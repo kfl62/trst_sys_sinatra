@@ -21,13 +21,11 @@ At this moment only in ro_RO
 Datorită folosirii intensive a elementelor de javascript ([Dojo toolkit]) precum şi a elementelor [HTML5], se recomandă folosirea browser-ului [Chrome],[Firefox] (cu care au fost testate paginile aplicaţiei), iar pentru a evita apariţia scrollbar-urilor (la navigare pe pagini) se recomandă o rezoluţie de min. 1280x1024.</font>
 
 ## Author
-Creat de [Ferenc-Loránt Kiss][kfl62_trst]
+Creat de [Ferenc-Loránt Kiss][kfl62_trst]<br>
 
 ## License
-Copyright (c) 2008-2010 Ferenc-Loránt Kiss
-
-All Rights Reserved.
-
+Copyright (c) 2008-2010 Ferenc-Loránt Kiss<br>
+All Rights Reserved.<br>
 Released under a [slightly modified MIT License][license].
 
 [kfl62_gh]: http://github.com/kfl62
