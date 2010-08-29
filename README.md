@@ -25,7 +25,9 @@ Creat de [Ferenc-Loránt Kiss][kfl62_trst]
 
 ## License
 Copyright (c) 2008-2010 Ferenc-Loránt Kiss
+
 All Rights Reserved.
+
 Released under a [slightly modified MIT License][license].
 
 [kfl62_gh]: http://github.com/kfl62
