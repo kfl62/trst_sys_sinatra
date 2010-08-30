@@ -3,7 +3,12 @@ Dir['lib','lib/*/'].each do |dir|
   $LOAD_PATH.unshift(dir) unless $LOAD_PATH.include?(dir)
 end
 
+require 'trst_pub'
 require 'trst_sys'
+
+map '/' do
+  run TrstPub.new
+end
 
 map '/srv' do
   run TrstSys.new

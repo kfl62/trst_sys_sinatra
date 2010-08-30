@@ -1,6 +1,6 @@
-if defined?(TrstSys)
+if defined?(TrstPub) || defined?(TrstSys)
   # This is the configuration to use when running within sinatra
-  project_path = TrstSys.root
+  project_path = File.expand_path('..', File.dirname(__FILE__))
   environment = :development
 else
   # this is the configuration to use when running within the compass command line tool.
@@ -12,6 +12,7 @@ end
 # This is common configuration
 sass_dir = File.join('src', 'stylesheets')
 images_dir = File.join('public', 'images')
+cache_dir = File.join('tmp','sass-cache')
 http_path = '/'
 http_images_path = '/images'
 http_stylesheets_path = '/stylesheets'

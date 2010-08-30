@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'compass'
 
-class TrstSys < Sinatra::Base
+class TrstPub < Sinatra::Base
 
   configure do
     root = File.expand_path('..', File.dirname(__FILE__))
@@ -23,7 +23,7 @@ class TrstSys < Sinatra::Base
   end
 
   get '/' do
-    "Welcome to TrustSys application ...testing..."
+    "Welcome to TrustSys public pages ...testing..."
   end
 
 end
