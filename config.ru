@@ -5,4 +5,6 @@ end
 
 require 'trst_sys'
 
-run TrstSys
+map '/srv' do
+  run TrstSys.new
+end
