@@ -8,7 +8,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    compass (0.10.4)
+    compass (0.10.5)
       haml (>= 3.0.4)
     haml (3.0.17)
     rack (1.2.1)
