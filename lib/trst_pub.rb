@@ -1,16 +1,12 @@
-require 'bundler/setup'
-require 'sinatra/base'
-require 'compass'
+require 'trst_conf'
 
 class TrstPub < Sinatra::Base
-
-  configure do
-    root = File.expand_path('..', File.dirname(__FILE__))
-    set :root , root
-    set :views, File.join(root, 'src')
-    set :logging, true
-    Compass.add_project_configuration(File.join(root, 'config', 'compass.rb')) \
-      unless Compass.configuration.name == File.join(root, 'config', 'compass.rb')
+  
+  Dir[File.join(TrstPub.root,'layouts','*.haml')].each do |layout|
+    name = layout[/([^\/]*)\.haml$/, 1].to_sym
+    haml = File.read(layout)
+    TrstPub.template(name) {haml}
+    TrstPub.layout {haml} if name == :trst_pub
   end
 
   get '/stylesheets/:name.css' do
@@ -18,12 +14,14 @@ class TrstPub < Sinatra::Base
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
 
-  get '/help' do
-    "Some help"
+  get '/' do
+    haml :"/trst_pub/index", :layout => !request.xhr?
   end
 
-  get '/' do
-    "Welcome to TrustSys public pages ...testing..."
+  get '/:page' do |pg|
+    page = pg.split('.')
+    page.empty? ? page = 'index' : page = page[0]
+    haml :"/trst_pub/#{page}", :layout => !request.xhr?
   end
 
 end

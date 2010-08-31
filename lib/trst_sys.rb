@@ -1,17 +1,6 @@
-require 'bundler/setup'
-require 'sinatra/base'
-require 'compass'
+require 'trst_conf'
 
 class TrstSys < Sinatra::Base
-
-  configure do
-    root = File.expand_path('..', File.dirname(__FILE__))
-    set :root , root
-    set :views, File.join(root, 'src')
-    set :logging, true
-    Compass.add_project_configuration(File.join(root, 'config', 'compass.rb')) \
-      unless Compass.configuration.name == File.join(root, 'config', 'compass.rb')
-  end
 
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'

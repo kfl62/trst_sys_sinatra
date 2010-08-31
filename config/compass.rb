@@ -1,4 +1,4 @@
-if defined?(TrstPub) || defined?(TrstSys)
+if defined?(Sinatra)
   # This is the configuration to use when running within sinatra
   project_path = File.expand_path('..', File.dirname(__FILE__))
   environment = :development
