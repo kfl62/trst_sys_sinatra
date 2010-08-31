@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'sinatra/base'
+require 'haml'
 require 'compass'
 
 Sinatra::Base.set(:root, File.expand_path('..', File.dirname(__FILE__)))
@@ -12,3 +13,5 @@ Sinatra::Base.configure do
     unless Compass.configuration.name == compass_config
 end
 
+require 'trst_helpers'
+Haml::Helpers.class_eval("include Trst::Helpers")
