@@ -1,10 +1,55 @@
-@import compass/reset
 @import partials/base
-@import blueprint
-@import compass/layout
-@import compass/utilities
+@import blueprint/grid
+@import compass/css3
+$blueprint_grid_columns: 9
+$blueprint_grid_margin: 10px
+$blueprint_grid_width: (800 - 8 * $blueprint_grid_margin) / $blueprint_grid_columns
+$blueprint-container-size: 800px
 
-+blueprint-typography
-
+body
+  background-color: #3e3e3e
 .wrap
   +container
+.em
+  font-style: italic
+.b
+  font-weight: bold
+#xhr_content
+  margin: 0.5em
+#public
+  #header
+    background:
+      color: #3e3e3e
+      image: image_url(unquote("/images/trst/sigla_klclean.gif"))
+      position: center left
+      repeat: no-repeat      
+    height: 90px
+    margin: 5px 0px
+  p.header_title
+    +prepend(4)
+    +column(4)
+    color: #f5f5f5
+    font-size: 2.0em
+    margin: 28px 0px 0px
+    text-align: center
+  p.header_auth
+    +column(3)
+    margin: 0px
+    text-align: right
+    span
+      color: #f5f5f5
+  #content
+    +column(6)
+    background:
+      color: #f5f5f5
+      image: image_url(unquote("/images/trst/trst.gif"))
+      position: center center
+      repeat: no-repeat
+    +border-radius(10px)
+    height: 500px
+  #sidebar
+    +column(3,last)
+    +border-radius(10px)
+    +linear-gradient(color-stops(#f5f5f5, #3e3e3e), left)
+    height: 500px
+
