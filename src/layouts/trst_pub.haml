@@ -1,0 +1,24 @@
+!!!
+%html
+  = partial('trst_pub/shared/html-head')
+
+  %body{:id => "public"}
+    #main.wrap
+      %header#header
+        = partial('trst_pub/shared/header')
+
+      %nav#menu
+        = partial('trst_pub/shared/menu')
+
+      %section#content
+        %article#xhr_content
+          = yield
+
+      %section#sidebar
+        = partial('trst_pub/shared/sidebar')
+
+      %section#main_footer.wrap
+
+    %footer#footer.wrap
+      = partial('trst_pub/shared/footer')
+  
