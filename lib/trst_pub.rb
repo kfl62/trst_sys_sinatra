@@ -2,7 +2,7 @@ require 'trst_conf'
 
 class TrstPub < Sinatra::Base
   
-  Dir[File.join(TrstPub.root,'layouts','*.haml')].each do |layout|
+  Dir[File.join(TrstPub.views,"layouts","*.haml")].each do |layout|
     name = layout[/([^\/]*)\.haml$/, 1].to_sym
     haml = File.read(layout)
     TrstPub.template(name) {haml}
