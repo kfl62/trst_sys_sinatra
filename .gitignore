@@ -1,5 +1,6 @@
 .*
 !.gitignore
 bin/*
-tmp/sass-cache
+config/secret*
+tmp/sass-cache/*
 tmp/*.vim
