@@ -2,5 +2,5 @@
 !.gitignore
 bin/*
 config/secret*
-tmp/sass-cache/*
-tmp/*.vim
+tmp/*
+!tmp/restart.txt
