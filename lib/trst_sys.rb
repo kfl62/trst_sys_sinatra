@@ -1,5 +1,4 @@
-require 'trst_conf'
-
+# encoding: utf-8
 class TrstSys < Sinatra::Base
 
   get '/stylesheets/:name.css' do
@@ -7,12 +6,14 @@ class TrstSys < Sinatra::Base
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
 
-  get '/help' do
-    "Some help"
+  get '/' do
+    haml :"/trst_pub/index", :layout => request.xhr? ? false : :'layouts/trst_sys'
   end
 
-  get '/' do
-    "Welcome to TrustSys application ...testing..."
+  get '/:page' do |pg|
+    page = pg.split('.')
+    page.empty? ? page = 'index' : page = page[0]
+    haml :"/trst_pub/#{page}", :layout => request.xhr? ? false : :'layouts/trst_sys'
   end
 
 end

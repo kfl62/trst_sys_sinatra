@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Trst
   module Helpers
    self.extend self

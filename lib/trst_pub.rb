@@ -1,5 +1,4 @@
-require 'trst_conf'
-
+# encoding: utf-8
 class TrstPub < Sinatra::Base
   
   get '/stylesheets/:name.css' do

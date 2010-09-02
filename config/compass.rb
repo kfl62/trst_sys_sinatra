@@ -1,3 +1,4 @@
+# encoding: utf-8
 if defined?(Sinatra)
   # This is the configuration to use when running within sinatra
   project_path = File.expand_path('..', File.dirname(__FILE__))
