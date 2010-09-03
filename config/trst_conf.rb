@@ -7,7 +7,10 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'haml'
 require 'compass'
-
+require 'trst_helpers_haml'
+require 'trst_helpers_sinatra'
+Haml::Helpers.class_eval("include Trst::Haml::Helpers")
+Sinatra::Base.class_eval("include Trst::Sinatra::Helpers")
 Sinatra::Base.set(:root, File.expand_path('..', File.dirname(__FILE__)))
 Sinatra::Base.set(:views, File.join(File.expand_path('..', File.dirname(__FILE__)), 'src'))
 Sinatra::Base.set(:logging, true)
@@ -22,10 +25,12 @@ require 'mongoid'
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new('localhost').db(User.db)
 end
+# models
 require 'pg_pub'
 require 'pg_sys'
+require 'trst_user'
+# controllers
+require 'trst_auth'
 require 'trst_pub'
 require 'trst_sys'
-require 'trst_helpers'
-Haml::Helpers.class_eval("include Trst::Helpers")
 
