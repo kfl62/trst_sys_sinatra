@@ -34,6 +34,8 @@ GEM
     mongo (1.0.7)
       bson (>= 1.0.4)
     rack (1.2.1)
+    rack-flash (0.1.1)
+      rack
     tzinfo (0.3.23)
     will_paginate (3.0.pre2)
 
@@ -44,4 +46,5 @@ DEPENDENCIES
   bson_ext (= 1.0.4)
   compass (~> 0.10)
   mongoid!
+  rack-flash
   sinatra!
