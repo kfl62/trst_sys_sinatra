@@ -13,7 +13,6 @@ Haml::Helpers.class_eval("include Trst::Haml::Helpers")
 Sinatra::Base.class_eval("include Trst::Sinatra::Helpers")
 Sinatra::Base.set(:root, File.expand_path('..', File.dirname(__FILE__)))
 Sinatra::Base.set(:views, File.join(File.expand_path('..', File.dirname(__FILE__)), 'src'))
-Sinatra::Base.set(:logging, true)
 Sinatra::Base.set(:haml, {:format => :html5, :attr_wrapper => '"'})
 Sinatra::Base.configure do
   compass_config = File.join(File.dirname(__FILE__), 'compass.rb')
@@ -33,4 +32,5 @@ require 'trst_user'
 require 'trst_auth'
 require 'trst_pub'
 require 'trst_sys'
+require 'trst_utils'
 
