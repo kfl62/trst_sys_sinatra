@@ -16,3 +16,7 @@ end
 map '/srv' do
   run TrstSys.new
 end
+
+map '/utils' do
+  run TrstUtils.new
+end
