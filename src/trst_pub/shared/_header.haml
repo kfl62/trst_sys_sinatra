@@ -1,12 +1,12 @@
 %p.header_title.em.st.ce Cleantech - TrustSys
 %p.header_auth.ri
   %span 
-    %a.st.em{:href => "auth/login"} Login
+    %a#login_status.st.em{:href => "#", :onclick => "loginBox.init(); return false;"} Login
     &nbsp;|&nbsp;
     %a.st.em{:href => "http://trst.ro"} TrustSys
     %br
   %br
   %br
   %span Autentificat ca şi:<br>
-  %span.em.st Anonymus
+  %span#login_name.st.em Anonymus
 

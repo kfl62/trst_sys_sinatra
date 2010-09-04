@@ -1,25 +1,30 @@
 # encoding: utf-8
 class TrstAuth < Sinatra::Base
 
+  get '/stylesheets/:name.css' do
+    content_type 'text/css', :charset => 'utf-8'
+    sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
+  end
+
   get '/users' do
     login_required
     redirect "/" unless current_user.admin?
     @users = TrstUser.all
     if @users != []
-      haml :"index", :layout => false
+      haml :"/trst_auth/index", :layout => false
     else
-      redirect '/signup'
+      redirect '/adduser'
     end
   end
 
   get '/users/:id' do
     login_required
-    @user = TrstUser.get(:id => params[:id])
+    @user = TrstUser.find(params[:id])
     haml :"/trst_auth/show", :layout => false
   end
 
   get '/login' do
-    haml :"/trst_auth/login", :layout => false
+    haml :"/trst_auth/login", :layout => request.xhr? ? false : :'layouts/trst_pub'
   end
 
   post '/login' do
@@ -33,7 +38,7 @@ class TrstAuth < Sinatra::Base
         session[:return_to] = false
         redirect redirect_url
       else
-        redirect '/sys'
+        redirect '/srv'
       end
     else
       if Rack.const_defined?('Flash')
@@ -50,37 +55,37 @@ class TrstAuth < Sinatra::Base
     redirect '/'
   end
 
-  get '/signup' do
-    haml :"/trst_auth/signup", :layout => false
+  get '/adduser' do
+    haml :"/auth/adduser", :layout => false
   end
 
-  post '/signup' do
+  post '/adduser' do
     @user = TrstUser.set(params[:user])
     if @user.valid && @user.id
       session[:user] = @user.id
       if Rack.const_defined?('Flash')
         flash[:notice] = "Account created."
       end
-      redirect '/'
+      redirect '/srv'
     else
       if Rack.const_defined?('Flash')
         flash[:notice] = "There were some problems creating your account: #{@user.errors}."
       end
-      redirect '/signup?' + hash_to_query_string(params['user'])
+      redirect '/auth/adduser?' + hash_to_query_string(params['user'])
     end
   end
 
   get '/users/:id/edit' do
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]
-    @user = TrstUser.get(:id => params[:id])
+    @user = TrstUser.find(params[:id])
     haml :"/trst_auth/edit", :layout => false
   end
 
   post '/users/:id/edit' do
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]
-    user = TrstUser.get(:id => params[:id])
+    user = TrstUser.find(params[:id])
     user_attributes = params[:user]
     if params[:user][:password] == ""
         user_attributes.delete("password")
@@ -102,7 +107,7 @@ class TrstAuth < Sinatra::Base
   get '/users/:id/delete' do
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]
-    if User.delete(params[:id])
+    if TrstUser.delete(params[:id])
       if Rack.const_defined?('Flash')
         flash[:notice] = "User deleted."
       end

@@ -1,0 +1,15 @@
+-unless request.xhr?
+  :javascript
+    loginBox.init()
+-else
+  %p.close{:onclick => "loginBox.destroy()"}
+  %p.title Autentificare
+  %form#form_auth{:action => "/auth/login", :method => "post"}
+    %span
+      Nume:
+      %input{:name => "[login_name]"}
+    %span
+      Parolă:
+      %input{:type => "password", :name => "[password]"}
+    %span.ce.login
+      %input{:type => "submit", :value => " Login ", :onclick => "loginBox.destroy()"}

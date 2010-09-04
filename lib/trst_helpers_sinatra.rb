@@ -27,10 +27,6 @@ module Trst
       def logged_in?
         !!session[:user]
       end
-
-      def use_layout?
-        !request.xhr?
-      end
     end
   end
 end
@@ -44,8 +40,6 @@ class GuestUser
     0
   end
 
-  # current_user.admin? returns false. current_user.has_a_baby? returns false.
-  # (which is a bit of an assumption I suppose)
   def method_missing(m, *args)
     return false
   end

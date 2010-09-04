@@ -10,14 +10,9 @@ class TrstUser
 
   class << self
 
-    def all
-      result = all
-      result.collect {|instance| new instance}
-    end
-
     def get(hash)
       if user = first(:conditions => hash)
-        new user
+        user
       else
         nil
       end
@@ -26,19 +21,30 @@ class TrstUser
     def set(attributes)
       user = new attributes
       user.save
-      new user
+      user
     end
 
     def set!(attributes)
       user = new attributes
       user.save(:validate => false)
-      new user
+      user
     end
 
     def delete(pk)
       user = find(pk)
       user.destroy
       user.destroyed?
+    end
+
+   def authenticate(login_name, pass)
+      current_user = get(:login_name => login_name)
+      return nil if current_user.nil?
+      return current_user if encrypt(pass, current_user.salt) == current_user.hashed_password
+      nil
+    end
+
+    def encrypt(pass, salt)
+      Digest::SHA1.hexdigest(pass+salt)
     end
 
   end
@@ -54,7 +60,7 @@ class TrstUser
   def password=(pass)
     @password = pass
     self.salt = random_string(10) if !self.salt
-    self.hashed_password = encrypt(@password, self.salt)
+    self.hashed_password = TrstUser.encrypt(@password, self.salt)
   end
 
   def admin?
@@ -66,10 +72,6 @@ class TrstUser
   end
 
   protected
-
-  def encrypt(pass, salt)
-    Digest::SHA1.hexdigest(pass+salt)
-  end
 
   def random_string(len)
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
