@@ -7,13 +7,15 @@ class TrstSys < Sinatra::Base
   end
 
   get '/' do
-    haml :"/trst_pub/index", :layout => request.xhr? ? false : :'layouts/trst_sys'
+    login_required
+    haml :"/trst_sys/index", :layout => request.xhr? ? false : :'layouts/trst_sys'
   end
 
   get '/:page' do |pg|
+    login_required
     page = pg.split('.')
     page.empty? ? page = 'index' : page = page[0]
-    haml :"/trst_pub/#{page}", :layout => request.xhr? ? false : :'layouts/trst_sys'
+    haml :"/trst_sys/#{page}", :layout => request.xhr? ? false : :'layouts/trst_sys'
   end
 
 end

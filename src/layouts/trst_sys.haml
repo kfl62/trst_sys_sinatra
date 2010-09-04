@@ -1,0 +1,24 @@
+!!!
+%html
+  = partial('trst_sys/shared/html-head')
+
+  %body{:id => "srv"}
+    #main.wrap
+      %header#header
+        = partial('trst_sys/shared/header')
+
+      %nav#menu
+        = partial('trst_sys/shared/menu')
+
+      %section#content
+        %article#xhr_content
+          = yield
+
+      %section#sidebar
+        = partial('trst_sys/shared/sidebar')
+
+      %section#main_footer.wrap
+
+    %footer#footer.wrap
+      = partial('trst_sys/shared/footer')
+

@@ -23,22 +23,31 @@ body
   text-align: right
 [class~=in]
   text-indent: 2.0em
+.close
+  background:
+    image: image_url(unquote("/images/icons/remove.png"))
+  cursor: pointer
+  float: right
+  width: 16px
+  height: 16px
+  margin: -6px
+  padding: 0px
+
+#content
+  +column(6)
+  background:
+    color: #f5f5f5
+    image: image_url(unquote("/images/trst/trst.gif"))
+    position: center center
+    repeat: no-repeat
+  +border-radius(10px)
+  height: 500px
 
 #xhr_content
   margin: 0.5em
 
-#public
-  #content
-    +column(6)
-    background:
-      color: #f5f5f5
-      image: image_url(unquote("/images/trst/trst.gif"))
-      position: center center
-      repeat: no-repeat
-    +border-radius(10px)
-    height: 500px
-
 @import partials/header
 @import partials/menu
+@import partials/auth
 @import partials/sidebar
 @import partials/footer
