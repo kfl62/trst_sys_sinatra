@@ -1,6 +1,6 @@
 # encoding: utf-8
 class TrstPub < Sinatra::Base
-  
+
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options

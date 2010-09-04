@@ -42,9 +42,35 @@ body
     repeat: no-repeat
   +border-radius(10px)
   height: 500px
+  position: relative
 
 #xhr_content
   margin: 0.5em
+
+#xhr_msg
+  +border-top-radius(10px)
+  color: black
+  display: block
+  top: 0px
+  left: 0px
+  width: 100%
+  position: absolute
+  padding: 0.5em 0px
+  text-indent: 2.5em
+  &.hidden
+    display: none
+  &.info
+    background:
+      color: rgba(230, 255, 230, 0.9)
+      image: image_url(unquote("/images/icons/info.png"))
+      position: 0.25em 0.25em
+      repeat: no-repeat
+  &.error, &.warning
+    background:
+      color: rgba(255, 204, 204, 0.9)
+      image: image_url(unquote("/images/icons/warning.png"))
+      position: 0.25em 0.25em
+      repeat: no-repeat
 
 @import partials/header
 @import partials/menu

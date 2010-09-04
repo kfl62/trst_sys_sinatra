@@ -30,10 +30,8 @@ class TrstAuth < Sinatra::Base
   post '/login' do
     if user = TrstUser.authenticate(params[:login_name], params[:password])
       session[:user] = user.id
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "Login successful."
-      end
-      if session[:return_to]
+      flash[:msg] = {:msg => {:txt => "Login successful.",:class => "info"}}.to_json
+    if session[:return_to]
         redirect_url = session[:return_to]
         session[:return_to] = false
         redirect redirect_url
@@ -41,17 +39,13 @@ class TrstAuth < Sinatra::Base
         redirect '/srv'
       end
     else
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "The email or password you entered is incorrect."
-      end
+      flash[:msg] = {:msg => {:txt => "The login_name or password you entered is incorrect.",:class => "error"}}.to_json
       redirect '/'
     end
   end
   get '/logout' do
     session[:user] = nil
-    if Rack.const_defined?('Flash')
-      flash[:notice] = "Logout successful."
-    end
+    flash[:msg] = {:msg => {:txt => "Logout successful.",:class => "info"}}.to_json
     redirect '/'
   end
 
@@ -63,14 +57,10 @@ class TrstAuth < Sinatra::Base
     @user = TrstUser.set(params[:user])
     if @user.valid && @user.id
       session[:user] = @user.id
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "Account created."
-      end
+      flash[:msg] = "Account created."
       redirect '/srv'
     else
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "There were some problems creating your account: #{@user.errors}."
-      end
+      flash[:msg] = {:msg => {:txt => "There were some problems creating your account: #{@user.errors}.",:class => "error"}}.to_json
       redirect '/auth/adduser?' + hash_to_query_string(params['user'])
     end
   end
@@ -92,14 +82,10 @@ class TrstAuth < Sinatra::Base
         user_attributes.delete("password_confirmation")
     end
     if user.update(user_attributes)
-      if Rack.const_defined?('Flash')
-        flash[:notice] = 'Account updated.'
-      end
+      flash[:msg] = {:msg => {:txt => "Account updated.",:class => "info"}}.to_json
       redirect '/'
     else
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "Whoops, looks like there were some problems with your updates: #{user.errors}."
-      end
+      flash[:msg] = {:msg => {:txt => "Whoops, looks like there were some problems with your updates: #{user.errors}.",:class => "error"}}.to_json
       redirect "/users/#{user.id}/edit?" + hash_to_query_string(user_attributes)
     end
   end
@@ -108,13 +94,9 @@ class TrstAuth < Sinatra::Base
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]
     if TrstUser.delete(params[:id])
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "User deleted."
-      end
+      flash[:msg] = {:msg => {:txt => "User deleted.",:class => "info"}}.to_json
     else
-      if Rack.const_defined?('Flash')
-        flash[:notice] = "Deletion failed."
-      end
+      flash[:msg] = {:msg => {:txt => "Deletion failed.",:class => "error"}}.to_json
     end
     redirect '/'
   end
