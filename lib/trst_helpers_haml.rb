@@ -26,9 +26,18 @@ module Trst
       def current_host
         request.host
       end
+      
+      def current_lang
+        ::Sinatra::Base.lang
+      end
+
+      def lang_path
+        current_lang == :ro ? retval = "" : retval = "/#{current_lang.to_s}"
+        retval
+      end
 
       def t(text)
-        I18n.locale = ::Sinatra::Base.lang
+        I18n.locale = current_lang
         I18n.reload!
         translation = I18n.t(text)
       end
