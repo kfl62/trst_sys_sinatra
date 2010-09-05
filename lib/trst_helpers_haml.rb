@@ -7,7 +7,7 @@ module Trst
       # stolen from http://github.com/cschneid/irclogger/blob/master/lib/partials.rb
       #   and made a lot more robust by me
       # this implementation uses erb by default. if you want to use any other template mechanism
-      #   then replace `erb` on line 13 and line 17 with `haml` or whatever 
+      #   then replace `erb` on line 13 and line 17 with `haml` or whatever
       def partial(template, *args)
         template_array = template.to_s.split('/')
         template = template_array[0..-2].join('/') + "/_#{template_array[-1]}"
@@ -26,6 +26,13 @@ module Trst
       def current_host
         request.host
       end
+
+      def t(text)
+        I18n.locale = ::Sinatra::Base.lang
+        I18n.reload!
+        translation = I18n.t(text)
+      end
+
     end
   end
 end

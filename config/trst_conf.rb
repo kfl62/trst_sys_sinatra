@@ -14,6 +14,7 @@ Sinatra::Base.class_eval("include Trst::Sinatra::Helpers")
 Sinatra::Base.set(:root, File.expand_path('..', File.dirname(__FILE__)))
 Sinatra::Base.set(:views, File.join(File.expand_path('..', File.dirname(__FILE__)), 'src'))
 Sinatra::Base.set(:haml, {:format => :html5, :attr_wrapper => '"'})
+Sinatra::Base.set(:lang, :ro)
 Sinatra::Base.configure do
   compass_config = File.join(File.dirname(__FILE__), 'compass.rb')
   Compass.add_project_configuration(compass_config) \
@@ -24,6 +25,10 @@ require 'mongoid'
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new('localhost').db('development')
 end
+require 'i18n'
+I18n.load_path += Dir.glob(File.join(File.expand_path('..', File.dirname(__FILE__)), 'src/translations/*.yml'))
+I18n.default_locale = :ro
+require 'mongoid/i18n'
 # models
 require 'pg_pub'
 require 'pg_sys'

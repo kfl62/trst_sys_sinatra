@@ -3,13 +3,13 @@
     loginBox.init()
 -else
   %p.close{:onclick => "loginBox.destroy()"}
-  %p.title Autentificare
+  %p.title= t('trst_auth.login_title')
   %form#form_auth{:action => "/auth/login", :method => "post"}
     %span
-      Nume:
+      = t('trst_auth.login_name')
       %input{:name => "[login_name]"}
     %span
-      Parolă:
+      = t('trst_auth.login_pass')
       %input{:type => "password", :name => "[password]"}
     %span.ce.login
       %input{:type => "submit", :value => " Login ", :onclick => "loginBox.destroy()"}

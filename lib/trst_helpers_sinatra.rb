@@ -27,6 +27,7 @@ module Trst
       def logged_in?
         !!session[:user]
       end
+   
     end
   end
 end
