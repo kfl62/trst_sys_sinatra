@@ -1,60 +1,12 @@
+:ruby
+  book = TrstBook.where(:name => "trst_pub").first
 %ul
-  %li 
-    %a{:href => "#"} Home
-  %li
-    %a{:href => "#"} Generalităţi
-    %ul
-      %li
-        %a{:href => "#"} Intro
-      %li
-        %a{:href => "#"} Noţiuni TGS
-      %li
-        %a{:href => "#"} Modelare sistemică
-      %li
-        %a{:href => "#"} Paradigma OO
-      %li
-        %a{:href => "#"} De ce UML?
-      %li
-        %a{:href => "#"} Concluzii
-  %li
-    %a{:href => "#"} Metodologie
-    %ul
-      %li
-        %a{:href => "#"} Intro
-      %li
-        %a{:href => "#"} Lista proceselor
-      %li
-        %a{:href => "#"} ISO 9001:2000
-      %li
-        %a{:href => "#"} Constrângere IAS
-      %li
-        %a{:href => "#"} Constrângere HR
-  %li
-    %a{:href => "#"} Structura
-    %ul
-      %li
-        %a{:href => "#"} Intro
-      %li
-        %a{:href => "#"} General
-      %li
-        %a{:href => "#"} Cercetare-Dezvoltare
-      %li
-        %a{:href => "#"} Comercial
-      %li
-        %a{:href => "#"} Producţie/Servicii
-      %li
-        %a{:href => "#"} Financiar/Contabil
-      %li
-        %a{:href => "#"} Resurse umane
-      %li
-        %a{:href => "#"} Administrare TrustSys
-  %li
-    %a{:href => "#"} Despre program
-    %ul
-      %li
-        %a{:href => "#"} Intro
-      %li
-        %a{:href => "#"} TrustSys help
-      %li
-        %a{:href => "#"} Firefox help
-      
+  - book.chapters.each do |chapter|
+    %li
+      %a{:id => "chapter_#{chapter.id}", :href => File.join(lang_path,chapter.path)}= chapter.name
+      - if chapter.pages.length > 0
+        %ul
+          - chapter.pages.each do |page|
+            %li
+              %a{:id  => "page_#{page.id}", :href => File.join(lang_path,page.path)}= page.name
+

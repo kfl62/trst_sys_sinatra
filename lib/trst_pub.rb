@@ -6,14 +6,27 @@ class TrstPub < Sinatra::Base
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
 
-  get '/' do
-    haml :"/trst_pub/index", :layout => request.xhr? ? false : :'layouts/trst_pub'
-  end
 
-  get '/:page' do |pg|
-    page = pg.split('.')
-    page.empty? ? page = 'index' : page = page[0]
-    haml :"/trst_pub/#{page}", :layout => request.xhr? ? false : :'layouts/trst_pub'
+  get '/*' do
+    if request.xhr?
+      haml :"trst_pub/page", :layout  => false
+    end
+    #code below just for testing :) real route above
+    book = TrstBook.where(:name  => "trst_pub").first
+    if params[:splat][0] == ""
+      page = book.chapters.where(:slug  => "home").first
+    elsif File.basename(params[:splat][0]) == "index.html"
+      if File.dirname(params[:splat][0]) == "."
+        page = book.chapters.where(:slug  => "home").first
+      else
+        page = book.chapters.where(:slug  => File.dirname(params[:splat][0])).first
+      end
+    else
+      chapter = book.chapters.where(:slug  => File.dirname(params[:splat][0])).first
+      slug = File.basename(params[:splat][0]).gsub(/(TrustSys-#{chapter.slug.camelize}-)|(.html)/,"")
+      page = chapter.pages.where(:slug => slug).first
+    end
+    haml :"trst_pub/page", :layout => :'/layouts/trst_pub', :locals => {:page  => page}
   end
 
 end
