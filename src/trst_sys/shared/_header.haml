@@ -1,6 +1,6 @@
 %p.header_title.em.st.ce Cleantech - TrustSys
 %p.header_auth.ri
-  %span 
+  %span
     %a#login_status.st.em{:href => "/auth/logout"}= t('trst_auth.logout')
     &nbsp;|&nbsp;
     %a.st.em{:href => "http://trst.ro"} TrustSys
@@ -10,9 +10,9 @@
   %span #{t('trst_auth.authenticated_as')}<br>
   %span#login_name.st.em #{current_user.login_name}
 %span#I18n
-  %a{:href => "/utils/lang/ro",:title => t('trst_auth.lang.ro')} 
+  %a{:href => "/utils/lang/ro",:title => t('trst_auth.lang.ro')}
     %img{:src => "/images/icons/ro.png",:alt => t('trst_auth.lang.ro')}
   %a{:href => "/utils/lang/en",:title => t('trst_auth.lang.en')}
     %img{:src => "/images/icons/en.png",:alt => t('trst_auth.lang.en')}
   %a{:href => "/utils/lang/hu",:title => t('trst_auth.lang.hu')}
-    %img{:src => "/images/icons/hu.png",:alt => t('trst_auth.lang.hu')}    
+    %img{:src => "/images/icons/hu.png",:alt => t('trst_auth.lang.hu')}
