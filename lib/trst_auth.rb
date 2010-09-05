@@ -85,7 +85,7 @@ class TrstAuth < Sinatra::Base
       flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.edituser_msg'), :class => "info"}}.to_json
       redirect '/'
     else
-      flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.edituser_err') + @user.errors},:class => "error"}}.to_json
+      flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.edituser_err') + @user.errors,:class => "error"}}.to_json
       redirect "/users/#{user.id}/edit?" + hash_to_query_string(user_attributes)
     end
   end
