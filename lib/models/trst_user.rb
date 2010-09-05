@@ -1,12 +1,14 @@
 class TrstUser 
   include Mongoid::Document
   include Mongoid::Timestamps
+
   field :login_name
   field :email
   field :hashed_password
   field :salt
   field :permission_level,  :type => Integer,     :default => 1
   field :settings,          :type => Hash,        :default => {}
+  field :pages,             :type => Hash,        :default => {}
 
   class << self
 
