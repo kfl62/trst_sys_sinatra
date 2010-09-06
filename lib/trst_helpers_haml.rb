@@ -28,7 +28,7 @@ module Trst
       end
       
       def current_lang
-        ::Sinatra::Base.lang
+        I18n.locale 
       end
 
       def lang_path
@@ -37,7 +37,6 @@ module Trst
       end
 
       def t(text)
-        I18n.locale = current_lang
         I18n.reload!
         translation = I18n.t(text)
       end
