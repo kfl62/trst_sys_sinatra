@@ -31,6 +31,19 @@ module Trst
         I18n.locale 
       end
 
+      def current_controller
+        self.class.to_s.underscore
+      end
+
+      def current_book
+        TrstBook.where(:name  => current_controller).first
+      end
+
+      def controller_path
+        current_controller == 'trst_sys' ? retval = '/srv' : retval = ''
+        retval
+      end
+
       def lang_path
         current_lang == :ro ? retval = "" : retval = "/#{current_lang.to_s}"
         retval

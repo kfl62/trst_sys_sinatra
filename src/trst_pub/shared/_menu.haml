@@ -1,12 +1,10 @@
-:ruby
-  book = TrstBook.where(:name => "trst_pub").first
 %ul
-  - book.chapters.each do |chapter|
+  - current_book.chapters.each do |chapter|
     %li
-      %a{:id => "chapter_#{chapter.id}", :href => File.join(lang_path,chapter.path)}= chapter.name
+      %a{:id => "chapter_#{chapter.id}", :href => File.join(lang_path,controller_path,chapter.path)}= chapter.name
       - if chapter.pages.length > 0
         %ul
           - chapter.pages.each do |page|
             %li
-              %a{:id  => "page_#{page.id}", :href => File.join(lang_path,page.path)}= page.name
+              %a{:id  => "page_#{page.id}", :href => File.join(lang_path,controller_path,page.path)}= page.name
 
