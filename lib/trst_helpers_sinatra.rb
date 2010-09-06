@@ -37,10 +37,13 @@ class GuestUser
     true
   end
 
-  def permission_level
-    0
+  def permission_lvl
+    10
   end
 
+  def permission_grp
+    ["public","guest"]
+  end
   def method_missing(m, *args)
     return false
   end

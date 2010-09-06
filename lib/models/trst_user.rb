@@ -6,7 +6,8 @@ class TrstUser
   field :email
   field :hashed_password
   field :salt
-  field :permission_level,  :type => Integer,     :default => 1
+  field :permission_lvl,    :type => Integer,     :default => 10
+  field :permission_grp,    :type => Array,       :default => ["public"]
   field :settings,          :type => Hash,        :default => {}
   field :pages,             :type => Hash,        :default => {}
 
@@ -66,7 +67,7 @@ class TrstUser
   end
 
   def admin?
-    self.permission_level == -1 || self.id == 1
+    self.permission_lvl == -1 || self.permission_grp.include?("admin")
   end
 
   def site_admin?

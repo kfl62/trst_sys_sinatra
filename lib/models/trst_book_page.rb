@@ -6,6 +6,8 @@ class TrstBookPage
 
   field :order,           :type  => Integer
   field :slug
+  field :access_lvl,      :type  => Integer,          :default  => 3
+  field :access_grp,      :type  => Array,            :default  => ["public","admin"]
   localized_field :name
   localized_field :title
   localized_field :content
