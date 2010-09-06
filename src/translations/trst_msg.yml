@@ -1,0 +1,16 @@
+ro:
+  lang:
+    change: "Limba aleasă este Română..."
+  loading: "O clipă se încarcă pagina..."
+  error: "Eroare: %{data}"
+en:
+  lang:
+    change: "Switched to English..."
+  loading: "Loading..."
+  error: "Error: %{error}"
+hu:
+  lang:
+    change: "A magyar nyelvet választotta..."
+  loading: "Egy kis tűrelem..."
+  error: "Hibaüzenet: %{data}"
+
