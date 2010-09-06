@@ -1,7 +1,7 @@
 var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
   var p = what;
   kind ? p += '/' + kind : p += '/info'
-  data ? p += '/' + data : p += '/data'  
+  data ? p += '?data=' + data : p += ''  
   var info_node = dojo.byId('xhr_msg'),
       anim = dojo.animateProperty({
         node: info_node,
@@ -29,6 +29,8 @@ var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
 })
 
 var xhrMenu = function(param){
+  if (dojo.body().id == 'srv')
+    param = 'srv/' + param
   var content_node = dojo.byId('xhr_content'),
       xhrParams = {
     url: '/' + param,

@@ -1,11 +1,11 @@
 # encoding: utf-8
 class TrstUtils < Sinatra::Base
 
-  get '/msg/:what/:kind/:data' do |w,k,d|
+  get '/msg/:what/:kind' do |w,k|
     if w == 'flash'
       retval = flash[:msg]
     else
-      retval = {:msg => {:txt => I18n.t(w, :data => d), :class => k}}.to_json
+      retval = {:msg => {:txt => I18n.t(w, :data => params[:data]), :class => k}}.to_json
     end
     retval
   end
