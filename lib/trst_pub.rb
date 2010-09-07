@@ -6,7 +6,6 @@ class TrstPub < Sinatra::Base
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
 
-
   get '/*' do
     if request.xhr?
       method, id = params[:splat][0].split('_')
