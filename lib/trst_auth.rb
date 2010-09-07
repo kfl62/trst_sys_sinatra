@@ -36,17 +36,17 @@ class TrstAuth < Sinatra::Base
         session[:return_to] = false
         redirect redirect_url
       else
-        redirect '/srv'
+        redirect "#{lang_path}/srv"
       end
     else
       flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.login_err'), :class => "error"}}.to_json
-      redirect '/'
+      redirect "#{lang_path}/"
     end
   end
   get '/logout' do
     session[:user] = nil
     flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.logout_msg'), :class => "info"}}.to_json
-    redirect '/'
+    redirect "#{lang_path}/"
   end
 
   get '/adduser' do
@@ -58,7 +58,7 @@ class TrstAuth < Sinatra::Base
     if @user.valid && @user.id
       session[:user] = @user.id
       flash[:msg] =  {:msg => {:txt => I18n.t('trst_auth.adduser_msg'), :class => "info"}}.to_json
-      redirect '/srv'
+      redirect "#{lang_path}/srv"
     else
       flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.adduser_msg') + @user.errors, :class => "error"}}.to_json
       redirect '/auth/adduser?' + hash_to_query_string(params['user'])
@@ -100,6 +100,6 @@ class TrstAuth < Sinatra::Base
     end
     redirect '/'
   end
-  
+
 end
 

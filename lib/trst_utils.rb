@@ -12,7 +12,7 @@ class TrstUtils < Sinatra::Base
 
   get '/lang/:lang' do |l|
     I18n.locale = l.to_sym
-    logged_in? ? path = '/srv' : path = '/'
+    path = logged_in? ?  "#{lang_path}/srv" :  "#{lang_path}/"
     flash[:msg] = {:msg => {:txt => I18n.t('lang.change'), :class => "info"}}.to_json
     redirect path
   end
