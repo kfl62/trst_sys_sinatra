@@ -1,10 +1,11 @@
 %ul
   - current_book.chapters.each do |chapter|
     %li
-      %a{:id => "chapter_#{chapter.id}", :href => File.join(lang_path,controller_path,chapter.path)}= chapter.name  
-      - if chapter.pages.length > 0
+      - unless chapter.order == 5 && !current_user.admin?
+        %a{:id => "chapter_#{chapter.id}", :href => File.join(lang_path,controller_path,chapter.path)}= chapter.name
+      - if chapter.pages.length > 0 # TODO show them based on permissions
         %ul
           - chapter.pages.each do |page|
             %li
               %a{:id  => "page_#{page.id}", :href => File.join(lang_path,controller_path,page.path)}= page.name
-      
+

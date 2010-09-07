@@ -7,6 +7,7 @@ class TrstSys < Sinatra::Base
   end
 
   get '/*' do
+    login_required
     if request.xhr?
       method, id = params[:splat][0].split('_')
       page = TrstBook.send method, id
