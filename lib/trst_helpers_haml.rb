@@ -26,9 +26,9 @@ module Trst
       def current_host
         request.host
       end
-      
+
       def current_lang
-        I18n.locale 
+        I18n.locale
       end
 
       def current_controller
