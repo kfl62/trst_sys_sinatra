@@ -9,7 +9,16 @@ class TrstUser
   field :permission_lvl,    :type => Integer,     :default => 10
   field :permission_grp,    :type => Array,       :default => ["public"]
   field :settings,          :type => Hash,        :default => {}
-  field :pages,             :type => Hash,        :default => {}
+  field :task_ids,          :type => Array,       :default => []    
+
+  # Validations
+  validates_uniqueness_of :login_name
+  validates_uniqueness_of :email
+  validates_format_of :email, :with => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
+  #validates_presence_of :password
+  validates_confirmation_of :password
+
+  attr_accessor :password, :password_confirmation
 
   class << self
 
@@ -51,14 +60,6 @@ class TrstUser
     end
 
   end
-  # Validations
-  validates_uniqueness_of :login_name
-  validates_uniqueness_of :email
-  validates_format_of :email, :with => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
-  validates_presence_of :password
-  validates_confirmation_of :password
-
-  attr_accessor :password, :password_confirmation
 
   def password=(pass)
     @password = pass
@@ -74,6 +75,10 @@ class TrstUser
     self.id == 1
   end
 
+  def tasks
+    task_ids
+  end
+  
   protected
 
   def random_string(len)

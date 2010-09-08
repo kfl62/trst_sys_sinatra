@@ -21,7 +21,12 @@ map '/utils' do
 end
 
 map '/srv' do
-  run TrstSys.new
+  map '/tsk' do
+    run TrstSysTsk.new
+  end
+  map '/' do
+    run TrstSys.new
+  end
 end
 
 map '/' do

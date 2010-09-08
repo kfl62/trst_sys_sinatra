@@ -1,0 +1,13 @@
+ro:
+  xhr_tasks:
+    title: "De rezolvat zilnic... (sarcini)"
+    init: "Accesare: Pagina mea -> Sarcini zilnice"
+en:
+  xhr_tasks:
+    title: "Daily todo... (tasks)"
+    init: "Access: My Page -> Daily tasks"
+hu:
+  xhr_tasks:
+    title: "Napi tennivaló... (feladatok)"
+    init: "Hozzáférés: Saját oldal -> Napi feladatok"
+

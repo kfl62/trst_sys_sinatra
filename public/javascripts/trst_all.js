@@ -37,12 +37,28 @@ var xhrMenu = function(param){
     load: function(data){
       content_node.innerHTML = data;
       dojo.attr('xhr_msg','class','hidden');
+      if (param.replace('srv/','') == dojo.body().dataset.dailytaskspage)
+        xhrInitSidebar();
     },
     error: function(error){
       dojo.publish('xhrMsg',['error','error',error])
     }
   };
   dojo.publish('xhrMsg',['loading','info']);
+  var defered = dojo.xhrGet(xhrParams)
+}
+
+var xhrInitSidebar = function(){
+  var content_node = dojo.byId('xhr_tasks'),
+  xhrParams = {
+    url: '/srv/tsk/',
+    load: function(data){
+      content_node.innerHTML = data;
+    },
+    error: function(error){
+      dojo.publish('xhrMsg',['error','error',error])
+    }
+  };
   var defered = dojo.xhrGet(xhrParams)
 }
 

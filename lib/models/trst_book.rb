@@ -23,6 +23,12 @@ class TrstBook
       book = where('chapters._id'  => BSON::ObjectID("#{id}")).first
       chapter = book.chapters.find(id)
     end
+    
+    def daily_tasks_page
+      bk = where(:name => 'trst_sys').first
+      ch = bk.chapters.where(:slug  => "my_page").first
+      pg = ch.pages.where(:slug  => "tasks").first
+    end
 
   end
 

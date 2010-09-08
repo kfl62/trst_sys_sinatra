@@ -1,0 +1,10 @@
+%article#xhr_tasks
+  - if session[:daily_tasks]
+    = render(:haml,:'/trst_sys/daily_tasks',:locals => {:tsks => session[:tasks]})
+  - else
+    %ul
+      %li.em.st.title= t('xhr_tasks.title')
+      %li= t('xhr_tasks.init')
+
+%article.em.st.in
+  Some widget

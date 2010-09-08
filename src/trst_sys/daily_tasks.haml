@@ -1,0 +1,6 @@
+%ul
+  %li.em.st=  t('xhr_tasks.title')
+  - tsks.each do |tsk|
+    %li.in{:style => "list-style-type: none"}
+      %a{:id  => "#{tsk}",:href => "#"}= TrstTask.find(tsk).name
+

@@ -4,10 +4,11 @@ class TrstBookPage
   include Mongoid::I18n
   include Mongoid::Timestamps
 
-  field :order,           :type  => Integer
+  field :order,           :type => Integer
   field :slug
-  field :access_lvl,      :type  => Integer,          :default  => 3
-  field :access_grp,      :type  => Array,            :default  => ["public","admin"]
+  field :access_lvl,      :type => Integer,           :default => 3
+  field :access_grp,      :type => Array,             :default => ["public","admin"]
+  field :task_ids,        :type => Array,             :default => []
   localized_field :name
   localized_field :title
   localized_field :content
@@ -16,6 +17,10 @@ class TrstBookPage
     chapter.slug == "home" ? retval = "/" : retval = "/#{chapter.slug}/"
     retval += "TrustSys-#{chapter.slug.camelize}-#{slug}.html"
     retval
+  end
+
+  def tasks
+    task_ids
   end
 
   embedded_in :chapter, :inverse_of => :pages
