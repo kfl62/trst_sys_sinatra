@@ -63,6 +63,11 @@ var xhrInitSidebar = function(){
 }
 
 function init(){
+  if (dojo.body().id == 'srv'){
+    dojo.require('trst.task',true)
+  }else{
+    dojo.require('trst.auth',true)
+  }
   dojo.publish('xhrMsg',['flash']);
   dojo.query('#menu ul > li > a')
   .onclick(function(e){

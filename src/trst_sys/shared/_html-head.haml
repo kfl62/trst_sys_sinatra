@@ -10,12 +10,10 @@
         :rel => "stylesheet",
         :type => "text/css"}
   %script{:language => "javascript",
+          :djConfig => "modulePaths: {'trst':'../../trust_sys'}",
           :src => "/javascripts/dojo/dojo/dojo.js",
           :type => "text/javascript"}
   %script{:language => "javascript",
-          :src => "/javascripts/trst_all.js",
-          :type => "text/javascript"}
-  %script{:language => "javascript",
-          :src => "/javascripts/trst_auth.js",
+          :src => "/javascripts/trust_sys/application.js",
           :type => "text/javascript"}
 
