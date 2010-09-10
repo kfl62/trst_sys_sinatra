@@ -22,6 +22,16 @@ class TrstBookPage
   def tasks
     task_ids
   end
+  
+  def task_add(id)
+    tasks.push(id) unless tasks.include?(id)
+    update_attributes(:task_ids => tasks)
+  end
+
+  def task_delete(id)
+    tasks.delete(id)
+    update_attributes(:task_ids => tasks)
+  end
 
   embedded_in :chapter, :inverse_of => :pages
 end

@@ -1,4 +1,4 @@
-class TrstUser 
+class TrstUser
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -9,7 +9,7 @@ class TrstUser
   field :permission_lvl,    :type => Integer,     :default => 10
   field :permission_grp,    :type => Array,       :default => ["public"]
   field :settings,          :type => Hash,        :default => {}
-  field :task_ids,          :type => Array,       :default => []    
+  field :task_ids,          :type => Hash,        :default => {'daily_tasks' => [], 'other_tasks' => []}
 
   # Validations
   validates_uniqueness_of :login_name
@@ -72,13 +72,47 @@ class TrstUser
   end
 
   def site_admin?
-    self.id == 1
+    self.id ==  -1 || (self.permission_grp & ["admin","web"]).length >= 1
   end
 
   def tasks
-    task_ids
+    task_ids.values.flatten.uniq
   end
-  
+
+  def daily_tasks
+    task_ids['daily_tasks']
+  end
+
+  def daily_tasks_add(id)
+    dt = daily_tasks.push(id) unless daily_tasks.include?(id)
+    ot = other_tasks
+    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  end
+
+  def daily_tasks_delete(id)
+    daily_tasks.delete(id)
+    dt = daily_tasks
+    ot = other_tasks
+    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  end
+
+  def other_tasks
+    task_ids['other_tasks']
+  end
+
+  def other_tasks_add(id)
+    dt = daily_tasks
+    ot = other_tasks.push(id) unless other_tasks.include?(id)
+    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  end
+
+  def other_tasks_delete(id)
+    other_tasks.delete(id)
+    dt = daily_tasks
+    ot = other_tasks
+    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  end
+
   protected
 
   def random_string(len)
