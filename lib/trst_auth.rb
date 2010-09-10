@@ -30,7 +30,7 @@ class TrstAuth < Sinatra::Base
   post '/login' do
     if user = TrstUser.authenticate(params[:login_name], params[:password])
       session[:user] = user.id
-      session[:tasks] = user.task_ids
+      session[:tasks] = user.daily_tasks
       flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.login_msg'), :class => "info"}}.to_json
     if session[:return_to]
         redirect_url = session[:return_to]
