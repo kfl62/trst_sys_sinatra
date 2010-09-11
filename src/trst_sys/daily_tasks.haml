@@ -4,4 +4,5 @@
     %li
       %a{:id  => "#{tsk}",:href => "#"}
         = TrstTask.find(tsk).name
-        %span.help
+      %span.help{:onclick  => "task.xhrGet('#{tsk}','help')"}
+
