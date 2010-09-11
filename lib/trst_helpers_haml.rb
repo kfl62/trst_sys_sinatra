@@ -89,6 +89,19 @@ module Trst
         return r_keys.sort
       end
 
+      def tr_class(v)
+        if v == 4
+          retval = "time"
+        elsif v == 3
+          retval = "rela"
+        elsif v == 2
+          retval = "loca"
+        else
+          retval == ""
+        end
+        retval
+      end
+
     end
   end
 end

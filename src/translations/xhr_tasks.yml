@@ -5,6 +5,10 @@ ro:
   gen_head:
     field: "Câmp"
     value: "Valoare"
+  button:
+    put: "Editare"
+    post: "Creare"
+    delete: "Ştergere"
   trst_task:
     created_at: "Creat"
     updated_at: "Modificat"
@@ -22,6 +26,10 @@ en:
   gen_head:
     field: "Field"
     value: "Value"
+  button:
+    put: "Edit"
+    post: "Create"
+    delete: "Delete"
   trst_task:
     created_at: "Created"
     updated_at: "Modified"
@@ -39,6 +47,10 @@ hu:
   gen_head:
     field: "Mező"
     value: "Érték"
+  button:
+    put: "Módosít"
+    post: "Létrehoz"
+    delete: "Töröl"
   trst_task:
     created_at: "Létrehozva"
     updated_at: "Módosítva"

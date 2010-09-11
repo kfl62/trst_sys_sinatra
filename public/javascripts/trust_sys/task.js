@@ -22,15 +22,13 @@ var task = {
     var lastX,lastY,tskww,tskwh,
     base = dojo.position(o1),
     tskw = dojo.position(o2);
-    tskww = (tskw.w < 200) ? 200 : tskw.w;
-    tskwh = (tskw.h < 200) ? 200 : tskw.h;
+    tskww = (tskw.w < 300) ? 300 : tskw.w;
     lastX = base.x + 15;
     lastY = base.y + 10;
     dojo.style(o2,{
       left:   lastX + 'px',
       top:    lastY + 'px',
-      width:  tskww + 'px',
-      height: tskwh + 'px'
+      width:  tskww + 'px'
     });
   },
   drawBox: function(data){

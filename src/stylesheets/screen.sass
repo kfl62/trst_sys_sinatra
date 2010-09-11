@@ -8,7 +8,7 @@ $blueprint_grid_width: (800 - 8 * $blueprint_grid_margin) / $blueprint_grid_colu
 $blueprint-container-size: 800px
 
 body
-  background-color: #3e3e3e
+  background-color: rgba(62, 62, 62, 1)
 .wrap
   +container
 [class~=em], [class~=it]
@@ -35,6 +35,15 @@ body
   width: 16px
   height: 16px
   margin: -6px
+  padding: 0px
+.help
+  background:
+    image: image_url(unquote("/images/icons/help.png"))
+  cursor: pointer
+  float: right
+  width: 16px
+  height: 16px
+  margin: 0px
   padding: 0px
 
 #content

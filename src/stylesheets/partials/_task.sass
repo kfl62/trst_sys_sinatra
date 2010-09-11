@@ -1,5 +1,5 @@
 #task_overlay
-  background-color: #3e3e3e
+  background-color: rgba(62, 62, 62, 1)
   +opacity(0.3)
   top: 0px
   left: 0px
@@ -8,8 +8,8 @@
   position: absolute
   z-index: 99
 #task_window
-  background-color: #f5f5f5
-  +box-shadow( #3e3e3e,0.5em,0.5em)
+  background-color: rgba(245, 245, 245, 1)
+  +box-shadow( rgba(62, 62, 62, 1), 0.5em, 0.5em)
   +border-radius(0.5em)
   padding: 0.5em 1.0em
   position: absolute
@@ -17,7 +17,44 @@
   .close
     margin: -1.0em -1.5em
   .task_title
-    border-bottom: solid 1px #3e3e3e
+    border-bottom: ridge 1px rgba(62, 62, 62, 1)
     font-style: italic
     font-weight: bolder
+  table
+    border-collapse: collapse
+    width: 100%
+    tr.loca
+      background-color: rgba(230, 230, 230, 1)
+    tr.rela
+      background-color: rgba(220, 220, 220, 1)
+    tr.time
+      background-color: rgba(210, 210, 210, 1)
+    td.buttons_bottom
+      text-align: center
+      line-height: 2.5em
+      vertical-align: center
+  span.button
+    background:
+      color: rgba(230, 230, 230, 1)
+      position: 1px 0px
+      repeat: no-repeat
+    border: outset 1px rgba(0, 0, 0, 1)
+    +border-radius(0.25em)
+    font-style: italic
+    font-size: 0.9em
+    font-weight: bolder
+    padding: 0.25em 0.5em 0.25em 2.25em
+    &:hover
+      background-color: rgba(255, 255, 190, 0.8)
+      cursor: pointer
+    &.put
+      background:
+        image: image_url(unquote("/images/icons/db_edit.png"))
+    &.post
+      background:
+        image: image_url(unquote("/images/icons/db_new.png"))
+    &.delete
+      background:
+        image: image_url(unquote("/images/icons/db_remove.png"))
+      
 
