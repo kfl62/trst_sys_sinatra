@@ -1,7 +1,7 @@
 var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
   var p = what;
   kind ? p += '/' + kind : p += '/info'
-  data ? p += '?data=' + data : p += ''  
+  data ? p += '?data=' + data : p += ''
   var info_node = dojo.byId('xhr_msg'),
       anim = dojo.animateProperty({
         node: info_node,
@@ -10,7 +10,7 @@ var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
           opacity: {end: 0, start: 1}
         },
         onEnd: function(){
-          dojo.attr(info_node,'class','hidden');        
+          dojo.attr(info_node,'class','hidden');
         }
       });
   dojo.xhrGet({
