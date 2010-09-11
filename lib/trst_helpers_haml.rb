@@ -54,6 +54,41 @@ module Trst
         translation = I18n.t(text)
       end
 
+      def readable_values(o)
+        keys = o.fields.keys
+        r_keys = []
+        keys.each do |k|
+          if k =~ /_at/
+            v = o.send k
+            r_keys << [4,t("#{o.class.to_s.underscore}.#{k}"),v]
+          elsif k =~ /_ids$/
+            case k.split('_')[0]
+            when 'page'
+              v = []
+              ary = o.send k
+              ary.each{ |a| v << "#{TrstBook.page(a).chapter.name}><b>#{TrstBook.page(a).name}</b><"}
+            when 'user'
+              v = []
+              ary = o.send k
+              ary.each{ |a| v << TrstUser.find(a).login_name}
+            when 'task'
+              v = []
+              ary = o.send k
+              ary.each{ |a| v << TrstTask.find(a).name}
+            end
+            r_keys << [3,t("#{o.class.to_s.underscore}.#{k}"),v]
+          elsif o.fields[k].type.to_s =~ /LocalizedField/
+            v = o.send k
+            v = v + "<span class='flri small'>(*ro,en,hu)</span>"
+            r_keys << [2,t("#{o.class.to_s.underscore}.#{k}"),v]
+          else
+           v = o.send k
+           r_keys << [1,t("#{o.class.to_s.underscore}.#{k}"),v]
+          end
+        end
+        return r_keys.sort
+      end
+
     end
   end
 end
