@@ -17,6 +17,8 @@ class TrstSysTsk < Sinatra::Base
       haml :"#{haml_path}/get_delete", :layout => false, :locals => {:action => verb}
     when /post|put/
       haml :"#{haml_path}/post_put", :layout => false, :locals => {:action => verb}
+    when /help/
+      haml "#{@task.help}"
     else
       haml "%p Wrong verb #{params.inspect}"
     end

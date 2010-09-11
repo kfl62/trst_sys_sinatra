@@ -1,6 +1,7 @@
 var task = {
   verb: 'get',
   connections: new Array,
+  actions: new Array,
   taskOverlay: dojo.create('div',{id:"task_overlay"}),
   taskWindow: dojo.create('div',{id:"task_window"}),
   xhrGet: function(id,verb){
@@ -8,7 +9,11 @@ var task = {
     xhrArgs = {
       url: '/srv/tsk/' + verb + '/' + id,
       load: function(data){
-        task.drawBox(data)
+        if (verb == 'help'){
+          dojo.byId('xhr_content').innerHTML = data;
+        }else{
+        task.drawBox(data);
+        }
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
