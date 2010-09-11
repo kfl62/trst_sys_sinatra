@@ -3,8 +3,8 @@
     = render(:haml,:'/trst_sys/daily_tasks',:locals => {:tsks => session[:tasks]})
   - else
     %ul
-      %li.em.st.title= t('xhr_tasks.title')
+      %li.em.st= t('xhr_tasks.title')
       %li= t('xhr_tasks.init')
 
-%article.em.st.in
+%article.em.st
   Some widget
