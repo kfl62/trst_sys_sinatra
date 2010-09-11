@@ -7,7 +7,7 @@ class TrstTask
   field           :haml_path
   field           :page_ids,        :type => Array,       :default => []
   field           :user_ids,        :type => Array,       :default => []
-  field           :model
+  field           :target
   localized_field :name
   localized_field :title
   localized_field :help
