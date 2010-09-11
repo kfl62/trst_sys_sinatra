@@ -2,12 +2,51 @@ ro:
   xhr_tasks:
     title: "De rezolvat zilnic... (sarcini)"
     init: "Accesare: Pagina mea -> Sarcini zilnice"
+  gen_head:
+    field: "Câmp"
+    value: "Valoare"
+  trst_task:
+    created_at: "Creat"
+    updated_at: "Modificat"
+    page_ids: "Cap->Pag"
+    user_ids: "Utilizator"
+    haml_path: "Cale şablon"
+    target: "Cale BD"
+    name: "Denumire"
+    title: "Titlu"
+    help: "Help"
 en:
   xhr_tasks:
     title: "Daily todo... (tasks)"
     init: "Access: My Page -> Daily tasks"
+  gen_head:
+    field: "Field"
+    value: "Value"
+  trst_task:
+    created_at: "Created"
+    updated_at: "Modified"
+    page_ids: "Chapt->Page"
+    user_ids: "User"
+    haml_path: "Templ. path"
+    target: "DB. path"
+    name: "Name"
+    title: "Title"
+    help: "Help"
 hu:
   xhr_tasks:
     title: "Napi tennivaló... (feladatok)"
     init: "Hozzáférés: Saját oldal -> Napi feladatok"
+  gen_head:
+    field: "Mező"
+    value: "Érték"
+  trst_task:
+    created_at: "Létrehozva"
+    updated_at: "Módosítva"
+    page_ids: "Fejezet->Old"
+    user_ids: "Felhasználó"
+    haml_path: "Sablon"
+    target: "Adatbázis"
+    name: "Elnevezés"
+    title: "Cím"
+    help: "Segítség"
 
