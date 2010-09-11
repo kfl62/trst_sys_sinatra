@@ -15,6 +15,8 @@ body
   font-style: italic
 [class~=bo], [class~=st]
   font-weight: bold
+[class~=small]
+  font-size: 0.8em
 [class~=st]
   text-align: justify
 [class~=ce]
@@ -23,6 +25,8 @@ body
   text-align: right
 [class~=in]
   text-indent: 2.0em
+[class~=flri]
+  float: right
 .close
   background:
     image: image_url(unquote("/images/icons/remove.png"))
@@ -76,4 +80,5 @@ body
 @import partials/menu
 @import partials/auth
 @import partials/sidebar
+@import partials/task
 @import partials/footer
