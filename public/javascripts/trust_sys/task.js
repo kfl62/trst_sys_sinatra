@@ -27,13 +27,11 @@ var task = {
     var lastX,lastY,tskww,tskwh,
     base = dojo.position(o1),
     tskw = dojo.position(o2);
-    tskww = (tskw.w < 300) ? 300 : tskw.w;
-    lastX = base.x + 15;
-    lastY = base.y + 10;
+    lastX = base.x + 18;
+    lastY = base.y + 18;
     dojo.style(o2,{
       left:   lastX + 'px',
-      top:    lastY + 'px',
-      width:  tskww + 'px'
+      top:    lastY + 'px'
     });
   },
   drawBox: function(data){
@@ -44,6 +42,13 @@ var task = {
       dojo.place(ovl,dojo.body(),'first');
       dojo.place(win,ovl,'after');
       this.positionBox(dojo.byId('xhr_content'),win);
+    }
+    else{
+      dojo.destroy(dojo.byId('task_window'))
+      var ovl = dojo.byId('task_overlay');
+      var win = this.taskWindow;
+      win.innerHTML = data;
+      dojo.place(win,ovl,'after');
     }
   },
   destroy: function(){
