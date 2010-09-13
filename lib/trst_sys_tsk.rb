@@ -9,7 +9,7 @@ class TrstSysTsk < Sinatra::Base
   get '/:verb/:id' do |verb,id|
     task = TrstTask.find(id)
     model, method = task.target.split('.')
-    haml_path = task.haml_path
+    haml_path = task.haml_path == 'default' ? '/trst_sys/shared' : task.haml_path
     @task = task
     @object = model.constantize.send method, id
     case verb
