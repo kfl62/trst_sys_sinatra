@@ -5,20 +5,25 @@ ro:
   gen_head:
     field: "Câmp"
     value: "Valoare"
+  gen_footer:
+    note: "* Câmp tradus.<br>
+           Dacă este gol, sau dacă nu există traducere, se va afişa ...?...<br>
+           Momentan traducerea se face prin schimbarea limbii de acces<br>
+           a interfeţei şi editarea câmpului în cauză."
+  gen_warning:
+    delete: "!!! Atenţie ştergera este ireversibilă !!!"
+    post: "!!! Înregistrare nouă !!!"
+  gen_msg:
+    delete: "Se va şterge: <br><b>%{data}</b>.<br>"
+    post: "Se va crea o nouă înregistrare în tabelul <b>%{data}</b>, din baza de date, cu un conţinut implicit.<br>
+           <b>Important:</b><br>-după creare nu uitaţi să modificaţi câmpurile (generate cu conţinut implicit, sau goale) şi să <b>salvaţi</b> datele, sau puteţi chiar să <b>ştergeţi înregistrarea</b>, dacă va-ţi răzgândit!"
   button:
+    get: "Vizionare"
     put: "Editare"
     post: "Creare"
     delete: "Ştergere"
-  trst_task:
-    created_at: "Creat"
-    updated_at: "Modificat"
-    page_ids: "Cap->Pag"
-    user_ids: "Utilizator"
-    haml_path: "Cale şablon"
-    target: "Cale BD"
-    name: "Denumire"
-    title: "Titlu"
-    help: "Help"
+    cancel: "Anulare"
+    save: "Salvare"
 en:
   xhr_tasks:
     title: "Daily todo... (tasks)"
@@ -26,20 +31,25 @@ en:
   gen_head:
     field: "Field"
     value: "Value"
+  gen_footer:
+    note: "* Translated field.<br>
+          If empty, or there is no translation, will display ...?...<br>
+          Currently translation is done by changing the access language<br>
+          and editing the concerned field."
+  gen_warning:
+    delete: "!!! Atention the delete action is irreversible !!!"
+    post: "!!! New record !!!"
+  gen_msg:
+    delete: "It will delete: <br><b>%{data}</b>.<br>"
+    post: "It will create a new record in table <b>%{data}</b> from the database, with default content.<br>
+           <b>Important:</b><br>-after creation don't forget to modify the fields (generated with default or empty content) and <b>save</b> the data, you could even <b>delete</b> the record if you change your mind."
   button:
+    get: "View"
     put: "Edit"
     post: "Create"
     delete: "Delete"
-  trst_task:
-    created_at: "Created"
-    updated_at: "Modified"
-    page_ids: "Chapt->Page"
-    user_ids: "User"
-    haml_path: "Templ. path"
-    target: "DB. path"
-    name: "Name"
-    title: "Title"
-    help: "Help"
+    cancel: "Cancel"
+    save: "Save"
 hu:
   xhr_tasks:
     title: "Napi tennivaló... (feladatok)"
@@ -47,18 +57,23 @@ hu:
   gen_head:
     field: "Mező"
     value: "Érték"
+  gen_footer:
+    note: "* Lefordított mező.<br>
+           Ha üres, vagy nincsen lefordítva, ...?... fog megjelenni!<br>
+           A lefordításához, az interfész nyelvének a megváltoztatása<br>
+           és az illető nyelven, a mező módosítása szükséges."
+  gen_warning:
+    delete: "!!! Figyelem a törlés visszafordíthatatlan !!!"
+    post: "!!! Új bejegyzés !!!"
+  gen_msg:
+    delete: "Törli a: <br><b>%{data}</b>, bejegyzést! <br>"
+    post: "Egy új bejegyzést fog létrehozni a <b>%{data}</b> adtabázis-táblában, az alapértelmezett értékekkel.<br>
+          <b>Fontos:</b><br>-a létrehozás után ne felejtse el módosítani az alapéertelmezett, vagy üres értékeket és elmenteni az adatokat. Akár le is törölheti a bejegyzést, ha meggondolta magát."
   button:
+    get: "Megnéz"
     put: "Módosít"
     post: "Létrehoz"
     delete: "Töröl"
-  trst_task:
-    created_at: "Létrehozva"
-    updated_at: "Módosítva"
-    page_ids: "Fejezet->Old"
-    user_ids: "Felhasználó"
-    haml_path: "Sablon"
-    target: "Adatbázis"
-    name: "Elnevezés"
-    title: "Cím"
-    help: "Segítség"
+    cancel: "Lefúj"
+    save: "Ment"
 
