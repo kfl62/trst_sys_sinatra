@@ -39,6 +39,35 @@ module Trst
         TrstBook.where(:name  => current_controller).first
       end
 
+      def current_title(task,verb)
+        title = task.title.empty? ? "...?..." : task.title
+        title += " - "
+        title += t("button.#{verb}")
+        return title
+      end
+
+      def current_buttons(verb)
+        case verb
+        when 'get'
+          %w{put post delete}
+        when 'delete'
+          %w{delete cancel}
+        when 'put'
+          %w{save cancel delete}
+        when 'post'
+          %w{post cancel}
+        end
+      end
+
+      def current_xhr(verb,action,target,id)
+        if verb == 'cancel'
+          retval = 'task.destroy()'
+        else
+          retval = "xhr#{action.capitalize}('#{target}','#{id}')"
+        end
+        retval
+      end
+
       def controller_path
         current_controller == 'trst_sys' ? retval = '/srv' : retval = ''
         retval
@@ -49,59 +78,12 @@ module Trst
         retval
       end
 
-      def t(text)
+      def t(text, options={})
         I18n.reload!
-        translation = I18n.t(text)
-      end
-
-      def readable_values(o)
-        keys = o.fields.keys
-        r_keys = []
-        keys.each do |k|
-          if k =~ /_at/
-            v = o.send k
-            r_keys << [4,t("#{o.class.to_s.underscore}.#{k}"),v]
-          elsif k =~ /_ids$/
-            case k.split('_')[0]
-            when 'page'
-              v = []
-              ary = o.send k
-              ary.each{ |a| v << "#{TrstBook.page(a).chapter.name}><b>#{TrstBook.page(a).name}</b><"}
-            when 'user'
-              v = []
-              ary = o.send k
-              ary.each{ |a| v << TrstUser.find(a).login_name}
-            when 'task'
-              v = []
-              ary = o.send k
-              ary.each{ |a| v << TrstTask.find(a).name}
-            end
-            r_keys << [3,t("#{o.class.to_s.underscore}.#{k}"),v]
-          elsif o.fields[k].type.to_s =~ /LocalizedField/
-            v = o.send k
-            v = v + "<span class='flri small'>(*ro,en,hu)</span>"
-            r_keys << [2,t("#{o.class.to_s.underscore}.#{k}"),v]
-          else
-           v = o.send k
-           r_keys << [1,t("#{o.class.to_s.underscore}.#{k}"),v]
-          end
-        end
-        return r_keys.sort
-      end
-
-      def tr_class(v)
-        if v == 4
-          retval = "time"
-        elsif v == 3
-          retval = "rela"
-        elsif v == 2
-          retval = "loca"
-        else
-          retval == ""
-        end
-        retval
+        translation = I18n.t(text,options)
       end
 
     end
   end
 end
+
