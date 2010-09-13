@@ -12,6 +12,7 @@
   +box-shadow( rgba(62, 62, 62, 1), 0.5em, 0.5em)
   +border-radius(0.5em)
   padding: 0.5em 1.0em
+  max-width: 480px
   position: absolute
   z-index: 100
   .close
@@ -23,20 +24,31 @@
   table
     border-collapse: collapse
     width: 100%
-    tr.loca
+    input
+      font-family: Verdana, Helvetica, Arial, sans-serif
+      margin: 0px
+      padding: 1px 0px
+      width: 150px
+    tr.normal
+      background-color: rgba(245, 245, 245, 1)
+    tr.relations
       background-color: rgba(230, 230, 230, 1)
-    tr.rela
+    tr.localized
       background-color: rgba(220, 220, 220, 1)
-    tr.time
+      input
+        width: 200px
+    tr.datetime
       background-color: rgba(210, 210, 210, 1)
     td.buttons_bottom
       text-align: center
       line-height: 2.5em
       vertical-align: center
+    td.footer_note
+      font-size: smaller
   span.button
     background:
       color: rgba(230, 230, 230, 1)
-      position: 1px 0px
+      position: 2px 0px
       repeat: no-repeat
     border: outset 1px rgba(0, 0, 0, 1)
     +border-radius(0.25em)
@@ -53,8 +65,19 @@
     &.post
       background:
         image: image_url(unquote("/images/icons/db_new.png"))
+        position: 0px 0px
     &.delete
       background:
         image: image_url(unquote("/images/icons/db_remove.png"))
-
+    &.save
+      background:
+        image: image_url(unquote("/images/icons/db_save.png"))
+        position: 2px 2px
+    &.cancel
+      background:
+        image: image_url(unquote("/images/icons/db_cancel.png"))
+        position: 2px 2px
+  sup
+    font-size: smaller
+    vertical-align: super
 
