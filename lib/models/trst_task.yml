@@ -1,0 +1,34 @@
+ro:
+  trst_task:
+    created_at: "Creat"
+    updated_at: "Modificat"
+    page_ids: "Cap->Pag"
+    user_ids: "Utilizator"
+    haml_path: "Cale şablon"
+    target: "Cale BD"
+    name: "Denumire"
+    title: "Titlu"
+    help: "Help"
+en:
+  trst_task:
+    created_at: "Created"
+    updated_at: "Modified"
+    page_ids: "Chapt->Page"
+    user_ids: "User"
+    haml_path: "Templ. path"
+    target: "DB. path"
+    name: "Name"
+    title: "Title"
+    help: "Help"
+hu:
+  trst_task:
+    created_at: "Létrehozva"
+    updated_at: "Módosítva"
+    page_ids: "Fej.->Old."
+    user_ids: "Felhasználó"
+    haml_path: "Sablon"
+    target: "Adatbázis"
+    name: "Elnevezés"
+    title: "Cím"
+    help: "Segítség"
+

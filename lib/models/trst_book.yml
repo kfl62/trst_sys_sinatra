@@ -1,0 +1,13 @@
+ro:
+  trst_book:
+    created_at: "Creat"
+    updated_at: "Modificat"
+en:
+  trst_book:
+    created_at: "Created"
+    updated_at: "Modified"
+hu:
+  trst_book:
+    created_at: "Létrehozva"
+    updated_at: "Módosítva"
+
