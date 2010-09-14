@@ -46,8 +46,8 @@ module Trst
         return title
       end
 
-      def current_buttons(verb)
-        case verb
+      def current_buttons(action)
+        case action
         when 'get'
           %w{put post delete}
         when 'delete'
@@ -56,16 +56,29 @@ module Trst
           %w{save cancel delete}
         when 'post'
           %w{post cancel}
+        when 'filter'
+          %w{post cancel}
         end
       end
 
-      def current_xhr(verb,action,target,id)
-        if verb == 'cancel'
-          retval = 'task.destroy()'
-        else
-          retval = "xhr#{action.capitalize}('#{target}','#{id}')"
+      def current_xhr(button,id,action,target_id)
+        case action
+        when /filter|get/
+          action = 'init'
+          verb = button
+          target_id = "new" if button == 'post'
+        when 'post'
+          target_id = "new"
+          verb = button
+        when 'put'
+          action = verb = 'put' if button == 'save'
+          action = verb = 'delete' if button == 'delete'
+        when 'delete'
+          verb = button
         end
-        retval
+        retval = "task.#{action}('#{id}','#{verb}','#{target_id}')"
+        retval = 'task.destroy()' if button == 'cancel'
+        return retval
       end
 
       def controller_path
