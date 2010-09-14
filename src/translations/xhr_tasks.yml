@@ -18,12 +18,15 @@ ro:
     post: "Se va crea o nouă înregistrare în tabelul <b>%{data}</b>, din baza de date, cu un conţinut implicit.<br>
            <b>Important:</b><br>-după creare nu uitaţi să modificaţi câmpurile (generate cu conţinut implicit, sau goale) şi să <b>salvaţi</b> datele, sau puteţi chiar să <b>ştergeţi înregistrarea</b>, dacă va-ţi răzgândit!"
   button:
+    filter: "Selectare"
     get: "Vizionare"
     put: "Editare"
     post: "Creare"
     delete: "Ştergere"
     cancel: "Anulare"
     save: "Salvare"
+  select:
+    select: "Alegeţi!"
 en:
   xhr_tasks:
     title: "Daily todo... (tasks)"
@@ -44,12 +47,15 @@ en:
     post: "It will create a new record in table <b>%{data}</b> from the database, with default content.<br>
            <b>Important:</b><br>-after creation don't forget to modify the fields (generated with default or empty content) and <b>save</b> the data, you could even <b>delete</b> the record if you change your mind."
   button:
+    filter: "Select"
     get: "View"
     put: "Edit"
     post: "Create"
     delete: "Delete"
     cancel: "Cancel"
     save: "Save"
+  select:
+    select: "Select!"
 hu:
   xhr_tasks:
     title: "Napi tennivaló... (feladatok)"
@@ -70,10 +76,13 @@ hu:
     post: "Egy új bejegyzést fog létrehozni a <b>%{data}</b> adtabázis-táblában, az alapértelmezett értékekkel.<br>
           <b>Fontos:</b><br>-a létrehozás után ne felejtse el módosítani az alapéertelmezett, vagy üres értékeket és elmenteni az adatokat. Akár le is törölheti a bejegyzést, ha meggondolta magát."
   button:
+    filter: "Választ"
     get: "Megnéz"
     put: "Módosít"
     post: "Létrehoz"
     delete: "Töröl"
     cancel: "Lefúj"
     save: "Ment"
+  select:
+    select: "Válaszon!"
 
