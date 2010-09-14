@@ -25,9 +25,9 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom", :colspan => "2"}
-          - current_buttons(action).each do |verb|
-            %span{:class => "button #{verb}", :onclick => "task.xhrGet('#{@task.id}','#{verb}')"}<
-              =t("button.#{verb}")
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+              =t("button.#{button}")
       %tr
         %td.footer_note{:colspan => "2"}= t('gen_footer.note')
 - else
@@ -42,7 +42,7 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |verb|
-            %span{:class => "button #{verb}", :onclick => current_xhr(verb,action,@task.target,@object.id)}<
-              =t("button.#{verb}")
-            
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+              =t("button.#{button}")
+

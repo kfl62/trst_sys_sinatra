@@ -1,0 +1,24 @@
+%p.close{:onclick => "task.destroy()"}
+%p.task_title= current_title(@task,action)
+%form{:id  => "xhr_#{action}"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+    %tbody
+      %tr
+        %td
+          %select{:onchange => "task.init('#{@task.id}',
+                                'get',
+                                (this.options[this.selectedIndex].value))"}
+            %option= t('select.select')
+            - @object.each do |o|
+              %option{:value => o.id}<
+                =o.name
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |verb|
+            %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
+              =t("button.#{verb}")
+

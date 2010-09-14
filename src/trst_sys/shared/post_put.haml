@@ -1,6 +1,6 @@
 %p.close{:onclick => "task.destroy()"}
 %p.task_title= current_title(@task,action)
--if action == 'put' 
+-if action == 'put'
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
       %thead
@@ -25,9 +25,9 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "2"}
-            - current_buttons(action).each do |verb|
-              %span{:class => "button #{verb}", :onclick => current_xhr(verb,action,@task.target,@object.id)}<
-                =t("button.#{verb}")
+            - current_buttons(action).each do |button|
+              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+                =t("button.#{button}")
         %tr
           %td.footer_note{:colspan => "2"}= t('gen_footer.note')
 -else
@@ -38,11 +38,11 @@
     %tbody
       %tr
         %td
-          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.class.to_s}")
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |verb|
-            %span{:class => "button #{verb}", :onclick => current_xhr(verb,action,@task.target,@object.id)}<
-              =t("button.#{verb}")
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new")}<
+              =t("button.#{button}")
 
