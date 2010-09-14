@@ -1,3 +1,4 @@
+dojo.provide("trst.auth");
 var loginBox = {
   init: function(){
     if (dojo.query('[id^="auth"]').length == 0){

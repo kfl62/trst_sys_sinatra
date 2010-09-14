@@ -66,9 +66,9 @@ var xhrInitSidebar = function(){
 
 function init(){
   if (dojo.body().id == 'srv'){
-    dojo.require('trst.task',true)
+    dojo.require('trst.task')
   }else{
-    dojo.require('trst.auth',true)
+    dojo.require('trst.auth')
   }
   dojo.publish('xhrMsg',['flash']);
   dojo.query('#menu ul > li > a')
