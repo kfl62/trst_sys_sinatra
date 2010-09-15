@@ -2,15 +2,27 @@ ro:
   lang:
     change: "Limba aleasă este Română..."
   loading: "O clipă se încarcă pagina..."
-  error: "Eroare: %{data}"
+  error: "Eroare: <b>%{data}</b>"
+  db:
+    post: "Înregistrarea a fost creată în tabelul <b>%{data}</b> ..."
+    put: "Înregistrare <b>%{data}</b> modificată ..."
+    delete: "Înregistrare <b>%{data}</b> ştearsă ..."
 en:
   lang:
     change: "Switched to English..."
   loading: "Loading..."
   error: "Error: %{error}"
+  db:
+    post: "Record was created in table <b>%{data}</b> ..."
+    put: "Edited record <b>%{data}</b> ..."
+    delete: "Deleted record <b>%{data}</b> ..."
 hu:
   lang:
     change: "A magyar nyelvet választotta..."
   loading: "Egy kis tűrelem..."
-  error: "Hibaüzenet: %{data}"
+  error: "Hibaüzenet: <b>%{data}</b>"
+  db:
+    post: "Új bejegyzés a <b>%{data}</b> adtabázis-táblában ..."
+    put: "Módosított bejegyzés <b>%{data}</b> ..."
+    delete: "Törölve <b>%{data}</b> ..."
 
