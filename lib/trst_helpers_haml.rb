@@ -64,19 +64,18 @@ module Trst
       def current_xhr(button,id,action,target_id)
         case action
         when /filter|get/
-          action = 'init'
           verb = button
           target_id = "new" if button == 'post'
         when 'post'
           target_id = "new"
           verb = button
         when 'put'
-          action = verb = 'put' if button == 'save'
-          action = verb = 'delete' if button == 'delete'
+          verb = 'put' if button == 'save'
+          verb = 'delete' if button == 'delete'
         when 'delete'
           verb = button
         end
-        retval = "task.#{action}('#{id}','#{verb}','#{target_id}')"
+        retval = "task.init('#{id}','#{verb}','#{target_id}')"
         retval = 'task.destroy()' if button == 'cancel'
         return retval
       end
