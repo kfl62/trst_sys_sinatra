@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TrstSysTsk < Sinatra::Base
 
   get '/' do
@@ -64,15 +65,16 @@ class TrstSysTsk < Sinatra::Base
     task = TrstTask.find(id)
     model, method = task.target.split('.')
     haml_path = task.haml_path == 'default' ? '/trst_sys/shared' : task.haml_path
+    update_hash = params_handle_ids(params,model)
     case method
     when 'find'
       @task = task
       @object = model.constantize.send method, target_id
-      @object.update_attributes params[model.underscore.to_sym]
+      @object.update_attributes update_hash
     else
       params.inspect
     end
-    flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => model), :class => "info"}}.to_json
+    flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json
     haml :"#{haml_path}/get_delete", :layout => false, :locals => {:action => 'get'}
   end
   # route for delete {{{1

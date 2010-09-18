@@ -32,6 +32,22 @@ module Trst
         lang = I18n.locale.to_s
         lang == "ro" ? "" : "/#{lang}"
       end
+      
+      def params_handle_ids(p,m)
+        retval = {}
+        p[m.underscore.to_sym].each_pair do |key,value|
+          retval[key] = key.index(/_ids/).nil? ?  CGI.unescape(value) : array_of_bson_ids(value)
+        end
+        retval
+      end
+
+      def array_of_bson_ids(ids)
+        retval = []
+        ids.split(',').each do |id|
+          retval << BSON::ObjectId(id)
+        end
+        retval
+      end
 
     end
   end
