@@ -49,7 +49,7 @@ module Trst
       def current_buttons(action)
         case action
         when 'get'
-          %w{put post delete}
+          %w{put delete cancel post}
         when 'delete'
           %w{delete cancel}
         when 'put'
