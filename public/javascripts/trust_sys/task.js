@@ -112,6 +112,7 @@ var task = {
     };
     var deferred = dojo.xhrPut(xhrArgs);
     this.url = ["/srv/tsk"];
+    this.verb = "get";
   },
   // delete {{{2
   delete: function(){
