@@ -25,6 +25,8 @@ ro:
     delete: "Ştergere"
     cancel: "Anulare"
     save: "Salvare"
+    add: "Adăugare"
+    del: "Ştergere"
   select:
     select: "Alegeţi!"
 en:
@@ -54,6 +56,8 @@ en:
     delete: "Delete"
     cancel: "Cancel"
     save: "Save"
+    add: "Add"
+    del: "Delete"
   select:
     select: "Select!"
 hu:
@@ -83,6 +87,8 @@ hu:
     delete: "Töröl"
     cancel: "Lefúj"
     save: "Ment"
+    add: "Hozzáad"
+    del: "Töröl"
   select:
     select: "Válaszon!"
 

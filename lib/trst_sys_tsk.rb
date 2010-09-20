@@ -91,5 +91,12 @@ class TrstSysTsk < Sinatra::Base
     end
     flash[:msg] = {:msg => {:txt => I18n.t('db.delete', :data => @object.name), :class => "info"}}.to_json
   end
-
+  # add/delete relations {{{1
+  get '/:id/:verb/:target_id/:field/:action' do |id,verb,target_id,field,action|
+    task = TrstTask.find(id)
+    model, method = task.target.split('.')
+    @task = task
+    @object = model.constantize.send method, target_id
+    haml :"trst_sys/shared/relations", :layout  => false, :locals => {:action => action, :field => field}
+  end
 end

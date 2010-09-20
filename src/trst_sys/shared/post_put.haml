@@ -13,13 +13,24 @@
           - when 'normal'
             %tr{:class => data[:css]}
               %td= data[:label]
-              %td<
+              %td
                 %input{:name => "[#{model}][#{data[:name]}]",
-                       :value => (data[:value] unless action == 'post')}
+                       :value => data[:value]}
+          - when 'relations'
+            %tr{:class => data[:css]}
+              %td= data[:label]
+              %td<
+                %span=data[:value][0].join(', ')
+                %input{:type => "hidden",
+                       :name => "[#{model}][#{data[:name]}]",
+                       :value => data[:value][1].join(',')}
+                - unless data[:value][0].empty?
+                  %span.db-relations-del{:'data-fieldname' => data[:name], :onclick => "task.relations.init()"}
+                %span.db-relations-add{:'data-fieldname' => data[:name],:onclick => "task.relations.init()"}
           - when 'localized'
             %tr{:class => data[:css]}
               %td= data[:label] + "<sup>*</sup>"
-              %td<
+              %td
                 %input{:name => "[#{model}][#{data[:name]}]",
                   :value => data[:value].nil? ? '...?...' : data[:value]["#{current_lang}"]}
       %tfoot

@@ -9,6 +9,16 @@ ro:
     name: "Denumire"
     title: "Titlu"
     help: "Help"
+    relations:
+      add:
+        page_ids: "Asocierea cu 'Cap->Pag'"
+        user_ids: "Asocierea cu 'Utilizator'"
+      del:
+        page_ids: "Ştergerea asocierii cu 'Cap->Pag'"
+        user_ids: "Ştergerea asocierii cu 'Utilizator'"
+      select:
+        page_ids: "Alegeţi 'Cap->Pag'"
+        user_ids: "Alegeţi 'Utilizator'"
 en:
   trst_task:
     created_at: "Created"
@@ -20,6 +30,16 @@ en:
     name: "Name"
     title: "Title"
     help: "Help"
+    relations:
+      add:
+        page_ids: "Associate with 'Chapt->Page'"
+        user_ids: "Associate with 'User'"
+      del:
+        page_ids: "Delete 'Chapt->Page' association"
+        user_ids: "Delete 'User' association"
+      select:
+        page_ids: "Select 'Chapt->Page'"
+        user_ids: "Select 'User'"
 hu:
   trst_task:
     created_at: "Létrehozva"
@@ -31,4 +51,14 @@ hu:
     name: "Elnevezés"
     title: "Cím"
     help: "Segítség"
+    relations:
+      add:
+        page_ids: "Associate with 'Chapt->Page'"
+        user_ids: "Associate with 'User'"
+      del:
+        page_ids: "Delete 'Chapt->Page' association"
+        user_ids: "Delete 'User' association"
+      select:
+        page_ids: "Select 'Chapt->Page'"
+        user_ids: "Select 'User'"
 

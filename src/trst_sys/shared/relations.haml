@@ -1,0 +1,41 @@
+%p.close{:onclick => "task.relations.destroy()"} &nbsp;
+%p.task_title= current_title(@object,field,action)
+- case field
+- when 'page_ids'
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+    %tbody
+      %tr
+        %td
+          %select
+            %option{:value => "null"}= t("#{@object.class.name.underscore}.relations.select.#{field}")
+            -# TrstBook.page_related_to.each do |page|
+              %option{:value => page[0]}= page[1]
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |verb|
+            %span{:class => "button #{verb}", :onclick => current_js(verb)}<
+              =t("button.#{verb}")
+- when 'user_ids'
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+    %tbody
+      %tr
+        %td
+          %select
+            %option{:value => "null"}= t("#{@object.class.name.underscore}.relations.select.#{field}")
+            -# TrstUser.user_related_to.each do |user|
+              %option{:value => user[0]}= user[1]
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |verb|
+            %span{:class => "button #{verb}", :onclick => current_js(verb)}<
+              =t("button.#{verb}")
+- else
+  %p Error

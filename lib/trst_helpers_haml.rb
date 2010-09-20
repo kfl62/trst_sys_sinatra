@@ -39,10 +39,15 @@ module Trst
         TrstBook.where(:name  => current_controller).first
       end
 
-      def current_title(task,verb)
-        title = task.title.empty? ? "...?..." : task.title
-        title += " - "
-        title += t("button.#{verb}")
+      def current_title(task,verb,action=nil)
+        case action
+        when nil
+          title = task.title.empty? ? "...?..." : task.title
+          title += " - "
+          title += t("button.#{verb}")
+        else
+          title = t("#{task.class.name.underscore}.relations.#{action}.#{verb}")
+        end
         return title
       end
 
@@ -58,6 +63,10 @@ module Trst
           %w{post cancel}
         when 'filter'
           %w{post cancel}
+        when 'add' # relations
+          %w{add cancel}
+        when 'del' # relations
+          %w{del cancel}
         end
       end
 
@@ -77,6 +86,12 @@ module Trst
         end
         retval = "task.init('#{id}','#{verb}','#{target_id}')"
         retval = 'task.destroy()' if button == 'cancel'
+        return retval
+      end
+      
+      def current_js(action)
+        retval = "task.relations.#{action}()"
+        retval = "task.relations.destroy()" if action == 'cancel'
         return retval
       end
 
