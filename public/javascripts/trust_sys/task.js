@@ -80,7 +80,6 @@ var task = {
     };
     dojo.publish('xhrMsg',['loading','info']);
     var deferred = dojo.xhrGet(xhrArgs);
-    task.relations.url = this.url;
     this.url = ["/srv/tsk"];
   },
   // post {{{2
@@ -189,6 +188,7 @@ dojo.mixin(task,{
       var ovl = this.relationsOverlay,
           win = this.relationsWindow,
           target = event.target;
+      this.url = this.parentNode.children[2].value.split(',')
       this.url.push(target.dataset.fieldname);
       this.url.push(target.className.split('-').pop());
       var pos = dojo.position(this.parentNode);
@@ -212,9 +212,9 @@ dojo.mixin(task,{
     },
     add: function(){
       var span = this.parentNode.children[0],
-          names = span.innerHTML.split(', '),
+          names = (span.innerHTML == "") ? [] : span.innerHTML.split(', '),
           input = this.parentNode.children[1],
-          ids = input.value.split(','),
+          ids = (input.value == "") ? [] : input.value.split(','),
           selected = dojo.query('#relations_window option:checked')[0];
       if (selected.value != 'null'){
         names.push(selected.text);

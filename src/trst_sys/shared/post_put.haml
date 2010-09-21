@@ -24,6 +24,7 @@
                 %input{:type => "hidden",
                        :name => "[#{model}][#{data[:name]}]",
                        :value => data[:value][1].join(',')}
+                %input{:type  => "hidden", :value => "/srv/tsk,#{@task.id.to_s},#{action},#{@object.id.to_s}"}
                 - unless data[:value][0].empty?
                   %span.db-relations-del{:'data-fieldname' => data[:name], :onclick => "task.relations.init()"}
                 %span.db-relations-add{:'data-fieldname' => data[:name],:onclick => "task.relations.init()"}
