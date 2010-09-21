@@ -11,7 +11,7 @@
         %td
           %select
             %option{:value => "null"}= t("#{@object.class.name.underscore}.relations.select.#{field}")
-            -# TrstBook.page_related_to.each do |page|
+            - TrstBook.page_related_to.each do |page|
               %option{:value => page[0]}= page[1]
     %tfoot
       %tr
@@ -29,7 +29,7 @@
         %td
           %select
             %option{:value => "null"}= t("#{@object.class.name.underscore}.relations.select.#{field}")
-            -# TrstUser.user_related_to.each do |user|
+            - TrstUser.user_related_to.each do |user|
               %option{:value => user[0]}= user[1]
     %tfoot
       %tr
