@@ -58,6 +58,12 @@ class TrstUser
     def encrypt(pass, salt)
       Digest::SHA1.hexdigest(pass+salt)
     end
+    
+    def user_related_to
+      retval = []
+      all.each{|user| retval << [user.id.to_s, user.login_name]}
+      return retval
+    end
 
   end
 
