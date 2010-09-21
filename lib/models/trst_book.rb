@@ -30,6 +30,15 @@ class TrstBook
       pg = ch.pages.where(:slug  => "tasks").first
     end
 
+    def page_related_to
+      retval = []
+      book = where(:name  => "trst_sys").first
+      book.chapters.each do |chapter|
+        chapter.pages.each{|page| retval << [page.id.to_s, "#{page.chapter.name}>#{page.name}<"]}
+      end
+      return retval
+    end
+
   end
 
 end
