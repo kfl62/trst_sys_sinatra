@@ -15,7 +15,6 @@ class TrstUser
   validates_uniqueness_of :login_name
   validates_uniqueness_of :email
   validates_format_of :email, :with => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
-  #validates_presence_of :password
   validates_confirmation_of :password
 
   attr_accessor :password, :password_confirmation
@@ -58,13 +57,15 @@ class TrstUser
     def encrypt(pass, salt)
       Digest::SHA1.hexdigest(pass+salt)
     end
-    
+
     def user_related_to
-      retval = []
-      all.each{|user| retval << [user.id.to_s, user.login_name]}
-      return retval
+      all.collect{|user| [user.id.to_s, user.login_name]}
     end
 
+  end
+
+  def name
+    login_name
   end
 
   def password=(pass)
@@ -89,34 +90,28 @@ class TrstUser
     task_ids['daily_tasks']
   end
 
-  def daily_tasks_add(id)
-    dt = daily_tasks.push(id) unless daily_tasks.include?(id)
-    ot = other_tasks
-    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
-  end
-
-  def daily_tasks_delete(id)
-    daily_tasks.delete(id)
-    dt = daily_tasks
-    ot = other_tasks
-    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  def daily_tasks_name
+    daily_tasks.collect{|id| TrstTask.find(id).name}
   end
 
   def other_tasks
     task_ids['other_tasks']
   end
 
-  def other_tasks_add(id)
-    dt = daily_tasks
-    ot = other_tasks.push(id) unless other_tasks.include?(id)
-    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  def other_tasks_name
+    other_tasks.collect{|id| TrstTask.find(id).name}
   end
 
-  def other_tasks_delete(id)
-    other_tasks.delete(id)
-    dt = daily_tasks
-    ot = other_tasks
-    update_attributes(:task_ids => {:daily_tasks => dt, :other_tasks => ot})
+  def table_data
+    [{:css => "normal",:name => "login_name",:label => I18n.t("trst_user.login_name"),:value => login_name},
+     {:css => "normal",:name => "email",:label => I18n.t("trst_user.email"),:value => email},
+     {:css => "integer",:name => "permission_lvl",:label => I18n.t("trst_user.permission_lvl"),:value => permission_lvl},
+     {:css => "array",:name => "permission_grp",:label => I18n.t("trst_user.permission_grp"),:value => permission_grp},
+     {:css => "hash",:name => "settings",:label => I18n.t("trst_user.settings.header"),:value => settings},
+     {:css => "relations",:name => "task_ids,daily_tasks",:label => I18n.t("trst_user.daily_tasks"),:value => [daily_tasks_name,daily_tasks]},
+     {:css => "relations",:name => "task_ids,other_tasks",:label => I18n.t("trst_user.other_tasks"),:value => [other_tasks_name,other_tasks]},
+     {:css => "datetime",:name => "created_at",:label => I18n.t("trst_task.created_at"),:value => created_at},
+     {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_task.updated_at"),:value => updated_at}]
   end
 
   protected
