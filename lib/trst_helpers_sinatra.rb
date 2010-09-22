@@ -41,10 +41,15 @@ module Trst
         retval
       end
 
-      def array_of_bson_ids(ids)
-        retval = []
-        ids.split(',').each do |id|
-          retval << BSON::ObjectId(id)
+      def array_of_bson_ids(value)
+        if value.is_a?(Hash)
+          hash = value
+          retval = {}
+          hash.each_pair do |key,value|
+            retval[key] = value.split(',').collect{|id| BSON::ObjectId(id)}
+          end
+        else
+          retval = value.split(',').collect{|id| BSON::ObjectId(id)}
         end
         retval
       end
