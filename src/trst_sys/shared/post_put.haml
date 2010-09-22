@@ -8,13 +8,13 @@
           %th= t('gen_head.field')
           %th= t('gen_head.value')
       %tbody
-        - @object.table_data.each do |data|; model = @task.target.split('.')[0].underscore
+        - @object.table_data.each do |data|
           - case data[:css]
           - when 'normal'
             %tr{:class => data[:css]}
               %td= data[:label]
               %td
-                %input{:name => "[#{model}][#{data[:name]}]",
+                %input{:name => input_name(@task,data[:name]),
                        :value => data[:value]}
           - when 'relations'
             %tr{:class => data[:css]}
@@ -22,17 +22,17 @@
               %td<
                 %span=data[:value][0].join(', ')
                 %input{:type => "hidden",
-                       :name => "[#{model}][#{data[:name]}]",
+                       :name => input_name(@task,data[:name]),
                        :value => data[:value][1].join(',')}
                 %input{:type  => "hidden", :value => "/srv/tsk,#{@task.id.to_s},#{action},#{@object.id.to_s}"}
                 - unless data[:value][0].empty?
-                  %span.db-relations-del{:'data-fieldname' => data[:name], :onclick => "task.relations.init()"}
-                %span.db-relations-add{:'data-fieldname' => data[:name],:onclick => "task.relations.init()"}
+                  %span.db-relations-del{:'data-fieldname' => data[:name].split(',').last, :onclick => "task.relations.init()"}
+                %span.db-relations-add{:'data-fieldname' => data[:name].split(',').last,:onclick => "task.relations.init()"}
           - when 'localized'
             %tr{:class => data[:css]}
               %td= data[:label] + "<sup>*</sup>"
               %td
-                %input{:name => "[#{model}][#{data[:name]}]",
+                %input{:name => input_name(@task,data[:name]),
                   :value => data[:value].nil? ? '...?...' : data[:value]["#{current_lang}"]}
       %tfoot
         %tr
