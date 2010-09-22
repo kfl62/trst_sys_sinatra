@@ -1,6 +1,6 @@
 # encoding: utf-8
 class TrstSysTsk < Sinatra::Base
-
+  # route for / {{{1
   get '/' do
     login_required
     session[:daily_tasks] = true
@@ -32,8 +32,8 @@ class TrstSysTsk < Sinatra::Base
     haml_path = task.haml_path == 'default' ? '/trst_sys/shared' : task.haml_path
     @task = task
     if target_id == 'new'
-      @object =  model.constantize 
-    else 
+      @object =  model.constantize
+    else
       @object = model.constantize.send method, target_id
     end
     case verb
@@ -98,5 +98,5 @@ class TrstSysTsk < Sinatra::Base
     @task = task
     @object = model.constantize.send method, target_id
     haml :"trst_sys/shared/relations", :layout  => false, :locals => {:action => action, :field => field}
-  end
+  end #}}}
 end
