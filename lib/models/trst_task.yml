@@ -53,12 +53,12 @@ hu:
     help: "Segítség"
     relations:
       add:
-        page_ids: "Associate with 'Chapt->Page'"
-        user_ids: "Associate with 'User'"
+        page_ids: "Társítás 'Fej.->Old.'"
+        user_ids: "Társítás 'Felhasználó'"
       del:
-        page_ids: "Delete 'Chapt->Page' association"
-        user_ids: "Delete 'User' association"
+        page_ids: "Társított 'Fej.->Old.' törlése"
+        user_ids: "Társított 'Felhasználó' törlése"
       select:
-        page_ids: "Select 'Chapt->Page'"
-        user_ids: "Select 'User'"
+        page_ids: "Válasszon 'Fej.->Old.'-t"
+        user_ids: "Válasszon 'Felhasználó'-t"
 

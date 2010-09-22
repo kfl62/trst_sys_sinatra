@@ -56,12 +56,12 @@ hu:
     updated_at: "Módosítva"
     relations:
       add:
-        daily_tasks: "Add to 'Daily tasks'"
-        other_tasks: "Add to 'Other tasks'"
+        daily_tasks: "'Napi tennivaló' hozzáad"
+        other_tasks: "'Engedélyezett tevékenységek' hozzáad"
       del:
-        daily_tasks: "Delete from 'Daily tasks'"
-        other_tasks: "Delete from 'Other tasks'"
+        daily_tasks: "'Napi tennivaló' töröl"
+        other_tasks: "'Engedélyezett tevékenységek' töröl"
       select:
-        daily_tasks: "Select task"
-        other_tasks: "Select task"
+        daily_tasks: "Válasszon feladatot"
+        other_tasks: "Válasszon feladatot"
 
