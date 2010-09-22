@@ -1,13 +1,28 @@
 ro:
   trst_book_chapter:
+    order: "Nr.Ordine"
+    slug: "Web-slug"
+    name: "Nume"
+    title: "Titlu"
+    content: "Conţinut"
     created_at: "Creat"
     updated_at: "Modificat"
 en:
   trst_book_chapter:
+    order: "Order"
+    slug: "Slug"
+    name: "Name"
+    title: "Title"
+    content: "Content"
     created_at: "Created"
     updated_at: "Modified"
 hu:
   trst_book_chapter:
+    order: "Sorszám"
+    slug: "Web-slug"
+    name: "Név"
+    title: "Cím"
+    content: "Tartalom"
     created_at: "Létrehozva"
     updated_at: "Módosítva"
 
