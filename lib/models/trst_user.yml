@@ -1,13 +1,67 @@
 ro:
   trst_user:
+    login_name: "Nume utilizator"
+    email: "Adresă email"
+    permission_lvl: "Nivel acces"
+    permission_grp: "Membru grupă"
+    settings:
+      header: "Setări"
+    daily_tasks: "Sarcini zilnice"
+    other_tasks: "Sarcini accesibile"
     created_at: "Creat"
     updated_at: "Modificat"
+    relations:
+      add:
+        daily_tasks: "Adăugare la 'Sarcini zilnice'"
+        other_tasks: "Adăugare la 'Sarcini accesibile'"
+      del:
+        daily_tasks: "Ştergere din 'Sarcini zilnice'"
+        other_tasks: "Ştergere din 'Sarcini accesibile'"
+      select:
+        daily_tasks: "Alegeţi sarcina"
+        other_tasks: "Alegeţi sarcina"
 en:
   trst_user:
+    login_name: "User name"
+    email: "Email address"
+    permission_lvl: "Permission level"
+    permission_grp: "Permission group"
+    settings:
+      header: "Settings"
+    daily_tasks: "Daily tasks"
+    other_tasks: "Other tasks"
     created_at: "Created"
     updated_at: "Modified"
+    relations:
+      add:
+        daily_tasks: "Add to 'Daily tasks'"
+        other_tasks: "Add to 'Other tasks'"
+      del:
+        daily_tasks: "Delete from 'Daily tasks'"
+        other_tasks: "Delete from 'Other tasks'"
+      select:
+        daily_tasks: "Select task"
+        other_tasks: "Select task"
 hu:
   trst_user:
+    login_name: "Felhasználó név"
+    email: "Email cím"
+    permission_lvl: "Engedélyszint"
+    permission_grp: "Csoporttagság"
+    settings:
+      header: "Beállítások"
+    daily_tasks: "Napi tennivaló"
+    other_tasks: "Engedélyezett tevékenységek"
     created_at: "Létrehozva"
     updated_at: "Módosítva"
+    relations:
+      add:
+        daily_tasks: "Add to 'Daily tasks'"
+        other_tasks: "Add to 'Other tasks'"
+      del:
+        daily_tasks: "Delete from 'Daily tasks'"
+        other_tasks: "Delete from 'Other tasks'"
+      select:
+        daily_tasks: "Select task"
+        other_tasks: "Select task"
 
