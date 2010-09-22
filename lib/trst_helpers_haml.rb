@@ -51,6 +51,16 @@ module Trst
         return title
       end
 
+      def input_name(task,name)
+        model = task.target.split('.')[0].underscore
+        retval = ""
+        name.split(',').each do |n|
+          retval += "[#{n}]"
+        end
+        retval = "[#{model}]#{retval}"
+        return retval
+      end
+
       def current_buttons(action)
         case action
         when 'get'
