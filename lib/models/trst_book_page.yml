@@ -1,13 +1,58 @@
 ro:
   trst_book_page:
+    order: "Nr.Ordine"
+    slug: "Web-slug"
+    access_lvl: "Nivel acces"
+    access_grp: "Grup acces"
+    task_ids: "Sarcini"
+    name: "Denumire"
+    title: "Titlu"
+    content: "Conţinut"
     created_at: "Creat"
     updated_at: "Modificat"
+    relations:
+      add:
+        task_ids: "Alocare 'Sarcină'"
+      del:
+        task_ids: "Ştergere 'Sarcină'"
+      select:
+        task_ids: "Alegeţi sarcina"
 en:
   trst_book_page:
+    order: "Order"
+    slug: "Slug"
+    access_lvl: "Access level"
+    access_grp: "Access group"
+    task_ids: "Tasks"
+    name: "Name"
+    title: "Title"
+    content: "Content"
     created_at: "Created"
     updated_at: "Modified"
+    relations:
+      add:
+        task_ids: "Add 'Task'"
+      del:
+        task_ids: "Delete 'Task'"
+      select:
+        task_ids: "Select task"
 hu:
   trst_book_page:
+    order: "Sorszám"
+    slug: "Web-slug"
+    access_lvl: "Jogosult szint"
+    access_grp: "Jogosult csoport"
+    task_ids: "Feladatok"
+    name: "Név"
+    title: "Cím"
+    content: "Tartalom"
     created_at: "Létrehozva"
     updated_at: "Módosítva"
+    relations:
+      add:
+        task_ids: "Társítás 'Feladat'"
+      del:
+        task_ids: "Társított 'Feladat' törlése"
+      select:
+        task_ids: "Válasszon 'Feladat'-t"
 

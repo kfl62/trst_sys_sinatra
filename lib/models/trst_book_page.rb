@@ -22,15 +22,20 @@ class TrstBookPage
   def tasks
     task_ids
   end
-  
-  def task_add(id)
-    tasks.push(id) unless tasks.include?(id)
-    update_attributes(:task_ids => tasks)
+
+  def tasks_name
+    task_ids.collect{|id| TrstTask.find(id).name}
   end
 
-  def task_delete(id)
-    tasks.delete(id)
-    update_attributes(:task_ids => tasks)
+  def table_data
+    [{:css => "integer",:name => "order",:label => I18n.t("trst_book_page.order"),:value => order},
+     {:css => "normal",:name => "slug",:label => I18n.t("trst_book_page.slug"),:value => slug},
+     {:css => "integer",:name => "access_lvl",:label => I18n.t("trst_book_page.access_lvl"),:value => access_lvl},
+     {:css => "array",:name => "access_grp",:label => I18n.t("trst_book_page.access_grp"),:value => access_grp},
+     {:css => "relations",:name => "task_ids",:label => I18n.t("trst_book_page.task_ids"),:value => [tasks_name,tasks]},
+     {:css => "translated",:name => "name",:label => I18n.t("trst_book_page.name"),:value => name},
+     {:css => "translated",:title => "title",:label => I18n.t("trst_book_page.title"),:value => title},
+     {:css => "translated",:content => "content",:label => I18n.t("trst_book_page.content"),:value => content}]
   end
 
   embedded_in :chapter, :inverse_of => :pages
