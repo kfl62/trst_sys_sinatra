@@ -37,5 +37,23 @@
           - current_buttons(action).each do |verb|
             %span{:class => "button #{verb}", :onclick => current_js(verb)}<
               =t("button.#{verb}")
+- when /daily_tasks|other_tasks/
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+    %tbody
+      %tr
+        %td
+          %select
+            %option{:value => "null"}= t("#{@object.class.name.underscore}.relations.select.#{field}")
+            - TrstTask.task_related_to.each do |task|
+              %option{:value => task[0]}= task[1]
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |verb|
+            %span{:class => "button #{verb}", :onclick => current_js(verb)}<
+              =t("button.#{verb}")
 - else
   %p Error
