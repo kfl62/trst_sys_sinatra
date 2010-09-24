@@ -94,14 +94,14 @@ module Trst
         when 'delete'
           verb = button
         end
-        retval = "task.init('#{id}','#{verb}','#{target_id}')"
-        retval = 'task.destroy()' if button == 'cancel'
+        retval = "trst.task.init('#{id}','#{verb}','#{target_id}')"
+        retval = 'trst.task.destroy()' if button == 'cancel'
         return retval
       end
       
       def current_js(action)
-        retval = "task.relations.#{action}()"
-        retval = "task.relations.destroy()" if action == 'cancel'
+        retval = "trst.task.relations.#{action}()"
+        retval = "trst.task.relations.destroy()" if action == 'cancel'
         return retval
       end
 

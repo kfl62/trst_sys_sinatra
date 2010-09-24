@@ -1,8 +1,8 @@
 -unless request.xhr?
   :javascript
-    loginBox.init()
+    trst.auth.init()
 -else
-  %p.close{:onclick => "loginBox.destroy()"}
+  %p.close{:onclick => "trst.auth.destroy()"}
   %p.title= t('trst_auth.login_title')
   %form#form_auth{:action => "/auth/login", :method => "post"}
     %span
@@ -12,4 +12,4 @@
       = t('trst_auth.login_pass')
       %input{:type => "password", :name => "[password]"}
     %span.ce.login
-      %input{:type => "submit", :value => " Login ", :onclick => "loginBox.destroy()"}
+      %input{:type => "submit", :value => " Login ", :onclick => "trst.auth.destroy()"}

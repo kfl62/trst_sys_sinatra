@@ -1,5 +1,5 @@
 dojo.provide("trst.auth");
-var loginBox = {
+trst.auth = {
   init: function(){
     if (dojo.query('[id^="auth"]').length == 0){
       this.auth_overlay();
@@ -22,4 +22,3 @@ var loginBox = {
     dojo.query('[id^="auth"]').forEach("dojo.destroy(item)")
   }
 }
-

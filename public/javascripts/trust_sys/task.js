@@ -1,5 +1,5 @@
 dojo.provide("trst.task");
-var task = {
+trst.task = {
   // variables {{{1
   id: "",
   verb: "",
@@ -39,7 +39,7 @@ var task = {
     var xhrArgs = {
       url: this.url.join('/'),
       load: function(data){
-        task.drawBox(data);
+        trst.task.drawBox(data);
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
@@ -71,7 +71,7 @@ var task = {
     xhrArgs = {
       url: this.url.join('/'),
       load: function(data){
-        task.drawBox(data);
+        trst.task.drawBox(data);
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
@@ -88,7 +88,7 @@ var task = {
       url: this.url.join('/'),
       load: function(data){
         dojo.publish('xhrMsg',['flash']);
-        task.drawBox(data);
+        trst.task.drawBox(data);
       },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
@@ -104,7 +104,7 @@ var task = {
       url: this.url.join('/'),
       load: function(data){
         dojo.publish('xhrMsg',['flash']);
-        task.drawBox(data);
+        trst.task.drawBox(data);
       },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
@@ -169,17 +169,17 @@ var task = {
     dojo.forEach(this.connections, dojo.disconnect);
     this.connections.length = 0;
     dojo.query('#sidebar ul > li > a').forEach(function(a){
-      task.connections.push(
+      trst.task.connections.push(
         dojo.connect(a, 'onclick', function(e){
           e.preventDefault()
-          task.init(e.target.id)
+          trst.task.init(e.target.id)
         })
       )
     })
   }
 }
   // mixin for handling relations {{{2
-dojo.mixin(task,{
+dojo.mixin(trst.task,{
   relations: {
     relationsOverlay: dojo.create('div',{id:"relations_overlay"}),
     relationsWindow: dojo.create('div',{id:"relations_window"}),
@@ -200,12 +200,12 @@ dojo.mixin(task,{
         url: this.url.join('/'),
         load: function(data){
           win.innerHTML = data;
-          dojo.place(ovl,task.taskWindow,'after');
+          dojo.place(ovl,trst.task.taskWindow,'after');
           dojo.place(win,ovl,'after');
         },
         error: function(error){
-          task.relations.destroy();
-          task.destroy();
+          trst.task.relations.destroy();
+          trst.task.destroy();
           dojo.publish('xhrMsg',['error','error',error]);
         }
       })
@@ -244,9 +244,29 @@ dojo.mixin(task,{
     }
   }
 })
-
-  // initialize on load{{{2
+// mixin for embedded documents {{{2
+dojo.mixin(trst.task,{
+  embedded: {
+    filter: function(task_id,step,selected){
+      var node = dojo.byId('task_window')
+      trst.task.url.push(task_id,'filter');
+      var xhrArgs = {
+        url: trst.task.url.join('/').concat('?step=',step,'&child_id=',selected),
+        load: function(data){
+          node.innerHTML = data;
+        },
+        error: function(error){
+          trst.task.destroy();
+          dojo.publish('xhrMsg',['error','error',error]);
+        }
+      };
+      var deferred = dojo.xhrGet(xhrArgs);
+      trst.task.url = ["/srv/tsk"];
+    }
+  }
+})
+// initialize on load{{{2
 function init(){
-  task.connect();
+  trst.task.connect();
 }
 dojo.addOnLoad(init);
