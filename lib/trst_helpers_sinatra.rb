@@ -54,6 +54,67 @@ module Trst
         retval
       end
 
+      def init_variables(task_id,verb, target_id = nil,params = {})
+        task = init_task(task_id)
+        object = init_object(verb,task,target_id,params)
+        haml_path = init_haml_path(verb,task)
+        params = init_params(verb,task,params)
+        return [task, object, haml_path, params]
+      end
+
+      def init_task(task_id)
+        task = TrstTask.find(task_id)
+      end
+      
+      def init_object(verb,task,target_id,params)
+        model, method = task.target.split('.')
+        model = model.constantize
+        object = model
+        if verb == 'filter'
+          object = model.all.empty? ? model : model.all
+          unless method == 'find'
+            step = params[:step] || 'one'
+            unless step == 'one'
+              parent = model.find(params[:child_id])
+              method = parent.associations.keys.first
+              object = parent.send method              
+            end
+          end
+        else
+          object = model.send method, target_id unless target_id == 'new'
+        end
+        return object
+      end
+
+      def init_haml_path(verb,task)
+        model, method = task.target.split('.')
+        haml_path = task.haml_path
+        haml_path = (haml_path == 'default') ? '/trst_sys/shared' : haml_path
+        case verb
+        when /filter/
+          haml_path += "/#{verb}"
+          haml_path += "_embedded" unless method == 'find'
+        when /get|delete/
+          haml_path += "/get_delete"
+        when /post|put/
+          haml_path += request.put? ? "/get_delete" : "/post_put"
+        else
+          haml_path = "/trst_sys/error"
+        end
+        return haml_path
+      end
+
+      def init_params(verb,task,params)
+        model, method = task.target.split('.')
+        params[:action] = verb
+        params[:action] = 'put' if request.post?
+        params[:action] = 'get' if request.put?
+        unless method == 'find'
+         params[:step] = params[:step] ?  "two" : "one"
+        end
+        return params
+      end
+
     end
   end
 end
