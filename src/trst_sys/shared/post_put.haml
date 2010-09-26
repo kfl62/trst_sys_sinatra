@@ -1,4 +1,4 @@
-%p.close{:onclick => "task.destroy()"}
+%p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
 -if action == 'put'
   %form{:id  => "xhr_#{action}"}
@@ -26,8 +26,8 @@
                        :value => data[:value][1].join(',')}
                 %input{:type  => "hidden", :value => "/srv/tsk,#{@task.id.to_s},#{action},#{@object.id.to_s}"}
                 - unless data[:value][0].empty?
-                  %span.db-relations-del{:'data-fieldname' => data[:name].split(',').last, :onclick => "task.relations.init()"}
-                %span.db-relations-add{:'data-fieldname' => data[:name].split(',').last,:onclick => "task.relations.init()"}
+                  %span.db-relations-del{:'data-fieldname' => data[:name].split(',').last, :onclick => "trst.task.relations.init()"}
+                %span.db-relations-add{:'data-fieldname' => data[:name].split(',').last,:onclick => "trst.task.relations.init()"}
           - when 'localized'
             %tr{:class => data[:css]}
               %td= data[:label] + "<sup>*</sup>"

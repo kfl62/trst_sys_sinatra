@@ -1,4 +1,4 @@
-%p.close{:onclick => "task.relations.destroy()"} &nbsp;
+%p.close{:onclick => "trst.task.relations.destroy()"} &nbsp;
 %p.task_title= current_title(@object,field,action)
 - case field
 - when 'page_ids'
@@ -37,7 +37,7 @@
           - current_buttons(action).each do |verb|
             %span{:class => "button #{verb}", :onclick => current_js(verb)}<
               =t("button.#{verb}")
-- when /daily_tasks|other_tasks/
+- when /task_ids|daily_tasks|other_tasks/
   %table{:cellspacing => "0"}
     %thead
       %tr
