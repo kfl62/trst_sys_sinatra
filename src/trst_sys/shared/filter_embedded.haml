@@ -1,0 +1,24 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@task,action)
+- case step
+- when 'one'
+  %select{:onchange => "trst.task.embedded.filter('#{@task.id}',
+                          'two',
+                          (this.options[this.selectedIndex].value))"}
+    %option{:value => "null"}= t("#{@object.first.class.name.underscore}.select")
+    - @object.each do |o|
+      %option{:value => o.id}= o.name
+- when 'two'
+  %select{:onchange => "trst.task.embedded.filter('#{@task.id}',
+                          'two',
+                          (this.options[this.selectedIndex].value))"}
+    %option{:value => "null"}= t("#{@object.first._parent.class.name.underscore}.select")
+    - @object.first._parent.class.all.each do |o|
+      %option{:value => o.id, :selected  => (o.id ==  @object.first._parent.id ? true : false)}= o.name
+  %nav#filter_embedded
+    %ul
+      - @object.each do |a|
+        %li
+          %a{:id => a.id, :href => "#"}= a.name
+- else
+  %P Error #{step}
