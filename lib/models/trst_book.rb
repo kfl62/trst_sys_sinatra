@@ -14,14 +14,14 @@ class TrstBook
   class << self
 
     def page(id)
-      book = where('chapters.pages._id'  => BSON::ObjectId(id)).first
+      book = where('chapters.pages._id'  => BSON::ObjectId("#{id}")).first
       chapter = nil
       book.chapters.each{ |c| chapter = c if c.pages.find(id)}
       page = chapter.pages.find(id)
     end
 
     def chapter(id)
-      book = where('chapters._id'  => BSON::ObjectId(id)).first
+      book = where('chapters._id'  => BSON::ObjectId("#{id}")).first
       chapter = book.chapters.find(id)
     end
 
@@ -54,8 +54,10 @@ class TrstBook
   end
 
   def table_data
-    [{:css => "translated",:name => "name",:label => I18n.t("trst_book.name"),:value => name},
-     {:css => "translated",:content => "content",:label => I18n.t("trst_book.content"),:value => content}]
+    [{:css => "localized",:name => "name",:label => I18n.t("trst_book.name"),:value => name_translations},
+     {:css => "localized",:name => "content",:label => I18n.t("trst_book.content"),:value => content_translations},
+     {:css => "datetime",:name => "created_at",:label => I18n.t("trst_book.created_at"),:value => created_at},
+     {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_book.updated_at"),:value => updated_at}]
   end
 
 end
