@@ -1,7 +1,7 @@
 # encoding: utf-8
 =begin
 #Page model
-Defined fields an default values:
+Defined fields and default values:
     field :order,           :type => Integer
     field :slug,            :type => String
     field :access_lvl,      :type => Integer,       :default => 3
@@ -31,21 +31,21 @@ class TrstBookPage
 
   embedded_in :chapter, :inverse_of => :pages
 
-  #TODO missing docs
+  # @todo Document this method
   def path
     chapter.slug == "home" ? retval = "/" : retval = "/#{chapter.slug}/"
     retval += "TrustSys-#{chapter.slug.camelize}-#{slug}.html"
     retval
   end
-  #TODO missing docs
+  # @todo Document this method
   def tasks
     task_ids
   end
-  #TODO missing docs
+  # @todo Document this method
   def tasks_name
     task_ids.collect{|id| TrstTask.find(id).name}
   end
-  #TODO missing docs
+  # @todo Document this method
   def table_data
     [{:css => "integer",:name => "order",:label => I18n.t("trst_book_page.order"),:value => order},
      {:css => "normal",:name => "slug",:label => I18n.t("trst_book_page.slug"),:value => slug},

@@ -3,7 +3,7 @@
 #Handling utilities#
 =end
 class TrstUtils < Sinatra::Base
-  #TODO missing docs
+  # @todo Document this method
   get '/msg/:what/:kind' do |w,k|
     if w == 'flash'
       retval = flash[:msg]
@@ -12,7 +12,7 @@ class TrstUtils < Sinatra::Base
     end
     retval
   end
-  #TODO missing docs
+  # @todo Document this method
   get '/lang/:lang' do |l|
     I18n.locale = l.to_sym
     path = logged_in? ?  "#{lang_path}/srv" :  "#{lang_path}/"

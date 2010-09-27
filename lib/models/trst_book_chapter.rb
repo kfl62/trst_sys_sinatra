@@ -1,7 +1,7 @@
 # encoding: utf-8
 =begin
 #Chapter model
-Defined fields an default values:
+Defined fields and default values:
     field :order,             :type => Integer
     field :slug,              :type => String
     localized_field :name
@@ -27,12 +27,12 @@ class TrstBookChapter
   embedded_in :book, :inverse_of => :chapters
   embeds_many :pages, :class_name => "TrstBookPage"
 
-  #TODO missing docs
+  # @todo Document this method
   def path
     slug == "home" ? retval = "/index.html" : retval = "/#{slug}/index.html"
     retval
   end
-  #TODO missing docs
+  # @todo Document this method
   def table_data
     [{:css => "integer",:name => "order",:label => I18n.t("trst_book_chapter.order"),:value => order},
      {:css => "normal",:name => "slug",:label => I18n.t("trst_book_chapter.slug"),:value => slug},

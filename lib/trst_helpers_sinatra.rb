@@ -10,11 +10,11 @@ module Trst
     # #Sinatra helpers
     # Helper methods used in TrstSys, TrstSysTsk classes
     module Helpers
-      # TODO missing docs
+      # @todo Document this method
       def hash_to_query_string(hash)
         hash.collect {|k,v| "#{k}=#{v}"}.join('&')
       end
-      # TODO missing docs
+      # @todo Document this method
       def login_required
         if current_user
           return true
@@ -24,7 +24,7 @@ module Trst
           return false
         end
       end
-      # TODO missing docs
+      # @todo Document this method
       def current_user
         if session[:user]
           TrstUser.find(session[:user])
@@ -32,7 +32,7 @@ module Trst
           return false
         end
       end
-      # TODO missing docs
+      # @todo Document this method
       def logged_in?
         !!session[:user]
       end
