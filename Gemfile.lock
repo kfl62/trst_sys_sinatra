@@ -7,12 +7,11 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 835a50366d316618612ab2ddca1aec4a03a9e6a2
+  revision: bc177989f4c4020ec7b16c8ce7cbdea51eba4034
   specs:
     mongoid (2.0.0.beta.18)
-      activemodel (~> 3.0.0)
-      bson (= 1.0.7)
-      mongo (= 1.0.8)
+      activemodel (~> 3.0)
+      mongo (= 1.0.9)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
 
@@ -24,14 +23,14 @@ GEM
       builder (~> 2.1.2)
       i18n (~> 0.4.1)
     activesupport (3.0.0)
-    bson (1.0.7)
-    bson_ext (1.0.7)
+    bson (1.0.9)
+    bson_ext (1.0.9)
     builder (2.1.2)
     compass (0.10.5)
       haml (>= 3.0.4)
     haml (3.0.18)
     i18n (0.4.1)
-    mongo (1.0.8)
+    mongo (1.0.9)
       bson (>= 1.0.5)
     mongoid_i18n (0.1.7)
       mongoid (>= 2.0.0.beta.9)
@@ -47,7 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext (= 1.0.7)
+  bson_ext (= 1.0.9)
   compass (~> 0.10)
   mongoid!
   mongoid_i18n
