@@ -1,11 +1,14 @@
 # encoding: utf-8
+=begin
+#Handling public pages#
+=end
 class TrstPub < Sinatra::Base
-
+  #TODO missing docs
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
-
+  #TODO missing docs
   get '/*' do
     if request.xhr?
       method, id = params[:splat][0].split('_')

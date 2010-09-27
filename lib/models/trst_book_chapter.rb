@@ -1,11 +1,25 @@
 # encoding: utf-8
+=begin
+#Chapter model
+Defined fields an default values:
+    field :order,             :type => Integer
+    field :slug,              :type => String
+    localized_field :name
+    localized_field :title
+    localized_field :content
+Validations:
+    TODO no validations defined
+Associations:
+    embedded_in :book, :inverse_of => :chapters
+    embeds_many :pages, :class_name => "TrstBookPage"
+=end
 class TrstBookChapter
   include Mongoid::Document
   include Mongoid::I18n
   include Mongoid::Timestamps
 
-  field :order,           :type  => Integer
-  field :slug
+  field :order,             :type => Integer
+  field :slug,              :type => String
   localized_field :name
   localized_field :title
   localized_field :content
@@ -13,11 +27,12 @@ class TrstBookChapter
   embedded_in :book, :inverse_of => :chapters
   embeds_many :pages, :class_name => "TrstBookPage"
 
+  #TODO missing docs
   def path
     slug == "home" ? retval = "/index.html" : retval = "/#{slug}/index.html"
     retval
   end
-
+  #TODO missing docs
   def table_data
     [{:css => "integer",:name => "order",:label => I18n.t("trst_book_chapter.order"),:value => order},
      {:css => "normal",:name => "slug",:label => I18n.t("trst_book_chapter.slug"),:value => slug},

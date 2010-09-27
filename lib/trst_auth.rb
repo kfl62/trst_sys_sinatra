@@ -1,11 +1,14 @@
 # encoding: utf-8
+=begin
+#Handling users#
+=end
 class TrstAuth < Sinatra::Base
-
+  #TODO missing docs
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
-
+  #TODO missing docs
   get '/users' do
     login_required
     redirect "/" unless current_user.admin?
@@ -16,17 +19,17 @@ class TrstAuth < Sinatra::Base
       redirect '/adduser'
     end
   end
-
+  #TODO missing docs
   get '/users/:id' do
     login_required
     @user = TrstUser.find(params[:id])
     haml :"/trst_auth/show", :layout => false
   end
-
+  #TODO missing docs
   get '/login' do
     haml :"/trst_auth/login", :layout => request.xhr? ? false : :'layouts/trst_pub'
   end
-
+  #TODO missing docs
   post '/login' do
     if user = TrstUser.authenticate(params[:login_name], params[:password])
       session[:user] = user.id
@@ -44,17 +47,18 @@ class TrstAuth < Sinatra::Base
       redirect "#{lang_path}/"
     end
   end
+  #TODO missing docs
   get '/logout' do
     session[:user] = nil
     session[:daily_tasks] = nil
     flash[:msg] = {:msg => {:txt => I18n.t('trst_auth.logout_msg'), :class => "info"}}.to_json
     redirect "#{lang_path}/"
   end
-
+  #TODO missing docs
   get '/adduser' do
     haml :"/auth/adduser", :layout => false
   end
-
+  #TODO missing docs
   post '/adduser' do
     @user = TrstUser.set(params[:user])
     if @user.valid && @user.id
@@ -66,14 +70,14 @@ class TrstAuth < Sinatra::Base
       redirect '/auth/adduser?' + hash_to_query_string(params['user'])
     end
   end
-
+  #TODO missing docs
   get '/users/:id/edit' do
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]
     @user = TrstUser.find(params[:id])
     haml :"/trst_auth/edit", :layout => false
   end
-
+  #TODO missing docs
   post '/users/:id/edit' do
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]
@@ -91,7 +95,7 @@ class TrstAuth < Sinatra::Base
       redirect "/users/#{user.id}/edit?" + hash_to_query_string(user_attributes)
     end
   end
-
+  #TODO missing docs
   get '/users/:id/delete' do
     login_required
     redirect "/users" unless current_user.admin? || current_user.id.to_s == params[:id]

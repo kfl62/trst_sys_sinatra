@@ -1,6 +1,9 @@
 # encoding: utf-8
+=begin
+#Handling utilities#
+=end
 class TrstUtils < Sinatra::Base
-
+  #TODO missing docs
   get '/msg/:what/:kind' do |w,k|
     if w == 'flash'
       retval = flash[:msg]
@@ -9,7 +12,7 @@ class TrstUtils < Sinatra::Base
     end
     retval
   end
-
+  #TODO missing docs
   get '/lang/:lang' do |l|
     I18n.locale = l.to_sym
     path = logged_in? ?  "#{lang_path}/srv" :  "#{lang_path}/"

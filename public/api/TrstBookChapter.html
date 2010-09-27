@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: TrstBookChapter</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (T)</a> &raquo; 
+    
+    
+    <span class="title">TrstBookChapter</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: TrstBookChapter
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">TrstBookChapter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Mongoid::Document, Mongoid::I18n, Mongoid::Timestamps</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/models/trst_book_chapter.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Chapter model</h1>
+
+<p>Defined fields an default values:</p>
+
+<pre class="code"><span class='id field'>field</span> <span class='symbol'>:order</span><span class='comma'>,</span>             <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='const'>Integer</span>
+<span class='id field'>field</span> <span class='symbol'>:slug</span><span class='comma'>,</span>              <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='const'>String</span>
+<span class='id localized_field'>localized_field</span> <span class='symbol'>:name</span>
+<span class='id localized_field'>localized_field</span> <span class='symbol'>:title</span>
+<span class='id localized_field'>localized_field</span> <span class='symbol'>:content</span>
+</pre>
+
+<p>Validations:</p>
+
+<pre class="code"><span class='const'>TODO</span> <span class='id no'>no</span> <span class='id validations'>validations</span> <span class='id defined'>defined</span>
+</pre>
+
+<p>Associations:</p>
+
+<pre class="code"><span class='id embedded_in'>embedded_in</span> <span class='symbol'>:book</span><span class='comma'>,</span> <span class='symbol'>:inverse_of</span> <span class='op'>=&gt;</span> <span class='symbol'>:chapters</span>
+<span class='id embeds_many'>embeds_many</span> <span class='symbol'>:pages</span><span class='comma'>,</span> <span class='symbol'>:class_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TrstBookPage</span><span class='tstring_end'>&quot;</span></span>
+</pre>
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path-instance_method" title="#path (instance method)">- (Object) <strong>path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>TODO missing docs.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table_data-instance_method" title="#table_data (instance method)">- (Object) <strong>table_data</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>TODO missing docs.</p></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="path-instance_method">
+  
+    - (<tt>Object</tt>) <strong>path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>TODO missing docs</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/models/trst_book_chapter.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id path'>path</span>
+  <span class='id slug'>slug</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>home</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='id retval'>retval</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/index.html</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id retval'>retval</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id slug'>slug</span><span class='rbrace'>}</span><span class='tstring_content'>/index.html</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id retval'>retval</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="table_data-instance_method">
+  
+    - (<tt>Object</tt>) <strong>table_data</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>TODO missing docs</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/models/trst_book_chapter.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id table_data'>table_data</span>
+  <span class='lbracket'>[</span><span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>integer</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>order</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.order</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id order'>order</span><span class='rbrace'>}</span><span class='comma'>,</span>
+   <span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>normal</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>slug</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.slug</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id slug'>slug</span><span class='rbrace'>}</span><span class='comma'>,</span>
+   <span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>localized</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.name</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id name_translations'>name_translations</span><span class='rbrace'>}</span><span class='comma'>,</span>
+   <span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>localized</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>title</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.title</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id title_translations'>title_translations</span><span class='rbrace'>}</span><span class='comma'>,</span>
+   <span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>localized</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>content</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.content</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id content_translations'>content_translations</span><span class='rbrace'>}</span><span class='comma'>,</span>
+   <span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>datetime</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>created_at</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.created_at</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id created_at'>created_at</span><span class='rbrace'>}</span><span class='comma'>,</span>
+   <span class='lbrace'>{</span><span class='symbol'>:css</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>datetime</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>updated_at</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trst_book_chapter.updated_at</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span><span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='id updated_at'>updated_at</span><span class='rbrace'>}</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Sep 27 11:31:30 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.1 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

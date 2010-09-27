@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: TrstUtils</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (T)</a> &raquo; 
+    
+    
+    <span class="title">TrstUtils</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: TrstUtils
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Sinatra::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sinatra::Base</li>
+          
+            <li class="next">TrstUtils</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/trst_utils.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Handling utilities</h1>
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GET___lang__lang_-instance_route" title="#GET '/lang/:lang' (instance route)">- (Object) <strong>GET '/lang/:lang'</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>TODO missing docs.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#GET___msg__what__kind_-instance_route" title="#GET '/msg/:what/:kind' (instance route)">- (Object) <strong>GET '/msg/:what/:kind'</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>TODO missing docs.</p></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="GET___lang__lang_-instance_route">
+  
+    - (<tt>Object</tt>) <strong>GET '/lang/:lang'</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>TODO missing docs</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/trst_utils.rb', line 16</span>
+
+<span class='id get'>get</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/lang/:lang</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id l'>l</span><span class='op'>|</span>
+  <span class='const'>I18n</span><span class='period'>.</span><span class='id locale'>locale</span> <span class='op'>=</span> <span class='id l'>l</span><span class='period'>.</span><span class='id to_sym'>to_sym</span>
+  <span class='id path'>path</span> <span class='op'>=</span> <span class='id logged_in?'>logged_in?</span> <span class='op'>?</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id lang_path'>lang_path</span><span class='rbrace'>}</span><span class='tstring_content'>/srv</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id lang_path'>lang_path</span><span class='rbrace'>}</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:msg</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:msg</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:txt</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lang.change</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>info</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id to_json'>to_json</span>
+  <span class='id redirect'>redirect</span> <span class='id path'>path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="GET___msg__what__kind_-instance_route">
+  
+    - (<tt>Object</tt>) <strong>GET '/msg/:what/:kind'</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>TODO missing docs</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9
+10
+11
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/trst_utils.rb', line 7</span>
+
+<span class='id get'>get</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/msg/:what/:kind</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id w'>w</span><span class='comma'>,</span><span class='id k'>k</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id w'>w</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>flash</span><span class='tstring_end'>'</span></span>
+    <span class='id retval'>retval</span> <span class='op'>=</span> <span class='id flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:msg</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span>
+    <span class='id retval'>retval</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:msg</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:txt</span> <span class='op'>=&gt;</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id t'>t</span><span class='lparen'>(</span><span class='id w'>w</span><span class='comma'>,</span> <span class='symbol'>:data</span> <span class='op'>=&gt;</span> <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='id k'>k</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id to_json'>to_json</span>
+  <span class='kw'>end</span>
+  <span class='id retval'>retval</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Sep 27 11:31:28 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.1 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,13 +1,22 @@
 # encoding: utf-8
+=begin
+#Haml helpers
+Just for convenience (namespace)
+=end   
 module Trst
+  # #Haml helpers
+  #Just for convenience (namespace)
   module Haml
+    # #Haml helpers
+    # Helper methods used in views
     module Helpers
       self.extend self
-      # lol stolen from http://gist.github.com/119874 author http://gist.github.com/lenary
-      # stolen from http://github.com/cschneid/irclogger/blob/master/lib/partials.rb
-      #   and made a lot more robust by me
-      # this implementation uses erb by default. if you want to use any other template mechanism
-      #   then replace `erb` on line 13 and line 17 with `haml` or whatever
+      # lol stolen again :), from http://gist.github.com/119874 author http://gist.github.com/lenary
+      # ####Original docs (lenary)
+      # stolen from http://github.com/cschneid/irclogger/blob/master/lib/partials.rb 
+      # and made a lot more robust by me this implementation uses erb by default. 
+      # If you want to use any other template mechanism then replace `erb` on line 13 and line 17 
+      # with `haml` or whatever.
       def partial(template, *args)
         template_array = template.to_s.split('/')
         template = template_array[0..-2].join('/') + "/_#{template_array[-1]}"
@@ -22,23 +31,23 @@ module Trst
           haml(:"#{template}", options)
         end
       end
-
+      # TODO missing docs
       def current_host
         request.host
       end
-
+      # TODO missing docs
       def current_lang
         I18n.locale
       end
-
+      # TODO missing docs
       def current_controller
         self.class.to_s.underscore
       end
-
+      # TODO missing docs
       def current_book
         TrstBook.where(:name  => current_controller).first
       end
-
+      # TODO missing docs
       def current_title(task,verb,action=nil)
         case action
         when nil
@@ -50,7 +59,7 @@ module Trst
         end
         return title
       end
-
+      # TODO missing docs
       def input_name(task,name)
         model = task.target.split('.')[0].underscore
         retval = ""
@@ -60,7 +69,7 @@ module Trst
         retval = "[#{model}]#{retval}"
         return retval
       end
-
+      # TODO missing docs
       def current_buttons(action)
         case action
         when 'get'
@@ -79,7 +88,7 @@ module Trst
           %w{del cancel}
         end
       end
-
+      # TODO missing docs
       def current_xhr(button,id,action,target_id)
         case action
         when /filter|get/
@@ -98,23 +107,23 @@ module Trst
         retval = 'trst.task.destroy()' if button == 'cancel'
         return retval
       end
-      
+      # TODO missing docs      
       def current_js(action)
         retval = "trst.task.relations.#{action}()"
         retval = "trst.task.relations.destroy()" if action == 'cancel'
         return retval
       end
-
+      # TODO missing docs
       def controller_path
         current_controller == 'trst_sys' ? retval = '/srv' : retval = ''
         retval
       end
-
+      # TODO missing docs
       def lang_path
         current_lang == :ro ? retval = "" : retval = "/#{current_lang.to_s}"
         retval
       end
-
+      # TODO missing docs
       def t(text, options={})
         I18n.reload!
         translation = I18n.t(text,options)

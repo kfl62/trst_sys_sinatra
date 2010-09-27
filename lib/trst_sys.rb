@@ -1,11 +1,14 @@
 # encoding: utf-8
+=begin
+#Handling TrustSys pages#
+=end
 class TrstSys < Sinatra::Base
-
+  #TODO missing docs
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
-
+  #TODO missing docs
   get '/*' do
     login_required
     if request.xhr?
