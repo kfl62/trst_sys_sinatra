@@ -1,6 +1,8 @@
 .*
 !.gitignore
+!.yardopts
 bin/*
 config/secret*
 tmp/*
 !tmp/restart.txt
+public/api
