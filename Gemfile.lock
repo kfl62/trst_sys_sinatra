@@ -1,9 +1,10 @@
 GIT
   remote: git://github.com/kfl62/sinatra.git
-  revision: d3eb5145ad58ad71c379b7e621567ef473e5d2be
+  revision: ec220153275f560040edc58cb153f1d3a10946b9
   specs:
-    sinatra (1.0)
+    sinatra (1.1.0)
       rack (>= 1.0)
+      tilt (~> 1.1)
 
 GIT
   remote: git://github.com/mongoid/mongoid
@@ -39,6 +40,7 @@ GEM
       rack
     rack-rewrite (1.0.1)
     rdiscount (1.6.5)
+    tilt (1.1)
     tzinfo (0.3.23)
     will_paginate (3.0.pre2)
 
