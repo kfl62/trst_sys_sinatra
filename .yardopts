@@ -1,5 +1,9 @@
--M rdiscount
--m markdown
--o public/api
+--title 'TrustSys API Documentation'
+--readme README.md
+--files LICENSE.md
+--markup-provider rdiscount
+--markup markdown
+--output-dir public/api
+--charset utf-8
 --no-stats
 --name-tag 'action: What\'s happening'
