@@ -3,6 +3,7 @@
 #Handling tasks#
 =end
 class TrstSysTsk < Sinatra::Base
+
   # route for /srv/tsk/
   # @action Action: require login unless authorized user, set `session[:daily_tasks]`
   # @action Render: `/trst_sys/daily_tasks`
@@ -11,6 +12,7 @@ class TrstSysTsk < Sinatra::Base
     session[:daily_tasks] = true
     haml :'/trst_sys/daily_tasks', :locals => {:tsks  => session[:tasks]}
   end
+
   # route for help, handler for displaying {TrstTask} help field
   # @see TrstTask TrstTask model => help field
   # @param [BSON::ObjectID.to_s] id the id of `@task`
@@ -21,6 +23,7 @@ class TrstSysTsk < Sinatra::Base
     @task = TrstTask.find(id)
     haml ":markdown\n  #{@task.help}"
   end
+
   # route for filter
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @action Action:
@@ -30,6 +33,7 @@ class TrstSysTsk < Sinatra::Base
     @task, @object, haml_path, locals = init_variables(id, 'filter', nil, params)
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
+
   # route for get (control center)
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @param [String] verb any of `get, post, put, delete, filter`
@@ -41,10 +45,9 @@ class TrstSysTsk < Sinatra::Base
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
+
   # route for post(create)
-  # @param [BSON::ObjectID.to_s] id the id of `@task`
-  # @param [String] verb any of `get, post, put, delete, filter`
-  # @param [BSON::ObjectID.to_s] target_id the id of `@object`
+  # @param (see #GET____id__verb__target_id_)
   # @action Action:
   # @action Render:
   # @todo Documentation for Action:,Render:
@@ -54,10 +57,9 @@ class TrstSysTsk < Sinatra::Base
     flash[:msg] = {:msg => {:txt => I18n.t('db.post', :data => @object.name), :class => "info"}}.to_json
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
+
   # route for put (update)
-  # @param [BSON::ObjectID.to_s] id the id of `@task`
-  # @param [String] verb any of `get, post, put, delete, filter`
-  # @param [BSON::ObjectID.to_s] target_id the id of `@object`
+  # @param (see #GET____id__verb__target_id_)
   # @action Action:
   # @action Render:
   # @todo Documentation for Action:,Render:
@@ -68,10 +70,9 @@ class TrstSysTsk < Sinatra::Base
     flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
+
   # route for delete
-  # @param [BSON::ObjectID.to_s] id the id of `@task`
-  # @param [String] verb any of `get, post, put, delete, filter`
-  # @param [BSON::ObjectID.to_s] target_id the id of `@object`
+  # @param (see #GET____id__verb__target_id_)
   # @action Action: execute `@object.delete`
   # @action Render: nothing
    delete '/:id/:verb/:target_id' do |id,verb,target_id|
@@ -79,6 +80,7 @@ class TrstSysTsk < Sinatra::Base
     @object.delete
     flash[:msg] = {:msg => {:txt => I18n.t('db.delete', :data => @object.name), :class => "info"}}.to_json
   end
+
   # add/delete relations
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @param [String] verb any of `get, post, put, delete, filter`
@@ -95,4 +97,5 @@ class TrstSysTsk < Sinatra::Base
     @object = model.constantize.send method, target_id
     haml :"trst_sys/shared/relations", :layout  => false, :locals => {:action => action, :field => field}
   end
+
 end
