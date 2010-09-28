@@ -1,3 +1,5 @@
+-M rdiscount
 -m markdown
 -o public/api
+--no-stats
 --name-tag 'action: What\'s happening'
