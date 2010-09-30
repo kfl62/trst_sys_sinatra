@@ -8,23 +8,7 @@
         %th= t('gen_head.value')
     %tbody
       - @object.table_data.each do |data|
-        %tr{:class => data[:css]}
-          - case data[:css]
-          - when /normal|integer/
-            %td= data[:label]
-            %td= data[:value]
-          - when 'array'
-            %td= data[:label]
-            %td= data[:value].join(', ')
-          - when 'relations'
-            %td= data[:label]
-            %td= data[:value][0].join(', ')
-          - when 'localized'
-            %td= data[:label] + "<sup>*</sup>"
-            %td= data[:value].nil? ? '...?...' : data[:value]["#{current_lang}"]
-          - when 'datetime'
-            %td= data[:label]
-            %td= data[:value]
+        - tr_body('get',data)
     %tfoot
       %tr
         %td{:class => "buttons_bottom", :colspan => "2"}
