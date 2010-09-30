@@ -78,8 +78,8 @@ module Trst
           td_get_value(data[:css],data[:value]) if verb == 'get'
           td_put_value(data,task,object) if verb == 'put'
         end
-      end      
-      
+      end
+
       # @todo Document this method
       def td_label(css,label)
         haml_tag :td do
@@ -93,12 +93,10 @@ module Trst
       # @todo Document this method
       def td_get_value(css,value)
         haml_tag :td do
-          haml_tag :span do
-            value = value.join(', ') if css == "array"
-            value = value[0].join(', ') if css == "relations"
-            value = (value.nil? ? '...?...' : value["#{current_lang}"]) if css == "localized"
-            haml_concat value
-          end
+          value = value.join(', ') if css == "array"
+          value = value[0].join(', ') if css == "relations"
+          value = (value.nil? ? '...?...' : value["#{current_lang}"]) if css == "localized"
+          haml_tag :span, value,  :class => "limit-width"
         end
       end
 
@@ -115,20 +113,20 @@ module Trst
                      :name => input_name(task,data[:name]),
                      :value => data[:value].nil? ? '...?...' : data[:value]["#{current_lang}"]
           when 'relations'
-            haml_tag :span, data[:value][0].join(', ')
+            haml_tag :span, data[:value][0].join(', '), :class => "limit-width"
             haml_tag :input, :type  => "hidden",
                      :name => input_name(task,data[:name]),
                      :value => data[:value][1].join(',')
             haml_tag :input, :type  => "hidden",
                      :value => "/srv/tsk,#{task.id.to_s},'put',#{object.id.to_s}"
-            haml_tag :span, :class => "db-relations-del", 
+            haml_tag :span, :class => "db-relations-del",
                      :'data-fieldname' => data[:name].split(',').last,
                      :onclick => "trst.task.relations.init()"
-            haml_tag :span, :class => "db-relations-add", 
+            haml_tag :span, :class => "db-relations-add",
                      :'data-fieldname' => data[:name].split(',').last,
                      :onclick => "trst.task.relations.init()"
           else
-            haml_tag :span, data[:value]
+            haml_tag :span, data[:value], :class => "limit-width"
           end
         end
       end
