@@ -2,7 +2,7 @@
 =begin
 #Haml helpers
 Just for convenience (namespace)
-=end   
+=end
 module Trst
   # #Haml helpers
   #Just for convenience (namespace)
@@ -10,7 +10,7 @@ module Trst
     # #Haml helpers
     # Helper methods used in views
     module Helpers
-      self.extend self
+      # self.extend self
       # lol stolen again :), from <http://gist.github.com/119874>
       #
       # stolen from <http://github.com/cschneid/irclogger/blob/master/lib/partials.rb><br>
@@ -32,26 +32,31 @@ module Trst
           haml(:"#{template}", options)
         end
       end
+
       # @return [String]
       # @todo Document this method
       def current_host
         request.host
       end
+
       # @return [String]
       # @todo Document this method
       def current_lang
         I18n.locale
       end
+
       # @return [String]
       # @todo Document this method
       def current_controller
         self.class.to_s.underscore
       end
+
       # @return [TrstBook]
       # @todo Document this method
       def current_book
         TrstBook.where(:name  => current_controller).first
       end
+
       # @return [String]
       # @todo Document this method
       def current_title(task,verb,action=nil)
@@ -65,6 +70,69 @@ module Trst
         end
         return title
       end
+
+      # @todo Document this method
+      def tr_body(verb,data,task = nil,object = nil)
+        haml_tag "tr.#{data[:css]}" do
+          td_label(data[:css],data[:label])
+          td_get_value(data[:css],data[:value]) if verb == 'get'
+          td_put_value(data,task,object) if verb == 'put'
+        end
+      end      
+      
+      # @todo Document this method
+      def td_label(css,label)
+        haml_tag :td do
+          haml_tag :span do
+            label += "<sup>*</sup>" if css == "localized"
+            haml_concat label
+          end
+        end
+      end
+
+      # @todo Document this method
+      def td_get_value(css,value)
+        haml_tag :td do
+          haml_tag :span do
+            value = value.join(', ') if css == "array"
+            value = value[0].join(', ') if css == "relations"
+            value = (value.nil? ? '...?...' : value["#{current_lang}"]) if css == "localized"
+            haml_concat value
+          end
+        end
+      end
+
+      # @todo Document this method
+      def td_put_value(data,task,object)
+        haml_tag :td do
+          case data[:css]
+          when /normal|integer/
+            haml_tag :input,
+                     :name => input_name(task,data[:name]),
+                     :value => data[:value]
+          when 'localized'
+            haml_tag :input,
+                     :name => input_name(task,data[:name]),
+                     :value => data[:value].nil? ? '...?...' : data[:value]["#{current_lang}"]
+          when 'relations'
+            haml_tag :span, data[:value][0].join(', ')
+            haml_tag :input, :type  => "hidden",
+                     :name => input_name(task,data[:name]),
+                     :value => data[:value][1].join(',')
+            haml_tag :input, :type  => "hidden",
+                     :value => "/srv/tsk,#{task.id.to_s},'put',#{object.id.to_s}"
+            haml_tag :span, :class => "db-relations-del", 
+                     :'data-fieldname' => data[:name].split(',').last,
+                     :onclick => "trst.task.relations.init()"
+            haml_tag :span, :class => "db-relations-add", 
+                     :'data-fieldname' => data[:name].split(',').last,
+                     :onclick => "trst.task.relations.init()"
+          else
+            haml_tag :span, data[:value]
+          end
+        end
+      end
+
       # @return [String]
       # @todo Document this method
       def input_name(task,name)
@@ -76,6 +144,7 @@ module Trst
         retval = "[#{model}]#{retval}"
         return retval
       end
+
       # get buttons for specific `action`
       # @example
       #   !!!haml
@@ -102,6 +171,7 @@ module Trst
           %w{del cancel}
         end
       end
+
       # @return [String]
       # @todo Document this method
       def current_xhr(button,id,action,target_id)
@@ -122,13 +192,15 @@ module Trst
         retval = 'trst.task.destroy()' if button == 'cancel'
         return retval
       end
+
       # @return [String]
-      # @todo Document this method      
+      # @todo Document this method
       def current_js(action)
         retval = "trst.task.relations.#{action}()"
         retval = "trst.task.relations.destroy()" if action == 'cancel'
         return retval
       end
+
       # get the current controller path
       # @example
       #   "#{lang_path}#{controller_path}" #=> "/hu/srv"
@@ -137,6 +209,7 @@ module Trst
         current_controller == 'trst_sys' ? retval = '/srv' : retval = ''
         retval
       end
+
       # get the current language path
       # @example
       #   "#{lang_path}#{controller_path}" #=> "/en/srv"
@@ -145,6 +218,7 @@ module Trst
         current_lang == :ro ? retval = "" : retval = "/#{current_lang.to_s}"
         retval
       end
+
       # @return [String]
       # @todo Document this method
       def t(text, options={})
