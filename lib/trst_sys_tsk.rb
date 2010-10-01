@@ -21,7 +21,7 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation for Action:,Render:
   get '/:id/help' do |id|
     @task = TrstTask.find(id)
-    haml ":markdown\n  #{@task.help}"
+    markdown @task.help
   end
 
   # route for filter
