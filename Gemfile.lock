@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/kfl62/sinatra.git
-  revision: ec220153275f560040edc58cb153f1d3a10946b9
+  revision: 9cfa74a7f352e13eb7f4f90cb8270fe51f611be5
   specs:
     sinatra (1.1.0)
       rack (>= 1.0)
@@ -38,7 +38,7 @@ GEM
     rack (1.2.1)
     rack-flash (0.1.1)
       rack
-    rack-rewrite (1.0.1)
+    rack-rewrite (1.0.2)
     rdiscount (1.6.5)
     tilt (1.1)
     tzinfo (0.3.23)
