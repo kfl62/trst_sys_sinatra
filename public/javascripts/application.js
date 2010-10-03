@@ -37,8 +37,10 @@ var xhrMenu = function(param){
     load: function(data){
       content_node.innerHTML = data;
       dojo.attr('xhr_msg','class','hidden');
-      if (param.replace('srv/','') == dojo.body().dataset.dailytaskspage){
-        xhrInitSidebar();
+      if (dojo.body().id == 'srv'){
+        if (param.replace('srv/','') == dojo.body().dataset.dailytaskspage){
+          xhrInitSidebar();
+        }
       }
     },
     error: function(error){
