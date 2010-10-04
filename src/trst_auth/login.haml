@@ -3,13 +3,24 @@
     trst.auth.init()
 -else
   %p.close{:onclick => "trst.auth.destroy()"}
-  %p.title= t('trst_auth.login_title')
+  %p.task_title= t('trst_auth.login_title')
   %form#form_auth{:action => "/auth/login", :method => "post"}
-    %span
-      = t('trst_auth.login_name')
-      %input{:name => "[login_name]"}
-    %span
-      = t('trst_auth.login_pass')
-      %input{:type => "password", :name => "[password]"}
-    %span.ce.login
-      %input{:type => "submit", :value => " Login ", :onclick => "trst.auth.destroy()"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %th{:colspan => "2"}
+      %tbody
+        %tr
+          %td
+            %span= t('trst_auth.login_name')
+          %td
+            %input{:name => "[login_name]"}
+        %tr
+          %td
+            %span= t('trst_auth.login_pass')
+          %td
+            %input{:type => "password", :name => "[password]"}
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "2"}
+            %span.button.login{:onclick => "trst.auth.submit()"}= "Login"
