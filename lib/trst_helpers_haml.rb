@@ -121,10 +121,10 @@ module Trst
                      :value => "/srv/tsk,#{task.id.to_s},'put',#{object.id.to_s}"
             haml_tag :span, :class => "db-relations-del",
                      :'data-fieldname' => data[:name].split(',').last,
-                     :onclick => "trst.task.relations.init()"
+                     :onclick => "trst.task.relations.init(this)"
             haml_tag :span, :class => "db-relations-add",
                      :'data-fieldname' => data[:name].split(',').last,
-                     :onclick => "trst.task.relations.init()"
+                     :onclick => "trst.task.relations.init(this)"
           else
             haml_tag :span, data[:value], :class => "limit-width"
           end
