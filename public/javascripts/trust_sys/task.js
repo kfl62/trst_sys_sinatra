@@ -183,13 +183,18 @@ dojo.mixin(trst.task,{
   relations: {
     relationsOverlay: dojo.create('div',{id:"relations_overlay"}),
     relationsWindow: dojo.create('div',{id:"relations_window"}),
-    init: function(){
-      this.parentNode = event.target.parentNode;
+    init: function(node){
+      // event.target does't work in firefox
+      //this.parentNode = event.target.parentNode;
+      this.parentNode = node.parentNode;
       var ovl = this.relationsOverlay,
           win = this.relationsWindow,
-          target = event.target;
-      this.url = this.parentNode.children[2].value.split(',')
-      this.url.push(target.dataset.fieldname);
+          //target = event.target;
+          target = node;
+      this.url = this.parentNode.children[2].value.split(',');
+      // this.url.push(target.dataset.fieldname);
+      // dataset not working in firefox
+      this.url.push(target.getAttribute('data-fieldname'));
       this.url.push(target.className.split('-').pop());
       var pos = dojo.position(this.parentNode);
       dojo.style(win,{

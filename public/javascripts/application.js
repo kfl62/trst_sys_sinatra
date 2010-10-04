@@ -38,7 +38,10 @@ var xhrMenu = function(param){
       content_node.innerHTML = data;
       dojo.attr('xhr_msg','class','hidden');
       if (dojo.body().id == 'srv'){
-        if (param.replace('srv/','') == dojo.body().dataset.dailytaskspage){
+        // var page = dojo.body().dataset.dailytaskspage)
+        // code above not working in firefox
+        var page = dojo.body().getAttribute('data-dailytaskspage')
+        if (param.replace('srv/','') == page){
           xhrInitSidebar();
         }
       }
