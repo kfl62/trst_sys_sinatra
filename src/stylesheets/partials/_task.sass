@@ -7,7 +7,7 @@
   height: 100%
   position: absolute
   z-index: 99
-#task_window
+#task_window, #auth_login
   background-color: rgba(245, 245, 245, 1)
   +box-shadow( rgba(62, 62, 62, 1), 0.5em, 0.5em)
   +border-radius(0.5em)
@@ -68,6 +68,9 @@
     &:hover
       background-color: rgba(255, 255, 190, 0.8)
       cursor: pointer
+    &.login
+      background:
+        image: image_url(unquote("/images/icons/db_login.png"))
     &.put
       background:
         image: image_url(unquote("/images/icons/db_edit.png"))
