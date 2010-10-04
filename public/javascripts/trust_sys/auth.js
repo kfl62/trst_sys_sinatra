@@ -18,6 +18,10 @@ trst.auth = {
       }
     })
   },
+  submit: function(){
+    dojo.byId('form_auth').submit();
+    this.destroy();
+  },
   destroy: function(){
     dojo.query('[id^="auth"]').forEach("dojo.destroy(item)")
   }
