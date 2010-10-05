@@ -9,18 +9,18 @@ Each user can change his password and some settings( {TrstUser} ) using an other
 =end
 class TrstAuth < Sinatra::Base
 
-  # @todo Document this method
+  # Render stylesheets
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
 
-  # @todo Document this method
+  # Render login screen
   get '/login' do
     haml :"/trst_auth/login", :layout => request.xhr? ? false : :'layouts/trst_pub'
   end
 
-  # @todo Document this method
+  # Authentication
   post '/login' do
     if user = TrstUser.authenticate(params[:login_name], params[:password])
       session[:user] = user.id
@@ -33,7 +33,7 @@ class TrstAuth < Sinatra::Base
     end
   end
 
-  # @todo Document this method
+  # Logout
   get '/logout' do
     session[:user] = nil
     session[:daily_tasks] = nil
