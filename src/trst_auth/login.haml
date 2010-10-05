@@ -19,8 +19,8 @@
           %td
             %span= t('trst_auth.login_pass')
           %td
-            %input{:type => "password", :name => "[password]"}
+            %input#login_pass{:type => "password", :name => "[password]"}
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "2"}
-            %span.button.login{:onclick => "trst.auth.submit()"}= "Login"
+            %span#login_button.button.login= "Login"

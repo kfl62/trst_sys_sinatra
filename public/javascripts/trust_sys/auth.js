@@ -4,6 +4,13 @@ trst.auth = {
     if (dojo.query('[id^="auth"]').length == 0){
       this.auth_overlay();
       this.auth_login();
+      dojo.connect(dojo.byId('login_pass'),'onkeypress',function(e){
+          if (e.keyCode == 13)
+          trst.auth.submit();
+      });
+      dojo.connect(dojo.byId('login_button'),'onclick',function(e){
+          trst.auth.submit();
+      });
     }
   },
   auth_overlay: function(){
