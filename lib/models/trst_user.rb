@@ -15,6 +15,8 @@ Validations
     validates_uniqueness_of :email
     validates_format_of :email, :with => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
     validates_confirmation_of :password
+Note:<br>
+`#user` will be used to represent an instance of {TrstUser}
 =end
 class TrstUser
   include Mongoid::Document
@@ -42,7 +44,7 @@ class TrstUser
     # @param [String] login_name User name
     # @param [String] pass User password
     # @return [TrstUser] returns nil if no user with `login_name`, or password
-    # doesn't match
+    #   doesn't match
     def authenticate(login_name, pass)
       current_user = where(:login_name => login_name).first
       return nil if current_user.nil?
@@ -50,68 +52,83 @@ class TrstUser
       nil
     end
     # Compare provided password with `hashed_password` using `Digest::SHA1.hexdigest`
-    # @param [String] pass User password
-    # @param [String] salt User salt
+    # @param [String] pass Provided password
+    # @param [String] salt `#user.salt`
     # @return [String] to compare with User's `hashed_password`
     def encrypt(pass, salt)
       Digest::SHA1.hexdigest(pass+salt)
     end
-    # @todo Document this method
-    # @return [Array] 
+    # Used in handling relations, for matching ids with names
+    # @return [Array] A collection of [#user.id.to_s, #user.login_name]
     def user_related_to
       all.collect{|user| [user.id.to_s, user.login_name]}
     end
   end
   # Shortcut for `login_name`. Just for avoid errors like `TrstUser.first.name`
+  # => `false` caused by {#method_missing}
   # @return [String] shortcut for `login_name`
   def name
     login_name
   end
-  # @todo Document this method
+  # Generate `hashed_password`
+  # @return [String] `hashed_password`
   def password=(pass)
     @password = pass
     self.salt = random_string(10) if !self.salt
     self.hashed_password = TrstUser.encrypt(@password, self.salt)
   end
-  # @todo Document this method
+  # `true` if `#user` has admin rights
+  # @return [Boolean]
   def admin?
     self.permission_lvl == -1 || self.permission_grp.include?("admin")
   end
-  # @todo Document this method
+  # `true` if `#user` has site admin rights
+  # @return [Boolean]
   def site_admin?
     self.id ==  -1 || (self.permission_grp & ["admin","web"]).length >= 1
   end
-  # @todo Document this method
-  # @return [Array] 
+  # A flattened list for unique task ids
+  # @return [Array] ids for all accessible tasks
   def tasks
     task_ids.values.flatten.uniq
   end
-  # @todo Document this method
-  # @see #table_data 
-  # @return [Array] 
+  #
+  # @see #table_data
+  # @return [Array] daily todo - ids
   def daily_tasks
     task_ids['daily_tasks']
   end
-  # @todo Document this method
-  # @see #table_data 
-  # @return [Array] 
+  #
+  # @see #table_data
+  # @return [Array] daily todo - names
   def daily_tasks_name
     daily_tasks.collect{|id| TrstTask.find(id).name}
   end
-  # @todo Document this method
-  # @see #table_data 
-  # @return [Array] 
+  #
+  # @see #table_data
+  # @return [Array] other accessible tasks - ids
   def other_tasks
     task_ids['other_tasks']
   end
-  # @todo Document this method
-  # @see #table_data 
-  # @return [Array] 
+  #
+  # @see #table_data
+  # @return [Array] other accessible tasks - names
   def other_tasks_name
     other_tasks.collect{|id| TrstTask.find(id).name}
   end
-  # @todo Document this method
-  # @return [Array] 
+  # Convenience method for `MVC`'s View part. The returned `Array` contains a `Hash`
+  # for each `field`, with the following informations:
+  #
+  # - `:css`   => info about type of field (`normal,integer,array,relations,localized` etc.);
+  # - `:name`  => name of field used when generating the `input` tags `name` attribute;
+  # - `:label` => translated label;
+  # - `:value` => :) the value of field.
+  #
+  # More about using provided data **`See Also:`**
+  # @see Trst::Haml::Helpers#td_label Helper for labels
+  # @see Trst::Haml::Helpers#td_get_value Helper for show values
+  # @see Trst::Haml::Helpers#td_put_value Helper for edit values
+  # @return [Array] an `Array` of `Hash`-es
   def table_data
     [{:css => "normal",:name => "login_name",:label => I18n.t("trst_user.login_name"),:value => login_name},
      {:css => "normal",:name => "email",:label => I18n.t("trst_user.email"),:value => email},
@@ -125,14 +142,15 @@ class TrstUser
   end
 
   protected
-  # @todo Document this method
+  # Generate `#user.salt` for new `#user`
+  # @return [String] random string for `#user.salt`
   def random_string(len)
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
     newsalt = ""
     1.upto(len) { |i| newsalt << chars[rand(chars.size-1)] }
     return newsalt
   end
-  # @todo Document this method
+  # @return [Boolean] `false` just for safety :)
   def method_missing(m, *args)
     return false
   end
