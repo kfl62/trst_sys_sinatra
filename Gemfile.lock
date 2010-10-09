@@ -8,11 +8,11 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 79a6d19a49b33973949d6b99a903a8a6210992e1
+  revision: 17f9a110590fd37383e799c437725a76f05648ff
   specs:
     mongoid (2.0.0.beta.19)
       activemodel (~> 3.0)
-      mongo (= 1.0.9)
+      mongo (~> 1.1)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
 
@@ -31,7 +31,7 @@ GEM
       haml (>= 3.0.4)
     haml (3.0.21)
     i18n (0.4.1)
-    mongo (1.0.9)
+    mongo (1.1)
       bson (>= 1.0.5)
     mongoid_i18n (0.1.7)
       mongoid (>= 2.0.0.beta.9)
