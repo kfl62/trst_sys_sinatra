@@ -21,7 +21,6 @@ Sinatra::Base.configure do
   Compass.add_project_configuration(compass_config) \
     unless Compass.configuration.name == compass_config
 end
-#require 'secret'
 require 'mongoid'
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new('localhost').db('development')
