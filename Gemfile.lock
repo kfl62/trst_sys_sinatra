@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/kfl62/sinatra.git
-  revision: 3297a61ee4edad0c53349c3f8683970ad8a7a190
+  revision: 91d871f6f092cba54a0a0e5a9ba3df51e00bddc7
   specs:
     sinatra (1.1.0)
       rack (~> 1.1)
