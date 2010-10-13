@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/kfl62/sinatra.git
-  revision: 91d871f6f092cba54a0a0e5a9ba3df51e00bddc7
+  revision: d842c1455279c69b011cd761558b32a50b407922
   specs:
     sinatra (1.1.0)
       rack (~> 1.1)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: c919d37d500027cdffd4cdb8603bf7aac4e2929b
+  revision: b1080cda54d32d3bc18e008867b33b82d64fb55b
   specs:
     mongoid (2.0.0.beta.19)
       activemodel (~> 3.0)
