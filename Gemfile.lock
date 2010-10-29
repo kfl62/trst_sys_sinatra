@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/kfl62/sinatra.git
-  revision: ad648be044e962b385ea398a8bf46a982083813d
+  revision: 0c089a11809dd63225ad02a3139e8533b6c364b7
   specs:
     sinatra (1.1.0)
       rack (~> 1.1)
@@ -27,10 +27,10 @@ GEM
     bson (1.1.1)
     bson_ext (1.1.1)
     builder (2.1.2)
-    compass (0.10.5)
+    compass (0.10.6)
       haml (>= 3.0.4)
     haml (3.0.22)
-    i18n (0.4.1)
+    i18n (0.4.2)
     mongo (1.1.1)
       bson (>= 1.1.1)
     mongoid_i18n (0.1.7)
