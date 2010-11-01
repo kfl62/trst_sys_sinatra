@@ -2,7 +2,7 @@
 =begin
 #Sinatra helpers
 Just for convenience (namespace)
-=end   
+=end
 module Trst
   # #Sinatra helpers
   # Just for convenience (namespace)
@@ -10,11 +10,13 @@ module Trst
     # #Sinatra helpers
     # Helper methods used in TrstSys, TrstSysTsk classes
     module Helpers
-      # @todo Document this method
+      # @return [String] return `Hash` key,value pairs as a `String`
       def hash_to_query_string(hash)
         hash.collect {|k,v| "#{k}=#{v}"}.join('&')
       end
-      # @todo Document this method
+      # @return [Boolean] true if `current_user`, else set `flash[:msg]` to error
+      #   and redirect to public pages
+      # @see #current_user
       def login_required
         if current_user
           return true
@@ -24,7 +26,8 @@ module Trst
           return false
         end
       end
-      # @todo Document this method
+      # @return [TrstUser] if `session[:user]` exists, else return `false`
+      # @see #login_required
       def current_user
         if session[:user]
           TrstUser.find(session[:user])
@@ -32,11 +35,12 @@ module Trst
           return false
         end
       end
-      # @todo Document this method
+      # @return [Boolean] check if `session[:user]` is initialized
       def logged_in?
         !!session[:user]
       end
       # Set language prefix for browser's path
+      # @return [String]
       def lang_path
         lang = I18n.locale.to_s
         lang == "ro" ? "" : "/#{lang}"
@@ -49,7 +53,7 @@ module Trst
         end
         retval
       end
-      # Collect values as BSON::ObjectId's from an csv 
+      # Collect values as BSON::ObjectId's from an csv
       def array_of_bson_ids(value)
         if value.is_a?(Hash)
           hash = value
@@ -86,7 +90,7 @@ module Trst
             unless step == 'one'
               parent = model.find(params[:child_id])
               method = parent.associations.keys.first
-              object = parent.send method              
+              object = parent.send method
             end
           end
         else
