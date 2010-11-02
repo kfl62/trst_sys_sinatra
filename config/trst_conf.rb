@@ -9,6 +9,7 @@ require 'sinatra/base'
 require 'haml'
 require 'compass'
 require 'rdiscount'
+require 'prawn'
 require 'trst_helpers_haml'
 require 'trst_helpers_sinatra'
 Haml::Helpers.class_eval("include Trst::Haml::Helpers")
