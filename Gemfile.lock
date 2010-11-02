@@ -16,9 +16,18 @@ GIT
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
 
+GIT
+  remote: git://github.com/sandal/prawn
+  revision: cd81f1e61bc5acf842b52f9e1abbbd5795edb5db
+  submodules: true
+  specs:
+    prawn (0.11.1.pre)
+      pdf-reader (>= 0.8.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
+    Ascii85 (1.0.0)
     activemodel (3.0.1)
       activesupport (= 3.0.1)
       builder (~> 2.1.2)
@@ -35,6 +44,8 @@ GEM
       bson (>= 1.1.1)
     mongoid_i18n (0.1.7)
       mongoid (>= 2.0.0.beta.9)
+    pdf-reader (0.8.6)
+      Ascii85 (>= 0.9)
     rack (1.2.1)
     rack-flash (0.1.1)
       rack
@@ -53,6 +64,7 @@ DEPENDENCIES
   compass (~> 0.10)
   mongoid!
   mongoid_i18n
+  prawn!
   rack-flash
   rack-rewrite
   rdiscount
