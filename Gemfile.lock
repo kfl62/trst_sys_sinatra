@@ -8,9 +8,9 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 8e8c4ec26e5382d1e0c19f9dfe389099220a7b17
+  revision: 6854503b3892f608ad92b37f0e99eddc9f2a2d09
   specs:
-    mongoid (2.0.0.beta.19)
+    mongoid (2.0.0.beta.20)
       activemodel (~> 3.0)
       mongo (~> 1.1)
       tzinfo (~> 0.3.22)
