@@ -1,24 +1,19 @@
--# Template for AdeverintaPredarePrimire.pdf
+-# Template for testing pdf generators 
 :ruby
-  #Prawn::Document.extensions << PrawnExtensions
   # encoding: utf-8
   require 'prawn/measurement_extensions'
-
-  start = params[:start].to_i
-  copies = params[:copies].to_i - 1
 
   pdf = Prawn::Document.new(
     :page_size => 'A4',
     :page_layout => :landscape,
-    :skip_page_creation => true,
     :margin => [0.mm],
     #:skip_page_creation => true,
     :info => {
-      :Title => "Adeverinţă_Primire_Plata",
+      :Title => "Test pdf",
       :Author => "kfl62",
-      :Subject => "Formular \"Adeverinţă de Primire şi Plată\"",
-      :Keywords => "Diren Exim Adeverinţă Primire Plată",
-      :Creator => "http://diren.trst.ro (using Sinatra, Prawn)",
+      :Subject => "Template for testing",
+      :Keywords => "TrustSys Prawn MongoDB Mongoid Sinatra",
+      :Creator => "http://demo.trst.ro (using Sinatra, Prawn)",
       :CreationDate => Time.now
     }
   )
@@ -28,152 +23,9 @@
                   :italic => 'public/fonts/verdanai.ttf',
                   :bold_italic => 'public/fonts/verdanaz.ttf',
                   :normal => 'public/fonts/verdana.ttf'})
-  for k in 0..copies
-    if k.even?                
-      2.times do                    
-        pdf.start_new_page
-        pdf.font 'Verdana'
-        pdf.bounding_box([15.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
-          pdf.font_size 8 do
-            pdf.text 'S.C. DIREN EXIM S.R.L.'
-            pdf.text 'Nr.înreg.R.C. : J12/1000/12.09.2000'
-            pdf.text 'Cod fiscal (C.U.I) : RO13354034'
-            pdf.text 'Str.Pădurii nr.2,bl.M16,sc.2,ap.14,'
-            pdf.text 'Cluj-Napoca, judeţul Cluj'
-          end
-          pdf.move_down 5.mm
-          pdf.text 'ADEVERINŢĂ DE PRIMIRE ŞI PLATĂ',
-            :align => :center, :size => 12, :style => :bold
-          pdf.move_down 1.mm
-          pdf.text "Nr. #{start + k} din ..../..../2010",
-            :align => :center, :size => 12, :style => :bold
-          pdf.move_down 5.mm
-          pdf.font_size 9 do
-            pdf.text 'S-a primit de la ........................................ str. .....................................',
-              :leading => 4,:align => :justify
-            pdf.text 'nr. ...... localitatea .................................... mijloc de transport ................',
-              :leading => 4,:align => :justify
-            pdf.text 'următoarele deşeuri refolosibile:',
-          end
-          pdf.move_down 3.mm
-          pdf.horizontal_rule
-          pdf.move_down 1.mm
-          pdf.font_size 10 do
-            pdf.text 'Denumirea materialului      Cod        Cantitate        Preţ       Valoare'
-            pdf.indent 10.mm do
-              pdf.text 'şi calitatea                                  -kg-          unitar        -lei-'
-            end
-          end
-          pdf.move_down 1.mm
-          pdf.horizontal_rule
-          pdf.move_down 55.mm
-          pdf.horizontal_rule
-          pdf.move_down 2.mm
-          pdf.text 'TOTAL:', :size => 10
-          pdf.move_down 1.mm
-          pdf.horizontal_rule
-          pdf.move_down 5.mm
-          pdf.font_size 9 do
-            pdf.text 'Achitat suma de: ........................'
-            pdf.move_down 2.mm
-            pdf.text 'Semnături',:align => :center, :style => :bold
-            pdf.move_down 2.mm
-            pdf.text '<b>Primitor:</b> ....................................', :inline_format => true
-            pdf.move_down 2.mm
-            pdf.text 'Predător:', :style => :bold
-            pdf.move_down 2.mm
-            pdf.text '<b>Am primit suma de:</b> .....................................',
-              :inline_format => true,:leading => 5
-            pdf.text 'BI/CI seria ..... nr. .....................',:leading => 5
-            pdf.text 'C.N.P. ......................................',:leading => 5
-            pdf.text 'Declar pe proprie răspundere că materialele pe care le predau provin din:',
-              :leading => 3
-            pdf.indent 10.mm do
-              pdf.text '1.) Gospodărie proprie .................................................................',
-                :leading => 3,:align => :justify
-              pdf.text '2.) Cumpărate de la......................................................................',
-                :leading => 3,:align => :justify
-              pdf.text '3.) Alte surse (nominalizare)..........................................................',
-                :leading => 3,:align => :justify
-            end
-          end
-          pdf.move_down 2.mm
-          pdf.text '<b>Semnătura</b>.................................',
-            :inline_format => true, :align => :right, :size => 9
-        end
-        pdf.bounding_box([163.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
-          pdf.font_size 8 do
-            pdf.text 'S.C. DIREN EXIM S.R.L.'
-            pdf.text 'Nr.înreg.R.C. : J12/1000/12.09.2000'
-            pdf.text 'Cod fiscal (C.U.I) : RO13354034'
-            pdf.text 'Str.Pădurii nr.2,bl.M16,sc.2,ap.14,'
-            pdf.text 'Cluj-Napoca, judeţul Cluj'
-          end
-          pdf.move_down 5.mm
-          pdf.text 'ADEVERINŢĂ DE PRIMIRE ŞI PLATĂ',
-            :align => :center, :size => 12, :style => :bold
-          pdf.move_down 1.mm
-          pdf.text "Nr. #{start + k + 1} din ..../..../2010",
-            :align => :center, :size => 12, :style => :bold
-          pdf.move_down 5.mm
-          pdf.font_size 9 do
-            pdf.text 'S-a primit de la ........................................ str. .....................................',
-              :leading => 4,:align => :justify
-            pdf.text 'nr. ...... localitatea .................................... mijloc de transport ................',
-              :leading => 4,:align => :justify
-            pdf.text 'următoarele deşeuri refolosibile:',
-          end
-          pdf.move_down 3.mm
-          pdf.horizontal_rule
-          pdf.move_down 1.mm
-          pdf.font_size 10 do
-            pdf.text 'Denumirea materialului      Cod        Cantitate        Preţ       Valoare'
-            pdf.indent 10.mm do
-              pdf.text 'şi calitatea                                  -kg-          unitar        -lei-'
-            end
-          end
-          pdf.move_down 1.mm
-          pdf.horizontal_rule
-          pdf.move_down 55.mm
-          pdf.horizontal_rule
-          pdf.move_down 2.mm
-          pdf.text 'TOTAL:', :size => 10
-          pdf.move_down 1.mm
-          pdf.horizontal_rule
-          pdf.move_down 5.mm
-          pdf.font_size 9 do
-            pdf.text 'Achitat suma de: ........................'
-            pdf.move_down 2.mm
-            pdf.text 'Semnături',:align => :center, :style => :bold
-            pdf.move_down 2.mm
-            pdf.text '<b>Primitor:</b> ....................................', :inline_format => true
-            pdf.move_down 2.mm
-            pdf.text 'Predător:', :style => :bold
-            pdf.move_down 2.mm
-            pdf.text '<b>Am primit suma de:</b> .....................................',
-              :inline_format => true,:leading => 5
-            pdf.text 'BI/CI seria ..... nr. .....................',:leading => 5
-            pdf.text 'C.N.P. ......................................',:leading => 5
-            pdf.text 'Declar pe proprie răspundere că materialele pe care le predau provin din:',
-              :leading => 3
-            pdf.indent 10.mm do
-              pdf.text '1.) Gospodărie proprie .................................................................',
-                :leading => 3,:align => :justify
-              pdf.text '2.) Cumpărate de la......................................................................',
-                :leading => 3,:align => :justify
-              pdf.text '3.) Alte surse (nominalizare)..........................................................',
-                :leading => 3,:align => :justify
-            end
-          end
-          pdf.move_down 2.mm
-          pdf.text '<b>Semnătura</b>.................................',
-            :inline_format => true, :align => :right, :size => 9
-        end
-        pdf.stroke_line(148.mm,5.mm,148.mm,10.mm)
-        pdf.stroke_line(148.mm,200.mm,148.mm,205.mm)
-      end
-    end
-  end
+
+  pdf.font 'Verdana'
+  pdf.text 'Some testing'
 -# Render pdf document for download
 -# headers for attachment handled in admin.rb
 = pdf.render()
