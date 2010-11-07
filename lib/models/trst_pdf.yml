@@ -1,0 +1,55 @@
+ro:
+  trst_pdf:
+    created_at: "Creat"
+    updated_at: "Modificat"
+    file_name: "Nume fişirer '*.pdf'"
+    task_ids: "Sarcina asociată"
+    name: "Denumire"
+    title: "Titlu"
+    help: "Help"
+    no_params: "Acest raport/formular nu are parametrii de setat"
+    relations:
+      add:
+        task_ids: "Asocierea cu 'Sarcina'"
+      del:
+        task_ids: "Ştergerea asocierii cu 'Sarcina'"
+      select:
+        task_ids: "Alegeţi 'Sarcina'"
+    app:
+      start: "Începând cu:"
+      copies: "Nr. seturi"
+en:
+  trst_pdf:
+    created_at: "Created"
+    updated_at: "Modified"
+    file_name: "'*.pdf' file name"
+    task_ids: "Related task"
+    name: "Name"
+    title: "Title"
+    help: "Help"
+    no_params: "This report/form has no settable params"
+    relations:
+      add:
+        task_ids: "Associate with 'Task'"
+      del:
+        task_ids: "Delete 'Task' association"
+      select:
+        task_ids: "Select 'Task'"
+hu:
+  trst_pdf:
+    created_at: "Létrehozva"
+    updated_at: "Módosítva"
+    file_name: "'*.pdf' fájl név"
+    task_ids: "Társított feladat"
+    name: "Elnevezés"
+    title: "Cím"
+    help: "Segítség"
+    no_params: "Acest raport/formular nu are parametrii"
+    relations:
+      add:
+        task_ids: "Társítás 'Feladat'"
+      del:
+        task_ids: "Társított 'Feladat' törlése"
+      select:
+        task_ids: "Válasszon 'Feladat'-t"
+
