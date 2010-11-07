@@ -22,7 +22,7 @@ class TrstPdf
   field           :task_ids,        :type => Array,       :default => []
   field           :file_name,       :type => String,      :default => "report"
   field           :default_values,  :type => Hash,        :default => {}
-  field           :last,            :type => Hash,        :default => {}
+  field           :last_values,     :type => Hash,        :default => {}
   localized_field :name
   localized_field :title
   localized_field :help
@@ -56,8 +56,8 @@ class TrstPdf
   def table_params
     unless last.empty?
       retval = []
-      last.each_pair do |key,value|
-        retval << {:css => "normal",:name => "[last][#{key}]",:label => I18n.t("trst_pdf.#{file_name}.#{key}"),:value => value}
+      last_values.each_pair do |key,value|
+        retval << {:css => "normal",:name => "[trst_pdf][last_values][#{key}]",:label => I18n.t("trst_pdf.#{file_name}.#{key}"),:value => value}
       end
     else
       retval = I18n.t("trst_pdf.no_params")
