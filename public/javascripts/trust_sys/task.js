@@ -82,6 +82,21 @@ trst.task = {
     var deferred = dojo.xhrGet(xhrArgs);
     this.url = ["/srv/tsk"];
   },
+  pdf: function(){
+    xhrArgs = {
+      url: this.url.join('/'),
+      load: function(data){
+        trst.task.drawBox(data);
+        dojo.attr('xhr_msg','class','hidden');
+      },
+      error: function(error){
+        dojo.publish('xhrMsg',['error','error',error]);
+      }
+    };
+    dojo.publish('xhrMsg',['loading','info']);
+    var deferred = dojo.xhrGet(xhrArgs);
+    this.url = ["/srv/tsk"];
+  },
   // post {{{2
   post: function(){
     xhrArgs = {
@@ -169,12 +184,22 @@ trst.task = {
     dojo.forEach(this.connections, dojo.disconnect);
     this.connections.length = 0;
     dojo.query('#sidebar ul > li > a').forEach(function(a){
-      trst.task.connections.push(
-        dojo.connect(a, 'onclick', function(e){
-          e.preventDefault()
-          trst.task.init(e.target.id)
-        })
-      )
+      if (a.getAttribute('data-tsks') == 'filter'){
+        trst.task.connections.push(
+          dojo.connect(a, 'onclick', function(e){
+            e.preventDefault()
+            trst.task.init(e.target.id)
+          })
+        )
+      }
+      else if (a.getAttribute('data-tsks') == 'pdf'){
+        trst.task.connections.push(
+          dojo.connect(a, 'onclick', function(e){
+            e.preventDefault()
+            trst.task.init(e.target.id,'pdf')
+          })
+        )
+      }
     })
   }
 }
