@@ -49,7 +49,7 @@ module Trst
       def params_handle_ids(p,m)
         retval = {}
         p[m.underscore.to_sym].each_pair do |key,value|
-          retval[key] = key.index(/_ids/).nil? ?  CGI.unescape(value) : array_of_bson_ids(value)
+          retval[key] = key.index(/_ids/).nil? ?  (value.is_a?(Hash) ? value : CGI.unescape(value)) : array_of_bson_ids(value)
         end
         retval
       end
@@ -93,7 +93,7 @@ module Trst
               object = parent.send method
             end
           end
-        elsif verb == 'pdf'
+        elsif verb == 'pdf' || verb == 'print'
           object = model.send method, task.id
         else
           object = model.send method, target_id unless target_id == 'new'

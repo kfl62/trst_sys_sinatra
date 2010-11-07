@@ -82,6 +82,7 @@ trst.task = {
     var deferred = dojo.xhrGet(xhrArgs);
     this.url = ["/srv/tsk"];
   },
+  // pdf get params {{{2
   pdf: function(){
     xhrArgs = {
       url: this.url.join('/'),
@@ -96,6 +97,23 @@ trst.task = {
     dojo.publish('xhrMsg',['loading','info']);
     var deferred = dojo.xhrGet(xhrArgs);
     this.url = ["/srv/tsk"];
+  },
+  // pdf generate {{{2
+  print: function(){
+    xhrArgs = {
+      form: dojo.query('form')[0],
+      url: this.url.join('/'),
+      load: function(data){
+        window.open(this.url);
+        dojo.attr('xhr_msg','class','hidden');
+      },
+      error: function(error){
+        dojo.publish('xhrMsg',['error','error',error]);
+      }
+    };
+    dojo.publish('xhrMsg',['loading','info']);
+    var deferred = dojo.xhrPut(xhrArgs);
+    this.destroy();
   },
   // post {{{2
   post: function(){

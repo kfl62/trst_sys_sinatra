@@ -168,7 +168,7 @@ module Trst
         when 'del' # relations
           %w{del cancel}
         when 'pdf'
-          %w{cancel}
+          %w{cancel print}
         end
       end
 
@@ -186,6 +186,8 @@ module Trst
           verb = 'put' if button == 'save'
           verb = 'delete' if button == 'delete'
         when 'delete'
+          verb = button
+        when 'pdf'
           verb = button
         end
         retval = "trst.task.init('#{id}','#{verb}','#{target_id}')"
