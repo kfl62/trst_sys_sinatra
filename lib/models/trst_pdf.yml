@@ -17,7 +17,10 @@ ro:
         task_ids: "Alegeţi 'Sarcina'"
     test:
       start: "Începând cu:"
-      copies: "Nr. seturi"
+      copies: "Nr. seturi:"
+    app:
+      start: "Începând cu:"
+      copies: "Nr. seturi:"
 en:
   trst_pdf:
     created_at: "Created"
@@ -35,6 +38,12 @@ en:
         task_ids: "Delete 'Task' association"
       select:
         task_ids: "Select 'Task'"
+    test:
+      start: "Start from:"
+      copies: "Copies:"
+    app:
+      start: "Start from:"
+      copies: "Copies:"
 hu:
   trst_pdf:
     created_at: "Létrehozva"
@@ -52,4 +61,10 @@ hu:
         task_ids: "Társított 'Feladat' törlése"
       select:
         task_ids: "Válasszon 'Feladat'-t"
+    test:
+      start: "Sorszám:"
+      copies: "Példányszám:"
+    app:
+      start: "Sorszám:"
+      copies: "Példányszám:"
 
