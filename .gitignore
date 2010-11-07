@@ -4,5 +4,6 @@
 bin/*
 config/secret*
 tmp/*
+src/trst_pdf/*
 !tmp/restart.txt
 public/api
