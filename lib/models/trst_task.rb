@@ -35,6 +35,10 @@ class TrstTask
 
   end
   # @todo Document this method
+  def is_pdf?
+    target.include?("TrstPdf")
+  end
+  # @todo Document this method
   def pages
     page_ids
   end
