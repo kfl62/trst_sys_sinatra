@@ -93,6 +93,8 @@ module Trst
               object = parent.send method
             end
           end
+        elsif verb == 'pdf'
+          object = model.send method, task.id
         else
           object = model.send method, target_id unless target_id == 'new'
         end
@@ -111,6 +113,8 @@ module Trst
           haml_path += "/get_delete"
         when /post|put/
           haml_path += request.put? ? "/get_delete" : "/post_put"
+        when /pdf/
+          haml_path += "/pdf_params"
         else
           haml_path = "/trst_sys/error"
         end

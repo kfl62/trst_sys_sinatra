@@ -167,6 +167,8 @@ module Trst
           %w{add cancel}
         when 'del' # relations
           %w{del cancel}
+        when 'pdf'
+          %w{cancel}
         end
       end
 
