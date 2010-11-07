@@ -2,6 +2,9 @@ ro:
   xhr_tasks:
     title: "De rezolvat zilnic... (sarcini)"
     init: "Accesare: Pagina mea -> Sarcini zilnice"
+    empty: "Nu aveţi sarcini definite..."
+  xhr_pdfs:
+    title: "Rapoarte/Formulare"
   gen_head:
     field: "Câmp"
     value: "Valoare"
@@ -27,12 +30,16 @@ ro:
     save: "Salvare"
     add: "Adăugare"
     del: "Ştergere"
+    pdf: "Setare parametrii"
   select:
     select: "Alegeţi!"
 en:
   xhr_tasks:
     title: "Daily todo... (tasks)"
     init: "Access: My Page -> Daily tasks"
+    empty: "No tasks defined..."
+  xhr_pdfs:
+    title: "Reports/Forms"
   gen_head:
     field: "Field"
     value: "Value"
@@ -64,6 +71,9 @@ hu:
   xhr_tasks:
     title: "Napi tennivaló... (feladatok)"
     init: "Hozzáférés: Saját oldal -> Napi feladatok"
+    empty: "Még nincsen feladat meghatározva..."
+  xhr_pdfs:
+    title: "Jelentések/Nyomtatványok"
   gen_head:
     field: "Mező"
     value: "Érték"
