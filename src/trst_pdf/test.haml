@@ -1,8 +1,8 @@
 -# Template for testing pdf generators 
 :ruby
+  #Prawn::Document.extensions << PrawnExtensions
   # encoding: utf-8
   require 'prawn/measurement_extensions'
-
   pdf = Prawn::Document.new(
     :page_size => 'A4',
     :page_layout => :landscape,
@@ -23,9 +23,10 @@
                   :italic => 'public/fonts/verdanai.ttf',
                   :bold_italic => 'public/fonts/verdanaz.ttf',
                   :normal => 'public/fonts/verdana.ttf'})
-
   pdf.font 'Verdana'
-  pdf.text 'Some testing'
+  pdf.text 'Object'
+  pdf.text @object.last_values["start"]
+
 -# Render pdf document for download
 -# headers for attachment handled in admin.rb
 = pdf.render()
