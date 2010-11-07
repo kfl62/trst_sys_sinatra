@@ -53,7 +53,17 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation for Action:,Render:
   get '/:id/:verb/:target_id' do |id,verb,target_id|
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
-    haml :"#{haml_path}", :layout => false, :locals => locals
+    unless verb == 'print'
+      haml :"#{haml_path}", :layout => false, :locals => locals
+    else
+      headers({'Content-Type' => 'application/pdf',
+               'Content-Description' => 'File Transfer',
+               'Content-Transfer-Encoding' => 'binary',
+               'Content-Disposition' => "attachment;filename=\"#{@object.file_name}.pdf\"",
+               'Expires' => '0',
+               'Pragma' => 'public'})
+      haml :"trst_pdf/#{@object.file_name}", :layout => false, :locals => locals
+    end
   end
 
   # route for post(create)
@@ -77,8 +87,12 @@ class TrstSysTsk < Sinatra::Base
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
     update_hash = params_handle_ids(params,@object.class.name)
     @object.update_attributes update_hash
-    flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json
-    haml :"#{haml_path}", :layout => false, :locals => locals
+    unless verb == 'print'
+      flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json
+      haml :"#{haml_path}", :layout => false, :locals => locals
+    else
+      nil
+    end
   end
 
   # route for delete
