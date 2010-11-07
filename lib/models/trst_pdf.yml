@@ -15,7 +15,7 @@ ro:
         task_ids: "Ştergerea asocierii cu 'Sarcina'"
       select:
         task_ids: "Alegeţi 'Sarcina'"
-    app:
+    test:
       start: "Începând cu:"
       copies: "Nr. seturi"
 en:

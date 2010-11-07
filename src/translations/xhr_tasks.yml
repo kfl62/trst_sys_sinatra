@@ -31,6 +31,7 @@ ro:
     add: "Adăugare"
     del: "Ştergere"
     pdf: "Setare parametrii"
+    print: "Generare pdf"
   select:
     select: "Alegeţi!"
 en:
@@ -65,6 +66,7 @@ en:
     save: "Save"
     add: "Add"
     del: "Delete"
+    print: "Generate pdf"
   select:
     select: "Select!"
 hu:
@@ -99,6 +101,7 @@ hu:
     save: "Ment"
     add: "Hozzáad"
     del: "Töröl"
+    print: "pdf Generálása"
   select:
     select: "Válaszon!"
 
