@@ -8,18 +8,6 @@ class TrstSys < Sinatra::Base
     content_type 'text/css', :charset => 'utf-8'
     sass :"stylesheets/#{params[:name]}", Compass.sass_engine_options
   end
-  # @todo Document this method   
-  get ('/pdf/:template') do
-    filename = params[:filename]
-    filename += '.pdf'
-    headers({'Content-Type' => 'application/pdf',
-             'Content-Description' => 'File Transfer',
-             'Content-Transfer-Encoding' => 'binary',
-             'Content-Disposition' => "attachment;filename=\"#{filename}\"",
-             'Expires' => '0',
-             'Pragma' => 'public'})
-    haml :"trst_pdf/#{params[:template]}", :layout => false
-  end
   # @todo Document this method
   get '/*' do
     login_required
