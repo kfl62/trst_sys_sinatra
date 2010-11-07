@@ -1,0 +1,32 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@object,action)
+- if @object.table_params.is_a? Array
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t('gen_head.field')
+        %th= t('gen_head.value')
+    %tbody
+      - @object.table_params.each do |data|
+        %tr{:class => data[:css]}
+          %td= data[:label]
+          %td
+            %input{:name => data[:name],:value => data[:value]}
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "2"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+              =t("button.#{button}")
+- else
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= @object.table_params
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "2"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+              =t("button.#{button}")
+    
