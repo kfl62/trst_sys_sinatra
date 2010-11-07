@@ -96,13 +96,24 @@ class TrstUser
   # @see #table_data
   # @return [Array] daily todo - ids
   def daily_tasks
-    task_ids['daily_tasks']
+    tsks = []
+    pdfs = []
+    task_ids['daily_tasks'].each do |t|
+      if TrstTask.find(t).is_pdf?
+        pdfs << t
+      else
+        tsks << t
+      end
+    end
+    return [tsks,pdfs]
   end
   #
   # @see #table_data
   # @return [Array] daily todo - names
   def daily_tasks_name
-    daily_tasks.collect{|id| TrstTask.find(id).name}
+    retval = []
+    daily_tasks.each{|t| retval << t.collect{|id| TrstTask.find(id).name}}
+    return retval.flatten
   end
   #
   # @see #table_data
@@ -135,7 +146,7 @@ class TrstUser
      {:css => "integer",:name => "permission_lvl",:label => I18n.t("trst_user.permission_lvl"),:value => permission_lvl},
      {:css => "array",:name => "permission_grp",:label => I18n.t("trst_user.permission_grp"),:value => permission_grp},
      {:css => "hash",:name => "settings",:label => I18n.t("trst_user.settings.header"),:value => settings},
-     {:css => "relations",:name => "task_ids,daily_tasks",:label => I18n.t("trst_user.daily_tasks"),:value => [daily_tasks_name,daily_tasks]},
+     {:css => "relations",:name => "task_ids,daily_tasks",:label => I18n.t("trst_user.daily_tasks"),:value => [daily_tasks_name,daily_tasks.flatten]},
      {:css => "relations",:name => "task_ids,other_tasks",:label => I18n.t("trst_user.other_tasks"),:value => [other_tasks_name,other_tasks]},
      {:css => "datetime",:name => "created_at",:label => I18n.t("trst_task.created_at"),:value => created_at},
      {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_task.updated_at"),:value => updated_at}]
