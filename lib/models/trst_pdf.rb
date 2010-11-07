@@ -54,7 +54,7 @@ class TrstPdf
   end
   # @todo Document this method
   def table_params
-    unless last.empty?
+    unless last_values.empty?
       retval = []
       last_values.each_pair do |key,value|
         retval << {:css => "normal",:name => "[trst_pdf][last_values][#{key}]",:label => I18n.t("trst_pdf.#{file_name}.#{key}"),:value => value}
