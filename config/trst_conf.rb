@@ -37,6 +37,7 @@ require 'trst_book_chapter'
 require 'trst_book_page'
 require 'trst_user'
 require 'trst_task'
+require 'trst_pdf'
 # controllers
 require 'trst_auth'
 require 'trst_pub'
