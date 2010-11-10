@@ -1,14 +1,6 @@
 GIT
-  remote: git://github.com/kfl62/sinatra.git
-  revision: ca7fbe54721c636ccc208c83eea0f4b70b57f702
-  specs:
-    sinatra (1.1.0)
-      rack (~> 1.1)
-      tilt (~> 1.1)
-
-GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 6854503b3892f608ad92b37f0e99eddc9f2a2d09
+  revision: 78b1dd32a83a6616176cc95ca20b770be143f566
   specs:
     mongoid (2.0.0.beta.20)
       activemodel (~> 3.0)
@@ -18,11 +10,19 @@ GIT
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: cd81f1e61bc5acf842b52f9e1abbbd5795edb5db
+  revision: b188b3d289ca6e35e3e32ef9cdfcacb1b3b62381
   submodules: true
   specs:
     prawn (0.11.1.pre)
       pdf-reader (>= 0.8.1)
+
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: e6887fe430c414004d419b76567d0c51a15ea734
+  specs:
+    sinatra (1.1.0)
+      rack (~> 1.1)
+      tilt (~> 1.1)
 
 GEM
   remote: http://rubygems.org/
