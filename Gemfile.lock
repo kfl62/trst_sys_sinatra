@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: e6887fe430c414004d419b76567d0c51a15ea734
+  revision: 5d15ddf3a182379a8bcdcdbabbff30441e3b610d
   specs:
     sinatra (1.1.0)
       rack (~> 1.1)
