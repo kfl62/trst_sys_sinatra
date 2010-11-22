@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 78b1dd32a83a6616176cc95ca20b770be143f566
+  revision: aed53e4e06f5f9db6915f5271be5dac5e46d7b36
   specs:
     mongoid (2.0.0.beta.20)
       activemodel (~> 3.0)
@@ -10,17 +10,17 @@ GIT
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: b188b3d289ca6e35e3e32ef9cdfcacb1b3b62381
+  revision: f7cd1c7c9629b4a897cc76bdf016ad320e52fedb
   submodules: true
   specs:
     prawn (0.11.1.pre)
-      pdf-reader (>= 0.8.1)
+      pdf-reader (>= 0.9.0)
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: 5d15ddf3a182379a8bcdcdbabbff30441e3b610d
+  revision: 45f954fa323ce5901e2ffb5ac73f5bdc48bd13b6
   specs:
-    sinatra (1.1.0)
+    sinatra (1.1.1)
       rack (~> 1.1)
       tilt (~> 1.1)
 
@@ -28,29 +28,52 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.0)
-    activemodel (3.0.1)
-      activesupport (= 3.0.1)
+    activemodel (3.0.3)
+      activesupport (= 3.0.3)
       builder (~> 2.1.2)
-      i18n (~> 0.4.1)
-    activesupport (3.0.1)
+      i18n (~> 0.4)
+    activesupport (3.0.3)
     bson (1.1.2)
     bson_ext (1.1.2)
     builder (2.1.2)
     compass (0.10.6)
       haml (>= 3.0.4)
-    haml (3.0.23)
+    diff-lcs (1.1.2)
+    git (1.2.5)
+    haml (3.0.24)
     i18n (0.4.2)
+    jeweler (1.5.1)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
+    mocha (0.9.9)
+      rake
     mongo (1.1.2)
       bson (>= 1.1.1)
-    mongoid_i18n (0.1.7)
+    mongoid_i18n (0.1.8)
+      bson_ext
+      bundler
+      jeweler
+      mocha
+      mongoid (>= 2.0.0.beta.20)
       mongoid (>= 2.0.0.beta.9)
-    pdf-reader (0.8.6)
+      rspec (>= 2.0.0.beta.8)
+    pdf-reader (0.9.0)
       Ascii85 (>= 0.9)
     rack (1.2.1)
     rack-flash (0.1.1)
       rack
     rack-rewrite (1.0.2)
+    rake (0.8.7)
     rdiscount (1.6.5)
+    rspec (2.1.0)
+      rspec-core (~> 2.1.0)
+      rspec-expectations (~> 2.1.0)
+      rspec-mocks (~> 2.1.0)
+    rspec-core (2.1.0)
+    rspec-expectations (2.1.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.1.0)
     tilt (1.1)
     tzinfo (0.3.23)
     will_paginate (3.0.pre2)
