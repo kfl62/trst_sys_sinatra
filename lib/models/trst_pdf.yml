@@ -21,6 +21,25 @@ ro:
     app:
       start: "Începând cu:"
       copies: "Nr. seturi:"
+    cim:
+      genre: "Genul M/F"
+      name: "Prenume / Nume"
+      city: "Localitate"
+      street: "Strada"
+      nr: "Număr"
+      bl: "Bloc"
+      sc: "Scara"
+      et: "Etaj"
+      ap: "Apartament"
+      region: "Judeţ"
+      ppr_s: "BI/CI Seria"
+      ppr_nr: "BI/CI Nr."
+      ppr_by: "Eliberat de"
+      ppr_on: "la data de"
+      cnp: "CNP"
+      employee:
+        title: ["Salariatul", "Salariata"]
+        prefix: ["dl.", "dna."]
 en:
   trst_pdf:
     created_at: "Created"
@@ -44,6 +63,25 @@ en:
     app:
       start: "Start from:"
       copies: "Copies:"
+    cim:
+      genre: "Genul M/F"
+      name: "Prenume / Nume"
+      city: "Localitate"
+      street: "Strada"
+      nr: "Număr"
+      bl: "Bloc"
+      sc: "Scara"
+      et: "Etaj"
+      ap: "Apartament"
+      region: "Judeţ"
+      ppr_s: "BI/CI Seria"
+      ppr_nr: "BI/CI Nr."
+      ppr_by: "Eliberat de"
+      ppr_on: "la data de"
+      cnp: "CNP"
+      employee:
+        title: ["Salariatul", "Salariata"]
+        prefix: ["dl.", "dna."]
 hu:
   trst_pdf:
     created_at: "Létrehozva"
@@ -67,4 +105,23 @@ hu:
     app:
       start: "Sorszám:"
       copies: "Példányszám:"
+    cim:
+      genre: "Genul M/F"
+      name: "Prenume / Nume"
+      city: "Localitate"
+      street: "Strada"
+      nr: "Număr"
+      bl: "Bloc"
+      sc: "Scara"
+      et: "Etaj"
+      ap: "Apartament"
+      region: "Judeţ"
+      ppr_s: "BI/CI Seria"
+      ppr_nr: "BI/CI Nr."
+      ppr_by: "Eliberat de"
+      ppr_on: "la data de"
+      cnp: "CNP"
+      employee:
+        title: ["Salariatul", "Salariata"]
+        prefix: ["dl.", "dna."]
 
