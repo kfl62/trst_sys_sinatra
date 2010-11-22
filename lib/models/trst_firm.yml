@@ -1,0 +1,10 @@
+ro:
+  trst_firm:
+    name: "Nume"
+en:
+  trst_firm:
+    name: "Name"
+hu:
+  trst_firm:
+    name: "Név"
+
