@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: aed53e4e06f5f9db6915f5271be5dac5e46d7b36
+  revision: ff5840d252756d180f31ccaca57431921d01c50d
   specs:
     mongoid (2.0.0.beta.20)
       activemodel (~> 3.0)
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: f7cd1c7c9629b4a897cc76bdf016ad320e52fedb
+  revision: 912728c2413144ca9801f3d2fd1880c10d9e0d6c
   submodules: true
   specs:
     prawn (0.11.1.pre)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: 45f954fa323ce5901e2ffb5ac73f5bdc48bd13b6
+  revision: 6d3d45df101686e89673ac7106f67b153aae0e98
   specs:
     sinatra (1.1.1)
       rack (~> 1.1)
@@ -33,22 +33,22 @@ GEM
       builder (~> 2.1.2)
       i18n (~> 0.4)
     activesupport (3.0.3)
-    bson (1.1.2)
-    bson_ext (1.1.2)
+    bson (1.1.4)
+    bson_ext (1.1.4)
     builder (2.1.2)
     compass (0.10.6)
       haml (>= 3.0.4)
     diff-lcs (1.1.2)
     git (1.2.5)
     haml (3.0.24)
-    i18n (0.4.2)
+    i18n (0.5.0)
     jeweler (1.5.1)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
       rake
-    mocha (0.9.9)
+    mocha (0.9.10)
       rake
-    mongo (1.1.2)
+    mongo (1.1.4)
       bson (>= 1.1.1)
     mongoid_i18n (0.1.8)
       bson_ext
@@ -66,14 +66,14 @@ GEM
     rack-rewrite (1.0.2)
     rake (0.8.7)
     rdiscount (1.6.5)
-    rspec (2.1.0)
-      rspec-core (~> 2.1.0)
-      rspec-expectations (~> 2.1.0)
-      rspec-mocks (~> 2.1.0)
-    rspec-core (2.1.0)
-    rspec-expectations (2.1.0)
+    rspec (2.2.0)
+      rspec-core (~> 2.2)
+      rspec-expectations (~> 2.2)
+      rspec-mocks (~> 2.2)
+    rspec-core (2.2.1)
+    rspec-expectations (2.2.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.1.0)
+    rspec-mocks (2.2.0)
     tilt (1.1)
     tzinfo (0.3.23)
     will_paginate (3.0.pre2)
@@ -83,7 +83,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext (= 1.1.2)
+  bson_ext (~> 1.1)
   compass (~> 0.10)
   mongoid!
   mongoid_i18n
