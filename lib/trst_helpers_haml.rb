@@ -139,6 +139,7 @@ module Trst
         name.split(',').each do |n|
           retval += "[#{n}]"
         end
+        retval += "[]" if name.end_with? ","
         retval = "[#{model}]#{retval}"
         return retval
       end

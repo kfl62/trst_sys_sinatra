@@ -49,7 +49,7 @@ module Trst
       def params_handle_ids(p,m)
         retval = {}
         p[m.underscore.to_sym].each_pair do |key,value|
-          retval[key] = key.index(/_ids/).nil? ?  (value.is_a?(Hash) ? value : CGI.unescape(value)) : array_of_bson_ids(value)
+          retval[key] = key.index(/_ids/).nil? ?  (value.is_a?(String) ? CGI.unescape(value) : value) : array_of_bson_ids(value)
         end
         retval
       end
