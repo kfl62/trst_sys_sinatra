@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 1abe9edf65ba9c044c0ed253fd26fce2d2f8edf5
+  revision: f9e17999c949bec5efad60079d232049b49c644f
   specs:
-    mongoid (2.0.0.beta.20)
+    mongoid (2.0.0.rc.1)
       activemodel (~> 3.0)
       mongo (~> 1.1)
       tzinfo (~> 0.3.22)
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: eed89c2cc92596ec8016dcce1d7e9e10bd8daf8d
+  revision: a157686d43462444b670ac1187cb76a4a6a867ca
   submodules: true
   specs:
     prawn (0.11.1.pre)
@@ -66,14 +66,14 @@ GEM
     rack-rewrite (1.0.2)
     rake (0.8.7)
     rdiscount (1.6.5)
-    rspec (2.3.0)
-      rspec-core (~> 2.3.0)
-      rspec-expectations (~> 2.3.0)
-      rspec-mocks (~> 2.3.0)
-    rspec-core (2.3.1)
-    rspec-expectations (2.3.0)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.3.0)
+    rspec-mocks (2.4.0)
     tilt (1.2.1)
     tzinfo (0.3.23)
     will_paginate (3.0.pre2)
