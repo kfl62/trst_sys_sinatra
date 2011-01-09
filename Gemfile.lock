@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: f9e17999c949bec5efad60079d232049b49c644f
+  revision: 73e80050a0e378a0486eb51caf714bb27e04b78e
   specs:
     mongoid (2.0.0.rc.1)
       activemodel (~> 3.0)
-      mongo (~> 1.1)
+      mongo (~> 1.1.5)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
 
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: e801b5aab5227a887175b5d4431223bd3e3c5b6c
+  revision: 9420a9b893eb2d8fdd793a58079aa3d7e20ab2c9
   specs:
     sinatra (1.2.0.a)
       rack (~> 1.1)
