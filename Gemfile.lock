@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 73e80050a0e378a0486eb51caf714bb27e04b78e
+  revision: 1642fc9f4ac51eab5e0c378f080a6007424c8e3c
   specs:
-    mongoid (2.0.0.rc.1)
+    mongoid (2.0.0.rc.4)
       activemodel (~> 3.0)
       mongo (~> 1.1.5)
       tzinfo (~> 0.3.22)
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: a157686d43462444b670ac1187cb76a4a6a867ca
+  revision: 05d637d073f3ddb40cfa0d901207b4b779131372
   submodules: true
   specs:
     prawn (0.11.1.pre)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: 9420a9b893eb2d8fdd793a58079aa3d7e20ab2c9
+  revision: a28ed5076caefd09711d2938da03f2fa105d6869
   specs:
     sinatra (1.2.0.a)
       rack (~> 1.1)
