@@ -1,16 +1,16 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 1642fc9f4ac51eab5e0c378f080a6007424c8e3c
+  revision: f9ed9bd142d821fbed7dd7b7c3b800cf34489a62
   specs:
-    mongoid (2.0.0.rc.4)
+    mongoid (2.0.0.rc.6)
       activemodel (~> 3.0)
-      mongo (~> 1.1.5)
+      mongo (~> 1.2)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: 05d637d073f3ddb40cfa0d901207b4b779131372
+  revision: c9cae80223b3cbbfe4c6d8647c44b7b4f0f0fcf4
   submodules: true
   specs:
     prawn (0.11.1.pre)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: a28ed5076caefd09711d2938da03f2fa105d6869
+  revision: c1eb806bbbdeb11c3ac319545b856482f1df9a7b
   specs:
     sinatra (1.2.0.a)
       rack (~> 1.1)
@@ -33,8 +33,8 @@ GEM
       builder (~> 2.1.2)
       i18n (~> 0.4)
     activesupport (3.0.3)
-    bson (1.1.5)
-    bson_ext (1.1.5)
+    bson (1.2.0)
+    bson_ext (1.2.0)
     builder (2.1.2)
     compass (0.10.6)
       haml (>= 3.0.4)
@@ -48,8 +48,8 @@ GEM
       rake
     mocha (0.9.10)
       rake
-    mongo (1.1.5)
-      bson (>= 1.1.5)
+    mongo (1.2.0)
+      bson (>= 1.2.0)
     mongoid_i18n (0.1.8)
       bson_ext
       bundler
@@ -74,8 +74,8 @@ GEM
     rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
-    tilt (1.2.1)
-    tzinfo (0.3.23)
+    tilt (1.2.2)
+    tzinfo (0.3.24)
     will_paginate (3.0.pre2)
     wirble (0.1.3)
 
