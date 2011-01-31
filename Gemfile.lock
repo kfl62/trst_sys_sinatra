@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 17072e822f19396f13e54f1763fd6ccd29c5386b
+  revision: f2ddfddbb8ba648ba39dd52929cebc78f0337b69
   specs:
-    mongoid (2.0.0.rc.6)
+    mongoid (2.0.0.rc.7)
       activemodel (~> 3.0)
       mongo (~> 1.2)
       tzinfo (~> 0.3.22)
@@ -10,19 +10,25 @@ GIT
 
 GIT
   remote: git://github.com/sandal/prawn
-  revision: 5e59fa7829129f3c1ccc87ba1ac332c284bb9fa6
-  submodules: true
+  revision: 531b7238850020f6e7af5035cc5e70d544e77a1b
   specs:
     prawn (0.11.1.pre)
       pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.0)
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: c1eb806bbbdeb11c3ac319545b856482f1df9a7b
+  revision: e16bc71590d3577769551263948a96642a0c83be
   specs:
     sinatra (1.2.0.a)
       rack (~> 1.1)
-      tilt (~> 1.2)
+      tilt (>= 1.2.2, < 2.0)
+
+GIT
+  remote: https://github.com/sandal/ttfunk.git
+  revision: c467d86c74eeffecb1f0887d11e5aacf08202507
+  specs:
+    ttfunk (1.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -65,7 +71,7 @@ GEM
       rack
     rack-rewrite (1.0.2)
     rake (0.8.7)
-    rdiscount (1.6.5)
+    rdiscount (1.6.8)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -87,9 +93,11 @@ DEPENDENCIES
   compass (~> 0.10)
   mongoid!
   mongoid_i18n
+  pdf-reader (~> 0.9.0)
   prawn!
   rack-flash
   rack-rewrite
   rdiscount
   sinatra!
+  ttfunk (~> 1.0.0)!
   wirble
