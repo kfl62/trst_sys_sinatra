@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mongoid/mongoid
-  revision: 0ae12cabb128b2771605c9acb9ddb77ceaefc840
+  revision: 9137c4624fcdf3020b1632ce838ef2e26a4cd109
   specs:
     mongoid (2.0.0.rc.7)
       activemodel (~> 3.0)
@@ -18,9 +18,9 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: 380c312269c7ba258b077207ab074f055e3c1309
+  revision: da5e3333be6a29169e97633d19eb9a3689ca1156
   specs:
-    sinatra (1.2.0.a)
+    sinatra (1.2.0.c)
       rack (~> 1.1)
       tilt (>= 1.2.2, < 2.0)
 
