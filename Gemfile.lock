@@ -1,16 +1,6 @@
 GIT
-  remote: git://github.com/mongoid/mongoid
-  revision: 782ddfeeefa2a64d9473ed433915662591f81755
-  specs:
-    mongoid (2.0.0)
-      activemodel (~> 3.0)
-      mongo (~> 1.2)
-      tzinfo (~> 0.3.22)
-      will_paginate (~> 3.0.pre)
-
-GIT
   remote: git://github.com/sandal/prawn
-  revision: 533261cb6b96e93f89e120447baee546fb682c72
+  revision: 5cca37e61e77411737a35707219b71bf4841de05
   specs:
     prawn (0.11.1)
       pdf-reader (>= 0.9.0)
@@ -18,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: cacd4738018ba4d4a9b2a4299a4bb6058b7be517
+  revision: 026648d788a9b477d5ffa94a2854b92cc995ac9e
   specs:
     sinatra (1.3.0)
       rack (~> 1.2)
@@ -26,9 +16,9 @@ GIT
 
 GIT
   remote: https://github.com/sandal/ttfunk.git
-  revision: 025de47832f241f0f313537932cc4ac796b1be70
+  revision: ad189671d86fb3f5799464f17f5b8b411ce384ea
   specs:
-    ttfunk (1.0.0)
+    ttfunk (1.0.1)
 
 GEM
   remote: http://rubygems.org/
@@ -55,6 +45,11 @@ GEM
     mocha (0.9.12)
     mongo (1.2.4)
       bson (>= 1.2.4)
+    mongoid (2.0.0.beta.20)
+      activemodel (~> 3.0)
+      mongo (~> 1.1)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
     mongoid_i18n (0.1.8)
       bson_ext
       bundler
@@ -80,7 +75,7 @@ GEM
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
     tilt (1.2.2)
-    tzinfo (0.3.25)
+    tzinfo (0.3.26)
     will_paginate (3.0.pre2)
     wirble (0.1.3)
 
@@ -90,7 +85,7 @@ PLATFORMS
 DEPENDENCIES
   bson_ext (~> 1.1)
   compass (~> 0.10)
-  mongoid!
+  mongoid (= 2.0.0.beta.20)
   mongoid_i18n
   pdf-reader (~> 0.9.0)
   prawn!
