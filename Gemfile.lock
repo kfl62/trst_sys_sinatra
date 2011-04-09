@@ -1,6 +1,29 @@
 GIT
+  remote: git://github.com/kfl62/mongoid_i18n.git
+  revision: 3666483d458aa56d374d8708a42aedf9a69e59fe
+  specs:
+    mongoid_i18n (0.2.1)
+      bson_ext (~> 1.2)
+      bundler
+      jeweler
+      mocha
+      mongoid (>= 2.0.0)
+      mongoid (>= 2.0.0)
+      rspec
+
+GIT
+  remote: git://github.com/mongoid/mongoid
+  revision: 943c0b9f6a45b16c7410a8c3441c65ecd4992596
+  specs:
+    mongoid (2.0.1)
+      activemodel (~> 3.0)
+      mongo (~> 1.3)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
+
+GIT
   remote: git://github.com/sandal/prawn
-  revision: 5cca37e61e77411737a35707219b71bf4841de05
+  revision: acac824e47352f5bf507b44a5546d55e90c91529
   specs:
     prawn (0.11.1)
       pdf-reader (>= 0.9.0)
@@ -8,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: 026648d788a9b477d5ffa94a2854b92cc995ac9e
+  revision: b0262b3f84f48e6e13318ce72bcdfeef29533871
   specs:
     sinatra (1.3.0)
       rack (~> 1.2)
@@ -24,13 +47,13 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.0)
-    activemodel (3.0.5)
-      activesupport (= 3.0.5)
+    activemodel (3.0.6)
+      activesupport (= 3.0.6)
       builder (~> 2.1.2)
-      i18n (~> 0.4)
-    activesupport (3.0.5)
-    bson (1.2.4)
-    bson_ext (1.2.4)
+      i18n (~> 0.5.0)
+    activesupport (3.0.6)
+    bson (1.3.0)
+    bson_ext (1.3.0)
     builder (2.1.2)
     compass (0.10.6)
       haml (>= 3.0.4)
@@ -43,21 +66,8 @@ GEM
       git (>= 1.2.5)
       rake
     mocha (0.9.12)
-    mongo (1.2.4)
-      bson (>= 1.2.4)
-    mongoid (2.0.0.beta.20)
-      activemodel (~> 3.0)
-      mongo (~> 1.1)
-      tzinfo (~> 0.3.22)
-      will_paginate (~> 3.0.pre)
-    mongoid_i18n (0.1.8)
-      bson_ext
-      bundler
-      jeweler
-      mocha
-      mongoid (>= 2.0.0.beta.20)
-      mongoid (>= 2.0.0.beta.9)
-      rspec (>= 2.0.0.beta.8)
+    mongo (1.3.0)
+      bson (>= 1.3.0)
     pdf-reader (0.9.1)
       Ascii85 (>= 0.9)
     rack (1.2.2)
@@ -85,8 +95,8 @@ PLATFORMS
 DEPENDENCIES
   bson_ext (~> 1.1)
   compass (~> 0.10)
-  mongoid (= 2.0.0.beta.20)
-  mongoid_i18n
+  mongoid!
+  mongoid_i18n!
   pdf-reader (~> 0.9.0)
   prawn!
   rack-flash
