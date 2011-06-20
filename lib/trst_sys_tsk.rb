@@ -85,7 +85,11 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation for Action:,Render:
   put '/:id/:verb/:target_id' do |id,verb,target_id|
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
-    update_hash = params_handle_ids(params,@object.class.name)
+    if params[:target]
+      update_hash = params[:"#{@object._parent.class.name.underscore}"]
+    else
+      update_hash = params_handle_ids(params,@object.class.name)
+    end
     @object.update_attributes update_hash
     unless verb == 'print'
       flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json

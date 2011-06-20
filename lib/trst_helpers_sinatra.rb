@@ -103,8 +103,13 @@ module Trst
           if method == 'details'
             if params[:target]
               method = params[:target]
-              model = model.find(target_id)
-              object = model.send(method).find(params[:child_id])
+              if model.find(target_id).nil?
+                model  = model.where("#{method}._id" => target_id).first
+                object = model.send(method).find(target_id)
+              else
+                model  = model.find(target_id)
+                object = model.send(method).find(params[:child_id])
+              end
             else
               method = 'find'
               object = model.send method, target_id unless target_id == 'new'
