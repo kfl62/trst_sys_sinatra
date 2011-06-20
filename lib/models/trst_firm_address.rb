@@ -22,15 +22,18 @@ class TrstFirmAddress
   embedded_in :trst_firm, :class_name => "TrstFirm", :inverse_of => :addresses
 
   def table_data
-    [{:css => "normal",:name => "city",:label => I18n.t("trst_firm_address.city"),:value => city},
-     {:css => "normal",:name => "street",:label => I18n.t("trst_firm_address.street"),:value => street},
-     {:css => "normal",:name => "nr",:label => I18n.t("trst_firm_address.nr"),:value => nr},
-     {:css => "normal",:name => "bl",:label => I18n.t("trst_firm_address.bl"),:value => bl},
-     {:css => "normal",:name => "sc",:label => I18n.t("trst_firm_address.sc"),:value => sc},
-     {:css => "normal",:name => "et",:label => I18n.t("trst_firm_address.et"),:value => et},
-     {:css => "normal",:name => "ap",:label => I18n.t("trst_firm_address.ap"),:value => ap},
-     {:css => "normal",:name => "state",:label => I18n.t("trst_firm_address.state"),:value => state},
-     {:css => "normal",:name => "country",:label => I18n.t("trst_firm_address.country"),:value => country},
-     {:css => "normal",:name => "zip",:label => I18n.t("trst_firm_address.zip"),:value => zip}]
+    [
+      {:css => "normal",:name => "name",:label => I18n.t("trst_firm_address.name"),:value => name},
+      {:css => "normal",:name => "city",:label => I18n.t("trst_firm_address.city"),:value => city},
+      {:css => "normal",:name => "street",:label => I18n.t("trst_firm_address.street"),:value => street},
+      {:css => "normal",:name => "nr",:label => I18n.t("trst_firm_address.nr"),:value => nr},
+      {:css => "normal",:name => "bl",:label => I18n.t("trst_firm_address.bl"),:value => bl},
+      {:css => "normal",:name => "sc",:label => I18n.t("trst_firm_address.sc"),:value => sc},
+      {:css => "normal",:name => "et",:label => I18n.t("trst_firm_address.et"),:value => et},
+      {:css => "normal",:name => "ap",:label => I18n.t("trst_firm_address.ap"),:value => ap},
+      {:css => "normal",:name => "state",:label => I18n.t("trst_firm_address.state"),:value => state},
+      {:css => "normal",:name => "country",:label => I18n.t("trst_firm_address.country"),:value => country},
+      {:css => "normal",:name => "zip",:label => I18n.t("trst_firm_address.zip"),:value => zip}
+    ]
   end
 end
