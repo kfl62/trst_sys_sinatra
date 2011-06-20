@@ -29,7 +29,7 @@ class TrstBookPage
   localized_field :title
   localized_field :content
 
-  embedded_in :chapter, :inverse_of => :pages
+  embedded_in :chapter, :class_name => "TrstBookChapter", :inverse_of => :pages
 
   # @todo Document this method
   def path

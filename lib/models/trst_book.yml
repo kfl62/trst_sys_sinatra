@@ -1,6 +1,6 @@
 ro:
   trst_book:
-  trst_book_chapter:
+    select: "Alegeţi:"
     name: "Denumire"
     content: "Conţinut"
     created_at: "Creat"

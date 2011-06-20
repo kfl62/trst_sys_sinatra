@@ -1,0 +1,17 @@
+ro:
+  trst_firm_address:
+    title: "2.) Editare adrese:"
+    name: "Denumire"
+    city: "Localitate"
+    street: "Strada"
+en:
+  trst_firm_address:
+    name: "Denumire"
+    city: "Localitate"
+    street: "Strada"
+hu:
+  trst_firm_address:
+    name: "Denumire"
+    city: "Localitate"
+    street: "Strada"
+

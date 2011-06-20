@@ -63,6 +63,11 @@ class TrstBook
 
   end
   # @todo Document this method
+  # added for embedded filter
+  def pages
+    chapters
+  end
+  # @todo Document this method
   def table_data
     [{:css => "localized",:name => "name",:label => I18n.t("trst_book.name"),:value => name_translations},
      {:css => "localized",:name => "content",:label => I18n.t("trst_book.content"),:value => content_translations},

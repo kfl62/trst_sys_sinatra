@@ -2,7 +2,7 @@ ro:
   trst_pdf:
     created_at: "Creat"
     updated_at: "Modificat"
-    file_name: "Nume fişirer '*.pdf'"
+    file_name: "Nume fişier '*.pdf'"
     task_ids: "Sarcina asociată"
     name: "Denumire"
     title: "Titlu"
@@ -15,7 +15,7 @@ ro:
         task_ids: "Ştergerea asocierii cu 'Sarcina'"
       select:
         task_ids: "Alegeţi 'Sarcina'"
-    test:
+    app_diren:
       start: "Începând cu:"
       copies: "Nr. seturi:"
     app:

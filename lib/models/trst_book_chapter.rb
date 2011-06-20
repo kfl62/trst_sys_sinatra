@@ -24,7 +24,7 @@ class TrstBookChapter
   localized_field :title
   localized_field :content
 
-  embedded_in :book, :inverse_of => :chapters
+  embedded_in :book, :class_name => "TrstBook", :inverse_of => :chapters
   embeds_many :pages, :class_name => "TrstBookPage"
 
   # @todo Document this method
