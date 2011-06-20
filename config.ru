@@ -32,4 +32,3 @@ end
 map '/' do
   run TrstPub.new
 end
-
