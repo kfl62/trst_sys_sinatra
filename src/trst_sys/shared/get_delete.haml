@@ -13,7 +13,7 @@
       %tr
         %td{:class => "buttons_bottom", :colspan => "2"}
           - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params[:target])}<
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
               =t("button.#{button}")
       %tr
         %td.footer_note{:colspan => "2"}= t('gen_footer.note')
@@ -30,6 +30,6 @@
       %tr
         %td{:class => "buttons_bottom"}
           - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params[:target])}<
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
               =t("button.#{button}")
 

@@ -191,7 +191,9 @@ module Trst
         when 'pdf'
           verb = button
         end
-        target_id = "#{target_id.to_s}?target=#{embedded}" if embedded
+        if embedded
+          target_id = "#{target_id.to_s}?target=#{embedded[:target]}&child_id=#{embedded[:child_id]}" if embedded[:target]
+        end
         retval = "trst.task.init('#{id}','#{verb}','#{target_id}')"
         retval = 'trst.task.destroy()' if button == 'cancel'
         return retval

@@ -109,7 +109,7 @@ module Trst
               else
                 model  = model.find(target_id)
                 object = model.send(method).find(params[:child_id])
-              end
+              end unless target_id == 'new'
             else
               method = 'find'
               object = model.send method, target_id unless target_id == 'new'
