@@ -18,7 +18,7 @@ class TrstFirmContactPerson
   field :email,   :default => "some@adress.com"
   field :other,   :default => "Alte date..."
 
-  embedded_in :trst_firm, :inverse_of => :persons
+  embedded_in :trst_firm, :class_name => "TrstFirm", :inverse_of => :persons
 
   def table_data
     [{:css => "normal",:name => "name",:label => I18n.t("trst_firm_contact_person.name"),:value => name},
