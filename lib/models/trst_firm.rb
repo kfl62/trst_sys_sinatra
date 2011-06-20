@@ -18,6 +18,8 @@ class TrstFirm
   embeds_many :units,       :class_name => "TrstFirmUnit"
 
   def details
+    self.addresses.create if self.addresses.empty?
+    self.persons.create if self.persons.empty?
     ["TrstFirm",id,[addresses,persons]]
   end
 
@@ -35,7 +37,7 @@ class TrstFirm
      {:css => "normal",:name => "contact,phone",:label => I18n.t("trst_firm.contact.phone"),:value => contact["phone"]},
      {:css => "normal",:name => "contact,fax",:label => I18n.t("trst_firm.contact.fax"),:value => contact["fax"]},
      {:css => "normal",:name => "contact,email",:label => I18n.t("trst_firm.contact.email"),:value => contact["email"]},
-     {:css => "normal",:name => "contact,website",:label => I18n.t("trst_firm.contact.website"),:value => contact["website"]},  
+     {:css => "normal",:name => "contact,website",:label => I18n.t("trst_firm.contact.website"),:value => contact["website"]},
      {:css => "normal",:name => "about,scope",:label => I18n.t("trst_firm.about.scope"),:value => about["scope"]},
      {:css => "normal",:name => "about,descript",:label => I18n.t("trst_firm.about.descript"),:value => about["descript"]}]
   end
