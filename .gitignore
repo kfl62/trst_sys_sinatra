@@ -8,4 +8,4 @@ src/trst_pdf/*
 !tmp/restart.txt
 public/api
 Gemfile.lock
-
+log/*
