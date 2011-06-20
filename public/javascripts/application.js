@@ -1,3 +1,4 @@
+// TODO documentation
 var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
   var p = what;
   kind ? p += '/' + kind : p += '/info'

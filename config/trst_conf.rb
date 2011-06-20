@@ -25,6 +25,7 @@ end
 require 'mongoid'
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new('localhost').db('development')
+  config.raise_not_found_error = false
 end
 require 'i18n'
 I18n.load_path += Dir.glob(File.join(app_root, 'src','translations','*.yml'))
@@ -39,6 +40,8 @@ require 'trst_user'
 require 'trst_task'
 require 'trst_pdf'
 require 'trst_firm'
+require 'trst_firm_address'
+require 'trst_firm_contact_person'
 require 'trst_firm_depart'
 require 'trst_firm_unit'
 # controllers

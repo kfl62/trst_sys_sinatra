@@ -4,12 +4,16 @@
 Just for convenience (namespace)
 =end
 module Trst
-  # #Sinatra helpers
+  #Sinatra helpers
   # Just for convenience (namespace)
   module Sinatra
     # #Sinatra helpers
     # Helper methods used in TrstSys, TrstSysTsk classes
     module Helpers
+      # @todo document this method
+      def ruby(*args)
+        render(:rb, *args)
+      end
       # @return [String] return `Hash` key,value pairs as a `String`
       def hash_to_query_string(hash)
         hash.collect {|k,v| "#{k}=#{v}"}.join('&')
@@ -89,14 +93,25 @@ module Trst
             step = params[:step] || 'one'
             unless step == 'one'
               parent = model.find(params[:child_id])
-              method = parent.associations.keys.first
+              #method = parent.associations.keys.first
               object = parent.send method
             end
           end
         elsif verb == 'pdf' || verb == 'print'
           object = model.send method, task.id
         else
-          object = model.send method, target_id unless target_id == 'new'
+          if method == 'details'
+            if params[:target]
+              method = params[:target]
+              model = model.find(target_id)
+              object = model.send(method).find(params[:child_id])
+            else
+              method = 'find'
+              object = model.send method, target_id unless target_id == 'new'
+            end
+          else
+            object = model.send method, target_id unless target_id == 'new'
+          end
         end
         return object
       end
@@ -135,4 +150,20 @@ module Trst
     end
   end
 end
+# #Tilt template
+# Render rb files
+module Tilt
+  class RubyTemplate < Template
+    def prepare
+    end
 
+    def evaluate(scope, locals, &block)
+      super(scope, locals, &block)
+    end
+
+    def precompiled_template(locals)
+      data.to_str
+    end
+ end
+ register 'rb', RubyTemplate
+end

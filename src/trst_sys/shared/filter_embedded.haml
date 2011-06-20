@@ -7,18 +7,46 @@
                           (this.options[this.selectedIndex].value))"}
     %option{:value => "null"}= t("#{@object.first.class.name.underscore}.select")
     - @object.each do |o|
-      %option{:value => o.id}= o.name
+      - name = o.name.is_a?(Array) ? o.name[0] : o.name
+      %option{:value => o.id}= name
 - when 'two'
-  %select{:onchange => "trst.task.embedded.filter('#{@task.id}',
-                          'two',
-                          (this.options[this.selectedIndex].value))"}
-    %option{:value => "null"}= t("#{@object.first._parent.class.name.underscore}.select")
-    - @object.first._parent.class.all.each do |o|
-      %option{:value => o.id, :selected  => (o.id ==  @object.first._parent.id ? true : false)}= o.name
-  %nav#filter_embedded
-    %ul
-      - @object.each do |a|
+  - if @object.first.is_a?(String)
+    %select{:onchange => "trst.task.embedded.filter('#{@task.id}',
+                            'two',
+                            (this.options[this.selectedIndex].value))"}
+      - t_path = @object.first.underscore
+      %option{:value => "null"}= t("#{t_path}.select")
+      - @object.first.classify.constantize.all.each do |o|
+        - name = o.name.is_a?(Array) ? o.name[0] : o.name
+        %option{:value => o.id, :selected  => (o.id ==  @object[1] ? true : false)}= name
+    %p{:style => "margin:0px"}= t("#{t_path}.details")
+    %p{:style => "margin:0px"}= t("#{t_path}.title")
+    %nav#filter_embedded
+      %ul
         %li
-          %a{:id => a.id, :href => "#"}= a.name
+          %a{:id => @object[1],:href => "#",:onclick => "trst.task.init('#{@task.id}','get','#{@object[1]}')"}= t("#{t_path}.label")
+    - @object[2].each do |detail|
+      %p{:style => "margin:0px"}= t("#{detail.first.class.name.underscore}.title")
+      %nav#filter_embedded
+        %ul
+          - detail.each do |d|
+            %li
+              %a{:href => "#",:onclick => "trst.task.embedded.get('#{@task.id}',
+                                            '#{@object[1]}',
+                                            '#{d.id}',
+                                            '#{d.metadata.key}')"}= d.name
+  - else
+    %select{:onchange => "trst.task.embedded.filter('#{@task.id}',
+                            'two',
+                            (this.options[this.selectedIndex].value))"}
+      %option{:value => "null"}= t("#{@object.first._parent.class.name.underscore}.select")
+      - @object.first._parent.class.all.each do |o|
+        - name = o.name.is_a?(Array) ? o.name[0] : o.name
+        %option{:value => o.id, :selected  => (o.id ==  @object.first._parent.id ? true : false)}= name
+    %nav#filter_embedded
+      %ul
+        - @object.each do |a|
+          %li
+            %a{:id => a.id, :href => "#"}= a.name
 - else
   %P Error #{step}

@@ -2,8 +2,8 @@
 =begin
 #Handling tasks#
 =end
-class TrstSysTsk < Sinatra::Base
 
+class TrstSysTsk < Sinatra::Base
   # route for /srv/tsk/
   # @action Action: require login unless authorized user, set `session[:daily_tasks]`
   # @action Render: `/trst_sys/daily_tasks`
@@ -62,7 +62,7 @@ class TrstSysTsk < Sinatra::Base
                'Content-Disposition' => "attachment;filename=\"#{@object.file_name}.pdf\"",
                'Expires' => '0',
                'Pragma' => 'public'})
-      haml :"trst_pdf/#{@object.file_name}", :layout => false, :locals => locals
+      ruby :"trst_pdf/#{@object.file_name}", :layout => false, :locals => locals
     end
   end
 
