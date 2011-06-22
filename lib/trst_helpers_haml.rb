@@ -143,7 +143,20 @@ module Trst
         retval = "[#{model}]#{retval}"
         return retval
       end
-
+      # @todo
+      def option_name(o)
+        case o.name
+        when Array
+          if o.name.length == 2
+            name = o.name.join(' ')
+          else
+            name = o.name.first
+          end
+        else
+          name = o.name
+        end
+        return name
+      end
       # get buttons for specific `action`
       # @example
       #   !!!haml
