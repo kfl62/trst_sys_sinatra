@@ -75,9 +75,9 @@ class TrstSysTsk < Sinatra::Base
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
     if params[:target]
       @object = @object.where("#{params[:target]}._id" => params[:child_id]).first
-      @object = @object.method(params[:target]).call.create
+      @object = @object.method(params[:target]).call.create.reload
     else
-      @object = @object.create
+      @object = @object.create.reload
     end
     flash[:msg] = {:msg => {:txt => I18n.t('db.post', :data => @object.name), :class => "info"}}.to_json
     haml :"#{haml_path}", :layout => false, :locals => locals
