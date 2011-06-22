@@ -124,10 +124,10 @@ module Trst
       def init_haml_path(verb,task)
         model, method = task.target.split('.')
         haml_path = task.haml_path
-        haml_path = (haml_path == 'default') ? '/trst_sys/shared' : haml_path
+        haml_path = (haml_path == 'default') ? '/trst_sys/shared' : '/trst_sys' + haml_path
         case verb
         when /filter/
-          haml_path += "/filter"
+          haml_path  = "/trst_sys/shared/filter"
           haml_path += "_embedded" unless method == 'find'
         when /get|delete/
           haml_path += "/get_delete"
