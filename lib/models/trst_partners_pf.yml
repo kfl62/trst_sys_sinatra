@@ -1,0 +1,60 @@
+ro:
+  trst_partners_pf:
+    id_pn: "CNP"
+    name_first: "Prenume"
+    name_last: "Nume"
+    name_full: "Nume"
+    identities:
+      id_sr: "CI seria"
+      id_nr: "CI nr."
+      id_by: "Eliberat de"
+      id_on: "Eliberat la data de"
+    address:
+      city: "Localitatea"
+      street: "Strada"
+      nr: "Număr"
+      bl: "Bloc"
+      sc: "Scara"
+      et: "Etaj"
+      ap: "Apartament"
+    other: "Altele"
+en:
+  trst_partners_pf:
+    id_pn: "CNP"
+    name_first: "Prenume"
+    name_last: "Nume"
+    name_full: "Nume"
+    identities:
+      id_sr: "CI seria"
+      id_nr: "CI nr."
+      id_by: "Eliberat de"
+      id_on: "Eliberat la data de"
+    address:
+      city: "Localitatea"
+      street: "Strada"
+      nr: "Număr"
+      bl: "Bloc"
+      sc: "Scara"
+      et: "Etaj"
+      ap: "Apartament"
+    other: "Altele"
+hu:
+  trst_partners_pf:
+    id_pn: "CNP"
+    name_first: "Prenume"
+    name_last: "Nume"
+    name_full: "Nume"
+    identities:
+      id_sr: "CI seria"
+      id_nr: "CI nr."
+      id_by: "Eliberat de"
+      id_on: "Eliberat la data de"
+    address:
+      city: "Localitatea"
+      street: "Strada"
+      nr: "Număr"
+      bl: "Bloc"
+      sc: "Scara"
+      et: "Etaj"
+      ap: "Apartament"
+    other: "Altele"
