@@ -18,7 +18,7 @@
                   = o.last
               -else
                 %option{:value => o.id}
-                  = o.name.is_a?(Array) ? o.name.first : o.name
+                  = option_name(o)
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
