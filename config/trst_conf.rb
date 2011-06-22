@@ -1,5 +1,5 @@
 # encoding: utf-8
-app_root = File.expand_path('../',File.dirname(__FILE__)) 
+app_root = File.expand_path('../',File.dirname(__FILE__))
 Dir['config','lib','lib/*/'].each do |dir|
   dir = File.join(app_root,dir)
   $LOAD_PATH.unshift(dir) unless $LOAD_PATH.include?(dir)
@@ -9,19 +9,7 @@ require 'sinatra/base'
 require 'haml'
 require 'compass'
 require 'rdiscount'
-require 'prawn'
-require 'trst_helpers_haml'
-require 'trst_helpers_sinatra'
-Haml::Helpers.class_eval("include Trst::Haml::Helpers")
-Sinatra::Base.class_eval("include Trst::Sinatra::Helpers")
-Sinatra::Base.set(:root, app_root)
-Sinatra::Base.set(:views, File.join(app_root, 'src'))
-Sinatra::Base.set(:haml, {:format => :html5, :attr_wrapper => '"'})
-Sinatra::Base.configure do
-  compass_config = File.join(File.dirname(__FILE__), 'compass.rb')
-  Compass.add_project_configuration(compass_config) \
-    unless Compass.configuration.name == compass_config
-end
+# ODM
 require 'mongoid'
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new('localhost').db('development')
@@ -32,22 +20,21 @@ I18n.load_path += Dir.glob(File.join(app_root, 'src','translations','*.yml'))
 I18n.load_path += Dir.glob(File.join(app_root, 'lib','models','*.yml'))
 I18n.default_locale = :ro
 require 'mongoid/i18n'
-# models
-require 'trst_book'
-require 'trst_book_chapter'
-require 'trst_book_page'
-require 'trst_user'
-require 'trst_task'
-require 'trst_pdf'
-require 'trst_firm'
-require 'trst_firm_address'
-require 'trst_firm_contact_person'
-require 'trst_firm_depart'
-require 'trst_firm_unit'
-# controllers
-require 'trst_auth'
-require 'trst_pub'
-require 'trst_sys'
-require 'trst_sys_tsk'
-require 'trst_utils'
-
+# models,controllers
+required = Dir.glob(File.join(app_root, 'lib','**','*.rb'))
+required.each do |r|
+  require r
+end
+# config sinatra, haml etc.
+Haml::Helpers.class_eval("include Trst::Haml::Helpers")
+Sinatra::Base.class_eval("include Trst::Sinatra::Helpers")
+Sinatra::Base.set(:root, app_root)
+Sinatra::Base.set(:views, File.join(app_root, 'src'))
+Sinatra::Base.set(:haml, {:format => :html5, :attr_wrapper => '"'})
+Sinatra::Base.configure do
+  compass_config = File.join(File.dirname(__FILE__), 'compass.rb')
+  Compass.add_project_configuration(compass_config) \
+    unless Compass.configuration.name == compass_config
+end
+# print export to pdf
+require 'prawn'
