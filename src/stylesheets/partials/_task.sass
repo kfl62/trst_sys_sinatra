@@ -27,7 +27,6 @@
       font-family: Verdana, Helvetica, Arial, sans-serif
       margin: 0px
       padding: 1px 0px
-      width: 150px
     td
       vertical-align: top
       span.limit-width
@@ -54,7 +53,32 @@
       vertical-align: center
     td.footer_note
       font-size: smaller
-  span.button
+    td.filtering-select-freight
+      div.dijitTextBox
+        width: 11em
+    td.filtering-select-pf
+      div.dijitTextBox
+        width: 20em
+    tbody.inner
+      border:
+        style: solid
+        color: rgba(62, 62, 62, 1)
+        width: 1px
+      tr
+        &:nth-child(2)
+          td
+            border-top: solid 1px rgba(62, 62, 62, 1)
+        &:nth-child(odd)
+          background-color: rgba(210, 210, 210, 1)
+        &:last-child
+          td
+            border-top: solid 1px rgba(62, 62, 62, 1)
+            color: rgba(255, 0, 0, 1)
+      td
+        border-right: solid 1px rgba(62, 62, 62, 1)
+        &:last-child
+          border: none
+  span.button, input[type="submit"], input[type="reset"]
     background:
       color: rgba(230, 230, 230, 1)
       position: 2px 0px
@@ -102,7 +126,7 @@
     height: 14px
     margin: 0px 3px
     padding: 0px
-  span.db-relations-del
+  span.db-relations-del, span.db-freight-del
     background:
       image: image_url(unquote("/images/icons/db_relations_del.png"))
     cursor: pointer
@@ -111,9 +135,48 @@
     height: 14px
     margin: 0px 3px 0px 0px
     padding: 0px
+  span
+    &.val
+      display: block
+      font-weight: bolder
+      text-align: right
+      width: 70px
+    &.p03
+      display: block
+      font-weight: bolder
+      text-align: right
+      width: 70px
+    &.p16
+      display: block
+      font-weight: bolder
+      text-align: right
+      width: 70px
+    &.res
+      display: block
+      font-weight: bolder
+      text-align: right
+      width: 70px
   sup
     font-size: smaller
     vertical-align: super
+  input
+    &.date
+      width: 100px
+      text-align: center
+      font-weight: bolder
+    &.um
+      width: 30px
+      text-align: center
+      font-weight: bolder
+    &.pu
+      width: 40px
+      text-align: center
+      font-weight: bolder
+    &.qu
+      width: 60px
+      text-align: center
+      font-weight: bolder
+
 #relations_overlay
   background-color: rgba(62, 62, 62, 1)
   +opacity(0.3)
@@ -144,7 +207,7 @@
       text-align: center
       line-height: 2.5em
       vertical-align: center
-  span.button
+  span.button, input[type="submit"], input[type="reset"]
     background:
       color: rgba(230, 230, 230, 1)
       position: 2px 1px
@@ -168,4 +231,5 @@
       background:
         image: image_url(unquote("/images/icons/db_cancel.png"))
         position: 2px 2px
-
+input.dijitInputInner
+  font-size: 0.9em

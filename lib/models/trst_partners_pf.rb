@@ -14,12 +14,25 @@ class TrstPartnersPf
   field :other,               :type => String,        :default => "Client"
 
   has_many :apps, :class_name => "TrstAccExpenditure", :inverse_of => :client
+  class << self
+    # @todo
+    def auto_search
+      pfs = []
+      all.each do |pf|
+        label = "#{pf.id_pn} | #{pf.name_full}"
+        pfs << {:id => pf.id,:pn => pf.id_pn,:label => label}
+      end
+      {:identifier => "id",:items => pfs}
+    end
+  end
+  # @todo
   def name_full
     name.join(' ')
   end
+  # @todo
   def table_data
     [
-      {:css => "normal",:name => "id_pn,",:label => I18n.t("trst_partners_pf.id_pn"),:value => id_pn},
+      {:css => "normal",:name => "id_pn",:label => I18n.t("trst_partners_pf.id_pn"),:value => id_pn},
       {:css => "normal",:name => "name,",:label => I18n.t("trst_partners_pf.name_last"),:value => name[0]},
       {:css => "normal",:name => "name,",:label => I18n.t("trst_partners_pf.name_first"),:value => name[1]},
       {:css => "normal",:name => "identities,id_sr",:label => I18n.t("trst_partners_pf.identities.id_sr"),:value => identities["id_sr"]},

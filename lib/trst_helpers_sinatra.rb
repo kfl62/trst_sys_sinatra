@@ -127,7 +127,7 @@ module Trst
         haml_path = (haml_path == 'default') ? '/trst_sys/shared' : '/trst_sys' + haml_path
         case verb
         when /filter/
-          haml_path  = "/trst_sys/shared/filter"
+          haml_path += "/filter"
           haml_path += "_embedded" unless method == 'find'
         when /get|delete/
           haml_path += "/get_delete"

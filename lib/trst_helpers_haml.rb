@@ -188,7 +188,7 @@ module Trst
 
       # @return [String]
       # @todo Document this method
-      def current_xhr(button,id,action,target_id,embedded = nil)
+      def current_xhr(button,id,action,target_id,params = nil)
         case action
         when /filter|get/
           verb = button
@@ -204,8 +204,9 @@ module Trst
         when 'pdf'
           verb = button
         end
-        if embedded
-          target_id = "#{target_id.to_s}?target=#{embedded[:target]}&child_id=#{embedded[:child_id]}" if embedded[:target]
+        if params
+          target_id = "#{target_id.to_s}?target=#{params[:target]}&child_id=#{params[:child_id]}" if params[:target]
+          target_id = "#{target_id.to_s}?id_pn=#{params[:id_pn]}" if params[:id_pn]
         end
         retval = "trst.task.init('#{id}','#{verb}','#{target_id}')"
         retval = 'trst.task.destroy()' if button == 'cancel'

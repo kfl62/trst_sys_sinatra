@@ -2,7 +2,7 @@
 %html
   = partial('trst_sys/shared/html-head')
 
-  %body{:id => "srv",:'data-lang' => current_lang, :'data-dailytaskspage' => "page_#{TrstBook.daily_tasks_page.id}"}
+  %body.soria{:id => "srv",:'data-lang' => current_lang, :'data-dailytaskspage' => "page_#{TrstBook.daily_tasks_page.id}"}
     #main.wrap
       %header#header
         = partial('trst_sys/shared/header')

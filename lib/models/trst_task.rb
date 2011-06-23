@@ -32,7 +32,10 @@ class TrstTask
     def task_related_to
       all.collect{|task| [task.id.to_s, task.name]}
     end
-
+    # @todo
+    def task_id_by_target(t)
+      where(:target => /#{t}/).first.id.to_s rescue nil
+    end
   end
   # @todo Document this method
   def is_pdf?

@@ -1,3 +1,5 @@
+dojo.require("dojo.data.ItemFileReadStore")
+dojo.require("dijit.form.FilteringSelect")
 dojo.provide("trst.task");
 trst.task = {
   // variables {{{1
@@ -40,6 +42,9 @@ trst.task = {
       url: this.url.join('/'),
       load: function(data){
         trst.task.drawBox(data);
+        if (dojo.byId('pfFilteringSelect') != undefined){
+          trst.task.acc.init(dojo.byId('pfFilteringSelect'));
+        }
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
@@ -122,6 +127,9 @@ trst.task = {
       load: function(data){
         dojo.publish('xhrMsg',['flash']);
         trst.task.drawBox(data);
+        if (dojo.byId('freightSelect_01') != undefined){
+          trst.task.acc.init(dojo.byId('freightSelect_01'))
+        }
       },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
@@ -326,6 +334,99 @@ dojo.mixin(trst.task,{
       };
       var deferred = dojo.xhrGet(xhrArgs);
       trst.task.url = ["/srv/tsk"];
+    }
+  }
+})
+dojo.mixin(trst.task,{
+  acc: {
+    init: function(input){
+      if (input.id == 'pfFilteringSelect'){
+        var pfStore = new dojo.data.ItemFileReadStore({
+            url: "/utils/search/TrstPartnersPf"
+        });
+        if (dijit.byId("pfFilteringSelect"))
+          dijit.byId("pfFilteringSelect").destroy();
+        var pfSearch = new dijit.form.FilteringSelect({
+          id: "pfFilteringSelect",
+          name: "id_pn",
+          value: "",
+          store: pfStore,
+          searchAttr: "pn",
+          placeHolder: "Caută după CNP",
+          labelAttr: "label",
+          onChange: function(id){
+            trst.task.acc.onSelectPf(id)
+          }
+        },"pfFilteringSelect")
+      }else{
+        var freightStore = new dojo.data.ItemFileReadStore({
+          url: "/utils/search/TrstAccFreight"
+        });
+        dojo.query('input.freight').forEach(function(fr){
+          if (dijit.byId(fr.id))
+            dijit.byId(fr.id).destroy();
+          var freightSearch = new dijit.form.FilteringSelect({
+            id: fr.id,
+            name: "[trst_acc_freight_in][freight_id]",
+            value: "",
+            store: freightStore,
+            searchAttr: "label",
+            placeHolder: "Selectare material",
+            labelAttr: "label",
+            onChange: function(id){
+              trst.task.acc.onSelectFreight(freightSearch)
+            }
+          },fr.id)
+        })
+        }
+    },
+    onSelectPf: function(id){
+      var button = dojo.query('.post')[1];
+      dojo.connect(button, 'onclick', function(){
+        trst.task.init(button.getAttribute('data-task_id'),'post','new?id_pn=' + id)
+      })
+    },
+    onSelectFreight: function(d){
+      var tr = d.domNode.parentElement.parentElement
+      tr.children[1].children[0].value = d.item.um
+      tr.children[2].children[0].value = parseFloat(d.item.pu).toFixed(2)
+      tr.children[3].children[0].focus()
+      tr.children[3].children[0].select()
+    },
+    deleteRow: function(node){
+      dojo.destroy(node.parentElement.parentElement)
+      trst.task.acc.calculator();
+    },
+    calculator: function(){
+      var rows = dojo.query('tbody.inner tr'), v_val = 0, v_p03 = 0, v_p16 = 0, v_res = 0, s_val = 0, s_p03 = 0, s_p16 = 0, s_res = 0
+      for(var i=1;i<rows.length -1;i++){
+        v_val = rows[i].children[2].children[0].value * rows[i].children[3].children[0].value
+        if (dijit.byId("freightSelect_0"+i).item != null){
+          if (dijit.byId("freightSelect_0"+i).item.p03 != 'false'){
+            v_p03 = v_val * 3 / 100
+          }else{
+            v_p03 = 0
+          }
+        }
+        v_p16 = v_val * 16 / 100
+        v_res = parseFloat(v_val) - (parseFloat(v_p03) + parseFloat(v_p16))
+        rows[i].children[2].children[0].value = parseFloat(rows[i].children[2].children[0].value).toFixed(2)
+        rows[i].children[3].children[0].value = parseFloat(rows[i].children[3].children[0].value).toFixed(2)
+        rows[i].children[4].children[0].innerHTML = v_val.toFixed(2)
+        rows[i].children[5].children[0].innerHTML = v_p03.toFixed(2)
+        rows[i].children[6].children[0].innerHTML = v_p16.toFixed(2)
+        rows[i].children[7].children[0].innerHTML = v_res.toFixed(2)
+        s_val +=  parseFloat(v_val); s_p03 += parseFloat(v_p03); s_p16 += parseFloat(v_p16); s_res += parseFloat(v_res);
+        v_val = 0; v_p03 = 0; v_p16 = 0; v_res = 0
+      }
+      rows[rows.length -1].children[1].children[0].innerHTML = s_val.toFixed(2)
+      rows[rows.length -1].children[2].children[0].innerHTML = s_p03.toFixed(2)
+      rows[rows.length -1].children[3].children[0].innerHTML = s_p16.toFixed(2)
+      rows[rows.length -1].children[4].children[0].innerHTML = s_res.toFixed(2)
+      rows[rows.length -1].children[1].children[1].value = s_val.toFixed(2)
+      rows[rows.length -1].children[2].children[1].value = s_p03.toFixed(2)
+      rows[rows.length -1].children[3].children[1].value = s_p16.toFixed(2)
+      rows[rows.length -1].children[4].children[1].value = s_res.toFixed(2)
     }
   }
 })

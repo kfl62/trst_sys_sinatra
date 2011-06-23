@@ -19,5 +19,9 @@ class TrstUtils < Sinatra::Base
     flash[:msg] = {:msg => {:txt => I18n.t('lang.change'), :class => "info"}}.to_json
     redirect path
   end
-
+  # @todo
+  get '/search/:model' do |m|
+    model = m.constantize
+    model.auto_search.to_json
+  end
 end

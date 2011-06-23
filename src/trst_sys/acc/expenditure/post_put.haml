@@ -1,23 +1,71 @@
 %p.close{:onclick => "trst.task.destroy()"}
-%p.task_title= current_title(@task,action)
+%p.task_title= "Adeverinţa de predare/primire"
 -if action == 'put'
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
       %thead
         %tr
-          %th= t('gen_head.field')
-          %th= t('gen_head.value')
-      %tbody
-        -# @object.table_data.each do |data|
-          -# tr_body('put',data,@task,@object)
+          %th{:colspan => "9"}
+            Nr.
+            %input.ce{:name => "[trst_acc_expenditure][name]",:value => @object.name}
+            din date de:
+            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => @object.id_date.to_s}
+        %tr
+          %td{:colspan => "9"}= "Clientul: #{@object.client.name_full} cu CNP #{@object.client.id_pn} a predat următoarele:"
+      %tbody.inner
+        %tr.odd
+          %td.ce Material
+          %td.ce UM
+          %td.ce PU
+          %td.ce Cant
+          %td.ce Valoare
+          %td.ce 3%
+          %td.ce 16%
+          %td.ce Rest
+          %td.ce &nbsp;&nbsp;
+        -for i in 1..5 do
+          %tr{:id => "tr_0#{i.to_s}"}
+            %td.filtering-select-freight
+              %input.freight{:id => "freightSelect_0#{i.to_s}"}
+            %td
+              %input.um{:id => "um_0#{i.to_s}",:value => ""}
+            %td
+              %input.pu{:id => "pu_0#{i.to_s}",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
+            %td
+              %input.qu{:id => "qu_0#{i.to_s}",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
+            %td
+              %span.val 0.00
+            %td
+              %span.p03 0.00
+            %td
+              %span.p16 0.00
+            %td
+              %span.res 0.00
+            %td
+              %span.db-freight-del{:onclick => "trst.task.acc.deleteRow(this)"}
+        %tr.odd
+          %td.ce.em.st{:colspan => "4"}Total
+          %td
+            %span.val 0.00
+            %input{:type => "hidden",:name => "[trst_acc_expenditure][sum_100]"}
+          %td
+            %span.p03 0.00
+            %input{:type => "hidden",:name => "[trst_acc_expenditure][sum_003]"}
+          %td
+            %span.p16 0.00
+            %input{:type => "hidden",:name => "[trst_acc_expenditure][sum_016]"}
+          %td
+            %span.res 0.00
+            %input{:type => "hidden",:name => "[trst_acc_expenditure][sum_out]"}
+          %td.ce &nbsp;&nbsp;
       %tfoot
         %tr
-          %td{:class => "buttons_bottom", :colspan => "2"}
+          %td{:class => "buttons_bottom", :colspan => "9"}
             - current_buttons(action).each do |button|
-              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
                 =t("button.#{button}")
         %tr
-          %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+          %td.footer_note{:colspan => "9"}= t('gen_footer.note')
 -else
   %table{:cellspacing => "0"}
     %thead

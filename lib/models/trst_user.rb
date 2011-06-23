@@ -99,10 +99,14 @@ class TrstUser
     tsks = []
     pdfs = []
     task_ids['daily_tasks'].each do |t|
-      if TrstTask.find(t).is_pdf?
-        pdfs << t
-      else
-        tsks << t
+      begin
+        if TrstTask.find(t).is_pdf?
+          pdfs << t
+        else
+          tsks << t
+        end
+      rescue
+        nil
       end
     end
     return [tsks,pdfs]
