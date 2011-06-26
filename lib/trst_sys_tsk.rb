@@ -53,16 +53,16 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation for Action:,Render:
   get '/:id/:verb/:target_id' do |id,verb,target_id|
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
-    unless verb == 'print'
-      haml :"#{haml_path}", :layout => false, :locals => locals
-    else
+    if verb == 'print'
       headers({'Content-Type' => 'application/pdf',
                'Content-Description' => 'File Transfer',
                'Content-Transfer-Encoding' => 'binary',
                'Content-Disposition' => "attachment;filename=\"#{@object.file_name}.pdf\"",
                'Expires' => '0',
                'Pragma' => 'public'})
-      ruby :"trst_pdf/#{@object.file_name}", :layout => false, :locals => locals
+      ruby :"#{haml_path}/#{@object.pdf_template rescue @object.file_name}", :layout => false, :locals => locals
+    else
+      haml :"#{haml_path}", :layout => false, :locals => locals
     end
   end
 
@@ -75,12 +75,13 @@ class TrstSysTsk < Sinatra::Base
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
     if params[:target]
       @object = @object.where("#{params[:target]}._id" => params[:child_id]).first
-      @object = @object.method(params[:target]).call.create.reload
+      @object = @object.method(params[:target]).call.create
     elsif params[:id_pn]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]))
       @object.reload
     else
-      @object = @object.create.reload
+      @object = @object.create
+      @object.reload
     end
     flash[:msg] = {:msg => {:txt => I18n.t('db.post', :data => @object.name), :class => "info"}}.to_json
     haml :"#{haml_path}", :layout => false, :locals => locals
@@ -99,6 +100,9 @@ class TrstSysTsk < Sinatra::Base
       update_hash = params_handle_ids(params,@object.class.name)
     end
     @object.update_attributes update_hash
+    if params[:freights]
+      params[:freights].values.each{|v| @object.freights.create(v) unless v["freight_id"].nil? || v["freight_id"].empty? }
+    end
     unless verb == 'print'
       flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json
       haml :"#{haml_path}", :layout => false, :locals => locals
@@ -113,7 +117,7 @@ class TrstSysTsk < Sinatra::Base
   # @action Render: nothing
    delete '/:id/:verb/:target_id' do |id,verb,target_id|
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
-    @object.delete
+    @object.destroy
     flash[:msg] = {:msg => {:txt => I18n.t('db.delete', :data => @object.name), :class => "info"}}.to_json
   end
 

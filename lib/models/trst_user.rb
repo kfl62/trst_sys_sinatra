@@ -31,6 +31,7 @@ class TrstUser
   field :settings,          :type => Hash,        :default => {}
   field :task_ids,          :type => Hash,        :default => {'daily_tasks' => [], 'other_tasks' => []}
 
+  belongs_to :unit, :class_name => "TrstFirmUnit", :inverse_of => :user
   # Validations
   validates_uniqueness_of :login_name
   validates_uniqueness_of :email

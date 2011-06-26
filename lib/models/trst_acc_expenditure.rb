@@ -14,10 +14,13 @@ class TrstAccExpenditure
   field :sum_100,     :type => Float,     :default => 0.00
   field :sum_out,     :type => Float,     :default => 0.00
 
+  alias :file_name :name
+
   has_many   :freights,   :class_name => "TrstAccFreightIn",  :inverse_of => :doc
   belongs_to :client,     :class_name => "TrstPartnersPf",    :inverse_of => :apps
 
   before_create :increment_name
+  after_destroy :destroy_freights
   # @todo
   def id_sr
     name.split('-')[0]
@@ -26,10 +29,18 @@ class TrstAccExpenditure
   def id_nr
     name.split('-')[1]
   end
+  # @todo
+  def pdf_template
+    'pdf'
+  end
 
   protected
   # @todo
   def increment_name
     self.name = TrstAccExpenditure.last.name.next rescue "DIR_CB52-000001"
+  end
+  # @todo
+  def destroy_freights
+    self.freights.destroy_all
   end
 end

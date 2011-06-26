@@ -49,5 +49,12 @@ class TrstPartnersPf
       {:css => "normal",:name => "other",:label => I18n.t("trst_partners_pf.other"),:value => other}
    ]
   end
-
+  # @todo
+  def i18n_hash
+    {
+      id_pn: id_pn, name: name_full,
+      city: address['city'], street: address['street'], nr: address["nr"], bl: address["bl"], sc: address["sc"], et: address["et"], ap: address["ap"],
+      id_sr: identities["id_sr"], id_nr: identities["id_nr"], id_by: identities["id_by"], id_on: identities["id_on"]
+    }
+  end
 end

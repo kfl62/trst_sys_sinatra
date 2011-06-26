@@ -34,7 +34,7 @@
               %a{:href => "#",:onclick => "trst.task.embedded.get('#{@task.id}',
                                             '#{@object[1]}',
                                             '#{d.id}',
-                                            '#{d.metadata.key}')"}= d.name
+                                            '#{d.metadata.key}')"}= d.name.is_a?(Array) ? d.name[0] : d.name
   - else
     %select{:onchange => "trst.task.embedded.filter('#{@task.id}',
                             'two',

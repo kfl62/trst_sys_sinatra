@@ -98,7 +98,7 @@ module Trst
             end
           end
         elsif verb == 'pdf' || verb == 'print'
-          object = model.send method, task.id
+          object = (model.send method, task.id) || (model.send method, target_id)
         else
           if method == 'details'
             if params[:target]
@@ -135,6 +135,8 @@ module Trst
           haml_path += request.put? ? "/get_delete" : "/post_put"
         when /pdf/
           haml_path += "/pdf_params"
+        when /print/
+          haml_path = "/trst_pdf" if task.haml_path == 'default'
         else
           haml_path = "/trst_sys/error"
         end

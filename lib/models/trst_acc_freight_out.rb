@@ -1,9 +1,9 @@
 # encoding: utf-8
 =begin
-#FreightIn model (Accounting)
+#FreightOut model (Accounting)
 =end
 
-class TrstAccFreightIn
+class TrstAccFreightOut
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -11,6 +11,6 @@ class TrstAccFreightIn
   field :pu,          :type => Float,     :default => 0.00
   field :qu,          :type => Float,     :default => 0.00
 
-  belongs_to :doc,     :class_name => "TrstAccExpenditure",   :inverse_of => :freights
-  belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :ins
+  belongs_to :doc,     :class_name => "TrstAccDeliveryNote",  :inverse_of => :freights
+  belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :outs
 end

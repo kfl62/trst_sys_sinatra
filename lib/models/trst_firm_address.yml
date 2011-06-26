@@ -14,6 +14,7 @@ ro:
     zip: "Cod poştal"
 en:
   trst_firm_address:
+    title: "2.) Editare adrese:"
     name: "Denumire"
     city: "Localitate"
     street: "Strada"
@@ -27,6 +28,7 @@ en:
     zip: "Cod poştal"
 hu:
   trst_firm_address:
+    title: "2.) Editare adrese:"
     name: "Denumire"
     city: "Localitate"
     street: "Strada"

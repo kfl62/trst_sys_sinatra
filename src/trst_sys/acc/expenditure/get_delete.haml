@@ -1,22 +1,62 @@
 %p.close{:onclick => "trst.task.destroy()"}
-%p.task_title= current_title(@task,action)
+%p.task_title= t('trst_acc_expenditure.title')
 -if action == 'get'
   %table{:cellspacing => "0"}
     %thead
       %tr
-        %th= t('gen_head.field')
-        %th= t('gen_head.value')
-    %tbody
-      -# @object.table_data.each do |data|
-        -# tr_body('get',data)
+        %th{:colspan => "8"}= "Nr. #{@object.name} din #{@object.id_date.strftime('%Y-%m-%d')}"
+      %tr
+        %td{:colspan => "8"}
+          %p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
+    %tbody.inner
+      %tr
+        %td.ce Material
+        %td.ce UM
+        %td.ce PU
+        %td.ce Cant
+        %td.ce Valoare
+        %td.ce 3%
+        %td.ce 16%
+        %td.ce Rest
+      - @object.freights.each do |f|
+        %tr
+          %td
+            %span.freight= f.freight.name
+          %td
+            %span.um= f.um
+          %td
+            %span.pu= "%.2f" % f.pu
+          %td
+            %span.qu= "%.2f" % f.qu
+          %td
+            - value = (f.pu * f.qu).round(2)
+            %span.val= "%.2f" % value
+          %td
+            - tax03 = f.freight.p03 ? (value * 3 / 100).round(2) : 0.0
+            %span.p03= "%.2f" %  tax03
+          %td
+            - tax16 = (value * 16 / 100).round(2)
+            %span.p16= "%.2f" % tax16
+          %td
+            %span.res= "%.2f" % (value - ( tax16 + tax03)).round(2)
+      %tr
+        %td.ce.em.st{:colspan => "4"}Total
+        %td
+          %span.val= "%.2f" % @object.sum_100
+        %td
+          %span.p03= "%.2f" % @object.sum_003
+        %td
+          %span.p16= "%.2f" % @object.sum_016
+        %td
+          %span.res= "%.2f" % @object.sum_out
     %tfoot
       %tr
-        %td{:class => "buttons_bottom", :colspan => "2"}
-          - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
-              =t("button.#{button}")
+        %td{:class => "buttons_bottom", :colspan => "8"}
+          %form{:id  => "xhr_#{action}"}
+          %span{:class => "button print", :onclick => "trst.task.acc.print_expenditure('#{@task.id}','print','#{@object.id}')"}= t("button.print")
+          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
       %tr
-        %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+        -# %td.footer_note{:colspan => "2"}= t('gen_footer.note')
 - else
   %table
     %thead

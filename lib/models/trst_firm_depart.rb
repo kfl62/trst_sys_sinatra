@@ -7,8 +7,15 @@ class TrstFirmDepart
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name,                :type => Array,         :default => ["ShortName","FullName","OfficialName"]
+  field :name,                :type => Array,         :default => ["ShortName","FullName"]
 
-  embedded_in :firm, :inverse_of => :departments
+  embedded_in :firm, :class_name => "TrstFirm", :inverse_of => :departments
 
+  # @todo
+  def table_data
+    [
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_sh"),:value => name[0]},
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_full"),:value => name[1]}
+    ]
+  end
 end

@@ -17,29 +17,35 @@ class TrstFirm
   embeds_many :departments, :class_name => "TrstFirmDepart"
   embeds_many :units,       :class_name => "TrstFirmUnit"
 
+  # @todo
   def details
     self.addresses.create if self.addresses.empty?
     self.persons.create if self.persons.empty?
-    ["TrstFirm",id,[addresses,persons]]
+    self.departments.create if self.departments.empty?
+    self.units.create if self.units.empty?
+    ["TrstFirm",id,[addresses,persons,departments,units]]
   end
 
+  # @todo
   def table_data
-    [{:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_sh"),:value => name[0]},
-     {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_full"),:value => name[1]},
-     {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_off"),:value => name[2]},
-     {:css => "normal",:name => "identities,caen",:label => I18n.t("trst_firm.identities.caen"),:value => identities["caen"]},
-     {:css => "normal",:name => "identities,chambcom",:label => I18n.t("trst_firm.identities.chambcom"),:value => identities["chambcom"]},
-     {:css => "normal",:name => "identities,fiscal",:label => I18n.t("trst_firm.identities.fiscal"),:value => identities["fiscal"]},
-     {:css => "normal",:name => "identities,account",:label => I18n.t("trst_firm.identities.account"),:value => identities["account"]},
-     {:css => "normal",:name => "identities,itm",:label => I18n.t("trst_firm.identities.itm"),:value => identities["itm"]},
-     {:css => "normal",:name => "identities,internet",:label => I18n.t("trst_firm.identities.internet"),:value => identities["internet"]},
-     {:css => "normal",:name => "identities,cod",:label => I18n.t("trst_firm.identities.cod"),:value => identities["cod"]},
-     {:css => "normal",:name => "contact,phone",:label => I18n.t("trst_firm.contact.phone"),:value => contact["phone"]},
-     {:css => "normal",:name => "contact,fax",:label => I18n.t("trst_firm.contact.fax"),:value => contact["fax"]},
-     {:css => "normal",:name => "contact,email",:label => I18n.t("trst_firm.contact.email"),:value => contact["email"]},
-     {:css => "normal",:name => "contact,website",:label => I18n.t("trst_firm.contact.website"),:value => contact["website"]},
-     {:css => "normal",:name => "about,scope",:label => I18n.t("trst_firm.about.scope"),:value => about["scope"]},
-     {:css => "normal",:name => "about,descript",:label => I18n.t("trst_firm.about.descript"),:value => about["descript"]}]
+    [
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_sh"),:value => name[0]},
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_full"),:value => name[1]},
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_off"),:value => name[2]},
+      {:css => "normal",:name => "identities,caen",:label => I18n.t("trst_firm.identities.caen"),:value => identities["caen"]},
+      {:css => "normal",:name => "identities,chambcom",:label => I18n.t("trst_firm.identities.chambcom"),:value => identities["chambcom"]},
+      {:css => "normal",:name => "identities,fiscal",:label => I18n.t("trst_firm.identities.fiscal"),:value => identities["fiscal"]},
+      {:css => "normal",:name => "identities,account",:label => I18n.t("trst_firm.identities.account"),:value => identities["account"]},
+      {:css => "normal",:name => "identities,itm",:label => I18n.t("trst_firm.identities.itm"),:value => identities["itm"]},
+      {:css => "normal",:name => "identities,internet",:label => I18n.t("trst_firm.identities.internet"),:value => identities["internet"]},
+      {:css => "normal",:name => "identities,cod",:label => I18n.t("trst_firm.identities.cod"),:value => identities["cod"]},
+      {:css => "normal",:name => "contact,phone",:label => I18n.t("trst_firm.contact.phone"),:value => contact["phone"]},
+      {:css => "normal",:name => "contact,fax",:label => I18n.t("trst_firm.contact.fax"),:value => contact["fax"]},
+      {:css => "normal",:name => "contact,email",:label => I18n.t("trst_firm.contact.email"),:value => contact["email"]},
+      {:css => "normal",:name => "contact,website",:label => I18n.t("trst_firm.contact.website"),:value => contact["website"]},
+      {:css => "normal",:name => "about,scope",:label => I18n.t("trst_firm.about.scope"),:value => about["scope"]},
+      {:css => "normal",:name => "about,descript",:label => I18n.t("trst_firm.about.descript"),:value => about["descript"]}
+    ]
   end
 
 end

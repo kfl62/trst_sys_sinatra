@@ -362,12 +362,12 @@ dojo.mixin(trst.task,{
         var freightStore = new dojo.data.ItemFileReadStore({
           url: "/utils/search/TrstAccFreight"
         });
-        dojo.query('input.freight').forEach(function(fr){
+        dojo.query('input.freight').forEach(function(fr,i){
           if (dijit.byId(fr.id))
             dijit.byId(fr.id).destroy();
           var freightSearch = new dijit.form.FilteringSelect({
             id: fr.id,
-            name: "[trst_acc_freight_in][freight_id]",
+            name: '[freights][' + (i+1) + '][freight_id]',
             value: "",
             store: freightStore,
             searchAttr: "label",
@@ -400,23 +400,23 @@ dojo.mixin(trst.task,{
     calculator: function(){
       var rows = dojo.query('tbody.inner tr'), v_val = 0, v_p03 = 0, v_p16 = 0, v_res = 0, s_val = 0, s_p03 = 0, s_p16 = 0, s_res = 0
       for(var i=1;i<rows.length -1;i++){
-        v_val = rows[i].children[2].children[0].value * rows[i].children[3].children[0].value
+        v_val = (parseFloat(rows[i].children[2].children[0].value) * parseFloat(rows[i].children[3].children[0].value)).toFixed(3)
         if (dijit.byId("freightSelect_0"+i).item != null){
           if (dijit.byId("freightSelect_0"+i).item.p03 != 'false'){
-            v_p03 = v_val * 3 / 100
+            v_p03 = parseFloat((v_val) * 3 / 100).toFixed(3)
           }else{
             v_p03 = 0
           }
         }
-        v_p16 = v_val * 16 / 100
-        v_res = parseFloat(v_val) - (parseFloat(v_p03) + parseFloat(v_p16))
+        v_p16 = (parseFloat(v_val) * 16 / 100).toFixed(3)
+        v_res = parseFloat(parseFloat(v_val).toFixed(2)) - (parseFloat(parseFloat(v_p03).toFixed(2)) + parseFloat(parseFloat(v_p16).toFixed(2)))
         rows[i].children[2].children[0].value = parseFloat(rows[i].children[2].children[0].value).toFixed(2)
         rows[i].children[3].children[0].value = parseFloat(rows[i].children[3].children[0].value).toFixed(2)
-        rows[i].children[4].children[0].innerHTML = v_val.toFixed(2)
-        rows[i].children[5].children[0].innerHTML = v_p03.toFixed(2)
-        rows[i].children[6].children[0].innerHTML = v_p16.toFixed(2)
-        rows[i].children[7].children[0].innerHTML = v_res.toFixed(2)
-        s_val +=  parseFloat(v_val); s_p03 += parseFloat(v_p03); s_p16 += parseFloat(v_p16); s_res += parseFloat(v_res);
+        rows[i].children[4].children[0].innerHTML = parseFloat(v_val).toFixed(2)
+        rows[i].children[5].children[0].innerHTML = parseFloat(v_p03).toFixed(2)
+        rows[i].children[6].children[0].innerHTML = parseFloat(v_p16).toFixed(2)
+        rows[i].children[7].children[0].innerHTML = parseFloat(v_res).toFixed(2)
+        s_val +=  parseFloat(parseFloat(v_val).toFixed(2)); s_p03 += parseFloat(parseFloat(v_p03).toFixed(2)); s_p16 += parseFloat(parseFloat(v_p16).toFixed(2)); s_res += parseFloat(parseFloat(v_res).toFixed(2));
         v_val = 0; v_p03 = 0; v_p16 = 0; v_res = 0
       }
       rows[rows.length -1].children[1].children[0].innerHTML = s_val.toFixed(2)
@@ -427,6 +427,22 @@ dojo.mixin(trst.task,{
       rows[rows.length -1].children[2].children[1].value = s_p03.toFixed(2)
       rows[rows.length -1].children[3].children[1].value = s_p16.toFixed(2)
       rows[rows.length -1].children[4].children[1].value = s_res.toFixed(2)
+    },
+    print_expenditure: function(id,verb,target_id){
+      trst.task.url.push(id,verb,target_id);
+      xhrArgs = {
+        url: trst.task.url.join('/'),
+        load: function(data){
+          window.open(this.url);
+          dojo.attr('xhr_msg','class','hidden');
+        },
+        error: function(error){
+          dojo.publish('xhrMsg',['error','error',error]);
+        }
+      };
+      dojo.publish('xhrMsg',['loading','info']);
+      var deferred = dojo.xhrGet(xhrArgs);
+      trst.task.destroy();
     }
   }
 })

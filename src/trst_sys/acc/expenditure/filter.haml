@@ -1,16 +1,17 @@
 %p.close{:onclick => "trst.task.destroy()"}
-%p.task_title= "Adeverinţă predare/primire (Selectare client)"
+%p.task_title= t('trst_acc_expenditure.title')
 %table{:cellspacing => "0"}
   %thead
     %tr
       %td
+        %p{:style => "font-size:0.9em"}= t('trst_acc_expenditure.client.select')
   %tbody
     %tr
       %td.filtering-select-pf
         %input#pfFilteringSelect
-        %span{:class => "button post"}= "Creare client"
+        %span{:class => "button post", :onclick => "trst.task.init('4e007119cd22db4425000001','post','new')"}= t('trst_acc_expenditure.client.add_button')
   %tfoot
     %tr
       %td{:class => "buttons_bottom"}
-        %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post")
+        %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post") + " APP!"
         %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")

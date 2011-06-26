@@ -1,5 +1,5 @@
 %p.close{:onclick => "trst.task.destroy()"}
-%p.task_title= "Adeverinţa de predare/primire"
+%p.task_title= t('trst_acc_expenditure.title')
 -if action == 'put'
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
@@ -11,9 +11,10 @@
             din date de:
             %input.date{:name => "[trst_acc_expenditure][id_date]",:value => @object.id_date.to_s}
         %tr
-          %td{:colspan => "9"}= "Clientul: #{@object.client.name_full} cu CNP #{@object.client.id_pn} a predat următoarele:"
+          %td{:colspan => "9"}
+            %p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
       %tbody.inner
-        %tr.odd
+        %tr
           %td.ce Material
           %td.ce UM
           %td.ce PU
@@ -28,11 +29,11 @@
             %td.filtering-select-freight
               %input.freight{:id => "freightSelect_0#{i.to_s}"}
             %td
-              %input.um{:id => "um_0#{i.to_s}",:value => ""}
+              %input.um{:id => "um_0#{i.to_s}",:name => "[freights][#{i}][um]",:value => ""}
             %td
-              %input.pu{:id => "pu_0#{i.to_s}",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
+              %input.pu{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
             %td
-              %input.qu{:id => "qu_0#{i.to_s}",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
+              %input.qu{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
             %td
               %span.val 0.00
             %td

@@ -1,0 +1,23 @@
+ro:
+  trst_acc_expenditure:
+    title: "Adeverinţă primire şi plată"
+    client:
+      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br />
+               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br \>
+               îl selectaţi şi se activează butonul \"Creare APP!\";<br />
+               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br />
+               va trebui să creaţi un \"Client nou!\"<br \>
+               &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi \"Anulare\"."
+
+      add_button: "Client nou!"
+      text: "S-a primit de la Dn(a) %{name} CNP: %{id_pn}<br />cu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap}, loc.%{city}<br />legitimat  cu: CI/BI seria.%{id_sr}, nr.%{id_nr}, %{id_by}/%{id_on}<br />mijloc de transport ____________________, următoarele deşeuri reciclabile:"
+      pdf_text: "S-a primit de la Dn(a) <b>%{name}</b> CNP: <b>%{id_pn}</b>\ncu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap},\nloc.%{city}, jud.Cluj, România,\nlegitimat  cu: CI/BI seria.%{id_sr}, nr.%{id_nr}, %{id_by}/%{id_on}\nmijloc de transport ______________, următoarele deşeuri reciclabile:"
+      pdf_decl: "Subsemnatul <b>%{name}</b> declar următoarele:\n1.) Cunosc faptul că falsul în declaraţie constituie infracţiune, se pedepseşte #####conform Codului Penal;\n2.) Materialel pe care le predau provin din:\n   ####a.) Gospodărie proprie;\n ####b.) Alte surse."
+en:
+  trst_acc_expenditure:
+    title: "Adeverinţă primire şi plată"
+    client: "S-a primit de la Dn(a) %{client.name_full}"
+hu:
+  trst_acc_expenditure:
+    title: "Adeverinţă primire şi plată"
+    client: "S-a primit de la Dn(a) %{client.name_full}"

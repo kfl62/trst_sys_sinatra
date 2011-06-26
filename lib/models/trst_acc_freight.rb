@@ -15,10 +15,13 @@ class TrstAccFreight
   field :descript,    :type => String,        :default => ""
   field :pu_other,    :type => Array,         :default => []
 
+  has_many :ins,      :class_name => "TrstAccFreightIn", :inverse_of => :freight
+  has_many :outs,     :class_name => "TrstAccFreightOut",:inverse_of => :freight
+
   class << self
     def auto_search
       fs = []
-      all.each do |f|
+      all.asc(:name).each do |f|
         fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:label => f.name}
       end
       {:identifier => "id",:items => fs}
