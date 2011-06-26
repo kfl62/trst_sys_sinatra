@@ -31,6 +31,7 @@ Sinatra::Base.class_eval("include Trst::Sinatra::Helpers")
 Sinatra::Base.set(:root, app_root)
 Sinatra::Base.set(:views, File.join(app_root, 'src'))
 Sinatra::Base.set(:haml, {:format => :html5, :attr_wrapper => '"'})
+Sinatra::Base.set(:dojo_cdn,false)
 Sinatra::Base.configure do
   compass_config = File.join(File.dirname(__FILE__), 'compass.rb')
   Compass.add_project_configuration(compass_config) \
