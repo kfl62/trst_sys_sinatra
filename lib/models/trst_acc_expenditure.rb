@@ -37,7 +37,7 @@ class TrstAccExpenditure
   protected
   # @todo
   def increment_name
-    self.name = TrstAccExpenditure.last.name.next rescue "DIR_CB52-000001"
+    self.name = TrstAccExpenditure.last.name.next rescue "DIR_CB25-000001"
   end
   # @todo
   def destroy_freights
