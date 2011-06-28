@@ -88,12 +88,22 @@ module Trst
         model = model.constantize
         object = model
         if verb == 'filter'
-          object = model.all.empty? ? model : model.all
+          #object = model.all.empty? ? model : model.all
+          if model.all.empty?
+            object = model
+          else
+            if model.fields.include? 'name'
+              object = model.all.asc(:name)
+            elsif model.fields.include? 'name_last'
+              object = model.all.asc(:name_last, :name_first)
+            else
+              object = model.all
+            end
+          end
           unless method == 'find'
             step = params[:step] || 'one'
             unless step == 'one'
               parent = model.find(params[:child_id])
-              #method = parent.associations.keys.first
               object = parent.send method
             end
           end
