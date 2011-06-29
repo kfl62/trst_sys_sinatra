@@ -130,6 +130,9 @@ trst.task = {
         if (dojo.byId('freightSelect_01') != undefined){
           trst.task.acc.init(dojo.byId('freightSelect_01'))
         }
+        if (dojo.query('[name*="[id_pn]"]')[0] != undefined){
+          trst.task.acc.validPn(dojo.query('[name*="[id_pn]"]')[0])
+        }
       },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
@@ -443,6 +446,40 @@ dojo.mixin(trst.task,{
       dojo.publish('xhrMsg',['loading','info']);
       var deferred = dojo.xhrGet(xhrArgs);
       trst.task.destroy();
+    },
+    validPn: function(node){
+      var valid = new dijit.form.ValidationTextBox({
+        name: node.name,
+        required: true,
+        trim: true,
+        selectOnClick: true,
+        promptMessage: "Validare CNP"
+      },node)
+      dojo.style(valid.domNode,"width","138px");
+      valid.focus();
+      valid.validator = function(value){
+        if (value.length < 13){
+          valid.invalidMessage = "Introduceţi 13 cifre!"
+          return false
+        }else{
+          if (value.length > 13){
+            valid.invalidMessage = "CNP max. 13 cifre!"
+            return false
+          }
+          var c = new String("279146358279"), sum = 0, mod = 0;
+          for(i=0; i<c.length; i++) {
+            sum = sum + value.charAt(i) * c.charAt(i)
+          }
+          mod = sum%11
+          if ((mod <10 && mod == value.charAt(12)) || (mod == 10 && value.charAt(12) == 1)){
+            valid.message = "CNP valid!"
+            return true
+          }else{
+            valid.invalidMessage = "CNP incorect!"
+            return false
+          }
+        }
+      }
     }
   }
 })
