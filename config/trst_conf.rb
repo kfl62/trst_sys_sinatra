@@ -14,6 +14,7 @@ require 'mongoid'
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new('localhost').db('development')
   config.raise_not_found_error = false
+  config.add_language('*')
 end
 require 'i18n'
 I18n.load_path += Dir.glob(File.join(app_root, 'src','translations','*.yml'))

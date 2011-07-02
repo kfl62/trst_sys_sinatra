@@ -1,0 +1,9 @@
+production:
+  hosts: [["localhost", 27017]]
+  database: "development"
+development:
+  hosts: [["localhost", 27017]]
+  database: "development"
+test:
+  hosts: [["localhost", 27017]]
+  database: "test"
