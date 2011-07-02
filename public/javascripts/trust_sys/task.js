@@ -472,7 +472,7 @@ dojo.mixin(trst.task,{
           }
           mod = sum%11
           if ((mod <10 && mod == value.charAt(12)) || (mod == 10 && value.charAt(12) == 1)){
-            valid.message = "CNP valid!"
+            valid.displayMessage("CNP valid!")
             return true
           }else{
             valid.invalidMessage = "CNP incorect!"

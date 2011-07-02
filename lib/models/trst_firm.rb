@@ -17,6 +17,18 @@ class TrstFirm
   embeds_many :departments, :class_name => "TrstFirmDepart"
   embeds_many :units,       :class_name => "TrstFirmUnit"
 
+  class << self
+    # @todo
+    def unit_id_by_unit_slug(s)
+      f = where('units.slug' => s).first
+      id = f.units.where(:slug => s).first.id
+    end
+    def unit_by_unit_id(i)
+      f = where('units._id' => i).first
+      f.units.find(i)
+    end
+  end
+
   # @todo
   def details
     self.addresses.create if self.addresses.empty?

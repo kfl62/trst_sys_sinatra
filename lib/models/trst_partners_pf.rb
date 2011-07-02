@@ -19,7 +19,7 @@ class TrstPartnersPf
   before_save :titleize_fields
   class << self
     # @todo
-    def auto_search
+    def auto_search(u = nil)
       pfs = []
       all.asc(:name_last, :name_first).each do |pf|
         if pf.id_pn == "123456789ABCD"
@@ -37,6 +37,10 @@ class TrstPartnersPf
     [name_last,name_first].join(' ')
   end
   alias :name :name_full
+  # @todo
+  def name_stats
+    "#{self.name} (#{id_pn})\nStr.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"
+  end
   # @todo
   def table_data
     [

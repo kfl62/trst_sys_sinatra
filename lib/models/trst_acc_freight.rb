@@ -17,17 +17,36 @@ class TrstAccFreight
 
   has_many :ins,      :class_name => "TrstAccFreightIn", :inverse_of => :freight
   has_many :outs,     :class_name => "TrstAccFreightOut",:inverse_of => :freight
+  belongs_to :unit,   :class_name => "TrstFirmUnit",     :inverse_of => :freights
 
   class << self
-    def auto_search
+    def auto_search(u = nil)
+      u ||= TrstFirm.unit_id_by_unit_slug("Main")
       fs = []
-      all.asc(:name).each do |f|
+      where(:unit_id => u).asc(:name).each do |f|
         fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:label => f.name}
       end
       {:identifier => "id",:items => fs}
     end
   end
-
+  # @todo
+  def unit
+    TrstFirm.unit_by_unit_id(self.unit_id)
+  end
+  # @todo
+  def col_name
+    ary = name.split(" ")
+    retval = case ary.length
+             when 1
+               ary[0][0..3].upcase
+             when 2
+               ary[0][0..1].upcase + ary[1][0..1].upcase
+             when 3
+               ary[0][0..1].upcase + ary[1][0].upcase + ary[2][0].upcase
+             else
+               "ERR"
+             end
+  end
   # @todo
   def table_data
     [

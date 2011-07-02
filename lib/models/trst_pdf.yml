@@ -3,6 +3,7 @@ ro:
     created_at: "Creat"
     updated_at: "Modificat"
     file_name: "Nume fişier '*.pdf'"
+    pdf_template: "Nume şablon"
     task_ids: "Sarcina asociată"
     name: "Denumire"
     title: "Titlu"
@@ -40,6 +41,9 @@ ro:
       employee:
         title: ["Salariatul", "Salariata"]
         prefix: ["dl.", "dna."]
+    expenditures_stats:
+      date: "Data"
+      slug: "Unitatea"
 en:
   trst_pdf:
     created_at: "Created"

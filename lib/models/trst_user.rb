@@ -71,6 +71,10 @@ class TrstUser
   def name
     login_name
   end
+  # @todo
+  def unit
+    TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
+  end
   # Generate `hashed_password`
   # @return [String] `hashed_password`
   def password=(pass)

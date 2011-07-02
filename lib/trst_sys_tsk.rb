@@ -77,7 +77,7 @@ class TrstSysTsk < Sinatra::Base
       @object = @object.where("#{params[:target]}._id" => params[:child_id]).first
       @object = @object.method(params[:target]).call.create
     elsif params[:id_pn]
-      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]))
+      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => TrstUser.find(session[:user]).unit_id)
       @object.reload
     else
       @object = @object.create

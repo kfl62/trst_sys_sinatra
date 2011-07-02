@@ -28,7 +28,7 @@ data_1 = [
 
 data_2 = [
   ["Gestionar","Primitor"],
-  ["Egri Maria",@object.client.name_full],
+  [@object.unit.chief,@object.client.name_full],
   ["_"*25,"_"*25]
 ]
 
@@ -56,10 +56,10 @@ pdf.bounding_box([15.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
   pdf.font_size 8 do
     pdf.text 'S.C. DIREN EXIM S.R.L.'
     pdf.move_up 9
-    pdf.text 'Punct de lucru: Calea Baciului nr.52', :align => :right
+    pdf.text "Punct de lucru: #{@object.unit.name[1]}", :align => :right
     pdf.text 'Nr.înreg.R.C. : J12/1000/12.09.2000'
     pdf.move_up 9
-    pdf.text 'Gestionar: Egri Maria', :align => :right
+    pdf.text "Gestionar: #{@object.unit.chief}", :align => :right
     pdf.text 'Cod fiscal (C.U.I) : RO13354034'
     pdf.text 'Str.Pădurii nr.2,bl.M16,sc.2,ap.14,'
     pdf.text 'Cluj-Napoca, judeţul Cluj'
@@ -112,10 +112,10 @@ pdf.bounding_box([163.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
   pdf.font_size 8 do
     pdf.text 'S.C. DIREN EXIM S.R.L.'
     pdf.move_up 9
-    pdf.text 'Punct de lucru: Calea Baciului nr.52', :align => :right
+    pdf.text "Punct de lucru: #{@object.unit.name[1]}", :align => :right
     pdf.text 'Nr.înreg.R.C. : J12/1000/12.09.2000'
     pdf.move_up 9
-    pdf.text 'Gestionar: Egri Maria', :align => :right
+    pdf.text "Gestionar: #{@object.unit.chief}", :align => :right
     pdf.text 'Cod fiscal (C.U.I) : RO13354034'
     pdf.text 'Str.Pădurii nr.2,bl.M16,sc.2,ap.14,'
     pdf.text 'Cluj-Napoca, judeţul Cluj'
