@@ -36,16 +36,16 @@ class TrstAccFreight
   # @todo
   def col_name
     ary = name.split(" ")
-    retval = case ary.length
-             when 1
-               ary[0][0..3].upcase
-             when 2
-               ary[0][0..1].upcase + ary[1][0..1].upcase
-             when 3
-               ary[0][0..1].upcase + ary[1][0].upcase + ary[2][0].upcase
-             else
-               "ERR"
-             end
+    case ary.length
+     when 1
+       ary[0][0..3].upcase
+     when 2
+       ary[0][0..1].upcase + ary[1][0..1].upcase
+     when 3
+       ary[0][0..1].upcase + ary[1][0].upcase + ary[2][0].upcase
+     else
+       "ERR"
+     end
   end
   # @todo
   def table_data

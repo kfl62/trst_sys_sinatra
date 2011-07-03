@@ -44,6 +44,9 @@ ro:
     expenditures_stats:
       date: "Data"
       slug: "Unitatea"
+    expenditures_receipts:
+      date: "Data"
+      slug: "Unitatea"
 en:
   trst_pdf:
     created_at: "Created"

@@ -31,6 +31,22 @@ class TrstPartnersPf
       end
       {:identifier => "id",:items => pfs}
     end
+    # @todo
+    def check_pn
+      ctrl = "279146358279"
+      errors = []
+      all.asc(:name_last, :name_first).each do |pf|
+        sum = 0
+        ctrl.each_char.each_with_index do |c, i|
+          sum += c.to_i * pf.id_pn[i].to_i
+        end
+        mod = sum % 11
+        unless (mod < 10 && mod == pf.id_pn[12].to_i) || (mod = 10 && pf.id_pn[12].to_i == 1)
+          errors << [pf.name_full, pf.id_pn]
+        end
+      end
+      errors.empty? ? "Ok" : errors
+    end
   end
   # @todo
   def name_full
@@ -72,8 +88,8 @@ class TrstPartnersPf
   protected
   # @todo
   def titleize_fields
-    self.name_last = name_last.titleize
-    self.name_first = name_first.titleize
-    self.address[:street] = address[:street].titleize
+    self.name_last = name_last.titleize if name_last
+    self.name_first = name_first.titleize if name_first
+    self.address[:street] = address[:street].titleize if address[:street]
   end
 end
