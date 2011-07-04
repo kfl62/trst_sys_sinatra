@@ -55,7 +55,9 @@ class TrstPartnersPf
   alias :name :name_full
   # @todo
   def name_stats
-    "#{self.name} (#{id_pn})\nStr.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"
+    "#{self.name} (#{id_pn})"[0..40] +
+    "\n" +
+    "Str.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"[0..40]
   end
   # @todo
   def table_data
@@ -91,5 +93,6 @@ class TrstPartnersPf
     self.name_last = name_last.titleize if name_last
     self.name_first = name_first.titleize if name_first
     self.address[:street] = address[:street].titleize if address[:street]
+    self.address[:city] = address[:street].titleize if address[:city]
   end
 end
