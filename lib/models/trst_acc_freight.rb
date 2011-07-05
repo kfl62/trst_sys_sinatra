@@ -48,6 +48,18 @@ class TrstAccFreight
      end
   end
   # @todo
+  def expenditure_pdf_name
+    ary = name.split(" ")
+    case ary.length
+    when 1
+      ary[0].titleize
+    when 2
+      [ary[0][0..2],'.',ary[1]].join[0..7]
+    else
+      "Error"
+    end
+  end
+  # @todo
   def table_data
     [
       {:css => "normal",:name => "name",:label => I18n.t("trst_acc_freight.name"),:value => name},

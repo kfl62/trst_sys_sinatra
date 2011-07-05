@@ -55,7 +55,8 @@ class TrstPartnersPf
   alias :name :name_full
   # @todo
   def name_stats
-    "#{self.name} (#{id_pn})"[0..40] +
+    n = self.name[0..17] << '.'
+    "#{n} (#{id_pn})" +
     "\n" +
     "Str.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"[0..40]
   end

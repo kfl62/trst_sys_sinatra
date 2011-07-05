@@ -9,7 +9,7 @@ data_0[0] = %w{Nr Material UM PU Cant. Val 3% 16% Rest}
   p03 = f.freight.p03 ? (val *  3 / 100).round(2) : 0.0
   p16 = (val * 16 / 100).round(2)
   out = val - (p03 + p16)
-  data_0[i + 1] = [i +1 , f.freight.name, f.um, "%.2f" % f.pu, "%.2f" % f.qu, "%.2f" % val, "%.2f" % p03, "%.2f" % p16, "%.2f" % out]
+  data_0[i + 1] = [i +1 , f.freight.expenditure_pdf_name, f.um, "%.2f" % f.pu, "%.2f" % f.qu, "%.2f" % val, "%.2f" % p03, "%.2f" % p16, "%.2f" % out]
 end
 
 for i in data_0.length..5 do
