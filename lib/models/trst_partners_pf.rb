@@ -94,6 +94,6 @@ class TrstPartnersPf
     self.name_last = name_last.titleize if name_last
     self.name_first = name_first.titleize if name_first
     self.address[:street] = address[:street].titleize if address[:street]
-    self.address[:city] = address[:street].titleize if address[:city]
+    self.address[:city] = address[:city].titleize if address[:city]
   end
 end
