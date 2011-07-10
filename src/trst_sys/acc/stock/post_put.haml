@@ -1,0 +1,58 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_stock.title')
+-if action == 'put'
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %th{:colspan => "3"}
+            Nume:
+            %input.ce{:name => "[trst_acc_stock][name]",:value => @object.name}
+            Luna:
+            %input.ce{:name => "[trst_acc_stock][id_month]",:value => @object.id_month.to_s,:style => "width:3em"}
+            %br
+            Expl:
+            %input.ce{:name => "[trst_acc_stock][expl]",:value => @object.expl}
+        %tr
+          %td{:colspan => "3"}
+            -#%p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
+      %tbody.inner
+        %tr
+          %td.ce Material
+          %td.ce UM
+          %td.ce Cant
+        - @object.freights_for_table.each_with_index do |f,i|
+          %tr
+            %td
+              %span.freight= f[1]
+            %td
+              %span.um= f[2]
+            %td
+              %input{:type => "hidden", :name => "[freights][#{i}][freight_id]",:value => f[0]}
+              %input{:type => "hidden", :name => "[freights][#{i}][doc_id]",:value => @object.id}
+              %input.ri.st{:name => "[freights][#{i}][qu]",:value => f[3]}
+        %tr
+          %td{:colspan => "3"} &nbsp;
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "3"}
+            - current_buttons(action).each do |button|
+              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+                =t("button.#{button}")
+        %tr
+          -#%td.footer_note{:colspan => "9"}= t('gen_footer.note')
+-else
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new")}<
+              =t("button.#{button}")

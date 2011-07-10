@@ -77,10 +77,14 @@ class TrstSysTsk < Sinatra::Base
       @object = @object.where("#{params[:target]}._id" => params[:child_id]).first
       @object = @object.method(params[:target]).call.create
     elsif params[:id_pn]
-      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => TrstUser.find(session[:user]).unit_id)
+      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id)
       @object.reload
     else
-      @object = @object.create
+      if @object.instance_methods.include?(:unit_id)
+        @object = @object.create(:unit_id => current_user.unit_id)
+      else
+        @object = @object.create
+      end
       @object.reload
     end
     flash[:msg] = {:msg => {:txt => I18n.t('db.post', :data => @object.name), :class => "info"}}.to_json
@@ -101,7 +105,10 @@ class TrstSysTsk < Sinatra::Base
     end
     @object.update_attributes update_hash
     if params[:freights]
-      params[:freights].values.each{|v| @object.freights.create(v) unless v["freight_id"].nil? || v["freight_id"].empty? }
+      params[:freights].values.each do |v|
+        o = @object.freights.find_or_create_by(:doc_id => v["doc_id"],:freight_id => v["freight_id"]) unless v["freight_id"].nil? || v["freight_id"].empty?
+        o.update_attributes v unless o.nil?
+      end
     end
     unless verb == 'print'
       flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json

@@ -16,16 +16,15 @@ class TrstAccExpenditure
 
   alias :file_name :name
 
-  scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time)}
-  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
-
-
   has_many   :freights,   :class_name => "TrstAccFreightIn",  :inverse_of => :doc
   belongs_to :client,     :class_name => "TrstPartnersPf",    :inverse_of => :apps
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :apps
 
   before_create :increment_name
   after_destroy :destroy_freights
+
+  scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time)}
+  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
 
   # @todo
   def unit

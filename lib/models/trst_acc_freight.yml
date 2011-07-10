@@ -1,0 +1,18 @@
+ro:
+  trst_acc_freight:
+    name: "Denumire"
+    um: "Unitate de măsură"
+    pu: "Preţ unitar"
+    p03: "Taxă mediu(3%)?"
+en:
+  trst_acc_freight:
+    name: "Denumire"
+    um: "Unitate de măsură"
+    pu: "Preţ unitar"
+    p03: "Taxă mediu(3%)?"
+hu:
+  trst_acc_freight:
+    name: "Denumire"
+    um: "Unitate de măsură"
+    pu: "Preţ unitar"
+    p03: "Taxă mediu(3%)?"

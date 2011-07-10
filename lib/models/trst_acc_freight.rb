@@ -15,9 +15,12 @@ class TrstAccFreight
   field :descript,    :type => String,        :default => ""
   field :pu_other,    :type => Array,         :default => []
 
-  has_many :ins,      :class_name => "TrstAccFreightIn", :inverse_of => :freight
-  has_many :outs,     :class_name => "TrstAccFreightOut",:inverse_of => :freight
-  belongs_to :unit,   :class_name => "TrstFirmUnit",     :inverse_of => :freights
+  has_many :ins,      :class_name => "TrstAccFreightIn",    :inverse_of => :freight
+  has_many :outs,     :class_name => "TrstAccFreightOut",   :inverse_of => :freight
+  has_many :stocks,   :class_name => "TrstAccFreightStock", :inverse_of => :freight
+  belongs_to :unit,   :class_name => "TrstFirmUnit",        :inverse_of => :freights
+
+  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
 
   class << self
     def auto_search(u = nil)
@@ -64,8 +67,7 @@ class TrstAccFreight
     [
       {:css => "normal",:name => "name",:label => I18n.t("trst_acc_freight.name"),:value => name},
       {:css => "normal",:name => "um",:label => I18n.t("trst_acc_freight.um"),:value => um},
-      {:css => "integer",:name => "pu",:label => I18n.t("trst_acc_freight.pu"),:value => pu},
-      {:css => "normal",:name => "p03",:label => I18n.t("trst_acc_freight.p03"),:value => p03}
+      {:css => "integer",:name => "pu",:label => I18n.t("trst_acc_freight.pu"),:value => pu}
     ]
   end
 end

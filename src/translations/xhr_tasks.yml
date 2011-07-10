@@ -34,6 +34,7 @@ ro:
     print: "Generare pdf"
   select:
     select: "Alegeţi!"
+    no_data: "Nu există înregistrări!"
 en:
   xhr_tasks:
     title: "Daily todo... (tasks)"

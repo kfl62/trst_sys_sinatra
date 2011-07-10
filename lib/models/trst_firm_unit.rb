@@ -14,6 +14,7 @@ class TrstFirmUnit
   embedded_in :firm,      :class_name => "TrstFirm",            :inverse_of => :units
   has_one     :user,      :class_name => "TrstUser",            :inverse_of => :unit
   has_many    :apps,      :class_name => "TrstAccExpenditure",  :inverse_of => :unit
+  has_many    :stocks,    :class_name => "TrstAccStock",        :inverse_of => :unit
   has_many    :freights,  :class_name => "TrstAccFreight",      :inverse_of => :unit
 
   before_save :generate_slug

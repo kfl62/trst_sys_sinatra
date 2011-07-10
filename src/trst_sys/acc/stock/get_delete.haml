@@ -1,0 +1,48 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_stock.title')
+-if action == 'get'
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th{:colspan => "3"}= "#{@object.name}"
+      %tr
+        %td{:colspan => "3"}
+          %p.ju= "Stoc: #{@object.unit.name[1]}<br>Expl: #{@object.expl}"
+    %tbody.inner
+      %tr
+        %td.ce Material
+        %td.ce UM
+        %td.ce Cant
+      - @object.freights_for_table.each do |f|
+        %tr
+          %td
+            %span.freight= f[1]
+          %td
+            %span.um= f[2]
+          %td
+            %span.val= "%.2f" % f[3]
+      %tr
+        %td{:colspan => "3"} &nbsp;
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "3"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
+      %tr
+        -# %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+- else
+  %table
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p= t("gen_msg.#{action}", :data => "#{@object.class.to_s} -> #{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
