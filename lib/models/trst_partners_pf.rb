@@ -17,6 +17,9 @@ class TrstPartnersPf
   has_many :apps, :class_name => "TrstAccExpenditure", :inverse_of => :client
 
   before_save :titleize_fields
+
+  scope :pn,   ->(pn) { where(:id_pn => pn) }
+
   class << self
     # @todo
     def auto_search(u = nil)
@@ -46,6 +49,10 @@ class TrstPartnersPf
         end
       end
       errors.empty? ? "Ok" : errors
+    end
+    # @todo
+    def id_by_pn(pn)
+      pn(pn).first.id rescue nil
     end
   end
   # @todo

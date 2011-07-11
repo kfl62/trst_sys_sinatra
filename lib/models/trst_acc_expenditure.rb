@@ -23,8 +23,9 @@ class TrstAccExpenditure
   before_create :increment_name
   after_destroy :destroy_freights
 
-  scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time)}
-  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
+  scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time) }
+  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)) }
+  scope :pn,    ->(pn)  { where(:client_id => TrstPartnersPf.id_by_pn(pn) ) }
 
   # @todo
   def unit
