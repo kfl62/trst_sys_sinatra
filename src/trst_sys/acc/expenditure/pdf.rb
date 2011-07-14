@@ -2,6 +2,10 @@
 # encoding: utf-8
 # Template for AdeverintaPredarePrimire.pdf
 require 'prawn/measurement_extensions'
+
+firm  = TrstFirm.first
+address = firm.addresses.first
+
 data_0 = []
 data_0[0] = %w{Nr Material UM PU Cant. Val 3% 16% Rest}
 @object.freights.each_with_index do |f,i|
@@ -40,8 +44,8 @@ pdf = Prawn::Document.new(
     :Title => "Adeverinţă_Primire_Plata",
     :Author => "kfl62",
     :Subject => "Formular \"Adeverinţă de Primire şi Plată\"",
-    :Keywords => "Diren Exim Adeverinţă Primire Plată",
-    :Creator => "http://diren.trst.ro (using Sinatra, Prawn)",
+    :Keywords => "#{firm.name[1].titleize} Adeverinţă Primire Plată",
+    :Creator => "http://#{firm.name[0].downcase}.trst.ro (using Sinatra, Prawn)",
     :CreationDate => Time.now
   }
 )
@@ -54,14 +58,14 @@ pdf.font_families.update(
 pdf.font 'Verdana'
 pdf.bounding_box([15.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
   pdf.font_size 8 do
-    pdf.text 'S.C. DIREN EXIM S.R.L.'
+    pdf.text "#{firm.name[2]}"
     pdf.move_up 9
     pdf.text "Punct de lucru: #{@object.unit.name[1]}", :align => :right
-    pdf.text 'Nr.înreg.R.C. : J12/1000/12.09.2000'
+    pdf.text "Nr.înreg.R.C. : #{firm.identities['chambcom']}"
     pdf.move_up 9
     pdf.text "Gestionar: #{@object.unit.chief}", :align => :right
-    pdf.text 'Cod fiscal (C.U.I) : RO13354034'
-    pdf.text 'Str.Pădurii nr.2,bl.M16,sc.2,ap.14,'
+    pdf.text "Cod fiscal (C.U.I) : #{firm.identities['fiscal']}"
+    pdf.text "Str.#{address.street} nr.#{address.nr},bl.#{address.bl},sc.#{address.sc},ap.#{address.ap},"
     pdf.text 'Cluj-Napoca, judeţul Cluj'
   end
   pdf.move_down 5.mm
@@ -110,14 +114,14 @@ pdf.bounding_box([15.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
 end
 pdf.bounding_box([163.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
   pdf.font_size 8 do
-    pdf.text 'S.C. DIREN EXIM S.R.L.'
+    pdf.text "#{firm.name[2]}"
     pdf.move_up 9
     pdf.text "Punct de lucru: #{@object.unit.name[1]}", :align => :right
-    pdf.text 'Nr.înreg.R.C. : J12/1000/12.09.2000'
+    pdf.text "Nr.înreg.R.C. : #{firm.identities['chambcom']}"
     pdf.move_up 9
     pdf.text "Gestionar: #{@object.unit.chief}", :align => :right
-    pdf.text 'Cod fiscal (C.U.I) : RO13354034'
-    pdf.text 'Str.Pădurii nr.2,bl.M16,sc.2,ap.14,'
+    pdf.text "Cod fiscal (C.U.I) : #{firm.identities['fiscal']}"
+    pdf.text "Str.#{address.street} nr.#{address.nr},bl.#{address.bl},sc.#{address.sc},ap.#{address.ap},"
     pdf.text 'Cluj-Napoca, judeţul Cluj'
   end
   pdf.move_down 5.mm
