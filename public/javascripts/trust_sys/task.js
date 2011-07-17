@@ -363,7 +363,7 @@ dojo.mixin(trst.task,{
         },"pfFilteringSelect")
       }else{
         var freightStore = new dojo.data.ItemFileReadStore({
-          url: "/utils/search/TrstAccFreight"
+          url: (input.getAttribute('data-dn') == 'true') ? "/utils/search/TrstAccFreight?dn=true" : "/utils/search/TrstAccFreight"
         });
         dojo.query('input.freight').forEach(function(fr,i){
           if (dijit.byId(fr.id))
@@ -377,11 +377,20 @@ dojo.mixin(trst.task,{
             placeHolder: "Selectare material",
             labelAttr: "label",
             onChange: function(id){
-              trst.task.acc.onSelectFreight(freightSearch)
+              if (input.getAttribute('data-dn') == 'true'){
+                trst.task.acc.onSelectFreightDN(freightSearch)
+              }else{
+                trst.task.acc.onSelectFreight(freightSearch)
+              }
             }
           },fr.id)
         })
-        }
+      }
+    },
+    deliveryInit: function(id){
+      var cl = dojo.byId('select_client'),
+          tp = dojo.byId('select_transporter');
+      trst.task.init(id,'post','new?client_id=' + cl.options(cl.selectedIndex).value + '&transporter_id=' + tp.options(tp.selectedIndex).value)
     },
     onSelectPf: function(id){
       var button = dojo.query('.post')[1];
@@ -396,9 +405,20 @@ dojo.mixin(trst.task,{
       tr.children[3].children[0].focus()
       tr.children[3].children[0].select()
     },
+    onSelectFreightDN: function(d){
+      var tr = d.domNode.parentElement.parentElement
+      tr.children[1].children[0].innerHTML = d.item.um
+      tr.children[2].children[0].innerHTML = parseFloat(d.item.stock).toFixed(2)
+      tr.children[3].children[0].focus()
+      tr.children[3].children[0].select()
+    },
     deleteRow: function(node){
       dojo.destroy(node.parentElement.parentElement)
       trst.task.acc.calculator();
+    },
+    deleteRowDN: function(node){
+      dojo.destroy(node.parentElement.parentElement)
+      trst.task.acc.calculatorDN();
     },
     calculator: function(){
       var rows = dojo.query('tbody.inner tr'), v_val = 0, v_p03 = 0, v_p16 = 0, v_res = 0, s_val = 0, s_p03 = 0, s_p16 = 0, s_res = 0
@@ -431,6 +451,16 @@ dojo.mixin(trst.task,{
       rows[rows.length -1].children[3].children[1].value = s_p16.toFixed(2)
       rows[rows.length -1].children[4].children[1].value = s_res.toFixed(2)
     },
+    calculatorDN: function(){
+      var rows = dojo.query('tbody.inner tr'), v_res = 0, s_qu = 0;
+      for(var i=1;i<rows.length -1;i++){
+        v_res = (parseFloat(rows[i].children[2].children[0].innerHTML) - parseFloat(rows[i].children[3].children[0].value)).toFixed(2)
+        rows[i].children[3].children[0].value = parseFloat(rows[i].children[3].children[0].value).toFixed(2)
+        rows[i].children[4].children[0].innerHTML = v_res
+        s_qu += parseFloat(rows[i].children[3].children[0].value)
+      }
+      rows[rows.length -1].children[1].children[0].innerHTML = parseFloat(s_qu).toFixed(2)
+    },
     print_expenditure: function(id,verb,target_id){
       trst.task.url.push(id,verb,target_id);
       xhrArgs = {
@@ -446,6 +476,24 @@ dojo.mixin(trst.task,{
       dojo.publish('xhrMsg',['loading','info']);
       var deferred = dojo.xhrGet(xhrArgs);
       trst.task.destroy();
+    },
+    print_delivery_note: function(id,verb,target_id){
+      trst.task.url.push(id,verb,target_id);
+      xhrArgs = {
+        url: trst.task.url.join('/'),
+        load: function(data){
+          window.open(this.url);
+          dojo.attr('xhr_msg','class','hidden');
+        },
+        error: function(error){
+          dojo.publish('xhrMsg',['error','error',error]);
+        }
+      };
+      dojo.publish('xhrMsg',['loading','info']);
+      var deferred = dojo.xhrGet(xhrArgs);
+      trst.task.id = this.verb = this.target_id = "";
+      trst.task.url = ["/srv/tsk"];
+      //trst.task.destroy();
     },
     validPn: function(node){
       var valid = new dijit.form.ValidationTextBox({
