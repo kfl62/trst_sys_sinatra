@@ -22,7 +22,11 @@ class TrstUtils < Sinatra::Base
   # @todo
   get '/search/:model' do |m|
     model = m.constantize
-    unit = TrstUser.find(session[:user]).unit_id
-    model.auto_search(unit).to_json
+    unit = current_user.unit_id
+    if params[:dn]
+      model.auto_search(unit,true).to_json
+    else
+      model.auto_search(unit).to_json
+    end
   end
 end

@@ -23,11 +23,15 @@ class TrstAccFreight
   scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
 
   class << self
-    def auto_search(u = nil)
+    def auto_search(u=nil, stock=nil)
       u ||= TrstFirm.unit_id_by_unit_slug("Main")
       fs = []
       where(:unit_id => u).asc(:name).each do |f|
-        fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:label => f.name}
+        if stock
+          fs << {:id => f.id,:um => f.um,:stock => f.stock, :label => f.name}
+        else
+          fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:label => f.name}
+        end
       end
       {:identifier => "id",:items => fs}
     end
@@ -61,6 +65,10 @@ class TrstAccFreight
     else
       "Error"
     end
+  end
+  # @todo
+  def stock
+    (stocks.first.qu rescue 0.00) + (ins.sum(:qu) || 0.00) - (outs.sum(:qu) || 0.00)
   end
   # @todo
   def table_data
