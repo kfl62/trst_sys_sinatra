@@ -1,0 +1,77 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_delivery_note.title')
+-if action == 'put'
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %th{:colspan => "6"}
+            Nr.
+            %input.ce{:name => "[trst_acc_delivery_note][name]",:value => @object.name}
+            din data de:
+            %input.date{:name => "[trst_acc_delivery_note][id_date]",:value => @object.id_date.to_s}
+        %tr
+          %td Anexa la aviz nr.
+          %td{:colspan => "5"}
+            %input.ce{:name => "[trst_acc_delivery_note][id_main_doc]",:value => @object.id_main_doc}
+        %tr
+          %td Delegat
+          %td{:colspan => "2"}
+            %select{:name => "[trst_acc_delivery_note][id_delegate_t]"}
+              %option{:value => "null"}= "Selectaţi delegatul!"
+              - TrstPartner.find(@object.transporter_id).persons.each do |d|
+                %option{:value => d.id.to_s}= d.name
+          %td Mijloc trans.
+          %td{:colspan => "2"}
+            %input.ce{:name => "[trst_acc_delivery_note][id_platte]",:value => @object.id_platte}
+      %tbody.inner
+        %tr
+          %td.ce Material
+          %td.ce UM
+          %td.ce Stoc
+          %td.ce Cant
+          %td.ce Rămâne
+          %td.ce &nbsp;&nbsp;
+        -for i in 1..5 do
+          %tr{:id => "tr_0#{i.to_s}"}
+            %td.filtering-select-freight
+              %input.freight{:id => "freightSelect_0#{i.to_s}", :data => {:dn => "true"}}
+            %td
+              %span.ce.st kg
+            %td
+              %span.val 0.00
+            %td
+              %input.ri.st{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculatorDN()", :style => "width:8em"}
+            %td
+              %span.res 0.00
+            %td
+              %span.db-freight-del{:onclick => "trst.task.acc.deleteRowDN(this)"}
+        %tr
+          %td.ce.em.st{:colspan => "3"}Total încărcare
+          %td
+            %span.ce.st{:style => "display:block"} 0.00
+          %td{:colspan => "2"}
+            %span &nbsp;&nbsp;
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "6"}
+            - current_buttons(action).each do |button|
+              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
+                =t("button.#{button}")
+        %tr
+          -#%td.footer_note{:colspan => "9"}= t('gen_footer.note')
+-else
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new",params)}<
+              =t("button.#{button}")
