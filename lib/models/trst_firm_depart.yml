@@ -4,4 +4,12 @@ ro:
     name_sh: "Nume scurt"
     name_full: "Nume complet"
 en:
+  trst_firm_depart:
+    title: "4.) Departamente"
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
 hu:
+  trst_firm_depart:
+    title: "4.) Departamente"
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
