@@ -1,0 +1,14 @@
+# st: font_face consolas; font_size 9
+ro:
+  trst_acc_delivery_note:
+    title: "Aviz de expediţie - Anexa3"
+    client:
+      select: "Selectaţi destinatarul"
+    transporter:
+      select: "Selectaţi transportatorul"
+en:
+  trst_acc_delivery_note:
+    title: "Aviz de expediţie - Anexa3"
+hu:
+  trst_acc_delivery_note:
+    title: "Aviz de expediţie - Anexa3"
