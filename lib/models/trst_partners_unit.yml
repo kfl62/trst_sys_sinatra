@@ -1,0 +1,18 @@
+ro:
+  trst_partner_unit:
+    title: "5.) Puncte de lucru"
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
+    chief: "Gestionar"
+en:
+  trst_partner_unit:
+    title: "5.) Puncte de lucru"
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
+    chief: "Gestionar"
+hu:
+  trst_partner_unit:
+    title: "5.) Puncte de lucru"
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
+    chief: "Gestionar"

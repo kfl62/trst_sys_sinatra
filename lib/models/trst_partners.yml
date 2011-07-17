@@ -1,0 +1,76 @@
+ro:
+  trst_partner:
+    select: "Selectaţi firma"
+    details: "Deoarece datele firmei sunt compuse din mai multe elemente<br>(firma propriuzisă,adrese,persoane de contact), editarea lor se<br>face în mai multe etape:"
+    title: "1.) Editare firmă:"
+    label: "Denumire/Coduri...etc..."
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
+    name_off: "Nume oficial"
+    identities:
+      caen: "Dom.activitate CAEN"
+      chambcom: "Cam.Comerţ"
+      fiscal: "Cod fiscal CUI"
+      account: "Cod contabilitate"
+      itm: "Nr. Cam.Munca ITM"
+      internet: "IP internet"
+      cod: "Cod intern"
+    contact:
+      phone: "Tel"
+      fax: "Fax"
+      email: "Email"
+      website: "Web"
+    about:
+      scope: "Scop"
+      descript: "Descriere"
+en:
+  trst_partner:
+    select: "Selectaţi firma"
+    details: "Deoarece datele firmei sunt compuse din mai multe elemente<br>(firma propriuzisă,adrese,persoane de contact), editarea lor se<br>face în mai multe etape:"
+    title: "1.) Editare firmă:"
+    label: "Denumire/Coduri...etc..."
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
+    name_off: "Nume oficial"
+    identities:
+      caen: "Dom.activitate CAEN"
+      chambcom: "Cam.Comerţ"
+      fiscal: "Cod fiscal CUI"
+      account: "Cod contabilitate"
+      itm: "Nr. Cam.Munca ITM"
+      internet: "IP internet"
+      cod: "Cod intern"
+    contact:
+      phone: "Tel"
+      fax: "Fax"
+      email: "Email"
+      website: "Web"
+    about:
+      scope: "Scop"
+      descript: "Descriere"
+hu:
+  trst_partner:
+    select: "Selectaţi firma"
+    details: "Deoarece datele firmei sunt compuse din mai multe elemente<br>(firma propriuzisă,adrese,persoane de contact), editarea lor se<br>face în mai multe etape:"
+    title: "1.) Editare firmă:"
+    label: "Denumire/Coduri...etc..."
+    name_sh: "Nume scurt"
+    name_full: "Nume complet"
+    name_off: "Nume oficial"
+    identities:
+      caen: "Dom.activitate CAEN"
+      chambcom: "Cam.Comerţ"
+      fiscal: "Cod fiscal CUI"
+      account: "Cod contabilitate"
+      itm: "Nr. Cam.Munca ITM"
+      internet: "IP internet"
+      cod: "Cod intern"
+    contact:
+      phone: "Tel"
+      fax: "Fax"
+      email: "Email"
+      website: "Web"
+    about:
+      scope: "Scop"
+      descript: "Descriere"
+
