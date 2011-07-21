@@ -8,7 +8,7 @@ class TrstAccExpenditure
   include Mongoid::Timestamps
 
   field :name,        :type => String
-  field :id_date,     :type => Date,      :default => Date.today
+  field :id_date,     :type => Date,      :default => Date.new(Time.now.year,Time.now.month,Time.now.day)
   field :sum_003,     :type => Float,     :default => 0.00
   field :sum_016,     :type => Float,     :default => 0.00
   field :sum_100,     :type => Float,     :default => 0.00
@@ -26,6 +26,12 @@ class TrstAccExpenditure
   scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time) }
   scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)) }
   scope :pn,    ->(pn)  { where(:client_id => TrstPartnersPf.id_by_pn(pn) ) }
+
+  class << self
+    def by_unit_id(u)
+      where(:unit_id => u).asc(:name)
+    end
+  end
 
   # @todo
   def unit
@@ -47,7 +53,7 @@ class TrstAccExpenditure
   protected
   # @todo
   def increment_name
-    self.name = TrstAccExpenditure.last.name.next rescue "DIR_CB25-000001"
+    self.name = TrstAccExpenditure.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_000001"
   end
   # @todo
   def destroy_freights
