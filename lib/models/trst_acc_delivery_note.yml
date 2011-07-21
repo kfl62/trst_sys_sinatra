@@ -8,7 +8,13 @@ ro:
       select: "Selectaţi transportatorul"
 en:
   trst_acc_delivery_note:
-    title: "Aviz de expediţie - Anexa3"
+    title: "Delivery Note - Annex3"
+    client:
+      select: "Select partner"
+    transporter:
+      select: "Select transporter"
 hu:
   trst_acc_delivery_note:
     title: "Aviz de expediţie - Anexa3"
+    transporter:
+      select: "Selectaţi transportatorul"
