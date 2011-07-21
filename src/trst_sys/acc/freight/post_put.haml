@@ -1,0 +1,36 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@task,action)
+-if action == 'put'
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %th= t('gen_head.field')
+          %th= t('gen_head.value')
+      %tbody
+        - @object.table_data.each do |data|
+          - tr_body('put',data,@task,@object)
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "2"}
+            - current_buttons(action).each do |button|
+              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+                =t("button.#{button}")
+        %tr
+          %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+-else
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new",params)}<
+              =t("button.#{button}")
+

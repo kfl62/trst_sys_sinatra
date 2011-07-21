@@ -35,6 +35,9 @@ class TrstAccFreight
       end
       {:identifier => "id",:items => fs}
     end
+    def by_unit_id(u)
+      where(:unit_id => u).asc(:name)
+    end
   end
   # @todo
   def unit
