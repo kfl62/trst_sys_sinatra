@@ -1,18 +1,22 @@
+# st: font_face consolas; font_size 9
 ro:
   trst_firm_unit:
-    title: "5.) Puncte de lucru"
+    title: "6.) Puncte de lucru"
     name_sh: "Nume scurt"
     name_full: "Nume complet"
     chief: "Gestionar"
+    env_auth: "Aut. de mediu"
 en:
   trst_firm_unit:
     title: "5.) Puncte de lucru"
     name_sh: "Nume scurt"
     name_full: "Nume complet"
     chief: "Gestionar"
+    env_auth: "Aut. de mediu"
 hu:
   trst_firm_unit:
     title: "5.) Puncte de lucru"
     name_sh: "Nume scurt"
     name_full: "Nume complet"
     chief: "Gestionar"
+    env_auth: "Aut. de mediu"

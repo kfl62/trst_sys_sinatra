@@ -10,6 +10,7 @@ class TrstFirmUnit
   field :name,          :type => Array,     :default => ["ShortName","FullName"]
   field :slug,          :type => String
   field :chief,         :type => String,    :default => "Lastname Firstname"
+  field :env_auth,      :type => String
 
   embedded_in :firm,      :class_name => "TrstFirm",            :inverse_of => :units
   has_one     :user,      :class_name => "TrstUser",            :inverse_of => :unit
@@ -22,9 +23,10 @@ class TrstFirmUnit
   # @todo
   def table_data
     [
-      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_sh"),:value => name[0]},
-      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_full"),:value => name[1]},
-      {:css => "normal",:name => "chief",:label => I18n.t("trst_firm.chief"),:value => chief}
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm_unit.name_sh"),:value => name[0]},
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm_unit.name_full"),:value => name[1]},
+      {:css => "normal",:name => "chief",:label => I18n.t("trst_firm_unit.chief"),:value => chief},
+      {:css => "normal",:name => "env_auth",:label => I18n.t("trst_firm_unit.env_auth"),:value => env_auth}
     ]
   end
 
