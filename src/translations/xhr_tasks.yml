@@ -1,3 +1,4 @@
+# st: font_face consolas; font_size 9
 ro:
   xhr_tasks:
     title: "De rezolvat zilnic... (sarcini)"
@@ -5,6 +6,8 @@ ro:
     empty: "Nu aveţi sarcini definite..."
   xhr_pdfs:
     title: "Rapoarte/Formulare"
+  xhr_queries:
+    title: "Interogări/Statistică/Verificare"
   gen_head:
     field: "Câmp"
     value: "Valoare"
