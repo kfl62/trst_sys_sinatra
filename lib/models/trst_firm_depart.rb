@@ -14,8 +14,8 @@ class TrstFirmDepart
   # @todo
   def table_data
     [
-      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_sh"),:value => name[0]},
-      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm.name_full"),:value => name[1]}
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm_depart.name_sh"),:value => name[0]},
+      {:css => "normal",:name => "name,",:label => I18n.t("trst_firm_depart.name_full"),:value => name[1]}
     ]
   end
 end
