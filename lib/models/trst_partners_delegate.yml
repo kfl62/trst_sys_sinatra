@@ -1,0 +1,34 @@
+# st: font_face consolas; font_size 9
+ro:
+  trst_partner_delegate:
+    title: "4.) Editare delegaţi:"
+    name: "Prenume/Nume"
+    role: "Funcţia"
+    id_pn: "CNP"
+    id_sr: "CI seria"
+    id_nr: "CI număr"
+    id_by: "Eliberat de"
+    id_on: "Eliberat la data de"
+    phone: "Telefon"
+en:
+  trst_partner_delegate:
+    title: "Persoane de contact"
+    name: "Prenume/Nume"
+    role: "Funcţia"
+    id_pn: "CNP"
+    id_sr: "CI seria"
+    id_nr: "CI număr"
+    id_by: "Eliberat de"
+    id_on: "Eliberat la data de"
+    phone: "Telefon"
+hu:
+  trst_partner_delegate:
+    title: "Persoane de contact"
+    name: "Prenume/Nume"
+    role: "Funcţia"
+    id_pn: "CNP"
+    id_sr: "CI seria"
+    id_nr: "CI număr"
+    id_by: "Eliberat de"
+    id_on: "Eliberat la data de"
+    phone: "Telefon"
