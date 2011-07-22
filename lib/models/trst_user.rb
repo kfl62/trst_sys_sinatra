@@ -103,10 +103,13 @@ class TrstUser
   def daily_tasks
     tsks = []
     pdfs = []
+    qrs  = []
     task_ids['daily_tasks'].each do |t|
       begin
         if TrstTask.find(t).is_pdf?
           pdfs << t
+        elsif TrstTask.find(t).is_query?
+          qrs  << t
         else
           tsks << t
         end
@@ -114,7 +117,7 @@ class TrstUser
         nil
       end
     end
-    return [tsks,pdfs]
+    return [tsks,pdfs,qrs]
   end
   #
   # @see #table_data

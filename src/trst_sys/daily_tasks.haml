@@ -15,4 +15,11 @@
         %a{:id => "#{pdf}",:'data-tsks' => "pdf",:href => "#"}
           = TrstTask.find(pdf).name
       %span.help{:onclick  => "trst.task.init('#{pdf}','help')"}
+  - unless tsks[2].empty?
+    %li.em.st= t('xhr_queries.title')
+    - tsks[2].each do |query|
+      %li
+        %a{:id => "#{pdf}",:'data-tsks' => "query",:href => "#"}
+          = TrstTask.find(query).name
+      %span.help{:onclick  => "trst.task.init('#{query}','help')"}
 

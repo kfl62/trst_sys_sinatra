@@ -42,6 +42,10 @@ class TrstTask
     target.include?("TrstPdf.find_by_task_id")
   end
   # @todo Document this method
+  def is_query?
+    target.include?(".query")
+  end
+  # @todo Document this method
   def pages
     page_ids
   end
