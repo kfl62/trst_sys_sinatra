@@ -125,6 +125,15 @@ module Trst
             haml_tag :span, :class => "db-relations-add",
                      :'data-fieldname' => data[:name].split(',').last,
                      :onclick => "trst.task.relations.init(this)"
+          when 'boolean'
+            haml_tag :input, "Da", :type => "radio",
+                     :name => input_name(task,data[:name]),
+                     :checked => data[:value],
+                     :value => "true"
+            haml_tag :input, "Nu", :type => "radio",
+                     :name => input_name(task,data[:name]),
+                     :checked => !data[:value],
+                     :value => "false"
           else
             haml_tag :span, data[:value], :class => "limit-width"
           end
