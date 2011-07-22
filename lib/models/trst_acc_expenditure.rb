@@ -31,6 +31,17 @@ class TrstAccExpenditure
     def by_unit_id(u)
       where(:unit_id => u).asc(:name)
     end
+    def check_sum
+      retval = []
+      all.each do |a|
+        f_sum_100 = 0
+        a.freights.each do |f|
+          f_sum_100 += (f.pu * f.qu).round(2)
+        end
+        retval.push [a.name, (a.sum_100 - f_sum_100).round(2)] if a.sum_100.round(2) != f_sum_100.round(2)
+      end
+      retval
+    end
   end
 
   # @todo
