@@ -12,7 +12,7 @@ class TrstAccFreight
   field :pu,          :type => Float,         :default => 0.00
   field :p03,         :type => Boolean,       :default => true
   field :category,    :type => String,        :default => "Category"
-  field :descript,    :type => String,        :default => ""
+  field :descript,    :type => Array,         :default => []
   field :pu_other,    :type => Array,         :default => []
 
   has_many :ins,      :class_name => "TrstAccFreightIn",    :inverse_of => :freight
@@ -78,7 +78,9 @@ class TrstAccFreight
     [
       {:css => "normal",:name => "name",:label => I18n.t("trst_acc_freight.name"),:value => name},
       {:css => "normal",:name => "um",:label => I18n.t("trst_acc_freight.um"),:value => um},
-      {:css => "integer",:name => "pu",:label => I18n.t("trst_acc_freight.pu"),:value => pu}
+      {:css => "integer",:name => "pu",:label => I18n.t("trst_acc_freight.pu"),:value => pu},
+      {:css => "boolean",:name => "p03",:label => I18n.t("trst_acc_freight.p03"),:value => p03},
+      {:css => "normal",:name => "descript,",:label => I18n.t("trst_acc_freight.cod"),:value => descript[0]}
     ]
   end
 end

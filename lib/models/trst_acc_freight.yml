@@ -1,18 +1,22 @@
+# st: font_face consolas; font_size 9
 ro:
   trst_acc_freight:
     name: "Denumire"
     um: "Unitate de măsură"
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
+    cod: "Cod deşeu"
 en:
   trst_acc_freight:
     name: "Denumire"
     um: "Unitate de măsură"
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
+    cod: "Cod deşeu"
 hu:
   trst_acc_freight:
     name: "Denumire"
     um: "Unitate de măsură"
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
+    cod: "Cod deşeu"
