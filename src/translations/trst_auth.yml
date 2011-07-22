@@ -1,3 +1,4 @@
+# st: font_face consolas; font_size 9
 ro:
   trst_auth:
     login: "Login"
@@ -28,7 +29,7 @@ en:
     login_pass: "Password"
     login_msg: "Login successful."
     login_err: "The login_name or password you entered is incorrect."
-    login_required: "Nice try, but authentication required..."    
+    login_required: "Nice try, but authentication required..."
     logout: "Logout"
     logout_msg: "Logout successful."
     authenticated_as: "Authenticated as:"
@@ -50,7 +51,7 @@ hu:
     login_pass: "Jelszó"
     login_msg: "Sikeres azonosítás"
     login_err: "Sikertelen azonosítás! Hibás név vagy jelszó!"
-    login_required: "Érdekes probálkozás, de az azonosítás szükséges..."  
+    login_required: "Érdekes probálkozás, de az azonosítás szükséges..."
     logout: "Logout"
     logout_msg: "Viszontlátásra!"
     adduser_msg: "Account created."
