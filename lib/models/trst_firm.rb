@@ -14,6 +14,7 @@ class TrstFirm
 
   embeds_many :addresses,   :class_name => "TrstFirmAddress"
   embeds_many :persons,     :class_name => "TrstFirmContactPerson"
+  embeds_many :delegates,   :class_name => "TrstFirmDelegate"
   embeds_many :departments, :class_name => "TrstFirmDepart"
   embeds_many :units,       :class_name => "TrstFirmUnit"
 
@@ -33,9 +34,10 @@ class TrstFirm
   def details
     self.addresses.create if self.addresses.empty?
     self.persons.create if self.persons.empty?
+    self.delegates.create if self.delegates.empty?
     self.departments.create if self.departments.empty?
     self.units.create if self.units.empty?
-    ["TrstFirm",id,[addresses,persons,departments,units]]
+    ["TrstFirm",id,[addresses,persons,delegates,departments,units]]
   end
 
   # @todo
