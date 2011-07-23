@@ -4,19 +4,19 @@
   %thead
     %tr
       %td
-        -#%p{:style => "font-size:0.9em"}= t('trst_acc_delivery_note.client.select')
+        %p{:style => "font-size:0.9em"}= t('trst_acc_delivery_note.filter_info')
   %tbody
     %tr
       %td
         %select#select_client
-          %option{:value => 'null'}= t('trst_acc_delivery_note.client.select')
+          %option{:value => 'null'}= t('trst_acc_delivery_note.select.client')
           - unless TrstPartner.empty?
             - TrstPartner.asc(:name).each do |client|
               %option{:value => client.id}= client.name[1]
     %tr
       %td
         %select#select_transporter
-          %option{:value => 'null'}= t('trst_acc_delivery_note.transporter.select')
+          %option{:value => 'null'}= t('trst_acc_delivery_note.select.transporter')
           - unless TrstPartner.empty?
             - TrstPartner.asc(:name).each do |transporter|
               %option{:value => transporter.id}= transporter.name[1]

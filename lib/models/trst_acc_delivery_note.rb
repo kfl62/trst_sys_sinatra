@@ -33,11 +33,11 @@ class TrstAccDeliveryNote
   end
   # @todo
   def delegate_transp
-    TrstPartner.find(transporter_id).persons.find(id_delegate_t) rescue nil
+    TrstPartner.find(transporter_id).delegates.find(id_delegate_t) rescue TrstPartner.find(transporter_id).delegates.first
   end
   # @todo
   def delegate_client
-    TrstPartner.find(client_id).persons.find(id_delegate_c) rescue nil
+    TrstPartner.find(client_id).delegates.find(id_delegate_c) rescue TrstPartner.find(client_id).delegates.first
   end
   # @todo
   def id_sr
@@ -55,8 +55,8 @@ class TrstAccDeliveryNote
   protected
   # @todo
   def increment_name
-    self.name = TrstAccDeliveryNote.last.name.next rescue "DIR_CB25_AEA3-001"
-    self.id_main_doc = TrstFirm.first.name[0][0..2].upcase rescue "DIR"
+    self.name = TrstAccDeliveryNote.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEA3_001"
+    self.id_main_doc = "#{TrstFirm.first.name[0][0..2].upcase}-" rescue "#{unit.firm.name[0][0..2].upcase}-"
   end
   # @todo
   def destroy_freights

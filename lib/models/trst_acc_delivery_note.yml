@@ -2,19 +2,46 @@
 ro:
   trst_acc_delivery_note:
     title: "Aviz de expediţie - Anexa3"
-    client:
-      select: "Selectaţi destinatarul"
-    transporter:
-      select: "Selectaţi transportatorul"
+    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
+                    destinatarul, respectiv transportatorul.<br/>
+                    Apăsaţi butonul \"Creare Anexa3\" <br/>
+                    <b>Important</b><br/>
+                    Selectaţi ambele, chiar dacă sunt acelaşi firme!"
+    select:
+      client: "Selectaţi destinatarul"
+      transporter: "Selectaţi transportatorul"
+      delegate: "Selectaţi delegatul!"
+    delegate_warning: "!!! Nu uitaţi să selectaţi delegatul !!!"
+    footer_note_put: "În cazul în care rubrica\"Rămâne\" are valoare negativă, notaţivă cantitatea şi creaţi</br>
+                      un APP pentru materialul în cauză, pe cantitate respectivă!"
+    footer_note_del: "Încă mai puteţi alege \"Ştergere\", dacă aţi greşit sau v-aţi răzgândit!<br/>
+                      Alegând opţiunea \"Generare PDF\" înregistrarea rămâne difinitivă!"
 en:
   trst_acc_delivery_note:
-    title: "Delivery Note - Annex3"
-    client:
-      select: "Select partner"
-    transporter:
-      select: "Select transporter"
+    title: "Aviz de expediţie - Anexa3"
+    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
+                    destinatarul, respectiv transportatorul.<br/>
+                    Apăsaţi butonul \"Creare Anexa3\" <br/>
+                    <b>Important</b><br/>
+                    Selectaţi ambele, chiar dacă sunt acelaşi firme!"
+    select:
+      client: "Selectaţi destinatarul"
+      transporter: "Selectaţi transportatorul"
+      delegate: "Selectaţi delegatul!"
+    delegate_warning: "!!! Nu uitaţi să selectaţi delegatul !!!"
+    footer_note: ""
 hu:
   trst_acc_delivery_note:
     title: "Aviz de expediţie - Anexa3"
-    transporter:
-      select: "Selectaţi transportatorul"
+    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
+                    destinatarul, respectiv transportatorul.<br/>
+                    Apăsaţi butonul \"Creare Anexa3\" <br/>
+                    <b>Important</b><br/>
+                    Selectaţi ambele, chiar dacă sunt acelaşi firme!"
+    select:
+      client: "Selectaţi destinatarul"
+      transporter: "Selectaţi transportatorul"
+      delegate: "Selectaţi delegatul!"
+    delegate_warning: "!!! Nu uitaţi să selectaţi delegatul !!!"
+    footer_note: ""
+

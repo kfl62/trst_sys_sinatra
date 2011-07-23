@@ -7,23 +7,30 @@
         %tr
           %th{:colspan => "6"}
             Nr.
-            %input.ce{:name => "[trst_acc_delivery_note][name]",:value => @object.name}
+            %input.ce{:name => "[trst_acc_delivery_note][name]",:value => @object.name, :style => "width:12em"}
             din data de:
             %input.date{:name => "[trst_acc_delivery_note][id_date]",:value => @object.id_date.to_s}
         %tr
-          %td Anexa la aviz nr.
-          %td{:colspan => "5"}
-            %input.ce{:name => "[trst_acc_delivery_note][id_main_doc]",:value => @object.id_main_doc}
-        %tr
-          %td Delegat
-          %td{:colspan => "2"}
-            %select{:name => "[trst_acc_delivery_note][id_delegate_t]"}
-              %option{:value => "null"}= "Selectaţi delegatul!"
-              - TrstPartner.find(@object.transporter_id).persons.each do |d|
-                %option{:value => d.id.to_s}= d.name
-          %td Mijloc trans.
-          %td{:colspan => "2"}
-            %input.ce{:name => "[trst_acc_delivery_note][id_platte]",:value => @object.id_platte}
+          %td{:colspan => "6"}
+            %table{:cellspacing => "0"}
+              %tbody
+                %tr
+                  %td Anexa la aviz nr.
+                  %td{:colspan => "3"}
+                    %input.ce{:name => "[trst_acc_delivery_note][id_main_doc]",:value => @object.id_main_doc}
+                %tr
+                  %td Delegat
+                  %td
+                    %select{:name => "[trst_acc_delivery_note][id_delegate_t]"}
+                      %option{:value => "null"}= t('trst_acc_delivery_note.select.delegate')
+                      - TrstPartner.find(@object.transporter_id).delegates.each do |d|
+                        %option{:value => d.id.to_s}= d.name
+                  %td Mijloc trans.
+                  %td
+                    %input.ce{:name => "[trst_acc_delivery_note][id_platte]",:value => @object.id_platte}
+              %tfoot
+                %tr
+                  %td.footer_note{:colspan => "4"}= t('trst_acc_delivery_note.delegate_warning')
       %tbody.inner
         %tr
           %td.ce Material
@@ -55,11 +62,10 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "6"}
-            - current_buttons(action).each do |button|
-              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
-                =t("button.#{button}")
+            %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
+            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
         %tr
-          -#%td.footer_note{:colspan => "9"}= t('gen_footer.note')
+          %td.footer_note{:colspan => "9"}= t('trst_acc_delivery_note.footer_note_put')
 -else
   %table{:cellspacing => "0"}
     %thead
