@@ -65,7 +65,7 @@
             %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
             %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
         %tr
-          %td.footer_note{:colspan => "9"}= t('trst_acc_delivery_note.footer_note_put')
+          %td.footer_note{:colspan => "6"}= t('trst_acc_delivery_note.footer_note_put')
 -else
   %table{:cellspacing => "0"}
     %thead
