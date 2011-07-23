@@ -491,9 +491,7 @@ dojo.mixin(trst.task,{
       };
       dojo.publish('xhrMsg',['loading','info']);
       var deferred = dojo.xhrGet(xhrArgs);
-      trst.task.id = this.verb = this.target_id = "";
-      trst.task.url = ["/srv/tsk"];
-      //trst.task.destroy();
+      trst.task.destroy();
     },
     validPn: function(node){
       var valid = new dijit.form.ValidationTextBox({
