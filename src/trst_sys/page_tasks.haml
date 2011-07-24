@@ -1,0 +1,4 @@
+%ul
+  - tsks.each do |t|
+    %li
+      %a{:id  => "#{t.id}",:'data-tsks' => "filter",:href => "#"}= t.name
