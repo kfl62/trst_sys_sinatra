@@ -1,3 +1,5 @@
 :markdown
   #{page.content}
-
+%article#page_tasks
+  - if page.methods.include?(:tasks)
+    = render(:haml,:'/trst_sys/page_tasks',:locals => {:tsks => page.tasks})
