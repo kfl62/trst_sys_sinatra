@@ -17,6 +17,7 @@ class TrstFirmUnit
   has_many    :apps,      :class_name => "TrstAccExpenditure",  :inverse_of => :unit
   has_many    :stocks,    :class_name => "TrstAccStock",        :inverse_of => :unit
   has_many    :freights,  :class_name => "TrstAccFreight",      :inverse_of => :unit
+  has_many    :dps,       :class_name => "TrstAccCache",        :inverse_of => :unit
 
   before_save :generate_slug
 
