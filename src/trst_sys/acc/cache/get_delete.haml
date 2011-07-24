@@ -1,3 +1,38 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
-%p= @object
+-if action == 'get'
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t('gen_head.field')
+        %th= t('gen_head.value')
+    %tbody
+      - @object.table_data.each do |data|
+        - tr_body('get',data)
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "2"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
+      %tr
+        - if current_user.unit_id
+          %td.footer_note{:colspan => "2"}= t('trst_acc_cache.footer_note_get.unit')
+        - else
+          %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+- else
+  %table
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p= t("gen_msg.#{action}", :data => "#{@object.class.to_s} -> #{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
+

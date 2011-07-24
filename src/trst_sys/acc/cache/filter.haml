@@ -9,6 +9,8 @@
       %tr
         %td
           - if current_user.unit_id
+            %span= t('trst_acc_cache.filter_info.unit')
+          - elsif session[:unit_id]
             %select{:onchange => "if (this.options[this.selectedIndex].value != 'null'){trst.task.init('#{@task.id}',
                                   'get',
                                   (this.options[this.selectedIndex].value))}"}
