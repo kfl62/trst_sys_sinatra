@@ -27,6 +27,8 @@ class TrstTask
   localized_field :title
   localized_field :help
 
+  before_update :sync_pages
+
   class << self
     # @todo Document this method
     def task_related_to
@@ -47,7 +49,7 @@ class TrstTask
   end
   # @todo Document this method
   def pages
-    page_ids
+    page_ids.collect{|id| TrstBook.page(id)}
   end
   # @todo Document this method
   def pages_name
@@ -65,12 +67,36 @@ class TrstTask
   def table_data
     [{:css => "normal",:name => "haml_path",:label => I18n.t("trst_task.haml_path"),:value => haml_path},
      {:css => "normal",:name => "target",:label => I18n.t("trst_task.target"),:value => target},
-     {:css => "relations",:name => "page_ids",:label => I18n.t("trst_task.page_ids"),:value => [pages_name,pages]},
+     {:css => "relations",:name => "page_ids",:label => I18n.t("trst_task.page_ids"),:value => [pages_name,page_ids]},
      {:css => "relations",:name => "user_ids",:label => I18n.t("trst_task.user_ids"),:value => [users_name,users]},
      {:css => "localized",:name => "name",:label => I18n.t("trst_task.name"),:value => name_translations},
      {:css => "localized",:name => "title",:label => I18n.t("trst_task.title"),:value => title_translations},
      {:css => "localized",:name => "help",:label => I18n.t("trst_task.help"),:value => help_translations},
      {:css => "datetime",:name => "created_at",:label => I18n.t("trst_task.created_at"),:value => created_at},
      {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_task.updated_at"),:value => updated_at}]
+  end
+
+  protected
+  def sync_pages
+    pgch = self.page_ids_change
+    if pgch
+      if pgch.first.empty?
+        pgch.last.each do |id|
+          b = TrstBook.page(id)
+          b.task_ids.push(self.id) unless b.task_ids.include?(self.id)
+          b.save
+        end
+      else
+        pgch.first.each do |id|
+          b = TrstBook.page(id)
+          if pgch.last.include?(id)
+            b.task_ids.push(self.id) unless b.task_ids.include?(self.id)
+          else
+            b.task_ids.delete(self.id)
+          end
+          b.save
+        end
+      end
+    end
   end
 end
