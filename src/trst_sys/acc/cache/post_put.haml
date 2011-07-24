@@ -1,0 +1,15 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@task,action)
+%form{:id  => "xhr_put"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+          Nume
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "6"}
+          %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
+          %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+      %tr
+        %td.footer_note{:colspan => "2"}= t('gen_footer.note')
