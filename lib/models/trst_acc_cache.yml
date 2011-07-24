@@ -2,6 +2,20 @@
 ro:
   trst_acc_cache:
     title: "Monetar"
+    name: "Document"
+    id_date: "Data"
+    money_in: "Bani primiţi"
+    money_out: "Bani cheltuiţi"
+    money_stock: "Bani în casă"
+    expl: "Explicaţii"
+    expl_value: "Vasy Ildiko"
+    filter_info:
+      unit: "Apăsaţi \"Creare\" ptr. a introduce suma primită!"
+    footer_note_put:
+      unit: "Câmpul \"Nume\" va fi completat de contabil/ă!"
+    footer_note_get:
+      unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
+            Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
 en:
   trst_acc_cache:
     title: "Monetar"
