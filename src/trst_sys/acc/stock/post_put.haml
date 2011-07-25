@@ -21,7 +21,7 @@
           %td.ce Material
           %td.ce UM
           %td.ce Cant
-        - @object.freights_for_table.each_with_index do |f,i|
+        - @object.freights_for_table(current_user.unit_id).each_with_index do |f,i|
           %tr
             %td
               %span.freight= f[1]

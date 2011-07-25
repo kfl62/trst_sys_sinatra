@@ -14,10 +14,19 @@ class TrstAccStock
   has_many   :freights,   :class_name => "TrstAccFreightStock", :inverse_of => :doc
   belongs_to :unit,       :class_name => "TrstFirmUnit",        :inverse_of => :stocks
 
-  scope :pos,     ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
-  scope :monthly, ->(m)   { where(:id_month => m) }
-
   after_destroy :destroy_freights
+  class << self
+    # @todo
+    def pos(slg)
+      slg = slg.upcase
+      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))
+    end
+    # @todo
+    def monthly(m)
+      m = m.to_i
+      where(:id_month => m)
+    end
+  end # Class methods
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
@@ -27,8 +36,8 @@ class TrstAccStock
     freights.where(:freight_id => id).first.qu rescue 0.00
   end
   # @todo
-  def freights_for_table
-    TrstAccFreight.asc(:name).map{|f| [f.id, f.name, f.um, qu_by_freight_id(f.id)]}
+  def freights_for_table(u)
+    TrstAccFreight.by_unit_id(u).asc(:name).map{|f| [f.id, f.name, f.um, qu_by_freight_id(f.id)]}
   end
   # @todo
   def stocks_for_table
