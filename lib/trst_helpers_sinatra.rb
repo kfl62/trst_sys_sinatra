@@ -109,6 +109,8 @@ module Trst
           end
         elsif verb == 'pdf' || verb == 'print'
           object = (model.send method, task.id) || (model.send method, target_id)
+        elsif verb == 'query'
+          object = model
         else
           if method == 'details'
             if params[:target]
@@ -147,6 +149,8 @@ module Trst
           haml_path += "/pdf_params"
         when /print/
           haml_path = "/trst_pdf" if task.haml_path == 'default'
+        when /query/
+          haml_path += "/query"
         else
           haml_path = "/trst_sys/error"
         end
