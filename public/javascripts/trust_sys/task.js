@@ -120,6 +120,22 @@ trst.task = {
     var deferred = dojo.xhrPut(xhrArgs);
     this.destroy();
   },
+  //query get params {{{2
+  query: function(){
+    xhrArgs = {
+      url: this.url.join('/'),
+      load: function(data){
+        trst.task.drawBox(data);
+        dojo.attr('xhr_msg','class','hidden');
+      },
+      error: function(error){
+        dojo.publish('xhrMsg',['error','error',error]);
+      }
+    };
+    dojo.publish('xhrMsg',['loading','info']);
+    var deferred = dojo.xhrGet(xhrArgs);
+    this.url = ["/srv/tsk"];
+  },
   // post {{{2
   post: function(){
     xhrArgs = {
@@ -226,6 +242,14 @@ trst.task = {
           dojo.connect(a, 'onclick', function(e){
             e.preventDefault()
             trst.task.init(e.target.id,'pdf')
+          })
+        )
+      }
+      else if (a.getAttribute('data-tsks') == 'query'){
+        trst.task.connections.push(
+          dojo.connect(a, 'onclick', function(e){
+            e.preventDefault()
+            trst.task.init(e.target.id,'query')
           })
         )
       }
