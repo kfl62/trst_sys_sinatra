@@ -1,0 +1,18 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_cache.query.title')
+%select
+  - ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"].each_with_index do |m,i|
+    %option{:value => i, :selected => i == Date.today.month}= m
+%table
+  %tbody.inner
+    %tr
+      %td Data
+      %td.ce Incasări
+      %td.ce Plăţi
+      %td.ce Sold
+    - @object.where(unit_id: current_user.unit_id).query.each do |d|
+      %tr
+        %td= d[0]
+        %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % d[1]
+        %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % d[2]
+        %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % d[3]
