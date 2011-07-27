@@ -16,6 +16,8 @@ ro:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
+    query:
+      title: "Bani în casă - Monetar"
 en:
   trst_acc_cache:
     title: "Monetar"
