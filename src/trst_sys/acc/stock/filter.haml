@@ -11,9 +11,9 @@
           %select{:onchange => "if (this.options[this.selectedIndex].value != 'null'){trst.task.init('#{@task.id}',
                                 'get',
                                 (this.options[this.selectedIndex].value))}"}
-            %option{:value => 'null'}= @object.empty? ? t('select.no_data') : t('select.select')
-            - unless @object.empty?
-              - @object.each do |o|
+            %option{:value => 'null'}= @object.where(:unit_id => current_user.unit.id).empty? ? t('select.no_data') : t('select.select')
+            - unless @object.where(:unit_id => current_user.unit.id).empty?
+              - @object.where(:unit_id => current_user.unit.id).each do |o|
                 %option{:value => o.id}
                   = option_name(o)
     %tfoot
