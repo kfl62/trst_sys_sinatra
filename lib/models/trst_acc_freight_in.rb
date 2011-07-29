@@ -17,8 +17,25 @@ class TrstAccFreightIn
 
   before_save   :update_date
 
-  scope :monthly, ->(m)  { where(:id_date.gte => DateTime.new(Date.today.year,m).to_time, :id_date.lt => DateTime.new(Date.today.year,m + 1).to_time)}
-  scope :pn,      ->(pn) { where(:doc_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id}) }
+  class << self
+    # @todo
+    def daily(d)
+      where(:id_date => DateTime.strptime("#{d}","%F").to_time)
+    end
+    # @todo
+    def monthly(m)
+      y = Date.today.year
+      m = m.to_i
+      mb = DateTime.new(y, m)
+      me = DateTime.new(y, m + 1)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
+    end
+    # @todo
+    def pn(pn)
+      where(:doc_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
+    end
+  end
+
   protected
   # @todo
   def update_date
