@@ -18,9 +18,89 @@ ro:
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
     query:
       title: "Bani în casă - Monetar"
+      name: "Data (Ziua)"
+      in:  "Bani primiţi"
+      out: "Bani cheltuiţi"
+      end: "Sold"
+      no_unit:
+        warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
+                  Pentru detalii click pe Punctul de lucru care vă interesează.
+        footer_note: Notă:<br/>
+                    Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
+                    Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
+                    fost actualizat soldul iniţial)
+    balance:
+      name: "Punctul de lucru"
+      in:  "Bani lăsaţi"
+      out: "Bani cheltuiţi"
+      end: "Sold"
 en:
   trst_acc_cache:
     title: "Monetar"
+    name: "Document"
+    id_date: "Data"
+    money_in: "Bani primiţi"
+    money_out: "Bani cheltuiţi"
+    money_stock: "Bani în casă"
+    expl: "Explicaţii"
+    expl_value: "Vasy Ildiko"
+    filter_info:
+      unit: "Apăsaţi \"Creare\" ptr. a introduce suma primită!"
+    footer_note_put:
+      unit: "Câmpul \"Nume\" va fi completat de contabil/ă!"
+    footer_note_get:
+      unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
+            Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
+    query:
+      title: "Bani în casă - Monetar"
+      name: "Data (Ziua)"
+      in:  "Bani primiţi"
+      out: "Bani cheltuiţi"
+      end: "Sold"
+      no_unit:
+        warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
+                  Pentru detalii click pe Punctul de lucru care vă interesează.
+        footer_note: Notă:<br/>
+                    Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
+                    Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
+                    fost actualizat soldul iniţial)
+    balance:
+      name: "Punctul de lucru"
+      in:  "Bani lăsaţi"
+      out: "Bani cheltuiţi"
+      end: "Sold"
 hu:
   trst_acc_cache:
     title: "Monetar"
+    name: "Document"
+    id_date: "Data"
+    money_in: "Bani primiţi"
+    money_out: "Bani cheltuiţi"
+    money_stock: "Bani în casă"
+    expl: "Explicaţii"
+    expl_value: "Vasy Ildiko"
+    filter_info:
+      unit: "Apăsaţi \"Creare\" ptr. a introduce suma primită!"
+    footer_note_put:
+      unit: "Câmpul \"Nume\" va fi completat de contabil/ă!"
+    footer_note_get:
+      unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
+            Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
+    query:
+      title: "Bani în casă - Monetar"
+      name: "Data (Ziua)"
+      in:  "Bani primiţi"
+      out: "Bani cheltuiţi"
+      end: "Sold"
+      no_unit:
+        warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
+                  Pentru detalii click pe Punctul de lucru care vă interesează.
+        footer_note: Notă:<br/>
+                    Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
+                    Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
+                    fost actualizat soldul iniţial)
+    balance:
+      name: "Punctul de lucru"
+      in:  "Bani lăsaţi"
+      out: "Bani cheltuiţi"
+      end: "Sold"
