@@ -1,0 +1,34 @@
+:ruby
+  today = Date.today
+  month = params[:month].nil? ? today.month : params[:month].to_i
+  unit_id = current_user.unit_id
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_freight.query.title')
+-if unit_id
+  %p
+    %select
+      - t('month')[0..today.month].each_with_index do |m,i|
+        %option{:value => i, :selected => i == month}= m
+    %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s}"
+  %table
+    %tbody.inner
+      %tr
+        %td= t('trst_acc_freight.query.name')
+        %td.ce= t('trst_acc_freight.query.start')
+        %td.ce= t('trst_acc_freight.query.in')
+        %td.ce= t('trst_acc_freight.query.out')
+        %td.ce= t('trst_acc_freight.query.end')
+      - @object.by_unit_id(unit_id).query(month).each do |stock|
+        %tr
+          %td= stock[0]
+          %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % stock[1]
+          %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % stock[2]
+          %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % stock[3]
+          %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % stock[4]
+      %tr
+        %td{:colspan => "5"} &nbsp;
+    %tfooter
+      %tr
+        %td.footer_note{:colspan => "5"}= t('trst_acc_freight.query.footer_note')
+-else
+  %p=t('trst_acc_freight.query.warning.no_unit')

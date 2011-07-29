@@ -6,6 +6,18 @@ ro:
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
+    query:
+        title: "Stocuri"
+        name: "Material"
+        start: "Iniţial"
+        in: "Intrări"
+        out: "Ieşiri"
+        end: "Stoc"
+        footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!<br>
+                      Stocurile ptr. lunile anterioare sunt cele de la sfârşitul lunii!
+        warning:
+            no_unit: "Nu aveţi nici un punct de lucru selectat!<br>"
+
 en:
   trst_acc_freight:
     name: "Denumire"
