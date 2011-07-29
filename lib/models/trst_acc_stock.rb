@@ -18,7 +18,6 @@ class TrstAccStock
   class << self
     # @todo
     def pos(slg)
-      slg = slg.upcase
       where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))
     end
     # @todo
