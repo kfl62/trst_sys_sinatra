@@ -23,14 +23,32 @@ class TrstAccExpenditure
   before_create :increment_name
   after_destroy :destroy_freights
 
-  scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time) }
-  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)) }
-  scope :pn,    ->(pn)  { where(:client_id => TrstPartnersPf.id_by_pn(pn) ) }
-
   class << self
+    # @todo
+    def daily(d)
+      where(:id_date => DateTime.strptime("#{d}","%F").to_time).asc(:name)
+    end
+    # @todo
+    def monthly(m)
+      y = Date.today.year
+      m = m.to_i
+      mb = DateTime.new(y, m)
+      me = DateTime.new(y, m + 1)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
+    end
+    # @todo
+    def pos(slg)
+      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
+    end
+    # @todo
     def by_unit_id(u)
       where(:unit_id => u).asc(:name)
     end
+    # @todo
+    def pn(pn)
+      where(:client_id => TrstPartnersPf.id_by_pn(pn)).asc(:name)
+    end
+    # @todo
     def check_sum
       retval = []
       all.each do |a|
