@@ -194,7 +194,7 @@ trst.task = {
     base = dojo.position(o1),
     tskw = dojo.position(o2);
     lastX = base.x + 18;
-    lastY = base.y + 18;
+    lastY = (o2.offsetHeight > 476) ? base.y + (482 - o2.offsetHeight) : base.y + 18;
     dojo.style(o2,{
       left:   lastX + 'px',
       top:    lastY + 'px'
