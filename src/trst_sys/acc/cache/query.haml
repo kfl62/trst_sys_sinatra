@@ -1,18 +1,48 @@
+:ruby
+  today = Date.today
+  month = params[:month].nil? ? today.month : params[:month].to_i
+  unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_cache.query.title')
-%select
-  - ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"].each_with_index do |m,i|
-    %option{:value => i, :selected => i == Date.today.month}= m
-%table
-  %tbody.inner
-    %tr
-      %td Data
-      %td.ce Incasări
-      %td.ce Plăţi
-      %td.ce Sold
-    - @object.where(unit_id: current_user.unit_id).query.each do |d|
+-if unit_id
+  %p
+    %select{:onchange => "if (this.options[this.selectedIndex].value != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                            'query',
+                          '?unit_id=#{unit_id}&month=' + (this.options[this.selectedIndex].value))}"}
+      - t('month')[0..today.month].each_with_index do |m,i|
+        %option{:value => i, :selected => i == month}= m
+    %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
+  %table
+    %tbody.inner
       %tr
-        %td= d[0]
-        %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % d[1]
-        %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % d[2]
-        %td.ri{:style => "padding:0px 2px 0px 5px"}= "%0.2f" % d[3]
+        %td{:style => "padding:1px 5px"}= t('trst_acc_cache.query.name')
+        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.query.in')
+        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.query.out')
+        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.query.end')
+      - @object.by_unit_id(unit_id).query(month).each do |d|
+        %tr
+          %td{:style => "padding:1px 5px"}= d[0]
+          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % d[1]
+          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % d[2]
+          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % d[3]
+-else
+  %p{:style => "font-size:0.9em"}= t('trst_acc_cache.query.no_unit.warning')
+  %table
+    %tbody.inner
+      %tr
+        %td{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.name')
+        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.in')
+        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.out')
+        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.end')
+      - TrstFirm.first.units.asc(:slug).each do |unit| ; balance = @object.by_unit_id(unit.id).balance
+        %tr
+          %td{:style => "padding:1px 5px;cursor:pointer"}
+            %span{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?unit_id=' + this.id)"}=unit.name[1]
+          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % balance[0]
+          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % balance[1]
+          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % balance[2]
+      %tr
+        %td{:colspan => "4"} &nbsp;
+    %tfooter
+      %tr
+        %td.footer_note{:colspan => "4"}= t('trst_acc_cache.query.no_unit.footer_note')
