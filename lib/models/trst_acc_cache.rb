@@ -26,7 +26,11 @@ class TrstAccCache
     # @todo
     def pos(slg)
       slg = slg.upcase
-      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))
+      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:id_date)
+    end
+    # @todo
+    def by_unit_id(u)
+      where(:unit_id => u).asc(:id_date)
     end
     # @todo
     def query(m = nil)
