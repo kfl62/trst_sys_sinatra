@@ -38,6 +38,7 @@ ro:
   select:
     select: "Alegeţi!"
     no_data: "Nu există înregistrări!"
+  month: ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"]
 en:
   xhr_tasks:
     title: "Daily todo... (tasks)"
