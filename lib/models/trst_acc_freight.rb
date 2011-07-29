@@ -20,9 +20,8 @@ class TrstAccFreight
   has_many :stocks,   :class_name => "TrstAccFreightStock", :inverse_of => :freight
   belongs_to :unit,   :class_name => "TrstFirmUnit",        :inverse_of => :freights
 
-  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))}
-
   class << self
+    # @todo
     def auto_search(u=nil, stock=nil)
       u ||= TrstFirm.unit_id_by_unit_slug("Main")
       fs = []
@@ -35,10 +34,28 @@ class TrstAccFreight
       end
       {:identifier => "id",:items => fs}
     end
+    # @todo
+    def pos(s)
+      where(:unit_id => TrstFirm.unit_id_by_unit_slug(s)).asc(:name)
+    end
+    # @todo
     def by_unit_id(u)
       where(:unit_id => u).asc(:name)
     end
-  end
+    # @todo
+    def query(m = nil)
+      m = m || Date.today.month
+      retval = []
+      asc(:name).each do |f|
+        stk = f.stocks.monthly(m).sum(:qu) || 0
+        f_in  = f.ins.monthly(m).sum(:qu) || 0
+        f_out = f.outs.monthly(m).sum(:qu) || 0
+        retval << [f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
+      end
+      retval
+    end
+  end # Class methods
+
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id)
