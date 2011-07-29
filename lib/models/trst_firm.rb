@@ -21,6 +21,7 @@ class TrstFirm
   class << self
     # @todo
     def unit_id_by_unit_slug(s)
+      s = s.upcase
       f = where('units.slug' => s).first
       id = f.units.where(:slug => s).first.id
     end
