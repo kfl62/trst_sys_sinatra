@@ -6,18 +6,25 @@ ro:
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
+    id_stats: "Cod intern"
+    filter:
+      no_unit:
+        warning: "Nu aveţi nici un Punct de lucru selectat!<br/>"
+        select: "Selectaţi unitatea!"
+      has_unit:
+        warning: "Punctul de lucru selectat: "
+        select: "Toate unităţile"
     query:
-        title: "Stocuri"
-        name: "Material"
-        start: "Iniţial"
-        in: "Intrări"
-        out: "Ieşiri"
-        end: "Stoc"
-        footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!<br>
-                      Stocurile ptr. lunile anterioare sunt cele de la sfârşitul lunii!
-        warning:
-            no_unit: "Nu aveţi nici un punct de lucru selectat!<br>"
-
+      title: "Stocuri"
+      name: "Material"
+      start: "Iniţial"
+      in: "Intrări"
+      out: "Ieşiri"
+      end: "Stoc"
+      footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!<br>
+                    Stocurile ptr. lunile anterioare sunt cele de la sfârşitul lunii!
+      warning:
+        no_unit: "Nu aveţi nici un punct de lucru selectat!<br/>"
 en:
   trst_acc_freight:
     name: "Denumire"
@@ -25,10 +32,47 @@ en:
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
+    id_stats: "Cod intern"
+    filter:
+      no_unit:
+        warning: "Nu aveţi nici un Punct de lucru selectat!<br/>"
+        select: "Selectaţi unitatea!"
+      has_unit:
+        warning: "Punctul de lucru selectat: "
+        select: "Toate unităţile"
+    query:
+      title: "Stocuri"
+      name: "Material"
+      start: "Iniţial"
+      in: "Intrări"
+      out: "Ieşiri"
+      end: "Stoc"
+      footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!<br>
+                    Stocurile ptr. lunile anterioare sunt cele de la sfârşitul lunii!
+      warning:
+        no_unit: "Nu aveţi nici un punct de lucru selectat!<br/>"
 hu:
-  trst_acc_freight:
     name: "Denumire"
     um: "Unitate de măsură"
     pu: "Preţ unitar"
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
+    id_stats: "Cod intern"
+    filter:
+      no_unit:
+        warning: "Nu aveţi nici un Punct de lucru selectat!<br/>"
+        select: "Selectaţi unitatea!"
+      has_unit:
+        warning: "Punctul de lucru selectat: "
+        select: "Toate unităţile"
+    query:
+      title: "Stocuri"
+      name: "Material"
+      start: "Iniţial"
+      in: "Intrări"
+      out: "Ieşiri"
+      end: "Stoc"
+      footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!<br>
+                    Stocurile ptr. lunile anterioare sunt cele de la sfârşitul lunii!
+      warning:
+        no_unit: "Nu aveţi nici un punct de lucru selectat!<br/>"
