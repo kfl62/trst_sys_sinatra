@@ -90,14 +90,14 @@ class TrstSysTsk < Sinatra::Base
       @object = @object.where("#{params[:target]}._id" => params[:child_id]).first
       @object = @object.method(params[:target]).call.create
     elsif params[:id_pn]
-      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id)
+      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id || session[:unit_id])
       @object.reload
     elsif params[:client_id]
-      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]), :transporter_id => BSON::ObjectId.from_string(params[:transporter_id]), :unit_id => current_user.unit_id)
+      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]), :transporter_id => BSON::ObjectId.from_string(params[:transporter_id]), :unit_id => current_user.unit_id || session[:unit_id])
       @object.reload
     else
       if @object.instance_methods.include?(:unit_id)
-        @object = @object.create(:unit_id => current_user.unit_id)
+        @object = @object.create(:unit_id => current_user.unit_id || session[:unit_id])
       else
         @object = @object.create
       end
