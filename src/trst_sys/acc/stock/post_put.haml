@@ -1,3 +1,5 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_stock.title')
 -if action == 'put'
@@ -21,7 +23,7 @@
           %td.ce Material
           %td.ce UM
           %td.ce Cant
-        - @object.freights_for_table(current_user.unit_id).each_with_index do |f,i|
+        - @object.freights_for_table(unit_id).each_with_index do |f,i|
           %tr
             %td
               %span.freight= f[1]

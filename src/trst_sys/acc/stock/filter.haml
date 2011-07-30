@@ -1,24 +1,31 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
-%form{:id  => "xhr_#{action}"}
-  %table{:cellspacing => "0"}
-    %thead
-      %tr
-        %td
-    %tbody
-      %tr
-        %td
-          %select{:onchange => "if (this.options[this.selectedIndex].value != 'null'){trst.task.init('#{@task.id}',
-                                'get',
-                                (this.options[this.selectedIndex].value))}"}
-            %option{:value => 'null'}= @object.where(:unit_id => current_user.unit.id).empty? ? t('select.no_data') : t('select.select')
-            - unless @object.where(:unit_id => current_user.unit.id).empty?
-              - @object.where(:unit_id => current_user.unit.id).each do |o|
-                %option{:value => o.id}
-                  = option_name(o)
-    %tfoot
-      %tr
-        %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |verb|
-            %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
-              =t("button.#{verb}")
+- if unit_id
+  - unless current_user.unit_id
+    = partial('trst_sys/shared/select_unit')
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %td
+      %tbody
+        %tr
+          %td
+            %select{:onchange => "if (selectedValue(this) != 'null'){trst.task.init('#{@task.id}',
+                                 'get',
+                                  selectedValue(this))}"}
+              %option{:value => 'null'}= TrstAccStock.by_unit_id(unit_id).empty? ? t('select.no_data') : t('select.select')
+              - unless TrstAccStock.by_unit_id(unit_id).empty?
+                - TrstAccStock.by_unit_id(unit_id).each do |o|
+                  %option{:value => o.id}
+                    = option_name(o)
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom"}
+            - current_buttons(action).each do |verb|
+              %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
+                =t("button.#{verb}")
+- else
+  = partial('trst_sys/shared/select_unit')
