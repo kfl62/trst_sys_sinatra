@@ -44,6 +44,10 @@ class TrstAccFreight
       where(:unit_id => u).asc(:name)
     end
     # @todo
+    def by_id_stats(ids)
+      where(:id_stats => ids).asc(:unit_id)
+    end
+    # @todo
     def query(m = nil)
       today = Date.today
       month = m.nil? ? today.month : m.to_i
@@ -58,8 +62,32 @@ class TrstAccFreight
     end
     # @todo
     def stats(m = nil)
+      retval, part, tot_stk, tot_ins, tot_out, tot_end = [], [], 0, 0, 0, 0
       today = Date.today
       month = m.nil? ? today.month : m.to_i
+      stats_for = all.map{|f| [f.name, f.id_stats]}.uniq.sort
+      stats_for.each_with_index do |ids,i|
+        part[i] = []
+        TrstFirm.unit_ids.each do |u|
+          f = by_unit_id(u).by_id_stats(ids[1]).first
+          if f
+            pos_stk = f.stocks.monthly(month).sum(:qu) || 0
+            pos_ins = f.ins.monthly(month).sum(:qu) || 0
+            pos_out = f.outs.monthly(month).sum(:qu) || 0
+            pos_end = pos_stk.round(2) + pos_ins.round(2) - pos_out.round(2)
+            tot_stk += pos_stk.round(2)
+            tot_ins += pos_ins.round(2)
+            tot_out += pos_out.round(2)
+            tot_end += pos_end.round(2)
+            part[i] << pos_end.round(2)
+          else
+            part[i] << 0
+          end
+        end
+        retval << [ids[0], tot_stk.round(2), tot_ins.round(2), tot_out.round(2), tot_end.round(2), part[i]].flatten
+        tot_stk, tot_ins, tot_out, tot_end = 0, 0, 0, 0
+      end
+      retval
     end
   end # Class methods
 
