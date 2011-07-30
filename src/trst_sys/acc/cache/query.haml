@@ -7,7 +7,7 @@
 -if unit_id
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
-                            'query',
+                          'query',
                           '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
       - t('month')[0..today.month].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
