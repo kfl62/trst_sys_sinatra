@@ -1,6 +1,5 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
-  units = [t('trst_acc_freight.filter.no_unit.select')]
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
 - if unit_id
