@@ -55,6 +55,22 @@ trst.task = {
     var deferred = dojo.xhrGet(xhrArgs);
     this.url = ["/srv/tsk"];
   },
+  //set unit_id {{{2
+  unit_id: function(){
+    xhrArgs = {
+      url: this.url.join('/'),
+      load: function(data){
+        trst.task.drawBox(data);
+        dojo.attr('xhr_msg','class','hidden');
+      },
+      error: function(error){
+        dojo.publish('xhrMsg',['error','error',error]);
+      }
+    };
+    dojo.publish('xhrMsg',['loading','info']);
+    var deferred = dojo.xhrGet(xhrArgs);
+    this.url = ["/srv/tsk"];
+  },
   // help {{{2
   help: function(){
     var xhrArgs = {
