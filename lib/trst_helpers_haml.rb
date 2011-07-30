@@ -134,6 +134,14 @@ module Trst
                      :name => input_name(task,data[:name]),
                      :checked => !data[:value],
                      :value => "false"
+            when 'admin'
+              if current_user.admin?
+                haml_tag :input,
+                         :name => input_name(task,data[:name]),
+                         :value => data[:value]
+              else
+                haml_tag :span, data[:value],  :class => "limit-width"
+              end
           else
             haml_tag :span, data[:value], :class => "limit-width"
           end
