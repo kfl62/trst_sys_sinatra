@@ -16,6 +16,8 @@ ro:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
+    footer_note_query: La "Bani primiţi", prima zi a lunii, include şi soldul iniţial!<br/>
+                       Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
@@ -26,6 +28,7 @@ ro:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
                   Pentru detalii click pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
+                    Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
                     Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
                     fost actualizat soldul iniţial)
@@ -51,6 +54,8 @@ en:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
+    footer_note_query: La "Bani primiţi", prima zi a lunii, include şi soldul iniţial!<br/>
+                       Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
@@ -61,6 +66,7 @@ en:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
                   Pentru detalii click pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
+                    Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
                     Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
                     fost actualizat soldul iniţial)
@@ -86,6 +92,8 @@ hu:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
+    footer_note_query: La "Bani primiţi", prima zi a lunii, include şi soldul iniţial!<br/>
+                       Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
@@ -96,6 +104,7 @@ hu:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
                   Pentru detalii click pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
+                    Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
                     Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
                     fost actualizat soldul iniţial)
