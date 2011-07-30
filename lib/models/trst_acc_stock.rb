@@ -25,6 +25,10 @@ class TrstAccStock
       m = m.to_i
       where(:id_month => m)
     end
+    # @todo
+    def by_unit_id(u)
+      where(:unit_id => u).asc(:name)
+    end
   end # Class methods
   # @todo
   def unit
