@@ -34,6 +34,13 @@ class TrstSysTsk < Sinatra::Base
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
 
+  # @todo Documentation
+  get '/:id/unit_id/:unit_id' do |id,unit_id|
+    session[:unit_id] = (unit_id == 'null') ? nil : unit_id
+    @task, @object, haml_path, locals = init_variables(id, 'filter', nil, params)
+    haml :"#{haml_path}", :layout => false, :locals => locals
+  end
+
   # route for pdf params setting
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @action Action:
