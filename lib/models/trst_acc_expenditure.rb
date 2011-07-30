@@ -8,7 +8,7 @@ class TrstAccExpenditure
   include Mongoid::Timestamps
 
   field :name,        :type => String
-  field :id_date,     :type => Date,      :default => Date.new(Time.now.year,Time.now.month,Time.now.day)
+  field :id_date,     :type => Date,      :default => Date.today
   field :sum_003,     :type => Float,     :default => 0.00
   field :sum_016,     :type => Float,     :default => 0.00
   field :sum_100,     :type => Float,     :default => 0.00
