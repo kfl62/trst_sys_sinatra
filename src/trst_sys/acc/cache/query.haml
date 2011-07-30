@@ -6,9 +6,9 @@
 %p.task_title= t('trst_acc_cache.query.title')
 -if unit_id
   %p
-    %select{:onchange => "if (this.options[this.selectedIndex].value != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                             'query',
-                          '?unit_id=#{unit_id}&month=' + (this.options[this.selectedIndex].value))}"}
+                          '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
       - t('month')[0..today.month].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
     %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
