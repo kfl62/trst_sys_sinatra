@@ -14,6 +14,7 @@ class TrstAccFreight
   field :category,    :type => String,        :default => "Category"
   field :descript,    :type => Array,         :default => []
   field :pu_other,    :type => Array,         :default => []
+  field :id_stats,    :type => String
 
   has_many :ins,      :class_name => "TrstAccFreightIn",    :inverse_of => :freight
   has_many :outs,     :class_name => "TrstAccFreightOut",   :inverse_of => :freight
@@ -44,15 +45,21 @@ class TrstAccFreight
     end
     # @todo
     def query(m = nil)
-      m = m || Date.today.month
+      today = Date.today
+      month = m.nil? ? today.month : m.to_i
       retval = []
       asc(:name).each do |f|
-        stk = f.stocks.monthly(m).sum(:qu) || 0
-        f_in  = f.ins.monthly(m).sum(:qu) || 0
-        f_out = f.outs.monthly(m).sum(:qu) || 0
+        stk = f.stocks.monthly(month).sum(:qu) || 0
+        f_in  = f.ins.monthly(month).sum(:qu) || 0
+        f_out = f.outs.monthly(month).sum(:qu) || 0
         retval << [f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
       end
       retval
+    end
+    # @todo
+    def stats(m = nil)
+      today = Date.today
+      month = m.nil? ? today.month : m.to_i
     end
   end # Class methods
 
@@ -97,7 +104,8 @@ class TrstAccFreight
       {:css => "normal",:name => "um",:label => I18n.t("trst_acc_freight.um"),:value => um},
       {:css => "integer",:name => "pu",:label => I18n.t("trst_acc_freight.pu"),:value => pu},
       {:css => "boolean",:name => "p03",:label => I18n.t("trst_acc_freight.p03"),:value => p03},
-      {:css => "normal",:name => "descript,",:label => I18n.t("trst_acc_freight.cod"),:value => descript[0]}
+      {:css => "admin",:name => "descript,",:label => I18n.t("trst_acc_freight.cod"),:value => descript[0]},
+      {:css => "admin",:name => "id_stats",:label => I18n.t("trst_acc_freight.id_stats"),:value => id_stats}
     ]
   end
 end
