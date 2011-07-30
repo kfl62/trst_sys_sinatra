@@ -13,34 +13,37 @@
         %option{:value => i, :selected => i == month}= m
     %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
   %table
-    %tbody.inner
+    %tbody.inner.stats
       %tr
-        %td{:style => "padding:1px 5px"}= t('trst_acc_cache.query.name')
-        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.query.in')
-        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.query.out')
-        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.query.end')
+        %td= t('trst_acc_cache.query.name')
+        %td.ce= t('trst_acc_cache.query.in')
+        %td.ce= t('trst_acc_cache.query.out')
+        %td.ce= t('trst_acc_cache.query.end')
       - @object.by_unit_id(unit_id).query(month).each do |d|
         %tr
-          %td{:style => "padding:1px 5px"}= d[0]
-          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % d[1]
-          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % d[2]
-          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % d[3]
+          %td= d[0]
+          %td.ri= "%0.2f" % d[1]
+          %td.ri= "%0.2f" % d[2]
+          %td.ri= "%0.2f" % d[3]
+    %tfooter
+      %tr
+        %td.footer_note{:colspan => "4"}= t('trst_acc_cache.footer_note_query')
 -else
   %p{:style => "font-size:0.9em"}= t('trst_acc_cache.query.no_unit.warning')
   %table
-    %tbody.inner
+    %tbody.inner.stats
       %tr
-        %td{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.name')
-        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.in')
-        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.out')
-        %td.ce{:style => "padding:1px 5px"}= t('trst_acc_cache.balance.end')
+        %td= t('trst_acc_cache.balance.name')
+        %td.ce= t('trst_acc_cache.balance.in')
+        %td.ce= t('trst_acc_cache.balance.out')
+        %td.ce= t('trst_acc_cache.balance.end')
       - TrstFirm.first.units.asc(:slug).each do |unit| ; balance = @object.by_unit_id(unit.id).balance
         %tr
           %td{:style => "padding:1px 5px;cursor:pointer"}
-            %span{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?unit_id=' + this.id)"}=unit.name[1]
-          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % balance[0]
-          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % balance[1]
-          %td.ri{:style => "padding:1px 5px"}= "%0.2f" % balance[2]
+            %span.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?unit_id=' + this.id)"}=unit.name[1]
+          %td.ri= "%0.2f" % balance[0]
+          %td.ri= "%0.2f" % balance[1]
+          %td.ri= "%0.2f" % balance[2]
       %tr
         %td{:colspan => "4"} &nbsp;
     %tfooter
