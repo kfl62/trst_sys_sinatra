@@ -1,4 +1,8 @@
 // TODO documentation
+var selectedValue = function(node){
+  return node.options[node.selectedIndex].value
+}
+
 var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
   var p = what;
   kind ? p += '/' + kind : p += '/info'
