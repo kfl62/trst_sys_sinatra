@@ -143,6 +143,9 @@ trst.task = {
       load: function(data){
         trst.task.drawBox(data);
         dojo.attr('xhr_msg','class','hidden');
+        if (dojo.byId('pfFilteringSelect') != undefined){
+          trst.task.acc.init(dojo.byId('pfFilteringSelect'));
+        }
       },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
@@ -389,10 +392,11 @@ dojo.mixin(trst.task,{
         });
         if (dijit.byId("pfFilteringSelect"))
           dijit.byId("pfFilteringSelect").destroy();
+        var id_pn = dojo.query('.filtering-select-pf')[0].getAttribute('data-id_pn')
         var pfSearch = new dijit.form.FilteringSelect({
           id: "pfFilteringSelect",
           name: "id_pn",
-          value: "",
+          value: (id_pn != undefined) ? id_pn : "",
           store: pfStore,
           searchAttr: "pn",
           placeHolder: "Caută după CNP",
@@ -434,9 +438,14 @@ dojo.mixin(trst.task,{
     },
     onSelectPf: function(id){
       var button = dojo.query('.post')[1];
-      dojo.connect(button, 'onclick', function(){
-        trst.task.init(button.getAttribute('data-task_id'),'post','new?id_pn=' + id)
-      })
+      if (button != undefined){
+        dojo.connect(button, 'onclick', function(){
+          trst.task.init(button.getAttribute('data-task_id'),'post','new?id_pn=' + id)
+        })
+      }else{
+        var task_id = dojo.query('.filtering-select-pf')[0].getAttribute('data-task_id')
+        trst.task.init(task_id,'query','?id_pn=' + id)
+      }
     },
     onSelectFreight: function(d){
       var tr = d.domNode.parentElement.parentElement

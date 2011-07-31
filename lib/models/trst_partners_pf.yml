@@ -19,6 +19,8 @@ ro:
       et: "Etaj"
       ap: "Apartament"
     other: "Altele"
+    query:
+      title: Statistică clienţi (PF)
 en:
   trst_partners_pf:
     id_pn: "CNP"

@@ -1,0 +1,20 @@
+:ruby
+  id_pn = params[:id_pn]
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_partners_pf.query.title')
+- if id_pn
+  %p Deocamdată ptr. testare :)
+  %p.filtering-select-pf{:data => {:task_id => @task.id, :id_pn => id_pn}}
+    %input#pfFilteringSelect
+  %table{:cellspacing => "0"}
+    %tbody
+      %tr
+        %td
+          %span Bani primiţi în total:&nbsp;
+          %span= "%.2f" % TrstAccExpenditure.query(id_pn)
+    %tfoot
+      %tr
+        %td
+- else
+  %p.filtering-select-pf{:data => {:task_id => @task.id}}
+    %input#pfFilteringSelect

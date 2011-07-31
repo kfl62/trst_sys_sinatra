@@ -49,6 +49,10 @@ class TrstAccExpenditure
       where(:client_id => TrstPartnersPf.id_by_pn(pn)).asc(:name)
     end
     # @todo
+    def by_client_id(ci)
+      where(:client_id => ci).asc(:name)
+    end
+    # @todo
     def check_sum
       retval = []
       all.each do |a|
@@ -59,6 +63,10 @@ class TrstAccExpenditure
         retval.push [a.name, (a.sum_100 - f_sum_100).round(2)] if a.sum_100.round(2) != f_sum_100.round(2)
       end
       retval
+    end
+    # @todo
+    def query(pn, m = nil)
+      by_client_id(pn).sum(:sum_out) || 0
     end
   end
 
