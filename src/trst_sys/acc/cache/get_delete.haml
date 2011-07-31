@@ -19,7 +19,7 @@
         - if current_user.unit_id
           %td.footer_note{:colspan => "2"}= t('trst_acc_cache.footer_note_get.unit')
         - else
-          %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+          %td.footer_note{:colspan => "2"}= "&nbsp;" #t('gen_footer.note')
 - else
   %table
     %thead

@@ -17,7 +17,7 @@
               %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
                 =t("button.#{button}")
         %tr
-          %td.footer_note{:colspan => "2"}= t('gen_footer.note')
+          %td.footer_note{:colspan => "2"}= "&nbsp;" #t('gen_footer.note')
 -else
   %table{:cellspacing => "0"}
     %thead

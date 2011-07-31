@@ -30,8 +30,6 @@ ro:
         footer_note: Notă:<br/>
                     Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
-                    Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
-                    fost actualizat soldul iniţial)
     balance:
       name: "Punctul de lucru"
       in:  "Bani lăsaţi"
