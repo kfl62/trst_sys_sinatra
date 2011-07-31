@@ -9,6 +9,8 @@ require 'sinatra/base'
 require 'haml'
 require 'compass'
 require 'rdiscount'
+# YAML settings
+YAML::ENGINE.yamler = 'syck'
 # ODM
 require 'mongoid'
 Mongoid.configure do |config|
