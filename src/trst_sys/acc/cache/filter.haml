@@ -7,9 +7,6 @@
     = partial('trst_sys/shared/select_unit')
     %form{:id  => "xhr_#{action}"}
       %table{:cellspacing => "0"}
-        %thead
-          %tr
-            %td
         %tbody
           %tr
             %td
@@ -28,6 +25,14 @@
                 %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
                   =t("button.#{verb}")
   - else
-    %span= t('trst_acc_cache.filter_info.unit')
+    %p.small= t('trst_acc_cache.filter_info.unit')
+    %form{:id  => "xhr_#{action}"}
+      %table{:cellspacing => "0"}
+        %tfoot
+          %tr
+            %td{:class => "buttons_bottom"}
+              - current_buttons(action).each do |verb|
+                %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
+                  =t("button.#{verb}")
 - else
   = partial('trst_sys/shared/select_unit')

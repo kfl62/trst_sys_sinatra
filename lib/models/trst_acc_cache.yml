@@ -12,7 +12,7 @@ ro:
     filter_info:
       unit: "Apăsaţi \"Creare\" ptr. a introduce suma primită!"
     footer_note_put:
-      unit: "Câmpul \"Nume\" va fi completat de contabil/ă!"
+      unit: "Câmpul \"Document\" va fi completat de contabil/ă!"
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
@@ -48,7 +48,7 @@ en:
     filter_info:
       unit: "Apăsaţi \"Creare\" ptr. a introduce suma primită!"
     footer_note_put:
-      unit: "Câmpul \"Nume\" va fi completat de contabil/ă!"
+      unit: "Câmpul \"Document\" va fi completat de contabil/ă!"
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
@@ -86,7 +86,7 @@ hu:
     filter_info:
       unit: "Apăsaţi \"Creare\" ptr. a introduce suma primită!"
     footer_note_put:
-      unit: "Câmpul \"Nume\" va fi completat de contabil/ă!"
+      unit: "Câmpul \"Document\" va fi completat de contabil/ă!"
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."

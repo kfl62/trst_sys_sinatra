@@ -1,43 +1,36 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
--if action == 'put'
+- if action == 'put'
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
-      %thead
-        %tr
-          %td
       %tbody
         %tr
-          %td
-            Nume
+          %td= t('trst_acc_cache.name')
           %td
             - if current_user.admin?
               %input{:name => "[trst_acc_cache][name]", :value => @object.name}
             - else
               %span= @object.name
         %tr
-          %td
-            Data
+          %td= t('trst_acc_cache.id_date')
           %td
             %input.date{:name => "[trst_acc_cache][id_date]", :value => @object.id_date.to_s}
         %tr
-          %td
-            Suma
+          %td= t('trst_acc_cache.money_in')
           %td
             %input.qu{:name => "[trst_acc_cache][money_in]", :value => "%.2f" % @object.money_in}
         %tr
-          %td
-            Explicaţii
+          %td= t('trst_acc_cache.expl')
           %td
             %input{:name => "[trst_acc_cache][expl]", :value => @object.expl}
       %tfoot
         %tr
-          %td{:class => "buttons_bottom", :colspan => "6"}
+          %td{:class => "buttons_bottom", :colspan => "2"}
             %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
             %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
         %tr
           %td.footer_note{:colspan => "2"}= t('trst_acc_cache.footer_note_put.unit')
--else
+- else
   %table{:cellspacing => "0"}
     %thead
       %tr
