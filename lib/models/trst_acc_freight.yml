@@ -21,10 +21,13 @@ ro:
       in: "Intrări"
       out: "Ieşiri"
       end: "Stoc"
-      footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!<br>
+      footer_note:  Stocurile ptr. luna curentă, calculate la zi, conform APP şi AE introduse!</br>
                     Stocurile ptr. lunile anterioare sunt cele de la sfârşitul lunii!
       warning:
-        no_unit: "Nu aveţi nici un punct de lucru selectat!<br/>"
+        no_unit: În tabelul de mai jos aveţi stocurile "Actuale" conform APP/AE-lor operate. Ultimele coloane <br/>
+                 conţin stocurile punctelor de lucru (componentele stocului).<br/>
+                 Pentru detalii "click" pe titlul coloanei, ce conţine unitatea, care vă interesează.
+
 en:
   trst_acc_freight:
     name: "Denumire"
