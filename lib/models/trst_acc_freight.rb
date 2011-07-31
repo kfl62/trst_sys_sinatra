@@ -56,7 +56,7 @@ class TrstAccFreight
         stk = f.stocks.monthly(month).sum(:qu) || 0
         f_in  = f.ins.monthly(month).sum(:qu) || 0
         f_out = f.outs.monthly(month).sum(:qu) || 0
-        retval << [f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
+        retval << [f.id, f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
       end
       retval
     end
@@ -87,6 +87,27 @@ class TrstAccFreight
         retval << [ids[0], tot_stk.round(2), tot_ins.round(2), tot_out.round(2), tot_end.round(2), part[i]].flatten
         tot_stk, tot_ins, tot_out, tot_end = 0, 0, 0, 0
       end
+      retval
+    end
+    # @todo
+    def stats_freight(id, m = nil)
+      f = find(id)
+      today = Date.today
+      year  = today.year
+      month = m.nil? ? today.month : m.to_i
+      days_in_month = (Date.new(year, 12, 31) << (12-month)).day
+      final = f.stocks.monthly(month).sum(:qu) || 0
+      retval, tot_ins, tot_out = [], 0, 0
+      (1..days_in_month).each do |i|
+        day = Date.new(year,month,i).to_s
+        f_ins = f.ins.daily(day).sum(:qu) || 0
+        f_out = f.outs.daily(day).sum(:qu) || 0
+        final = final + f_ins - f_out
+        tot_ins += f_ins
+        tot_out += f_out
+        retval << [day.to_s, f_ins, f_out, final] unless (f_ins == 0 && f_out ==0)
+      end
+      retval << ["", tot_ins, tot_out, final]
       retval
     end
   end # Class methods

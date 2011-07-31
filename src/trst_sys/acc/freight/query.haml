@@ -1,7 +1,9 @@
 :ruby
   today = Date.today
   month = params[:month].nil? ? today.month : params[:month].to_i
+  freight_id = params[:freight_id]
   unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
+  unit = TrstAccFreight.find(freight_id).unit if freight_id
   cols = 0
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_freight.query.title')
@@ -12,37 +14,57 @@
                           '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
       - t('month')[0..today.month].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
-    %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s}"
+    %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
+  %p.small= t('trst_acc_freight.stats_freight.intro')
   %table
     %tbody.inner.stats
       %tr
-        %td.ce= t('trst_acc_freight.query.name')
-        %td.ce= t('trst_acc_freight.query.start')
-        %td.ce= t('trst_acc_freight.query.in')
-        %td.ce= t('trst_acc_freight.query.out')
-        %td.ce= t('trst_acc_freight.query.end')
-      - @object.by_unit_id(unit_id).query(month).each do |stock|
+        - %w{name start ins outs final}.each do |cn|
+          %td.ce= t("trst_acc_freight.query.#{cn}")
+      - @object.by_unit_id(unit_id).query(month).each do |stock| ; cols = stock.length - 1
         %tr
-          %td= stock[0]
-          %td.ri= "%0.2f" % stock[1]
-          %td.ri= "%0.2f" % stock[2]
-          %td.ri= "%0.2f" % stock[3]
-          %td.ri= "%0.2f" % stock[4]
+          %td
+            %span.link{:id  => stock.shift, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?freight_id=' + this.id)"}= stock.shift
+          - stock.each_with_index do |s,i|
+            %td.ri= "%0.2f" % s
       %tr
-        %td{:colspan => "5"} &nbsp;
+        %td{:colspan => cols} &nbsp;
     %tfooter
       %tr
         %td.footer_note{:colspan => "5"}= t('trst_acc_freight.query.footer_note')
--else
+- elsif freight_id
+  %p= "<b>#{t('trst_acc_freight.stats_freight.title')}</b> (#{unit.name[1]})"
+  %p
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?freight_id=' + selectedValue(this) + '&month=#{month}')}"}
+      - TrstAccFreight.pos(unit.slug).each do |f|
+        %option{:value => f.id, :selected => f.id.to_s == freight_id}= f.name
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?freight_id=#{freight_id}&month=' + selectedValue(this))}"}
+      - t('month')[0..today.month].each_with_index do |m,i|
+        %option{:value => i, :selected => i == month}= m
+    %table
+      %tbody.inner.stats
+        %tr
+          - %w{date ins outs final}.each do |cn|
+            %td.ce= t("trst_acc_freight.stats_freight.#{cn}")
+        %tr
+          %td.ce{:colspan => "3"}= t('trst_acc_freight.stats_freight.start')
+          %td.ri= "%0.2f" % (init = TrstAccFreight.find(freight_id).stocks.monthly(month).sum(:qu) || 0).round(2)
+        - data = TrstAccFreight.stats_freight(freight_id,month).each do |d|
+          %tr
+            %td= d.shift
+            - d.each do |l|
+              %td.ri=   "%0.2f" % l
+- else
   %p=t('trst_acc_freight.query.warning.no_unit')
   %table
     %tbody.inner.stats
       %tr
-        %td.ce= t('trst_acc_freight.query.name')
-        %td.ce= t('trst_acc_freight.query.start')
-        %td.ce= t('trst_acc_freight.query.in')
-        %td.ce= t('trst_acc_freight.query.out')
-        %td.ce= t('trst_acc_freight.query.end')
+        - %w{name start ins outs final}.each do |cn|
+          %td.ce= t("trst_acc_freight.query.#{cn}")
         - TrstFirm.first.units.asc(:slug).each do |unit|
           %td
             %span.ce.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?unit_id=' + this.id)"}= unit.name[0]
