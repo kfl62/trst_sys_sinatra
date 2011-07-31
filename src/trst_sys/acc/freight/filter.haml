@@ -5,11 +5,10 @@
 - if unit_id
   - unless current_user.unit_id
     = partial('trst_sys/shared/select_unit')
+  - unless current_user.admin?
+    %p.small= t('trst_acc_freight.filter.intro')
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
-      %thead
-        %tr
-          %td
       %tbody
         %tr
           %td
@@ -24,8 +23,8 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom"}
-            - current_buttons(action).each do |verb|
-              %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
-                =t("button.#{verb}")
+            - if current_user.admin?
+              %span{:class => "button post", :onclick => "trst.task.init('#{@task.id}', 'post', 'new')"}= t("button.post")
+            %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
 - else
   = partial('trst_sys/shared/select_unit')

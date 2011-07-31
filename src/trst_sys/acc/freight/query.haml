@@ -7,7 +7,7 @@
   cols = 0
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_freight.query.title')
--if unit_id
+-if unit_id && freight_id.nil?
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                           'query',

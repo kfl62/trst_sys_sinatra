@@ -7,7 +7,11 @@ ro:
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
     id_stats: "Cod intern"
+    footer_note: "\"Ştergere/Creare\" materiale necesită drepturi de administrator!"
     filter:
+      intro: Alegeţi materialul, pe care doriţi să-l modificaţi.<br/>
+             De preferinţă modificaţi <b>numai preţul</b>, modifi-<br/>
+             carea celorlalte proprietăţi necesită aprobare!
       no_unit:
         warning: "Nu aveţi nici un Punct de lucru selectat!<br/>"
         select: "Selectaţi unitatea!"
@@ -43,7 +47,11 @@ en:
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
     id_stats: "Cod intern"
+    footer_note: "\"Ştergere/Creare\" materiale necesită drepturi de administrator!"
     filter:
+      intro: Alegeţi materialul, pe care doriţi să-l modificaţi.<br/>
+             De preferinţă modificaţi <b>numai preţul</b>, modifi-<br/>
+             carea celorlalte proprietăţi necesită aprobare!
       no_unit:
         warning: "Nu aveţi nici un Punct de lucru selectat!<br/>"
         select: "Selectaţi unitatea!"
@@ -79,7 +87,11 @@ hu:
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
     id_stats: "Cod intern"
+    footer_note: "\"Ştergere/Creare\" materiale necesită drepturi de administrator!"
     filter:
+      intro: Alegeţi materialul, pe care doriţi să-l modificaţi.<br/>
+             De preferinţă modificaţi <b>numai preţul</b>, modifi-<br/>
+             carea celorlalte proprietăţi necesită aprobare!
       no_unit:
         warning: "Nu aveţi nici un Punct de lucru selectat!<br/>"
         select: "Selectaţi unitatea!"
@@ -107,3 +119,4 @@ hu:
       ins: Intrări
       outs: Ieşiri
       final: Stoc
+
