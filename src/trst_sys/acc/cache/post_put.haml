@@ -11,7 +11,10 @@
           %td
             Nume
           %td
-            %span= @object.name
+            - if current_user.admin?
+              %input{:name => "[trst_acc_cache][name]", :value => @object.name}
+            - else
+              %span= @object.name
         %tr
           %td
             Data

@@ -26,7 +26,7 @@ ro:
       end: "Sold"
       no_unit:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
-                  Pentru detalii click pe Punctul de lucru care vă interesează.
+                  Pentru detalii "click" pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
                     Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
