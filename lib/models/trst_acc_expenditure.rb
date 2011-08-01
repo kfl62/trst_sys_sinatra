@@ -68,6 +68,11 @@ class TrstAccExpenditure
     def query(pn, m = nil)
       by_client_id(pn).sum(:sum_out) || 0
     end
+    # @todo
+    def today_to_console
+      today = Date.today.to_s
+      daily(today).each{|app| p "#{app.name} --- #{app.updated_at.strftime("%H:%M")} --- #{"%.2f" % app.sum_out}"}
+    end
   end
 
   # @todo
