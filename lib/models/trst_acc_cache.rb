@@ -63,8 +63,8 @@ class TrstAccCache
     def balance
       month   = Date.today.month
       unit_id = first.unit_id
-      ins = monthly(Date.today.month).sum(:money_in)
-      out = TrstAccExpenditure.by_unit_id(unit_id).monthly(month).sum(:sum_out)
+      ins = monthly(Date.today.month).sum(:money_in) || 0
+      out = TrstAccExpenditure.by_unit_id(unit_id).monthly(month).sum(:sum_out) || 0
       [ins, out, ins - out]
     end
   end # Class methods
