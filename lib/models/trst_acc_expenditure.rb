@@ -8,7 +8,7 @@ class TrstAccExpenditure
   include Mongoid::Timestamps
 
   field :name,        :type => String
-  field :id_date,     :type => Date,      :default => Date.today
+  field :id_date,     :type => Date
   field :sum_003,     :type => Float,     :default => 0.00
   field :sum_016,     :type => Float,     :default => 0.00
   field :sum_100,     :type => Float,     :default => 0.00
@@ -20,7 +20,7 @@ class TrstAccExpenditure
   belongs_to :client,     :class_name => "TrstPartnersPf",    :inverse_of => :apps
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :apps
 
-  before_create :increment_name
+  before_create :increment_name_date
   after_destroy :destroy_freights
 
   class << self
@@ -94,8 +94,9 @@ class TrstAccExpenditure
 
   protected
   # @todo
-  def increment_name
+  def increment_name_date
     self.name = TrstAccExpenditure.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_000001"
+    self.id_date = Date.today
   end
   # @todo
   def destroy_freights
