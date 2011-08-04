@@ -16,11 +16,12 @@ ro:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
-    footer_note_query: La "Bani primiţi", prima zi a lunii, include şi soldul iniţial!<br/>
+    footer_note_query: Notă:<br/>
                        Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
+      stk: "Sold iniţial"
       in:  "Bani primiţi"
       out: "Bani cheltuiţi"
       end: "Sold"
@@ -28,14 +29,15 @@ ro:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
                   Pentru detalii "click" pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
-                    Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
     balance:
       name: "Punctul de lucru"
+      stk: "Sold iniţial"
       in:  "Bani lăsaţi"
       out: "Bani cheltuiţi"
       end: "Sold"
 en:
+ro:
   trst_acc_cache:
     title: "Monetar"
     name: "Document"
@@ -52,28 +54,28 @@ en:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
-    footer_note_query: La "Bani primiţi", prima zi a lunii, include şi soldul iniţial!<br/>
+    footer_note_query: Notă:<br/>
                        Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
+      stk: "Sold iniţial"
       in:  "Bani primiţi"
       out: "Bani cheltuiţi"
       end: "Sold"
       no_unit:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
-                  Pentru detalii click pe Punctul de lucru care vă interesează.
+                  Pentru detalii "click" pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
-                    Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
-                    Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
-                    fost actualizat soldul iniţial)
     balance:
       name: "Punctul de lucru"
+      stk: "Sold iniţial"
       in:  "Bani lăsaţi"
       out: "Bani cheltuiţi"
       end: "Sold"
 hu:
+ro:
   trst_acc_cache:
     title: "Monetar"
     name: "Document"
@@ -90,24 +92,23 @@ hu:
     footer_note_get:
       unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
             Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
-    footer_note_query: La "Bani primiţi", prima zi a lunii, include şi soldul iniţial!<br/>
+    footer_note_query: Notă:<br/>
                        Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
+      stk: "Sold iniţial"
       in:  "Bani primiţi"
       out: "Bani cheltuiţi"
       end: "Sold"
       no_unit:
         warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
-                  Pentru detalii click pe Punctul de lucru care vă interesează.
+                  Pentru detalii "click" pe Punctul de lucru care vă interesează.
         footer_note: Notă:<br/>
-                    Rubrica "Bani lăsaţi" conţine şi soldul iniţial!<br/>
                     Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
-                    Soldul la Pct.de lucru Rădaia, pe luna iulie, este cu caracter informativ (nu a<br/>
-                    fost actualizat soldul iniţial)
     balance:
       name: "Punctul de lucru"
+      stk: "Sold iniţial"
       in:  "Bani lăsaţi"
       out: "Bani cheltuiţi"
       end: "Sold"

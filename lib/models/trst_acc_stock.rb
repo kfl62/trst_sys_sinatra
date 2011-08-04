@@ -9,7 +9,7 @@ class TrstAccStock
 
   field :name,        :type => String,    :default => "Stock_unit_month"
   field :id_month,    :type => Integer,   :default => Date.today.month
-  field :expl,        :type => String,    :default => "Monthly"
+  field :expl,        :type => String,    :default => "Stock initial"
 
   has_many   :freights,   :class_name => "TrstAccFreightStock", :inverse_of => :doc
   belongs_to :unit,       :class_name => "TrstFirmUnit",        :inverse_of => :stocks

@@ -2,6 +2,7 @@
   today = Date.today
   month = params[:month].nil? ? today.month : params[:month].to_i
   unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
+  unit_id = nil if unit_id == 'null'
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_cache.query.title')
 -if unit_id
@@ -11,7 +12,15 @@
                           '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
       - t('month')[0..today.month].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
-    %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
+    - if current_user.unit_id
+      %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
+    - else
+      %select{:onchange => "trst.task.destroy();trst.task.init('#{@task.id}',
+                           'query',
+                           '?month=#{month}&unit_id=' + selectedValue(this))"}
+        %option{:value => "null"}= t("trst_acc_freight.filter.#{unit_id ? 'has' : 'no' }_unit.select")
+        - TrstFirm.first.units.asc(:slug).each do |unit|
+          %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
   %table
     %tbody.inner.stats
       %tr
@@ -19,6 +28,9 @@
         %td.ce= t('trst_acc_cache.query.in')
         %td.ce= t('trst_acc_cache.query.out')
         %td.ce= t('trst_acc_cache.query.end')
+      %tr
+        %td.ce{:colspan => "3"}= t('trst_acc_cache.query.stk')
+        %td.ri= "%0.2f" % (stk = TrstAccCache.by_unit_id(unit_id).monthly(month).sum(:money_stock) || 0)
       - @object.by_unit_id(unit_id).query(month).each do |d|
         %tr
           %td= d[0]
@@ -30,22 +42,30 @@
         %td.footer_note{:colspan => "4"}= t('trst_acc_cache.footer_note_query')
 -else
   %p{:style => "font-size:0.9em"}= t('trst_acc_cache.query.no_unit.warning')
+  %p
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?month=' + selectedValue(this))}"}
+      - t('month')[0..today.month].each_with_index do |m,i|
+        %option{:value => i, :selected => i == month}= m
   %table
     %tbody.inner.stats
       %tr
         %td= t('trst_acc_cache.balance.name')
+        %td.ce= t('trst_acc_cache.balance.stk')
         %td.ce= t('trst_acc_cache.balance.in')
         %td.ce= t('trst_acc_cache.balance.out')
         %td.ce= t('trst_acc_cache.balance.end')
-      - TrstFirm.first.units.asc(:slug).each do |unit| ; balance = @object.by_unit_id(unit.id).balance
+      - TrstFirm.first.units.asc(:slug).each do |unit| ; balance = @object.by_unit_id(unit.id).balance(month)
         %tr
           %td{:style => "padding:1px 5px;cursor:pointer"}
-            %span.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?unit_id=' + this.id)"}=unit.name[1]
+            %span.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?month=#{month}&unit_id=' + this.id)"}=unit.name[1]
           %td.ri= "%0.2f" % balance[0]
           %td.ri= "%0.2f" % balance[1]
           %td.ri= "%0.2f" % balance[2]
+          %td.ri= "%0.2f" % balance[3]
       %tr
-        %td{:colspan => "4"} &nbsp;
+        %td{:colspan => "5"} &nbsp;
     %tfooter
       %tr
         %td.footer_note{:colspan => "4"}= t('trst_acc_cache.query.no_unit.footer_note')

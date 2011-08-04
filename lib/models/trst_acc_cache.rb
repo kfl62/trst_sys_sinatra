@@ -41,15 +41,16 @@ class TrstAccCache
       where(:unit_id => u).asc(:id_date)
     end
     # @todo
-    def query(m = nil)
+    def query(month = nil)
       today = Date.today
       year  = today.year
-      month = m.nil? ? today.month : m.to_i
+      month ||= today.month
       days_in_month = (Date.new(year, 12, 31) << (12-month)).day
       unit_id = first.unit_id
-      retval = []; tot_in = 0; tot_out = 0
+      retval, tot_out = [], 0
+      tot_in = monthly(month.to_i).sum(:money_stock) || 0
       (1..days_in_month).each do |i|
-        day = Date.new(year,month,i).to_s
+        day = Date.new(year,month.to_i,i).to_s
         sum_in  = daily(day).sum(:money_in) || 0.0
         tot_in += sum_in
         sum_out = TrstAccExpenditure.by_unit_id(unit_id).daily(day).sum(:sum_out) || 0.0
@@ -60,12 +61,13 @@ class TrstAccCache
       retval
     end
     # @todo
-    def balance
-      month   = Date.today.month
+    def balance(month = nil)
+      month ||= Date.today.month
       unit_id = first.unit_id
-      ins = monthly(Date.today.month).sum(:money_in) || 0
-      out = TrstAccExpenditure.by_unit_id(unit_id).monthly(month).sum(:sum_out) || 0
-      [ins, out, ins - out]
+      stk = monthly(month.to_i).sum(:money_stock) || 0
+      ins = monthly(month.to_i).sum(:money_in) || 0
+      out = TrstAccExpenditure.by_unit_id(unit_id).monthly(month.to_i).sum(:sum_out) || 0
+      [stk, ins, out, stk + ins - out]
     end
   end # Class methods
 
