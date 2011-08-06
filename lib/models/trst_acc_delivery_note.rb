@@ -24,8 +24,32 @@ class TrstAccDeliveryNote
   before_create :increment_name
   after_destroy :destroy_freights
 
-  scope :daily, ->(day) { where(:id_date => DateTime.strptime("#{day}","%F").to_time) }
-  scope :pos,   ->(slg) { where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)) }
+  class << self
+    # @todo
+    def pos(slg)
+      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
+    end
+    # @todo
+    def daily(d)
+      where(:id_date => DateTime.strptime("#{d}","%F").to_time).asc(:name)
+    end
+    # @todo
+    def monthly(month = nil)
+      y = Date.today.year
+      month ||= Date.today.month
+      mb = DateTime.new(y, month)
+      me = DateTime.new(y, month + 1)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time).asc(:name)
+    end
+    # @todo
+    def by_unit_id(u)
+      where(:unit_id => u).asc(:name)
+    end
+    # @todo
+    def to_console
+      all.each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
+    end
+  end
 
   # @todo
   def unit
