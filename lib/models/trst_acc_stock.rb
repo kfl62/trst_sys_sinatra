@@ -14,6 +14,7 @@ class TrstAccStock
   has_many   :freights,   :class_name => "TrstAccFreightStock", :inverse_of => :doc
   belongs_to :unit,       :class_name => "TrstFirmUnit",        :inverse_of => :stocks
 
+  after_create :freights_init
   after_destroy :destroy_freights
   class << self
     # @todo
@@ -35,18 +36,16 @@ class TrstAccStock
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
   end
   # @todo
-  def qu_by_freight_id(id)
-    freights.where(:freight_id => id).first.qu rescue 0.00
-  end
-  # @todo
-  def freights_for_table(u)
-    TrstAccFreight.by_unit_id(u).asc(:name).map{|f| [f.id, f.name, f.um, qu_by_freight_id(f.id)]}
-  end
-  # @todo
-  def stocks_for_table
-    # code here
+  def freights_sort_by_name
+    freights.sort{|a,b| (a.freight.name rescue "Error...") <=> (b.freight.name rescue "Error...")}
   end
   protected
+  # @todo
+  def freights_init
+    TrstAccFreight.by_unit_id(self.unit_id).asc(:name).each do |f|
+      self.freights << TrstAccFreightStock.create(:doc_id => self.id, :freight_id => f.id, :um => f.um, :pu => f.pu)
+    end
+  end
   # @todo
   def destroy_freights
     self.freights.destroy_all

@@ -2,9 +2,24 @@
 ro:
   trst_acc_stock:
     title: "Consultare/Editare stoc"
+    name: "Material"
+    um: "UM"
+    pu: "PU"
+    qu: "Cantitate"
+    add_freight: " Stoc la alt preţ"
 en:
   trst_acc_stock:
     title: "Consultare/Editare stoc"
+    name: "Material"
+    um: "UM"
+    pu: "PU"
+    qu: "Cantitate"
+    add_freight: " Stoc la alt preţ"
 hu:
   trst_acc_stock:
     title: "Consultare/Editare stoc"
+    name: "Material"
+    um: "UM"
+    pu: "PU"
+    qu: "Cantitate"
+    add_freight: " Stoc la alt preţ"

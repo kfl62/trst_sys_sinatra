@@ -575,6 +575,22 @@ dojo.mixin(trst.task,{
           }
         }
       }
+    },
+    insertRow: function(name,doc_id,freight_id){
+      var i = dojo.query('tr.freight').length;
+      var lastRow = dojo.query('tr.freight')[i - 1];
+      var newRow = dojo.clone(lastRow);
+      newRow.children[0].children[0].innerHTML = name;
+      newRow.children[2].children[1].name = '[freights][' + i + '][doc_id]'
+      newRow.children[2].children[1].value = doc_id
+      newRow.children[2].children[2].name = '[freights][' + i + '][freight_id]'
+      newRow.children[2].children[2].value = freight_id
+      newRow.children[2].children[3].name = '[freights][' + i + '][pu]'
+      newRow.children[2].children[3].value = "0.00"
+      dojo.destroy(newRow.children[2].children[0])
+      newRow.children[3].children[0].name = '[freights][' + i + '][qu]'
+      newRow.children[3].children[0].value = "0.00"
+      dojo.place(newRow,lastRow,'after')
     }
   }
 })

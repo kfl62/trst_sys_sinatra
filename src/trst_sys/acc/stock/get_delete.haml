@@ -6,25 +6,28 @@
   %table{:cellspacing => "0"}
     %thead
       %tr
-        %th{:colspan => "3"}= "#{@object.name}"
+        %th{:colspan => "4"}= "#{@object.name}"
       %tr
-        %td{:colspan => "3"}
+        %td{:colspan => "4"}
           %p.ju= "Stoc: #{@object.unit.name[1]}<br>Expl: #{@object.expl}"
     %tbody.inner
       %tr
-        %td.ce Material
-        %td.ce UM
-        %td.ce Cant
-      - @object.freights_for_table(unit_id).each do |f|
+        %td.ce= t('trst_acc_stock.name')
+        %td.ce= t('trst_acc_stock.um')
+        %td.ce= t('trst_acc_stock.pu')
+        %td.ce= t('trst_acc_stock.qu')
+      - @object.freights_sort_by_name.each do |f|
         %tr
           %td
-            %span.freight= f[1]
+            %span.freight= f.freight.name rescue "Error..."
           %td
-            %span.um= f[2]
+            %span.um= f.um
           %td
-            %span.val= "%.2f" % f[3]
+            %span.pu=  "%.2f" % f.pu
+          %td
+            %span.val= "%.2f" % f.qu
       %tr
-        %td{:colspan => "3"} &nbsp;
+        %td{:colspan => "4"} &nbsp;
     %tfoot
       %tr
         %td{:class => "buttons_bottom", :colspan => "3"}
@@ -32,7 +35,7 @@
             %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
               =t("button.#{button}")
       %tr
-        %td.footer_note{:colspan => "2"}= "&nbsp;" #t('gen_footer.note')
+        %td.footer_note{:colspan => "4"}= "&nbsp;" #t('gen_footer.note')
 - else
   %table
     %thead
