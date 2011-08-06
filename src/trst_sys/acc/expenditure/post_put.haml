@@ -1,3 +1,5 @@
+:ruby
+  unit_id = current_user.unit_id || session[:unit_id]
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
 -if action == 'put'
@@ -59,6 +61,7 @@
             %span.res 0.00
             %input{:type => "hidden",:name => "[trst_acc_expenditure][sum_out]"}
             %input{:type => "hidden", :name => "[freights][#{i}][doc_id]",:value => @object.id}
+            %input{:type => "hidden", :name => "[freights][#{i}][unit_id]",:value => unit_id}
           %td.ce &nbsp;&nbsp;
       %tfoot
         %tr
