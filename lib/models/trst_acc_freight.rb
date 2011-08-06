@@ -23,12 +23,14 @@ class TrstAccFreight
 
   class << self
     # @todo
-    def auto_search(u=nil, stock=nil)
-      u ||= TrstFirm.unit_id_by_unit_slug("Main")
+    def auto_search(unit=nil, stock=nil)
+      unit ||= TrstFirm.unit_id_by_unit_slug("AF01")
       fs = []
-      where(:unit_id => u).asc(:name).each do |f|
+      where(:unit_id => unit).asc(:name).each do |f|
         if stock
-          fs << {:id => f.id,:um => f.um,:stock => f.stock, :label => f.name}
+          dn = TrstAccDeliveryNote.by_unit_id(unit).last
+          month = dn.id_date.month
+          fs << {:id => f.id,:um => f.um,:stock => f.stock(month), :label => f.name}
         else
           fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:label => f.name}
         end
@@ -141,6 +143,13 @@ class TrstAccFreight
     else
       "Error"
     end
+  end
+  # @todo
+  def stock(month = nil)
+    f_stk = stocks.monthly(month).sum(:qu) || 0
+    f_ins = ins.monthly(month).sum(:qu) || 0
+    f_out = outs.monthly(month).sum(:qu) || 0
+    f_stk + f_ins - f_out
   end
   # @todo
   def table_data
