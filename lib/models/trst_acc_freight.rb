@@ -143,10 +143,6 @@ class TrstAccFreight
     end
   end
   # @todo
-  def stock
-    (stocks.first.qu rescue 0.00) + (ins.sum(:qu) || 0.00) - (outs.sum(:qu) || 0.00)
-  end
-  # @todo
   def table_data
     [
       {:css => "normal",:name => "name",:label => I18n.t("trst_acc_freight.name"),:value => name},
