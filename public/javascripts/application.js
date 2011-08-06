@@ -2,7 +2,9 @@
 var selectedValue = function(node){
   return node.options[node.selectedIndex].value
 }
-
+var selectedLabel = function(node){
+  return node.options[node.selectedIndex].innerHTML
+}
 var sysMsg = dojo.subscribe('xhrMsg',function(what,kind,data){
   var p = what;
   kind ? p += '/' + kind : p += '/info'
