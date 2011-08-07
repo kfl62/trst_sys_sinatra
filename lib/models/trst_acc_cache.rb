@@ -7,7 +7,7 @@ class TrstAccCache
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name,          :type => String,    :default => "DP_NR-#{Date.today.to_s}"
+  field :name,          :type => String
   field :id_date,       :type => Date,      :default => Date.new(Time.now.year,Time.now.month,Time.now.day)
   field :money_in,      :type => Float,     :default => 0.00
   field :money_out,     :type => Float,     :default => 0.00
@@ -16,19 +16,20 @@ class TrstAccCache
 
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :dps
 
-  before_create :init_expl
+  before_create :init_name_date_expl
 
   class << self
     # @todo
-    def daily(day)
+    def daily(day = nil)
+      day ||= Date.today.to_s
       where(:id_date => DateTime.strptime("#{day}","%F").to_time)
     end
     # @todo
-    def monthly(m)
-      y = Date.today.year
-      m = m.to_i
-      mb = DateTime.new(y, m)
-      me = DateTime.new(y, m + 1)
+    def monthly(month = nil)
+      year = Date.today.year
+      month ||= Date.today.month
+      mb = DateTime.new(year, month.to_i)
+      me = DateTime.new(year, month.to_i + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
@@ -85,7 +86,9 @@ class TrstAccCache
   protected
 
   # @todo
-  def init_expl
+  def init_name_date_expl
+    self.name = "DP_NR-#{Date.today.to_s}"
+    self.id_date = Date.today
     self.expl = I18n.t('trst_acc_cache.expl_value')
   end
 

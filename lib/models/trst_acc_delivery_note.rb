@@ -8,7 +8,7 @@ class TrstAccDeliveryNote
   include Mongoid::Timestamps
 
   field :name,          :type => String
-  field :id_date,       :type => Date,      :default => Date.today
+  field :id_date,       :type => Date
   field :id_main_doc,   :type => String
   field :id_delegate_c, :type => String
   field :id_delegate_t, :type => String
@@ -21,7 +21,7 @@ class TrstAccDeliveryNote
   belongs_to :transporter,:class_name => "TrstPartner",       :inverse_of => :delivery_pprss
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :delivery_notes
 
-  before_create :increment_name
+  before_create :increment_name_date
   after_destroy :destroy_freights
 
   class << self
@@ -30,15 +30,16 @@ class TrstAccDeliveryNote
       where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
     end
     # @todo
-    def daily(d)
-      where(:id_date => DateTime.strptime("#{d}","%F").to_time).asc(:name)
+    def daily(day = nil)
+      day ||= Date.today.to_s
+      where(:id_date => DateTime.strptime("#{day}","%F").to_time).asc(:name)
     end
     # @todo
     def monthly(month = nil)
-      y = Date.today.year
+      year = Date.today.year
       month ||= Date.today.month
-      mb = DateTime.new(y, month)
-      me = DateTime.new(y, month + 1)
+      mb = DateTime.new(year, month.to_i)
+      me = DateTime.new(year, month.to_i + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time).asc(:name)
     end
     # @todo
@@ -46,7 +47,7 @@ class TrstAccDeliveryNote
       where(:unit_id => u).asc(:name)
     end
     # @todo
-    def to_console
+    def to_txt
       all.each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
     end
   end
@@ -64,23 +65,19 @@ class TrstAccDeliveryNote
     TrstPartner.find(client_id).delegates.find(id_delegate_c) rescue TrstPartner.find(client_id).delegates.first
   end
   # @todo
-  def id_sr
-    name.split('-')[0]
-  end
-  # @todo
-  def id_nr
-    name.split('-')[1]
-  end
-  # @todo
   def pdf_template
     'pdf'
   end
 
   protected
   # @todo
-  def increment_name
+  def increment_name_date
+    if TrstAccDeliveryNote.by_unit_id(unit_id).last.freights.empty?
+      TrstAccDeliveryNote.by_unit_id(unit_id).last.destroy
+    end
     self.name = TrstAccDeliveryNote.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEA3_001"
     self.id_main_doc = "#{TrstFirm.first.name[0][0..2].upcase}-" rescue "#{unit.firm.name[0][0..2].upcase}-"
+    self.id_date = Date.today
   end
   # @todo
   def destroy_freights

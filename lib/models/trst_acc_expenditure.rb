@@ -25,16 +25,17 @@ class TrstAccExpenditure
 
   class << self
     # @todo
-    def daily(d)
-      where(:id_date => DateTime.strptime("#{d}","%F").to_time).asc(:name)
+    def daily(day = nil)
+      day ||= Date.today.to_s
+      where(:id_date => DateTime.strptime("#{day}","%F").to_time).asc(:name)
     end
     # @todo
-    def monthly(m)
-      y = Date.today.year
-      m = m.to_i
-      mb = DateTime.new(y, m)
-      me = DateTime.new(y, m + 1)
-      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
+    def monthly(month = nil)
+      year = Date.today.year
+      month ||= Date.today.month
+      mb = DateTime.new(year, month.to_i)
+      me = DateTime.new(year, month.to_i+ 1)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time).asc(:name)
     end
     # @todo
     def pos(slg)
@@ -69,23 +70,14 @@ class TrstAccExpenditure
       by_client_id(pn).sum(:sum_out) || 0
     end
     # @todo
-    def today_to_console
-      today = Date.today.to_s
-      daily(today).each{|app| p "#{app.name} --- #{app.updated_at.strftime("%H:%M")} --- #{"%.2f" % app.sum_out}"}
+    def to_txt
+      all.each{|app| p "#{app.name} --- #{app.id_date.to_s} #{app.updated_at.strftime("%H:%M")} --- #{("%.2f" % app.sum_out).rjust(8)}"}
     end
   end
 
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
-  end
-  # @todo
-  def id_sr
-    name.split('-')[0]
-  end
-  # @todo
-  def id_nr
-    name.split('-')[1]
   end
   # @todo
   def pdf_template
@@ -95,7 +87,10 @@ class TrstAccExpenditure
   protected
   # @todo
   def increment_name_date
-    self.name = TrstAccExpenditure.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_000001"
+    if TrstAccExpenditure.by_unit_id(unit_id).last.freights.empty?
+      TrstAccExpenditure.by_unit_id(unit_id).last.destroy
+    end
+    self.name = TrstAccExpenditure.by_unit_id(unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_000001"
     self.id_date = Date.today
   end
   # @todo

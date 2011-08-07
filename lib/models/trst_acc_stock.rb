@@ -22,9 +22,9 @@ class TrstAccStock
       where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))
     end
     # @todo
-    def monthly(m)
-      m = m.to_i
-      where(:id_month => m)
+    def monthly(month = nil)
+      month ||= Date.today.month
+      where(:id_month => month.to_i)
     end
     # @todo
     def by_unit_id(u)
