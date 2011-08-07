@@ -1,0 +1,19 @@
+# st: font_face consolas; font_size 9
+ro:
+  trst_acc_invoice:
+    title: "Facturi - Persoane juridice"
+    not_ready: Din păcate încâ nu este gata!<br/><br/>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+               înseamnă că va fi utilizabil în curând!
+en:
+  trst_acc_invoice:
+    title: "Facturi - Persoane juridice"
+    not_ready: Din păcate încâ nu este gata!<br/><br/>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+               înseamnă că va fi utilizabil în curând!
+hu:
+  trst_acc_invoice:
+    title: "Facturi - Persoane juridice"
+    not_ready: Din păcate încâ nu este gata!<br/><br/>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+               înseamnă că va fi utilizabil în curând!
