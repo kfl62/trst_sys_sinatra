@@ -32,7 +32,7 @@ class TrstTask
   class << self
     # @todo Document this method
     def task_related_to
-      all.collect{|task| [task.id.to_s, task.name]}
+      all.asc(:name).collect{|task| [task.id.to_s, task.name]}
     end
     # @todo
     def task_id_by_target(t)
@@ -46,6 +46,9 @@ class TrstTask
   # @todo Document this method
   def is_query?
     target.include?(".query")
+  end
+  def is_repair?
+    target.include?(".repair")
   end
   # @todo Document this method
   def pages

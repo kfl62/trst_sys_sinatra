@@ -155,6 +155,38 @@ trst.task = {
     var deferred = dojo.xhrGet(xhrArgs);
     this.url = ["/srv/tsk"];
   },
+  // error handling page {{{2
+  repair: function(){
+    xhrArgs = {
+      url: this.url.join('/'),
+      load: function(data){
+        trst.task.drawBox(data);
+        dojo.attr('xhr_msg','class','hidden');
+      },
+      error: function(error){
+        dojo.publish('xhrMsg',['error','error',error]);
+      }
+    };
+    dojo.publish('xhrMsg',['loading','info']);
+    var deferred = dojo.xhrGet(xhrArgs);
+    this.url = ["/srv/tsk"];
+  },
+  // not ready page {{{2
+  test: function(){
+    xhrArgs = {
+      url: this.url.join('/'),
+      load: function(data){
+        trst.task.drawBox(data);
+        dojo.attr('xhr_msg','class','hidden');
+      },
+      error: function(error){
+        dojo.publish('xhrMsg',['error','error',error]);
+      }
+    };
+    dojo.publish('xhrMsg',['loading','info']);
+    var deferred = dojo.xhrGet(xhrArgs);
+    this.url = ["/srv/tsk"];
+  },
   // post {{{2
   post: function(){
     xhrArgs = {
@@ -269,6 +301,22 @@ trst.task = {
           dojo.connect(a, 'onclick', function(e){
             e.preventDefault()
             trst.task.init(e.target.id,'query')
+          })
+        )
+      }
+      else if (a.getAttribute('data-tsks') == 'repair'){
+        trst.task.connections.push(
+          dojo.connect(a, 'onclick', function(e){
+            e.preventDefault()
+            trst.task.init(e.target.id,'repair')
+          })
+        )
+      }
+      else if (a.getAttribute('data-tsks') == 'test'){
+        trst.task.connections.push(
+          dojo.connect(a, 'onclick', function(e){
+            e.preventDefault()
+            trst.task.init(e.target.id,'test')
           })
         )
       }

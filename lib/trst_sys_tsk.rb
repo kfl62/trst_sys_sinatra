@@ -57,6 +57,18 @@ class TrstSysTsk < Sinatra::Base
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
 
+  # @todo Documentation
+  get '/:id/repair/' do |id|
+    @task, @object, haml_path, locals = init_variables(id, 'repair', nil, params)
+    haml :"#{haml_path}", :layout => false, :locals => locals
+  end
+
+  # @todo Documentation
+  get '/:id/test/' do |id|
+    @task, @object, haml_path, locals = init_variables(id, 'test', nil, params)
+    haml :"#{haml_path}", :layout => false, :locals => locals
+  end
+
   # route for get (control center)
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @param [String] verb any of `get, post, put, delete, filter`

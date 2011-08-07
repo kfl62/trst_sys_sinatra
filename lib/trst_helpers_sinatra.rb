@@ -109,7 +109,7 @@ module Trst
           end
         elsif verb == 'pdf' || verb == 'print'
           object = (model.send method, task.id) || (model.send method, target_id)
-        elsif verb == 'query'
+        elsif verb =~ /query|test|repair/
           object = model
         else
           if method == 'details'
@@ -151,6 +151,10 @@ module Trst
           haml_path = "/trst_pdf" if task.haml_path == 'default'
         when /query/
           haml_path += "/query"
+        when /repair/
+          haml_path += "/repair"
+        when /test/
+          haml_path = "/trst_sys/shared/not_ready"
         else
           haml_path = "/trst_sys/error"
         end
