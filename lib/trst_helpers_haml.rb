@@ -64,7 +64,7 @@ module Trst
         when nil
           title = task.title.empty? ? "...?..." : task.title
           title += " - "
-          title += t("button.#{verb}")
+          title += t("button.#{verb}",:default => "")
         else
           title = t("#{task.class.name.underscore}.relations.#{action}.#{verb}")
         end
