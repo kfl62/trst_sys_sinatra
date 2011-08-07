@@ -51,6 +51,7 @@ var xhrMenu = function(param){
         if (param.replace('srv/','') == page){
           xhrInitSidebar();
         }
+        xhrInitPageTasks();
       }
     },
     error: function(error){
@@ -74,6 +75,19 @@ var xhrInitSidebar = function(){
     }
   };
   var defered = dojo.xhrGet(xhrArgs)
+}
+
+var xhrInitPageTasks = function(){
+  dojo.query('#page_tasks ul > li > a ').forEach(function(a){
+    if (a.getAttribute('data-tsks') == 'filter'){
+      trst.task.connections.push(
+        dojo.connect(a, 'onclick', function(e){
+          e.preventDefault()
+          trst.task.init(e.target.id)
+        })
+      )
+    }
+  })
 }
 
 function init(){
