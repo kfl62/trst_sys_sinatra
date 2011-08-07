@@ -8,6 +8,8 @@ ro:
     title: "Rapoarte/Formulare"
   xhr_queries:
     title: "Interogări/Statistică/Verificare"
+  xhr_repair:
+    title: "S-a strecurat o greşeală..."
   gen_head:
     field: "Câmp"
     value: "Valoare"
@@ -41,72 +43,85 @@ ro:
   month: ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"]
 en:
   xhr_tasks:
-    title: "Daily todo... (tasks)"
-    init: "Access: My Page -> Daily tasks"
-    empty: "No tasks defined..."
+    title: "De rezolvat zilnic... (sarcini)"
+    init: "Accesare: Pagina mea -> Sarcini zilnice"
+    empty: "Nu aveţi sarcini definite..."
   xhr_pdfs:
-    title: "Reports/Forms"
+    title: "Rapoarte/Formulare"
+  xhr_queries:
+    title: "Interogări/Statistică/Verificare"
+  xhr_repair:
+    title: "S-a strecurat o greşeală..."
   gen_head:
-    field: "Field"
-    value: "Value"
+    field: "Câmp"
+    value: "Valoare"
   gen_footer:
-    note: "* Translated field.<br>
-          If empty, or there is no translation, will display ...?...<br>
-          Currently translation is done by changing the access language<br>
-          and editing the concerned field."
+    note: "* Câmp tradus.<br>
+           Dacă este gol, sau dacă nu există traducere, se va afişa ...?...<br>
+           Momentan traducerea se face prin schimbarea limbii de acces<br>
+           a interfeţei şi editarea câmpului în cauză."
   gen_warning:
-    delete: "!!! Atention the delete action is irreversible !!!"
-    post: "!!! New record !!!"
+    delete: "!!! Atenţie ştergera este ireversibilă !!!"
+    post: "!!! Înregistrare nouă !!!"
   gen_msg:
-    delete: "It will delete: <br><b>%{data}</b>.<br>"
-    post: "It will create a new record in table <b>%{data}</b> from the database, with default content.<br>
-           <b>Important:</b><br>-after creation don't forget to modify the fields (generated with default or empty content) and <b>save</b> the data, you could even <b>delete</b> the record if you change your mind."
+    delete: "Se va şterge: <br><b>%{data}</b>.<br>"
+    post: "Se va crea o nouă înregistrare în tabelul <b>%{data}</b>, din baza de date, cu un conţinut implicit.<br>
+           <b>Important:</b><br>-după creare nu uitaţi să modificaţi câmpurile (generate cu conţinut implicit, sau goale) şi să <b>salvaţi</b> datele, sau puteţi chiar să <b>ştergeţi înregistrarea</b>, dacă va-ţi răzgândit!"
   button:
-    filter: "Select"
-    get: "View"
-    put: "Edit"
-    post: "Create"
-    delete: "Delete"
-    cancel: "Cancel"
-    save: "Save"
-    add: "Add"
-    del: "Delete"
-    print: "Generate pdf"
+    filter: "Selectare"
+    get: "Vizionare"
+    put: "Editare"
+    post: "Creare"
+    delete: "Ştergere"
+    cancel: "Anulare"
+    save: "Salvare"
+    add: "Adăugare"
+    del: "Ştergere"
+    pdf: "Setare parametrii"
+    print: "Generare pdf"
   select:
-    select: "Select!"
+    select: "Alegeţi!"
+    no_data: "Nu există înregistrări!"
+  month: ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"]
 hu:
   xhr_tasks:
-    title: "Napi tennivaló... (feladatok)"
-    init: "Hozzáférés: Saját oldal -> Napi feladatok"
-    empty: "Még nincsen feladat meghatározva..."
+    title: "De rezolvat zilnic... (sarcini)"
+    init: "Accesare: Pagina mea -> Sarcini zilnice"
+    empty: "Nu aveţi sarcini definite..."
   xhr_pdfs:
-    title: "Jelentések/Nyomtatványok"
+    title: "Rapoarte/Formulare"
+  xhr_queries:
+    title: "Interogări/Statistică/Verificare"
+  xhr_repair:
+    title: "S-a strecurat o greşeală..."
   gen_head:
-    field: "Mező"
-    value: "Érték"
+    field: "Câmp"
+    value: "Valoare"
   gen_footer:
-    note: "* Lefordított mező.<br>
-           Ha üres, vagy nincsen lefordítva, ...?... fog megjelenni!<br>
-           A lefordításához, az interfész nyelvének a megváltoztatása<br>
-           és az illető nyelven, a mező módosítása szükséges."
+    note: "* Câmp tradus.<br>
+           Dacă este gol, sau dacă nu există traducere, se va afişa ...?...<br>
+           Momentan traducerea se face prin schimbarea limbii de acces<br>
+           a interfeţei şi editarea câmpului în cauză."
   gen_warning:
-    delete: "!!! Figyelem a törlés visszafordíthatatlan !!!"
-    post: "!!! Új bejegyzés !!!"
+    delete: "!!! Atenţie ştergera este ireversibilă !!!"
+    post: "!!! Înregistrare nouă !!!"
   gen_msg:
-    delete: "Törli a: <br><b>%{data}</b>, bejegyzést! <br>"
-    post: "Egy új bejegyzést fog létrehozni a <b>%{data}</b> adtabázis-táblában, az alapértelmezett értékekkel.<br>
-          <b>Fontos:</b><br>-a létrehozás után ne felejtse el módosítani az alapéertelmezett, vagy üres értékeket és elmenteni az adatokat. Akár le is törölheti a bejegyzést, ha meggondolta magát."
+    delete: "Se va şterge: <br><b>%{data}</b>.<br>"
+    post: "Se va crea o nouă înregistrare în tabelul <b>%{data}</b>, din baza de date, cu un conţinut implicit.<br>
+           <b>Important:</b><br>-după creare nu uitaţi să modificaţi câmpurile (generate cu conţinut implicit, sau goale) şi să <b>salvaţi</b> datele, sau puteţi chiar să <b>ştergeţi înregistrarea</b>, dacă va-ţi răzgândit!"
   button:
-    filter: "Választ"
-    get: "Megnéz"
-    put: "Módosít"
-    post: "Létrehoz"
-    delete: "Töröl"
-    cancel: "Lefúj"
-    save: "Ment"
-    add: "Hozzáad"
-    del: "Töröl"
-    print: "pdf Generálása"
+    filter: "Selectare"
+    get: "Vizionare"
+    put: "Editare"
+    post: "Creare"
+    delete: "Ştergere"
+    cancel: "Anulare"
+    save: "Salvare"
+    add: "Adăugare"
+    del: "Ştergere"
+    pdf: "Setare parametrii"
+    print: "Generare pdf"
   select:
-    select: "Válaszon!"
-
+    select: "Alegeţi!"
+    no_data: "Nu există înregistrări!"
+  month: ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"]
