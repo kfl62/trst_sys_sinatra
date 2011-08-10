@@ -9,7 +9,7 @@ class TrstPartnerDelegate
 
   field :name,    :default => "FirstName LastName"
   field :role,    :default => "Delegat"
-  field :id_pn,   :default => "1620824264374"
+  field :id_pn,   :default => "0123456789123"
   field :id_sr,   :default => "KX"
   field :id_nr,   :default => "123456"
   field :id_by,   :default => "SPCLEP Cluj-Napoca"
@@ -17,6 +17,7 @@ class TrstPartnerDelegate
   field :phone,   :default => "+40-264-406440"
 
   embedded_in :trst_partners, :class_name => "TrstPartner", :inverse_of => :delegates
+  has_many    :grns,          :class_name => "TrstAccGrn",  :inverse_of => :delegate
 
   def table_data
     [
