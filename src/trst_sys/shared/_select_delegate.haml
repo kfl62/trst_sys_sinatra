@@ -16,7 +16,7 @@
 - else
   %tr.delegate_select
     %td{:colspan => "6"}
-      %select{:name => "[trst_acc_grn][id_delegate]", :onchange => 'trst.task.acc.onSelectDelegate(this)'}
+      %select{:name => "[trst_acc_grn][delegate_id]", :onchange => 'trst.task.acc.onSelectDelegate(this)'}
         %option{:value => "null"}= t('trst_acc_grn.select.delegate')
         - delegates.each do |d|
           %option{:value => d.id.to_s}= d.name
