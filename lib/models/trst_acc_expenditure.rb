@@ -89,7 +89,7 @@ class TrstAccExpenditure
   def increment_name_date
     if TrstAccExpenditure.by_unit_id(unit_id).last.freights.empty?
       TrstAccExpenditure.by_unit_id(unit_id).last.destroy
-    end
+    end unless TrstAccExpenditure.by_unit_id(unit_id).last.nil?
     self.name = TrstAccExpenditure.by_unit_id(unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_000001"
     self.id_date = Date.today
   end

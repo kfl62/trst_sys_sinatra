@@ -74,7 +74,7 @@ class TrstAccDeliveryNote
   def increment_name_date
     if TrstAccDeliveryNote.by_unit_id(unit_id).last.freights.empty?
       TrstAccDeliveryNote.by_unit_id(unit_id).last.destroy
-    end
+    end unless TrstAccDeliveryNote.by_unit_id(unit_id).last.nil?
     self.name = TrstAccDeliveryNote.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEA3_001"
     self.id_main_doc = "#{TrstFirm.first.name[0][0..2].upcase}-" rescue "#{unit.firm.name[0][0..2].upcase}-"
     self.id_date = Date.today
