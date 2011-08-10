@@ -107,6 +107,9 @@ class TrstSysTsk < Sinatra::Base
     elsif params[:client_id]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]), :transporter_id => BSON::ObjectId.from_string(params[:transporter_id]), :unit_id => current_user.unit_id || session[:unit_id])
       @object.reload
+    elsif params[:supplier_id]
+      @object = @object.create(:supplier_id => BSON::ObjectId.from_string(params[:supplier_id]), :unit_id => current_user.unit_id || session[:unit_id])
+      @object.reload
     else
       if @object.instance_methods.include?(:unit_id)
         @object = @object.create(:unit_id => current_user.unit_id || session[:unit_id])
@@ -137,6 +140,10 @@ class TrstSysTsk < Sinatra::Base
         o = @object.freights.find_or_create_by(:id => v["id"]) unless v["freight_id"].nil? || v["freight_id"].empty?
         o.update_attributes v unless o.nil?
       end
+    end
+    if params[:delegates]
+      d = TrstPartner.find(@object.supplier_id).delegates.create(params[:delegates])
+      @object.update_attribute(:delegate_id, d.id)
     end
     unless verb == 'print'
       flash[:msg] = {:msg => {:txt => I18n.t('db.put', :data => @object.name), :class => "info"}}.to_json

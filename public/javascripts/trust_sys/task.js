@@ -197,8 +197,8 @@ trst.task = {
         if (dojo.byId('freightSelect_01') != undefined){
           trst.task.acc.init(dojo.byId('freightSelect_01'))
         }
-        if (dojo.query('[name*="[id_pn]"]')[0] != undefined){
-          trst.task.acc.validPn(dojo.query('[name*="[id_pn]"]')[0])
+        if (dojo.query('[name*="_pn]"]')[0] != undefined){
+          trst.task.acc.validPn(dojo.query('[name*="_pn]"]')[0])
         }
       },
       error: function(error){
@@ -381,8 +381,10 @@ dojo.mixin(trst.task,{
           ids = input.value.split(','),
           selected = dojo.query('#relations_window option:checked')[0];
       if (selected.value != 'null'){
-        names.splice(dojo.indexOf(names,selected.text),1);
-        ids.splice(dojo.indexOf(selected.value),1);
+        if (dojo.indexOf(names,selected.text) >= 0)
+          names.splice(dojo.indexOf(names,selected.text),1);
+        if (dojo.indexOf(ids,selected.value) >= 0)
+          ids.splice(dojo.indexOf(ids,selected.value),1);
       };
       span.innerHTML = names.join(', ');
       input.value = ids.join(',');
@@ -484,6 +486,14 @@ dojo.mixin(trst.task,{
           tp = dojo.byId('select_transporter');
       trst.task.init(id,'post','new?client_id=' + cl.options(cl.selectedIndex).value + '&transporter_id=' + tp.options(tp.selectedIndex).value)
     },
+    grnInit: function(id){
+      var supp = dojo.byId('select_supplier')
+      if (selectedValue(supp) != 'null'){
+        trst.task.init(id,'post','new?supplier_id=' + selectedValue(supp))
+        }else{
+          alert("Nu aţi selectat furnizorul!")
+        }
+    },
     onSelectPf: function(id){
       var button = dojo.query('.post')[1];
       if (button != undefined){
@@ -508,6 +518,18 @@ dojo.mixin(trst.task,{
       tr.children[2].children[0].innerHTML = parseFloat(d.item.stock).toFixed(2)
       tr.children[3].children[0].focus()
       tr.children[3].children[0].select()
+    },
+    onSelectDelegate: function(node){
+      if (selectedValue(node) == 'null'){
+        alert("Nu este o opţiune validă!")
+      }else if (selectedValue(node) == 'new'){
+        dojo.destroy(dojo.query('.delegate_select')[0])
+        dojo.query('.delegate_new').style('display','')
+      }else{
+        dojo.query('.delegate_new').forEach(function(tr){
+          dojo.destroy(tr)
+        })
+      }
     },
     deleteRow: function(node){
       dojo.destroy(node.parentElement.parentElement)
@@ -558,6 +580,20 @@ dojo.mixin(trst.task,{
       }
       rows[rows.length -1].children[1].children[0].innerHTML = parseFloat(s_qu).toFixed(2)
     },
+    calculatorGrn: function(){
+      var rows = dojo.query('tbody.inner tr'), v_val = 0, s_val = 0;
+      for(var i=1;i<rows.length -1;i++){
+        v_val = (parseFloat(rows[i].children[2].children[0].value) * parseFloat(rows[i].children[3].children[0].value)).toFixed(3)
+        rows[i].children[2].children[0].value = parseFloat(rows[i].children[2].children[0].value).toFixed(2)
+        rows[i].children[3].children[0].value = parseFloat(rows[i].children[3].children[0].value).toFixed(2)
+        rows[i].children[4].children[0].innerHTML = parseFloat(v_val).toFixed(2)
+        s_val += parseFloat(parseFloat(v_val).toFixed(2));
+        v_val = 0
+      }
+      rows[rows.length -1].children[1].children[0].innerHTML = s_val.toFixed(2)
+      rows[rows.length -1].children[1].children[1].value = s_val.toFixed(2)
+      dojo.byId('sum_pay').value = s_val.toFixed(2)
+   },
     print_expenditure: function(id,verb,target_id){
       trst.task.url.push(id,verb,target_id);
       xhrArgs = {
@@ -591,15 +627,19 @@ dojo.mixin(trst.task,{
       trst.task.destroy();
     },
     validPn: function(node){
+      if (dijit.byId("delegate_id_pn"))
+        dijit.byId("delegate_id_pn").destroy();
       var valid = new dijit.form.ValidationTextBox({
         name: node.name,
         required: true,
         trim: true,
         selectOnClick: true,
+        placeHolder: "Cod numeric personal",
         promptMessage: "Validare CNP"
       },node)
       dojo.style(valid.domNode,"width","138px");
-      valid.focus();
+      if (node.id != "delegate_id_pn")
+        valid.focus();
       valid.validator = function(value){
         if (value.length < 13){
           valid.invalidMessage = "Introduceţi 13 cifre!"
