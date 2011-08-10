@@ -1,2 +1,103 @@
+:ruby
+  session[:unit_id] = TrstFirm.unit_id_by_unit_slug('AFDV')
+  unit_id = current_user.unit_id || session[:unit_id]
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
+-if action == 'put'
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %th{:colspan => "6"}
+            Nr.
+            %input.ce{:name => "[trst_acc_grn][name]",:value => @object.name, :style => "width:12em"}
+            din data de:
+            %input.date{:name => "[trst_acc_grn][id_date]",:value => @object.id_date.to_s}
+        %tr
+          %td{:colspan => "6"}
+            %span De la furnizorul:
+        %tr
+          %td{:colspan => "6",:style => "border: solid 1px"}
+            %table{:cellspacing => "0"}
+              %tbody
+                %tr
+                  %td
+                    %select{:name => "[trst_acc_grn][supplier_id]"}
+                      - TrstPartner.suppliers.each do |s|
+                        %option{:value => s.id, :selected => s.id == @object.supplier_id}= s.name[1]
+                  %td
+                    %input.date{:name => "[trst_acc_grn][main_doc_date]",:value => @object.main_doc_date.to_s, :placeholder => "În data de:"}
+
+                  %td
+                    %select{:name => "[trst_acc_grn][main_doc_type]"}
+                      %option{:value => "null"}= "Tip document"
+                      %option{:value => "DN"}= "Aviz de expediţie"
+                      %option{:value => "INV"}= "Factură fiscală"
+                  %td
+                    %input.date{:name => "[trst_acc_grn][main_doc_name]",:value => @object.main_doc_name.to_s, :placeholder => "Nr. document"}
+                = partial('trst_sys/shared/select_delegate', :locals => {:partner_id => @object.supplier_id})
+        %tr
+          %td{:colspan => "6"}
+            %p S-au recepţionat următoarele:
+      %tbody.inner.stats
+        %tr
+          %td.ce Material
+          %td.ce UM
+          %td.ce PU
+          %td.ce Cant
+          %td.ce Valoare
+          %td.ce &nbsp;&nbsp;
+        -for i in 1..5 do
+          %tr{:id => "tr_0#{i.to_s}"}
+            %td.filtering-select-freight
+              %input.freight{:id => "freightSelect_0#{i.to_s}"}
+            %td
+              %span.ce.st kg
+            %td
+              %input.ri.st{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:4em"}
+            %td
+              %input.ri.st{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:8em"}
+              %input{:type => "hidden", :name => "[freights][#{i}][doc_id]",:value => @object.id}
+              %input{:type => "hidden", :name => "[freights][#{i}][unit_id]",:value => unit_id}
+            %td
+              %span.res 0.00
+            %td
+              %span.db-freight-del{:onclick => "trst.task.acc.deleteRow(this)"}
+        %tr
+          %td.ce.em.st{:colspan => "4"}
+            %span Total
+          %td
+            %span.ce.st{:style => "display:block"} 0.00
+            %input{:type => "hidden", :name => "[trst_acc_grn][sum_100]"}
+          %td
+            %span &nbsp;&nbsp;
+      %tfoot
+        %tr
+          %td{:colspan => "6"}
+            %span= "Detalii plată:"
+        %tr
+          %td{:colspan => "3"}
+            %input.ce.st{:name => "[trst_acc_grn][main_doc_paym]",:placeholder => "Achitat cu",:style => "width:12.5em"}
+          %td{:colspan => "3"}
+            %input.ce.st{:id => "sum_pay",:name => "[trst_acc_grn][sum_pay]",:placeholder => "Suma de",:style => "width:8em"}
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "6"}
+            %span{:class => "button save", :onclick => "trst.task.acc.calculatorGrn(); trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
+            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+        %tr
+          %td.footer_note{:colspan => "6"}= t('trst_acc_grn.footer_note_put')
+-else
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new",params)}<
+              =t("button.#{button}")
