@@ -58,7 +58,6 @@
             %td
               %input.ri.st{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:8em"}
               %input{:type => "hidden", :name => "[freights][#{i}][doc_id]",:value => @object.id}
-              %input{:type => "hidden", :name => "[freights][#{i}][unit_id]",:value => unit_id}
             %td
               %span.res 0.00
             %td
