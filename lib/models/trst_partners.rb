@@ -11,6 +11,9 @@ class TrstPartner
   field :identities,          :type => Hash,          :default => {:caen => "xxx",:chambcom => "Jxx/xxx/xxx",:fiscal => "ROxxx",:account => "xxx",:itm => "xxx",:internet => "xxx.xxx.xxx.xxx",:cod => "XXX"}
   field :contact,             :type => Hash,          :default => {:phone => "xxxx",:fax => "xxx",:email => "xx@xxx.xxx",:website => "xxxx"}
   field :about,               :type => Hash,          :default => {:scope => "Scope ...?...", :descript => "Descript ...?..."}
+  field :client,              :type => Boolean,       :default => true
+  field :supplier,            :type => Boolean,       :default => true
+  field :transporter,         :type => Boolean,       :default => true
 
   embeds_many :addresses,       :class_name => "TrstPartnerAddress"
   embeds_many :persons,         :class_name => "TrstPartnerContactPerson"
@@ -26,11 +29,24 @@ class TrstPartner
       f = where('units.slug' => s).first
       id = f.units.where(:slug => s).first.id
     end
+    # @todo
     def unit_by_unit_id(i)
       f = where('units._id' => i).first
       f.units.find(i)
     end
-  end
+    # @todo
+    def clients
+      where(:client => true).asc(:name)
+    end
+    # @todo
+    def suppliers
+      where(:supplier => true).asc(:name)
+    end
+    # @todo
+    def transporters
+      where(:transporter => true).asc(:name)
+    end
+  end # Class methods
 
   # @todo
   def details
@@ -60,7 +76,10 @@ class TrstPartner
       {:css => "normal",:name => "contact,email",:label => I18n.t("trst_partner.contact.email"),:value => contact["email"]},
       {:css => "normal",:name => "contact,website",:label => I18n.t("trst_partner.contact.website"),:value => contact["website"]},
       {:css => "normal",:name => "about,scope",:label => I18n.t("trst_partner.about.scope"),:value => about["scope"]},
-      {:css => "normal",:name => "about,descript",:label => I18n.t("trst_partner.about.descript"),:value => about["descript"]}
+      {:css => "normal",:name => "about,descript",:label => I18n.t("trst_partner.about.descript"),:value => about["descript"]},
+      {:css => "boolean",:name => "client",:label => I18n.t("trst_partner.client"),:value => client},
+      {:css => "boolean",:name => "supplier",:label => I18n.t("trst_partner.supplier"),:value => supplier},
+      {:css => "boolean",:name => "transporter",:label => I18n.t("trst_partner.transporter"),:value => transporter}
     ]
   end
 

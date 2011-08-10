@@ -24,6 +24,9 @@ ro:
     about:
       scope: "Scop"
       descript: "Descriere"
+    client: "Beneficiar"
+    supplier: "Furnizor"
+    transporter: "Transportator"
 en:
   trst_partner:
     select: "Selectaţi firma"
@@ -49,6 +52,9 @@ en:
     about:
       scope: "Scop"
       descript: "Descriere"
+    client: "Beneficiar"
+    supplier: "Furnizor"
+    transporter: "Transportator"
 hu:
   trst_partner:
     select: "Selectaţi firma"
@@ -74,4 +80,6 @@ hu:
     about:
       scope: "Scop"
       descript: "Descriere"
-
+    client: "Beneficiar"
+    supplier: "Furnizor"
+    transporter: "Transportator"
