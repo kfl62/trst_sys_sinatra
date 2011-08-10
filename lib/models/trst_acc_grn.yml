@@ -14,6 +14,8 @@ ro:
       supplier: Selectaţi furnizorul!
       delegate: Selectaţi delegatul!
       delegate_new: "Adăugare delegat"
+    inv: Factură fiscală
+    dn: Aviz de expediţie
 en:
   trst_acc_grn:
     title: "Notă de recepţie"
@@ -29,6 +31,8 @@ en:
       supplier: Selectaţi furnizorul!
       delegate: Selectaţi delegatul!
       delegate_new: "Adăugare delegat"
+    inv: Factură fiscală
+    dn: Aviz de expediţie
 hu:
   trst_acc_grn:
     title: "Notă de recepţie"
@@ -44,3 +48,5 @@ hu:
       supplier: Selectaţi furnizorul!
       delegate: Selectaţi delegatul!
       delegate_new: "Adăugare delegat"
+    inv: Factură fiscală
+    dn: Aviz de expediţie

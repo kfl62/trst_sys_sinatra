@@ -1,2 +1,48 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
+-if action == 'get'
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td{:colspan => "2"}
+          %span= "Recepţia nr. <b>#{@object.name}</b>/<b>#{@object.id_date.to_s}</b>"
+    %tbody
+      %tr
+        %td{:colspan => "2"} &nbsp;
+      %tr
+        %td{:colspan => "2"}
+          %span= "Se va genera cu următorul conţinut:<br/></br>De la furnizorul <b>#{TrstPartner.find(@object.supplier_id).name[2]}</b></br>"
+          %span= "în baza doc: <b>#{t("trst_acc_grn.#{@object.main_doc_type.downcase}")} - #{@object.main_doc_name}/ #{@object.main_doc_date}</b> <br/>"
+          %span= "delegatul <b>#{@object.delegate.name}</b> cu mijlocul de transp. <b>#{@object.main_doc_plat.upcase}</b>,<br\>"
+          %span= "în prezenţa Dn-lui/ei <b>#{@object.unit.chief}</b>, sau recepţionat următoarele:<br\>"
+      %tr
+        %td{:colspan => "2"} &nbsp;
+      - @object.freights.each_with_index do |f,i|
+        %tr
+          %td.st= "#{i + 1}. Deşeuri #{f.freight.name.downcase}"
+          %td.st.ri= "#{"%.2f" % f.qu} #{f.um.downcase}"
+      %tr
+        %td{:colspan => "2"} &nbsp;
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "2"}
+          %form{:id  => "xhr_#{action}"}
+          %span{:class => "button print", :onclick => "trst.task.acc.print_grn('#{@task.id}','print','#{@object.id}')"}= t("button.print")
+          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+      %tr
+        %td.footer_note{:colspan => "2"}= t('trst_acc_grn.footer_note_del')
+- else
+  %table
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p= t("gen_msg.#{action}", :data => "#{@object.class.to_s} -> #{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
