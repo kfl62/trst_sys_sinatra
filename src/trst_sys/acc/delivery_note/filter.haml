@@ -10,15 +10,15 @@
       %td
         %select#select_client
           %option{:value => 'null'}= t('trst_acc_delivery_note.select.client')
-          - unless TrstPartner.empty?
-            - TrstPartner.asc(:name).each do |client|
+          - unless TrstPartner.clients.empty?
+            - TrstPartner.clients.each do |client|
               %option{:value => client.id}= client.name[1]
     %tr
       %td
         %select#select_transporter
           %option{:value => 'null'}= t('trst_acc_delivery_note.select.transporter')
-          - unless TrstPartner.empty?
-            - TrstPartner.asc(:name).each do |transporter|
+          - unless TrstPartner.transporters.empty?
+            - TrstPartner.transporters.each do |transporter|
               %option{:value => transporter.id}= transporter.name[1]
   %tfoot
     %tr
