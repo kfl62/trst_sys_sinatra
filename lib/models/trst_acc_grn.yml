@@ -5,15 +5,42 @@ ro:
     not_ready: Din păcate încâ nu este gata!<br/><br/>
                Faptul că a apărut în meniul "Sarcini zilnice",<br/>
                înseamnă că va fi utilizabil în curând!
+    filter:
+      info: Selectaţi furnizorul din căsuţa de mai jos!<br/>
+            În cazul în care nu există, creaţi un furnizor<br/>
+            alegând task-ul "Editare partener".
+      add_supplier: Adăugare furnizor!
+    select:
+      supplier: Selectaţi furnizorul!
+      delegate: Selectaţi delegatul!
+      delegate_new: "Adăugare delegat"
 en:
   trst_acc_grn:
     title: "Notă de recepţie"
     not_ready: Din păcate încâ nu este gata!<br/><br/>
                Faptul că a apărut în meniul "Sarcini zilnice",<br/>
                înseamnă că va fi utilizabil în curând!
+    filter:
+      info: Selectaţi furnizorul din căsuţa de mai jos!<br/>
+            În cazul în care nu există, creaţi un furnizor<br/>
+            alegând task-ul "Editare partener".
+      add_supplier: Adăugare furnizor!
+    select:
+      supplier: Selectaţi furnizorul!
+      delegate: Selectaţi delegatul!
+      delegate_new: "Adăugare delegat"
 hu:
   trst_acc_grn:
     title: "Notă de recepţie"
     not_ready: Din păcate încâ nu este gata!<br/><br/>
                Faptul că a apărut în meniul "Sarcini zilnice",<br/>
                înseamnă că va fi utilizabil în curând!
+    filter:
+      info: Selectaţi furnizorul din căsuţa de mai jos!<br/>
+            În cazul în care nu există, creaţi un furnizor<br/>
+            alegând task-ul "Editare partener".
+      add_supplier: Adăugare furnizor!
+    select:
+      supplier: Selectaţi furnizorul!
+      delegate: Selectaţi delegatul!
+      delegate_new: "Adăugare delegat"
