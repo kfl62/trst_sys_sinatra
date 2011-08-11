@@ -626,6 +626,25 @@ dojo.mixin(trst.task,{
       var deferred = dojo.xhrGet(xhrArgs);
       trst.task.destroy();
     },
+    print_grn: function(id,verb,target_id){
+      trst.task.url.push(id,verb,target_id);
+      xhrArgs = {
+        url: trst.task.url.join('/'),
+        load: function(data){
+          window.open(this.url);
+          dojo.attr('xhr_msg','class','hidden');
+        },
+        error: function(error){
+          dojo.publish('xhrMsg',['error','error',error]);
+        }
+      };
+      dojo.publish('xhrMsg',['loading','info']);
+      var deferred = dojo.xhrGet(xhrArgs);
+      trst.task.destroy();
+      // trst.task.id = trst.task.verb = trst.task.target_id = "";
+      // trst.task.url = ["/srv/tsk"];
+
+    },
     validPn: function(node){
       if (dijit.byId("delegate_id_pn"))
         dijit.byId("delegate_id_pn").destroy();

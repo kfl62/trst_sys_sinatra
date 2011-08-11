@@ -19,6 +19,8 @@ class TrstAccGrn
   field   :sum_out,               :type => Float,     :default => 0.00
   field   :sum_pay,               :type => Float,     :default => 0.00
 
+  alias :file_name :name
+
   has_many    :freights,    :class_name => "TrstAccFreightIn",    :inverse_of => :doc
   belongs_to  :supplier,    :class_name => "TrstPartner",         :inverse_of => :qrns
   has_one     :delegate,    :class_name => "TrstPartnerDelegate", :inverse_of => :grns
@@ -59,6 +61,11 @@ class TrstAccGrn
   def delegate
     TrstPartner.find(supplier_id).delegates.find(delegate_id)
   end
+  # @todo
+  def pdf_template
+    'pdf'
+  end
+
   protected
   # @todo
   def increment_name_date
