@@ -65,7 +65,7 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "9"}
-            %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
+            %span{:class => "button save", :onclick => "trst.task.acc.calculator(); trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
             %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
         %tr
           %td.footer_note{:colspan => "9"}= "&nbsp;" #t('gen_footer.note')
