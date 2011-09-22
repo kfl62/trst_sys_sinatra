@@ -125,7 +125,7 @@ trst.task = {
       form: dojo.query('form')[0],
       url: this.url.join('/'),
       load: function(data){
-        window.open(this.url);
+        window.location = this.url;
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
