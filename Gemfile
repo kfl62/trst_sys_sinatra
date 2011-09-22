@@ -1,5 +1,5 @@
 source "http://rubygems.org"
-gem "sinatra", :git => "git://github.com/sinatra/sinatra.git", :require => "sinatra/base"
+gem "sinatra", "1.2.6"#, :git => "git://github.com/sinatra/sinatra.git", :require => "sinatra/base"
 gem "haml"
 gem "mongoid", "2.0.2" #, :git => "git://github.com/mongoid/mongoid"
 gem "mongoid_i18n"#, :git => "git://github.com/kfl62/mongoid_i18n.git",:require => "mongoid/i18n"
