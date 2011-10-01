@@ -3,6 +3,8 @@ require './config/trst_conf'
 require 'rack-flash'
 require 'rack/rewrite'
 
+use Rack::CommonLogger
+
 use Rack::Session::Cookie, :secret => 'zsdgryst34kkufklfSwsqwess'
 use Rack::Flash
 use Rack::Rewrite do
