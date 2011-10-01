@@ -599,7 +599,7 @@ dojo.mixin(trst.task,{
       xhrArgs = {
         url: trst.task.url.join('/'),
         load: function(data){
-          window.open(this.url);
+          window.location = this.url;
           dojo.attr('xhr_msg','class','hidden');
         },
         error: function(error){
@@ -615,7 +615,7 @@ dojo.mixin(trst.task,{
       xhrArgs = {
         url: trst.task.url.join('/'),
         load: function(data){
-          window.open(this.url);
+          window.location = this.url;
           dojo.attr('xhr_msg','class','hidden');
         },
         error: function(error){
@@ -631,7 +631,7 @@ dojo.mixin(trst.task,{
       xhrArgs = {
         url: trst.task.url.join('/'),
         load: function(data){
-          window.open(this.url);
+          window.location = this.url;
           dojo.attr('xhr_msg','class','hidden');
         },
         error: function(error){
