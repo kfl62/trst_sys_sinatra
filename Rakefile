@@ -1,4 +1,6 @@
 #encoding: utf-8
+require "thin"
+require "wirble"
 
 task :default => "doc"
 
@@ -36,5 +38,5 @@ end
 
 desc "Start web server"
 task :thin do
-  exec "rackup -sthin -p3000"
+  exec "thin -D start"
 end
