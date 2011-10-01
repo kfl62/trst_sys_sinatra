@@ -1,4 +1,4 @@
-# st: font_face consolas; font_size 9
+# st: font_face "consolas"; font_size 9
 ro:
   trst_partner_unit:
     title: "5.) Puncte de lucru"
