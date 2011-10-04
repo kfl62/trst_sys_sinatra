@@ -1,11 +1,11 @@
 source "http://rubygems.org"
 gem "sinatra", "1.3.0", :require => "sinatra/base"
+gem "rack", "1.3.3"
 gem "rack-flash"
 gem "rack-rewrite", :require => "rack/rewrite"
 gem "haml"
 gem "compass", "~>0.10"
-gem "mongoid", "2.0.2"
-gem "mongoid_i18n",:require => "mongoid/i18n"
+gem "mongoid"
 gem "bson_ext"
 gem 'prawn'
 gem "rdiscount"
