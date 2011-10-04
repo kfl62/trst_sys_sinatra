@@ -17,7 +17,6 @@ Associations:
 =end
 class TrstBookPage
   include Mongoid::Document
-  include Mongoid::I18n
   include Mongoid::Timestamps
 
   field :order,           :type => Integer
@@ -25,9 +24,9 @@ class TrstBookPage
   field :access_lvl,      :type => Integer,       :default => 3
   field :access_grp,      :type => Array,         :default => ["public","admin"]
   field :task_ids,        :type => Array,         :default => []
-  localized_field :name
-  localized_field :title
-  localized_field :content
+  field :name,            :localize => true
+  field :title,           :localize => true
+  field :content,         :localize => true
 
   embedded_in :chapter, :class_name => "TrstBookChapter", :inverse_of => :pages
 

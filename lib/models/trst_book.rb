@@ -11,11 +11,10 @@ Associations:
 =end
 class TrstBook
   include Mongoid::Document
-  include Mongoid::I18n
   include Mongoid::Timestamps
 
-  localized_field :name
-  localized_field :content
+  field :name, :localize => true
+  field :content, :localize => true
 
   validates_presence_of :name
 

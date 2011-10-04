@@ -15,14 +15,13 @@ Associations:
 =end
 class TrstBookChapter
   include Mongoid::Document
-  include Mongoid::I18n
   include Mongoid::Timestamps
 
   field :order,             :type => Integer
   field :slug,              :type => String
-  localized_field :name
-  localized_field :title
-  localized_field :content
+  field :name,            :localize => true
+  field :title,           :localize => true
+  field :content,         :localize => true
 
   embedded_in :book, :class_name => "TrstBook", :inverse_of => :chapters
   embeds_many :pages, :class_name => "TrstBookPage"

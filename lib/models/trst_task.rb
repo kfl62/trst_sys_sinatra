@@ -16,16 +16,15 @@ Associations:
 =end
 class TrstTask
   include Mongoid::Document
-  include Mongoid::I18n
   include Mongoid::Timestamps
 
   field           :haml_path,       :type => String,      :default => "default"
   field           :page_ids,        :type => Array,       :default => []
   field           :user_ids,        :type => Array,       :default => []
   field           :target
-  localized_field :name
-  localized_field :title
-  localized_field :help
+  field           :name,            :localize => true
+  field           :title,           :localize => true
+  field           :help,            :localize => true
 
   before_update :sync_pages
 

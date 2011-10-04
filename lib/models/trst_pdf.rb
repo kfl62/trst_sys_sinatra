@@ -16,7 +16,7 @@ Associations:
 =end
 class TrstPdf
   include Mongoid::Document
-  include Mongoid::I18n
+  #include Mongoid::I18n
   include Mongoid::Timestamps
 
   field           :task_ids,        :type => Array,       :default => []
@@ -24,9 +24,9 @@ class TrstPdf
   field           :pdf_template,    :type => String,      :default => "report"
   field           :default_values,  :type => Hash,        :default => {}
   field           :last_values,     :type => Hash,        :default => {}
-  localized_field :name
-  localized_field :title
-  localized_field :help
+  field           :name,            :localize => true
+  field           :title,           :localize => true
+  field           :help,            :localize => true
 
   class << self
     # @todo Document this method
