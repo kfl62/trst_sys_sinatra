@@ -25,7 +25,6 @@ task :console do
   I18n.load_path += Dir.glob(File.join(app_root, 'src','translations','*.yml'))
   I18n.load_path += Dir.glob(File.join(app_root, 'lib','models','*.yml'))
   I18n.default_locale = :ro
-  require 'mongoid/i18n'
   # models,controllers
   required = Dir.glob(File.join(app_root, 'lib','models','*.rb'))
   required.each do |r|
