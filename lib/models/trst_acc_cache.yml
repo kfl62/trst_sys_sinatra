@@ -1,4 +1,4 @@
-# st: font_face "consolas"; font_size 9
+# encoding: utf-8
 ro:
   trst_acc_cache:
     title: "Monetar"
@@ -37,7 +37,6 @@ ro:
       out: "Bani cheltuiţi"
       end: "Sold"
 en:
-ro:
   trst_acc_cache:
     title: "Monetar"
     name: "Document"
@@ -75,7 +74,6 @@ ro:
       out: "Bani cheltuiţi"
       end: "Sold"
 hu:
-ro:
   trst_acc_cache:
     title: "Monetar"
     name: "Document"
