@@ -1,5 +1,5 @@
 source "http://rubygems.org"
-gem "sinatra", "1.3.0", :require => "sinatra/base"
+gem "sinatra", :require => "sinatra/base"
 gem "rack", "~>1.3.3"
 gem "rack-flash"
 gem "rack-rewrite", :require => "rack/rewrite"
