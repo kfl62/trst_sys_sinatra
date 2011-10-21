@@ -29,5 +29,7 @@
         %a{:id => "#{repair}",:'data-tsks' => data_tsk,:href => "#"}
           = TrstTask.find(repair).name
         %span.help{:onclick  => "trst.task.init('#{repair}','help')"}
-
-
+  - unless current_user.unit_id
+    %hr
+    %li.em.st= 'Punctul de lucru selectat:'
+    %li#current_unit_id= TrstFirm.unit_by_unit_id(session[:unit_id]).name[1] rescue "Toate unităţile"

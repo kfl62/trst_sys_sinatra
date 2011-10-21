@@ -1,27 +1,34 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_delivery_note.title')
-%table{:cellspacing => "0"}
-  %thead
-    %tr
-      %td
-        %p{:style => "font-size:0.9em"}= t('trst_acc_delivery_note.filter_info')
-  %tbody
-    %tr
-      %td
-        %select#select_client
-          %option{:value => 'null'}= t('trst_acc_delivery_note.select.client')
-          - unless TrstPartner.clients.empty?
-            - TrstPartner.clients.each do |client|
-              %option{:value => client.id}= client.name[1]
-    %tr
-      %td
-        %select#select_transporter
-          %option{:value => 'null'}= t('trst_acc_delivery_note.select.transporter')
-          - unless TrstPartner.transporters.empty?
-            - TrstPartner.transporters.each do |transporter|
-              %option{:value => transporter.id}= transporter.name[1]
-  %tfoot
-    %tr
-      %td{:class => "buttons_bottom"}
-        %span{:class => "button post", :onclick => "trst.task.acc.deliveryInit('#{@task.id}')" }= t("button.post") + " Anexa3"
-        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+- if unit_id
+  - if current_user.unit_id.nil?
+    = partial('trst_sys/shared/select_unit')
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+          %p{:style => "font-size:0.9em"}= t('trst_acc_delivery_note.filter_info')
+    %tbody
+      %tr
+        %td
+          %select#select_client
+            %option{:value => 'null'}= t('trst_acc_delivery_note.select.client')
+            - unless TrstPartner.clients.empty?
+              - TrstPartner.clients.each do |client|
+                %option{:value => client.id}= client.name[1]
+      %tr
+        %td
+          %select#select_transporter
+            %option{:value => 'null'}= t('trst_acc_delivery_note.select.transporter')
+            - unless TrstPartner.transporters.empty?
+              - TrstPartner.transporters.each do |transporter|
+                %option{:value => transporter.id}= transporter.name[1]
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          %span{:class => "button post", :onclick => "trst.task.acc.deliveryInit('#{@task.id}')" }= t("button.post") + " Anexa3"
+          %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+- else
+  = partial('trst_sys/shared/select_unit')

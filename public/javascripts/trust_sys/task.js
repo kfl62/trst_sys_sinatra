@@ -61,6 +61,9 @@ trst.task = {
       url: this.url.join('/'),
       load: function(data){
         trst.task.drawBox(data);
+        if (dojo.byId('pfFilteringSelect') != undefined){
+          trst.task.acc.init(dojo.byId('pfFilteringSelect'));
+        }
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
@@ -93,6 +96,9 @@ trst.task = {
       url: this.url.join('/'),
       load: function(data){
         trst.task.drawBox(data);
+        if (dojo.query('[name*="_pn]"]')[0] != undefined){
+          trst.task.acc.validPn(dojo.query('[name*="_pn]"]')[0])
+        }
         dojo.attr('xhr_msg','class','hidden');
       },
       error: function(error){
@@ -216,7 +222,10 @@ trst.task = {
       load: function(data){
         dojo.publish('xhrMsg',['flash']);
         trst.task.drawBox(data);
-      },
+        if (dojo.query('[name*="_pn]"]')[0] != undefined){
+          trst.task.acc.validPn(dojo.query('[name*="_pn]"]')[0])
+        }
+     },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
       }
@@ -308,7 +317,7 @@ trst.task = {
         trst.task.connections.push(
           dojo.connect(a, 'onclick', function(e){
             e.preventDefault()
-            trst.task.init(e.target.id,'repair')
+            trst.task.init(e.target.id,'repair','null')
           })
         )
       }
@@ -650,6 +659,7 @@ dojo.mixin(trst.task,{
         dijit.byId("delegate_id_pn").destroy();
       var valid = new dijit.form.ValidationTextBox({
         name: node.name,
+        value: node.value,
         required: true,
         trim: true,
         selectOnClick: true,

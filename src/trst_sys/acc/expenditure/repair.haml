@@ -1,28 +1,42 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+  date = session[:date] || Date.today.to_s
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
-%table{:cellspacing => "0"}
-  %thead
-    %tr
-      %td{:colspan => "4"}
-        %span.small.with-title{:title => t('trst_acc_expenditure.repair.header_title')}= t('trst_acc_expenditure.repair.header')
-        %br
-  %tbody
-    %tr
-      %td.ce APP nr.
-      %td.ce Valoare
-      %td.ce Plătit
-      %td.ce Acţiune
-    - @object.by_unit_id(unit_id).daily.each do |o|
+- if unit_id
+  - if current_user.unit_id.nil?
+    = partial('trst_sys/shared/select_unit')
+  %table{:cellspacing => "0"}
+    %thead
       %tr
-        %td= o.name
-        %td
-          %span.val= "%.2f" % o.sum_100
-        %td
-          %span.res= "%.2f" % o.sum_out
-        %td
-          %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccExpenditure")}','get','#{o.id}')"}
-  %tfoot
-    %tr
-      %td.footer_note{:colspan => "4"}= t('trst_acc_expenditure.repair.footer')
+        - if current_user.unit_id
+          %td{:colspan => "4"}
+            %span.small.with-title{:title => t('trst_acc_expenditure.repair.header_title')}= t('trst_acc_expenditure.repair.header')
+            %br
+        - else
+          %span.small Adeverinţe eliberate în data de:&nbsp;
+          %input.date{:onchange => "trst.task.init('#{@task.id}','repair',this.value)", :value => date}
+          %hr
+    %tbody
+      %tr
+        %td.ce APP nr.
+        %td.ce Valoare
+        %td.ce Plătit
+        %td.ce Acţiune
+      - @object.by_unit_id(unit_id).daily(date).each do |o|
+        %tr
+          %td= o.name
+          %td
+            %span.val= "%.2f" % o.sum_100
+          %td
+            %span.res= "%.2f" % o.sum_out
+          %td
+            %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccExpenditure")}','get','#{o.id}')"}
+    %tfoot
+      %tr
+        - if current_user.unit_id
+          %td.footer_note{:colspan => "4"}= t('trst_acc_expenditure.repair.footer')
+        - else
+          %td.footer_note{:colspan => "4"}= t('trst_acc_expenditure.repair.footer_short')
+- else
+  = partial('trst_sys/shared/select_unit')

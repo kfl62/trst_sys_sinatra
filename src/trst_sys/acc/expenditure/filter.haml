@@ -1,17 +1,24 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
-%table{:cellspacing => "0"}
-  %thead
-    %tr
-      %td
-        %p{:style => "font-size:0.9em"}= t('trst_acc_expenditure.client.select')
-  %tbody
-    %tr
-      %td.filtering-select-pf
-        %input#pfFilteringSelect
-        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartnersPf")}','post','new')"}= t('trst_acc_expenditure.client.add_button')
-  %tfoot
-    %tr
-      %td{:class => "buttons_bottom"}
-        %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post") + " APP!"
-        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+- if unit_id
+  - if current_user.unit_id.nil?
+    = partial('trst_sys/shared/select_unit')
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+          %p{:style => "font-size:0.9em"}= t('trst_acc_expenditure.client.select')
+    %tbody
+      %tr
+        %td.filtering-select-pf
+          %input#pfFilteringSelect
+          %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartnersPf")}','post','new')"}= t('trst_acc_expenditure.client.add_button')
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post") + " APP!"
+          %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+- else
+  = partial('trst_sys/shared/select_unit')

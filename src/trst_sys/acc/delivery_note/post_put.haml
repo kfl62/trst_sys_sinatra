@@ -1,5 +1,4 @@
 :ruby
-  session[:unit_id] = TrstFirm.unit_id_by_unit_slug('AFDV') if current_user.login_name == "andrea75"
   unit_id = current_user.unit_id || session[:unit_id]
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_delivery_note.title')

@@ -43,7 +43,8 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation
   get '/:id/unit_id/:unit_id' do |id,unit_id|
     session[:unit_id] = (unit_id == 'null') ? nil : unit_id
-    @task, @object, haml_path, locals = init_variables(id, 'filter', nil, params)
+    verb = TrstTask.find(id).target.split('.')[1] == 'repair' ? 'repair' : 'filter'
+    @task, @object, haml_path, locals = init_variables(id, verb, nil, params)
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
 
@@ -64,7 +65,8 @@ class TrstSysTsk < Sinatra::Base
   end
 
   # @todo Documentation
-  get '/:id/repair/' do |id|
+  get '/:id/repair/:date' do |id,date|
+    session[:date] = (date == 'null' || date.nil?) ? Date.today.to_s : date
     @task, @object, haml_path, locals = init_variables(id, 'repair', nil, params)
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
