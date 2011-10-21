@@ -3,14 +3,23 @@ ro:
   trst_acc_expenditure:
     title: "Adeverinţă primire şi plată"
     not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br>
                înseamnă că va fi utilizabil în curând!
+    repair:
+      header: "Puteţi Tipării/Şterge Adeverinţele eliberate azi!<br>"
+      header_title: "Pentru mai multe detalii apasaţi pe pictograma ...?... din dreptul
+                     comenzii"
+      footer: "<br />Notă: <br />
+              În cazul în care nu s-a tipărit o Adeverinţă puteţi repeta tipărirea cu<br>
+              un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
+              Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
+              pictograma <img src='images/icons/help.png' width='12' height='12' />"
     client:
-      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br />
-               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br \>
+      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br>
+               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br>
                îl selectaţi şi se activează butonul \"Creare APP!\";<br />
-               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br />
-               va trebui să creaţi un \"Client nou!\"<br \>
+               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br>
+               va trebui să creaţi un \"Client nou!\"<br>
                &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi \"Anulare\"."
 
       add_button: "Client nou!"
@@ -21,14 +30,14 @@ en:
   trst_acc_expenditure:
     title: "Adeverinţă primire şi plată"
     not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br>
                înseamnă că va fi utilizabil în curând!
     client:
-      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br />
-               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br \>
+      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br>
+               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br>
                îl selectaţi şi se activează butonul \"Creare APP!\";<br />
-               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br />
-               va trebui să creaţi un \"Client nou!\"<br \>
+               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br>
+               va trebui să creaţi un \"Client nou!\"<br>
                &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi \"Anulare\"."
 
       add_button: "Client nou!"
