@@ -71,9 +71,9 @@ class TrstTask
      {:css => "normal",:name => "target",:label => I18n.t("trst_task.target"),:value => target},
      {:css => "relations",:name => "page_ids",:label => I18n.t("trst_task.page_ids"),:value => [pages_name,page_ids]},
      {:css => "relations",:name => "user_ids",:label => I18n.t("trst_task.user_ids"),:value => [users_name,users]},
-     {:css => "localized",:name => "name",:label => I18n.t("trst_task.name"),:value => name_translations},
-     {:css => "localized",:name => "title",:label => I18n.t("trst_task.title"),:value => title_translations},
-     {:css => "localized",:name => "help",:label => I18n.t("trst_task.help"),:value => help_translations},
+     {:css => "localized",:name => "name",:label => I18n.t("trst_task.name"),:value => name},
+     {:css => "localized",:name => "title",:label => I18n.t("trst_task.title"),:value => title},
+     {:css => "localized",:name => "help",:label => I18n.t("trst_task.help"),:value => help},
      {:css => "datetime",:name => "created_at",:label => I18n.t("trst_task.created_at"),:value => created_at},
      {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_task.updated_at"),:value => updated_at}]
   end

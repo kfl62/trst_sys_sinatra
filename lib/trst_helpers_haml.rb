@@ -95,7 +95,7 @@ module Trst
         haml_tag :td do
           value = value.join(', ') if css == "array"
           value = value[0].join(', ') if css == "relations"
-          value = (value.nil? ? '...?...' : value["#{current_lang}"]) if css == "localized"
+          value = (value.nil? ? '...?...' : value) if css == "localized"
           haml_tag :span, value,  :class => "limit-width"
         end
       end
@@ -111,7 +111,7 @@ module Trst
           when 'localized'
             haml_tag :input,
                      :name => input_name(task,data[:name]),
-                     :value => data[:value].nil? ? '...?...' : data[:value]["#{current_lang}"]
+                     :value => data[:value].nil? ? '...?...' : data[:value]
           when 'relations'
             haml_tag :span, data[:value][0].join(', '), :class => "limit-width"
             haml_tag :input, :type  => "hidden",
