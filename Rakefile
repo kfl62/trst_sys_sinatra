@@ -17,7 +17,7 @@ task :console do
   require 'mongoid'
   app_root = File.expand_path(File.dirname(__FILE__))
   Mongoid.configure do |config|
-    config.master = Mongo::Connection.new('localhost').db('development')
+    config.master = Mongo::Connection.new('localhost').db('development_master')
     config.raise_not_found_error = false
     config.add_language('*')
   end
