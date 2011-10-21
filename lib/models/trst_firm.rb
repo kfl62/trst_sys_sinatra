@@ -27,7 +27,7 @@ class TrstFirm
     end
     # @todo
     def unit_by_unit_id(i)
-      f = where('units._id' => i).first
+      f = where('units._id' => BSON::ObjectId.from_string(i)).first
       f.units.find(i)
     end
     # @todo
