@@ -7,7 +7,7 @@ class TrstPartnersPf
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :id_pn,               :type => String,        :default => "123456789ABCD"
+  field :id_pn,               :type => String
   field :name_last,           :type => String,        :default => "Last(Nume)"
   field :name_first,          :type => String,        :default => "First(Prenume)"
   field :identities,          :type => Hash,          :default => {:id_sr => "KX", :id_nr => "123456",:id_by => "SPCLEP Cluj-Napoca", :id_on => "1900-01-01"}
