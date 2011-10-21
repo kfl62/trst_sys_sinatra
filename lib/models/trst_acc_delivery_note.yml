@@ -5,6 +5,15 @@ ro:
     not_ready: Din păcate încâ nu este gata!<br/><br/>
                Faptul că a apărut în meniul "Sarcini zilnice",<br/>
                înseamnă că va fi utilizabil în curând!
+    repair:
+      header: "Puteţi Tipării/Şterge Anexele3 la avize eliberate azi!<br>"
+      header_title: "Pentru mai multe detalii apasaţi pe pictograma ...?... din dreptul
+                     comenzii"
+      footer: "<br />Notă: <br />
+              În cazul în care nu s-a tipărit o Anexă3 puteţi repeta tipărirea cu<br>
+              un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
+              Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
+              pictograma <img src='images/icons/help.png' width='12' height='12' />"
     filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
                     destinatarul, respectiv transportatorul.<br/>
                     Apăsaţi butonul \"Creare Anexa3\" <br/>

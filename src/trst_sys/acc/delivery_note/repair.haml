@@ -1,0 +1,29 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_delivery_note.title')
+%table{:cellspacing => "0"}
+  %thead
+    %tr
+      %td{:colspan => "4"}
+        %span.small.with-title{:title => t('trst_acc_delivery_note.repair.header_title')}= t('trst_acc_delivery_note.repair.header')
+        %br
+  %tbody
+    %tr
+      %td.ce Anexa3 nr.
+      %td.ce Aviz nr.
+      %td.ce Delegat
+      %td.ce Acţiune
+    - @object.by_unit_id(unit_id).daily.each do |o|
+      %tr
+        %td
+          %span= o.name
+        %td
+          %span= o.id_main_doc
+        %td
+          %span= o.delegate_transp.name
+        %td
+          %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccDeliveryNote")}','get','#{o.id}')"}
+  %tfoot
+    %tr
+      %td.footer_note{:colspan => "4"}= t('trst_acc_delivery_note.repair.footer')
