@@ -21,7 +21,13 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation for Action:,Render:
   get '/:id/help' do |id|
     @task = TrstTask.find(id)
-    markdown @task.help
+    help_path = @task.help.split('_')
+    if help_path.shift == "file"
+      help_path = File.join('help',help_path)
+      markdown :"#{help_path}"
+    else
+      markdown @task.help
+    end
   end
 
   # route for filter
