@@ -39,13 +39,17 @@ class TrstPartnersPf
       ctrl = "279146358279"
       errors = []
       all.asc(:name_last, :name_first).each do |pf|
-        sum = 0
-        ctrl.each_char.each_with_index do |c, i|
-          sum += c.to_i * pf.id_pn[i].to_i
-        end
-        mod = sum % 11
-        unless (mod < 10 && mod == pf.id_pn[12].to_i) || (mod = 10 && pf.id_pn[12].to_i == 1)
+        if pf.id_pn.length != 13
           errors << [pf.name_full, pf.id_pn]
+        else
+          sum = 0
+          ctrl.each_char.each_with_index do |c, i|
+            sum += c.to_i * pf.id_pn[i].to_i
+          end
+          mod = sum % 11
+          unless (mod < 10 && mod == pf.id_pn[12].to_i) || (mod = 10 && pf.id_pn[12].to_i == 1)
+            errors << [pf.name_full, pf.id_pn]
+          end
         end
       end
       errors.empty? ? "Ok" : errors
