@@ -1,5 +1,6 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+  date_retro = (Date.new(2011,10,1)..Date.new(2012,2,29)).include? Date.today
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
 - if unit_id
@@ -20,5 +21,15 @@
         %td{:class => "buttons_bottom"}
           %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post") + " APP!"
           %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+      - if date_retro
+        %tr
+          %td
+            -#%span.small= "Introduceţi APP pentru #{(Date.today-8.month).to_s}?"
+            -#%input#date_retro{:type => "checkbox", :data => {:date_retro => (Date.today-8.month).to_s}}
+            %span.small= "Introduceţi APP pentru 2011-03-01?"
+            %input#date_retro{:type => "checkbox", :data => {:date_retro => "2011-03-01"}}
+        %tr
+          %td
+            %span.small= t('trst_acc_expenditure.retro')
 - else
   = partial('trst_sys/shared/select_unit')

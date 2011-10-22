@@ -504,10 +504,15 @@ dojo.mixin(trst.task,{
         }
     },
     onSelectPf: function(id){
-      var button = dojo.query('.post')[1];
+      var button = dojo.query('.post')[1] , path = 'new?id_pn=' + id;
       if (button != undefined){
         dojo.connect(button, 'onclick', function(){
-          trst.task.init(button.getAttribute('data-task_id'),'post','new?id_pn=' + id)
+          if (dojo.byId('date_retro') != undefined){
+            if (dojo.byId('date_retro').checked){
+              path += '&date_retro=' + dojo.byId('date_retro').getAttribute('data-date_retro')
+            }
+          }
+          trst.task.init(button.getAttribute('data-task_id'),'post',path)
         })
       }else{
         var task_id = dojo.query('.filtering-select-pf')[0].getAttribute('data-task_id')

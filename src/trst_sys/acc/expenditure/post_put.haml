@@ -9,9 +9,9 @@
         %tr
           %th{:colspan => "9"}
             Nr.
-            %input.ce{:name => "[trst_acc_expenditure][name]",:value => @object.name}
+            %input.ce{:name => "[trst_acc_expenditure][name]",:value => params[:date_retro].nil? ? @object.name : ''}
             din date de:
-            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => @object.id_date.to_s}
+            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => params[:date_retro].nil? ? @object.id_date.to_s : params[:date_retro]}
         %tr
           %td{:colspan => "9"}
             %p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)

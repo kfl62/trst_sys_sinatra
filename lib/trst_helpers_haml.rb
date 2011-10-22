@@ -223,7 +223,10 @@ module Trst
         end
         if params
           target_id = "#{target_id.to_s}?target=#{params[:target]}&child_id=#{params[:child_id]}" if params[:target]
-          target_id = "#{target_id.to_s}?id_pn=#{params[:id_pn]}" if params[:id_pn]
+          if params[:id_pn]
+            target_id = "#{target_id.to_s}?id_pn=#{params[:id_pn]}"
+            target_id += "&date_retro=#{params[:date_retro]}" if params[:date_retro]
+          end
           target_id = "#{target_id.to_s}?client_id=#{params[:client_id]}&transporter_id=#{params[:transporter_id]}" if params[:client_id]
           target_id = "#{target_id.to_s}?supplier_id=#{params[:supplier_id]}" if params[:supplier_id]
         end
