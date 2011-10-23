@@ -116,7 +116,8 @@ module Trst
             if params[:target]
               method = params[:target]
               if model.find(target_id).nil?
-                model  = model.where("#{method}._id" => target_id).first
+                t = (target_id.is_a? String) ? BSON::ObjectId.from_string(target_id) : target_id
+                model  = model.where("#{method}._id" => t).first
                 object = model.send(method).find(target_id)
               else
                 model  = model.find(target_id)
