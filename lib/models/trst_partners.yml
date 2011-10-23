@@ -27,6 +27,15 @@ ro:
     client: "Beneficiar"
     supplier: "Furnizor"
     transporter: "Transportator"
+    quick:
+      supplier:
+        title: Adăugare (sumară) furnizor
+        get: |
+          Furnizorul <b>%{partner}</b> a fost adăugat.<br>
+          Datele introduse sunt cele necesare completării NIR-lui.<br>
+          Vă rugăm ca cât mai repede să completaţi şi celelate<br>
+          date, editând furnizorul <b>Editare partener</b><br>
+          Datele delegatului se vor întroduce la completarea NIR-lui.
 en:
   trst_partner:
     select: "Selectaţi firma"

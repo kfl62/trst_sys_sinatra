@@ -496,12 +496,19 @@ dojo.mixin(trst.task,{
       trst.task.init(id,'post','new?client_id=' + cl.options(cl.selectedIndex).value + '&transporter_id=' + tp.options(tp.selectedIndex).value)
     },
     grnInit: function(id){
-      var supp = dojo.byId('select_supplier')
-      if (selectedValue(supp) != 'null'){
-        trst.task.init(id,'post','new?supplier_id=' + selectedValue(supp))
+      if (dojo.byId('select_supplier') != undefined){
+        var supp = dojo.byId('select_supplier');
+        if (selectedValue(supp) != 'null'){
+          trst.task.init(id,'post','new?supplier_id=' + selectedValue(supp))
         }else{
           alert("Nu aţi selectat furnizorul!")
         }
+      }else if (dojo.byId('grn_supplier_id') != undefined){
+        var supp = dojo.byId('grn_supplier_id');
+        trst.task.init(id,'post','new?supplier_id=' + supp.value)
+      }else{
+        alert("Nu aţi selectat furnizorul!")
+      }
     },
     onSelectPf: function(id){
       var button = dojo.query('.post')[1] , path = 'new?id_pn=' + id;

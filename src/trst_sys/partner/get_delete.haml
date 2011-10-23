@@ -1,0 +1,30 @@
+:ruby
+  unit_id = current_user.unit_id || session[:unit_id]
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_partner.quick.supplier.title')
+-if action == 'get'
+  %table{:cellspacing => "0"}
+    %tbody
+      %tr
+        %td= t('trst_partner.quick.supplier.get', :partner => @object.name[2])
+        %input#grn_supplier_id{:type => "hidden", :value => @object.id}
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom"}
+            %span{:class => "button post", :onclick => "trst.task.acc.grnInit('#{TrstTask.task_id_by_target("TrstAccGrn")}')" }= t("button.post") + " NIR"
+            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+- else
+  %table
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p= t("gen_msg.#{action}", :data => "#{@object.class.to_s} -> #{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
