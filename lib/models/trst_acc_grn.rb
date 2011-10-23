@@ -23,7 +23,7 @@ class TrstAccGrn
 
   has_many    :freights,    :class_name => "TrstAccFreightIn",    :inverse_of => :doc
   belongs_to  :supplier,    :class_name => "TrstPartner",         :inverse_of => :qrns
-  has_one     :delegate,    :class_name => "TrstPartnerDelegate", :inverse_of => :grns
+  belongs_to  :delegate,    :class_name => "TrstPartnerDelegate", :inverse_of => :grns
   belongs_to  :unit,        :class_name => "TrstFirmUnit",        :inverse_of => :grns
 
   before_create :increment_name_date
@@ -59,7 +59,7 @@ class TrstAccGrn
   end
   # @todo
   def delegate
-    TrstPartner.find(supplier_id).delegates.find(delegate_id)
+    TrstPartner.find(self.supplier_id).delegates.find(self.delegate_id)
   end
   # @todo
   def pdf_template
