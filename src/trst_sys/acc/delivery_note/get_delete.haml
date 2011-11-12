@@ -27,7 +27,7 @@
       %tr
         %td{:class => "buttons_bottom", :colspan => "2"}
           %form{:id  => "xhr_#{action}"}
-          %span{:class => "button print", :onclick => "trst.task.acc.print_delivery_note('#{@task.id}','print','#{@object.id}')"}= t("button.print")
+          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
           %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
       %tr
         %td.footer_note{:colspan => "2"}= t('trst_acc_delivery_note.footer_note_del')

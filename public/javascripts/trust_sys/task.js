@@ -152,6 +152,9 @@ trst.task = {
         if (dojo.byId('pfFilteringSelect') != undefined){
           trst.task.acc.init(dojo.byId('pfFilteringSelect'));
         }
+        if (trst.task.acc.cpus != null){
+          trst.task.acc.calculatorInv();
+        }
       },
       error: function(error){
         dojo.publish('xhrMsg',['error','error',error]);
@@ -205,6 +208,9 @@ trst.task = {
         }
         if (dojo.query('[name*="_pn]"]')[0] != undefined){
           trst.task.acc.validPn(dojo.query('[name*="_pn]"]')[0])
+        }
+        if (trst.task.acc.cpus != null){
+          trst.task.acc.calculatorInv();
         }
       },
       error: function(error){
@@ -510,6 +516,26 @@ dojo.mixin(trst.task,{
         alert("Nu aţi selectat furnizorul!")
       }
     },
+    invoiceInit: function(id){
+      var cl = dojo.byId('select_client'),
+          m  = dojo.byId('select_month'),
+          t  = dojo.query("[name='out_003']"),
+          path = 'new';
+      if (cl && selectedValue(cl) != 'null'){
+        path += '?client_id=' + selectedValue(cl);
+      }else{
+        alert('Nu aţi selectat clientul!')
+        return false
+      }
+      if (m && selectedValue(m) != 'Luna'){
+        path += '&month=' + selectedValue(m);
+      }else{
+        alert('Nu aţi selectat luna!')
+        return false
+      }
+      path += '&out_003=' + t[0].checked
+      trst.task.init(id,'query',path)
+    },
     onSelectPf: function(id){
       var button = dojo.query('.post')[1] , path = 'new?id_pn=' + id;
       if (button != undefined){
@@ -552,6 +578,33 @@ dojo.mixin(trst.task,{
         })
       }
     },
+    onSelectDn: function(){
+      var dns = [], cid = dojo.byId('cid');
+      var task_id = cid.getAttribute('data-task_id');
+      var path = 'new'
+      dojo.query('td.select-dn input:checked').forEach(
+        function(node){
+          dns.push(node.id)
+        }
+      )
+      path += '?client_id=' + cid.getAttribute('data-client_id')
+      path += '&month=' + cid.getAttribute('data-month')
+      path += '&out_003=' + cid.getAttribute('data-out_003')
+      path += '&dn_ary=' + dns
+      trst.task.acc.initInvCpus();
+      trst.task.init(task_id,'query', path);
+    },
+    initInvCpus: function(){
+      var pus = dojo.query('tr.to-calculate input.pu')
+      this.cpus = new Object;
+      if (pus.length > 0){
+        pus.forEach(
+          function(pu){
+            trst.task.acc.cpus[pu.id] = pu.value;
+          }
+        )
+      }
+    },
     deleteRow: function(node){
       dojo.destroy(node.parentElement.parentElement)
       trst.task.acc.calculator();
@@ -559,6 +612,66 @@ dojo.mixin(trst.task,{
     deleteRowDN: function(node){
       dojo.destroy(node.parentElement.parentElement)
       trst.task.acc.calculatorDN();
+    },
+    calculatorInv: function(){
+      var rows = dojo.query('tr.to-calculate'), val = 0, s_val = 0;
+      if (dojo.query('tr.result').length > 0)
+        var td_sum = dojo.query('tr.result')[0].children[1];
+      if (rows.length > 0){
+        rows.forEach(
+          function(r){
+            if (trst.task.acc.cpus != null && trst.task.acc.cpus[r.children[2].children[0].id])
+              r.children[2].children[0].value = parseFloat(trst.task.acc.cpus[r.children[2].children[0].id]).toFixed(2)
+            r.children[2].children[0].value = parseFloat( r.children[2].children[0].value).toFixed(2)
+            val = parseFloat(parseFloat(r.children[1].children[0].innerHTML).toFixed(2) * parseFloat(r.children[2].children[0].value).toFixed(2)).toFixed(2)
+            r.children[3].children[0].innerHTML = val
+            s_val += parseFloat(parseFloat(val).toFixed(2))
+            val = 0
+          }
+        )
+        trst.task.acc.cpus = null;
+        td_sum.children[0].innerHTML = s_val.toFixed(2)
+        if (td_sum.children[1])
+          td_sum.children[1].value = s_val.toFixed(2)
+      }
+      if (dojo.byId('payment-payed') && dojo.byId('payment-payed').checked){
+        var pDoc = dojo.byId('payment-doc')
+        pDoc.value = 'Achitat cu '
+        if (dojo.byId('payment-cache').checked){
+          pDoc.value += 'chitanţa nr. '
+        }else{
+          pDoc.value += ' ordin de plată nr. '
+        }
+        pDoc.value += dojo.byId('payment-doc-nr').value
+        pDoc.value += ' din data de '
+        pDoc.value += dojo.byId('payment-date').value
+       }
+    },
+    toggleDn: function(node){
+      var toggle_state = !node.previousElementSibling.checked
+      node.previousElementSibling.checked = toggle_state
+      trst.task.acc.onSelectDn()
+    },
+    toggleInvoicePayment: function(){
+      if (dojo.byId('payment-cache').checked){
+        dojo.byId('payment-payed').checked = true
+        dojo.byId('payment-doc-label').innerHTML = 'Chitanţa nr.'
+        dojo.style('payment-doc-nr','display','')
+        dojo.byId('payment-date-label').innerHTML = ' din data de:'
+        dojo.byId('payment-date').name = '[trst_acc_invoice][payment_date][]'
+      }else{
+        if (dojo.byId('payment-payed').checked){
+          dojo.byId('payment-doc-label').innerHTML = 'Ordin de plată nr:'
+          dojo.style('payment-doc-nr','display','')
+          dojo.byId('payment-date-label').innerHTML = ' din data de:'
+          dojo.byId('payment-date').name = '[trst_acc_invoice][payment_date][]'
+        }else{
+          dojo.byId('payment-doc-label').innerHTML = 'Virament bancar'
+          dojo.style('payment-doc-nr','display','none')
+          dojo.byId('payment-date-label').innerHTML = ' termen de plată:'
+          dojo.byId('payment-date').name = '[trst_acc_invoice][payment_deadline]'
+        }
+      }
     },
     calculator: function(){
       var rows = dojo.query('tbody.inner tr'), v_val = 0, v_p03 = 0, v_p16 = 0, v_res = 0, s_val = 0, s_p03 = 0, s_p16 = 0, s_res = 0
@@ -614,24 +727,8 @@ dojo.mixin(trst.task,{
       rows[rows.length -1].children[1].children[0].innerHTML = s_val.toFixed(2)
       rows[rows.length -1].children[1].children[1].value = s_val.toFixed(2)
       dojo.byId('sum_pay').value = s_val.toFixed(2)
-   },
-    print_expenditure: function(id,verb,target_id){
-      trst.task.url.push(id,verb,target_id);
-      xhrArgs = {
-        url: trst.task.url.join('/'),
-        load: function(data){
-          window.location = this.url;
-          dojo.attr('xhr_msg','class','hidden');
-        },
-        error: function(error){
-          dojo.publish('xhrMsg',['error','error',error]);
-        }
-      };
-      dojo.publish('xhrMsg',['loading','info']);
-      var deferred = dojo.xhrGet(xhrArgs);
-      trst.task.destroy();
     },
-    print_delivery_note: function(id,verb,target_id){
+    print: function(id,verb,target_id){
       trst.task.url.push(id,verb,target_id);
       xhrArgs = {
         url: trst.task.url.join('/'),
@@ -646,25 +743,8 @@ dojo.mixin(trst.task,{
       dojo.publish('xhrMsg',['loading','info']);
       var deferred = dojo.xhrGet(xhrArgs);
       trst.task.destroy();
-    },
-    print_grn: function(id,verb,target_id){
-      trst.task.url.push(id,verb,target_id);
-      xhrArgs = {
-        url: trst.task.url.join('/'),
-        load: function(data){
-          window.location = this.url;
-          dojo.attr('xhr_msg','class','hidden');
-        },
-        error: function(error){
-          dojo.publish('xhrMsg',['error','error',error]);
-        }
-      };
-      dojo.publish('xhrMsg',['loading','info']);
-      var deferred = dojo.xhrGet(xhrArgs);
-      trst.task.destroy();
-      // trst.task.id = trst.task.verb = trst.task.target_id = "";
-      // trst.task.url = ["/srv/tsk"];
-
+      //trst.task.id = trst.task.verb = trst.task.target_id = "";
+      //trst.task.url = ["/srv/tsk"];
     },
     validPn: function(node){
       if (dijit.byId("delegate_id_pn"))
