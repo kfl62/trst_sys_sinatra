@@ -112,8 +112,15 @@ class TrstSysTsk < Sinatra::Base
     elsif params[:id_pn]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id || session[:unit_id])
       @object.reload
-    elsif params[:client_id]
+    elsif params[:client_id] && params[:transporter_id]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]), :transporter_id => BSON::ObjectId.from_string(params[:transporter_id]), :unit_id => current_user.unit_id || session[:unit_id])
+      @object.reload
+    elsif params[:client_id] && params[:dns]
+      @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]))
+      params[:dns].split(',').each do |dn|
+        @object.delivery_notes << TrstAccDeliveryNote.find(dn)
+        @object.save
+      end
       @object.reload
     elsif params[:supplier_id]
       @object = @object.create(:supplier_id => BSON::ObjectId.from_string(params[:supplier_id]), :unit_id => current_user.unit_id || session[:unit_id])
@@ -148,6 +155,13 @@ class TrstSysTsk < Sinatra::Base
         o = @object.freights.find_or_create_by(:id => v["id"]) unless v["freight_id"].nil? || v["freight_id"].empty?
         o.update_attributes v unless o.nil?
       end
+    end
+    if params[:inv_freights]
+      params[:inv_freights].values.each do |v|
+        o = @object.freights.find_or_create_by(:id_stats => v["id_stats"])
+        o.update_attributes v unless o.nil?
+      end
+      @object.update_delivery_notes(true)
     end
     if params[:delegates]
       d = TrstPartner.find(@object.supplier_id).delegates.create(params[:delegates])
