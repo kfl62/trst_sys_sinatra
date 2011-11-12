@@ -1,2 +1,90 @@
 %p.close{:onclick => "trst.task.destroy()"}
-%p.task_title= current_title(@task,action)
+-if action == 'put'
+  %p.task_title= current_title(@task,action)
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %td{:colspan => "4"}
+            %span.small{:style => "color:#999999;display:block; margin-bottom:-8px"}= "(Id. intern #{@object.name})"
+            %br
+            %span= "Azi: "
+            %input.date{:name => "[trst_acc_invoice][id_date]", :value =>  @object.id_date.to_s}
+            %span= "cu factura nr: "
+            %input.ce{:name => "[trst_acc_invoice][id_main_doc]", :value => @object.id_main_doc}
+            %br
+            %span= "Se facturează clientului #{@object.client.name[1]}, delegat"
+            %select{:name => "[trst_acc_invoice][id_delegate_c]"}
+              - @object.client.delegates.each do |d|
+                %option{:value => d.id.to_s}= d.name
+            %br
+            %span.small{:style => "display:block; max-width:400px"}= "Marfa livrată cu avizele: #{@object.delivery_notes.map{|dn| dn.id_main_doc}.join(',')}, după cum urmează:"
+            %br
+      %tbody.inner
+        %tr
+          %td Material
+          %td Cantitate
+          %td Preţ
+          %td Valoare
+        - @object.delivery_notes.sum_freights.sort.each_with_index do |s,i|
+          %tr.to-calculate
+            %td
+              %span.freight= s[0]
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][name]", :value => s[0]}
+            %td
+              %span.qu= "%.2f" % s[1][1]
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][qu]", :value => s[1][1]}
+            %td
+              %input.pu{:id => s[1][0], :name => "[inv_freights][#{i}][pu]", :value => "0.00", :onchange => "trst.task.acc.calculatorInv()"}
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][id_stats]", :value => s[1][0]}
+            %td
+              %span.val 0.00
+        %tr.result
+          %td{:colspan => "3"}
+            %span{:onclick => "trst.task.acc.calculatorInv()"} Total
+          %td
+            %span.val 0.00
+            %input{:type => "hidden", :name => "[trst_acc_invoice][sum]", :value => "0.00"}
+      %tfoot
+        %tr
+          %td{:colspan => "4"} &nbsp;
+        %tr
+          %td{:style => "vertical-align:middle", :colspan => "4"}
+            %span.small Achitat?
+            %span.small Da
+            %input#payment-payed{:type => "radio", :name => "[trst_acc_invoice][payed]", :checked => @object.payed, :value => "true", :onclick => "trst.task.acc.toggleInvoicePayment()"}
+            %span.small Nu
+            %input{:type => "radio", :name => "[trst_acc_invoice][payed]", :checked => !@object.payed, :value => "false", :onclick => "trst.task.acc.toggleInvoicePayment()"}
+            %span.small &nbsp;&nbsp;|&nbsp;&nbsp;Modalitate plată
+            %span.small Cache
+            %input#payment-cache{:type => "radio", :name => "cache", :onclick => "trst.task.acc.toggleInvoicePayment()"}
+            %span.small Bancă
+            %input{:type => "radio", :name => "cache", :checked => true, :onclick => "trst.task.acc.toggleInvoicePayment()"}
+        %tr#payment
+          %td{:colspan => "4"}
+            %span#payment-doc-label Virament bancar
+            %input#payment-doc-nr.ce.st{:style => "width:3.0em;display:none", :value => ""}
+            %span#payment-date-label termen de plată:
+            %input#payment-date.date{:name => "[trst_acc_invoice][payment_deadline",:value => Date.today.to_s}
+            %input#payment-doc{:type => "hidden", :name => "[trst_acc_invoice][payment_doc]", :value => ""}
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "4"}
+            %span{:class => "button save", :onclick => "trst.task.acc.calculatorInv(); trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
+            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+
+-else
+  %p.task_title= t('trst_acc_invoice.title')
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new",params)}<
+              =t("button.#{button}")

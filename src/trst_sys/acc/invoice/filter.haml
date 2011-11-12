@@ -1,2 +1,40 @@
+:ruby
+  today = Date.today
+  month = params[:month].nil? ? today.month : params[:month].to_i
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
+%table{:cellspacing => "0"}
+  %thead
+    %tr
+      %td{:colspan => "2"}
+        -#%p{:style => "font-size:0.9em"}= t('trst_acc_invoice.filter.info')
+  %tbody
+    %tr
+      %td{:style => "vertical-align:middle"}
+        %select#select_client
+          %option{:value => 'null'}= t('trst_acc_invoice.select.client')
+          - unless TrstPartner.clients.empty?
+            - TrstPartner.clients.each do |client|
+              %option{:value => client.id}= client.name[1]
+      %td{:style => "vertical-align:middle"}
+        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartner.find")}','post','new')"}= t('trst_acc_invoice.filter.add_client')
+    %tr
+      %td{:style => "vertical-align:middle"}
+        %span.small Luna ptr. facturare
+      %td{:style => "vertical-align:middle"}
+        %select#select_month
+          - t('month')[0..today.month].each_with_index do |m,i|
+            %option{:value => i, :selected => i == month}= m
+    %tr
+      %td{:style => "vertical-align:middle"}
+        %span.small Tip marfă facturată
+      %td{:style => "vertical-align:middle"}
+        %span.small cu 3%
+        %input{:type => "radio", :name => "out_003", :checked => true}
+        %span.small fără 3%
+        %input{:type => "radio", :name => "out_003"}
+  %tfoot
+    %tr
+      %td{:class => "buttons_bottom", :colspan => "2"}
+        %span{:class => "button post", :onclick => "trst.task.acc.invoiceInit('#{@task.id}')" }= "Selectare Avize"
+        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
