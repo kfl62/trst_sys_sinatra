@@ -13,6 +13,7 @@ class TrstAccDeliveryNote
   field :id_delegate_c, :type => String
   field :id_delegate_t, :type => String
   field :id_platte,     :type => String
+  field :charged,       :type => Boolean,   :default => false
 
   alias :file_name :name
 
@@ -20,6 +21,7 @@ class TrstAccDeliveryNote
   belongs_to :client,     :class_name => "TrstPartner",       :inverse_of => :delivery_notes
   belongs_to :transporter,:class_name => "TrstPartner",       :inverse_of => :delivery_pprss
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :delivery_notes
+  belongs_to :invoice,    :class_name => "TrstAccInvoice",    :inverse_of => :delivery_notes
 
   before_create :increment_name_date
   after_destroy :destroy_freights
@@ -46,6 +48,33 @@ class TrstAccDeliveryNote
     def by_unit_id(u)
       where(:unit_id => u).asc(:name)
     end
+    # #todo
+    def by_client_id(id)
+      where(:client_id => id).asc(:name)
+    end
+    # @todo
+    def by_freights_p03(tax = false)
+      ids = []
+      all.each do |dn|
+        tmp = []
+        dn.freights.each{|f| tmp << f.freight.p03}
+        ids << dn.id if tmp.uniq[0] == tax
+      end
+      any_in(:_id  => ids)
+    end
+    # @todo
+    def by_charged(status = false)
+      where(:charged => status)
+    end
+   # @todo
+    def sum_freights
+      all.each_with_object({}) do |dn,s|
+        dn.freights.each_with_object(s) do |f,s|
+          key = f.freight.name
+          s[key].nil? ?  s[key] = [f.freight.id_stats,f.qu] : s[key][1] += f.qu
+        end
+      end
+    end
     # @todo
     def to_txt
       all.each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
@@ -67,6 +96,12 @@ class TrstAccDeliveryNote
   # @todo
   def pdf_template
     'pdf'
+  end
+  # @todo
+  def freights_list
+    self.freights.asc(:name).each_with_object([]) do |f,r|
+      r << "#{f.freight.name}: #{"%.2f" % f.qu}"
+    end
   end
 
   protected

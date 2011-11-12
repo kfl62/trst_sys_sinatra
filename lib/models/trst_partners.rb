@@ -22,6 +22,7 @@ class TrstPartner
   embeds_many :units,           :class_name => "TrstPartnerUnit"
   has_many    :delivery_notes,  :class_name => "TrstAccDeliveryNote", :inverse_of => :client
   has_many    :delivery_pprss,  :class_name => "TrstAccDeliveryNote", :inverse_of => :transporter
+  has_many    :invoices,        :class_name => "TrstAccInvoice",      :inverse_of => :client
 
   class << self
     # @todo
