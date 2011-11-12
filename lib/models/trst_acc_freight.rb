@@ -112,6 +112,36 @@ class TrstAccFreight
       retval << ["", tot_ins, tot_out, final]
       retval
     end
+    # @todo
+    # def inventory(m = nil)
+    #   today = Date.today
+    #   year  = today.year
+    #   month = m.nil? ? today.month : m.to_i
+    #   data = Hash.new
+    #   asc(:name).each do |fgt|
+    #     fgt.stocks.monthly(m).each do |s|
+    #       key = "stock_#{s.freight.name}_#{s.pu}"
+    #       unless s.pu && s.qu == 0
+    #         if data[key].nil?
+    #           data[key] = [s.pu, s.qu, (s.pu * s.qu).round(2)]
+    #         else
+    #           data[key][1] += s.qu
+    #           data[key][3] += (s.pu * s.qu).round(2)
+    #         end
+    #       end
+    #     end
+    #     fgt.ins.monthly(m).each do |f|
+    #       key = "#{f.freight.name}_#{f.pu}"
+    #       if data[key].nil?
+    #         data[key] = [f.freight.name, f.um, f.qu, f.pu, (f.pu * f.qu).round(2)]
+    #       else
+    #         data[key][2] += f.qu
+    #         data[key][4] += (f.pu * f.qu).round(2)
+    #       end
+    #     end
+    #   end
+    #   data
+    # end
   end # Class methods
 
   # @todo
