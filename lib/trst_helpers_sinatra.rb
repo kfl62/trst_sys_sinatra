@@ -151,7 +151,7 @@ module Trst
         when /print/
           haml_path = "/trst_pdf" if task.haml_path == 'default'
         when /query/
-          haml_path += "/query"
+          haml_path += method == "find" ? "/query" : "/#{method}"
         when /repair/
           haml_path += "/repair"
         when /test/
