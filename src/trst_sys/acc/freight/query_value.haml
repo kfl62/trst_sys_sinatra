@@ -1,0 +1,67 @@
+:ruby
+  today = Date.today
+  month = params[:month].nil? ? today.month : params[:month].to_i
+  freight_id = params[:freight_id]
+  unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
+  unit_id = nil if unit_id == 'null'
+  unit = TrstAccFreight.find(freight_id).unit if freight_id
+  cols = 0
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= "Inventar valoric"
+-if unit_id && freight_id.nil?
+  %p
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
+      - t('month')[0..today.month].each_with_index do |m,i|
+        %option{:value => i, :selected => i == month}= m
+    - if current_user.unit_id
+      %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
+    - else
+      %select{:onchange => "trst.task.destroy();trst.task.init('#{@task.id}',
+                           'query',
+                           '?month=#{month}&unit_id=' + selectedValue(this))"}
+        %option{:value => "null"}= t("trst_acc_freight.filter.#{unit_id ? 'has' : 'no' }_unit.select")
+        - TrstFirm.first.units.asc(:slug).each do |unit|
+          %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
+  %p.small= t('trst_acc_freight.stats_freight.intro')
+  %table
+    %tbody.inner.stats
+      %tr
+        - %w{name pu start value ins value outs final value}.each do |cn|
+          %td.ce= t("trst_acc_freight.query.#{cn}")
+      - @object.by_unit_id(unit_id).query_value(month).values.each do |stock| ; cols = stock.length - 2
+        %tr
+          %td
+            %span.link{:id  => stock.shift, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?freight_id=' + this.id)"}= stock.shift
+          - stock.each_with_index do |s,i|
+            - unless i == 8
+              %td.ri{:style => ("color:red" if i==0 && stock[8]==1)}= "%0.2f" % s
+      %tr
+        %td{:colspan => cols} &nbsp;
+    %tfooter
+      %tr
+        %td.footer_note{:colspan => "5"}= t('trst_acc_freight.query.footer_note')
+- else
+  %p=t('trst_acc_freight.query.warning.no_unit')
+  %p
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?month=' + selectedValue(this))}"}
+      - t('month')[0..today.month].each_with_index do |m,i|
+        %option{:value => i, :selected => i == month}= m
+  %table
+    %tbody.inner.stats
+      %tr
+        - %w{name start ins outs final}.each do |cn|
+          %td.ce= t("trst_acc_freight.query.#{cn}")
+        - TrstFirm.first.units.asc(:slug).each do |unit|
+          %td
+            %span.ce.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?month=#{month}&unit_id=' + this.id)"}= unit.name[0]
+      - @object.stats(month).each do |st| ; cols = st.length
+        %tr
+          %td= st.shift
+          - st.each_with_index do |c,i|
+            %td.ri{:class => (i == 3) && 'st' }= "%0.2f" % c
+      %tr
+        %td{:colspan => cols} &nbsp;
