@@ -21,7 +21,9 @@ ro:
     query:
       title: "Stocuri"
       name: "Material"
+      pu: "PU"
       start: "Iniţial"
+      value: "Valoare"
       ins: "Intrări"
       outs: "Ieşiri"
       final: "Stoc"
