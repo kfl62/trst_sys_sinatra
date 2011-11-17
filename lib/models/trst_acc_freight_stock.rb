@@ -23,6 +23,18 @@ class TrstAccFreightStock
       month ||= Date.today.month
       where(:id_month => month.to_i).asc(:freight_id)
     end
+    # @todo
+    def query_value_hash(m)
+      monthly(m).each_with_object({}) do |f,h|
+        k = "#{f.freight.id_stats}_#{"%05.2f" % f.pu}"
+        if h[k].nil?
+          h[k] = [f.freight.id_stats, f.freight.name, f.pu, f.qu, (f.pu * f.qu).round(2)]
+        else
+          h[k][3] += f.qu
+          h[k][4] += (f.pu * f.qu).round(2)
+        end
+      end
+   end
   end
 
   protected
