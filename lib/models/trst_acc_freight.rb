@@ -67,87 +67,24 @@ class TrstAccFreight
       today = Date.today
       month = m.nil? ? today.month : m.to_i
       stk_start, ins, outs, stk_end = {}, {}, {}, {}
-      asc(:name).each do |fr|
-        stk_start_t = fr.stocks.monthly(month).each_with_object({}) do |f,h|
-          k = "#{f.freight.name}_#{"%05.2f" % f.pu}"
-          h[k] = [f.freight.id.to_s, f.freight.name, f.pu, f.qu, (f.pu * f.qu).round(2)]
-        end
-        stk_start.merge! stk_start_t
-        ins_t = fr.ins.monthly(month).each_with_object({}) do |f,h|
-          k = "#{f.freight.name}_#{"%05.2f" % f.pu}"
-          if h[k].nil?
-            h[k] = [f.freight.id.to_s, f.freight.name, f.pu, f.qu, (f.pu * f.qu).round(2)]
-          else
-            h[k][3] += f.qu
-            h[k][4] += (f.pu * f.qu).round(2)
-          end
-        end
-        ins.merge! ins_t
+      asc(:id_stats).each do |fr|
+        stk_start.merge!(fr.stocks.query_value_hash(month)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+        ins.merge!(fr.ins.query_value_hash(month)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
         if month == Date.today.month
-          outs_t = fr.outs.monthly(month).each_with_object({}) do |f,h|
-            k = "#{f.freight.id.to_s}"
-            h[k].nil? ? h[k] = [f.freight.id.to_s,f.qu] : h[k][1] += f.qu
-          end
-          outs.merge! outs_t
+          outs.merge!(fr.outs.query_value_hash(month)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
         end
-        stk_end_t = fr.stocks.monthly(month + 1).each_with_object({}) do |f,h|
-          k = "#{f.freight.name}_#{"%05.2f" % f.pu}"
-          h[k] = [f.freight.id.to_s, f.freight.name, f.pu, f.qu, (f.pu * f.qu).round(2)]
-        end
-        stk_end.merge! stk_end_t
+        stk_end.merge!(fr.stocks.query_value_hash(month + 1)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
       end
+      stk_start
       retval = (stk_start.keys | ins.keys).sort.each_with_object({}) do |k,h|
         stk_start[k].nil? ? h[k] = (ins[k][0..2] + [0.0,0.0] + ins[k][2..-1]) : h[k] = stk_start[k] + [0.0,0.0]
         h[k][5..-1] = ins[k][3..-1] unless ins[k].nil?
       end
       retval.values.each{|v|
-        last_in = find(v[0]).ins.monthly(month).last || find(v[0]).stocks.monthly(month).last
+        last_in = where(:id_stats  => v[0])[0].ins.monthly(month).last || where(:id_stats => v[0])[0].stocks.monthly(month).last
         v[10] = v[2] == last_in.pu ? 1 : 0
       }
-      retval.each_pair do |k,v|
-        if stk_end[k].nil? && (stk_start || ins)
-          if outs[v[0]]
-            tmp = retval.select{|k,v1| v1[0] == outs[v[0]][0]}.each.sort_by{|k,v2| v2[10]}.each_with_object({}){|a,h| h[a[0]] = a[1]}
-            tmp.each_pair do |k,tv|
-              if tv[10] == 1
-                tv[7] = outs[v[0]][1]
-                tv[8] = tv[3] + tv[5] - tv[7]
-              else
-                if tv[7].nil?
-                  if tv[3] + tv[5] < outs[v[0]][1]
-                    tv[7] = tv[3] + tv[5]
-                    tv[8] = tv[3] + tv[5] - tv[7]
-                    outs[v[0]][1] -= tv[7]
-                  else
-                    tv[7] = outs[v[0]][1]
-                    tv[8] = tv[3] + tv[5] - tv[7]
-                    outs[v[0]][1] = 0
-                  end
-                else
-                  # if tv[3] + tv[5] < outs[v[0]][1]
-                  #   tv[7] = tv[3] + tv[5]
-                  #   tv[8] = tv[3] + tv[5] - tv[7]
-                  #   outs[v[0]][1] -= tv[7]
-                  # else
-                  #   tv[7] = outs[v[0]][1]
-                  #   tv[8] = tv[3] + tv[5] - tv[7]
-                  #   outs[v[0]][1] = 0
-                  # end
-                end
-              end
-            end
-            retval.merge! tmp
-          else
-            v[7] = v[3] + v[5]
-            v[8] = v[3] + v[5] - v[7]
-          end
-        else
-          v[7] = v[3] + v[5] - stk_end[k][3]
-          v[8] = stk_end[k][3]
-        end
-      end
-      retval.values.each{|v| v[9] = (v[2] * v[8]).round(2)}
-      retval
+      retval = handle_query_values(retval,stk_start,ins,outs,stk_end)
     end
      # @todo
     def stats(m = nil)
@@ -199,36 +136,7 @@ class TrstAccFreight
       retval << ["", tot_ins, tot_out, final]
       retval
     end
-    # @todo
-    def inventory(m = nil)
-      today = Date.today
-      year  = today.year
-      month = m.nil? ? today.month : m.to_i
-      data = Hash.new
-      asc(:name).each do |fgt|
-        fgt.stocks.monthly(m).each do |s|
-          key = "stock_#{s.freight.name}_#{s.pu*100}"
-          unless s.pu && s.qu == 0
-            if data[key].nil?
-              data[key] = [s.pu, s.qu, (s.pu * s.qu).round(2)]
-            else
-              data[key][1] += s.qu
-              data[key][3] += (s.pu * s.qu).round(2)
-            end
-          end
-        end
-        fgt.ins.monthly(m).each do |f|
-          key = "#{f.freight.name}_#{f.pu*100}"
-          if data[key].nil?
-            data[key] = [f.freight.name, f.um, f.qu, f.pu, (f.pu * f.qu).round(2)]
-          else
-            data[key][2] += f.qu
-            data[key][4] += (f.pu * f.qu).round(2)
-          end
-        end
-      end
-      data
-    end
+
   end # Class methods
 
   # @todo
@@ -278,5 +186,46 @@ class TrstAccFreight
       {:css => "admin",:name => "descript,",:label => I18n.t("trst_acc_freight.cod"),:value => descript[0]},
       {:css => "admin",:name => "id_stats",:label => I18n.t("trst_acc_freight.id_stats"),:value => id_stats}
     ]
+  end
+
+  protected
+  # @todo
+  def self.handle_query_values(values,stk_start,ins,outs,stk_end)
+    values.each_pair do |k,v|
+      if stk_end[k].nil? && (stk_start || ins)
+        outs_key = k.split('_')[0]
+        if outs[outs_key]
+          tmp = values.select{|k,v1| v1[0] == outs[v[0]][0]}.each.sort_by{|k,v2| v2[10]}.each_with_object({}){|a,h| h[a[0]] = a[1]}
+          tmp.each_pair do |k,tv|
+            if tv[7].nil?
+              if tv[10] == 0
+                if tv[3] + tv[5] < outs[v[0]][1]
+                  tv[7] = tv[3] + tv[5]
+                  tv[8] = tv[3] + tv[5] - tv[7]
+                  outs[v[0]][1] -= tv[7]
+                else
+                  tv[7] = outs[v[0]][1]
+                  tv[8] = tv[3] + tv[5] - tv[7]
+                  outs[v[0]][1] -= tv[7]
+                end
+              end
+            end
+            if tv[10] == 1
+              tv[7] = outs[v[0]][1]
+              tv[8] = tv[3] + tv[5] - tv[7]
+            end
+          end
+          values.merge! tmp
+        else
+          outs.empty? ? v[7] = v[3] + v[5] : v[7] = 0
+          v[8] = v[3] + v[5] - v[7]
+        end
+      else
+        v[7] = v[3] + v[5] - stk_end[k][3]
+        v[8] = stk_end[k][3]
+      end
+      v[9] = (v[2] * v[8]).round(2)
+    end
+    values
   end
 end
