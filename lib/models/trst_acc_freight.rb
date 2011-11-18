@@ -85,6 +85,7 @@ class TrstAccFreight
         v[10] = v[2] == last_in.pu ? 1 : 0
       }
       retval = handle_query_values(retval,stk_start,ins,outs,stk_end)
+      retval = sum_query_values(retval)
     end
      # @todo
     def stats(m = nil)
@@ -225,6 +226,18 @@ class TrstAccFreight
         v[8] = stk_end[k][3]
       end
       v[9] = (v[2] * v[8]).round(2)
+    end
+    values
+  end
+  # @todo
+  def self.sum_query_values(values)
+    values.merge!({"TOTAL" => ["TOTAL","Total (RON)",0,0,0,0,0,0,0,0,0]})
+    values.each_pair do |k,v|
+      unless k == "TOTAL"
+        values["TOTAL"][4] += v[4]
+        values["TOTAL"][6] += v[6]
+        values["TOTAL"][9] += v[9]
+      end
     end
     values
   end

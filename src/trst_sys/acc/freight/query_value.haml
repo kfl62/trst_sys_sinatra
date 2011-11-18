@@ -5,6 +5,8 @@
   unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
   unit_id = nil if unit_id == 'null'
   unit = TrstAccFreight.find(freight_id).unit if freight_id
+  expenditures = TrstAccExpenditure.by_unit_id(unit_id) if unit_id
+  balance = TrstAccCache.by_unit_id(unit_id).balance(month) if unit_id
   cols = 0
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= "Inventar valoric"
@@ -27,7 +29,9 @@
       %tr
         - %w{name pu start value ins value outs final value}.each do |cn|
           %td.ce= t("trst_acc_freight.query.#{cn}")
-      - @object.by_unit_id(unit_id).query_value(month).values.each do |stock| ; cols = stock.length - 2
+      - data = @object.by_unit_id(unit_id).query_value(month).values
+      - sum = data.pop
+      - data.each do |stock| ; cols = stock.length - 2
         %tr
           %td
             %span.link{:id  => stock.shift}= stock.shift
@@ -35,7 +39,44 @@
             - unless i == 8
               %td.ri{:style => ("color:red" if i==0 && stock[8]==1)}= "%0.2f" % s
       %tr
-        %td{:colspan => cols} &nbsp;
+        %td.ce.st{:colspan => "2"}= sum[1]
+        %td.ri.st{:colspan => "2"}= "%0.2f" % sum[4]
+        %td.ri.st{:colspan => "2"}= "%0.2f" % sum[6]
+        %td.ri.st{:colspan => "3"}= "%0.2f" % sum[9]
+    %tfooter
+      %tr
+        %td.small.ce.st{:colspan => cols} Statistică cheltuieli materiale
+      %tr
+        %td
+        %td.small.ce.st{:colspan => "4"} Conform APP
+        %td.small.ce.st{:colspan => "4"} Conform Inventar
+      %tr
+        %td.small Sume achitate
+        %td.small.ri.st{:colspan => "3",:style => "color:blue"}= "%0.2f" % expenditures.monthly(month).sum(:sum_out)
+        %td
+        %td.small.ri{:colspan => "3"}
+        %td
+      %tr
+        %td.small Reţinut 16%
+        %td.small.ri{:colspan => "3"}= "%0.2f" % expenditures.monthly(month).sum(:sum_016)
+        %td
+        %td.small.ri{:colspan => "3"}
+        %td
+      %tr
+        %td.small Reţinut 3%
+        %td.small.ri{:colspan => "3"}= "%0.2f" % expenditures.monthly(month).sum(:sum_003)
+        %td
+        %td.small.ri{:colspan => "3"}
+        %td
+      %tr
+        %td.small Valoare marfă
+        %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % expenditures.monthly(month).sum(:sum_100)
+        %td
+        %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % sum[6]
+        %td
+      %tr
+        %td.small.st Numerar:
+        %td.small{:colspan => "7"}= "Sold initial <b>#{"%0.2f" % balance[0]}</b> intrări <b>#{"%0.2f" % balance[1]}</b> plăţi  <b style='color:blue'>#{"%0.2f" % balance[2]}</b> sold final <b>#{"%0.2f" % balance[3]}</b>"
 - else
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
@@ -54,7 +95,9 @@
       %tr
         - %w{name pu start value ins value outs final value}.each do |cn|
           %td.ce= t("trst_acc_freight.query.#{cn}")
-      - @object.query_value(month).values.each do |stock| ; cols = stock.length - 2
+      - data = @object.query_value(month).values
+      - sum = data.pop
+      - data.each do |stock| ; cols = stock.length - 2
         %tr
           %td
             %span.link{:id  => stock.shift}= stock.shift
@@ -62,4 +105,7 @@
             - unless i == 8
               %td.ri{:style => ("color:red" if i==0 && stock[8]==1)}= "%0.2f" % s
       %tr
-        %td{:colspan => cols} &nbsp;
+        %td.ce{:colspan => 2}= sum[1]
+        %td.ri.st{:colspan => "2"}= "%0.2f" % sum[4]
+        %td.ri.st{:colspan => "2"}= "%0.2f" % sum[6]
+        %td.ri.st{:colspan => "3"}= "%0.2f" % sum[9]
