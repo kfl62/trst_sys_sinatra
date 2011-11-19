@@ -48,9 +48,9 @@ class TrstPdf
     [{:css => "normal",:name => "file_name",:label => I18n.t("trst_pdf.file_name"),:value => file_name},
      {:css => "normal",:name => "pdf_template",:label => I18n.t("trst_pdf.pdf_template"),:value => pdf_template},
      {:css => "relations",:name => "task_ids",:label => I18n.t("trst_pdf.task_ids"),:value => [tasks_name,tasks]},
-     {:css => "localized",:name => "name",:label => I18n.t("trst_pdf.name"),:value => name_translations},
-     {:css => "localized",:name => "title",:label => I18n.t("trst_pdf.title"),:value => title_translations},
-     {:css => "localized",:name => "help",:label => I18n.t("trst_pdf.help"),:value => help_translations},
+     {:css => "localized",:name => "name",:label => I18n.t("trst_pdf.name"),:value => name},
+     {:css => "localized",:name => "title",:label => I18n.t("trst_pdf.title"),:value => title},
+     {:css => "localized",:name => "help",:label => I18n.t("trst_pdf.help"),:value => help},
      {:css => "datetime",:name => "created_at",:label => I18n.t("trst_pdf.created_at"),:value => created_at},
      {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_pdf.updated_at"),:value => updated_at}]
   end
