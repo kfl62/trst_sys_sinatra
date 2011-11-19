@@ -9,10 +9,7 @@
           %th= t('gen_head.value')
       %tbody
         - @object.table_params.each do |data|
-          %tr{:class => data[:css]}
-            %td= data[:label]
-            %td
-              %input{:name => data[:name],:value => data[:value]}
+          - tr_body('put',data,@task,@object)
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "2"}
