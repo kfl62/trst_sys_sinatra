@@ -37,5 +37,5 @@ end
 
 desc "Start web server"
 task :thin do
-  exec "thin -D start"
+  exec "thin start"
 end
