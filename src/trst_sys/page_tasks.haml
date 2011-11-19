@@ -1,6 +1,7 @@
 - if page.access_lvl >= current_user.permission_lvl
   %ul
     - page.tasks.each do |t|
+      - data_tsks = t.is_pdf? ? "pdf" : (t.is_query? ? "query" : "filter")
       %li
-        %a{:id  => "#{t.id}",:'data-tsks' => "filter",:href => "#"}= t.name
+        %a{:id  => "#{t.id}",:'data-tsks' => data_tsks,:href => "#"}= t.name
         %span.help{:onclick  => "trst.task.init('#{t.id}','help')"}

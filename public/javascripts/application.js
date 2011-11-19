@@ -87,6 +87,22 @@ var xhrInitPageTasks = function(){
         })
       )
     }
+    else if (a.getAttribute('data-tsks') == 'pdf'){
+      trst.task.connections.push(
+        dojo.connect(a, 'onclick', function(e){
+          e.preventDefault()
+          trst.task.init(e.target.id,'pdf')
+        })
+      )
+    }
+    else if (a.getAttribute('data-tsks') == 'query'){
+      trst.task.connections.push(
+        dojo.connect(a, 'onclick', function(e){
+          e.preventDefault()
+          trst.task.init(e.target.id,'query')
+        })
+      )
+    }
   })
 }
 
