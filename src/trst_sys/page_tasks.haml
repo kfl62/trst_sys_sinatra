@@ -1,4 +1,6 @@
-%ul
-  - tsks.each do |t|
-    %li
-      %a{:id  => "#{t.id}",:'data-tsks' => "filter",:href => "#"}= t.name
+- if page.access_lvl >= current_user.permission_lvl
+  %ul
+    - page.tasks.each do |t|
+      %li
+        %a{:id  => "#{t.id}",:'data-tsks' => "filter",:href => "#"}= t.name
+        %span.help{:onclick  => "trst.task.init('#{t.id}','help')"}
