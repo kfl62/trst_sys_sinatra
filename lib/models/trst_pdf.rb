@@ -59,7 +59,11 @@ class TrstPdf
     unless last_values.empty?
       retval = []
       last_values.each_pair do |key,value|
-        retval << {:css => "normal",:name => "[trst_pdf][last_values][#{key}]",:label => I18n.t("trst_pdf.#{pdf_template}.#{key}"),:value => value}
+        unless key == "period"
+          retval << {:css => "normal",:name => "[last_values][#{key}]",:label => I18n.t("trst_pdf.#{pdf_template}.#{key}"),:value => value}
+        else
+          retval << {:css => "accountancy",:name => "[last_values][#{key}]",:label => I18n.t("trst_pdf.#{pdf_template}.#{key}"),:value => value}
+        end
       end
     else
       retval = I18n.t("trst_pdf.no_params")

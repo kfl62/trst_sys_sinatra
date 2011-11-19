@@ -83,7 +83,7 @@ module Trst
       # @todo Document this method
       def td_label(css,label)
         haml_tag :td do
-          haml_tag :span do
+          haml_tag "span.#{'hidden' if css == 'accountancy' && current_user.permission_lvl > 5}" do
             label += "<sup>*</sup>" if css == "localized"
             haml_concat label
           end
@@ -141,6 +141,18 @@ module Trst
                          :value => data[:value]
               else
                 haml_tag :span, data[:value],  :class => "limit-width"
+              end
+            when 'accountancy'
+              if current_user.permission_lvl <= 5
+                haml_tag :input,
+                         :class => "date",
+                         :name => input_name(task,data[:name]),
+                         :value => data[:value]
+              else
+                haml_tag :input,
+                         :type => "hidden",
+                         :name => input_name(task,data[:name]),
+                         :value => 1
               end
           else
             haml_tag :span, data[:value], :class => "limit-width"
