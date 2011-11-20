@@ -75,7 +75,6 @@ class TrstAccFreight
         end
         stk_end.merge!(fr.stocks.query_value_hash(month + 1)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
       end
-      stk_start
       retval = (stk_start.keys | ins.keys).sort.each_with_object({}) do |k,h|
         stk_start[k].nil? ? h[k] = (ins[k][0..2] + [0.0,0.0] + ins[k][2..-1]) : h[k] = stk_start[k] + [0.0,0.0]
         h[k][5..-1] = ins[k][3..-1] unless ins[k].nil?
