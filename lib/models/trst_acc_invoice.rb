@@ -24,6 +24,20 @@ class TrstAccInvoice
   before_create :increment_name_date
   after_destroy :restore_delivery_notes
 
+  class << self
+    # @todo
+    def daily(d)
+      where(:id_date => DateTime.strptime("#{d}","%F").to_time)
+    end
+    # @todo
+    def monthly(m)
+      y = Date.today.year
+      m = m.to_i
+      mb = DateTime.new(y, m)
+      me = DateTime.new(y, m + 1)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
+    end
+  end # Class methods
   # @todo
   def delegate
     TrstPartner.find(client_id).delegates.find(id_delegate_c) rescue TrstPartner.find(client_id).delegates.first
