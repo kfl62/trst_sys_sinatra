@@ -50,6 +50,9 @@ ro:
       date: "Data"
       slug: "Unitatea"
       period: "Nr.zile"
+    stock_with_values:
+      month: "Luna (1..12)"
+      units: "Pct. de lucru"
 en:
   trst_pdf:
     created_at: "Created"
