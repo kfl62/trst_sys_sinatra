@@ -24,7 +24,7 @@
           %td.ce= t('trst_acc_stock.um')
           %td.ce= t('trst_acc_stock.pu')
           %td.ce= t('trst_acc_stock.qu')
-        - @object.freights_sort_by_name.each_with_index do |f,i|
+        - @object.freights_sort_by_id_stats.each_with_index do |f,i|
           %tr.freight
             %td
               %span.freight= f.freight.name rescue "Error..."
