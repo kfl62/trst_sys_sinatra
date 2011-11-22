@@ -36,8 +36,8 @@ class TrstAccStock
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
   end
   # @todo
-  def freights_sort_by_name
-    freights.sort{|a,b| (a.freight.name rescue "Error...") <=> (b.freight.name rescue "Error...")}
+  def freights_sort_by_id_stats
+    freights.sort{|a,b| (a.freight.id_stats rescue "Error...") <=> (b.freight.id_stats rescue "Error...")}
   end
   protected
   # @todo
