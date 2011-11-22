@@ -52,25 +52,25 @@
         %td.small.ce.st{:colspan => "4"} Conform Inventar
       %tr
         %td.small Sume achitate
-        %td.small.ri.st{:colspan => "3",:style => "color:blue"}= "%0.2f" % expenditures.monthly(month).sum(:sum_out)
+        %td.small.ri.st{:colspan => "3",:style => "color:blue"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_out) || 0)
         %td
         %td.small.ri{:colspan => "3"}
         %td
       %tr
         %td.small Reţinut 16%
-        %td.small.ri{:colspan => "3"}= "%0.2f" % expenditures.monthly(month).sum(:sum_016)
+        %td.small.ri{:colspan => "3"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_016) || 0)
         %td
         %td.small.ri{:colspan => "3"}
         %td
       %tr
         %td.small Reţinut 3%
-        %td.small.ri{:colspan => "3"}= "%0.2f" % expenditures.monthly(month).sum(:sum_003)
+        %td.small.ri{:colspan => "3"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_003) || 0)
         %td
         %td.small.ri{:colspan => "3"}
         %td
       %tr
         %td.small Valoare marfă
-        %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % expenditures.monthly(month).sum(:sum_100)
+        %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_100) || 0)
         %td
         %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % sum[6]
         %td
