@@ -33,7 +33,7 @@
       - @object.by_unit_id(unit_id).query(month).each do |stock| ; cols = stock.length - 1
         %tr
           %td
-            %span.link{:id  => stock.shift, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?freight_id=' + this.id)"}= stock.shift
+            %span.link{:id  => stock.shift, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?freight_id=' + this.id + '&month=#{month}')"}= stock.shift
           - stock.each_with_index do |s,i|
             %td.ri= "%0.2f" % s
       %tr
