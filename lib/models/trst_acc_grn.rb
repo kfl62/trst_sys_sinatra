@@ -21,8 +21,8 @@ class TrstAccGrn
 
   alias :file_name :name
 
-  has_many    :freights,    :class_name => "TrstAccFreightIn",    :inverse_of => :doc
-  belongs_to  :supplier,    :class_name => "TrstPartner",         :inverse_of => :qrns
+  has_many    :freights,    :class_name => "TrstAccFreightIn",    :inverse_of => :doc_grn
+  belongs_to  :supplier,    :class_name => "TrstPartner",         :inverse_of => :grns
   belongs_to  :delegate,    :class_name => "TrstPartnerDelegate", :inverse_of => :grns
   belongs_to  :unit,        :class_name => "TrstFirmUnit",        :inverse_of => :grns
 
