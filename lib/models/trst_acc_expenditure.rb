@@ -16,7 +16,7 @@ class TrstAccExpenditure
 
   alias :file_name :name
 
-  has_many   :freights,   :class_name => "TrstAccFreightIn",  :inverse_of => :doc
+  has_many   :freights,   :class_name => "TrstAccFreightIn",  :inverse_of => :doc_exp
   belongs_to :client,     :class_name => "TrstPartnersPf",    :inverse_of => :apps
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :apps
 
