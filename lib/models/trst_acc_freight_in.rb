@@ -12,7 +12,8 @@ class TrstAccFreightIn
   field :pu,          :type => Float,     :default => 0.00
   field :qu,          :type => Float,     :default => 0.00
 
-  belongs_to :doc,     :class_name => "TrstAccExpenditure",   :inverse_of => :freights
+  belongs_to :doc_exp, :class_name => "TrstAccExpenditure",   :inverse_of => :freights
+  belongs_to :doc_grn, :class_name => "TrstAccGrn",           :inverse_of => :freights
   belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :ins
 
   before_save   :update_date
@@ -32,7 +33,7 @@ class TrstAccFreightIn
     end
     # @todo
     def pn(pn)
-      where(:doc_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
+      where(:doc_exp_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
     end
     # @todod
     def query_value_hash(m)
@@ -48,10 +49,15 @@ class TrstAccFreightIn
     end
   end
 
+  # @todod
+  def doc
+    doc_exp_id.nil? ? doc_grn : doc_exp
+  end
+
   protected
   # @todo
   def update_date
-    self.id_date = doc.id_date
+    self.id_date = doc_exp.nil? ?  doc_grn.id_date : doc_exp.id_date
   end
 
 end
