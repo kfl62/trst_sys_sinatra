@@ -1,5 +1,6 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+  @object.reload
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_stock.title')
 -if action == 'get'
