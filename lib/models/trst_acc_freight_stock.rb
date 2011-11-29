@@ -8,20 +8,31 @@ class TrstAccFreightStock
   include Mongoid::Timestamps
 
   field :id_month,      :type => Integer
+  field :id_stats,      :type => String
   field :um,            :type => String,    :default => "kg"
   field :pu,            :type => Float,     :default => 0.00
   field :qu,            :type => Float,     :default => 0.00
+  field :val,           :type => Float,     :default => 0.00
 
   belongs_to :doc,     :class_name => "TrstAccStock",     :inverse_of => :freights
   belongs_to :freight, :class_name => "TrstAccFreight",   :inverse_of => :stocks
 
-  before_save   :update_month
+  before_update   :update_self
 
   class << self
     # @todo
     def monthly(month = nil)
       month ||= Date.today.month
       where(:id_month => month.to_i).asc(:freight_id)
+    end
+    # @todo
+    def keys
+      all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq!.sort!
+    end
+    # @todo
+    def by_id_stats_and_pu(key)
+      id_stats, pu = key.split('_')
+      where(:id_stats => id_stats).and(:pu => pu.to_f)
     end
     # @todo
     def query_value_hash(m)
@@ -39,7 +50,9 @@ class TrstAccFreightStock
 
   protected
   # @todo
-  def update_month
+  def update_self
     self.id_month = doc.id_month
+    self.id_stats = freight.id_stats
+    self.val = (pu * qu).round(2)
   end
 end
