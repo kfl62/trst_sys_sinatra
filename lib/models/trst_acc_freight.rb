@@ -192,7 +192,7 @@ class TrstAccFreight
   # @todo
   def self.handle_query_values(values,stk_start,ins,outs,stk_end)
     values.each_pair do |k,v|
-      if stk_end[k].nil? && (stk_start || ins)
+      if stk_end[k].nil? && stk_end.empty?
         outs_key = k.split('_')[0]
         if outs[outs_key]
           tmp = values.select{|k,v1| v1[0] == outs[v[0]][0]}.each.sort_by{|k,v2| v2[10]}.each_with_object({}){|a,h| h[a[0]] = a[1]}
@@ -221,8 +221,13 @@ class TrstAccFreight
           v[8] = v[3] + v[5] - v[7]
         end
       else
-        v[7] = v[3] + v[5] - stk_end[k][3]
-        v[8] = stk_end[k][3]
+        if stk_end[k].nil?
+          v[7] = v[3] + v[5]
+          v[8] = 0.0
+        else
+          v[7] = v[3] + v[5] - stk_end[k][3]
+          v[8] = stk_end[k][3]
+        end
       end
       v[9] = (v[2] * v[8]).round(2)
     end
