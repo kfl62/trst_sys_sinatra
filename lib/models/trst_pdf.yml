@@ -53,6 +53,8 @@ ro:
     stock_with_values:
       month: "Luna (1..12)"
       units: "Pct. de lucru"
+    stock_with_values_firm:
+      month: "Luna (1..12)"
 en:
   trst_pdf:
     created_at: "Created"
