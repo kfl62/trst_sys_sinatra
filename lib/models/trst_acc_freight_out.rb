@@ -30,7 +30,7 @@ class TrstAccFreightOut
       y = Date.today.year
       m = m.to_i
       mb = DateTime.new(y, m)
-      me = DateTime.new(y, m + 1)
+      me = m == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
