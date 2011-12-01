@@ -19,7 +19,7 @@
           %td= t('trst_acc_cache.money_in')
           %td
             %input.qu{:name => "[trst_acc_cache][money_in]", :value => "%.2f" % @object.money_in}
-        - if current_user.admin?
+        - if current_user.admin? || current_user.permission_lvl <= 5
           %tr
             %td= t('trst_acc_cache.money_stock')
             %td
