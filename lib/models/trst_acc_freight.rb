@@ -66,7 +66,7 @@ class TrstAccFreight
     def query_value(m = nil)
       today = Date.today
       month = m.nil? ? today.month : m.to_i
-      month_next =  m == 12 ? 1 : m + 1
+      month_next =  month == 12 ? 1 : month + 1
       stk_start, ins, outs, stk_end = {}, {}, {}, {}
       asc(:id_stats).each do |fr|
         stk_start.merge!(fr.stocks.query_value_hash(month)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
