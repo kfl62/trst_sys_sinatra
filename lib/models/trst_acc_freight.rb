@@ -73,8 +73,9 @@ class TrstAccFreight
         ins.merge!(fr.ins.query_value_hash(month)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
         if month == Date.today.month || fr.stocks.query_value_hash(month_next).empty?
           outs.merge!(fr.outs.query_value_hash(month)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
+        else
+          stk_end.merge!(fr.stocks.query_value_hash(month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
         end
-        stk_end.merge!(fr.stocks.query_value_hash(month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
       end
       retval = (stk_start.keys | ins.keys).sort.each_with_object({}) do |k,h|
         stk_start[k].nil? ? h[k] = (ins[k][0..2] + [0.0,0.0] + ins[k][2..-1]) : h[k] = stk_start[k] + [0.0,0.0]
@@ -218,7 +219,7 @@ class TrstAccFreight
           end
           values.merge! tmp
         else
-          outs.empty? ? v[7] = v[3] + v[5] : v[7] = 0
+          v[7] = 0
           v[8] = v[3] + v[5] - v[7]
         end
       else
