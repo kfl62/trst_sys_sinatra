@@ -35,7 +35,7 @@ class TrstAccFreightIn
     end
     # @todo
     def keys
-      all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq!.sort!
+      all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort!
     end
     # @todo
     def by_id_stats_and_pu(key)
