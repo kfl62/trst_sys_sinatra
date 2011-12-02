@@ -7,7 +7,7 @@
         %tr
           %td= t('trst_acc_cache.name')
           %td
-            - if current_user.admin?
+            - if current_user.admin? || current_user.permission_lvl <= 5
               %input{:name => "[trst_acc_cache][name]", :value => @object.name}
             - else
               %span= @object.name
