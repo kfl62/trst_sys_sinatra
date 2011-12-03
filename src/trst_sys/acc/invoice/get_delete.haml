@@ -7,7 +7,10 @@
         %td{:colspan => "4"}
           %span.small{:style => "color:#999999"}= " Cu nr. intern #{@object.name}"
           %br
-          %span{:style => "display:block;max-width:400px"}= " - a fost operată factura nr. <b>#{@object.id_main_doc}/#{@object.id_date.to_s}</b> către <b>#{@object.client.name[2]}</b> cu următorul conţinut"
+          %span{:style => "display:block;max-width:400px"}= " - a fost operată factura nr. <b>#{@object.id_main_doc}/#{@object.id_date.to_s}</b> către <b>#{@object.client.name[2]}</b> în baza avizelor de expediţie:"
+          %span{:style => "display:block;max-width:400px;padding-left:5px"}= @object.delivery_notes.each_with_object([]){|dn,a| a << dn.id_main_doc}.join(', ')
+          %span{:style => "display:block;max-width:400px"}= "cu următorul conţinut:"
+          %br
     %tbody.inner
       %tr
         %td Material
