@@ -107,7 +107,7 @@ class TrstSysTsk < Sinatra::Base
   post '/:id/:verb/:target_id' do |id,verb,target_id|
     @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
     if params[:target]
-      @object = @object.where("#{params[:target]}._id" => params[:child_id]).first
+      @object = @object.where("#{params[:target]}._id" => BSON::ObjectId.from_string(params[:child_id])).first
       @object = @object.method(params[:target]).call.create
     elsif params[:id_pn]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id || session[:unit_id])
