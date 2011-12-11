@@ -30,7 +30,7 @@
           %td
             %span= o.id_main_doc
           %td
-            %span= o.delegate_transp.name
+            %span= o.delegate_transp.name rescue "!!! Anonymus !!!"
           %td
             %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccDeliveryNote")}','get','#{o.id}')"}
     %tfoot
