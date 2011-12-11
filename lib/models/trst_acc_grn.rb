@@ -25,6 +25,7 @@ class TrstAccGrn
   belongs_to  :supplier,    :class_name => "TrstPartner",         :inverse_of => :grns
   belongs_to  :delegate,    :class_name => "TrstPartnerDelegate", :inverse_of => :grns
   belongs_to  :unit,        :class_name => "TrstFirmUnit",        :inverse_of => :grns
+  belongs_to  :signed_by,   :class_name => "TrstUser",            :inverse_of => :grns
 
   before_create :increment_name_date
   after_destroy :destroy_freights

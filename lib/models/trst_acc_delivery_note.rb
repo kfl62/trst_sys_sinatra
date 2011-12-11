@@ -22,6 +22,7 @@ class TrstAccDeliveryNote
   belongs_to :transporter,:class_name => "TrstPartner",       :inverse_of => :delivery_pprss
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :delivery_notes
   belongs_to :invoice,    :class_name => "TrstAccInvoice",    :inverse_of => :delivery_notes
+  belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :delivery_notes
 
   before_create :increment_name_date
   after_destroy :destroy_freights

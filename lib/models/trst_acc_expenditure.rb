@@ -19,6 +19,7 @@ class TrstAccExpenditure
   has_many   :freights,   :class_name => "TrstAccFreightIn",  :inverse_of => :doc_exp
   belongs_to :client,     :class_name => "TrstPartnersPf",    :inverse_of => :apps
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :apps
+  belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :apps
 
   before_create :increment_name_date
   after_destroy :destroy_freights
