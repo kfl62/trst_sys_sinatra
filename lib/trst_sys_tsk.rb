@@ -111,28 +111,25 @@ class TrstSysTsk < Sinatra::Base
       @object = @object.method(params[:target]).call.create
     elsif params[:id_pn]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id || session[:unit_id])
-      @object.reload
     elsif params[:client_id] && params[:transporter_id]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]), :transporter_id => BSON::ObjectId.from_string(params[:transporter_id]), :unit_id => current_user.unit_id || session[:unit_id])
-      @object.reload
     elsif params[:client_id] && params[:dns]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:client_id]))
       params[:dns].split(',').each do |dn|
         @object.delivery_notes << TrstAccDeliveryNote.find(dn)
         @object.save
       end
-      @object.reload
     elsif params[:supplier_id]
       @object = @object.create(:supplier_id => BSON::ObjectId.from_string(params[:supplier_id]), :unit_id => current_user.unit_id || session[:unit_id])
-      @object.reload
     else
       if @object.instance_methods.include?(:unit_id)
         @object = @object.create(:unit_id => current_user.unit_id || session[:unit_id])
       else
         @object = @object.create
       end
-      @object.reload
     end
+    @object.update_attributes(:signed_by_id => current_user.id) if @object.class.instance_methods.include?(:signed_by_id)
+    @object.reload
     flash[:msg] = {:msg => {:txt => I18n.t('db.post', :data => @object.name), :class => "info"}}.to_json
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
