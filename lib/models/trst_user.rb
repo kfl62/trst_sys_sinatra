@@ -23,6 +23,7 @@ class TrstUser
   include Mongoid::Timestamps
 
   field :login_name
+  field :name
   field :email
   field :hashed_password
   field :salt
@@ -31,7 +32,11 @@ class TrstUser
   field :settings,          :type => Hash,        :default => {}
   field :task_ids,          :type => Hash,        :default => {'daily_tasks' => [], 'other_tasks' => []}
 
-  belongs_to :unit, :class_name => "TrstFirmUnit", :inverse_of => :user
+  belongs_to :unit,           :class_name => "TrstFirmUnit",        :inverse_of => :user
+  has_many   :apps,           :class_name => "TrstAccExpenditure",  :inverse_of => :signed_by
+  has_many   :grns,           :class_name => "TrstAccGrn",          :inverse_of => :signed_by
+  has_many   :delivery_notes, :class_name => "TrstAccDeliveryNote", :inverse_of => :signed_by
+
   # Validations
   validates_uniqueness_of :login_name
   validates_uniqueness_of :email
@@ -64,12 +69,10 @@ class TrstUser
     def user_related_to
       all.collect{|user| [user.id.to_s, user.login_name]}
     end
-  end
-  # Shortcut for `login_name`. Just for avoid errors like `TrstUser.first.name`
-  # => `false` caused by {#method_missing}
-  # @return [String] shortcut for `login_name`
-  def name
-    login_name
+    # @todo
+    def by_login_name(login)
+      where(:login_name => login).first
+    end
   end
   # @todo
   def unit
@@ -154,6 +157,7 @@ class TrstUser
   # @return [Array] an `Array` of `Hash`-es
   def table_data
     [{:css => "normal",:name => "login_name",:label => I18n.t("trst_user.login_name"),:value => login_name},
+     {:css => "normal",:name => "name",:label => I18n.t("trst_user.name"),:value =>name},
      {:css => "normal",:name => "email",:label => I18n.t("trst_user.email"),:value => email},
      {:css => "integer",:name => "permission_lvl",:label => I18n.t("trst_user.permission_lvl"),:value => permission_lvl},
      {:css => "array",:name => "permission_grp",:label => I18n.t("trst_user.permission_grp"),:value => permission_grp},

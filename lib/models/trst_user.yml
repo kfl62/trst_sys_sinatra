@@ -2,6 +2,7 @@
 ro:
   trst_user:
     login_name: "Nume utilizator"
+    name: "Nume / Prenume"
     email: "Adresă email"
     permission_lvl: "Nivel acces"
     permission_grp: "Membru grupă"
