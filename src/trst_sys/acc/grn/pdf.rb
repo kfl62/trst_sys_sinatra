@@ -3,6 +3,7 @@
 require 'prawn/measurement_extensions'
 unit_id   = @object.unit_id
 unit      = TrstFirm.unit_by_unit_id(unit_id)
+signed_by =  unit.chief.include?(',') ? @object.signed_by.name : unit.chief
 data = Hash.new
 sum_100 = @object.sum_100
 @object.freights.each do |f|
@@ -60,9 +61,9 @@ pdf.text_box @object.delegate.name,
              :at => [43.mm, pdf.bounds.top - 48.mm], :width => 92.mm, :align => :center, :size => 10
 pdf.text_box @object.main_doc_plat,
              :at => [175.mm, pdf.bounds.top - 48.mm], :width => 105.mm, :align => :center, :size => 10
-pdf.text_box unit.chief,
+pdf.text_box signed_by,
              :at => [195.mm, 12.mm], :size => 10
-pdf.text_box unit.chief,
+pdf.text_box signed_by,
              :at => [250.mm, 12.mm], :size => 10
 
 pdf.bounding_box([15.mm, pdf.bounds.top - 70.mm], :width  => pdf.bounds.width) do

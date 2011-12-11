@@ -149,7 +149,7 @@ pdf.bounding_box([left,top], :width => 130.mm, :height => 56) do
 end
 pdf.bounding_box([left,top], :width => 130.mm, :height => 42) do
   pdf.bounding_box([0.mm,30], :width => 80.mm) do
-    pdf.text "Gestionar\n#{ @object.unit.chief}", :style => :bold, :size => 8, :align => :center
+    pdf.text "Gestionar\n#{ @object.signed_by.name}", :style => :bold, :size => 8, :align => :center
   end
   pdf.bounding_box([80.mm,25], :width => 50.mm) do
     pdf.indent 0,3.mm do
@@ -340,7 +340,7 @@ pdf.bounding_box([left,top], :width => 130.mm, :height => 56) do
 end
 pdf.bounding_box([left,top], :width => 130.mm, :height => 42) do
   pdf.bounding_box([0.mm,30], :width => 80.mm) do
-    pdf.text "Gestionar\n#{ @object.unit.chief}", :style => :bold, :size => 8, :align => :center
+    pdf.text "Gestionar\n#{ @object.signed_by.name}", :style => :bold, :size => 8, :align => :center
   end
   pdf.bounding_box([80.mm,25], :width => 50.mm) do
     pdf.indent 0,3.mm do

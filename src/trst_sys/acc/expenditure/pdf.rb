@@ -31,7 +31,7 @@ data_1 = [
 
 data_2 = [
   ["Gestionar","Primitor"],
-  [@object.unit.chief,@object.client.name_full],
+  [@object.signed_by.name,@object.client.name_full],
   ["_"*25,"_"*25]
 ]
 
@@ -62,7 +62,7 @@ pdf.bounding_box([15.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
     pdf.text "Punct de lucru: #{@object.unit.name[1]}", :align => :right
     pdf.text "Nr.înreg.R.C. : #{firm.identities['chambcom']}"
     pdf.move_up 9
-    pdf.text "Gestionar: #{@object.unit.chief}", :align => :right
+    pdf.text "Gestionar: #{@object.signed_by.name}", :align => :right
     pdf.text "Cod fiscal (C.U.I) : #{firm.identities['fiscal']}"
     pdf.text "Str.#{address.street} nr.#{address.nr},bl.#{address.bl},sc.#{address.sc},ap.#{address.ap},"
     pdf.text 'Cluj-Napoca, judeţul Cluj'
@@ -118,7 +118,7 @@ pdf.bounding_box([163.mm,200.mm],:width  => 123.mm, :height => 190.mm) do
     pdf.text "Punct de lucru: #{@object.unit.name[1]}", :align => :right
     pdf.text "Nr.înreg.R.C. : #{firm.identities['chambcom']}"
     pdf.move_up 9
-    pdf.text "Gestionar: #{@object.unit.chief}", :align => :right
+    pdf.text "Gestionar: #{@object.signed_by.name}", :align => :right
     pdf.text "Cod fiscal (C.U.I) : #{firm.identities['fiscal']}"
     pdf.text "Str.#{address.street} nr.#{address.nr},bl.#{address.bl},sc.#{address.sc},ap.#{address.ap},"
     pdf.text 'Cluj-Napoca, judeţul Cluj'

@@ -13,8 +13,8 @@
         %td{:colspan => "2"}
           %span= "Se va genera cu următorul conţinut:<br/></br>De la firma <b>#{@object.unit.firm.name[2]}</b> #{@object.unit.name[1]}</br>"
           %span= "ptr.firma <b>#{TrstPartner.find(@object.client_id).name[2]}</b> #{TrstPartner.find(@object.client_id).units.first.name[1]}<br/>"
-          %span= "delegatul <b>#{@object.delegate_transp.name}</b> cu mijlocul de transp. <b>#{@object.id_platte.upcase}</b>,<br\>"
-          %span= "în prezenţa Dn-lui/ei <b>#{@object.unit.chief}</b>, încarcă următoarele:<br\>"
+          %span= "delegatul <b>#{@object.delegate_transp.name rescue "!!! Anonymus !!!"}</b> cu mijlocul de transp. <b>#{@object.id_platte.upcase}</b>,<br\>"
+          %span= "în prezenţa Dn-lui/ei <b>#{@object.signed_by.name}</b>, încarcă următoarele:<br\>"
       %tr
         %td{:colspan => "2"} &nbsp;
       - @object.freights.each_with_index do |f,i|

@@ -14,7 +14,7 @@
           %span= "Se va genera cu următorul conţinut:<br/></br>De la furnizorul <b>#{TrstPartner.find(@object.supplier_id).name[2]}</b></br>"
           %span= "în baza doc: <b>#{t("trst_acc_grn.#{@object.main_doc_type.downcase}")} - #{@object.main_doc_name}/ #{@object.main_doc_date}</b> <br/>"
           %span= "delegatul <b>#{@object.delegate.name}</b> cu mijlocul de transp. <b>#{@object.main_doc_plat.upcase}</b>,<br\>"
-          %span= "în prezenţa Dn-lui/ei <b>#{@object.unit.chief}</b>, sau recepţionat următoarele:<br\>"
+          %span= "în prezenţa Dn-lui/ei <b>#{@object.signed_by.name}</b>, sau recepţionat următoarele:<br\>"
       %tr
         %td{:colspan => "2"} &nbsp;
       - @object.freights.each_with_index do |f,i|
