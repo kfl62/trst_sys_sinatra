@@ -16,6 +16,9 @@ ro:
       delegate_new: "Adăugare delegat"
     inv: Factură fiscală
     dn: Aviz de expediţie
+  trst_acc_grn_transfer:
+    title: "Transfer gestiune"
+    filter:
 en:
   trst_acc_grn:
     title: "Notă de recepţie"
