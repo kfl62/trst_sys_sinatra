@@ -1,0 +1,29 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
+  unit_id = nil if unit_id == 'null'
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_grn_transfer.title')
+- if unit_id
+  - unless current_user.unit_id
+    = partial('trst_sys/shared/select_unit')
+  %table{:cellspacing => "0"}
+    %thead
+      - TrstAccDeliveryNote.asc(:id_date).by_charged(false).where(:unit_id => unit_id).intern.each_with_index do |dn,i|
+        - if i % 8 == 0
+          %tr
+        %td.select-dn{:style => "border-right: solid 1px #333333"}
+          %input{:id => dn.id, :type => "checkbox"}
+          %span{:title => "#{dn.id_date}\n#{dn.name}\n#{dn.freights_list.join("\n")}", :style => "cursor:pointer", :onclick => "trst.task.acc.toggleDn(this)"}= dn.id_main_doc
+      %tr
+        %td{:colspan => "8"}
+    %tbody
+      %tr
+        %td{:colspan => "8"}
+
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "8"}
+          %span{:class => "button post", :onclick => "trst.task.acc.grnInit('#{@task.id}')" }= t("button.post") + " NIR"
+          %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+- else
+  = partial('trst_sys/shared/select_unit')
