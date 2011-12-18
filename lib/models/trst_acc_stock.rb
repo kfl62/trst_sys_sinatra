@@ -37,7 +37,7 @@ class TrstAccStock
   end
   # @todo
   def freights_sort_by_id_stats
-    freights.sort{|a,b| (a.freight.id_stats rescue "Error...") <=> (b.freight.id_stats rescue "Error...")}
+    freights.asc(:id_stats, :pu)
   end
   protected
   # @todo
