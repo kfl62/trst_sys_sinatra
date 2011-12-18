@@ -19,6 +19,8 @@ class TrstAccFreightIn
   belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :ins
 
   before_update   :update_self
+  before_update   :handle_stock_add
+  before_destroy  :handle_stock_remove
 
   class << self
     # @todo
@@ -46,7 +48,7 @@ class TrstAccFreightIn
     def pn(pn)
       where(:doc_exp_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
     end
-    # @todod
+    # @todo
     def query_value_hash(m)
       monthly(m).each_with_object({}) do |f,h|
         k = "#{f.freight.id_stats}_#{"%05.2f" % f.pu}"
@@ -64,13 +66,36 @@ class TrstAccFreightIn
   def doc
     doc_exp_id.nil? ? doc_grn : doc_exp
   end
+  # @todo
+  def unit
+    TrstFirm.unit_by_unit_id(self.doc.unit_id)
+  end
 
   protected
   # @todo
   def update_self
     self.id_date = doc_exp.nil? ?  doc_grn.id_date : doc_exp.id_date
-    self.id_stats = freight.id_stats
     self.val = (pu * qu).round(2)
+  end
+  # @todo
+  def handle_stock_add
+    if id_date.month == Date.today.month
+      stck = unit.current_stock
+      f = stck.freights.find_or_create_by(:id_stats => id_stats, :pu => pu)
+      f.freight_id = freight.id
+      f.qu  += qu
+      f.save
+    end
+  end
+  # @todo
+  def handle_stock_remove
+    if id_date.month == Date.today.month
+      stck = unit.current_stock
+      f = stck.freights.find_or_create_by(:id_stats => id_stats, :pu => pu)
+      f.freight_id = freight.id
+      f.qu -= qu
+      f.save
+    end
   end
 
 end

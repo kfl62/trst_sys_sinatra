@@ -14,11 +14,14 @@ class TrstAccFreightOut
   field :pu_invoice,    :type => Float,     :default => 0.00
   field :qu,            :type => Float,     :default => 0.00
   field :val,           :type => Float,     :default => 0.00
+  field :val_invoice,   :type => Float,     :default => 0.00
 
   belongs_to :doc,     :class_name => "TrstAccDeliveryNote",  :inverse_of => :freights
   belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :outs
 
-  before_update   :update_self
+  before_create   :update_self
+  before_update   :handle_stock_remove
+  before_destroy  :handle_stock_add
 
   class << self
     # @todo
@@ -49,14 +52,58 @@ class TrstAccFreightOut
         h[k].nil? ? h[k] = [f.freight.id_stats,f.qu] : h[k][1] += f.qu
       end
     end
+  end # Class methods
+  # @todo
+  def unit
+    TrstFirm.unit_by_unit_id(self.doc.unit_id)
   end
 
   protected
   # @todo
   def update_self
     self.id_date = doc.id_date
-    self.id_stats = freight.id_stats
-    self.val = (pu_invoice * qu).round(2)
+    self.val = (pu * qu).round(2)
   end
-
+  # @todo
+  def handle_stock_remove
+    if id_date.month == Date.today.month
+      out = self.qu
+      stck = unit.current_stock
+      fs = stck.freights.where(:id_stats => id_stats)
+      if fs.count == 1
+        f = fs.first
+        f.qu -= qu
+        self.pu = f.pu
+        f.save
+      else
+        sk = fs.asc(:pu).collect{|f| f.pu}
+        sk.delete(freight.pu).nil? ? sk : sk.push(freight.pu)
+        sk.each do |spu|
+          f = fs.where(:pu => spu).first
+          if out > f.qu
+            self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :doc_id => doc_id) unless f.qu == 0
+            out -= f.qu unless out == 0
+            f.qu = 0
+            f.save
+          else
+            self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :doc_id => doc_id) unless out == 0
+            f.qu -= out
+            out = 0
+            f.save
+          end
+        end
+        self.delete
+      end
+    end
+  end
+  # @todo
+  def handle_stock_add
+    if id_date.month == Date.today.month
+      stck = unit.current_stock
+      f = stck.freights.find_or_create_by(:id_stats => id_stats, :pu => pu)
+      f.freight_id = freight.id
+      f.qu += qu
+      f.save
+    end
+  end
 end
