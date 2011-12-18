@@ -22,6 +22,10 @@ class TrstFirmUnit
   before_save :generate_slug
 
   # @todo
+  def current_stock
+    stocks.where(:id_month  => 0).first
+  end
+  # @todo
   def table_data
     [
       {:css => "normal",:name => "name,",:label => I18n.t("trst_firm_unit.name_sh"),:value => name[0]},
