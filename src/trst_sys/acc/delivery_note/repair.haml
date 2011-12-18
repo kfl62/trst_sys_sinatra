@@ -26,7 +26,7 @@
       - @object.by_unit_id(unit_id).daily(date).each do |o|
         %tr
           %td
-            %span= o.name
+            %span{:title => "Materiale\n#{o.freights_list.join("\n")}"}= o.name
           %td
             %span= o.id_main_doc
           %td

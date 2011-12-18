@@ -25,7 +25,8 @@
         %td.ce Acţiune
       - @object.by_unit_id(unit_id).daily(date).each do |o|
         %tr
-          %td= o.name
+          %td
+            %span{:title => "Materiale\n#{o.freights_list.join("\n")}"}= o.name
           %td
             %span.val= "%.2f" % o.sum_100
           %td
