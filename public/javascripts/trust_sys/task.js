@@ -558,6 +558,7 @@ dojo.mixin(trst.task,{
       tr.children[2].children[0].value = parseFloat(d.item.pu).toFixed(2)
       tr.children[3].children[0].focus()
       tr.children[3].children[0].select()
+      tr.children[3].children[1].value = d.item.id_stats
     },
     onSelectFreightDN: function(d){
       var tr = d.domNode.parentElement.parentElement
@@ -565,7 +566,8 @@ dojo.mixin(trst.task,{
       tr.children[2].children[0].innerHTML = parseFloat(d.item.stock).toFixed(2)
       tr.children[3].children[0].focus()
       tr.children[3].children[0].select()
-    },
+      tr.children[3].children[2].value = d.item.id_stats
+   },
     onSelectDelegate: function(node){
       if (selectedValue(node) == 'null'){
         alert("Nu este o opţiune validă!")

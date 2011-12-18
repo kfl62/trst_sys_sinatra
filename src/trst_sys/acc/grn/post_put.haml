@@ -1,5 +1,5 @@
 :ruby
-  session[:unit_id] = TrstFirm.unit_id_by_unit_slug('AFDV')
+  session[:unit_id] = TrstFirm.unit_id_by_unit_slug('AFDV') rescue TrstFirm.unit_id_by_unit_slug('DPOA')
   unit_id = current_user.unit_id || session[:unit_id]
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
@@ -57,6 +57,7 @@
               %input.ri.st{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:4em"}
             %td
               %input.ri.st{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:8em"}
+              %input{:type => "hidden", :name => "[freights][#{i}][id_stats]",:value => ''}
               %input{:type => "hidden", :name => "[freights][#{i}][doc_grn_id]",:value => @object.id}
             %td
               %span.res 0.00

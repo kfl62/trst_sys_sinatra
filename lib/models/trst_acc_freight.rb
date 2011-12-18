@@ -30,9 +30,9 @@ class TrstAccFreight
         if stock
           dn = TrstAccDeliveryNote.by_unit_id(unit).last
           month = dn.id_date.month
-          fs << {:id => f.id,:um => f.um,:stock => f.stock(month), :label => f.name}
+          fs << {:id => f.id,:um => f.um,:stock => f.stock(month),:id_stats => f.id_stats, :label => f.name}
         else
-          fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:label => f.name}
+          fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:id_stats => f.id_stats,:label => f.name}
         end
       end
       {:identifier => "id",:items => fs}
@@ -88,7 +88,7 @@ class TrstAccFreight
       retval = handle_query_values(retval,stk_start,ins,outs,stk_end)
       retval = sum_query_values(retval)
     end
-     # @todo
+    # @todo
     def stats(m = nil)
       retval, part, tot_stk, tot_ins, tot_out, tot_end = [], [], 0, 0, 0, 0
       today = Date.today
