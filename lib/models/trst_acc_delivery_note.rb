@@ -25,7 +25,7 @@ class TrstAccDeliveryNote
   belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :delivery_notes
 
   before_create :increment_name_date
-  after_destroy :destroy_freights
+  before_destroy :destroy_freights
 
   class << self
     # @todo
@@ -49,6 +49,10 @@ class TrstAccDeliveryNote
     def by_unit_id(u)
       where(:unit_id => u).asc(:name)
     end
+    # todo
+    def intern(firm = true)
+      where(:client_id.in => TrstPartner.where(:firm => firm).collect{|p| p.id})
+    end
     # #todo
     def by_client_id(id)
       where(:client_id => id).asc(:name)
@@ -67,7 +71,7 @@ class TrstAccDeliveryNote
     def by_charged(status = false)
       where(:charged => status)
     end
-   # @todo
+    # @todo
     def sum_freights
       all.each_with_object({}) do |dn,s|
         dn.freights.each_with_object(s) do |f,s|
@@ -100,8 +104,8 @@ class TrstAccDeliveryNote
   end
   # @todo
   def freights_list
-    self.freights.asc(:name).each_with_object([]) do |f,r|
-      r << "#{f.freight.name}: #{"%.2f" % f.qu}"
+    self.freights.asc(:id_stats).each_with_object([]) do |f,r|
+      r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
     end
   end
 

@@ -22,7 +22,7 @@ class TrstAccExpenditure
   belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :apps
 
   before_create :increment_name_date
-  after_destroy :destroy_freights
+  before_destroy :destroy_freights
 
   class << self
     # @todo
@@ -83,6 +83,12 @@ class TrstAccExpenditure
   # @todo
   def pdf_template
     'pdf'
+  end
+  # @todo
+  def freights_list
+    self.freights.asc(:id_stats).each_with_object([]) do |f,r|
+      r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
+    end
   end
 
   protected

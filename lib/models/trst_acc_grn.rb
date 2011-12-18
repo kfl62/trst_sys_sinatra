@@ -28,7 +28,7 @@ class TrstAccGrn
   belongs_to  :signed_by,   :class_name => "TrstUser",            :inverse_of => :grns
 
   before_create :increment_name_date
-  after_destroy :destroy_freights
+  before_destroy :destroy_freights
 
   class << self
     # @todo
@@ -52,6 +52,10 @@ class TrstAccGrn
     def by_unit_id(u)
       where(:unit_id => u).asc(:name)
     end
+     # todo
+    def intern(firm = true)
+      where(:client_id.in => TrstPartner.where(:firm => firm).collect{|p| p.id})
+    end
   end # Class methods
 
   # @todo
@@ -65,6 +69,12 @@ class TrstAccGrn
   # @todo
   def pdf_template
     'pdf'
+  end
+  # @todo
+  def freights_list
+    self.freights.asc(:id_stats).each_with_object([]) do |f,r|
+      r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
+    end
   end
 
   protected
