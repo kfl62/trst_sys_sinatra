@@ -56,6 +56,7 @@ class TrstAccInvoice
           else
             df.pu_invoice = 0.00 if df.freight.id_stats == f.id_stats
           end
+          df.val_invoice = (df.pu_invoice * df.qu).round(2)
           df.save
         end
       end
