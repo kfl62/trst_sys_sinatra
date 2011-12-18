@@ -14,6 +14,7 @@ class TrstPartner
   field :client,              :type => Boolean,       :default => true
   field :supplier,            :type => Boolean,       :default => true
   field :transporter,         :type => Boolean,       :default => true
+  field :firm,                :type => Boolean,       :default => false
 
   embeds_many :addresses,       :class_name => "TrstPartnerAddress"
   embeds_many :persons,         :class_name => "TrstPartnerContactPerson"
