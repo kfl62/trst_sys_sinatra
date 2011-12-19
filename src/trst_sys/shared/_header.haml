@@ -5,7 +5,7 @@
     &nbsp;|&nbsp;
     %a.st.em{:href => "http://trst.ro"} TrustSys
     %br
-  %br
+  %span.small= "IP: #{request.ip}<br>"
   %br
   %span #{t('trst_auth.authenticated_as')}<br>
   %span#login_name.st.em #{current_user.login_name}

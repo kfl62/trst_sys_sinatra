@@ -1,12 +1,11 @@
 %p.header_title.em.st.ce Cleantech - TrustSys
 %p.header_auth.ri
   %span
-    %a#login_status.st.em{:href => "#", :onclick => "trst.auth.init(); return false;"}
-      = t('trst_auth.login')
+    %a#login_status.st.em{:href => "#", :onclick => "trst.auth.init(); return false;"}= t('trst_auth.login')
     &nbsp;|&nbsp;
     %a.st.em{:href => "http://trst.ro"} TrustSys
     %br
-  %br
+  %span.small= "IP: #{request.ip}<br>"
   %br
   %span #{t('trst_auth.authenticated_as')}<br>
   %span#login_name.st.em Anonymus
