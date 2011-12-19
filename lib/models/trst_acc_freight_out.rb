@@ -37,6 +37,11 @@ class TrstAccFreightOut
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
+    def intern(firm = true)
+      ids = all.each_with_object([]){|f,a| a << f.id if f.doc.client.firm == firm}
+      where(:_id.in => ids)
+    end
+    # @todo
     def by_id_stats_and_pu(key)
       id_stats, pu = key.split('_')
       where(:id_stats => id_stats)

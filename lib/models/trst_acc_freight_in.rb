@@ -36,6 +36,17 @@ class TrstAccFreightIn
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
+    def intern(firm = true)
+      ids = all.each_with_object([]) do |f,a|
+        if f.doc_grn
+          a << f.id if f.doc.client.firm == firm
+        else
+          a << f.id
+        end
+      end
+      where(:_id.in => ids)
+    end
+    # @todo
     def keys
       all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort!
     end
