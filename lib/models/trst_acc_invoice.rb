@@ -22,7 +22,7 @@ class TrstAccInvoice
   embeds_many :freights,      :class_name => "TrstAccInvoiceFreight"
 
   before_create :increment_name_date
-  after_destroy :restore_delivery_notes
+  before_destroy :restore_delivery_notes
 
   class << self
     # @todo
@@ -45,19 +45,17 @@ class TrstAccInvoice
   # @todo
   def update_delivery_notes(add = true)
     self.delivery_notes.each do |dn|
-      dn.charged = add
-      dn.save
+      dn.update_attribute(:charged, add)
     end
     self.freights.each do |f|
       self.delivery_notes.each do |dn|
         dn.freights.each do |df|
           if add
-            df.pu_invoice = f.pu if df.freight.id_stats == f.id_stats
+            df.set(:pu_invoice, f.pu) if df.freight.id_stats == f.id_stats
           else
-            df.pu_invoice = 0.00 if df.freight.id_stats == f.id_stats
+            df.set(:pu_invoice, 0.00) if df.freight.id_stats == f.id_stats
           end
-          df.val_invoice = (df.pu_invoice * df.qu).round(2)
-          df.save
+          df.set(:val_invoice, (df.pu_invoice * df.qu).round(2))
         end
       end
     end
