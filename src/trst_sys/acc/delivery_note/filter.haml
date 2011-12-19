@@ -1,5 +1,7 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+  clients = current_user.permission_lvl <= 5 ? TrstPartner.clients : TrstPartner.clients.where(:name.in => ["Diren", "Remat"])
+  transporters = current_user.permission_lvl <= 5 ? TrstPartner.transporters : TrstPartner.transporters.where(:name.in => ["Diren", "Remat"])
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_delivery_note.title')
 - if unit_id
@@ -16,14 +18,14 @@
           %select#select_client
             %option{:value => 'null'}= t('trst_acc_delivery_note.select.client')
             - unless TrstPartner.clients.empty?
-              - TrstPartner.clients.each do |client|
+              - clients.each do |client|
                 %option{:value => client.id}= client.name[1]
       %tr
         %td
           %select#select_transporter
             %option{:value => 'null'}= t('trst_acc_delivery_note.select.transporter')
             - unless TrstPartner.transporters.empty?
-              - TrstPartner.transporters.each do |transporter|
+              - transporters.each do |transporter|
                 %option{:value => transporter.id}= transporter.name[1]
     %tfoot
       %tr
