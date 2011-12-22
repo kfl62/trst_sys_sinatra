@@ -3,13 +3,13 @@
   out_003 = params[:out_003] == 'true' ? true : false
   month = params[:month]
   dns = params[:dn_ary].nil? ? [] : params[:dn_ary].split(',')
-  bckgrnd = {"afdv" => "#FFBFF0","ca21" => "#DDDDDD", "sa57" => "#FFFF99", "r25b" => "#BFFFBF"}
+  bckgrnd = {"afdv" => "#FFBFF0","ca21" => "#DDDDDD","cb25" => "#DDDDDD","sa57" => "#FFFF99","o139" => "#FFFF99","r25b" => "#BFFFBF","rafn" => "#BFFFBF"}
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_invoice.title') + " - Selectare avize"
 %span#cid.hidden{:data => {:task_id => @task.id, :client_id => client_id, :month => month, :out_003 => params[:out_003]}}
 %table{:cellspacing => "0"}
   %thead
-    - TrstAccDeliveryNote.asc(:id_date).by_client_id(client_id).monthly(month).by_freights_p03(out_003).by_charged(false).each_with_index do |dn,i|
+    - TrstAccDeliveryNote.asc(:id_date).by_client_id(client_id).monthly(month).by_charged(false).by_freights_p03(out_003).each_with_index do |dn,i|
       - if i % 8 == 0
         %tr
       %td.select-dn{:style => "border-right: solid 1px #333333; background-color: #{bckgrnd[dn.name.split('_')[1].downcase]}"}
