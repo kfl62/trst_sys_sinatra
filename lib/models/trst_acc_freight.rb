@@ -13,7 +13,7 @@ class TrstAccFreight
   field :p03,         :type => Boolean,       :default => true
   field :category,    :type => String,        :default => "Category"
   field :descript,    :type => Array,         :default => []
-  field :pu_other,    :type => Array,         :default => []
+  field :pu_retro,    :type => Float,         :default => 0.00
   field :id_stats,    :type => String
 
   has_many :ins,      :class_name => "TrstAccFreightIn",    :inverse_of => :freight
@@ -32,7 +32,7 @@ class TrstAccFreight
           month = dn.id_date.month
           fs << {:id => f.id,:um => f.um,:stock => f.stock(month),:id_stats => f.id_stats, :label => f.name}
         else
-          fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:id_stats => f.id_stats,:label => f.name}
+          fs << {:id => f.id,:um => f.um,:pu => f.pu,:pu_retro => f.pu_retro,:p03 => f.p03,:id_stats => f.id_stats,:label => f.name}
         end
       end
       {:identifier => "id",:items => fs}
@@ -184,6 +184,7 @@ class TrstAccFreight
       {:css => "normal",:name => "name",:label => I18n.t("trst_acc_freight.name"),:value => name},
       {:css => "normal",:name => "um",:label => I18n.t("trst_acc_freight.um"),:value => um},
       {:css => "integer",:name => "pu",:label => I18n.t("trst_acc_freight.pu"),:value => pu},
+      {:css => "accountancy.retro",:name => "pu_retro",:label => I18n.t("trst_acc_freight.pu_retro"),:value => pu_retro},
       {:css => "boolean",:name => "p03",:label => I18n.t("trst_acc_freight.p03"),:value => p03},
       {:css => "admin",:name => "descript,",:label => I18n.t("trst_acc_freight.cod"),:value => descript[0]},
       {:css => "admin",:name => "id_stats",:label => I18n.t("trst_acc_freight.id_stats"),:value => id_stats}
