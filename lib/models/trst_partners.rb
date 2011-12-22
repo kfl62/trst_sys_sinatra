@@ -48,6 +48,10 @@ class TrstPartner
     def transporters
       where(:transporter => true).asc(:name)
     end
+    # @todo
+    def intern(f = true)
+      where(:firm => f).asc(:name)
+    end
   end # Class methods
 
   # @todo
