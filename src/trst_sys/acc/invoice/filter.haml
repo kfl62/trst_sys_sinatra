@@ -14,7 +14,7 @@
         %select#select_client
           %option{:value => 'null'}= t('trst_acc_invoice.select.client')
           - unless TrstPartner.clients.empty?
-            - TrstPartner.clients.each do |client|
+            - TrstPartner.clients.intern(false).each do |client|
               %option{:value => client.id}= client.name[1]
       %td{:style => "vertical-align:middle"}
         %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartner.find")}','post','new')"}= t('trst_acc_invoice.filter.add_client')
