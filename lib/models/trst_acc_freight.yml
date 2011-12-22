@@ -4,6 +4,7 @@ ro:
     name: "Denumire"
     um: "Unitate de măsură"
     pu: "Preţ unitar"
+    pu_retro: "Preţ vechi"
     p03: "Taxă mediu(3%)?"
     cod: "Cod deşeu"
     id_stats: "Cod intern"
