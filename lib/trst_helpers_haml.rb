@@ -73,7 +73,14 @@ module Trst
 
       # @todo Document this method
       def tr_body(verb,data,task = nil,object = nil)
-        haml_tag "tr.#{data[:css]}" do
+        cl = "hidden"
+        if data[:css].include?("accountancy")
+          cl = data[:css] if data[:css].include?("period") && current_user.permission_lvl <= 5
+          cl = data[:css] if data[:css].include?("retro") && current_user.permission_lvl <= 6
+        else
+          cl = data[:css]
+        end
+        haml_tag "tr.#{cl}" do
           td_label(data[:css],data[:label])
           td_get_value(data[:css],data[:value]) if verb == 'get'
           td_put_value(data,task,object) if verb == 'put'
@@ -83,7 +90,7 @@ module Trst
       # @todo Document this method
       def td_label(css,label)
         haml_tag :td do
-          haml_tag "span.#{'hidden' if css == 'accountancy' && current_user.permission_lvl > 5}" do
+          haml_tag :span do
             label += "<sup>*</sup>" if css == "localized"
             haml_concat label
           end
@@ -142,21 +149,14 @@ module Trst
               else
                 haml_tag :span, data[:value],  :class => "limit-width"
               end
-            when 'accountancy'
-              if current_user.permission_lvl <= 5
-                haml_tag :input,
-                         :class => "date",
-                         :name => input_name(task,data[:name]),
-                         :value => data[:value]
-              else
-                haml_tag :input,
-                         :type => "hidden",
-                         :name => input_name(task,data[:name]),
-                         :value => 1
-              end
-          else
-            haml_tag :span, data[:value], :class => "limit-width"
-          end
+            when /accountancy/
+              val = data[:css].include?("period") ? 1 :  data[:value]
+              haml_tag :input,
+                       :name => input_name(task,data[:name]),
+                       :value => val
+            else
+              haml_tag :span, data[:value], :class => "limit-width"
+            end
         end
       end
 

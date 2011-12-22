@@ -62,7 +62,7 @@ class TrstPdf
         unless key == "period"
           retval << {:css => "normal",:name => "[last_values][#{key}]",:label => I18n.t("trst_pdf.#{pdf_template}.#{key}"),:value => value}
         else
-          retval << {:css => "accountancy",:name => "[last_values][#{key}]",:label => I18n.t("trst_pdf.#{pdf_template}.#{key}"),:value => value}
+          retval << {:css => "accountancy.period",:name => "[last_values][#{key}]",:label => I18n.t("trst_pdf.#{pdf_template}.#{key}"),:value => value}
         end
       end
     else
