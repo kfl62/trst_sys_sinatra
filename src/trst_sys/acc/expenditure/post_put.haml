@@ -1,7 +1,15 @@
 :ruby
   unit_id = current_user.unit_id || session[:unit_id]
+  month = params[:date_retro].nil? ? nil : params[:date_retro].split('-')[1].to_i
+  last = month.nil? ? nil :  TrstAccExpenditure.by_unit_id(unit_id).monthly(month).last
+  name_last = last.nil? ? "" : last.name.next
+  date_last = last.nil? ? params[:date_retro] : last.id_date.to_s
+  name_last = nil unless current_user.permission_lvl <= 6
+  date_last = nil unless current_user.permission_lvl <= 6
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
+- unless date = params[:date_retro].nil?
+  %span#retro
 -if action == 'put'
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
@@ -9,9 +17,9 @@
         %tr
           %th{:colspan => "9"}
             Nr.
-            %input.ce{:name => "[trst_acc_expenditure][name]",:value => params[:date_retro].nil? ? @object.name : ''}
-            din date de:
-            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => params[:date_retro].nil? ? @object.id_date.to_s : params[:date_retro]}
+            %input.ce{:name => "[trst_acc_expenditure][name]",:value => params[:date_retro].nil? ? @object.name : (name_last || "")}
+            din data de:
+            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => params[:date_retro].nil? ? @object.id_date.to_s : (date_last || params[:date_retro])}
         %tr
           %td{:colspan => "9"}
             %p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)

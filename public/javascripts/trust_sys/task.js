@@ -540,11 +540,8 @@ dojo.mixin(trst.task,{
       var button = dojo.query('.post')[1] , path = 'new?id_pn=' + id;
       if (button != undefined){
         dojo.connect(button, 'onclick', function(){
-          if (dojo.byId('date_retro') != undefined){
-            if (dojo.byId('date_retro').checked){
-              path += '&date_retro=' + dojo.byId('date_retro').getAttribute('data-date_retro')
-            }
-          }
+          if (dojo.query('input[type=checkbox]:checked').length > 0)
+            path += '&date_retro=' + dojo.query('input[type=checkbox]:checked')[0].getAttribute('data-date_retro')
           trst.task.init(button.getAttribute('data-task_id'),'post',path)
         })
       }else{
@@ -555,7 +552,11 @@ dojo.mixin(trst.task,{
     onSelectFreight: function(d){
       var tr = d.domNode.parentElement.parentElement
       tr.children[1].children[0].value = d.item.um
-      tr.children[2].children[0].value = parseFloat(d.item.pu).toFixed(2)
+      if (dojo.byId('retro') != undefined && parseFloat(d.item.pu_retro) != 0) {
+        tr.children[2].children[0].value = parseFloat(d.item.pu_retro).toFixed(2)
+      }else{
+        tr.children[2].children[0].value = parseFloat(d.item.pu).toFixed(2)
+      }
       tr.children[3].children[0].focus()
       tr.children[3].children[0].select()
       tr.children[3].children[1].value = d.item.id_stats
