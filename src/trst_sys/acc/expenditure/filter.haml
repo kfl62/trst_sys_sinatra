@@ -15,7 +15,7 @@
       %tr
         %td.filtering-select-pf
           %input#pfFilteringSelect
-          %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartnersPf")}','post','new')"}= t('trst_acc_expenditure.client.add_button')
+          %span{:class => "button post", :data => {:task_id => TrstTask.task_id_by_target("TrstPartnersPf")}}= t('trst_acc_expenditure.client.add_button')
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}

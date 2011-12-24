@@ -537,12 +537,15 @@ dojo.mixin(trst.task,{
       trst.task.init(id,'query',path)
     },
     onSelectPf: function(id){
-      var button = dojo.query('.post')[1] , path = 'new?id_pn=' + id;
-      if (button != undefined){
-        dojo.connect(button, 'onclick', function(){
+      var button = dojo.query('.button.post'), path = 'new?id_pn=' + id;
+      if (button.length == 2){
+        dojo.connect(button[0], 'onclick', function(){
+          trst.task.init(button[0].getAttribute('data-task_id'),'post','new')
+        })
+        dojo.connect(button[1], 'onclick', function(){
           if (dojo.query('input[type=checkbox]:checked').length > 0)
             path += '&date_retro=' + dojo.query('input[type=checkbox]:checked')[0].getAttribute('data-date_retro')
-          trst.task.init(button.getAttribute('data-task_id'),'post',path)
+          trst.task.init(button[1].getAttribute('data-task_id'),'post',path)
         })
       }else{
         var task_id = dojo.query('.filtering-select-pf')[0].getAttribute('data-task_id')
