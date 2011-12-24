@@ -16,6 +16,7 @@ class TrstPartnersPf
 
   has_many :apps, :class_name => "TrstAccExpenditure", :inverse_of => :client
 
+  validates_uniqueness_of :id_pn
   before_save :titleize_fields
 
   scope :pn,   ->(pn) { where(:id_pn => pn) }
@@ -25,7 +26,7 @@ class TrstPartnersPf
     def auto_search(u = nil)
       pfs = []
       all.asc(:name_last, :name_first).each do |pf|
-        if pf.id_pn == "123456789ABCD"
+        if pf.id_pn.nil? || pf.id_pn.empty?
           pf.delete
         else
           label = "#{pf.id_pn} | #{pf.name_full}"
@@ -36,21 +37,8 @@ class TrstPartnersPf
     end
     # @todo
     def check_pn
-      ctrl = "279146358279"
-      errors = []
-      all.asc(:name_last, :name_first).each do |pf|
-        if pf.id_pn.length != 13
-          errors << [pf.name_full, pf.id_pn]
-        else
-          sum = 0
-          ctrl.each_char.each_with_index do |c, i|
-            sum += c.to_i * pf.id_pn[i].to_i
-          end
-          mod = sum % 11
-          unless (mod < 10 && mod == pf.id_pn[12].to_i) || (mod = 10 && pf.id_pn[12].to_i == 1)
-            errors << [pf.name_full, pf.id_pn]
-          end
-        end
+      errors = all.asc(:name_last, :name_first).each_with_object([]) do |pf,e|
+        e << [pf.name, pf.id_pn] if pf.pn_error?
       end
       errors.empty? ? "Ok" : errors
     end
@@ -70,6 +58,22 @@ class TrstPartnersPf
     "#{n} (#{id_pn})" +
     "\n" +
     "Str.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"[0..40]
+  end
+  # @todo
+  def pn_error?
+    ctrl = "279146358279"
+    if id_pn.nil? || id_pn.length != 13
+      return true
+    else
+      sum = 0
+      ctrl.each_char.each_with_index do |c, i|
+        sum += c.to_i * id_pn[i].to_i
+      end
+      mod = sum % 11
+      unless (mod < 10 && mod == id_pn[12].to_i) || (mod = 10 && id_pn[12].to_i == 1)
+        return true
+      end
+    end
   end
   # @todo
   def table_data
