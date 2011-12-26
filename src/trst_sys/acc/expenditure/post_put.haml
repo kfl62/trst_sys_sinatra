@@ -80,13 +80,24 @@
           %td.footer_note{:colspan => "9"}= "&nbsp;" #t('gen_footer.note')
 -else
   %table{:cellspacing => "0"}
-    %thead
-      %tr
-        %th= t("gen_warning.#{action}")
-    %tbody
-      %tr
-        %td
-          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    -if TrstAccExpenditure.by_unit_id(unit_id).last.freights.empty?
+      %thead
+        %tr
+          %th{:style => "color:red"} !!! Atenţie !!!
+      %tbody
+        %tr
+          %td
+            %p.ju{:style => "width:350px;color:red"} Există o Adeverinţă fără nici un material ! Poate fi o greşeală de a Dvs. sau se mai lucrează şi la un alt calculator.
+            %p.ju{:style => "width:350px;color:red"} Dacă sunteţi convins că în acest moment nu se întroduc date de pe alt calculator, apăsaţi "Creare", în caz contrar apăsaţi "Anulare" şi încercaţi mai târziu.
+            %p.ju{:style => "width:350px"} Cel mai bine să-l sunaţi pe Doruleţ (0745-438733) să vă puneţi de acord!!!
+    - else
+      %thead
+        %tr
+          %th= t("gen_warning.#{action}")
+      %tbody
+        %tr
+          %td
+            %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
