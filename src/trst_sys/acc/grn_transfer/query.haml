@@ -1,0 +1,54 @@
+:ruby
+  to_unit = current_user.unit_id.nil? ? TrstFirm.unit_id_by_unit_slug('DPOA') : current_user.unit_id
+  from_unit = current_user.unit_id.nil? ? params[:from_unit] : TrstFirm.unit_id_by_unit_slug('DPOA')
+  dns = params[:dn_ary].nil? ? [] : params[:dn_ary].split(',')
+  bckgrnd = {"false" => "#DDDDDD", "true" => "#FFBFF0"}
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_grn_transfer.title')
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :from_unit => from_unit}}
+%table{:cellspacing => "0"}
+  %thead
+    - TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_unit_id(from_unit).each_with_index do |dn,i|
+      - if i % 8 == 0
+        %tr
+      %td.select-dn{:style => "border-right: solid 1px #333333"}
+        %input{:id => dn.id, :type => "checkbox", :checked  => dns.include?(dn.id.to_s), :onchange => "trst.task.acc.onSelectDnTransfer()"}
+        %span{:title => "#{dn.id_date}\n#{dn.name}\n#{dn.freights_list.join("\n")}", :style => "cursor:pointer; background-color: #{bckgrnd[dn.freights.first.freight.p03.to_s]}", :onclick => "trst.task.acc.toggleDnTransfer(this)"}= dn.id_main_doc
+    %tr
+      %td{:colspan => "8"}
+        %br
+        %span.small Legendă:
+        %span.small{:style => "border: solid 1px #333333; background-color: #{bckgrnd["false"]}"}= "fără 3%"
+        %span.small{:style => "border: solid 1px #333333; background-color: #{bckgrnd["true"]}"}= "cu 3%"
+        %br
+        %span.small Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
+  %tbody
+    - unless dns.empty?
+      %tr
+        %td{:colspan => "8"}
+          %table{:style => "width:80%; margin: 15px auto 5px;"}
+            %tbody.inner
+              %tr.ce
+                %td Material
+                %td Preţ (lei/kg)
+                %td Cantitate
+                %td Valoare
+              - data = TrstAccDeliveryNote.any_in(:_id  => dns).sum_freights_grn; data.sort.each do |s|
+                %tr.to-calculate
+                  %td
+                    %span.freight= s[1][0]
+                  %td
+                    %span.qu{:style => "width:80%"}= "%.2f" % s[1][2]
+                  %td
+                    %span.val{:style => "width:80%"}= "%.2f" % s[1][3]
+                  %td
+                    %span.val{:style => "width:80%"}= "%.2f" % s[1][4]
+              %tr.result
+                %td.ce.st{:colspan => "3"}= "Total"
+                %td
+                  %span.val{:style => "width:80%"}= "%.2f" % data.values.sum{|r| r[4]}
+  %tfoot
+    %tr
+      %td{:class => "buttons_bottom", :colspan => "8"}
+        %span{:class => "button post", :onclick => "trst.task.init('#{@task.id}','post','new?supplier_id=#{TrstPartner.intern.first.id}&dns=#{dns.join(',')}&to_unit=#{to_unit}')" }= t("button.post") + " NIR"
+        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
