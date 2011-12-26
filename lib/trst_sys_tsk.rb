@@ -120,7 +120,15 @@ class TrstSysTsk < Sinatra::Base
         @object.save
       end
     elsif params[:supplier_id]
-      @object = @object.create(:supplier_id => BSON::ObjectId.from_string(params[:supplier_id]), :unit_id => current_user.unit_id || session[:unit_id])
+      unit_id = BSON::ObjectId.from_string(params[:to_unit]) if params[:to_unit]
+      unit_id ||= current_user.unit_id || session[:unit_id]
+      @object = @object.create(:supplier_id => BSON::ObjectId.from_string(params[:supplier_id]), :unit_id => unit_id)
+      if params[:dns]
+        params[:dns].split(',').each do |dn|
+          @object.delivery_notes << TrstAccDeliveryNote.find(dn)
+          @object.save
+        end
+      end
     else
       if @object.instance_methods.include?(:unit_id)
         @object = @object.create(:unit_id => current_user.unit_id || session[:unit_id])

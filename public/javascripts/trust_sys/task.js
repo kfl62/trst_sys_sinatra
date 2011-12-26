@@ -516,6 +516,14 @@ dojo.mixin(trst.task,{
         alert("Nu aţi selectat furnizorul!")
       }
     },
+    grnTransferInit: function(id){
+      var hd = dojo.byId('hidden_data'),
+          path = 'new';
+      if (hd.getAttribute('data-from_unit') != null){
+        path += '?from_unit=' + hd.getAttribute('data-from_unit')
+      }
+      trst.task.init(id,'query',path)
+    },
     invoiceInit: function(id){
       var cl = dojo.byId('select_client'),
           m  = dojo.byId('select_month'),
@@ -585,19 +593,32 @@ dojo.mixin(trst.task,{
       }
     },
     onSelectDn: function(){
-      var dns = [], cid = dojo.byId('cid');
-      var task_id = cid.getAttribute('data-task_id');
+      var dns = [], hidden_data = dojo.byId('hidden_data');
+      var task_id = hidden_data.getAttribute('data-task_id');
       var path = 'new'
       dojo.query('td.select-dn input:checked').forEach(
         function(node){
           dns.push(node.id)
         }
       )
-      path += '?client_id=' + cid.getAttribute('data-client_id')
-      path += '&month=' + cid.getAttribute('data-month')
-      path += '&out_003=' + cid.getAttribute('data-out_003')
+      path += '?client_id=' + hidden_data.getAttribute('data-client_id')
+      path += '&month=' + hidden_data.getAttribute('data-month')
+      path += '&out_003=' + hidden_data.getAttribute('data-out_003')
       path += '&dn_ary=' + dns
       trst.task.acc.initInvCpus();
+      trst.task.init(task_id,'query', path);
+    },
+    onSelectDnTransfer: function(){
+      var dns = [], hidden_data = dojo.byId('hidden_data');
+      var task_id = hidden_data.getAttribute('data-task_id');
+      var path = 'new'
+      dojo.query('td.select-dn input:checked').forEach(
+        function(node){
+          dns.push(node.id)
+        }
+      )
+      path += '?from_unit=' + hidden_data.getAttribute('data-from_unit')
+      path += '&dn_ary=' + dns
       trst.task.init(task_id,'query', path);
     },
     initInvCpus: function(){
@@ -657,6 +678,11 @@ dojo.mixin(trst.task,{
       var toggle_state = !node.previousElementSibling.checked
       node.previousElementSibling.checked = toggle_state
       trst.task.acc.onSelectDn()
+    },
+    toggleDnTransfer: function(node){
+      var toggle_state = !node.previousElementSibling.checked
+      node.previousElementSibling.checked = toggle_state
+      trst.task.acc.onSelectDnTransfer()
     },
     toggleInvoicePayment: function(){
       if (dojo.byId('payment-cache').checked){
