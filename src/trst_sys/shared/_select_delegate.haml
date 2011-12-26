@@ -1,37 +1,41 @@
 :ruby
   delegates = TrstPartner.find(partner_id).delegates
 - if delegates.empty?
-  %tr
-    %td{:colspan => "2"}
-      %input.ce.st{:name => "[delegates][name]",:placeholder => "Prin delegatul",:style => "width:17.2em"}
-    %td{:colspan => "2"}
-      %input.ce.st{:id => "delegate_id_pn",:name => "[delegates][id_pn]",:placeholder => "CNP"}
-  %tr
-    %td{:colspan => "4"}
-      %input.ce.st{:name => "[delegates][id_sr]",:placeholder => "CI",:style => "width:2em"}
-      %input.ce.st{:name => "[delegates][id_nr]",:placeholder => "Nr.",:style => "width:6em"}
-      %input.ce.st{:name => "[delegates][id_by]",:placeholder => "Eliberat de.",:style => "width:10em"}
-      %input.date{:name => "[delegates][id_on]",:placeholder => "La data de"}
-      %input.ce.st{:name => "[trst_acc_grn][main_doc_plat]",:value => @object.main_doc_plat,:placeholder => "Nr. auto",:style => "width:6em"}
+  %table
+    %tbody
+      %tr
+        %td
+          %input.ce.st{:name => "[delegates][name]",:placeholder => "Prin delegatul",:style => "width:17.2em"}
+        %td
+          %input.ce.st{:id => "delegate_id_pn",:name => "[delegates][id_pn]",:placeholder => "CNP"}
+      %tr
+        %td{:colspan => "2"}
+          %input.ce.st{:name => "[delegates][id_sr]",:placeholder => "CI",:style => "width:2em"}
+          %input.ce.st{:name => "[delegates][id_nr]",:placeholder => "Nr.",:style => "width:6em"}
+          %input.ce.st{:name => "[delegates][id_by]",:placeholder => "Eliberat de.",:style => "width:10em"}
+          %input.date{:name => "[delegates][id_on]",:placeholder => "La data de"}
+          %input.ce.st{:name => "[trst_acc_grn][main_doc_plat]",:value => @object.main_doc_plat,:placeholder => "Nr. auto",:style => "width:6em"}
 - else
-  %tr.delegate_select
-    %td{:colspan => "6"}
-      %select{:name => "[trst_acc_grn][delegate_id]", :onchange => 'trst.task.acc.onSelectDelegate(this)'}
-        %option{:value => "null"}= t('trst_acc_grn.select.delegate')
-        - delegates.each do |d|
-          %option{:value => d.id.to_s}= d.name
-        %optgroup{:style => "text-align:center;display:block;color:red"}
-          %option{:value => "new"}= t('trst_acc_grn.select.delegate_new')
-      %input.ce.st{:name => "[trst_acc_grn][main_doc_plat]",:value => @object.main_doc_plat,:placeholder => "Nr. auto",:style => "width:6em"}
-  %tr.delegate_new{:style => "display:none"}
-    %td{:colspan => "2"}
-      %input.ce.st{:name => "[delegates][name]",:placeholder => "Prin delegatul",:style => "width:17.2em"}
-    %td{:colspan => "2"}
-      %input.ce.st{:id => "delegate_id_pn",:name => "[delegates][id_pn]",:placeholder => "CNP"}
-  %tr.delegate_new{:style => "display:none"}
-    %td{:colspan => "4"}
-      %input.ce.st{:name => "[delegates][id_sr]",:placeholder => "CI",:style => "width:2em"}
-      %input.ce.st{:name => "[delegates][id_nr]",:placeholder => "Nr.",:style => "width:6em"}
-      %input.ce.st{:name => "[delegates][id_by]",:placeholder => "Eliberat de.",:style => "width:10em"}
-      %input.date{:name => "[delegates][id_on]",:placeholder => "La data de"}
-      %input.ce.st{:name => "[trst_acc_grn][main_doc_plat]",:value => @object.main_doc_plat,:placeholder => "Nr. auto",:style => "width:6em"}
+  %table
+    %tbody
+      %tr.delegate_select
+        %td{:colspan => "2"}
+          %select{:name => "[trst_acc_grn][delegate_id]", :onchange => 'trst.task.acc.onSelectDelegate(this)'}
+            %option{:value => "null"}= t('trst_acc_grn.select.delegate')
+            - delegates.each do |d|
+              %option{:value => d.id.to_s}= d.name
+            %optgroup{:style => "text-align:center;display:block;color:red"}
+              %option{:value => "new"}= t('trst_acc_grn.select.delegate_new')
+          %input.ce.st{:name => "[trst_acc_grn][main_doc_plat]",:value => @object.main_doc_plat,:placeholder => "Nr. auto",:style => "width:6em"}
+      %tr.delegate_new{:style => "display:none"}
+        %td
+          %input.ce.st{:name => "[delegates][name]",:placeholder => "Prin delegatul",:style => "width:17.2em"}
+        %td
+          %input.ce.st{:id => "delegate_id_pn",:name => "[delegates][id_pn]",:placeholder => "CNP"}
+      %tr.delegate_new{:style => "display:none"}
+        %td{:colspan => "2"}
+          %input.ce.st{:name => "[delegates][id_sr]",:placeholder => "CI",:style => "width:2em"}
+          %input.ce.st{:name => "[delegates][id_nr]",:placeholder => "Nr.",:style => "width:6em"}
+          %input.ce.st{:name => "[delegates][id_by]",:placeholder => "Eliberat de.",:style => "width:10em"}
+          %input.date{:name => "[delegates][id_on]",:placeholder => "La data de"}
+          %input.ce.st{:name => "[trst_acc_grn][main_doc_plat]",:value => @object.main_doc_plat,:placeholder => "Nr. auto",:style => "width:6em"}
