@@ -16,8 +16,8 @@ class TrstPartnerDelegate
   field :id_on,   :default => "21.12.2008"
   field :phone,   :default => "+40-264-406440"
 
-  embedded_in :trst_partners, :class_name => "TrstPartner", :inverse_of => :delegates
-  has_many    :grns,          :class_name => "TrstAccGrn",  :inverse_of => :delegate
+  embedded_in :firm,  :class_name => "TrstPartner", :inverse_of => :delegates
+  has_many    :grns,  :class_name => "TrstAccGrn",  :inverse_of => :delegate
 
   def table_data
     [
