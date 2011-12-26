@@ -22,6 +22,7 @@ class TrstAccDeliveryNote
   belongs_to :transporter,:class_name => "TrstPartner",       :inverse_of => :delivery_pprss
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :delivery_notes
   belongs_to :invoice,    :class_name => "TrstAccInvoice",    :inverse_of => :delivery_notes
+  belongs_to :doc_grn,    :class_name => "TrstAccGrn",        :inverse_of => :delivery_notes
   belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :delivery_notes
 
   before_create :increment_name_date
@@ -51,7 +52,7 @@ class TrstAccDeliveryNote
     end
     # todo
     def intern(firm = true)
-      where(:client_id.in => TrstPartner.where(:firm => firm).collect{|p| p.id})
+      where(:client_id.in => TrstPartner.intern(firm).collect{|p| p.id})
     end
     # #todo
     def by_client_id(id)
@@ -72,7 +73,7 @@ class TrstAccDeliveryNote
       where(:charged => status)
     end
     # @todo
-    def sum_freights
+    def sum_freights_inv
       all.each_with_object({}) do |dn,s|
         dn.freights.each_with_object(s) do |f,s|
           key = f.freight.name
@@ -80,7 +81,21 @@ class TrstAccDeliveryNote
         end
       end
     end
-    # @todo
+     # @todo
+    def sum_freights_grn
+      all.each_with_object({}) do |dn,s|
+        dn.freights.each_with_object(s) do |f,s|
+          key = "#{f.id_stats}_#{"%05.2f" % f.pu}"
+          if s[key].nil?
+            s[key] = [f.freight.name,f.freight.id_stats,f.pu,f.qu,(f.pu * f.qu).round(2)]
+          else
+            s[key][3] += f.qu
+            s[key][4] += (f.pu * f.qu).round(2)
+          end
+        end
+      end
+    end
+   # @todo
     def to_txt
       all.each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
     end

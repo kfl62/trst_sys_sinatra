@@ -21,11 +21,12 @@ class TrstAccGrn
 
   alias :file_name :name
 
-  has_many    :freights,    :class_name => "TrstAccFreightIn",    :inverse_of => :doc_grn
-  belongs_to  :supplier,    :class_name => "TrstPartner",         :inverse_of => :grns
-  belongs_to  :delegate,    :class_name => "TrstPartnerDelegate", :inverse_of => :grns
-  belongs_to  :unit,        :class_name => "TrstFirmUnit",        :inverse_of => :grns
-  belongs_to  :signed_by,   :class_name => "TrstUser",            :inverse_of => :grns
+  has_many    :freights,      :class_name => "TrstAccFreightIn",    :inverse_of => :doc_grn
+  has_many    :delivery_notes,:class_name => "TrstAccDeliveryNote", :inverse_of => :doc_grn
+  belongs_to  :supplier,      :class_name => "TrstPartner",         :inverse_of => :grns
+  belongs_to  :delegate,      :class_name => "TrstPartnerDelegate", :inverse_of => :grns
+  belongs_to  :unit,          :class_name => "TrstFirmUnit",        :inverse_of => :grns
+  belongs_to  :signed_by,     :class_name => "TrstUser",            :inverse_of => :grns
 
   before_create :increment_name_date
   before_destroy :destroy_freights
@@ -54,7 +55,11 @@ class TrstAccGrn
     end
      # todo
     def intern(firm = true)
-      where(:client_id.in => TrstPartner.where(:firm => firm).collect{|p| p.id})
+      where(:client_id.in => TrstPartner.intern(firm).collect{|p| p.id})
+    end
+    # @todo
+    def to_txt
+      all.each{|grn| p "#{grn.name} --- #{grn.id_date.to_s} --- #{grn.supplier.name[1]}"}
     end
   end # Class methods
 
