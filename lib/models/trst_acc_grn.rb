@@ -81,6 +81,11 @@ class TrstAccGrn
       r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
     end
   end
+  def update_delivery_notes(add = true)
+    self.delivery_notes.each do |dn|
+      dn.update_attribute(:charged, add)
+    end
+  end
 
   protected
   # @todo
@@ -93,6 +98,7 @@ class TrstAccGrn
   end
   # @todo
   def destroy_freights
+    self.update_delivery_notes(false)
     self.freights.destroy_all
   end
 end
