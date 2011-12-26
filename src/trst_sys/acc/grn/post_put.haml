@@ -35,7 +35,9 @@
                       %option{:value => "INV"}= "Factură fiscală"
                   %td
                     %input.date{:name => "[trst_acc_grn][main_doc_name]",:value => @object.main_doc_name.to_s, :placeholder => "Nr. document"}
-                = partial('trst_sys/shared/select_delegate', :locals => {:partner_id => @object.supplier_id})
+                %tr
+                  %td{:colspan => "4"}
+                    = partial('trst_sys/shared/select_delegate', :locals => {:partner_id => @object.supplier_id})
         %tr
           %td{:colspan => "6"}
             %p S-au recepţionat următoarele:
