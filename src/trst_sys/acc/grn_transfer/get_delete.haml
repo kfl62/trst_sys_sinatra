@@ -1,0 +1,29 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@task,action)
+-if action == 'get'
+  %table{:cellspacing => "0"}
+    %thead
+    %tbody
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "2"}
+          %form{:id  => "xhr_#{action}"}
+          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
+          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+      %tr
+        %td.footer_note{:colspan => "2"}= t('trst_acc_grn.footer_note_del')
+- else
+  %table
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p= t("gen_msg.#{action}", :data => "#{@object.class.to_s} -> #{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
