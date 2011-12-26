@@ -1,7 +1,7 @@
 :ruby
   today = Date.today
   month = params[:month].nil? ? today.month : params[:month].to_i
-  dns = TrstAccDeliveryNote.asc(:id_date).monthly(month).where(:charged => false)
+  dns = TrstAccDeliveryNote.asc(:id_date).monthly(month).where(:charged => false).intern(false)
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_invoice.title')
 %p
