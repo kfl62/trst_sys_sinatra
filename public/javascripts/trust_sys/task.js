@@ -817,6 +817,13 @@ dojo.mixin(trst.task,{
         }
       }
     },
+    validDelegate: function(t,o){
+      if (selectedValue(dojo.query('select')[0]) == 'null'){
+        alert("Nu aţi selectat delegatul!")
+      }else{
+        trst.task.init(t,'put',o)
+      }
+    },
     insertRow: function(name,doc_id,freight_id){
       var i = dojo.query('tr.freight').length, ii = 1;
       var lastRow = dojo.query('tr.freight')[i - 1];

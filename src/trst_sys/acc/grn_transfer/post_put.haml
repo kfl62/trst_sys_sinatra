@@ -56,7 +56,7 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "4"}
-            %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
+            %span{:class => "button save", :onclick => "trst.task.acc.validDelegate('#{@task.id}','#{@object.id}')"}= t("button.save")
             %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
 
 -else
