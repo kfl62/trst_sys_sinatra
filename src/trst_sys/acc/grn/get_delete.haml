@@ -30,7 +30,7 @@
           %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
           %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
       %tr
-        %td.footer_note{:colspan => "2"}= t('trst_acc_grn.footer_note_del')
+        %td.footer_note{:colspan => "4"}= #t('trst_acc_grn.footer_note_del')
 - else
   %table
     %thead
