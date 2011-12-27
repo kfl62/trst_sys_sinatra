@@ -8,6 +8,8 @@
     = partial('trst_sys/shared/select_unit')
   - else
     %span.small= t('trst_acc_grn_transfer.unit_chief')
+    %br
+    %span.small= "( <b>#{current_user.unit.slug}</b> )"
   %table
     %tfoot
       %tr
