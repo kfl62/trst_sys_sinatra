@@ -1,6 +1,5 @@
 # encoding: utf-8
-# Template for Invoice
-require 'prawn/measurement_extensions'
+# Template for GRN Transfer
 require 'prawn/measurement_extensions'
 supplier  = TrstPartner.intern.first
 unit      = TrstFirm.unit_by_unit_id(@object.unit_id)
@@ -10,7 +9,7 @@ data = Hash.new
 sum_100 = @object.sum_100
 @object.delivery_notes.each do |dn|
   dn. freights. each do |f|
-    key = "#{f.freight.id_stats}"
+    key = "#{f.id_stats}_#{"%05.2f" % f.pu}"
     if data[key].nil?
       data[key] = [f.freight.name, f.um, f.qu, f.pu, (f.pu * f.qu).round(2), ["#{dn.id_main_doc} #{ "%.2f" % f.qu}"]]
     else
@@ -32,7 +31,7 @@ pdf = Prawn::Document.new(
   :info => {
     :Title => "Notă de recepţie",
     :Author => "kfl62",
-    :Subject => "Formular \"Notă de recepţie\"",
+    :Subject => "Formular \"Notă de recepţie\" - Transfer gestiune",
     :Keywords => "Diren Exim Continent Impex Notă de recepţie ",
     :Creator => "http://diren.trst.ro (using Sinatra, Prawn)",
     :CreationDate => Time.now

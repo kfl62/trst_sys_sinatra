@@ -6,7 +6,7 @@
       %thead
         %tr
           %td{:colspan => "4"}
-            %span.small= "Nr.intern #{@object.name}"
+            %span.small= "Nr.intern <b>#{@object.name}</b>"
             %input{:type => "hidden",:name => "[trst_acc_grn][name]",:value => @object.name}
             %span.small din data de:
             %input.date{:name => "[trst_acc_grn][id_date]",:value => @object.id_date.to_s}
