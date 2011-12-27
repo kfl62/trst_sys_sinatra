@@ -4,7 +4,7 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_stock.title')
 -if action == 'get'
-  %table{:cellspacing => "0"}
+  %table.big
     %thead
       %tr
         %th{:colspan => "4"}= "#{@object.name}"
@@ -31,7 +31,7 @@
         %td{:colspan => "4"} &nbsp;
     %tfoot
       %tr
-        %td{:class => "buttons_bottom", :colspan => "3"}
+        %td{:class => "buttons_bottom", :colspan => "4"}
           - current_buttons(action).each do |button|
             %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
               =t("button.#{button}")

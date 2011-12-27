@@ -282,6 +282,15 @@ trst.task = {
       var win = this.taskWindow;
       win.innerHTML = data;
       dojo.place(win,ovl,'after');
+      this.positionBox(dojo.byId('xhr_content'),win);
+    }
+    if (dojo.query('table.big').length > 0){
+      var tbl = dojo.query('table.big')[0]
+      if (tbl.scrollHeight > tbl.clientHeight){
+        tbl.style.width = (tbl.offsetWidth + 16) + 'px'
+      }else{
+        tbl.style.width = (tbl.offsetWidth + 1) + 'px'
+      }
     }
   },
   // destroy the taskWindow and reset vars{{{2

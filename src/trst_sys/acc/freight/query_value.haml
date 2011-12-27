@@ -24,7 +24,7 @@
       - TrstFirm.first.units.asc(:slug).each do |unit|
         %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
   -#%p.small= t('trst_acc_freight.stats_freight.intro')
-  %table
+  %table.big
     %tbody.inner.stats.small
       %tr
         - %w{name pu start value ins value outs final value}.each do |cn|
@@ -34,7 +34,7 @@
       - data.each do |stock| ; cols = stock.length - 2
         %tr
           %td
-            %span.link{:id  => stock.shift}= stock.shift
+            %span.link{:id  => stock.shift,:style => "white-space:nowrap"}= stock.shift
           - stock.each_with_index do |s,i|
             - unless i == 8
               %td.ri{:style => ("color:red" if i==0 && stock[8]==1)}= "%0.2f" % s
@@ -90,7 +90,7 @@
       %option{:value => "null"}= t("trst_acc_freight.filter.#{unit_id ? 'has' : 'no' }_unit.select")
       - TrstFirm.first.units.asc(:slug).each do |unit|
         %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
-  %table{:style => "display:block;max-height:500px;min-width:585px;overflow-y:auto"}
+  %table.big
     %tbody.inner.stats.small
       %tr
         - %w{name pu start value ins value outs final value}.each do |cn|
@@ -100,7 +100,7 @@
       - data.each do |stock| ; cols = stock.length - 2
         %tr
           %td
-            %span.link{:id  => stock.shift}= stock.shift
+            %span.link{:id  => stock.shift,:style => "white-space:nowrap"}= stock.shift
           - stock.each_with_index do |s,i|
             - unless i == 8
               %td.ri{:style => ("color:red" if i==0 && stock[8]==1)}= "%0.2f" % s
