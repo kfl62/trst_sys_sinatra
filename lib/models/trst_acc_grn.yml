@@ -19,6 +19,11 @@ ro:
   trst_acc_grn_transfer:
     title: "Transfer gestiune"
     filter:
+    unit_chief: |
+      Pentru a recepţiona marfă de la alte gestiuni<br/>
+      Apăsaţi "Selectare avize" şi bifaţi avizele a <br/>
+      căror denumire se termină cu indicativul punctului.
+    no_dn: Nu sunt avize de recepţionat!
 en:
   trst_acc_grn:
     title: "Notă de recepţie"
