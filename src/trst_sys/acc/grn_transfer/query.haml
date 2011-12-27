@@ -8,12 +8,17 @@
 %span#hidden_data.hidden{:data => {:task_id => @task.id, :from_unit => from_unit}}
 %table{:cellspacing => "0"}
   %thead
-    - TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_unit_id(from_unit).each_with_index do |dn,i|
-      - if i % 8 == 0
+    - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_unit_id(from_unit)
+      - if dns_select.empty?
         %tr
-      %td.select-dn{:style => "border-right: solid 1px #333333"}
-        %input{:id => dn.id, :type => "checkbox", :checked  => dns.include?(dn.id.to_s), :onchange => "trst.task.acc.onSelectDnTransfer()"}
-        %span{:title => "#{dn.id_date}\n#{dn.name}\n#{dn.freights_list.join("\n")}", :style => "cursor:pointer; background-color: #{bckgrnd[dn.freights.first.freight.p03.to_s]}", :onclick => "trst.task.acc.toggleDnTransfer(this)"}= dn.id_main_doc
+          %td
+            %span.small= t('trst_acc_grn_transfer.no_dn')
+      - else; dns_select.each_with_index do |dn,i|
+        - if i % 8 == 0
+          %tr
+        %td.select-dn{:style => "border-right: solid 1px #333333"}
+          %input{:id => dn.id, :type => "checkbox", :checked  => dns.include?(dn.id.to_s), :onchange => "trst.task.acc.onSelectDnTransfer()"}
+          %span{:title => "#{dn.id_date}\n#{dn.name}\n#{dn.freights_list.join("\n")}", :style => "cursor:pointer; background-color: #{bckgrnd[dn.freights.first.freight.p03.to_s]}", :onclick => "trst.task.acc.toggleDnTransfer(this)"}= dn.id_main_doc
     %tr
       %td{:colspan => "8"}
         %br
