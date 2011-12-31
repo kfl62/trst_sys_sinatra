@@ -1,6 +1,7 @@
 :ruby
   today = Date.today
   month = params[:month].nil? ? today.month : params[:month].to_i
+  year = params[:year].nil? ? today.year : params[:year].to_i
   unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
   unit_id = nil if unit_id == 'null'
 %p.close{:onclick => "trst.task.destroy()"}
@@ -9,15 +10,20 @@
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                           'query',
-                          '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
-      - t('month')[0..today.month].each_with_index do |m,i|
+                          '?unit_id=#{unit_id}&month=#{month}&year=' + selectedValue(this))}"}
+      - [2011,2012].each do |y|
+        %option{:value => y, :selected => y == year}= y
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?unit_id=#{unit_id}&year=#{year}&month=' + selectedValue(this))}"}
+      - t('month')[0..12].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
     - if current_user.unit_id
       %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
     - else
       %select{:onchange => "trst.task.destroy();trst.task.init('#{@task.id}',
                            'query',
-                           '?month=#{month}&unit_id=' + selectedValue(this))"}
+                           '?month=#{month}&year=#{year}&unit_id=' + selectedValue(this))"}
         %option{:value => "null"}= t("trst_acc_freight.filter.#{unit_id ? 'has' : 'no' }_unit.select")
         - TrstFirm.first.units.asc(:slug).each do |unit|
           %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
@@ -30,8 +36,8 @@
         %td.ce= t('trst_acc_cache.query.end')
       %tr
         %td.ce{:colspan => "3"}= t('trst_acc_cache.query.stk')
-        %td.ri= "%0.2f" % (stk = TrstAccCache.by_unit_id(unit_id).monthly(month).sum(:money_stock) || 0)
-      - @object.by_unit_id(unit_id).query(month).each do |d|
+        %td.ri= "%0.2f" % (stk = TrstAccCache.by_unit_id(unit_id).monthly(year,month).sum(:money_stock) || 0)
+      - @object.by_unit_id(unit_id).query(year,month).each do |d|
         %tr
           %td= d[0]
           %td.ri= "%0.2f" % d[1]
@@ -45,7 +51,12 @@
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                           'query',
-                          '?month=' + selectedValue(this))}"}
+                          '?month=#{month}&year=' + selectedValue(this))}"}
+      - [2011,2012].each do |y|
+        %option{:value => y, :selected => y == year}= y
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?year=#{year}&month=' + selectedValue(this))}"}
       - t('month')[0..today.month].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
   %table
@@ -56,10 +67,10 @@
         %td.ce= t('trst_acc_cache.balance.in')
         %td.ce= t('trst_acc_cache.balance.out')
         %td.ce= t('trst_acc_cache.balance.end')
-      - TrstFirm.first.units.asc(:slug).each do |unit| ; balance = @object.by_unit_id(unit.id).balance(month)
+      - TrstFirm.first.units.asc(:slug).each do |unit| ; balance = @object.by_unit_id(unit.id).balance(year,month)
         %tr
           %td{:style => "padding:1px 5px;cursor:pointer"}
-            %span.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?month=#{month}&unit_id=' + this.id)"}=unit.name[1]
+            %span.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?month=#{month}&year=#{year}&unit_id=' + this.id)"}=unit.name[1]
           %td.ri= "%0.2f" % balance[0]
           %td.ri= "%0.2f" % balance[1]
           %td.ri= "%0.2f" % balance[2]

@@ -1,21 +1,27 @@
 :ruby
   today = Date.today
+  year = params[:year].nil? ? today.year : params[:year].to_i
   month = params[:month].nil? ? today.month : params[:month].to_i
-  dns = TrstAccDeliveryNote.asc(:id_date).monthly(month).where(:charged => false).intern(false)
+  dns = TrstAccDeliveryNote.asc(:id_date).monthly(year,month).where(:charged => false).intern(false)
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_invoice.title')
 %p
   %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                         'query',
-                        '?month=' + selectedValue(this))}"}
-    - t('month')[0..today.month].each_with_index do |m,i|
+                        '?month=#{month}&year=' + selectedValue(this))}"}
+    - [2011,2012].each do |y|
+      %option{:value => y, :selected => y == year}= y
+  %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                        'query',
+                        '?year=#{year}&month=' + selectedValue(this))}"}
+    - t('month')[0..12].each_with_index do |m,i|
       %option{:value => i, :selected => i == month}= m
 %table{:cellspacing => "0"}
   %thead
     %tr
-      - unless @object.monthly(month).count == 0
+      - unless @object.monthly(year,month).count == 0
         %td{:colspan => "6"}
-          %span{:style => "display:block;max-width:400px"}= "În această luna s-au eliberat #{@object.monthly(month).count} facturi ( #{"%.2f" % @object.monthly(month).sum(:sum)} RON )"
+          %span{:style => "display:block;max-width:400px"}= "În această luna s-au eliberat #{@object.monthly(year,month).count} facturi ( #{"%.2f" % @object.monthly(year,month).sum(:sum)} RON )"
           %br
           %span.small Legendă:
           %span.small{:style => "border: solid 1px #333333; background-color:#DDDDDD; padding:0px 3px"}= "Achitat"
@@ -27,7 +33,7 @@
     %tr
       %td &nbsp;
   %tbody
-    - @object.asc(:id_date).monthly(month).each_with_index do |inv,i|
+    - @object.asc(:id_date).monthly(year,month).each_with_index do |inv,i|
       - if i % 6 == 0
         %tr
       %td.select-dn{:style => "border-right: solid 1px #333333; background-color: #{inv.payed ? "#DDDDDD" : "#FFBFF0"}"}

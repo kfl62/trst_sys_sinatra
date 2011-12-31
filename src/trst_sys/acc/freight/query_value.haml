@@ -1,12 +1,13 @@
 :ruby
   today = Date.today
+  year = params[:year].nil? ? today.year : params[:year].to_i
   month = params[:month].nil? ? today.month : params[:month].to_i
   freight_id = params[:freight_id]
   unit_id = current_user.unit_id.nil? ? params[:unit_id] : current_user.unit_id
   unit_id = nil if unit_id == 'null'
   unit = TrstAccFreight.find(freight_id).unit if freight_id
   expenditures = TrstAccExpenditure.by_unit_id(unit_id) if unit_id
-  balance = TrstAccCache.by_unit_id(unit_id).balance(month) if unit_id
+  balance = TrstAccCache.by_unit_id(unit_id).balance(year,month) if unit_id
   cols = 0
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= "Inventar valoric"
@@ -14,12 +15,17 @@
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                           'query',
-                          '?unit_id=#{unit_id}&month=' + selectedValue(this))}"}
-      - t('month')[0..today.month].each_with_index do |m,i|
+                          '?unit_id=#{unit_id}&month=#{month}&year=' + selectedValue(this))}"}
+      - [2011,2012].each do |y|
+        %option{:value => y, :selected => y == year}= y
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?unit_id=#{unit_id}&year=#{year}&month=' + selectedValue(this))}"}
+      - t('month')[0..12].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
     %select{:onchange => "trst.task.destroy();trst.task.init('#{@task.id}',
                          'query',
-                         '?month=#{month}&unit_id=' + selectedValue(this))"}
+                         '?month=#{month}&year=#{year}&unit_id=' + selectedValue(this))"}
       %option{:value => "null"}= t("trst_acc_freight.filter.#{unit_id ? 'has' : 'no' }_unit.select")
       - TrstFirm.first.units.asc(:slug).each do |unit|
         %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
@@ -29,7 +35,7 @@
       %tr
         - %w{name pu start value ins value outs final value}.each do |cn|
           %td.ce= t("trst_acc_freight.query.#{cn}")
-      - data = @object.by_unit_id(unit_id).query_value(month).values
+      - data = @object.by_unit_id(unit_id).query_value(year,month).values
       - sum = data.pop
       - data.each do |stock| ; cols = stock.length - 2
         %tr
@@ -52,25 +58,25 @@
         %td.small.ce.st{:colspan => "4"} Conform Inventar
       %tr
         %td.small Sume achitate
-        %td.small.ri.st{:colspan => "3",:style => "color:blue"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_out) || 0)
+        %td.small.ri.st{:colspan => "3",:style => "color:blue"}= "%0.2f" % (expenditures.monthly(year,month).sum(:sum_out) || 0)
         %td
         %td.small.ri{:colspan => "3"}
         %td
       %tr
         %td.small Reţinut 16%
-        %td.small.ri{:colspan => "3"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_016) || 0)
+        %td.small.ri{:colspan => "3"}= "%0.2f" % (expenditures.monthly(year,month).sum(:sum_016) || 0)
         %td
         %td.small.ri{:colspan => "3"}
         %td
       %tr
         %td.small Reţinut 3%
-        %td.small.ri{:colspan => "3"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_003) || 0)
+        %td.small.ri{:colspan => "3"}= "%0.2f" % (expenditures.monthly(year,month).sum(:sum_003) || 0)
         %td
         %td.small.ri{:colspan => "3"}
         %td
       %tr
         %td.small Valoare marfă
-        %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % (expenditures.monthly(month).sum(:sum_100) || 0)
+        %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % (expenditures.monthly(year,month).sum(:sum_100) || 0)
         %td
         %td.small.ri.st{:colspan => "3",:style => "color:red"}= "%0.2f" % sum[6]
         %td
@@ -81,12 +87,17 @@
   %p
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                           'query',
-                          '?month=' + selectedValue(this))}"}
-      - t('month')[0..today.month].each_with_index do |m,i|
+                          '?unit_id=#{unit_id}&month=#{month}&year=' + selectedValue(this))}"}
+      - [2011,2012].each do |y|
+        %option{:value => y, :selected => y == year}= y
+    %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
+                          'query',
+                          '?year=#{year}&month=' + selectedValue(this))}"}
+      - t('month')[0..12].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
     %select{:onchange => "trst.task.destroy();trst.task.init('#{@task.id}',
                          'query',
-                         '?month=#{month}&unit_id=' + selectedValue(this))"}
+                         '?month=#{month}&year=#{year}&unit_id=' + selectedValue(this))"}
       %option{:value => "null"}= t("trst_acc_freight.filter.#{unit_id ? 'has' : 'no' }_unit.select")
       - TrstFirm.first.units.asc(:slug).each do |unit|
         %option{:value => unit.id, :selected => unit.id.to_s == params[:unit_id]}= unit.name[1]
@@ -95,7 +106,7 @@
       %tr
         - %w{name pu start value ins value outs final value}.each do |cn|
           %td.ce= t("trst_acc_freight.query.#{cn}")
-      - data = @object.query_value(month).values
+      - data = @object.query_value(year,month).values
       - sum = data.pop
       - data.each do |stock| ; cols = stock.length - 2
         %tr

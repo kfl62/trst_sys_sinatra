@@ -1,5 +1,6 @@
 :ruby
   today = Date.today
+  year = params[:year].nil? ? today.year : params[:year].to_i
   month = params[:month].nil? ? today.month : params[:month].to_i
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
@@ -22,8 +23,11 @@
       %td{:style => "vertical-align:middle"}
         %span.small Luna ptr. facturare
       %td{:style => "vertical-align:middle"}
+        %select#select_year
+          - ["Anul",2011,2012].each do |y|
+            %option{:value => y, :selected => y == year}= y
         %select#select_month
-          - t('month')[0..today.month].each_with_index do |m,i|
+          - t('month')[0..12].each_with_index do |m,i|
             %option{:value => i, :selected => i == month}= m
     %tr
       %td{:style => "vertical-align:middle"}
