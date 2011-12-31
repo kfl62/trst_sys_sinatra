@@ -50,31 +50,31 @@ class TrstAccFreight
       where(:id_stats => ids).asc(:unit_id)
     end
     # @todo
-    def query(m = nil)
-      today = Date.today
-      month = m.nil? ? today.month : m.to_i
+    def query(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
       retval = []
       asc(:id_stats).each do |f|
-        stk = f.stocks.monthly(month).sum(:qu) || 0
-        f_in  = f.ins.monthly(month).sum(:qu) || 0
-        f_out = f.outs.monthly(month).sum(:qu) || 0
+        stk = f.stocks.monthly(y,m).sum(:qu) || 0
+        f_in  = f.ins.monthly(y,m).sum(:qu) || 0
+        f_out = f.outs.monthly(y,m).sum(:qu) || 0
         retval << [f.id, f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
       end
       retval
     end
     # @todo
-    def query_value(m = nil)
-      today = Date.today
-      month = m.nil? ? today.month : m.to_i
-      month_next =  month == 12 ? 1 : month + 1
+    def query_value(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
+      month_next =  m == 12 ? 1 : m + 1
       stk_start, ins, outs, stk_end = {}, {}, {}, {}
       asc(:id_stats).each do |fr|
-        stk_start.merge!(fr.stocks.query_value_hash(month)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
-        ins.merge!(fr.ins.query_value_hash(month)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
-        if month == Date.today.month || fr.stocks.query_value_hash(month_next).empty?
-          outs.merge!(fr.outs.query_value_hash(month)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
+        stk_start.merge!(fr.stocks.query_value_hash(y,m)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+        ins.merge!(fr.ins.query_value_hash(y,m)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+        if m == Date.today.month || fr.stocks.query_value_hash(y,month_next).empty?
+          outs.merge!(fr.outs.query_value_hash(y,m)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
         else
-          stk_end.merge!(fr.stocks.query_value_hash(month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+          stk_end.merge!(fr.stocks.query_value_hash(y,month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
         end
       end
       retval = (stk_start.keys | ins.keys).sort.each_with_object({}) do |k,h|
@@ -82,26 +82,26 @@ class TrstAccFreight
         h[k][5..-1] = ins[k][3..-1] unless ins[k].nil?
       end
       retval.values.each{|v|
-        last_in = where(:id_stats  => v[0])[0].ins.monthly(month).last || where(:id_stats => v[0])[0].stocks.monthly(month).last
+        last_in = where(:id_stats  => v[0])[0].ins.monthly(y,m).last || where(:id_stats => v[0])[0].stocks.monthly(y,m).last
         v[10] = v[2] == last_in.pu ? 1 : 0
       }
       retval = handle_query_values(retval,stk_start,ins,outs,stk_end)
       retval = sum_query_values(retval)
     end
     # @todo
-    def stats(m = nil)
+    def stats(y = nil, m = nil)
       retval, part, tot_stk, tot_ins, tot_out, tot_end = [], [], 0, 0, 0, 0
-      today = Date.today
-      month = m.nil? ? today.month : m.to_i
+      y ||= Date.today.year
+      m ||= Date.today.month
       stats_for = all.map{|f| [f.id_stats, f.name]}.uniq.sort
       stats_for.each_with_index do |ids,i|
         part[i] = []
         TrstFirm.unit_ids.each do |u|
           f = by_unit_id(u).by_id_stats(ids[0]).first
           if f
-            pos_stk = f.stocks.monthly(month).sum(:qu) || 0
-            pos_ins = f.ins.monthly(month).sum(:qu) || 0
-            pos_out = f.outs.monthly(month).sum(:qu) || 0
+            pos_stk = f.stocks.monthly(y,m).sum(:qu) || 0
+            pos_ins = f.ins.monthly(y,m).sum(:qu) || 0
+            pos_out = f.outs.monthly(y,m).sum(:qu) || 0
             pos_end = pos_stk.round(2) + pos_ins.round(2) - pos_out.round(2)
             tot_stk += pos_stk.round(2)
             tot_ins += pos_ins.round(2)
@@ -118,16 +118,15 @@ class TrstAccFreight
       retval
     end
     # @todo
-    def stats_freight(id, m = nil)
+    def stats_freight(id, y = nil, m = nil)
       f = find(id)
-      today = Date.today
-      year  = today.year
-      month = m.nil? ? today.month : m.to_i
-      days_in_month = (Date.new(year, 12, 31) << (12-month)).day
-      final = f.stocks.monthly(month).sum(:qu) || 0
+      y ||= Date.today.year
+      m ||= Date.today.month
+      days_in_month = (Date.new(y, 12, 31) << (12-m)).day
+      final = f.stocks.monthly(y,m).sum(:qu) || 0
       retval, tot_ins, tot_out = [], 0, 0
       (1..days_in_month).each do |i|
-        day = Date.new(year,month,i).to_s
+        day = Date.new(y,m,i).to_s
         f_ins = f.ins.daily(day).sum(:qu) || 0
         f_out = f.outs.daily(day).sum(:qu) || 0
         final = final + f_ins - f_out
@@ -172,10 +171,10 @@ class TrstAccFreight
     end
   end
   # @todo
-  def stock(month = nil)
-    f_stk = stocks.monthly(month).sum(:qu) || 0
-    f_ins = ins.monthly(month).sum(:qu) || 0
-    f_out = outs.monthly(month).sum(:qu) || 0
+  def stock(y = nil, m = nil)
+    f_stk = stocks.monthly(y,m).sum(:qu) || 0
+    f_ins = ins.monthly(y,m).sum(:qu) || 0
+    f_out = outs.monthly(y,m).sum(:qu) || 0
     f_stk + f_ins - f_out
   end
   # @todo

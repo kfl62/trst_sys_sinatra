@@ -25,9 +25,9 @@ class TrstAccCache
       where(:id_date => DateTime.strptime("#{day}","%F").to_time)
     end
     # @todo
-    def monthly(month = nil)
-      y = Date.today.year
-      m = month.nil? ? Date.today.month : month.to_i
+    def monthly(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
       mb = DateTime.new(y, m)
       me = m.to_i == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
@@ -42,16 +42,16 @@ class TrstAccCache
       where(:unit_id => u).asc(:id_date)
     end
     # @todo
-    def query(month = nil)
+    def query(y = nil, m = nil)
       today = Date.today
-      year  = today.year
-      month ||= today.month
-      days_in_month = (Date.new(year, 12, 31) << (12-month)).day
+      y ||= Date.today.year
+      m ||= Date.today.month
+      days_in_month = (Date.new(y, 12, 31) << (12-m)).day
       unit_id = first.unit_id
       retval, tot_out = [], 0
-      tot_in = monthly(month.to_i).sum(:money_stock) || 0
+      tot_in = monthly(y,m).sum(:money_stock) || 0
       (1..days_in_month).each do |i|
-        day = Date.new(year,month.to_i,i).to_s
+        day = Date.new(y,m,i).to_s
         sum_in  = daily(day).sum(:money_in) || 0.0
         tot_in += sum_in
         sum_out = TrstAccExpenditure.by_unit_id(unit_id).daily(day).sum(:sum_out) || 0.0
@@ -62,12 +62,13 @@ class TrstAccCache
       retval
     end
     # @todo
-    def balance(month = nil)
-      month ||= Date.today.month
+    def balance(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
       unit_id = first.unit_id
-      stk = monthly(month.to_i).sum(:money_stock) || 0
-      ins = monthly(month.to_i).sum(:money_in) || 0
-      out = TrstAccExpenditure.by_unit_id(unit_id).monthly(month.to_i).sum(:sum_out) || 0
+      stk = monthly(y,m).sum(:money_stock) || 0
+      ins = monthly(y,m).sum(:money_in) || 0
+      out = TrstAccExpenditure.by_unit_id(unit_id).monthly(y,m).sum(:sum_out) || 0
       [stk, ins, out, stk + ins - out]
     end
   end # Class methods

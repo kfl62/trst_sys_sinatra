@@ -23,7 +23,7 @@ class TrstFirmUnit
 
   # @todo
   def current_stock
-    stocks.where(:id_month  => 0).first
+    stocks.where(:id_date  => Date.new(2000,1,31)).first
   end
   # @todo
   def table_data

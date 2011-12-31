@@ -8,7 +8,7 @@ class TrstAccStock
   include Mongoid::Timestamps
 
   field :name,        :type => String,    :default => "Stock_unit_month"
-  field :id_month,    :type => Integer,   :default => Date.today.month
+  field :id_date,     :type => Date
   field :expl,        :type => String,    :default => "Stock initial"
 
   has_many   :freights,   :class_name => "TrstAccFreightStock", :inverse_of => :doc
@@ -22,9 +22,10 @@ class TrstAccStock
       where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))
     end
     # @todo
-    def monthly(month = nil)
-      month ||= Date.today.month
-      where(:id_month => month.to_i)
+    def monthly(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
+      where(:id_date => Date.new(y,m,1))
     end
     # @todo
     def by_unit_id(u)

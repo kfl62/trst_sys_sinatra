@@ -29,9 +29,9 @@ class TrstAccFreightOut
       where(:id_date => DateTime.strptime("#{d}","%F").to_time)
     end
     # @todo
-    def monthly(m)
-      y = Date.today.year
-      m = m.to_i
+    def monthly(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
       mb = DateTime.new(y, m)
       me = m == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
@@ -51,8 +51,8 @@ class TrstAccFreightOut
       where(:doc_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
     end
     # @todo
-    def query_value_hash(m)
-      monthly(m).each_with_object({}) do |f,h|
+    def query_value_hash(y,m)
+      monthly(y,m).each_with_object({}) do |f,h|
         k = "#{f.freight.id_stats}"
         h[k].nil? ? h[k] = [f.freight.id_stats,f.qu] : h[k][1] += f.qu
       end

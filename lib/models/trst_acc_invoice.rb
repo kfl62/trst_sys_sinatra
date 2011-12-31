@@ -30,9 +30,9 @@ class TrstAccInvoice
       where(:id_date => DateTime.strptime("#{d}","%F").to_time)
     end
     # @todo
-    def monthly(month = nil)
-      y = Date.today.year
-      m = month.nil? ? Date.today.month : month.to_i
+    def monthly(y = nil, m = nil)
+      y ||= Date.today.year
+      m ||= Date.today.month
       mb = DateTime.new(y, m)
       me = m.to_i == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
