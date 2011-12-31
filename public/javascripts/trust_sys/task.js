@@ -535,6 +535,7 @@ dojo.mixin(trst.task,{
     },
     invoiceInit: function(id){
       var cl = dojo.byId('select_client'),
+          y  = dojo.byId('select_year'),
           m  = dojo.byId('select_month'),
           t  = dojo.query("[name='out_003']"),
           path = 'new';
@@ -542,6 +543,12 @@ dojo.mixin(trst.task,{
         path += '?client_id=' + selectedValue(cl);
       }else{
         alert('Nu aţi selectat clientul!')
+        return false
+      }
+      if (y && selectedValue(y) != 'Anul'){
+        path += '&year=' + selectedValue(y);
+      }else{
+        alert('Nu aţi selectat anul!')
         return false
       }
       if (m && selectedValue(m) != 'Luna'){
