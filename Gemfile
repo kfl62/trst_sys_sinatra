@@ -1,10 +1,10 @@
 source "http://rubygems.org"
 gem "sinatra", :require => "sinatra/base"
-gem "rack", "~>1.3.3"
+gem "rack"
 gem "rack-flash"
 gem "rack-rewrite", :require => "rack/rewrite"
 gem "haml"
-gem "compass", "~>0.10"
+gem "compass"
 gem "mongoid"
 gem "bson_ext"
 gem 'prawn'
