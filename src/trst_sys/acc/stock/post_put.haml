@@ -10,11 +10,11 @@
           %th{:colspan => "4"}
             Nume:
             %input.ce{:name => "[trst_acc_stock][name]",:value => @object.name}
-            Luna:
-            %input.ce{:name => "[trst_acc_stock][id_month]",:value => @object.id_month.to_s,:style => "width:3em"}
+            Data:
+            %input.ce{:name => "[trst_acc_stock][id_date]",:value => @object.id_date.to_s,:style => "width:7em"}
             %br
             Expl:
-            %input.ce{:name => "[trst_acc_stock][expl]",:value => @object.expl}
+            %input{:name => "[trst_acc_stock][expl]",:value => @object.expl,:style => "width:23em"}
         %tr
           %td{:colspan => "4"}
             -#%p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
