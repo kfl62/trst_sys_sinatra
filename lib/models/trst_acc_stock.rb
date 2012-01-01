@@ -43,8 +43,8 @@ class TrstAccStock
   protected
   # @todo
   def freights_init
-    TrstAccFreight.by_unit_id(self.unit_id).asc(:name).each do |f|
-      self.freights << TrstAccFreightStock.create(:doc_id => self.id, :freight_id => f.id, :um => f.um, :pu => f.pu)
+    TrstFirm.unit_by_unit_id(self.unit_id).current_stock.freights.asc(:id_stats,:pu).each do |f|
+      self.freights << f.clone unless f.qu == 0
     end
   end
   # @todo
