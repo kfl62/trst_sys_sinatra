@@ -3,6 +3,7 @@
 #Handling utilities#
 =end
 class TrstUtils < Sinatra::Base
+  register Sinatra::Flash
   # @todo Document this method
   get '/msg/:what/:kind' do |w,k|
     if w == 'flash'

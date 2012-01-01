@@ -4,6 +4,7 @@
 =end
 
 class TrstSysTsk < Sinatra::Base
+  register Sinatra::Flash
   # route for /srv/tsk/
   # @action Action: require login unless authorized user, set `session[:daily_tasks]`
   # @action Render: `/trst_sys/daily_tasks`

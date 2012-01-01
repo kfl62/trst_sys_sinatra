@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 gem "sinatra", :require => "sinatra/base"
+gem "sinatra-flash", :require => "sinatra/flash"
 gem "rack"
-gem "rack-flash"
 gem "rack-rewrite", :require => "rack/rewrite"
 gem "haml"
 gem "compass"

@@ -1,12 +1,10 @@
 # encoding: utf-8
 require './config/trst_conf'
-require 'rack-flash'
 require 'rack/rewrite'
 
 use Rack::CommonLogger
 
 use Rack::Session::Cookie, :secret => 'zsdgryst34kkufklfSwsqwess'
-use Rack::Flash
 use Rack::Rewrite do
   rewrite %r{^/\w{2}/auth},  '/auth'
   rewrite %r{^/\w{2}/utils}, '/utils'

@@ -6,6 +6,7 @@ Dir['config','lib','lib/*/'].each do |dir|
 end
 require 'bundler/setup'
 require 'sinatra/base'
+require 'sinatra/flash'
 require 'haml'
 require 'compass'
 require 'rdiscount'

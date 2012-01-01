@@ -8,7 +8,7 @@ Each user can change his password and some settings( {TrstUser} ) using an other
 (accessible via `Settings` menu).
 =end
 class TrstAuth < Sinatra::Base
-
+  register Sinatra::Flash
   # Render stylesheets
   get '/stylesheets/:name.css' do
     content_type 'text/css', :charset => 'utf-8'
