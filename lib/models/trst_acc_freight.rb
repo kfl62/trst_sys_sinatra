@@ -29,8 +29,9 @@ class TrstAccFreight
       where(:unit_id => unit).asc(:name).each do |f|
         if stock
           dn = TrstAccDeliveryNote.by_unit_id(unit).last
+          year  = dn.id_date.year
           month = dn.id_date.month
-          fs << {:id => f.id,:um => f.um,:stock => f.stock(month),:id_stats => f.id_stats, :label => f.name}
+          fs << {:id => f.id,:um => f.um,:stock => f.stock(year,month),:id_stats => f.id_stats, :label => f.name}
         else
           fs << {:id => f.id,:um => f.um,:pu => f.pu,:pu_retro => f.pu_retro,:p03 => f.p03,:id_stats => f.id_stats,:label => f.name}
         end
