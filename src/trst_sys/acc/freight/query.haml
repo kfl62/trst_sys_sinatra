@@ -19,7 +19,7 @@
     %select{:onchange => "if (selectedValue(this) != '0'){trst.task.destroy();trst.task.init('#{@task.id}',
                           'query',
                           '?unit_id=#{unit_id}&year=#{year}&month=' + selectedValue(this))}"}
-      - t('month')[0..today.month].each_with_index do |m,i|
+      - t('month')[0..12].each_with_index do |m,i|
         %option{:value => i, :selected => i == month}= m
     - if current_user.unit_id
       %span= "#{TrstFirm.unit_by_unit_id(unit_id).name[1]}, #{today.to_s if month == today.month}"
