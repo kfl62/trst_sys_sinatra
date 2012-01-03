@@ -508,7 +508,7 @@ dojo.mixin(trst.task,{
     deliveryInit: function(id){
       var cl = dojo.byId('select_client'),
           tp = dojo.byId('select_transporter');
-      trst.task.init(id,'post','new?client_id=' + cl.options(cl.selectedIndex).value + '&transporter_id=' + tp.options(tp.selectedIndex).value)
+      trst.task.init(id,'post','new?client_id=' + selectedValue(cl) + '&transporter_id=' + selectedValue(tp))
     },
     grnInit: function(id){
       if (dojo.byId('select_supplier') != undefined){
