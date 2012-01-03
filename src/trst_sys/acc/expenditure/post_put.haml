@@ -1,7 +1,8 @@
 :ruby
   unit_id = current_user.unit_id || session[:unit_id]
+  year  = params[:date_retro].nil? ? nil : params[:date_retro].split('-')[0].to_i
   month = params[:date_retro].nil? ? nil : params[:date_retro].split('-')[1].to_i
-  last = month.nil? ? nil :  TrstAccExpenditure.by_unit_id(unit_id).monthly(month).last
+  last = month.nil? ? nil :  TrstAccExpenditure.by_unit_id(unit_id).monthly(year,month).last
   name_last = last.nil? ? "" : last.name.next
   date_last = last.nil? ? params[:date_retro] : last.id_date.to_s
   name_last = nil unless current_user.permission_lvl <= 6
