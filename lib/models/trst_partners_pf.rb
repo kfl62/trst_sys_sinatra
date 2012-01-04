@@ -27,7 +27,7 @@ class TrstPartnersPf
       pfs = []
       all.asc(:name_last, :name_first).each do |pf|
         if pf.id_pn.nil? || pf.id_pn.empty?
-          pf.delete if (pf.created_at + 5.0/1440) <= DateTime.now
+          pf.delete if (pf.created_at + 300) < DateTime.now
         else
           label = "#{pf.id_pn} | #{pf.name_full}"
           pfs << {:id => pf.id,:pn => pf.id_pn,:label => label}
