@@ -7,7 +7,7 @@
   bckgrnd = {"afdv" => "#FFBFF0","ca21" => "#DDDDDD","cb25" => "#DDDDDD","sa57" => "#FFFF99","o139" => "#FFFF99","r25b" => "#BFFFBF","rafn" => "#BFFFBF"}
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_invoice.title') + " - Selectare avize"
-%span#hidden_data.hidden{:data => {:task_id => @task.id, :client_id => client_id, :month => month, :out_003 => params[:out_003]}}
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :client_id => client_id,:year => year, :month => month, :out_003 => params[:out_003]}}
 %table{:cellspacing => "0"}
   %thead
     - TrstAccDeliveryNote.asc(:id_date).by_client_id(client_id).monthly(year,month).by_charged(false).by_freights_p03(out_003).each_with_index do |dn,i|

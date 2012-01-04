@@ -618,6 +618,7 @@ dojo.mixin(trst.task,{
         }
       )
       path += '?client_id=' + hidden_data.getAttribute('data-client_id')
+      path += '&year=' + hidden_data.getAttribute('data-year')
       path += '&month=' + hidden_data.getAttribute('data-month')
       path += '&out_003=' + hidden_data.getAttribute('data-out_003')
       path += '&dn_ary=' + dns
