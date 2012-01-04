@@ -16,6 +16,16 @@ ro:
       delegate_new: "Adăugare delegat"
     inv: Factură fiscală
     dn: Aviz de expediţie
+    repair:
+      header: "Puteţi Tipării/Şterge NIR-le făcute azi!<br>"
+      header_title: 'Pentru mai multe detalii apasaţi pe pictograma ...?... din dreptul comenzii'
+      footer: |
+        <br>Notă:<br>
+        În cazul în care nu s-a tipărit un NIR puteţi repeta tipărirea cu<br>
+        un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
+        Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
+        pictograma <img src='images/icons/help.png' width='12' height='12' />
+      footer_short: "<br>Notă:<br> Pentru detalii click pe pictograma <img src='images/icons/help.png' width='12' height='12' />"
   trst_acc_grn_transfer:
     title: "Transfer gestiune"
     filter:
