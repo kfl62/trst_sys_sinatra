@@ -1,3 +1,45 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+  date = session[:date] || Date.today.to_s
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= "NIR - Firme/Intern - Reparaţii"
-%p Urmează în curând :)
+- if unit_id
+  - if current_user.unit_id.nil?
+    = partial('trst_sys/shared/select_unit')
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        - if current_user.unit_id
+          %td{:colspan => "4"}
+            %span.small.with-title{:title => t('trst_acc_grn.repair.header_title')}= t('trst_acc_grn.repair.header')
+            %br
+        - else
+          %span.small NIR-uri făcute în data de:&nbsp;
+          %input.date{:onchange => "trst.task.init('#{@task.id}','repair',this.value)", :value => date}
+          %hr
+    %tbody
+      %tr
+        %td.ce Cod int.
+        %td.ce Furnizor
+        %td.ce Valoare
+        %td.ce Acţiune
+      - @object.by_unit_id(unit_id).daily(date).each do |o|
+        %tr
+          %td
+            %span{:title => "Materiale\n#{o.freights_list.join("\n")}"}= o.name
+            %br
+            %span.small= o.delivery_notes.each_with_object([]){|dn,a| a << dn.id_main_doc}.join(', ')
+          %td
+            %span= o.supplier.name[1]
+          %td
+            %span.res= "%.2f" % o.sum_100
+          %td
+            %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccGrn")}','get','#{o.id}')"}
+    %tfoot
+      %tr
+        - if current_user.unit_id
+          %td.footer_note{:colspan => "4"}= t('trst_acc_grn.repair.footer')
+        - else
+          %td.footer_note{:colspan => "4"}= t('trst_acc_grn.repair.footer_short')
+- else
+  = partial('trst_sys/shared/select_unit')
