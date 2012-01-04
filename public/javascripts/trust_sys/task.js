@@ -475,6 +475,8 @@ dojo.mixin(trst.task,{
           searchAttr: "pn",
           placeHolder: "Caută după CNP",
           labelAttr: "label",
+          invalidMessage: "",
+          searchDelay: 500,
           onChange: function(id){
             trst.task.acc.onSelectPf(id)
           }
