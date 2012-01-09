@@ -76,7 +76,7 @@ class TrstAccFreight
         if m == Date.today.month || fr.stocks.query_value_hash(year_next,month_next).empty?
           outs.merge!(fr.outs.query_value_hash(y,m)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
         else
-          stk_end.merge!(fr.stocks.query_value_hash(y,month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+          stk_end.merge!(fr.stocks.query_value_hash(year_next,month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
         end
       end
       retval = (stk_start.keys | ins.keys).sort.each_with_object({}) do |k,h|
