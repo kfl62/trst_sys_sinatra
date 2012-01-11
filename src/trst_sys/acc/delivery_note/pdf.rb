@@ -5,7 +5,14 @@ require 'prawn/measurement_extensions'
 firm        = TrstFirm.first
 client      = TrstPartner.find(@object.client_id)
 transporter = TrstPartner.find(@object.transporter_id)
-
+freights = @object.freights.each_with_object({}) do |f,h|
+  key = f.id_stats
+  if h[key].nil?
+    h[key] = [f.freight.name, f.freight.descript[0], f.qu]
+  else
+    h[key][2] += f.qu
+  end
+end
 pdf = Prawn::Document.new(
   :page_size => 'A4',
   :page_layout => :landscape,
@@ -58,7 +65,7 @@ end
 pdf.bounding_box([left + 110.mm,top + 14 ], :width => 20.mm, :height => 28) do
   pdf.move_down 6
   pdf.text "Cantitate", :style => :bold, :size => 8, :align => :center
-  pdf.text "-to-", :style => :bold, :size => 8, :align => :center
+  pdf.text "-kg-", :style => :bold, :size => 8, :align => :center
   pdf.stroke_bounds
   top -= 14
 end
@@ -66,8 +73,8 @@ pdf.bounding_box([left,top], :width => 80.mm, :height => 56) do
   # Freight
   pdf.move_down 4
   pdf.indent 10.mm do
-    @object.freights.each_with_index do |f,i|
-      pdf.text "#{i + 1}.) Deşeuri #{f.freight.name.downcase}", :style => :bold, :size => 8
+    freights.values.each_with_index do |f,i|
+      pdf.text "#{i + 1}.) Deşeuri #{f[0].downcase}", :style => :bold, :size => 8
     end
   end
   pdf.stroke_bounds
@@ -75,8 +82,8 @@ end
 pdf.bounding_box([left + 80.mm,top], :width => 30.mm, :height => 56) do
   # Cod
   pdf.move_down 4
-  @object.freights.each_with_index do |f,i|
-    pdf.text "-#{f.freight.descript[0]}-", :style => :bold, :size => 8, :align => :center
+  freights.values.each_with_index do |f,i|
+    pdf.text "-#{f[1]}-", :style => :bold, :size => 8, :align => :center
   end
   pdf.stroke_bounds
 end
@@ -84,8 +91,8 @@ pdf.bounding_box([left + 110.mm,top], :width => 20.mm, :height => 56) do
   # Quantity
   pdf.move_down 4
   pdf.indent 0,3.mm do
-    @object.freights.each_with_index do |f,i|
-      pdf.text "%.3f" % (f.qu / 1000).round(3), :style => :bold, :size => 8, :align => :right
+    freights.values.each_with_index do |f,i|
+      pdf.text "%.2f" % f[2].round(2), :style => :bold, :size => 8, :align => :right
     end
   end
   pdf.stroke_bounds
@@ -249,7 +256,7 @@ end
 pdf.bounding_box([left + 110.mm,top + 14 ], :width => 20.mm, :height => 28) do
   pdf.move_down 6
   pdf.text "Cantitate", :style => :bold, :size => 8, :align => :center
-  pdf.text "-to-", :style => :bold, :size => 8, :align => :center
+  pdf.text "-kg-", :style => :bold, :size => 8, :align => :center
   pdf.stroke_bounds
   top -= 14
 end
@@ -257,8 +264,8 @@ pdf.bounding_box([left,top], :width => 80.mm, :height => 56) do
   # Freight
   pdf.move_down 4
   pdf.indent 10.mm do
-    @object.freights.each_with_index do |f,i|
-      pdf.text "#{i + 1}.) Deşeuri #{f.freight.name.downcase}", :style => :bold, :size => 8
+    freights.values.each_with_index do |f,i|
+      pdf.text "#{i + 1}.) Deşeuri #{f[0].downcase}", :style => :bold, :size => 8
     end
   end
   pdf.stroke_bounds
@@ -266,8 +273,8 @@ end
 pdf.bounding_box([left + 80.mm,top], :width => 30.mm, :height => 56) do
   # Cod
   pdf.move_down 4
-  @object.freights.each_with_index do |f,i|
-    pdf.text "-#{f.freight.descript[0]}-", :style => :bold, :size => 8, :align => :center
+  freights.values.each_with_index do |f,i|
+    pdf.text "-#{f[1]}-", :style => :bold, :size => 8, :align => :center
   end
   pdf.stroke_bounds
 end
@@ -275,8 +282,8 @@ pdf.bounding_box([left + 110.mm,top], :width => 20.mm, :height => 56) do
   # Quantity
   pdf.move_down 4
   pdf.indent 0,3.mm do
-    @object.freights.each_with_index do |f,i|
-      pdf.text "%.3f" % (f.qu / 1000).round(3), :style => :bold, :size => 8, :align => :right
+    freights.values.each_with_index do |f,i|
+      pdf.text "%.2f" % f[2].round(2), :style => :bold, :size => 8, :align => :right
     end
   end
   pdf.stroke_bounds
