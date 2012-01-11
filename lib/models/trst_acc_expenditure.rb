@@ -97,7 +97,7 @@ class TrstAccExpenditure
     if TrstAccExpenditure.by_unit_id(unit_id).last.freights.empty?
       TrstAccExpenditure.by_unit_id(unit_id).last.destroy
     end unless TrstAccExpenditure.by_unit_id(unit_id).last.nil?
-    self.name = TrstAccExpenditure.by_unit_id(unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_000001"
+    self.name = TrstAccExpenditure.by_unit_id(unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}-000001"
     self.id_date = Date.today
   end
   # @todo
