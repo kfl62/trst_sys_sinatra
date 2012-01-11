@@ -38,9 +38,9 @@ class TrstAccFreightStock
     # @todo
     def query_value_hash(y,m)
       monthly(y,m).each_with_object({}) do |f,h|
-        k = "#{f.freight.id_stats}_#{"%05.2f" % f.pu}"
+        k = "#{f.id_stats}_#{"%05.2f" % f.pu}"
         if h[k].nil?
-          h[k] = [f.freight.id_stats, f.freight.name, f.pu, f.qu, (f.pu * f.qu).round(2)]
+          h[k] = [f.id_stats, f.freight.name, f.pu, f.qu, (f.pu * f.qu).round(2)]
         else
           h[k][3] += f.qu
           h[k][4] += (f.pu * f.qu).round(2)

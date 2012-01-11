@@ -53,8 +53,8 @@ class TrstAccFreightOut
     # @todo
     def query_value_hash(y,m)
       monthly(y,m).each_with_object({}) do |f,h|
-        k = "#{f.freight.id_stats}"
-        h[k].nil? ? h[k] = [f.freight.id_stats,f.qu] : h[k][1] += f.qu
+        k = "#{f.id_stats}"
+        h[k].nil? ? h[k] = [f.id_stats,f.qu] : h[k][1] += f.qu
       end
     end
   end # Class methods
