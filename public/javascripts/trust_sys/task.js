@@ -534,7 +534,11 @@ dojo.mixin(trst.task,{
       if (hd.getAttribute('data-to_unit') != null){
         path += '?to_unit=' + hd.getAttribute('data-to_unit')
       }
-      path += '&out_003=' + t[0].checked
+      if (t.length > 0){
+        path += '&out_003=' + t[0].checked
+      }else{
+        path += '&out_003=true'
+      }
       trst.task.init(id,'query',path)
     },
     invoiceInit: function(id){
