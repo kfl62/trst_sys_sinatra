@@ -35,17 +35,17 @@
           %tr.to-calculate
             %td
               %span.freight= s[1][0]
-              %input{:type => "hidden", :name => "[freights][#{i}][freight_id]", :value => TrstAccFreight.by_unit_id(@object.unit_id).by_id_stats(s[1][1]).first.id}
-              %input{:type => "hidden", :name => "[freights][#{i}][id_stats]", :value => s[1][1]}
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][freight_id]", :value => TrstAccFreight.by_unit_id(@object.unit_id).by_id_stats(s[1][1]).first.id}
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][id_stats]", :value => s[1][1]}
             %td
               %span.qu{:style => "width:80%"}= "%.2f" % s[1][2]
-              %input{:type => "hidden", :name => "[freights][#{i}][pu]", :value => s[1][2]}
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][pu]", :value => s[1][2]}
             %td
               %span.val{:style => "width:80%"}= "%.2f" % s[1][3]
-              %input{:type => "hidden", :name => "[freights][#{i}][qu]", :value => s[1][3]}
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][qu]", :value => s[1][3]}
             %td
               %span.val{:style => "width:80%"}= "%.2f" % s[1][4]
-              %input{:type => "hidden", :name => "[freights][#{i}][val]", :value => s[1][4]}
+              %input{:type => "hidden", :name => "[inv_freights][#{i}][val]", :value => s[1][4]}
         %tr.result
           %td.ce.st{:colspan => "3"}= "Total"
           %td
