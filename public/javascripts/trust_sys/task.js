@@ -642,7 +642,7 @@ dojo.mixin(trst.task,{
           dns.push(node.id)
         }
       )
-      path += '?from_unit=' + hidden_data.getAttribute('data-from_unit')
+      path += '?out_003=' + hidden_data.getAttribute('data-out_003')
       path += '&dn_ary=' + dns
       trst.task.init(task_id,'query', path);
     },

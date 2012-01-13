@@ -6,7 +6,7 @@
   bckgrnd = {"afdv" => "#FFBFF0","ca21" => "#DDDDDD","cb25" => "#DDDDDD","sa57" => "#FFFF99","o139" => "#FFFF99","r25b" => "#BFFFBF","rafn" => "#BFFFBF"}
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_grn_transfer.title')
-%span#hidden_data.hidden{:data => {:task_id => @task.id, :from_unit => from_unit}}
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :out_003 => out_003.to_s}}
 %table{:cellspacing => "0"}
   %thead
     - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_freights_p03(out_003).where(:unit_id.ne  => to_unit)
