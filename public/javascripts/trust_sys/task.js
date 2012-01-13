@@ -529,10 +529,12 @@ dojo.mixin(trst.task,{
     },
     grnTransferInit: function(id){
       var hd = dojo.byId('hidden_data'),
+          t  = dojo.query("[name='out_003']"),
           path = 'new';
-      if (hd.getAttribute('data-from_unit') != null){
-        path += '?from_unit=' + hd.getAttribute('data-from_unit')
+      if (hd.getAttribute('data-to_unit') != null){
+        path += '?to_unit=' + hd.getAttribute('data-to_unit')
       }
+      path += '&out_003=' + t[0].checked
       trst.task.init(id,'query',path)
     },
     invoiceInit: function(id){

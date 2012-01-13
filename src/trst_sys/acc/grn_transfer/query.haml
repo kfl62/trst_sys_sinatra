@@ -1,14 +1,16 @@
 :ruby
   to_unit = current_user.unit_id.nil? ? TrstFirm.unit_id_by_unit_slug('DPOA') : current_user.unit_id
-  from_unit = current_user.unit_id.nil? ? params[:from_unit] : TrstFirm.unit_id_by_unit_slug('DPOA')
+  from_unit = current_user.unit_id.nil? ? nil : TrstFirm.unit_id_by_unit_slug('DPOA')
+  out_003 = params[:out_003] == 'true' ? true : false
   dns = params[:dn_ary].nil? ? [] : params[:dn_ary].split(',')
-  bckgrnd = {"false" => "#DDDDDD", "true" => "#FFBFF0"}
+  bckgrnd = {"afdv" => "#FFBFF0","ca21" => "#DDDDDD","cb25" => "#DDDDDD","sa57" => "#FFFF99","o139" => "#FFFF99","r25b" => "#BFFFBF","rafn" => "#BFFFBF"}
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_grn_transfer.title')
 %span#hidden_data.hidden{:data => {:task_id => @task.id, :from_unit => from_unit}}
 %table{:cellspacing => "0"}
   %thead
-    - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_unit_id(from_unit)
+    - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_freights_p03(out_003).where(:unit_id.ne  => to_unit)
+    - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_unit_id(from_unit) if from_unit
       - if dns_select.empty?
         %tr
           %td
@@ -18,13 +20,13 @@
           %tr
         %td.select-dn{:style => "border-right: solid 1px #333333"}
           %input{:id => dn.id, :type => "checkbox", :checked  => dns.include?(dn.id.to_s), :onchange => "trst.task.acc.onSelectDnTransfer()"}
-          %span{:title => "#{dn.id_date}\n#{dn.name}\n#{dn.freights_list.join("\n")}", :style => "cursor:pointer; background-color: #{bckgrnd[dn.freights.first.freight.p03.to_s]}", :onclick => "trst.task.acc.toggleDnTransfer(this)"}= dn.id_main_doc
+          %span{:title => "#{dn.id_date}\n#{dn.name}\n#{dn.freights_list.join("\n")}", :style => "cursor:pointer; ; background-color: #{bckgrnd[dn.name.split('_')[1].downcase]}", :onclick => "trst.task.acc.toggleDnTransfer(this)"}= dn.id_main_doc
     %tr
       %td{:colspan => "8"}
         %br
         %span.small Legendă:
-        %span.small{:style => "border: solid 1px #333333; background-color: #{bckgrnd["false"]}"}= "fără 3%"
-        %span.small{:style => "border: solid 1px #333333; background-color: #{bckgrnd["true"]}"}= "cu 3%"
+        - TrstFirm.first.units.asc(:slug).each do |u|
+          %span.small{:style => "border: solid 1px #333333; background-color: #{bckgrnd[u.name[0].downcase]}"}= u.name[1]
         %br
         %span.small Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
   %tbody

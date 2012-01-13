@@ -1,20 +1,23 @@
 :ruby
-  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
+  unit_id = current_user.unit_id.nil? ? TrstFirm.unit_id_by_unit_slug('DPOA') : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_grn_transfer.title')
-%span#hidden_data.hidden{:data => {:from_unit => unit_id}}
-- if unit_id
-  - if current_user.unit_id.nil?
-    = partial('trst_sys/shared/select_unit')
-  - else
-    %span.small= t('trst_acc_grn_transfer.unit_chief')
-    %br
-    %span.small= "( <b>#{current_user.unit.slug}</b> )"
-  %table
-    %tfoot
-      %tr
-        %td{:class => "buttons_bottom", :colspan => "2"}
-          %span{:class => "button post", :onclick => "trst.task.acc.grnTransferInit('#{@task.id}')" }= "Selectare Avize"
-          %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+%span#hidden_data.hidden{:data => {:to_unit => unit_id}}
+- if current_user.unit_id.nil?
+  %p{:style => "vertical-align:middle"}
+    %span.small Tip marfă transferată:
+    %span.small | cu 3%
+    %input{:type => "radio", :name => "out_003", :checked => true}
+    %span.small | fără 3%
+    %input{:type => "radio", :name => "out_003"}
+  %hr
 - else
-  = partial('trst_sys/shared/select_unit')
+  %span.small= t('trst_acc_grn_transfer.unit_chief')
+  %br
+  %span.small= "( <b>#{current_user.unit.slug}</b> )"
+%table
+  %tfoot
+    %tr
+      %td{:class => "buttons_bottom", :colspan => "2"}
+        %span{:class => "button post", :onclick => "trst.task.acc.grnTransferInit('#{@task.id}')" }= "Selectare Avize"
+        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
