@@ -9,8 +9,8 @@
 %span#hidden_data.hidden{:data => {:task_id => @task.id, :out_003 => out_003.to_s}}
 %table{:cellspacing => "0"}
   %thead
-    - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_freights_p03(out_003).where(:unit_id.ne  => to_unit)
-    - dns_select = TrstAccDeliveryNote.asc(:id_date).intern.by_charged(false).by_unit_id(from_unit) if from_unit
+    - dns_select = TrstAccDeliveryNote.asc(:id_date).nin(false).by_charged(false).by_freights_p03(out_003).where(:unit_id.ne  => to_unit)
+    - dns_select = TrstAccDeliveryNote.asc(:id_date).nin(false).by_charged(false).by_unit_id(from_unit) if from_unit
       - if dns_select.empty?
         %tr
           %td

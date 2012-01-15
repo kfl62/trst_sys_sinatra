@@ -103,10 +103,11 @@
         - TrstFirm.first.units.asc(:slug).each do |unit|
           %td
             %span.ce.link{:id => unit.id, :onclick => "trst.task.destroy(); trst.task.init('#{@task.id}','query','?month=#{month}&year=#{year}&unit_id=' + this.id)"}= unit.name[0]
-      - @object.stats(year,month).each do |st| ; cols = st.length
+      - @object.stats(year,month).each do |st| ; cols = st.length - 1
         %tr
           %td= st.shift
+          - dif = st.pop
           - st.each_with_index do |c,i|
-            %td.ri{:class => (i == 3) && 'st' }= "%0.2f" % c
+            %td.ri{:class => (i == 3) && 'st', :title => (i == 3 && dif != 0) &&  "Transfer intern neoperat:\n\t%0.2f kg\nlipseşte la stoc DPOA!" % dif, :style =>  (i == 3 && dif != 0) && 'color:red;cursor:pointer'}= "%0.2f" % c
       %tr
         %td{:colspan => cols} &nbsp;

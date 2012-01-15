@@ -2,7 +2,7 @@
   today = Date.today
   year = params[:year].nil? ? today.year : params[:year].to_i
   month = params[:month].nil? ? today.month : params[:month].to_i
-  dns = TrstAccDeliveryNote.asc(:id_date).monthly(year,month).where(:charged => false).intern(false)
+  dns = TrstAccDeliveryNote.asc(:id_date).monthly(year,month).where(:charged => false).nin
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_invoice.title')
 %p
