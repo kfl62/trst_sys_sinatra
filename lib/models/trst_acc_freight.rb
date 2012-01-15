@@ -56,15 +56,15 @@ class TrstAccFreight
       m ||= Date.today.month
       retval = []
       asc(:id_stats).each do |f|
-        stk = f.stocks.monthly(y,m).sum(:qu) || 0
-        f_in  = f.ins.monthly(y,m).sum(:qu) || 0
-        f_out = f.outs.monthly(y,m).sum(:qu) || 0
+        stk   = f.stocks.sum_qu(y,m)
+        f_in  = f.ins.sum_qu(y,m)
+        f_out = f.outs.sum_qu(y,m)
         retval << [f.id, f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
       end
       retval
     end
     # @todo
-    def query_value(y = nil, m = nil)
+    def query_value(y = nil, m = nil, firm = true)
       y ||= Date.today.year
       m ||= Date.today.month
       month_next =  m == 12 ? 1 : m + 1
@@ -72,9 +72,17 @@ class TrstAccFreight
       stk_start, ins, outs, stk_end = {}, {}, {}, {}
       asc(:id_stats).each do |fr|
         stk_start.merge!(fr.stocks.query_value_hash(y,m)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
-        ins.merge!(fr.ins.query_value_hash(y,m)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+        if firm
+          ins.merge!(fr.ins.query_value_hash(y,m)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+        else
+          ins.merge!(fr.ins.nin.query_value_hash(y,m)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
+        end
         if m == Date.today.month || fr.stocks.query_value_hash(year_next,month_next).empty?
-          outs.merge!(fr.outs.query_value_hash(y,m)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
+          if firm
+            outs.merge!(fr.outs.query_value_hash(y,m)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
+          else
+            outs.merge!(fr.outs.nin.query_value_hash(y,m)){|k,o,n| k = [ n[0], o[1].nil? ? n[1] : o[1] + n[1] ]}
+          end
         else
           stk_end.merge!(fr.stocks.query_value_hash(year_next,month_next)){|k,o,n| k = [ n[0], n[1], n[2], o[3].nil? ? n[3] : o[3] + n[3], o[4].nil? ? n[4] : o[4] + n[4] ]}
         end
@@ -101,20 +109,23 @@ class TrstAccFreight
         TrstFirm.unit_ids.each do |u|
           f = by_unit_id(u).by_id_stats(ids[0]).first
           if f
-            pos_stk = f.stocks.monthly(y,m).sum(:qu) || 0
-            pos_ins = f.ins.monthly(y,m).sum(:qu) || 0
-            pos_out = f.outs.monthly(y,m).sum(:qu) || 0
-            pos_end = pos_stk.round(2) + pos_ins.round(2) - pos_out.round(2)
+            pos_stk = f.stocks.sum_qu(y,m)
+            pos_ins = f.ins.sum_qu(y,m)
+            pos_out = f.outs.sum_qu(y,m)
+            pos_end = pos_stk + pos_ins - pos_out
+            pos_ins_nin = f.ins.nin.sum_qu(y,m)
+            pos_out_nin = f.outs.nin.sum_qu(y,m)
+            pos_end_nin = pos_stk + pos_ins_nin - pos_out_nin
             tot_stk += pos_stk.round(2)
-            tot_ins += pos_ins.round(2)
-            tot_out += pos_out.round(2)
-            tot_end += pos_end.round(2)
+            tot_ins += pos_ins_nin.round(2)
+            tot_out += pos_out_nin.round(2)
+            tot_end += pos_end_nin.round(2)
             part[i] << pos_end.round(2)
           else
             part[i] << 0
           end
         end
-        retval << [ids[1], tot_stk.round(2), tot_ins.round(2), tot_out.round(2), tot_end.round(2), part[i]].flatten
+        retval << [ids[1], tot_stk.round(2), tot_ins.round(2), tot_out.round(2), tot_end.round(2), part[i], (tot_end - part[i].sum).round(2)].flatten
         tot_stk, tot_ins, tot_out, tot_end = 0, 0, 0, 0
       end
       retval
