@@ -9,6 +9,7 @@ class TrstAccExpenditure
 
   field :name,        :type => String
   field :id_date,     :type => Date
+  field :id_intern,   :type => Boolean,   :default => false
   field :sum_003,     :type => Float,     :default => 0.00
   field :sum_016,     :type => Float,     :default => 0.00
   field :sum_100,     :type => Float,     :default => 0.00

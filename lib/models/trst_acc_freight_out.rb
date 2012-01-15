@@ -9,6 +9,7 @@ class TrstAccFreightOut
 
   field :id_date,       :type => Date
   field :id_stats,      :type => String
+  field :id_intern,     :type => Boolean,   :default => false
   field :um,            :type => String,    :default => "kg"
   field :pu,            :type => Float,     :default => 0.00
   field :pu_invoice,    :type => Float,     :default => 0.00
@@ -37,9 +38,8 @@ class TrstAccFreightOut
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
-    def intern(firm = true)
-      ids = all.each_with_object([]){|f,a| a << f.id if f.doc.client.firm == firm}
-      where(:_id.in => ids)
+    def nin(nin = true)
+      where(:id_intern => !nin)
     end
     # @todo
     def by_id_stats_and_pu(key)
@@ -57,6 +57,10 @@ class TrstAccFreightOut
         h[k].nil? ? h[k] = [f.id_stats,f.qu] : h[k][1] += f.qu
       end
     end
+    # @todo
+    def sum_qu(y,m)
+      monthly(y,m).sum(:qu) || 0
+    end
   end # Class methods
   # @todo
   def unit
@@ -66,8 +70,9 @@ class TrstAccFreightOut
   protected
   # @todo
   def update_self
-    self.id_date = doc.id_date
+    self.id_date   = doc.id_date
     self.val = (pu * qu).round(2)
+    self.id_intern = true if doc.id_intern
   end
   # @todo
   def handle_stock_remove

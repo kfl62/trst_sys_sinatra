@@ -9,6 +9,7 @@ class TrstAccFreightIn
 
   field :id_date,     :type => Date
   field :id_stats,    :type => String
+  field :id_intern,   :type => Boolean,   :default => false
   field :um,          :type => String,    :default => "kg"
   field :pu,          :type => Float,     :default => 0.00
   field :qu,          :type => Float,     :default => 0.00
@@ -36,15 +37,8 @@ class TrstAccFreightIn
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
-    def intern(firm = true)
-      ids = all.each_with_object([]) do |f,a|
-        if f.doc_grn
-          a << f.id if f.doc.client.firm == firm
-        else
-          a << f.id
-        end
-      end
-      where(:_id.in => ids)
+    def nin(nin = true)
+      where(:id_intern => !nin)
     end
     # @todo
     def keys
@@ -71,6 +65,10 @@ class TrstAccFreightIn
         end
       end
     end
+    # @todo
+    def sum_qu(y,m)
+      monthly(y,m).sum(:qu) || 0
+    end
   end
 
   # @todod
@@ -85,7 +83,8 @@ class TrstAccFreightIn
   protected
   # @todo
   def update_self
-    self.id_date = doc_exp.nil? ?  doc_grn.id_date : doc_exp.id_date
+    self.id_date   = doc_exp.nil? ? doc_grn.id_date : doc_exp.id_date
+    self.id_intern = true if doc.id_intern
     self.val = (pu * qu).round(2)
   end
   # @todo

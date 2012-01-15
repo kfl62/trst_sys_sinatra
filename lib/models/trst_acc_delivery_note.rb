@@ -9,6 +9,7 @@ class TrstAccDeliveryNote
 
   field :name,          :type => String
   field :id_date,       :type => Date
+  field :id_intern,     :type => Boolean,   :default => false
   field :id_main_doc,   :type => String
   field :id_delegate_c, :type => String
   field :id_delegate_t, :type => String
@@ -25,7 +26,7 @@ class TrstAccDeliveryNote
   belongs_to :doc_grn,    :class_name => "TrstAccGrn",        :inverse_of => :delivery_notes
   belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :delivery_notes
 
-  before_create :increment_name_date
+  before_create  :increment_name_date
   before_destroy :destroy_freights
 
   class << self
@@ -51,8 +52,8 @@ class TrstAccDeliveryNote
       where(:unit_id => u).asc(:name)
     end
     # todo
-    def intern(firm = true)
-      where(:client_id.in => TrstPartner.intern(firm).collect{|p| p.id})
+    def nin(nin = true)
+      where(:id_intern => !nin)
     end
     # #todo
     def by_client_id(id)
@@ -133,6 +134,7 @@ class TrstAccDeliveryNote
     self.name = TrstAccDeliveryNote.where(:unit_id => unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEA3_001"
     self.id_main_doc = "#{TrstFirm.first.name[0][0..2].upcase}-" rescue "#{unit.firm.name[0][0..2].upcase}-"
     self.id_date = Date.today
+    self.id_intern = true if client.firm
   end
   # @todo
   def destroy_freights

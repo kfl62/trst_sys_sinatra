@@ -9,6 +9,7 @@ class TrstAccFreightStock
 
   field :id_date,       :type => Date
   field :id_stats,      :type => String
+  field :id_intern,     :type => Boolean,   :default => false
   field :um,            :type => String,    :default => "kg"
   field :pu,            :type => Float,     :default => 0.00
   field :qu,            :type => Float,     :default => 0.00
@@ -47,6 +48,10 @@ class TrstAccFreightStock
         end
       end
    end
+    # @todo
+    def sum_qu(y,m)
+      monthly(y,m).sum(:qu) || 0
+    end
   end
 
   protected
