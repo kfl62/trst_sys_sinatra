@@ -9,6 +9,7 @@ class TrstAccCache
 
   field :name,          :type => String
   field :id_date,       :type => Date,      :default => Date.new(Time.now.year,Time.now.month,Time.now.day)
+  field :id_intern,     :type => Boolean,   :default => false
   field :money_in,      :type => Float,     :default => 0.00
   field :money_out,     :type => Float,     :default => 0.00
   field :money_stock,   :type => Float,     :default => 0.00

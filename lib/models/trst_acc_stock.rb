@@ -9,6 +9,7 @@ class TrstAccStock
 
   field :name,        :type => String,    :default => "Stock_unit_month"
   field :id_date,     :type => Date
+  field :id_intern,   :type => Boolean,   :default => false
   field :expl,        :type => String,    :default => "Stock initial"
 
   has_many   :freights,   :class_name => "TrstAccFreightStock", :inverse_of => :doc

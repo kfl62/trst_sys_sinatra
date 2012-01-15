@@ -9,6 +9,7 @@ class TrstAccCassation
 
   field :name,              :type => String
   field :id_date,           :type => Date
+  field :id_intern,         :type => Boolean,     :default => false
   field :text,              :type => String
   field :val,               :type => Float,       :default => 0.0
 

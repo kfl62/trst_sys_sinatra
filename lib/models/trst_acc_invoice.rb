@@ -9,6 +9,7 @@ class TrstAccInvoice
 
   field :name,              :type => String
   field :id_date,           :type => Date
+  field :id_intern,         :type => Boolean,     :default => false
   field :id_main_doc,       :type => String
   field :id_delegate_c,     :type => String
   field :sum,               :type => Float,       :default => 0.00
