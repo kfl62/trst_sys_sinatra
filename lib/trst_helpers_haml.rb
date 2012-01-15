@@ -241,6 +241,7 @@ module Trst
           end
           target_id = "#{target_id.to_s}?client_id=#{params[:client_id]}&transporter_id=#{params[:transporter_id]}" if params[:client_id]
           target_id = "#{target_id.to_s}?supplier_id=#{params[:supplier_id]}" if params[:supplier_id]
+          target_id = "#{target_id.to_s}?partner_type=#{params[:partner_type]}" if params[:partner_type]
         end
         retval = "trst.task.init('#{id}','#{verb}','#{target_id}')"
         retval = 'trst.task.destroy()' if button == 'cancel'
