@@ -36,6 +36,15 @@ ro:
           Vă rugăm ca cât mai repede să completaţi şi celelate<br>
           date, editând furnizorul <b>Editare partener</b><br>
           Datele delegatului se vor întroduce la completarea NIR-lui.
+      client:
+        title: Adăugare (sumară) client
+        get: |
+          Clientul <b>%{partner}</b> a fost adăugat.<br>
+          Datele introduse sunt cele necesare completării facturii.<br>
+          Vă rugăm ca cât mai repede să completaţi şi celelate<br>
+          date, editând clientul <b>Editare partener</b><br>
+          Datele delegatului se vor întroduce la completarea facturii.
+      error: "Eroare sunaţi la administratorul de sistem!"
 en:
   trst_partner:
     select: "Selectaţi firma"
