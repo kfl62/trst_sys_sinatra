@@ -165,7 +165,7 @@ class TrstSysTsk < Sinatra::Base
     end
     if params[:inv_freights]
       params[:inv_freights].values.each do |v|
-        o = @object.freights.find_or_create_by(:id_stats => v["id_stats"])
+        o = @object.freights.find_or_create_by(:id => v["id"], :id_stats => v["id_stats"])
         o.update_attributes v unless o.nil?
       end
       @object.update_delivery_notes(true)
