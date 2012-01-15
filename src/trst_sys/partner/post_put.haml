@@ -1,7 +1,8 @@
 :ruby
   unit_id = current_user.unit_id || session[:unit_id]
+  partner_not = params[:partner_type] == 'client' ? 'supplier' : 'client'
 %p.close{:onclick => "trst.task.destroy()"}
-%p.task_title= t('trst_partner.quick.title.supplier')
+%p.task_title= t("trst_partner.quick.#{params[:partner_type]}.title")
 -if action == 'put'
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
@@ -42,7 +43,7 @@
           %td Număr
           %td
             %input{:name => "[addresses][nr]"}
-        %input{:type => "hidden", :name => "[trst_partner][client]", :value => "false"}
+        %input{:type => "hidden", :name => "[trst_partner][#{partner_not}]", :value => "false"}
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "2"}

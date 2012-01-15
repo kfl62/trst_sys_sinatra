@@ -13,7 +13,7 @@
           - unless TrstPartner.suppliers.empty?
             - TrstPartner.suppliers.each do |supplier|
               %option{:value => supplier.id}= supplier.name[1]
-        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartner.find")}','post','new')"}= t('trst_acc_grn.filter.add_supplier')
+        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartner.find")}','post','new?partner_type=supplier')"}= t('trst_acc_grn.filter.add_supplier')
   %tfoot
     %tr
       %td{:class => "buttons_bottom"}

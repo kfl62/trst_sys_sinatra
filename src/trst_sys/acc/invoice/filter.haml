@@ -18,7 +18,7 @@
             - TrstPartner.clients.intern(false).each do |client|
               %option{:value => client.id}= client.name[1]
       %td{:style => "vertical-align:middle"}
-        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartner.find")}','post','new')"}= t('trst_acc_invoice.filter.add_client')
+        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstPartner.find")}','post','new?partner_type=client')"}= t('trst_acc_invoice.filter.add_client')
     %tr
       %td{:style => "vertical-align:middle"}
         %span.small Luna ptr. facturare
