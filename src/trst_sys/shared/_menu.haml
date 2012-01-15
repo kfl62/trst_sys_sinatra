@@ -3,8 +3,9 @@
     %li
       - unless chapter.order == 5 && !current_user.admin?
         %a{:id => "chapter_#{chapter.id}", :href => File.join(lang_path,controller_path,chapter.path)}= chapter.name
-      - if chapter.pages.length > 0 # TODO show them based on permissions
+      - if chapter.pages.length > 0 && chapter.pages.where(:access_lvl.gte => current_user.permission_lvl).count > 0
         %ul
-          - chapter.pages.each do |page|
-            %li
-              %a{:id  => "page_#{page.id}", :href => File.join(lang_path,controller_path,page.path)}= page.name
+          - chapter.pages.asc(:order).each do |page|
+            - if current_user.permission_lvl <= page.access_lvl
+              %li
+                %a{:id  => "page_#{page.id}", :href => File.join(lang_path,controller_path,page.path)}= page.name
