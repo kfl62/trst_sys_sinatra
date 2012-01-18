@@ -11,6 +11,7 @@ class TrstFirmUnit
   field :slug,          :type => String
   field :chief,         :type => String,    :default => "Lastname Firstname"
   field :env_auth,      :type => String
+  field :main,          :type => Boolean,   :default => false
 
   embedded_in :firm,      :class_name => "TrstFirm",            :inverse_of => :units
   has_one     :user,      :class_name => "TrstUser",            :inverse_of => :unit
