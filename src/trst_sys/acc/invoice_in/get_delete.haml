@@ -1,0 +1,63 @@
+%p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@task,action)
+-if action == 'get'
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td{:colspan => "4"}
+          %span.small{:style => "color:#999999"}= " Cu nr. intern #{@object.name}"
+          %br
+          %span{:style => "display:block;max-width:400px"}= " - a fost operată factura nr. <b>#{@object.id_main_doc}/#{@object.id_date.to_s}</b> către <b>#{@object.client.name[2]}</b> în baza avizelor de expediţie:"
+          %span{:style => "display:block;max-width:400px;padding-left:5px"}= @object.delivery_notes.each_with_object([]){|dn,a| a << dn.id_main_doc}.join(', ')
+          %span{:style => "display:block;max-width:400px"}= "cu următorul conţinut:"
+          %br
+    %tbody.inner
+      %tr
+        %td Material
+        %td PU
+        %td Cant
+        %td Val
+      - @object.freights.each do |f|
+        %tr
+          %td
+            %span.freight= f.name
+          %td
+            %spam.pu= "%.2f" % f.pu
+          %td
+            %span.qu= "%.2f" % f.qu
+          %td
+            - value = (f.pu * f.qu).round(2)
+            %span.val= "%.2f" % value
+      %tr
+        %td.ce.em.st{:colspan => "3"} Total
+        %td
+          %span.val= "%.2f" % @object.sum
+    %tfoot
+      %tr
+        %td{:colspan => "4"}
+          -if @object.payment_doc.empty?
+            %span= "Factura nu este plătită! Termen: #{@object.payment_deadline.to_s}"
+          -else
+            %span= @object.payment_doc
+      %tr
+        %td{:class => "buttons_bottom", :colspan => "4"}
+          %form{:id  => "xhr_#{action}"}
+          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
+          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+      %tr
+        %td.footer_note{:colspan => "4"}= "Notă:<br>&nbsp;&nbsp;\"Generare pdf\" numai în cazul în care doriţi NIR ptr. client"
+- else
+  %table
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p= t("gen_msg.#{action}", :data => "#{@object.class.to_s} -> #{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
+              =t("button.#{button}")
