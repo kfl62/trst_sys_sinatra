@@ -88,6 +88,7 @@ class TrstAccFreightOut
       else
         sk = fs.asc(:pu).collect{|f| f.pu}
         sk.delete(freight.pu).nil? ? sk : sk.push(freight.pu)
+        sk.delete(0).nil? ? sk : sk.push(0) if unit.main?
         sk.each do |spu|
           f = fs.where(:pu => spu).first
           if out > f.qu
