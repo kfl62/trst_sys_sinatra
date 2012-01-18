@@ -603,7 +603,7 @@ dojo.mixin(trst.task,{
       tr.children[3].children[0].focus()
       tr.children[3].children[0].select()
       tr.children[3].children[2].value = d.item.id_stats
-   },
+    },
     onSelectDelegate: function(node){
       if (selectedValue(node) == 'null'){
         alert("Nu este o opţiune validă!")
