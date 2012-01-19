@@ -5,7 +5,7 @@ gem "rack"
 gem "rack-rewrite", :require => "rack/rewrite"
 gem "haml"
 gem "compass"
-gem "mongoid"
+gem "mongoid", "~>2.3.0"
 gem "bson_ext"
 gem 'prawn'
 gem "rdiscount"
