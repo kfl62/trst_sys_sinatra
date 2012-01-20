@@ -28,13 +28,21 @@ class TrstAccFreightStock
       where(:id_date => Date.new(y,m,1))
     end
     # @todo
-    def keys
-      all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort!
+    def keys(with_pu = true)
+      if with_pu
+        all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort!
+      else
+        all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
+      end
     end
     # @todo
     def by_id_stats_and_pu(key)
       id_stats, pu = key.split('_')
-      where(:id_stats => id_stats).and(:pu => pu.to_f)
+      if pu
+        where(:id_stats => id_stats).and(:pu => pu.to_f)
+      else
+        where(:id_stats => id_stats)
+      end
     end
     # @todo
     def query_value_hash(y,m)
