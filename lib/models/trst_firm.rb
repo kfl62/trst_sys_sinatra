@@ -35,6 +35,10 @@ class TrstFirm
     def unit_ids
       first.units.asc(:slug).map{|u| u.id}
     end
+    # @todo
+    def pos(s)
+      unit_by_unit_id(unit_id_by_unit_slug(s))
+    end
   end
 
   # @todo
