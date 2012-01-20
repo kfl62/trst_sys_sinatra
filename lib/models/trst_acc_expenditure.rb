@@ -58,14 +58,14 @@ class TrstAccExpenditure
     # @todo
     def check_sum
       retval = []
-      all.each do |a|
+      retval = all.each_with_object([]) do |app,a|
         f_sum_100 = 0
-        a.freights.each do |f|
+        app.freights.each do |f|
           f_sum_100 += (f.pu * f.qu).round(2)
         end
-        retval.push [a.name, (a.sum_100 - f_sum_100).round(2)] if a.sum_100.round(2) != f_sum_100.round(2)
+        a << "#{app.unit.slug} -#{app.name.rjust(16)} #{app.id_date.to_s} #{("%0.2f" % app.sum_100).rjust(10)} #{("%0.2f" % f_sum_100).rjust(10)} #{("%0.2f" % (app.sum_100 - f_sum_100)).rjust(10)}" if app.sum_100.round(2) != f_sum_100.round(2)
       end
-      retval
+      puts retval.empty? ? "Ok" : retval.join("\n")
     end
     # @todo
     def query(pn, m = nil)
