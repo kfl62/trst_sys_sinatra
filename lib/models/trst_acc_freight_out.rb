@@ -78,6 +78,7 @@ class TrstAccFreightOut
   def handle_stock_remove
     if id_date.month == Date.today.month
       out = self.qu
+      last_pu = freight.ins.last.pu == 0 ? freight.pu : freight.ins.last.pu
       stck = unit.current_stock
       fs = stck.freights.where(:id_stats => id_stats)
       if fs.count == 1
@@ -87,7 +88,7 @@ class TrstAccFreightOut
         f.save
       else
         sk = fs.asc(:pu).collect{|f| f.pu}
-        sk.delete(freight.pu).nil? ? sk : sk.push(freight.pu)
+        sk.delete(last_pu).nil? ? sk : sk.push(last_pu)
         sk.delete(0).nil? ? sk : sk.push(0) if unit.main?
         sk.each do |spu|
           f = fs.where(:pu => spu).first
