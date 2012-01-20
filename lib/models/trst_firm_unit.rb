@@ -27,6 +27,22 @@ class TrstFirmUnit
     stocks.where(:id_date  => Date.new(2000,1,31)).first
   end
   # @todo
+  def current_stock_check(all = false, with_pu = false)
+    y = Date.today.year
+    m = Date.today.month
+    keys   = self.current_stock.freights.keys(with_pu)
+    retval = keys.each_with_object([]) do |k,a|
+      f = self.current_stock.freights.by_id_stats_and_pu(k)[0].freight
+      f_st = f.stocks.by_id_stats_and_pu(k).sum_qu(y,m)
+      f_in = f.ins.by_id_stats_and_pu(k).sum_qu(y,m)
+      f_ou = f.outs.by_id_stats_and_pu(k).sum_qu(y,m)
+      f_cs = self.current_stock.freights.by_id_stats_and_pu(k).sum(:qu) || 0
+      diff = (f_st + f_in - f_ou - f_cs).round(2)
+      a << "#{k} #{("%0.2f" % (f_st + f_in - f_ou)).rjust(10)} #{("%0.2f" % f_cs).rjust(10)} #{("%0.2f" % diff).rjust(10)}" if (diff != 0 or all)
+    end
+    puts retval.empty? ? "Ok" : retval.join("\n")
+  end
+  # @todo
   def table_data
     [
       {:css => "normal",:name => "name,",:label => I18n.t("trst_firm_unit.name_sh"),:value => name[0]},
