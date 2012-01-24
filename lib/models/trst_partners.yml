@@ -27,6 +27,7 @@ ro:
     client: "Beneficiar"
     supplier: "Furnizor"
     transporter: "Transportator"
+    p03: "Reţinem 3% ?"
     quick:
       supplier:
         title: Adăugare (sumară) furnizor

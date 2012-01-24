@@ -15,6 +15,7 @@ class TrstPartner
   field :supplier,            :type => Boolean,       :default => true
   field :transporter,         :type => Boolean,       :default => true
   field :firm,                :type => Boolean,       :default => false
+  field :p03,                 :type => Boolean,       :default => true
 
   embeds_many :addresses,       :class_name => "TrstPartnerAddress"
   embeds_many :persons,         :class_name => "TrstPartnerContactPerson"
@@ -85,7 +86,8 @@ class TrstPartner
       {:css => "normal",:name => "about,descript",:label => I18n.t("trst_partner.about.descript"),:value => about["descript"]},
       {:css => "boolean",:name => "client",:label => I18n.t("trst_partner.client"),:value => client},
       {:css => "boolean",:name => "supplier",:label => I18n.t("trst_partner.supplier"),:value => supplier},
-      {:css => "boolean",:name => "transporter",:label => I18n.t("trst_partner.transporter"),:value => transporter}
+      {:css => "boolean",:name => "transporter",:label => I18n.t("trst_partner.transporter"),:value => transporter},
+      {:css => "boolean",:name => "p03",:label => I18n.t("trst_partner.p03"),:value => p03}
     ]
   end
 
