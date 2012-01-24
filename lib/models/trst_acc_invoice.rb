@@ -38,6 +38,10 @@ class TrstAccInvoice
       me = m.to_i == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
       where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
+     # todo
+    def nin(nin = true)
+      where(:id_intern => !nin)
+    end
   end # Class methods
   # @todo
   def delegate
