@@ -34,15 +34,18 @@
         %td.ce= t('trst_acc_cache.query.in')
         %td.ce= t('trst_acc_cache.query.out')
         %td.ce= t('trst_acc_cache.query.end')
+        %td.ce= "Control" if current_user.login_name == 'andrea75'
       %tr
         %td.ce{:colspan => "3"}= t('trst_acc_cache.query.stk')
         %td.ri= "%0.2f" % (stk = TrstAccCache.by_unit_id(unit_id).monthly(year,month).sum(:money_stock) || 0)
+        %td.ri= "Valoare"
       - @object.by_unit_id(unit_id).query(year,month).each do |d|
         %tr
           %td= d[0]
           %td.ri= "%0.2f" % d[1]
           %td.ri= "%0.2f" % d[2]
           %td.ri= "%0.2f" % d[3]
+          %td.ri= "%0.2f" % d[4] if current_user.login_name == 'andrea75'
     %tfooter
       %tr
         %td.footer_note{:colspan => "4"}= t('trst_acc_cache.footer_note_query')
