@@ -17,7 +17,8 @@ class TrstPartnersPf
   has_many :apps, :class_name => "TrstAccExpenditure", :inverse_of => :client
 
   validates_uniqueness_of :id_pn
-  before_save :titleize_fields
+  before_create :tmp_pn
+  before_save   :titleize_fields
 
   scope :pn,   ->(pn) { where(:id_pn => pn) }
 
@@ -26,7 +27,7 @@ class TrstPartnersPf
     def auto_search(u = nil)
       pfs = []
       all.asc(:name_last, :name_first).each do |pf|
-        if pf.id_pn.nil? || pf.id_pn.empty?
+        if pf.id_pn.nil? || pf.id_pn.empty? || pf.id_pn.include?("tmp")
           pf.delete if (pf.created_at + 300) < DateTime.now
         else
           label = "#{pf.id_pn} | #{pf.name_full}"
@@ -82,7 +83,7 @@ class TrstPartnersPf
   # @todo
   def table_data
     [
-      {:css => "normal",:name => "id_pn",:label => I18n.t("trst_partners_pf.id_pn"),:value => id_pn},
+      {:css => "normal",:name => "id_pn",:label => I18n.t("trst_partners_pf.id_pn"),:value => ""},
       {:css => "normal",:name => "name_last",:label => I18n.t("trst_partners_pf.name_last"),:value => name_last},
       {:css => "normal",:name => "name_first",:label => I18n.t("trst_partners_pf.name_first"),:value => name_first},
       {:css => "normal",:name => "identities,id_sr",:label => I18n.t("trst_partners_pf.identities.id_sr"),:value => identities["id_sr"]},
@@ -108,6 +109,10 @@ class TrstPartnersPf
     }
   end
   protected
+  # @todo
+  def tmp_pn
+    self.id_pn = "tmp_#{Random.new.rand(10..100)}"
+  end
   # @todo
   def titleize_fields
     self.name_last = name_last.titleize if name_last
