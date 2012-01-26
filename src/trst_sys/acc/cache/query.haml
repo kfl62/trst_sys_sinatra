@@ -34,11 +34,10 @@
         %td.ce= t('trst_acc_cache.query.in')
         %td.ce= t('trst_acc_cache.query.out')
         %td.ce= t('trst_acc_cache.query.end')
-        %td.ce= "Control" if current_user.login_name == 'andrea75'
+        %td.ce{:rowspan => "2"}= "Recepţie<br>(Valoare)" if current_user.login_name == 'andrea75'
       %tr
         %td.ce{:colspan => "3"}= t('trst_acc_cache.query.stk')
         %td.ri= "%0.2f" % (stk = TrstAccCache.by_unit_id(unit_id).monthly(year,month).sum(:money_stock) || 0)
-        %td.ri= "Valoare"
       - @object.by_unit_id(unit_id).query(year,month).each do |d|
         %tr
           %td= d[0]
