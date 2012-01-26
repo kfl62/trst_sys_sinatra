@@ -51,15 +51,18 @@ class TrstAccCache
       unit_id = first.unit_id
       retval, tot_out = [], 0
       tot_in = monthly(y,m).sum(:money_stock) || 0
+      tot_tot = 0
       (1..days_in_month).each do |i|
         day = Date.new(y,m,i).to_s
         sum_in  = daily(day).sum(:money_in) || 0.0
         tot_in += sum_in
         sum_out = TrstAccExpenditure.by_unit_id(unit_id).daily(day).sum(:sum_out) || 0.0
         tot_out += sum_out
-        retval << [day, sum_in.round(2), sum_out.round(2), (tot_in - tot_out).round(2)] unless (sum_in == 0 && sum_out ==0)
+        sum_tot = TrstAccExpenditure.by_unit_id(unit_id).daily(day).sum(:sum_100) || 0.0
+        tot_tot += sum_tot
+        retval << [day, sum_in.round(2), sum_out.round(2), (tot_in - tot_out).round(2), sum_tot.round(2)] unless (sum_in == 0 && sum_out ==0)
       end
-      retval.push(["Total", tot_in.round(2), tot_out.round(2), (tot_in - tot_out).round(2)])
+      retval.push(["Total", tot_in.round(2), tot_out.round(2), (tot_in - tot_out).round(2),tot_tot.round(2)])
       retval
     end
     # @todo
