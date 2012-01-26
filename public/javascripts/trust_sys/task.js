@@ -808,7 +808,7 @@ dojo.mixin(trst.task,{
         dijit.byId("delegate_id_pn").destroy();
       var valid = new dijit.form.ValidationTextBox({
         name: node.name,
-        value: node.value,
+        value: "",
         required: true,
         trim: true,
         selectOnClick: true,
