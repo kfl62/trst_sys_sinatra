@@ -91,6 +91,12 @@ class TrstAccExpenditure
       r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
     end
   end
+  # @todo
+  def change_date(y,m,d)
+    t = Time.utc(y,m,d)
+    set(:id_date,t)
+    freights.each{|f| f.set(:id_date,t)}
+  end
 
   protected
   # @todo
