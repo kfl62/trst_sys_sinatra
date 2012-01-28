@@ -83,7 +83,7 @@ class TrstPartnersPf
   # @todo
   def table_data
     [
-      {:css => "normal",:name => "id_pn",:label => I18n.t("trst_partners_pf.id_pn"),:value => ""},
+      {:css => "normal",:name => "id_pn",:label => I18n.t("trst_partners_pf.id_pn"),:value => id_pn},
       {:css => "normal",:name => "name_last",:label => I18n.t("trst_partners_pf.name_last"),:value => name_last},
       {:css => "normal",:name => "name_first",:label => I18n.t("trst_partners_pf.name_first"),:value => name_first},
       {:css => "normal",:name => "identities,id_sr",:label => I18n.t("trst_partners_pf.identities.id_sr"),:value => identities["id_sr"]},
