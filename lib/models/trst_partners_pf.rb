@@ -60,9 +60,10 @@ class TrstPartnersPf
   # @todo
   def name_stats
     n = self.name[0..17] << (self.name.length > 17 ? '.' : '')
+    t = "Str.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"
+    txt = t[0..35] << (t.length > 35 ? '.' : '')
     "#{n} (#{id_pn})" +
-    "\n" +
-    "Str.#{address["street"]} nr.#{ address["nr"]},#{address["city"]}"[0..40]
+    "\n#{txt}"
   end
   # @todo
   def pn_error?
