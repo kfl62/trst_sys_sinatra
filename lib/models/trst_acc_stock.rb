@@ -45,7 +45,7 @@ class TrstAccStock
   # @todo
   def freights_init
     TrstFirm.unit_by_unit_id(self.unit_id).current_stock.freights.asc(:id_stats,:pu).each do |f|
-      self.freights << f.clone unless f.qu == 0
+      self.freights << f.clone unless (f.qu == 0 && f.pu != f.freight.pu)
     end
   end
   # @todo
