@@ -38,7 +38,7 @@ class TrstFirmUnit
       f_ou = f.outs.by_id_stats_and_pu(k).sum_qu(y,m)
       f_cs = self.current_stock.freights.by_id_stats_and_pu(k).sum(:qu) || 0
       diff = (f_st + f_in - f_ou - f_cs).round(2)
-      a << "#{k} #{("%0.2f" % (f_st + f_in - f_ou)).rjust(10)} #{("%0.2f" % f_cs).rjust(10)} #{("%0.2f" % diff).rjust(10)}" if (diff != 0 or all)
+      a << "#{k} #{("%0.2f" % f_st).rjust(10)} #{("%0.2f" % f_in).rjust(10)} #{("%0.2f" % f_ou).rjust(10)} #{("%0.2f" % (f_st + f_in - f_ou)).rjust(10)} #{("%0.2f" % f_cs).rjust(10)} #{("%0.2f" % diff).rjust(10)}" if (diff != 0 or all)
     end
     puts retval.empty? ? "Ok" : retval.join("\n")
   end
