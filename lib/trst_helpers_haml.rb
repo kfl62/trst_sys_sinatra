@@ -163,7 +163,7 @@ module Trst
       # @return [String]
       # @todo Document this method
       def input_name(task,name)
-        model = task.target.split('.')[0].underscore
+        model = task.goal.split('.')[0].underscore
         retval = ""
         name.split(',').each do |n|
           retval += "[#{n}]"
@@ -217,13 +217,13 @@ module Trst
 
       # @return [String]
       # @todo Document this method
-      def current_xhr(button,id,action,target_id,params = nil)
+      def current_xhr(button,id,action,goal_id,params = nil)
         case action
         when /filter|get/
           verb = button
-          target_id = "new" if button == 'post'
+          goal_id = "new" if button == 'post'
         when 'post'
-          target_id = "new"
+          goal_id = "new"
           verb = button
         when 'put'
           verb = 'put' if button == 'save'
@@ -234,16 +234,16 @@ module Trst
           verb = button
         end
         if params
-          target_id = "#{target_id.to_s}?target=#{params[:target]}&child_id=#{params[:child_id]}" if params[:target]
+          goal_id = "#{goal_id.to_s}?goal=#{params[:goal]}&child_id=#{params[:child_id]}" if params[:goal]
           if params[:id_pn]
-            target_id = "#{target_id.to_s}?id_pn=#{params[:id_pn]}"
-            target_id += "&date_retro=#{params[:date_retro]}" if params[:date_retro]
+            goal_id = "#{goal_id.to_s}?id_pn=#{params[:id_pn]}"
+            goal_id += "&date_retro=#{params[:date_retro]}" if params[:date_retro]
           end
-          target_id = "#{target_id.to_s}?client_id=#{params[:client_id]}&transporter_id=#{params[:transporter_id]}" if params[:client_id]
-          target_id = "#{target_id.to_s}?supplier_id=#{params[:supplier_id]}" if params[:supplier_id]
-          target_id = "#{target_id.to_s}?partner_type=#{params[:partner_type]}" if params[:partner_type]
+          goal_id = "#{goal_id.to_s}?client_id=#{params[:client_id]}&transporter_id=#{params[:transporter_id]}" if params[:client_id]
+          goal_id = "#{goal_id.to_s}?supplier_id=#{params[:supplier_id]}" if params[:supplier_id]
+          goal_id = "#{goal_id.to_s}?partner_type=#{params[:partner_type]}" if params[:partner_type]
         end
-        retval = "trst.task.init('#{id}','#{verb}','#{target_id}')"
+        retval = "trst.task.init('#{id}','#{verb}','#{goal_id}')"
         retval = 'trst.task.destroy()' if button == 'cancel'
         return retval
       end

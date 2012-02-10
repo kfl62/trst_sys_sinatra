@@ -3,28 +3,28 @@
   - if tsks[0].empty?
     %li= t('xhr_tasks.empty')
   - else
-    - tsks[0].each do |tsk|; data_tsk = TrstTask.find(tsk).target.split('_').last == 'test' ? 'test' : 'filter'
+    - tsks[0].each do |tsk|; data_tsk = TrstTask.find(tsk).goal.split('_').last == 'test' ? 'test' : 'filter'
       %li
         %a{:id  => "#{tsk}",:'data-tsks' => data_tsk,:href => "#"}
           = TrstTask.find(tsk).name
         %span.help{:onclick  => "trst.task.init('#{tsk}','help')"}
   - unless tsks[1].empty?
     %li.em.st= t('xhr_pdfs.title')
-    - tsks[1].each do |pdf|; data_tsk = TrstTask.find(pdf).target.split('_').last == 'test' ? 'test' : 'pdf'
+    - tsks[1].each do |pdf|; data_tsk = TrstTask.find(pdf).goal.split('_').last == 'test' ? 'test' : 'pdf'
       %li
         %a{:id => "#{pdf}",:'data-tsks' => data_tsk,:href => "#"}
           = TrstTask.find(pdf).name
         %span.help{:onclick  => "trst.task.init('#{pdf}','help')"}
   - unless tsks[2].empty?
     %li.em.st= t('xhr_queries.title')
-    - tsks[2].each do |query|; data_tsk = TrstTask.find(query).target.split('_').last == 'test' ? 'test' : 'query'
+    - tsks[2].each do |query|; data_tsk = TrstTask.find(query).goal.split('_').last == 'test' ? 'test' : 'query'
       %li
         %a{:id => "#{query}",:'data-tsks' => data_tsk,:href => "#"}
           = TrstTask.find(query).name
         %span.help{:onclick  => "trst.task.init('#{query}','help')"}
   - unless tsks[3].empty?
     %li.em.st= t('xhr_repair.title')
-    - tsks[3].each do |repair|; data_tsk = TrstTask.find(repair).target.split('_').last == 'test' ? 'test' : 'repair'
+    - tsks[3].each do |repair|; data_tsk = TrstTask.find(repair).goal.split('_').last == 'test' ? 'test' : 'repair'
       %li
         %a{:id => "#{repair}",:'data-tsks' => data_tsk,:href => "#"}
           = TrstTask.find(repair).name

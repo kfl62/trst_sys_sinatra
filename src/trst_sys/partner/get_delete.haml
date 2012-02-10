@@ -13,7 +13,7 @@
         %tfoot
           %tr
             %td{:class => "buttons_bottom"}
-              %span{:class => "button post", :onclick => "trst.task.acc.grnInit('#{TrstTask.task_id_by_target("TrstAccGrn")}')" }= t("button.post") + " NIR"
+              %span{:class => "button post", :onclick => "trst.task.acc.grnInit('#{TrstTask.task_id_by_goal("TrstAccGrn")}')" }= t("button.post") + " NIR"
               %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
   - elsif partner_type == 'client'
     %table{:cellspacing => "0"}
@@ -23,7 +23,7 @@
         %tfoot
           %tr
             %td{:class => "buttons_bottom"}
-              %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccInvoice")}')" }= "Înapoi la Facturare"
+              %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_goal("TrstAccInvoice")}')" }= "Înapoi la Facturare"
               %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
   - else
     %p= t("trst_partner.quick.error")

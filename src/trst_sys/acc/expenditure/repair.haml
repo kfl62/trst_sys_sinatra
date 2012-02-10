@@ -32,7 +32,7 @@
           %td
             %span.res= "%.2f" % o.sum_out
           %td
-            %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccExpenditure")}','get','#{o.id}')"}
+            %span.db-edit{:title => "Tipărire/Ştergere #{o.name}", :onclick => "trst.task.init('#{TrstTask.task_id_by_goal("TrstAccExpenditure")}','get','#{o.id}')"}
     %tfoot
       %tr
         - if current_user.unit_id

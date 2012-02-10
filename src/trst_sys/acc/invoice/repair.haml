@@ -39,7 +39,7 @@
       %td.select-dn{:style => "border-right: solid 1px #333333; background-color: #{inv.payed ? "#DDDDDD" : "#FFBFF0"}"}
         %span{:title  => "Cod #{inv.name} din #{inv.id_date.to_s}\n în valoare de #{"%.2f" % inv.sum}\n#{inv.payed ? inv.payment_doc : "Termen: #{inv.payment_deadline.to_s}"}",
               :style => "cursor:pointer",
-              :onclick => "trst.task.init('#{TrstTask.task_id_by_target("TrstAccInvoice")}','get','#{inv.id}')"}= inv.id_main_doc
+              :onclick => "trst.task.init('#{TrstTask.task_id_by_goal("TrstAccInvoice")}','get','#{inv.id}')"}= inv.id_main_doc
   %tfoot
     - if dns.count == 0
       %tr

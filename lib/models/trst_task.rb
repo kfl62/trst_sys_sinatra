@@ -5,7 +5,7 @@ Defined fields and default values:
     field           :haml_path,   :type => String,  :default => "default"
     field           :page_ids,    :type => Array,   :default => []
     field           :user_ids,    :type => Array,   :default => []
-    field           :target
+    field           :goal
     localized_field :name
     localized_field :title
     localized_field :help
@@ -21,7 +21,7 @@ class TrstTask
   field           :haml_path,       :type => String,      :default => "default"
   field           :page_ids,        :type => Array,       :default => []
   field           :user_ids,        :type => Array,       :default => []
-  field           :target
+  field           :goal
   field           :name,            :localize => true
   field           :title,           :localize => true
   field           :help,            :localize => true
@@ -34,20 +34,20 @@ class TrstTask
       all.asc(:name).collect{|task| [task.id.to_s, task.name]}
     end
     # @todo
-    def task_id_by_target(t)
-      where(:target => /#{t}/).first.id.to_s rescue nil
+    def task_id_by_goal(t)
+      where(:goal => /#{t}/).first.id.to_s rescue nil
     end
   end
   # @todo Document this method
   def is_pdf?
-    target.include?("TrstPdf.find_by_task_id")
+    goal.include?("TrstPdf.find_by_task_id")
   end
   # @todo Document this method
   def is_query?
-    target.include?(".query")
+    goal.include?(".query")
   end
   def is_repair?
-    target.include?(".repair")
+    goal.include?(".repair")
   end
   # @todo Document this method
   def pages
@@ -68,7 +68,7 @@ class TrstTask
   # @todo Document this method
   def table_data
     [{:css => "normal",:name => "haml_path",:label => I18n.t("trst_task.haml_path"),:value => haml_path},
-     {:css => "normal",:name => "target",:label => I18n.t("trst_task.target"),:value => target},
+     {:css => "normal",:name => "goal",:label => I18n.t("trst_task.goal"),:value => goal},
      {:css => "relations",:name => "page_ids",:label => I18n.t("trst_task.page_ids"),:value => [pages_name,page_ids]},
      {:css => "relations",:name => "user_ids",:label => I18n.t("trst_task.user_ids"),:value => [users_name,users]},
      {:css => "localized",:name => "name",:label => I18n.t("trst_task.name"),:value => name},

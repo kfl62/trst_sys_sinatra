@@ -44,7 +44,7 @@ class TrstSysTsk < Sinatra::Base
   # @todo Documentation
   get '/:id/unit_id/:unit_id' do |id,unit_id|
     session[:unit_id] = (unit_id == 'null') ? nil : unit_id
-    verb = TrstTask.find(id).target.split('.')[1] == 'repair' ? 'repair' : 'filter'
+    verb = TrstTask.find(id).goal.split('.')[1] == 'repair' ? 'repair' : 'filter'
     @task, @object, haml_path, locals = init_variables(id, verb, nil, params)
     haml :"#{haml_path}", :layout => false, :locals => locals
   end
@@ -81,12 +81,12 @@ class TrstSysTsk < Sinatra::Base
   # route for get (control center)
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @param [String] verb any of `get, post, put, delete, filter`
-  # @param [BSON::ObjectID.to_s] target_id the id of `@object`
+  # @param [BSON::ObjectID.to_s] goal_id the id of `@object`
   # @action Action:
   # @action Render:
   # @todo Documentation for Action:,Render:
-  get '/:id/:verb/:target_id' do |id,verb,target_id|
-    @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
+  get '/:id/:verb/:goal_id' do |id,verb,goal_id|
+    @task, @object, haml_path, locals = init_variables(id, verb, goal_id, params)
     if verb == 'print'
       headers({'Content-Type' => 'application/pdf',
                'Content-Description' => 'File Transfer',
@@ -101,15 +101,15 @@ class TrstSysTsk < Sinatra::Base
   end
 
   # route for post(create)
-  # @param (see #GET____id__verb__target_id_)
+  # @param (see #GET____id__verb__goal_id_)
   # @action Action:
   # @action Render:
   # @todo Documentation for Action:,Render:
-  post '/:id/:verb/:target_id' do |id,verb,target_id|
-    @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
-    if params[:target]
-      @object = @object.where("#{params[:target]}._id" => BSON::ObjectId.from_string(params[:child_id])).first
-      @object = @object.method(params[:target]).call.create
+  post '/:id/:verb/:goal_id' do |id,verb,goal_id|
+    @task, @object, haml_path, locals = init_variables(id, verb, goal_id, params)
+    if params[:goal]
+      @object = @object.where("#{params[:goal]}._id" => BSON::ObjectId.from_string(params[:child_id])).first
+      @object = @object.method(params[:goal]).call.create
     elsif params[:id_pn]
       @object = @object.create(:client_id => BSON::ObjectId.from_string(params[:id_pn]), :unit_id => current_user.unit_id || session[:unit_id])
     elsif params[:client_id] && params[:transporter_id]
@@ -144,13 +144,13 @@ class TrstSysTsk < Sinatra::Base
   end
 
   # route for put (update)
-  # @param (see #GET____id__verb__target_id_)
+  # @param (see #GET____id__verb__goal_id_)
   # @action Action:
   # @action Render:
   # @todo Documentation for Action:,Render:
-  put '/:id/:verb/:target_id' do |id,verb,target_id|
-    @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
-    if params[:target]
+  put '/:id/:verb/:goal_id' do |id,verb,goal_id|
+    @task, @object, haml_path, locals = init_variables(id, verb, goal_id, params)
+    if params[:goal]
       update_hash = params[:"#{@object._parent.class.name.underscore}"]
     else
       update_hash = params_handle_ids(params,@object.class.name)
@@ -183,11 +183,11 @@ class TrstSysTsk < Sinatra::Base
   end
 
   # route for delete
-  # @param (see #GET____id__verb__target_id_)
+  # @param (see #GET____id__verb__goal_id_)
   # @action Action: execute `@object.delete`
   # @action Render: nothing
-   delete '/:id/:verb/:target_id' do |id,verb,target_id|
-    @task, @object, haml_path, locals = init_variables(id, verb, target_id, params)
+   delete '/:id/:verb/:goal_id' do |id,verb,goal_id|
+    @task, @object, haml_path, locals = init_variables(id, verb, goal_id, params)
     @object.destroy
     flash[:msg] = {:msg => {:txt => I18n.t('db.delete', :data => @object.name), :class => "info"}}.to_json
   end
@@ -195,17 +195,17 @@ class TrstSysTsk < Sinatra::Base
   # add/delete relations
   # @param [BSON::ObjectID.to_s] id the id of `@task`
   # @param [String] verb any of `get, post, put, delete, filter`
-  # @param [BSON::ObjectID.to_s] target_id the id of `@object`
+  # @param [BSON::ObjectID.to_s] goal_id the id of `@object`
   # @param [String] field
   # @param [String] action any of `add, delete`
   # @action Action:
   # @action Render:
   # @todo Documentation for Action:,Render:
-  get '/:id/:verb/:target_id/:field/:action' do |id,verb,target_id,field,action|
+  get '/:id/:verb/:goal_id/:field/:action' do |id,verb,goal_id,field,action|
     task = TrstTask.find(id)
-    model, method = task.target.split('.')
+    model, method = task.goal.split('.')
     @task = task
-    @object = model.constantize.send method, target_id
+    @object = model.constantize.send method, goal_id
     haml :"trst_sys/shared/relations", :layout  => false, :locals => {:action => action, :field => field}
   end
 

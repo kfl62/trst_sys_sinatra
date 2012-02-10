@@ -71,9 +71,9 @@ module Trst
         retval
       end
       # Helper for initializing variables in TrstSysTsk handlers
-      def init_variables(task_id,verb, target_id = nil,params = {})
+      def init_variables(task_id,verb, goal_id = nil,params = {})
         task = init_task(task_id)
-        object = init_object(verb,task,target_id,params)
+        object = init_object(verb,task,goal_id,params)
         haml_path = init_haml_path(verb,task)
         params = init_params(verb,task,params)
         return [task, object, haml_path, params]
@@ -83,8 +83,8 @@ module Trst
         task = TrstTask.find(task_id)
       end
       # Initialize value for @object variable, in current context
-      def init_object(verb,task,target_id,params)
-        model, method = task.target.split('.')
+      def init_object(verb,task,goal_id,params)
+        model, method = task.goal.split('.')
         model = model.constantize
         object = model
         if verb == 'filter'
@@ -108,34 +108,34 @@ module Trst
             end
           end
         elsif verb == 'pdf' || verb == 'print'
-          object = (model.send method, task.id) || (model.send method, target_id)
+          object = (model.send method, task.id) || (model.send method, goal_id)
         elsif verb =~ /query|test|repair/
           object = model
         else
           if method == 'details'
-            if params[:target]
-              method = params[:target]
-              if model.find(target_id).nil?
-                t = (target_id.is_a? String) ? BSON::ObjectId.from_string(target_id) : target_id
+            if params[:goal]
+              method = params[:goal]
+              if model.find(goal_id).nil?
+                t = (goal_id.is_a? String) ? BSON::ObjectId.from_string(goal_id) : goal_id
                 model  = model.where("#{method}._id" => t).first
-                object = model.send(method).find(target_id)
+                object = model.send(method).find(goal_id)
               else
-                model  = model.find(target_id)
+                model  = model.find(goal_id)
                 object = model.send(method).find(params[:child_id])
-              end unless target_id == 'new'
+              end unless goal_id == 'new'
             else
               method = 'find'
-              object = model.send method, target_id unless target_id == 'new'
+              object = model.send method, goal_id unless goal_id == 'new'
             end
           else
-            object = model.send method, target_id unless target_id == 'new'
+            object = model.send method, goal_id unless goal_id == 'new'
           end
         end
         return object
       end
       # Initialize load path for haml templates
       def init_haml_path(verb,task)
-        model, method = task.target.split('.')
+        model, method = task.goal.split('.')
         haml_path = task.haml_path
         haml_path = (haml_path == 'default') ? '/trst_sys/shared' : '/trst_sys' + haml_path
         case verb
@@ -163,7 +163,7 @@ module Trst
       end
       # Set values for :locals hash
       def init_params(verb,task,params)
-        model, method = task.target.split('.')
+        model, method = task.goal.split('.')
         params[:action] = verb
         params[:action] = 'put' if request.post?
         params[:action] = 'get' if request.put?
