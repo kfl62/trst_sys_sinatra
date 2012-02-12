@@ -21,35 +21,10 @@
         %td{:class => "buttons_bottom"}
           %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post") + " APP!"
           %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
-      - if date_retro && current_user.permission_lvl > 6
+      - if date_retro && current_user.permission_lvl == 11
         %tr
           %td
             %span.small= "Introduceţi APP pentru #{(Date.today-8.month).to_s}?"
             %input.date_retro{:type => "checkbox", :data => {:date_retro => (Date.today-8.month).to_s}}
-      - else
-        %tr
-          %td
-            %span.small= "Introduceţi APP pentru luna 03"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-03-"}}
-            %span.small= " | 04"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-04-"}}
-            %span.small= " | 05"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-05-"}}
-            %span.small= " | 06"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-06-"}}
-            %br
-            %span.small= "Introduceţi APP pentru luna 07"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-07-"}}
-            %span.small= " | 08"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-08-"}}
-            %span.small= " | 09"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-09-"}}
-            %span.small= " | 10"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-10-"}}
-            %span.small= " | 11"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => "2011-11-"}}
-        %tr
-          %td
-            %span.small= t('trst_acc_expenditure.retro')
 - else
   = partial('trst_sys/shared/select_unit')
