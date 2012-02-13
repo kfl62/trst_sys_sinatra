@@ -3,7 +3,7 @@
   date_retro = (Date.new(2011,11,1)..Date.new(2012,2,29)).include? Date.today
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
-%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.expenditure"}}
+-#%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.expenditure"}}
 - if unit_id
   - if current_user.unit_id.nil?
     = partial('trst_sys/shared/select_unit')
@@ -15,7 +15,7 @@
     %tbody
       %tr
         %td.filtering-select-pf
-          %input#filteringSelect
+          %input#pfFilteringSelect
           %span{:class => "button post", :data => {:task_id => TrstTask.task_id_by_goal("TrstPartnersPf")}}= t('trst_acc_expenditure.client.add_button')
     %tfoot
       %tr
