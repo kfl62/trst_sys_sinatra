@@ -1,5 +1,8 @@
+:ruby
+  supplier_task_id   = TrstTask.task_id_by_goal("TrstPartner.find")
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_grn.title')
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn", :action => "filter", :supplier_task_id => supplier_task_id}}
 %table{:cellspacing => "0"}
   %thead
     %tr
@@ -13,10 +16,10 @@
           - unless TrstPartner.suppliers.empty?
             - TrstPartner.suppliers.each do |supplier|
               %option{:value => supplier.id}= supplier.name[1]
-        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_goal("TrstPartner.find")}','post','new?partner_type=supplier')"}= t('trst_acc_grn.filter.add_supplier')
+        %span{:class => "button post supplier"}= t('trst_acc_grn.filter.add_supplier')
   %tfoot
     %tr
       %td{:class => "buttons_bottom"}
-        %span{:class => "button post", :onclick => "trst.task.acc.grnInit('#{@task.id}')" }= t("button.post") + " NIR"
-        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+        %span{:class => "button post mc-evt"}= t("button.post") + " NIR"
+        %span{:class => "button cancel mc-evt"}= t("button.cancel")
 

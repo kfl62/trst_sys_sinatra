@@ -1,20 +1,18 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
 -if action == 'get'
+  %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn", :action => "get", :object_id => "#{@object.id}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr
         %td{:colspan => "2"}
-          %span= "Recepţia nr. <b>#{@object.name}</b>/<b>#{@object.id_date.to_s}</b>"
+          %span= "#{t('trst_acc_grn.get.thead')} <b>#{@object.name}</b>/<b>#{@object.id_date.to_s}</b>"
     %tbody
       %tr
         %td{:colspan => "2"} &nbsp;
       %tr
         %td{:colspan => "2"}
-          %span= "Se va genera cu următorul conţinut:<br/></br>De la furnizorul <b>#{TrstPartner.find(@object.supplier_id).name[2]}</b></br>"
-          %span= "în baza doc: <b>#{t("trst_acc_grn.#{@object.main_doc_type.downcase}")} - #{@object.main_doc_name}/ #{@object.main_doc_date}</b> <br/>"
-          %span= "delegatul <b>#{@object.delegate.name}</b> cu mijlocul de transp. <b>#{@object.main_doc_plat.upcase}</b>,<br\>"
-          %span= "în prezenţa Dn-lui/ei <b>#{@object.signed_by.name}</b>, sau recepţionat următoarele:<br\>"
+          %span= t('trst_acc_grn.get.tbody.text', @object.i18n_hash)
       %tr
         %td{:colspan => "2"} &nbsp;
       - @object.freights.each_with_index do |f,i|
@@ -27,11 +25,12 @@
       %tr
         %td{:class => "buttons_bottom", :colspan => "2"}
           %form{:id  => "xhr_#{action}"}
-          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
-          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+          %span{:class => "button print mc-evt"}= t("button.print")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
       %tr
-        %td.footer_note{:colspan => "4"}= #t('trst_acc_grn.footer_note_del')
+        %td.footer_note{:colspan => "4"}= "&nbsp;&nbsp;"
 - else
+  %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn", :action => "delete", :object_id => "#{@object.id}"}}
   %table
     %thead
       %tr
@@ -43,6 +42,5 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
-              =t("button.#{button}")
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+          %span{:class => "button delete mc-evt"}= t("button.delete")

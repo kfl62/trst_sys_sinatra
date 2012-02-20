@@ -4,18 +4,19 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
 -if action == 'put'
+  %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn", :action => "put", :object_id => "#{@object.id}"}}
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
       %thead
         %tr
           %th{:colspan => "6"}
-            Nr.
+            %span= t('trst_acc_grn.put.thead.label')[0]
             %input.ce{:name => "[trst_acc_grn][name]",:value => @object.name, :style => "width:12em"}
-            din data de:
+            %span= t('trst_acc_grn.put.thead.label')[1]
             %input.date{:name => "[trst_acc_grn][id_date]",:value => @object.id_date.to_s}
         %tr
           %td{:colspan => "6"}
-            %span De la furnizorul:
+            %span= t('trst_acc_grn.put.thead.label')[2]
         %tr
           %td{:colspan => "6",:style => "border: solid 1px"}
             %table{:cellspacing => "0"}
@@ -39,33 +40,33 @@
                 %tr
                   %td{:colspan => "4"}
                     = partial('trst_sys/shared/select_delegate', :locals => {:partner_id => @object.supplier_id})
+              %tfoot
+                %tr
+                  %td{:colspan => "4"}
+                    %span.small= t('trst_acc_grn.put.thead.info')
         %tr
           %td{:colspan => "6"}
-            %p S-au recepţionat următoarele:
-      %tbody.inner.stats
-        %tr
-          %td.ce Material
-          %td.ce UM
-          %td.ce PU
-          %td.ce Cant
-          %td.ce Valoare
-          %td.ce &nbsp;&nbsp;
+            %p{:style => "margin:5px"}= t('trst_acc_grn.put.thead.label')[3]
+      %tbody.inner
+        %tr.ce
+          - t('trst_acc_grn.put.tbody').each do |label|
+            %td= label
         -for i in 1..5 do
           %tr{:id => "tr_0#{i.to_s}"}
-            %td.filtering-select-freight
+            %td.filtering-select-freight{:style => "width:4em"}
               %input.freight{:id => "freightSelect_0#{i.to_s}"}
-            %td
-              %span.ce.st kg
-            %td
-              %input.ri.st{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:4em"}
-            %td
-              %input.ri.st{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculatorGrn()", :style => "width:8em"}
+            %td.ce
+              %span.st kg
+            %td{:style => "width:4em"}
+              %input.puw{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00"}
+            %td{:style => "width:4em"}
+              %input.quw{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00"}
               %input{:type => "hidden", :name => "[freights][#{i}][id_stats]",:value => ''}
               %input{:type => "hidden", :name => "[freights][#{i}][doc_grn_id]",:value => @object.id}
-            %td
+            %td.ce
               %span.res 0.00
-            %td
-              %span.db-freight-del{:onclick => "trst.task.acc.deleteRow(this)"}
+            %td.ce
+              %span.db-freight-del.ce
         %tr
           %td.ce.em.st{:colspan => "4"}
             %span Total
@@ -77,7 +78,7 @@
       %tfoot
         %tr
           %td{:colspan => "6"}
-            %span= "Detalii plată:"
+            %span= t('trst_acc_grn.put.tfoot')
         %tr
           %td{:colspan => "3"}
             %input.ce.st{:name => "[trst_acc_grn][main_doc_paym]",:placeholder => "Achitat cu",:style => "width:12.5em"}
@@ -85,11 +86,12 @@
             %input.ce.st{:id => "sum_pay",:name => "[trst_acc_grn][sum_pay]",:placeholder => "Suma de",:style => "width:8em"}
         %tr
           %td{:class => "buttons_bottom", :colspan => "6"}
-            %span{:class => "button save", :onclick => "trst.task.acc.calculatorGrn(); trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
-            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+            %span{:class => "button save mc-evt"}= t("button.save")
+            %span{:class => "button delete mc-evt"}= t("button.delete")
         %tr
-          %td.footer_note{:colspan => "6"}= t('trst_acc_grn.footer_note_put')
+          %td.footer_note{:colspan => "6"}= "&nbsp;&nbsp;"
 -else
+  %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn", :action => "post", :object_id => "#{@object.id rescue nil}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr
