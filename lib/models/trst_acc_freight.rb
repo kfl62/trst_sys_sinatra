@@ -33,7 +33,7 @@ class TrstAccFreight
           month = dn.id_date.month
           fs << {:id => f.id,:um => f.um,:stock => f.stock(year,month),:id_stats => f.id_stats, :label => f.name}
         else
-          fs << {:id => f.id,:um => f.um,:pu => f.pu,:pu_retro => f.pu_retro,:p03 => f.p03,:id_stats => f.id_stats,:label => f.name}
+          fs << {:id => f.id,:um => f.um,:pu => f.pu,:p03 => f.p03,:id_stats => f.id_stats,:label => f.name}
         end
       end
       {:identifier => "id",:items => fs}
