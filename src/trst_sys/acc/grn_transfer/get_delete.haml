@@ -1,19 +1,18 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
 -if action == 'get'
+  %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn_transfer", :action => "get", :object_id => "#{@object.id}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr
         %td{:colspan => "4"}
-        %span.small= "Cu documentul având nr. intern #{@object.name} s-au operat avizele:"
+        %span.small= t('trst_acc_grn_transfer.get.thead.label_01', :name => @object.name)
         %span.small{:style => "display:block; max-width:400px"}= "#{@object.delivery_notes.map{|dn| dn.id_main_doc}.join(', ')}"
-        %span.small= "şi s-au recepţionat următoarele mărfuri:"
+        %span.small= t('trst_acc_grn_transfer.get.thead.label_02')
     %tbody.inner
       %tr.ce
-        %td Material
-        %td Preţ (lei/kg)
-        %td Cantitate
-        %td Valoare
+        - t('trst_acc_grn_transfer.get.tbody').each do |label|
+          %td= label
       - data = @object.delivery_notes.sum_freights_grn; data.sort.each do |s|
         %tr.to-calculate
           %td
@@ -32,11 +31,12 @@
       %tr
         %td{:class => "buttons_bottom", :colspan => "4"}
           %form{:id  => "xhr_#{action}"}
-          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
-          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+          %span{:class => "button print mc-evt"}= t("button.print")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
       %tr
-        %td.footer_note{:colspan => "4"}= #t('trst_acc_grn_transfer.footer_note_print')
+        %td.footer_note{:colspan => "4"} &nbsp;
 - else
+  %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn_transfer", :action => "delete", :object_id => "#{@object.id rescue nil}"}}
   %table
     %thead
       %tr
@@ -48,6 +48,5 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
-              =t("button.#{button}")
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+          %span{:class => "button delete mc-evt"}= t("button.delete")

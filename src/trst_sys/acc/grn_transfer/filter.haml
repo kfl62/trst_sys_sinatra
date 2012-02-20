@@ -2,22 +2,30 @@
   unit_id = current_user.unit_id.nil? ? TrstFirm.unit_id_by_unit_slug('DPOA') : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_grn_transfer.title')
-%span#hidden_data.hidden{:data => {:to_unit => unit_id}}
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.grn_transfer", :action => "filter", :to_unit => unit_id}}
 - if current_user.unit_id.nil?
   %p{:style => "vertical-align:middle"}
-    %span.small Tip marfă transferată:
-    %span.small | cu 3%
+    %span.small= t('trst_acc_grn_transfer.filter.label')[0]
+    %span.small= t('trst_acc_grn_transfer.filter.label')[1]
     %input{:type => "radio", :name => "out_003", :checked => true}
-    %span.small | fără 3%
+    %span.small= t('trst_acc_grn_transfer.filter.label')[2]
     %input{:type => "radio", :name => "out_003"}
   %hr
 - else
-  %span.small= t('trst_acc_grn_transfer.unit_chief')
+  %span.small= t('trst_acc_grn_transfer.filter.unit_chief')
   %br
   %span.small= "( <b>#{current_user.unit.slug}</b> )"
+  %hr
+  %p{:style => "vertical-align:middle"}
+    %span.small= t('trst_acc_grn_transfer.filter.label')[0]
+    %span.small= t('trst_acc_grn_transfer.filter.label')[1]
+    %input{:type => "radio", :name => "out_003", :checked => true}
+    %span.small= t('trst_acc_grn_transfer.filter.label')[2]
+    %input{:type => "radio", :name => "out_003"}
+  %hr
 %table
   %tfoot
     %tr
       %td{:class => "buttons_bottom", :colspan => "2"}
-        %span{:class => "button post", :onclick => "trst.task.acc.grnTransferInit('#{@task.id}')" }= "Selectare Avize"
-        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+        %span{:class => "button post mc-evt"}= t('trst_acc_grn_transfer.filter.label')[3]
+        %span{:class => "button cancel mc-evt"}= t("button.cancel")
