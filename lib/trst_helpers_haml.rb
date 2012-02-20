@@ -235,10 +235,7 @@ module Trst
         end
         if params
           goal_id = "#{goal_id.to_s}?goal=#{params[:goal]}&child_id=#{params[:child_id]}" if params[:goal]
-          if params[:id_pn]
-            goal_id = "#{goal_id.to_s}?id_pn=#{params[:id_pn]}"
-            goal_id += "&date_retro=#{params[:date_retro]}" if params[:date_retro]
-          end
+          goal_id = "#{goal_id.to_s}?id_pn=#{params[:id_pn]}" if params[:id_pn]
           goal_id = "#{goal_id.to_s}?client_id=#{params[:client_id]}&transporter_id=#{params[:transporter_id]}" if params[:client_id]
           goal_id = "#{goal_id.to_s}?supplier_id=#{params[:supplier_id]}" if params[:supplier_id]
           goal_id = "#{goal_id.to_s}?partner_type=#{params[:partner_type]}" if params[:partner_type]
