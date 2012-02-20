@@ -54,7 +54,6 @@ class TrstPartner
       where(:firm => f).asc(:name)
     end
   end # Class methods
-
   # @todo
   def details
     self.addresses.create if self.addresses.empty?
@@ -64,7 +63,6 @@ class TrstPartner
     self.units.create if self.units.empty?
     ["TrstPartner",id,[addresses,persons,delegates,departments,units]]
   end
-
   # @todo
   def table_data
     [
@@ -90,6 +88,4 @@ class TrstPartner
       {:css => "boolean",:name => "p03",:label => I18n.t("trst_partner.p03"),:value => p03}
     ]
   end
-
-
 end

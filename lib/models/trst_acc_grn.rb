@@ -34,9 +34,12 @@ class TrstAccGrn
 
   class << self
     # @todo
-    def daily(day = nil)
-      day ||= Date.today.to_s
-      where(:id_date => DateTime.strptime("#{day}","%F").to_time).asc(:name)
+    def daily(y = nil, m = nil, d = nil)
+      y,m,d = y.split('-').map{|s| s.to_i} if y.is_a? String
+      y ||= Date.today.year
+      m ||= Date.today.month
+      d ||= Date.today.mday
+      where(:id_date => Time.utc(y,m,d)).asc(:name)
     end
     # @todo
     def monthly(y = nil, m = nil)
@@ -82,6 +85,16 @@ class TrstAccGrn
       r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
     end
   end
+  # @todo
+  def i18n_hash
+    {
+      supplier: supplier.name[2],
+      doc_name: main_doc_name, doc_date: main_doc_date,
+      delegate: delegate.name, platte: main_doc_plat.upcase,
+      signed_by: signed_by.name
+    }
+  end
+  # @todo
   def update_delivery_notes(add = true)
     self.delivery_notes.each do |dn|
       dn.update_attribute(:charged, add)

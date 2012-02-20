@@ -35,11 +35,14 @@ class TrstAccDeliveryNote
       where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
     end
     # @todo
-    def daily(day = nil)
-      day ||= Date.today.to_s
-      where(:id_date => DateTime.strptime("#{day}","%F").to_time).asc(:name)
+    def daily(y = nil, m = nil, d = nil)
+      y,m,d = y.split('-').map{|s| s.to_i} if y.is_a? String
+      y ||= Date.today.year
+      m ||= Date.today.month
+      d ||= Date.today.mday
+      where(:id_date => Time.utc(y,m,d)).asc(:name)
     end
-    # @todo
+   # @todo
     def monthly(y = nil, m = nil)
       y ||= Date.today.year
       m ||= Date.today.month
@@ -124,7 +127,27 @@ class TrstAccDeliveryNote
       r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
     end
   end
-
+  # @todo
+  def i18n_label_thead
+    {id_main_doc: id_main_doc, id_date: id_date.to_s, name: name}
+  end
+  # @todo
+  def i18n_label_thead_01
+    {id_main_doc: id_main_doc, id_date: id_date.to_s, name: name}
+  end
+  # @todo
+  def i18n_label_thead_02
+    cl  = TrstPartner.find(client_id).name[2] rescue "Missing (Lipsă) !!!"
+    clp = TrstPartner.find(client_id).units.first.name[1] rescue "Missing (Lipsă) !!!"
+    del = delegate_transp.name rescue "!!! Anonymus !!!"
+    plt = id_platte.upcase rescue "B 00 NNN"
+    {
+      firm: unit.firm.name[2], pos: unit.name[1],
+      client:cl, client_pos: clp,
+      delegate: del, id_platte: plt,
+      chief: signed_by.name
+    }
+  end
   protected
   # @todo
   def increment_name_date

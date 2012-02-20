@@ -28,9 +28,12 @@ class TrstAccCassation
       where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
     end
     # @todo
-    def daily(day = nil)
-      day ||= Date.today.to_s
-      where(:id_date => DateTime.strptime("#{day}","%F").to_time).asc(:name)
+    def daily(y = nil, m = nil, d = nil)
+      y,m,d = y.split('-').map{|s| s.to_i} if y.is_a? String
+      y ||= Date.today.year
+      m ||= Date.today.month
+      d ||= Date.today.mday
+      where(:id_date => Time.utc(y,m,d)).asc(:name)
     end
     # @todo
     def monthly(y = nil, m = nil)
