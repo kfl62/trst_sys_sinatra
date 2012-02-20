@@ -2,42 +2,64 @@
 ro:
   trst_acc_delivery_note:
     title: "Aviz de expediţie - Anexa3"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
-               înseamnă că va fi utilizabil în curând!
+    not_ready: |
+      Din păcate încâ nu este gata!<br><br>
+      Faptul că a apărut în meniul "Sarcini zilnice",<br>
+      înseamnă că va fi utilizabil în curând!
+    filter:
+      info: |
+        Click pe "Selectaţi..." şi alegeţi pe rând<br>
+        destinatarul, respectiv transportatorul.<br>
+        Apăsaţi butonul "Creare Anexa3" <br>
+        <b>Important</b><br>
+        Selectaţi ambele, chiar dacă sunt acelaşi firme!
+      select:
+        client: "Selectaţi destinatarul"
+        transporter: "Selectaţi transportatorul"
+    put:
+      label:
+        thead: ["Nr.", "din data de", "Anexă la aviz nr.", "Delegat", "Mijloc de transp."]
+        tbody: ["Material", "UM", "Stoc", "Cant.", "Rămâne", "&nbsp;&nbsp;"]
+        tbody_sum: "Total încărcare"
+      select: "Selectaţi delegatul!"
+      footer: |
+        În cazul în care rubrica\"Rămâne\" are valoare negativă, notaţivă cantitatea şi creaţi<br>
+        un APP pentru materialul în cauză, pe cantitate respectivă!
+    get:
+      label:
+        thead_01: |
+          La avizul de expediţie nr. <b>%{id_main_doc}</b>/<b>%{id_date}</b><br>
+          Anexa3 nr. <b>%{name}</b>/<b>%{id_date}</b>
+        thead_02: |
+          Se va genera cu următorul conţinut:<br></br>De la firma <b>%{firm}</b> %{pos}<br>
+          ptr.firma <b>%{client}</b>, %{client_pos}<br>
+          delegatul <b>%{delegate}</b> cu mijlocul de transp. <b>%{id_platte}</b>,<br>
+          în prezenţa Dn-lui/ei <b>%{chief}</b>,<br> încarcă următoarele:<br>
+        tbody: ["Deşeuri", "lei/kg"]
+      footer: |
+        Încă mai puteţi alege "Ştergere", dacă aţi greşit sau v-aţi răzgândit!<br>
+        Alegând opţiunea \"Generare PDF\" înregistrarea rămâne difinitivă!
     repair:
       header: "Puteţi Tipării/Şterge Anexele3 la avize eliberate azi!<br>"
       header_title: "Pentru mai multe detalii apasaţi pe pictograma ...?... din dreptul comenzii"
-      footer: "<br />Notă: <br />
-              În cazul în care nu s-a tipărit o Anexă3 puteţi repeta tipărirea cu<br>
-              un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
-              Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
-              pictograma <img src='images/icons/help.png' width='12' height='12' />"
-      footer_short: "<br />Notă: <br />Pentru detalii click pe pictograma <img src='images/icons/help.png' width='12' height='12' />"
-    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
-                    destinatarul, respectiv transportatorul.<br/>
-                    Apăsaţi butonul \"Creare Anexa3\" <br/>
-                    <b>Important</b><br/>
-                    Selectaţi ambele, chiar dacă sunt acelaşi firme!"
-    select:
-      client: "Selectaţi destinatarul"
-      transporter: "Selectaţi transportatorul"
-      delegate: "Selectaţi delegatul!"
-    delegate_warning: "!!! Nu uitaţi să selectaţi delegatul !!!"
-    footer_note_put: "În cazul în care rubrica\"Rămâne\" are valoare negativă, notaţivă cantitatea şi creaţi</br>
-                      un APP pentru materialul în cauză, pe cantitate respectivă!"
-    footer_note_del: "Încă mai puteţi alege \"Ştergere\", dacă aţi greşit sau v-aţi răzgândit!<br/>
-                      Alegând opţiunea \"Generare PDF\" înregistrarea rămâne difinitivă!"
+      footer: |
+        <br />Notă: <br />
+        În cazul în care nu s-a tipărit o Anexă3 puteţi repeta tipărirea cu<br>
+        un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
+        Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
+        pictograma <img src='images/icons/help.png' width='12' height='12' />
+      footer_short: |
+        "<br />Notă: <br />Pentru detalii click pe pictograma <img src='images/icons/help.png' width='12' height='12' />"
 en:
   trst_acc_delivery_note:
     title: "Aviz de expediţie - Anexa3"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+    not_ready: Din păcate încâ nu este gata!<br><br>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br>
                înseamnă că va fi utilizabil în curând!
-    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
-                    destinatarul, respectiv transportatorul.<br/>
-                    Apăsaţi butonul \"Creare Anexa3\" <br/>
-                    <b>Important</b><br/>
+    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br>
+                    destinatarul, respectiv transportatorul.<br>
+                    Apăsaţi butonul \"Creare Anexa3\" <br>
+                    <b>Important</b><br>
                     Selectaţi ambele, chiar dacă sunt acelaşi firme!"
     select:
       client: "Selectaţi destinatarul"
@@ -46,18 +68,18 @@ en:
     delegate_warning: "!!! Nu uitaţi să selectaţi delegatul !!!"
     footer_note_put: "În cazul în care rubrica\"Rămâne\" are valoare negativă, notaţivă cantitatea şi creaţi</br>
                       un APP pentru materialul în cauză, pe cantitate respectivă!"
-    footer_note_del: "Încă mai puteţi alege \"Ştergere\", dacă aţi greşit sau v-aţi răzgândit!<br/>
+    footer_note_del: "Încă mai puteţi alege \"Ştergere\", dacă aţi greşit sau v-aţi răzgândit!<br>
                       Alegând opţiunea \"Generare PDF\" înregistrarea rămâne difinitivă!"
 hu:
   trst_acc_delivery_note:
     title: "Aviz de expediţie - Anexa3"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+    not_ready: Din păcate încâ nu este gata!<br><br>
+               Faptul că a apărut în meniul "Sarcini zilnice",<br>
                înseamnă că va fi utilizabil în curând!
-    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br/>
-                    destinatarul, respectiv transportatorul.<br/>
-                    Apăsaţi butonul \"Creare Anexa3\" <br/>
-                    <b>Important</b><br/>
+    filter_info: "Click pe \"Selectaţi...\" şi alegeţi pe rând<br>
+                    destinatarul, respectiv transportatorul.<br>
+                    Apăsaţi butonul \"Creare Anexa3\" <br>
+                    <b>Important</b><br>
                     Selectaţi ambele, chiar dacă sunt acelaşi firme!"
     select:
       client: "Selectaţi destinatarul"
@@ -66,5 +88,5 @@ hu:
     delegate_warning: "!!! Nu uitaţi să selectaţi delegatul !!!"
     footer_note_put: "În cazul în care rubrica\"Rămâne\" are valoare negativă, notaţivă cantitatea şi creaţi</br>
                       un APP pentru materialul în cauză, pe cantitate respectivă!"
-    footer_note_del: "Încă mai puteţi alege \"Ştergere\", dacă aţi greşit sau v-aţi răzgândit!<br/>
+    footer_note_del: "Încă mai puteţi alege \"Ştergere\", dacă aţi greşit sau v-aţi răzgândit!<br>
                       Alegând opţiunea \"Generare PDF\" înregistrarea rămâne difinitivă!"
