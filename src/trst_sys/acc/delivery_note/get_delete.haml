@@ -1,26 +1,23 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_delivery_note.title')
 -if action == 'get'
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.delivery_note", :action => "get", :object_id => "#{@object.id rescue nil}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr
         %td{:colspan => "3"}
-          %span= "La avizul de expediţie nr. <b>#{@object.id_main_doc}</b>/<b>#{@object.id_date.to_s}</b><br/>Anexa3 nr. <b>#{@object.name}</b>/<b>#{@object.id_date.to_s}</b>"
+          %span= t('trst_acc_delivery_note.get.label.thead_01', @object.i18n_label_thead_01)
+      %tr
+        %td{:colspan => "3"} &nbsp;
+      %tr
+        %td{:colspan => "3"}= t('trst_acc_delivery_note.get.label.thead_02', @object.i18n_label_thead_02)
+      %tr
+        %td{:colspan => "3"} &nbsp;
     %tbody
-      %tr
-        %td{:colspan => "3"} &nbsp;
-      %tr
-        %td{:colspan => "3"}
-          %span= "Se va genera cu următorul conţinut:<br/></br>De la firma <b>#{@object.unit.firm.name[2]}</b> #{@object.unit.name[1]}</br>"
-          %span= "ptr.firma <b>#{TrstPartner.find(@object.client_id).name[2] rescue "!!! Anonymus !!!"}</b> #{TrstPartner.find(@object.client_id).units.first.name[1] rescue "!!! Pct. Lucru Anonymus !!!"}<br/>"
-          %span= "delegatul <b>#{@object.delegate_transp.name rescue "!!! Anonymus !!!"}</b> cu mijlocul de transp. <b>#{@object.id_platte.upcase rescue "B 00 NNN"}</b>,<br\>"
-          %span= "în prezenţa Dn-lui/ei <b>#{@object.signed_by.name}</b>, încarcă următoarele:<br\>"
-      %tr
-        %td{:colspan => "3"} &nbsp;
       - @object.freights.each_with_index do |f,i|
         %tr
-          %td.st= "#{i + 1}. Deşeuri #{f.freight.name.downcase}"
-          %td.st.ri= "#{"%.2f" % f.pu} lei/kg"
+          %td.st= "#{i + 1}. #{t('trst_acc_delivery_note.get.label.tbody')[0]} #{f.freight.name.downcase}"
+          %td.st.ri= "#{"%.2f" % f.pu} #{t('trst_acc_delivery_note.get.label.tbody')[1]}"
           %td.st.ri= "#{"%.2f" % f.qu} #{f.um.downcase}"
       %tr
         %td{:colspan => "3"} &nbsp;
@@ -28,11 +25,12 @@
       %tr
         %td{:class => "buttons_bottom", :colspan => "3"}
           %form{:id  => "xhr_#{action}"}
-          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
-          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+          %span{:class => "button print mc-evt"}= t("button.print")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
       %tr
-        %td.footer_note{:colspan => "3"}= t('trst_acc_delivery_note.footer_note_del')
+        %td.footer_note{:colspan => "3"}= t('trst_acc_delivery_note.get.footer')
 - else
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.delivery_note", :action => "delete", :object_id => "#{@object.id rescue nil}"}}
   %table
     %thead
       %tr
@@ -44,6 +42,5 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
-              =t("button.#{button}")
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
