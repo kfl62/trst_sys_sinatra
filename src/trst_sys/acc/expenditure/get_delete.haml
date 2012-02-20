@@ -1,6 +1,7 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
 -if action == 'get'
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.expenditure", :action => "get", :object_id => "#{@object.id rescue nil}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr
@@ -10,14 +11,8 @@
           %p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
     %tbody.inner
       %tr
-        %td.ce Material
-        %td.ce UM
-        %td.ce PU
-        %td.ce Cant
-        %td.ce Valoare
-        %td.ce 3%
-        %td.ce 16%
-        %td.ce Rest
+        - t('trst_acc_expenditure.label.get').each do |label|
+          %td.ce= label
       - @object.freights.each do |f|
         %tr
           %td
@@ -52,12 +47,12 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom", :colspan => "8"}
-          %form{:id  => "xhr_#{action}"}
-          %span{:class => "button print", :onclick => "trst.task.acc.print('#{@task.id}','print','#{@object.id}')"}= t("button.print")
-          %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+          %span{:class => "button print mc-evt"}= t("button.print")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
       %tr
-        %td.footer_note{:colspan => "2"}= "&nbsp;" #t('gen_footer.note')
+        %td.footer_note{:colspan => "2"}= "&nbsp;"
 - else
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.expenditure", :action => "delete", :object_id => "#{@object.id rescue nil}"}}
   %table
     %thead
       %tr
@@ -69,6 +64,5 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
-              =t("button.#{button}")
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+          %span{:class => "button delete mc-evt"}= t("button.delete")

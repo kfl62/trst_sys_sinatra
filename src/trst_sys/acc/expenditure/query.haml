@@ -2,10 +2,11 @@
   id_pn = params[:id_pn]
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_partners_pf.query.title')
+%span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.expenditure", :action => "query", :id_pn => "#{id_pn}"}}
 - if id_pn
   %p Deocamdată ptr. testare :)
-  %p.filtering-select-pf{:data => {:task_id => @task.id, :id_pn => id_pn}}
-    %input#pfFilteringSelect
+  %p.filtering-select-client
+    %input#clientSelect
   %table{:cellspacing => "0"}
     %tbody
       %tr
@@ -16,5 +17,5 @@
       %tr
         %td
 - else
-  %p.filtering-select-pf{:data => {:task_id => @task.id}}
-    %input#pfFilteringSelect
+  %p.filtering-select-client
+    %input#clientSelect

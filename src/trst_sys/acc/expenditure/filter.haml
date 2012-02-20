@@ -1,9 +1,9 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
-  date_retro = (Date.new(2011,11,1)..Date.new(2012,2,29)).include? Date.today
+  client_task_id   = TrstTask.task_id_by_goal("TrstPartnersPf")
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
--#%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.expenditure"}}
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.expenditure", :action => "filter", :client_task_id => client_task_id}}
 - if unit_id
   - if current_user.unit_id.nil?
     = partial('trst_sys/shared/select_unit')
@@ -14,18 +14,13 @@
           %p{:style => "font-size:0.9em"}= t('trst_acc_expenditure.client.select')
     %tbody
       %tr
-        %td.filtering-select-pf
-          %input#pfFilteringSelect
-          %span{:class => "button post", :data => {:task_id => TrstTask.task_id_by_goal("TrstPartnersPf")}}= t('trst_acc_expenditure.client.add_button')
+        %td.filtering-select-client
+          %input#clientSelect
+          %span{:class => "button post mc-evt"}= t('trst_acc_expenditure.client.add_button')
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          %span{:class => "button post", :data => {:task_id => @task.id}}= t("button.post") + " APP!"
-          %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
-      - if date_retro && current_user.permission_lvl == 9
-        %tr
-          %td
-            %span.small= "Introduceţi APP pentru #{(Date.today-8.month).to_s}?"
-            %input.date_retro{:type => "checkbox", :data => {:date_retro => (Date.today-8.month).to_s}}
+          %span{:class => "button post mc-evt"}= t("button.post") + " APP!"
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
 - else
   = partial('trst_sys/shared/select_unit')

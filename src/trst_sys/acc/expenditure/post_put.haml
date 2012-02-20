@@ -1,40 +1,25 @@
 :ruby
   unit_id = current_user.unit_id || session[:unit_id]
-  year  = params[:date_retro].nil? ? nil : params[:date_retro].split('-')[0].to_i
-  month = params[:date_retro].nil? ? nil : params[:date_retro].split('-')[1].to_i
-  last = month.nil? ? nil :  TrstAccExpenditure.asc(:created_at).by_unit_id(unit_id).monthly(year,month).last
-  name_last = last.nil? ? "" : last.name.next
-  date_last = last.nil? ? params[:date_retro] : last.id_date.to_s
-  name_last = nil unless current_user.permission_lvl <= 6
-  date_last = nil unless current_user.permission_lvl <= 6
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_expenditure.title')
-- unless date = params[:date_retro].nil?
-  %span#retro
 -if action == 'put'
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.expenditure", :action => "put", :object_id => "#{@object.id}"}}
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
       %thead
         %tr
           %th{:colspan => "9"}
             Nr.
-            %input.ce{:name => "[trst_acc_expenditure][name]",:value => params[:date_retro].nil? ? @object.name : (name_last || "")}
+            %input.ce{:name => "[trst_acc_expenditure][name]",:value => @object.name}
             din data de:
-            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => params[:date_retro].nil? ? @object.id_date.to_s : (date_last || params[:date_retro])}
+            %input.date{:name => "[trst_acc_expenditure][id_date]",:value => @object.id_date.to_s}
         %tr
           %td{:colspan => "9"}
             %p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
       %tbody.inner
         %tr
-          %td.ce Material
-          %td.ce UM
-          %td.ce PU
-          %td.ce Cant
-          %td.ce Valoare
-          %td.ce 3%
-          %td.ce 16%
-          %td.ce Rest
-          %td.ce &nbsp;&nbsp;
+          - t('trst_acc_expenditure.label.put').each do |label|
+            %td.ce= label
         -for i in 1..5 do
           %tr{:id => "tr_0#{i.to_s}"}
             %td.filtering-select-freight
@@ -42,9 +27,9 @@
             %td
               %input.um{:id => "um_0#{i.to_s}",:name => "[freights][#{i}][um]",:value => ""}
             %td
-              %input.pu{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
+              %input.pu{:id => "pu_0#{i.to_s}",:name => "[freights][#{i}][pu]",:value => "0.00"}
             %td
-              %input.qu{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :onchange => "trst.task.acc.calculator()"}
+              %input.qu{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00"}
               %input{:type => "hidden", :name => "[freights][#{i}][id_stats]",:value => ''}
             %td
               %span.val 0.00
@@ -55,7 +40,7 @@
             %td
               %span.res 0.00
             %td
-              %span.db-freight-del{:onclick => "trst.task.acc.deleteRow(this)"}
+              %span.db-freight-del
         %tr.odd
           %td.ce.em.st{:colspan => "4"}Total
           %td
@@ -75,11 +60,12 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "9"}
-            %span{:class => "button save", :onclick => "trst.task.acc.calculator(); trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
-            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+            %span{:class => "button save mc-evt"}= t("button.save")
+            %span{:class => "button delete mc-evt"}= t("button.delete")
         %tr
           %td.footer_note{:colspan => "9"}= "&nbsp;" #t('gen_footer.note')
 -else
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.expenditure", :action => "post", :object_id => "#{@object.id rescue nil}"}}
   %table{:cellspacing => "0"}
     -if TrstAccExpenditure.by_unit_id(unit_id).last.freights.empty?
       %thead
@@ -88,9 +74,9 @@
       %tbody
         %tr
           %td
-            %p.ju{:style => "width:350px;color:red"} Există o Adeverinţă fără nici un material ! Poate fi o greşeală de a Dvs. sau se mai lucrează şi la un alt calculator.
-            %p.ju{:style => "width:350px;color:red"} Dacă sunteţi convins că în acest moment nu se întroduc date de pe alt calculator, apăsaţi "Creare", în caz contrar apăsaţi "Anulare" şi încercaţi mai târziu.
-            %p.ju{:style => "width:350px"} Cel mai bine să-l sunaţi pe Doruleţ (0745-438733) să vă puneţi de acord!!!
+            %p.ju{:style => "width:350px;color:red"}
+              Există o Adeverinţă fără nici un material !
+              Poate fi o greşeală de a Dvs. sau se mai lucrează şi la un alt calculator.
     - else
       %thead
         %tr
