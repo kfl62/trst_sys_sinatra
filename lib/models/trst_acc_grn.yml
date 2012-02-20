@@ -2,14 +2,30 @@
 ro:
   trst_acc_grn:
     title: "Notă de recepţie"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
-               înseamnă că va fi utilizabil în curând!
+    not_ready: |
+      Din păcate încâ nu este gata!<br/><br/>
+      Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+      înseamnă că va fi utilizabil în curând!
     filter:
-      info: Selectaţi furnizorul din căsuţa de mai jos!<br/>
-            În cazul în care nu există, creaţi un furnizor<br/>
-            alegând task-ul "Editare partener".
+      info: |
+        Selectaţi furnizorul din căsuţa de mai jos!<br/>
+        În cazul în care nu există, creaţi un furnizor<br/>
+        alegând task-ul "Editare partener".
       add_supplier: Adăugare furnizor!
+    put:
+      thead:
+        label: ["Nr.", "din data de", "De la furnizorul:", "S-au recepţionat următoarele:"]
+        info: "Notă: Toate câmpurile sunt obligatorii!"
+      tbody: ["Material", "UM", "PU", "Cant.", "Valoare", "&nbsp;&nbsp;"]
+      tfoot: "Detalii plată:"
+    get:
+      thead: "Recepţia nr."
+      tbody:
+        text: |
+          Se va genera cu următorul conţinut:<br/></br>De la furnizorul <b>%{supplier}</b><br>
+          în baza doc: <b>%{doc_name} / %{doc_date}</b> <br>
+          delegatul <b>%{delegate}</b> cu mijlocul de transp. <b>%{platte}</b>,<br>
+          în prezenţa Dn-lui/ei <b>%{signed_by}</b>, sau recepţionat următoarele:<br>
     select:
       supplier: Selectaţi furnizorul!
       delegate: Selectaţi delegatul!
@@ -29,10 +45,28 @@ ro:
   trst_acc_grn_transfer:
     title: "Transfer gestiune"
     filter:
-    unit_chief: |
-      Pentru a recepţiona marfă de la alte gestiuni<br/>
-      Apăsaţi "Selectare avize" şi bifaţi avizele a <br/>
-      căror denumire se termină cu indicativul punctului.
+      label: ["Tip marfă transferată:", "cu 3%", " | fără 3%", "Selectare Avize"]
+      unit_chief: |
+        Pentru a recepţiona marfă de la alte gestiuni<br/>
+        Apăsaţi "Selectare avize" şi bifaţi avizele a <br/>
+        căror denumire se termină cu indicativul punctului.
+    query:
+      thead_01: Legendă
+      thead_02: Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
+      tbody: ["Material", "Preţ (lei/kg)", "Cantitate", "Valoare"]
+    put:
+      thead:
+        label_01: "Nr.intern <b>%{name}</b>"
+        label_02: "din data de: "
+        label_03: "De la furnizorul: %{name} prin delegat:"
+        label_04: "Cu avizele: %{dns}"
+        label_05: "S-au recepţionat următoarele:"
+      tbody: ["Material", "Preţ (lei/kg)", "Cantitate", "Valoare"]
+    get:
+      thead:
+        label_01: "Cu documentul având nr. intern %{name} s-au operat avizele:"
+        label_02: "şi s-au recepţionat următoarele mărfuri:"
+      tbody: ["Material", "Preţ (lei/kg)", "Cantitate", "Valoare"]
     no_dn: Nu sunt avize de recepţionat!
 en:
   trst_acc_grn:
