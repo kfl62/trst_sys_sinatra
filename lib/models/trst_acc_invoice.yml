@@ -2,18 +2,15 @@
 ro:
   trst_acc_invoice:
     title: "Facturi - Persoane juridice"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
-               înseamnă că va fi utilizabil în curând!
+    not_ready: |
+      Din păcate încâ nu este gata!<br/><br/>
+      Faptul că a apărut în meniul "Sarcini zilnice",<br/>
+      înseamnă că va fi utilizabil în curând!
     filter:
-      info: Selectaţi clientul din căsuţa de mai jos!<br/>
-            În cazul în care nu există, creaţi un client<br/>
-            alegând task-ul "Adăugare client".
-      add_client: Adăugare client!
-    select:
-      client: Selectaţi clientul!
-      delegate: Selectaţi delegatul!
-      delegate_new: "Adăugare delegat"
+      post_client: Adăugare client!
+      select_client: Selectaţi clientul!
+      select_month: "Luna ptr. facturare"
+      select_tax: ["Tip marfă facturată", "cu 3%", "fără 3%"]
     inv: Factură fiscală
 en:
   trst_acc_invoice:
