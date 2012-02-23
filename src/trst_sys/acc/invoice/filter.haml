@@ -2,26 +2,27 @@
   today = Date.today
   year = params[:year].nil? ? today.year : params[:year].to_i
   month = params[:month].nil? ? today.month : params[:month].to_i
+  client_task_id   = TrstTask.task_id_by_goal("TrstPartner.find")
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.invoice", :action => "filter", :client_task_id => client_task_id}}
 %table{:cellspacing => "0"}
   %thead
     %tr
-      %td{:colspan => "2"}
-        -#%p{:style => "font-size:0.9em"}= t('trst_acc_invoice.filter.info')
+      %td{:colspan => "2"}= #"&nbsp;&nbsp;"
   %tbody
     %tr
       %td{:style => "vertical-align:middle"}
         %select#select_client
-          %option{:value => 'null'}= t('trst_acc_invoice.select.client')
+          %option{:value => 'null'}= t('trst_acc_invoice.filter.select_client')
           - unless TrstPartner.clients.empty?
             - TrstPartner.clients.intern(false).each do |client|
               %option{:value => client.id}= client.name[1]
       %td{:style => "vertical-align:middle"}
-        %span{:class => "button post", :onclick => "trst.task.init('#{TrstTask.task_id_by_goal("TrstPartner.find")}','post','new?partner_type=client')"}= t('trst_acc_invoice.filter.add_client')
+        %span{:class => "button post client"}= t('trst_acc_invoice.filter.post_client')
     %tr
       %td{:style => "vertical-align:middle"}
-        %span.small Luna ptr. facturare
+        %span.small=  t('trst_acc_invoice.filter.select_month')
       %td{:style => "vertical-align:middle"}
         %select#select_year
           - ["Anul",2011,2012].each do |y|
@@ -31,14 +32,14 @@
             %option{:value => i, :selected => i == month}= m
     %tr
       %td{:style => "vertical-align:middle"}
-        %span.small Tip marfă facturată
+        %span.small=  t('trst_acc_invoice.filter.select_tax')[0]
       %td{:style => "vertical-align:middle"}
-        %span.small cu 3%
+        %span.small=  t('trst_acc_invoice.filter.select_tax')[1]
         %input{:type => "radio", :name => "out_003", :checked => true}
-        %span.small fără 3%
+        %span.small=  t('trst_acc_invoice.filter.select_tax')[2]
         %input{:type => "radio", :name => "out_003"}
   %tfoot
     %tr
       %td{:class => "buttons_bottom", :colspan => "2"}
-        %span{:class => "button post", :onclick => "trst.task.acc.invoiceInit('#{@task.id}')" }= "Selectare Avize"
-        %span{:class => "button cancel", :onclick => "trst.task.destroy()"}= t("button.cancel")
+        %span{:class => "button post mc-evt"}= "Selectare Avize"
+        %span{:class => "button cancel mc-evt"}= t("button.cancel")
