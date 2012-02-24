@@ -183,6 +183,7 @@ module Trst
           end
         else
           name = o.name
+          name += " - #{o.id_pn}" if o.fields.include? 'id_pn'
         end
         return name
       end
