@@ -27,8 +27,8 @@ class TrstPartnersPf
     def auto_search(u = nil)
       pfs = []
       all.asc(:name_last, :name_first).each do |pf|
-        if pf.id_pn.nil? || pf.id_pn.empty? || pf.id_pn.include?("tmp")
-          pf.delete if (pf.created_at + 300) < DateTime.now
+        if pf.pn_error?
+          pf.id_pn.include?("tmp") ? (pf.delete if (pf.created_at + 300) < DateTime.now) : pf.delete
         else
           label = "#{pf.id_pn} | #{pf.name_full}"
           pfs << {:id => pf.id,:pn => pf.id_pn,:label => label}
