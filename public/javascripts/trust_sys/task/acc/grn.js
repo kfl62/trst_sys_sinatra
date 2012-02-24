@@ -1,8 +1,5 @@
 dojo.mixin(trst.task.acc,{
   grn: {
-    freightStore: new dojo.data.ItemFileReadStore({
-      url: "/utils/search/TrstAccFreight"
-    }),
     init: function(){
       // Validate presence of supplier and connect buttons 'Post'
       if (trst.task.acc.hd.action == 'filter'){
@@ -56,11 +53,14 @@ dojo.mixin(trst.task.acc,{
       }
     },
     initFreightSearch: function(fr,i){
+      var freightStore = new dojo.data.ItemFileReadStore({
+            url: "/utils/search/TrstAccFreight"
+          })
       var search = new dijit.form.FilteringSelect({
         id: fr.id,
         name: '[freights][' + (i+1) + '][freight_id]',
         value: "",
-        store: trst.task.acc.grn.freightStore,
+        store: freightStore,
         searchAttr: "label",
         placeHolder: "Selectare material",
         labelAttr: "label",

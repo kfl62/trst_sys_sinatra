@@ -1,11 +1,5 @@
 dojo.mixin(trst.task.acc,{
   expenditure: {
-    clientStore:  new dojo.data.ItemFileReadStore({
-      url: "/utils/search/TrstPartnersPf"
-    }),
-    freightStore: new dojo.data.ItemFileReadStore({
-      url: "/utils/search/TrstAccFreight"
-    }),
     init: function(){
       // Initialize select by id_pn input
       if (dojo.byId('clientSelect') != null){
@@ -39,12 +33,15 @@ dojo.mixin(trst.task.acc,{
       this.connectButtons()
     },
     initClientSearch: function(){
+      var clientStore =  new dojo.data.ItemFileReadStore({
+            url: "/utils/search/TrstPartnersPf"
+          });
       var id_pn = trst.task.acc.hd.id_pn
       var search = new dijit.form.FilteringSelect({
         id: "clientSelect",
         name: "id_pn",
         value: (id_pn != undefined) ? id_pn : "",
-        store: trst.task.acc.expenditure.clientStore,
+        store: clientStore,
         searchAttr: "pn",
         placeHolder: "Caută după CNP",
         labelAttr: "label",
@@ -69,11 +66,14 @@ dojo.mixin(trst.task.acc,{
       }
     },
     initFreightSearch: function(fr,i){
+      var freightStore = new dojo.data.ItemFileReadStore({
+            url: "/utils/search/TrstAccFreight"
+          })
       var search = new dijit.form.FilteringSelect({
         id: fr.id,
         name: '[freights][' + (i+1) + '][freight_id]',
         value: "",
-        store: trst.task.acc.expenditure.freightStore,
+        store: freightStore,
         searchAttr: "label",
         placeHolder: "Selectare material",
         labelAttr: "label",
