@@ -16,11 +16,11 @@ dojo.mixin(trst.task,{
       var deferred = dojo.xhrGet(xhrArgs);
       trst.task.url = ["/srv/tsk"];
     },
-    get: function(task_id,target_id,child_id,target){
+    get: function(task_id,goal_id,child_id,goal){
       var node = dojo.byId('task_window')
-      trst.task.url.push(task_id,'get',target_id);
+      trst.task.url.push(task_id,'get',goal_id);
       var xhrArgs = {
-        url: trst.task.url.join('/').concat('?target=',target,'&child_id=',child_id),
+        url: trst.task.url.join('/').concat('?goal=',goal,'&child_id=',child_id),
         load: function(data){
           node.innerHTML = data;
         },
