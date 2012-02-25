@@ -6,18 +6,16 @@
     %thead
       %tr
         %td{:colspan => "4"}
-          %span.small{:style => "color:#999999"}= " Cu nr. intern #{@object.name}"
+          %span.small{:style => "color:#999999"}= t('trst_acc_invoice.get.thead_01', :name => @object.name)
           %br
-          %span{:style => "display:block;max-width:400px"}= " - a fost operată factura nr. <b>#{@object.id_main_doc}/#{@object.id_date.to_s}</b> către <b>#{@object.client.name[2]}</b> în baza avizelor de expediţie:"
+          %span{:style => "display:block;max-width:400px"}= t('trst_acc_invoice.get.thead_02', :id_main_doc => @object.id_main_doc, :id_date => @object.id_date.to_s, :client => @object.client.name[2])
           %span{:style => "display:block;max-width:400px;padding-left:5px"}= @object.delivery_notes.each_with_object([]){|dn,a| a << dn.id_main_doc}.join(', ')
-          %span{:style => "display:block;max-width:400px"}= "cu următorul conţinut:"
+          %span{:style => "display:block;max-width:400px"}= t('trst_acc_invoice.get.thead_03')
           %br
     %tbody.inner
-      %tr
-        %td Material
-        %td PU
-        %td Cant
-        %td Val
+      %tr.ce.st.em
+        - t('trst_acc_invoice.get.tbody').each do |label|
+          %td= label
       - @object.freights.each do |f|
         %tr
           %td.vam
@@ -37,7 +35,7 @@
       %tr
         %td{:colspan => "4"}
           -if @object.payment_doc.empty?
-            %span= "Factura nu este plătită! Termen: #{@object.payment_deadline.to_s}"
+            %span= t('trst_acc_invoice.get.tfoot', :deadline => @object.payment_deadline.to_s)
           -else
             %span= @object.payment_doc
       %tr

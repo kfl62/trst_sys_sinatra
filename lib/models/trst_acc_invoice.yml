@@ -12,6 +12,22 @@ ro:
       select_month: "Luna ptr. facturare"
       select_tax: ["Tip marfă facturată", "cu 3%", "fără 3%"]
     inv: Factură fiscală
+    query:
+      thead_01: Legendă
+      thead_02: Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
+      tbody: ["Material", "Cantitate", "Preţ", "Valoare"]
+    put:
+      thead_01: ["Azi: ", "cu factura nr: "]
+      thead_02: "Se facturează clientului %{client}, delegat"
+      thead_03: ["Marfa livrată cu avizele: ", ", după cum urmează:"]
+      tbody: ["Material", "Cantitate", "Preţ", "Valoare"]
+      tfoot: ["Achitat?", "Da", "Nu", "&nbsp;&nbsp;|&nbsp;&nbsp;Modalitate plată? ", "Cache", "Bancă", "Virament bancar", "termen de plată"]
+    get:
+      thead_01: "Cu nr. intern %{name}"
+      thead_02: " - a fost operată factura nr. <b>%{id_main_doc}/%{id_date}</b> către <b>%{client}</b> în baza avizelor de expediţie:"
+      thead_03: "cu următorul conţinut:"
+      tbody: ["Material", "Preţ", "Cantitate", "Valoare"]
+      tfoot: "Factura nu este plătită! Termen: %{deadline}"
 en:
   trst_acc_invoice:
     title: "Facturi - Persoane juridice"

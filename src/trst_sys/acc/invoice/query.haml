@@ -20,22 +20,20 @@
     %tr
       %td{:colspan => "8"}
         %br
-        %span.small Legendă:
+        %span.small= t('trst_acc_invoice.query.thead_01')
         - TrstFirm.first.units.asc(:slug).each do |u|
           %span.small{:style => "border: solid 1px #333333; background-color: #{bckgrnd[u.name[0].downcase]}"}= u.name[1]
         %br
-        %span.small Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
+        %span.small= t('trst_acc_invoice.query.thead_02')
     %tbody
       - unless dns.empty?
         %tr
           %td{:colspan => "8"}
             %table{:style => "width:80%; margin: 15px auto 5px;"}
               %tbody.inner
-                %tr
-                  %td.ce Material
-                  %td.ce Cantitate
-                  %td.ce Preţ
-                  %td.ce Valoare
+                %tr.ce.st.em
+                  - t('trst_acc_invoice.query.tbody').each do |label|
+                    %td= label
                 - TrstAccDeliveryNote.any_in(:_id  => dns).sum_freights_inv.sort.each do |s|
                   %tr.to-calculate
                     %td.vam

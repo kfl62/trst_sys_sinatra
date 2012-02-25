@@ -9,24 +9,22 @@
           %td{:colspan => "4"}
             %span.small{:style => "color:#999999;display:block; margin-bottom:-8px"}= "(Id. intern #{@object.name})"
             %br
-            %span= "Azi: "
+            %span= t('trst_acc_invoice.put.thead_01')[0]
             %input.date{:name => "[trst_acc_invoice][id_date]", :value =>  @object.id_date.to_s}
-            %span= "cu factura nr: "
+            %span= t('trst_acc_invoice.put.thead_01')[1]
             %input.ce{:name => "[trst_acc_invoice][id_main_doc]", :value => @object.id_main_doc}
             %br
-            %span= "Se facturează clientului #{@object.client.name[1]}, delegat"
+            %span=  t('trst_acc_invoice.put.thead_02', :client => @object.client.name[1])
             %select{:name => "[trst_acc_invoice][id_delegate_c]"}
               - @object.client.delegates.each do |d|
                 %option{:value => d.id.to_s}= d.name
             %br
-            %span.small{:style => "display:block; max-width:400px"}= "Marfa livrată cu avizele: #{@object.delivery_notes.map{|dn| dn.id_main_doc}.join(',')}, după cum urmează:"
+            %span.small{:style => "display:block; max-width:400px"}= "#{t('trst_acc_invoice.put.thead_03')[0]} #{@object.delivery_notes.map{|dn| dn.id_main_doc}.join(',')} #{t('trst_acc_invoice.put.thead_03')[1]}"
             %br
       %tbody.inner
-        %tr
-          %td.ce Material
-          %td.ce Cantitate
-          %td.ce Preţ
-          %td.ce Valoare
+        %tr.ce.st.em
+          - t('trst_acc_invoice.put.tbody').each do |label|
+            %td= label
         - @object.delivery_notes.sum_freights_inv.sort.each_with_index do |s,i|
           %tr.to-calculate
             %td.vam
@@ -50,22 +48,22 @@
         %tr
           %td{:colspan => "4"} &nbsp;
         %tr
-          %td{:style => "vertical-align:middle", :colspan => "4"}
-            %span.small Achitat?
-            %span.small Da
+          %td.vam{:colspan => "4"}
+            %span.small= t('trst_acc_invoice.put.tfoot')[0]
+            %span.small= t('trst_acc_invoice.put.tfoot')[1]
             %input#payment-payed.payment{:type => "radio", :name => "[trst_acc_invoice][payed]", :checked => @object.payed, :value => "true"}
-            %span.small Nu
+            %span.small= t('trst_acc_invoice.put.tfoot')[2]
             %input.payment{:type => "radio", :name => "[trst_acc_invoice][payed]", :checked => !@object.payed, :value => "false"}
-            %span.small &nbsp;&nbsp;|&nbsp;&nbsp;Modalitate plată
-            %span.small Cache
+            %span.small= t('trst_acc_invoice.put.tfoot')[3]
+            %span.small= t('trst_acc_invoice.put.tfoot')[4]
             %input#payment-cache.payment{:type => "radio", :name => "cache"}
-            %span.small Bancă
+            %span.small= t('trst_acc_invoice.put.tfoot')[5]
             %input.payment{:type => "radio", :name => "cache", :checked => true}
         %tr#payment
-          %td{:colspan => "4"}
-            %span#payment-doc-label Virament bancar
+          %td.vam{:colspan => "4"}
+            %span#payment-doc-label.small= t('trst_acc_invoice.put.tfoot')[6]
             %input#payment-doc-nr.ce.st{:style => "width:3.0em;display:none", :value => ""}
-            %span#payment-date-label termen de plată:
+            %span#payment-date-label.small= t('trst_acc_invoice.put.tfoot')[7]
             %input#payment-date.date{:name => "[trst_acc_invoice][payment_deadline",:value => Date.today.to_s}
             %input#payment-doc{:type => "hidden", :name => "[trst_acc_invoice][payment_doc]", :value => ""}
         %tr
