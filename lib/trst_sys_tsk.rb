@@ -158,8 +158,9 @@ class TrstSysTsk < Sinatra::Base
     @object.update_attributes update_hash
     if params[:freights]
       params[:freights].values.each do |v|
-        o = @object.freights.find_or_create_by(:id_stats => v["id_stats"], :pu => v["pu"]) unless v["freight_id"].nil? || v["freight_id"].empty?
+        o = @object.freights.find_or_create_by(:freight_id => v["freight_id"], :pu => v["pu"]) unless v["freight_id"].nil? || v["freight_id"].empty?
         o.update_attributes v unless o.nil?
+        o.delete if v["qu"] == '-999'
       end
       @object.reload
     end
