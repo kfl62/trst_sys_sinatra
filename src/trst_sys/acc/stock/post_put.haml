@@ -3,11 +3,12 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_stock.title')
 -if action == 'put'
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.stock", :action => "put", :object_id => "#{@object.id rescue nil}"}}
   %form{:id  => "xhr_#{action}"}
     %table.big
       %thead
         %tr
-          %th{:colspan => "4"}
+          %th{:colspan => "5"}
             Nume:
             %input.ce{:name => "[trst_acc_stock][name]",:value => @object.name}
             Data:
@@ -16,7 +17,7 @@
             Expl:
             %input{:name => "[trst_acc_stock][expl]",:value => @object.expl,:style => "width:23em"}
         %tr
-          %td{:colspan => "4"}
+          %td{:colspan => "5"}
             -#%p.ju{:style => "width:600px"}= t('trst_acc_expenditure.client.text', @object.client.i18n_hash)
       %tbody.inner.stat
         %tr
@@ -24,6 +25,7 @@
           %td.ce= t('trst_acc_stock.um')
           %td.ce= t('trst_acc_stock.pu')
           %td.ce= t('trst_acc_stock.qu')
+          %td.ce &nbsp;
         - @object.freights_sort_by_id_stats.each_with_index do |f,i|
           %tr.freight
             %td
@@ -37,21 +39,24 @@
               %input.ri.st{:style => "width:4.0em", :name => "[freights][#{i}][pu]", :value => "%0.2f" % f.pu}
             %td
               %input.ri.st{:style => "width:6.0em", :name => "[freights][#{i}][qu]", :value => "%0.2f" % f.qu}
+            %td
+              %span.db-freight-del
         %tr
-          %td{:colspan => "4"}
-            %select{:onchange => "if (selectedValue(this) != 'null'){trst.task.acc.insertRow(selectedLabel(this),'#{@object.id}',selectedValue(this))}"}
+          %td{:colspan => "5"}
+            %select
               %option{:value => "null"}=t('trst_acc_stock.add_freight')
               - TrstAccFreight.by_unit_id(@object.unit_id).asc(:name).each do |f|
                 %option{:value => f.id}= f.name
       %tfoot
         %tr
-          %td{:class => "buttons_bottom", :colspan => "4"}
-            - current_buttons(action).each do |button|
-              %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id)}<
-                =t("button.#{button}")
+        %td{:class => "buttons_bottom", :colspan => "4"}
+          %span{:class => "button save mc-evt"}= t("button.save")
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
         %tr
           %td.footer_note{:colspan => "4"}= "&nbsp;" #t('gen_footer.note')
 -else
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.stock", :action => "post", :object_id => "#{@object.id rescue nil}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr

@@ -2,6 +2,7 @@
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.stock", :action => "filter"}}
 - if unit_id
   - unless current_user.unit_id
     = partial('trst_sys/shared/select_unit')
@@ -13,9 +14,7 @@
       %tbody
         %tr
           %td
-            %select{:onchange => "if (selectedValue(this) != 'null'){trst.task.init('#{@task.id}',
-                                 'get',
-                                  selectedValue(this))}"}
+            %select
               %option{:value => 'null'}= TrstAccStock.by_unit_id(unit_id).empty? ? t('select.no_data') : t('select.select')
               - unless TrstAccStock.by_unit_id(unit_id).empty?
                 - TrstAccStock.by_unit_id(unit_id).each do |o|
@@ -24,8 +23,7 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom"}
-            - current_buttons(action).each do |verb|
-              %span{:class => "button #{verb}", :onclick => current_xhr(verb,@task.id,action,"new")}<
-                =t("button.#{verb}")
+            %span{:class => "button post mc-evt"}= t("button.post")
+            %span{:class => "button cancel mc-evt"}= t("button.cancel")
 - else
   = partial('trst_sys/shared/select_unit')
