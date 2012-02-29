@@ -93,41 +93,53 @@ class TrstAccFreightOut
   # @todo
   def handle_stock_remove
     if id_date.month == Date.today.month
-      out = self.qu
-      last_pu = freight.ins.last.pu == 0 ? freight.pu : freight.ins.last.pu
       stck = unit.current_stock
-      fs = stck.freights.where(:id_stats => id_stats)
-      if fs.count == 1
-        f = fs.first
-        f.qu -= qu
-        self.pu = f.pu
-        f.save
-      else
-        sk = fs.asc(:pu).collect{|f| f.pu}
-        sk.delete(last_pu).nil? ? sk : sk.push(last_pu)
-        sk.delete(0).nil? ? sk : sk.push(0) if unit.main?
-        sk.each do |spu|
-          f = fs.where(:pu => spu).first
-          if out > f.qu
-            self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :doc_id => doc_id) unless f.qu == 0
-            out -= f.qu unless out == 0
-            f.qu = 0
-            f.save
-          else
-            self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :doc_id => doc_id) unless out == 0
-            f.qu -= out
-            out = 0
-            f.save
-          end
+    else
+      stck  = unit.monthly_stock(id_date.year,id_date.month)
+      cstk  = unit.current_stock
+    end
+    out = self.qu
+    last_pu = freight.ins.last.pu == 0 ? freight.pu : freight.ins.last.pu
+    fs   = stck.freights.where(:id_stats => id_stats)
+    csfs = cstk.freights.where(:id_stats => id_stats)
+    if fs.count == 1
+      f   = fs.first
+      csf = csfs.where(:pu => f.pu).first
+      f.qu   -= qu
+      csf.qu -= qu
+      self.pu = f.pu
+      f.save
+      csf.save
+    else
+      sk = fs.asc(:pu).collect{|f| f.pu}
+      sk.delete(last_pu).nil? ? sk : sk.push(last_pu)
+      sk.delete(0).nil? ? sk : sk.push(0) if unit.main?
+      sk.each do |spu|
+        f   = fs.where(:pu => spu).first
+        csf = csfs.where(:pu => f.pu).first
+        if out > f.qu
+          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :doc_id => doc_id) unless f.qu == 0
+          out -= f.qu unless out == 0
+          f.qu   = 0
+          csf.qu = 0
+          f.save
+          csf.save
+        else
+          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :doc_id => doc_id) unless out == 0
+          f.qu   -= out
+          csf.qu -= out
+          out = 0
+          f.save
+          csf.save
         end
-        self.delete
       end
+      self.delete
     end
   end
   # @todo
   def handle_stock_add
-    if id_date.month == Date.today.month
-      stck = unit.current_stock
+    to_handle = (id_date.month == Date.today.month) ? [unit.current_stock] : [unit.current_stock, unit.monthly_stock(id_date.year,id_date.month)]
+    to_handle.each do |stck|
       f = stck.freights.find_or_create_by(:id_stats => id_stats, :pu => pu)
       f.freight_id = freight.id
       f.qu += qu
