@@ -14,7 +14,7 @@
       %tbody
         %tr
           %td
-            %select
+            %select.stock
               %option{:value => 'null'}= TrstAccStock.by_unit_id(unit_id).empty? ? t('select.no_data') : t('select.select')
               - unless TrstAccStock.by_unit_id(unit_id).empty?
                 - TrstAccStock.by_unit_id(unit_id).each do |o|
