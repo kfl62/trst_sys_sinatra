@@ -54,11 +54,11 @@ class TrstFirmUnit
     base = self.monthly_stock(y,m) || self.current_stock
     keys   = base.freights.keys(with_pu)
     retval = keys.each_with_object([]) do |k,a|
-      f = self.current_stock.freights.by_id_stats_and_pu(k)[0].freight
+      f    = base.freights.by_id_stats_and_pu(k)[0].freight
       f_st = f.stocks.by_id_stats_and_pu(k).sum_qu(y,m)
       f_in = f.ins.by_id_stats_and_pu(k).sum_qu(y,m)
       f_ou = f.outs.by_id_stats_and_pu(k).sum_qu(y,m)
-      f_cs = self.current_stock.freights.by_id_stats_and_pu(k).sum(:qu) || 0
+      f_cs = base.freights.by_id_stats_and_pu(k).sum(:qu) || 0
       diff = (f_st + f_in - f_ou - f_cs).round(2)
       a << "#{k} #{("%0.2f" % f_st).rjust(10)} #{("%0.2f" % f_in).rjust(10)} #{("%0.2f" % f_ou).rjust(10)} #{("%0.2f" % (f_st + f_in - f_ou)).rjust(10)} #{("%0.2f" % f_cs).rjust(10)} #{("%0.2f" % diff).rjust(10)}" if (diff != 0 or all)
     end
