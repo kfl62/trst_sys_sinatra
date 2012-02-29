@@ -68,7 +68,7 @@ class TrstAccExpenditure
         end
         a << "#{app.unit.slug} -#{app.name.rjust(16)} #{app.id_date.to_s} #{("%0.2f" % app.sum_100).rjust(10)} #{("%0.2f" % f_sum_100).rjust(10)} #{("%0.2f" % (app.sum_100 - f_sum_100)).rjust(10)}" if app.sum_100.round(2) != f_sum_100.round(2)
       end
-      puts retval.empty? ? "Ok" : retval.join("\n")
+      retval.empty? ? "Ok" : retval.join("\n")
     end
     # @todo
     def query(pn, m = nil)
