@@ -35,6 +35,27 @@ task :console do
   IRB.start
 end
 
+task :daily do
+  require "bundler/setup"
+  require 'mongoid'
+  app_root = File.expand_path(File.dirname(__FILE__))
+  Mongoid.configure do |config|
+    config.master = Mongo::Connection.new('localhost').db('development_master')
+    config.raise_not_found_error = false
+  end
+  required = Dir.glob(File.join(app_root, 'lib','models','*.rb'))
+  required.each do |r|
+    require r
+  end
+  f = File.new('./tmp/error.log', 'a')
+  f.write "Check \"sum\" for expenditures - #{Date.today.to_s}\n"
+  f.write "\t#{TrstAccExpenditure.daily.check_sum}\n"
+  TrstFirm.first.units.each do |u|
+    f.write "Check current stock for #{u.slug}\n"
+    f.write "\t#{TrstFirm.pos(u.slug).current_stock_check(false,true)}\n"
+  end
+end
+
 desc "Start web server"
 task :thin do
   exec "thin start"
