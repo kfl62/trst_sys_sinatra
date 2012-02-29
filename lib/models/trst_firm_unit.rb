@@ -45,7 +45,7 @@ class TrstFirmUnit
   end
   # @todo
   def monthly_stock(y,m)
-    stocks.monthly(y,m).first
+    stocks.monthly(y,m + 1).first
   end
   # @todo
   def monthly_stock_check(all = false, with_pu = false, y = nil, m = nil)

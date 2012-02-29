@@ -26,6 +26,7 @@ class TrstAccStock
     def monthly(y = nil, m = nil)
       y ||= Date.today.year
       m ||= Date.today.month
+      if m == 13; y += 1; m = 1; end
       where(:id_date => Date.new(y,m,1))
     end
     # @todo
