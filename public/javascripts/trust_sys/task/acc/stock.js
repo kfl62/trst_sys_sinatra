@@ -3,9 +3,9 @@ dojo.mixin(trst.task.acc,{
     init: function(){
       // Connect select, 'Post' on filter
       if (trst.task.acc.hd.action == 'filter'){
-        dojo.query('select').onchange(function(evt){
-          if (selectedValue(evt.target) != 'null'){
-            trst.task.init(trst.task.acc.hd.task_id,'get',selectedValue(evt.target))
+        dojo.query('select.stock').onchange(function(e){
+          if (selectedValue(e.target) != 'null'){
+            trst.task.init(trst.task.acc.hd.task_id,'get',selectedValue(e.target))
           }
         })
         dojo.query('.button.post.mc-evt').onclick(function(){
@@ -49,20 +49,16 @@ dojo.mixin(trst.task.acc,{
       node.parentNode.previousElementSibling.children[0].value = '-999'
     },
     connectButtons: function(){
-      var bs = dojo.query('.button.save.mc-evt'),
-          bp = dojo.query('.button.put.mc-evt'),
-          bc = dojo.query('.button.cancel.mc-evt'),
-          bd = dojo.query('.button.delete.mc-evt');
-      bs.onclick(function(){
+      dojo.query('.button.save.mc-evt').onclick(function(){
         trst.task.init(trst.task.acc.hd.task_id,'put',trst.task.acc.hd.object_id)
       })
-      bp.onclick(function(){
+      dojo.query('.button.put.mc-evt').onclick(function(){
         trst.task.init(trst.task.acc.hd.task_id,'put',trst.task.acc.hd.object_id)
       })
-      bc.onclick(function(){
+      dojo.query('.button.cancel.mc-evt').onclick(function(){
         trst.task.destroy()
       })
-      bd.onclick(function(){
+      dojo.query('.button.delete.mc-evt').onclick(function(){
         trst.task.init(trst.task.acc.hd.task_id,'delete',trst.task.acc.hd.object_id)
       })
     }
