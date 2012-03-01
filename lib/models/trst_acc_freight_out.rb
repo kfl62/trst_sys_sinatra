@@ -127,10 +127,10 @@ class TrstAccFreightOut
         else
           self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :doc_id => doc_id) unless out == 0
           f.qu   -= out
-          csf.qu -= out
+          csf.qu -= out if csf
           out = 0
           f.save
-          csf.save
+          csf.save if csf
         end
       end
       self.delete
