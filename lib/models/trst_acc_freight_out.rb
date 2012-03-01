@@ -101,29 +101,29 @@ class TrstAccFreightOut
     out = self.qu
     last_pu = freight.ins.last.pu == 0 ? freight.pu : freight.ins.last.pu
     fs   = stck.freights.where(:id_stats => id_stats)
-    csfs = cstk.freights.where(:id_stats => id_stats)
+    csfs = cstk.freights.where(:id_stats => id_stats) if cstk
     if fs.count == 1
       f   = fs.first
-      csf = csfs.where(:pu => f.pu).first
+      csf = csfs.where(:pu => f.pu).first if csfs
       f.qu   -= qu
-      csf.qu -= qu
+      csf.qu -= qu  if csf
       self.pu = f.pu
       f.save
-      csf.save
+      csf.save if csf
     else
       sk = fs.asc(:pu).collect{|f| f.pu}
       sk.delete(last_pu).nil? ? sk : sk.push(last_pu)
       sk.delete(0).nil? ? sk : sk.push(0) if unit.main?
       sk.each do |spu|
         f   = fs.where(:pu => spu).first
-        csf = csfs.where(:pu => f.pu).first
+        csf = csfs.where(:pu => f.pu).first if csfs
         if out > f.qu
           self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :doc_id => doc_id) unless f.qu == 0
           out -= f.qu unless out == 0
           f.qu   = 0
-          csf.qu = 0
+          csf.qu = 0 if csf
           f.save
-          csf.save
+          csf.save if csf
         else
           self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :doc_id => doc_id) unless out == 0
           f.qu   -= out
