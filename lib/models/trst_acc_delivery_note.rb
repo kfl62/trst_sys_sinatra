@@ -32,7 +32,7 @@ class TrstAccDeliveryNote
   class << self
     # @todo
     def pos(slg)
-      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
+      where(:unit_id => TrstFirm.pos(slg))
     end
     # @todo
     def daily(y = nil, m = nil, d = nil)
@@ -40,7 +40,7 @@ class TrstAccDeliveryNote
       y ||= Date.today.year
       m ||= Date.today.month
       d ||= Date.today.mday
-      where(:id_date => Time.utc(y,m,d)).asc(:name)
+      where(:id_date => Time.utc(y,m,d))
     end
    # @todo
     def monthly(y = nil, m = nil)
@@ -48,11 +48,11 @@ class TrstAccDeliveryNote
       m ||= Date.today.month
       mb = DateTime.new(y, m)
       me = m.to_i == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
-      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time).asc(:name)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
     def by_unit_id(u)
-      where(:unit_id => u).asc(:name)
+      where(:unit_id => u)
     end
     # todo
     def nin(nin = true)
@@ -60,7 +60,7 @@ class TrstAccDeliveryNote
     end
     # #todo
     def by_client_id(id)
-      where(:client_id => id).asc(:name)
+      where(:client_id => id)
     end
     # @todo
     def by_freights_p03(tax = false)
@@ -85,7 +85,7 @@ class TrstAccDeliveryNote
         end
       end
     end
-     # @todo
+    # @todo
     def sum_freights_grn
       all.each_with_object({}) do |dn,s|
         dn.freights.each_with_object(s) do |f,s|
@@ -99,9 +99,9 @@ class TrstAccDeliveryNote
         end
       end
     end
-   # @todo
+    # @todo
     def to_txt
-      all.each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
+      all.asc(:name).each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
     end
   end # Class methods
   # @todo
