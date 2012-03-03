@@ -37,7 +37,7 @@ class TrstTask
     def task_id_by_goal(t)
       where(:goal => /#{t}/).first.id.to_s rescue nil
     end
-  end
+  end # Class methods
   # @todo Document this method
   def is_pdf?
     goal.include?("TrstPdf.find_by_task_id")
@@ -77,7 +77,6 @@ class TrstTask
      {:css => "datetime",:name => "created_at",:label => I18n.t("trst_task.created_at"),:value => created_at},
      {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_task.updated_at"),:value => updated_at}]
   end
-
   protected
   def sync_pages
     pgch = self.page_ids_change
