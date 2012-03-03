@@ -13,12 +13,14 @@ class TrstFirmUnit
   field :env_auth,      :type => String
   field :main,          :type => Boolean,   :default => false
 
-  embedded_in :firm,      :class_name => "TrstFirm",            :inverse_of => :units
-  has_one     :user,      :class_name => "TrstUser",            :inverse_of => :unit
-  has_many    :apps,      :class_name => "TrstAccExpenditure",  :inverse_of => :unit
-  has_many    :stocks,    :class_name => "TrstAccStock",        :inverse_of => :unit
-  has_many    :freights,  :class_name => "TrstAccFreight",      :inverse_of => :unit
-  has_many    :dps,       :class_name => "TrstAccCache",        :inverse_of => :unit
+  embedded_in :firm,          :class_name => "TrstFirm",            :inverse_of => :units
+  has_one     :user,          :class_name => "TrstUser",            :inverse_of => :unit
+  has_many    :apps,          :class_name => "TrstAccExpenditure",  :inverse_of => :unit
+  has_many    :grns,          :class_name => "TrstAccGrn",          :inverse_of => :unit
+  has_many    :delivery_notes,:class_name => "TrstAccDeliveryNote", :inverse_of => :unit
+  has_many    :stocks,        :class_name => "TrstAccStock",        :inverse_of => :unit
+  has_many    :freights,      :class_name => "TrstAccFreight",      :inverse_of => :unit
+  has_many    :dps,           :class_name => "TrstAccCache",        :inverse_of => :unit
 
   before_save :generate_slug
 
