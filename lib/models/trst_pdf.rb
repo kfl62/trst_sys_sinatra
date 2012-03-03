@@ -33,8 +33,7 @@ class TrstPdf
     def find_by_task_id(id)
       all.in(:task_ids => [id]).first
     end
-
-  end
+  end # Class methods
   # @todo Document this method
   def tasks
     task_ids
