@@ -1,6 +1,7 @@
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= current_title(@task,action)
 - if action == 'put'
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.cache", :action => "put", :object_id => "#{@object.id rescue nil}"}}
   %form{:id  => "xhr_#{action}"}
     %table{:cellspacing => "0"}
       %tbody
@@ -31,11 +32,12 @@
       %tfoot
         %tr
           %td{:class => "buttons_bottom", :colspan => "2"}
-            %span{:class => "button save", :onclick => "trst.task.init('#{@task.id}','put','#{@object.id}')"}= t("button.save")
-            %span{:class => "button delete", :onclick => "trst.task.init('#{@task.id}','delete','#{@object.id}')"}= t("button.delete")
+            %span{:class => "button save mc-evt"}= t("button.save")
+            %span{:class => "button delete mc-evt"}= t("button.delete")
         %tr
           %td.footer_note{:colspan => "2"}= t('trst_acc_cache.footer_note_put.unit')
 - else
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.cache", :action => "post", :object_id => "#{@object.id rescue nil}"}}
   %table{:cellspacing => "0"}
     %thead
       %tr

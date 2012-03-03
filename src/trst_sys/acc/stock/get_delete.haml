@@ -50,6 +50,5 @@
     %tfoot
       %tr
         %td{:class => "buttons_bottom"}
-          - current_buttons(action).each do |button|
-            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,@object.id,params)}<
-              =t("button.#{button}")
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+          %span{:class => "button delete mc-evt"}= t("button.delete")
