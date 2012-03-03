@@ -103,8 +103,7 @@ class TrstAccDeliveryNote
     def to_txt
       all.each{|dn| p "#{dn.name} --- #{dn.id_main_doc} --- #{dn.id_date.to_s}"}
     end
-  end
-
+  end # Class methods
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
