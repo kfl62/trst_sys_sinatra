@@ -57,10 +57,8 @@ class TrstBook
       end
       return retval
     end
-
     alias page_related_to trst_sys_pages
-
-  end
+  end # Class methhods
   # @todo Document this method
   # added for embedded filter
   def pages
