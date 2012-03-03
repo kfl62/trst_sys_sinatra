@@ -30,7 +30,7 @@ class TrstAccFreightIn
       y ||= Date.today.year
       m ||= Date.today.month
       d ||= Date.today.mday
-      where(:id_date => Time.utc(y,m,d)).asc(:name)
+      where(:id_date => Time.utc(y,m,d))
     end
     # @todo
     def monthly(y = nil, m = nil)
@@ -63,10 +63,6 @@ class TrstAccFreightIn
       end
     end
     # @todo
-    def pn(pn)
-      where(:doc_exp_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
-    end
-    # @todo
     def pos(slug)
       where(:freight_id.in  => TrstFirm.pos(slug).freights.map{|f| f.id})
     end
@@ -86,9 +82,8 @@ class TrstAccFreightIn
     def sum_qu(y,m)
       monthly(y,m).sum(:qu) || 0
     end
-  end
-
-  # @todod
+  end # Class methods
+  # @todo
   def doc
     doc_exp_id.nil? ? doc_grn : doc_exp
   end
@@ -96,7 +91,6 @@ class TrstAccFreightIn
   def unit
     TrstFirm.unit_by_unit_id(self.doc.unit_id)
   end
-
   protected
   # @todo
   def update_self
