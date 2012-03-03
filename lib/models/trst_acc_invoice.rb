@@ -18,9 +18,9 @@ class TrstAccInvoice
   field :payment_deadline,  :type => Date
   field :payment_date,      :type => Array,       :default => []
 
-  belongs_to  :client,        :class_name => "TrstPartner",         :inverse_of => :invoices
-  has_many    :delivery_notes,:class_name => "TrstAccDeliveryNote", :inverse_of => :invoice
-  embeds_many :freights,      :class_name => "TrstAccInvoiceFreight"
+  belongs_to  :client,        :class_name => "TrstPartner",           :inverse_of => :invoices
+  has_many    :delivery_notes,:class_name => "TrstAccDeliveryNote",   :inverse_of => :invoice
+  embeds_many :freights,      :class_name => "TrstAccInvoiceFreight", :inverse_of => :invoice
 
   before_create :increment_name_date
   before_destroy :restore_delivery_notes
@@ -32,7 +32,7 @@ class TrstAccInvoice
       y ||= Date.today.year
       m ||= Date.today.month
       d ||= Date.today.mday
-      where(:id_date => Time.utc(y,m,d)).asc(:name)
+      where(:id_date => Time.utc(y,m,d))
     end
     # @todo
     def monthly(y = nil, m = nil)
@@ -77,7 +77,6 @@ class TrstAccInvoice
   def pdf_template
     'pdf'
   end
-
   protected
   # @todo
   def increment_name_date
