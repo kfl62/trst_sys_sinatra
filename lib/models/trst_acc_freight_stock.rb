@@ -60,8 +60,11 @@ class TrstAccFreightStock
     def sum_qu(y,m)
       monthly(y,m).sum(:qu) || 0
     end
+  end # Class Methods
+  # @todo
+  def unit
+    TrstFirm.unit_by_unit_id(self.doc.unit_id)
   end
-
   protected
   # @todo
   def update_self
