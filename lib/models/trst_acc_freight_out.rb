@@ -67,6 +67,10 @@ class TrstAccFreightOut
       where(:doc_id.in => TrstAccExpenditure.pn(pn).map{|e| e.id})
     end
     # @todo
+    def pos(slug)
+      where(:freight_id.in  => TrstFirm.pos(slug).freights.map{|f| f.id})
+    end
+    # @todo
     def query_value_hash(y,m)
       monthly(y,m).each_with_object({}) do |f,h|
         k = "#{f.id_stats}"
