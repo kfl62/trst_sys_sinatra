@@ -73,7 +73,7 @@ class TrstUser
     def by_login_name(login)
       where(:login_name => login).first
     end
-  end
+  end # Class methods
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
@@ -167,7 +167,6 @@ class TrstUser
      {:css => "datetime",:name => "created_at",:label => I18n.t("trst_task.created_at"),:value => created_at},
      {:css => "datetime",:name => "updated_at",:label => I18n.t("trst_task.updated_at"),:value => updated_at}]
   end
-
   protected
   # Generate `#user.salt` for new `#user`
   # @return [String] random string for `#user.salt`
