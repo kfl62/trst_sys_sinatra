@@ -39,7 +39,7 @@ class TrstAccGrn
       y ||= Date.today.year
       m ||= Date.today.month
       d ||= Date.today.mday
-      where(:id_date => Time.utc(y,m,d)).asc(:name)
+      where(:id_date => Time.utc(y,m,d))
     end
     # @todo
     def monthly(y = nil, m = nil)
@@ -47,11 +47,11 @@ class TrstAccGrn
       m ||= Date.today.month
       mb = DateTime.new(y, m)
       me = m.to_i == 12 ? DateTime.new(y + 1, 1) : DateTime.new(y, m + 1)
-      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time).asc(:name)
+      where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
     end
     # @todo
     def pos(slg)
-      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg)).asc(:name)
+      where(:unit_id => TrstFirm.pos(slg))
     end
     # @todo
     def by_unit_id(u)
@@ -63,10 +63,9 @@ class TrstAccGrn
     end
     # @todo
     def to_txt
-      all.each{|grn| p "#{grn.name} --- #{grn.id_date.to_s} --- #{grn.supplier.name[1]}"}
+      all.asc(:name).each{|grn| p "#{grn.name} --- #{grn.id_date.to_s} --- #{grn.supplier.name[1]}"}
     end
   end # Class methods
-
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
@@ -100,7 +99,6 @@ class TrstAccGrn
       dn.update_attribute(:charged, add)
     end
   end
-
   protected
   # @todo
   def increment_name_date
