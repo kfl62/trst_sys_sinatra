@@ -24,7 +24,7 @@ class TrstAccFreight
   class << self
     # @todo
     def auto_search(unit=nil, stock=nil)
-      unit ||= TrstFirm.unit_id_by_unit_slug("AF01")
+      unit ||= TrstFirm.pos("AF01")
       fs = []
       where(:unit_id => unit).asc(:name).each do |f|
         if stock
@@ -40,28 +40,26 @@ class TrstAccFreight
     end
     # @todo
     def pos(s)
-      where(:unit_id => TrstFirm.unit_id_by_unit_slug(s)).asc(:id_stats)
+      where(:unit_id => TrstFirm.pos(s))
     end
     # @todo
     def by_unit_id(u)
-      where(:unit_id => u).asc(:id_stats)
+      where(:unit_id => u)
     end
     # @todo
     def by_id_stats(ids)
-      where(:id_stats => ids).asc(:unit_id)
+      where(:id_stats => ids)
     end
     # @todo
     def query(y = nil, m = nil)
       y ||= Date.today.year
       m ||= Date.today.month
-      retval = []
-      asc(:id_stats).each do |f|
+      retval = asc(:id_stats).each_with_object([]) do |f,a|
         stk   = f.stocks.sum_qu(y,m)
         f_in  = f.ins.sum_qu(y,m)
         f_out = f.outs.sum_qu(y,m)
-        retval << [f.id, f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
+        a << [f.id, f.name, stk.round(2), f_in.round(2), f_out.round(2), (stk + f_in - f_out).round(2)]
       end
-      retval
     end
     # @todo
     def query_value(y = nil, m = nil, firm = true)
@@ -152,7 +150,6 @@ class TrstAccFreight
     end
 
   end # Class methods
-
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id)
@@ -202,7 +199,6 @@ class TrstAccFreight
       {:css => "admin",:name => "id_stats",:label => I18n.t("trst_acc_freight.id_stats"),:value => id_stats}
     ]
   end
-
   protected
   # @todo
   def self.handle_query_values(values,stk_start,ins,outs,stk_end)
