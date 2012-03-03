@@ -39,8 +39,7 @@ class TrstFirm
     def pos(s)
       unit_by_unit_id(unit_id_by_unit_slug(s))
     end
-  end
-
+  end # Class methods
   # @todo
   def details
     self.addresses.create if self.addresses.empty?
@@ -50,7 +49,6 @@ class TrstFirm
     self.units.create if self.units.empty?
     ["TrstFirm",id,[addresses,persons,delegates,departments,units]]
   end
-
   # @todo
   def table_data
     [
