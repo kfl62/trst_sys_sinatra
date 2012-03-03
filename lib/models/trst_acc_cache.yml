@@ -14,10 +14,12 @@ ro:
     footer_note_put:
       unit: "Câmpul \"Document\" va fi completat de contabil/ă!"
     footer_note_get:
-      unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
-            Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
-    footer_note_query: Notă:<br/>
-                       Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
+      unit: |
+        Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br>
+        Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\".
+    footer_note_query: |
+      Notă:<br>
+      Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
@@ -26,10 +28,12 @@ ro:
       out: "Bani cheltuiţi"
       end: "Sold"
       no_unit:
-        warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
-                  Pentru detalii "click" pe Punctul de lucru care vă interesează.
-        footer_note: Notă:<br/>
-                    Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
+        warning:  |
+          În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
+          Pentru detalii "click" pe Punctul de lucru care vă interesează.
+        footer_note: |
+          Notă:<br>
+          Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br>
     balance:
       name: "Punctul de lucru"
       stk: "Sold iniţial"
@@ -51,10 +55,12 @@ en:
     footer_note_put:
       unit: "Câmpul \"Document\" va fi completat de contabil/ă!"
     footer_note_get:
-      unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
-            Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
-    footer_note_query: Notă:<br/>
-                       Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
+      unit: |
+        Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br>
+        Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\".
+    footer_note_query: |
+      Notă:<br>
+      Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
@@ -63,10 +69,12 @@ en:
       out: "Bani cheltuiţi"
       end: "Sold"
       no_unit:
-        warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
-                  Pentru detalii "click" pe Punctul de lucru care vă interesează.
-        footer_note: Notă:<br/>
-                    Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
+        warning:  |
+          În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
+          Pentru detalii "click" pe Punctul de lucru care vă interesează.
+        footer_note: |
+          Notă:<br>
+          Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br>
     balance:
       name: "Punctul de lucru"
       stk: "Sold iniţial"
@@ -88,10 +96,12 @@ hu:
     footer_note_put:
       unit: "Câmpul \"Document\" va fi completat de contabil/ă!"
     footer_note_get:
-      unit: "Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br/>
-            Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\"."
-    footer_note_query: Notă:<br/>
-                       Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
+      unit: |
+        Câmpurile \"Bani cheltuiţi/în casă\" se completeză automat!<br>
+        Dacă vreţi situaţia curentă, accesaţi interogarea \"Bani în casă\".
+    footer_note_query: |
+      Notă:<br>
+      Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!
     query:
       title: "Bani în casă - Monetar"
       name: "Data (Ziua)"
@@ -100,10 +110,12 @@ hu:
       out: "Bani cheltuiţi"
       end: "Sold"
       no_unit:
-        warning:  În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
-                  Pentru detalii "click" pe Punctul de lucru care vă interesează.
-        footer_note: Notă:<br/>
-                    Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br/>
+        warning:  |
+          În tabelul de mai jos aveţi soldurile "Actuale" conform APP-lor operate.<br>
+          Pentru detalii "click" pe Punctul de lucru care vă interesează.
+        footer_note: |
+          Notă:<br>
+          Rubrica "Bani cheltuiţi" conţine numai plăţile pe APP-uri!<br>
     balance:
       name: "Punctul de lucru"
       stk: "Sold iniţial"
