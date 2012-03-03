@@ -38,36 +38,72 @@ ro:
 en:
   trst_acc_expenditure:
     title: "Adeverinţă primire şi plată"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br>
-               înseamnă că va fi utilizabil în curând!
+    not_ready: |
+      Din păcate încâ nu este gata!<br><br>
+      Faptul că a apărut în meniul "Sarcini zilnice",<br>
+      înseamnă că va fi utilizabil în curând!
+    repair:
+      header: "Puteţi Tipării/Şterge Adeverinţele eliberate azi!<br>"
+      header_title: 'Pentru mai multe detalii apasaţi pe pictograma ...?... din dreptul comenzii'
+      footer: |
+        <br>Notă:<br>
+        În cazul în care nu s-a tipărit o Adeverinţă puteţi repeta tipărirea cu<br>
+        un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
+        Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
+        pictograma <img src='images/icons/help.png' width='12' height='12' />
+      footer_short: "<br>Notă:<br> Pentru detalii click pe pictograma <img src='images/icons/help.png' width='12' height='12' />"
+    retro: |
+      <br>Notă:<br>
+      În perioada noiembrie-februarie trebuie întroduse datele<br>
+      restante din martie-iunie (2011). Ptr. detalii click pe <img src='images/icons/help.png' width='12' height='12' />
     client:
-      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br>
-               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br>
-               îl selectaţi şi se activează butonul \"Creare APP!\";<br />
-               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br>
-               va trebui să creaţi un \"Client nou!\"<br>
-               &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi \"Anulare\"."
-
+      select: |
+         Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br>
+         &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br>
+         îl selectaţi şi se activează butonul "Creare APP!";<br />
+         &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br>
+         va trebui să creaţi un "Client nou!"<br>
+         &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi "Anulare".
       add_button: "Client nou!"
       text: "S-a primit de la Dn(a) %{name} CNP: %{id_pn}<br />cu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap}, loc.%{city}<br />legitimat  cu: CI/BI seria.%{id_sr}, nr.%{id_nr}, %{id_by}/%{id_on}<br />mijloc de transport ____________________, următoarele deşeuri reciclabile:"
       pdf_text: "S-a primit de la Dn(a) <b>%{name}</b> CNP: <b>%{id_pn}</b>\ncu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap},\nloc.%{city}, jud.Cluj, România,\nlegitimat  cu: CI/BI seria.%{id_sr}, nr.%{id_nr}, %{id_by}/%{id_on}\nmijloc de transport ______________, următoarele deşeuri reciclabile:"
       pdf_decl: "Subsemnatul <b>%{name}</b> declar următoarele:\n1.) Cunosc faptul că falsul în declaraţie constituie infracţiune, se pedepseşte #####conform Codului Penal;\n2.) Materialel pe care le predau provin din:\n   ####a.) Gospodărie proprie;\n ####b.) Alte surse."
+    label:
+      put: ["Material", "UM", "PU", "Cant.", "Valoare", "3%", "16%", "Rest", "&nbsp;&nbsp;"]
+      get: ["Material", "UM", "PU", "Cant.", "Valoare", "3%", "16%", "Rest"]
 hu:
   trst_acc_expenditure:
     title: "Adeverinţă primire şi plată"
-    not_ready: Din păcate încâ nu este gata!<br/><br/>
-               Faptul că a apărut în meniul "Sarcini zilnice",<br/>
-               înseamnă că va fi utilizabil în curând!
+    not_ready: |
+      Din păcate încâ nu este gata!<br><br>
+      Faptul că a apărut în meniul "Sarcini zilnice",<br>
+      înseamnă că va fi utilizabil în curând!
+    repair:
+      header: "Puteţi Tipării/Şterge Adeverinţele eliberate azi!<br>"
+      header_title: 'Pentru mai multe detalii apasaţi pe pictograma ...?... din dreptul comenzii'
+      footer: |
+        <br>Notă:<br>
+        În cazul în care nu s-a tipărit o Adeverinţă puteţi repeta tipărirea cu<br>
+        un click pe pictograma <img src='images/icons/db_edit.png' width='12' height='12' /> din ultima coloană a rândului corespunzător.<br>
+        Dacă doriţi să Ştergeţi, citiţi prima dată Ajutorul oferit de un click pe<br>
+        pictograma <img src='images/icons/help.png' width='12' height='12' />
+      footer_short: "<br>Notă:<br> Pentru detalii click pe pictograma <img src='images/icons/help.png' width='12' height='12' />"
+    retro: |
+      <br>Notă:<br>
+      În perioada noiembrie-februarie trebuie întroduse datele<br>
+      restante din martie-iunie (2011). Ptr. detalii click pe <img src='images/icons/help.png' width='12' height='12' />
     client:
-      select: "Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br />
-               &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br \>
-               îl selectaţi şi se activează butonul \"Creare APP!\";<br />
-               &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br />
-               va trebui să creaţi un \"Client nou!\"<br \>
-               &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi \"Anulare\"."
-
+      select: |
+         Începeţi să scrieţi CNP-ul în căsuţa de mai jos şi dacă:<br>
+         &nbsp;&nbsp;&nbsp;1.) aţi găsit un client cu CNP-ul respectiv,<br>
+         îl selectaţi şi se activează butonul "Creare APP!";<br />
+         &nbsp;&nbsp;&nbsp;2.) nu găsiţi nici un client cu CNP-ul respectiv,<br>
+         va trebui să creaţi un "Client nou!"<br>
+         &nbsp;&nbsp;&nbsp;3.) v-aţi răzgândit, apăsaţi "Anulare".
       add_button: "Client nou!"
       text: "S-a primit de la Dn(a) %{name} CNP: %{id_pn}<br />cu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap}, loc.%{city}<br />legitimat  cu: CI/BI seria.%{id_sr}, nr.%{id_nr}, %{id_by}/%{id_on}<br />mijloc de transport ____________________, următoarele deşeuri reciclabile:"
       pdf_text: "S-a primit de la Dn(a) <b>%{name}</b> CNP: <b>%{id_pn}</b>\ncu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap},\nloc.%{city}, jud.Cluj, România,\nlegitimat  cu: CI/BI seria.%{id_sr}, nr.%{id_nr}, %{id_by}/%{id_on}\nmijloc de transport ______________, următoarele deşeuri reciclabile:"
       pdf_decl: "Subsemnatul <b>%{name}</b> declar următoarele:\n1.) Cunosc faptul că falsul în declaraţie constituie infracţiune, se pedepseşte #####conform Codului Penal;\n2.) Materialel pe care le predau provin din:\n   ####a.) Gospodărie proprie;\n ####b.) Alte surse."
+    label:
+      put: ["Material", "UM", "PU", "Cant.", "Valoare", "3%", "16%", "Rest", "&nbsp;&nbsp;"]
+      get: ["Material", "UM", "PU", "Cant.", "Valoare", "3%", "16%", "Rest"]
