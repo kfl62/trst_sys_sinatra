@@ -30,7 +30,6 @@ class TrstPartnerUnit
       {:css => "normal",:name => "env_auth",:label => I18n.t("trst_firm_unit.env_auth"),:value => env_auth}
     ]
   end
-
   protected
   # @todo
   def generate_slug
