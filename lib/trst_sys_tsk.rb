@@ -158,18 +158,12 @@ class TrstSysTsk < Sinatra::Base
     @object.update_attributes update_hash
     if params[:freights]
       params[:freights].values.each do |v|
-        o = @object.freights.find_or_create_by(:freight_id => v["freight_id"], :pu => v["pu"]) unless v["freight_id"].nil? || v["freight_id"].empty?
+        o = @object.freights.find_or_create_by(:_id => v["id"]) unless v["freight_id"].nil? || v["freight_id"].empty?
         o.update_attributes v unless o.nil?
         o.delete if v["qu"] == '-999'
       end
+      @object.update_delivery_notes(true) if @object.class.instance_methods.include?(:update_delivery_notes)
       @object.reload
-    end
-    if params[:inv_freights]
-      params[:inv_freights].values.each do |v|
-        o = @object.freights.find_or_create_by(:id_stats => v["id_stats"], :pu => v["pu"])
-        o.update_attributes v unless o.nil?
-      end
-      @object.update_delivery_notes(true)
     end
     if params[:delegates]
       d = TrstPartner.find(@object.supplier_id).delegates.create(params[:delegates])
