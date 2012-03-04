@@ -18,6 +18,7 @@ class TrstAccFreightStock
   belongs_to :doc,     :class_name => "TrstAccStock",     :inverse_of => :freights
   belongs_to :freight, :class_name => "TrstAccFreight",   :inverse_of => :stocks
 
+  before_create   :handle_nil_id
   before_update   :update_self
 
   class << self
@@ -66,6 +67,10 @@ class TrstAccFreightStock
     TrstFirm.unit_by_unit_id(self.doc.unit_id)
   end
   protected
+  # @todo
+  def handle_nil_id
+    self.id = BSON::ObjectId.new
+  end
   # @todo
   def update_self
     self.id_date = doc.id_date
