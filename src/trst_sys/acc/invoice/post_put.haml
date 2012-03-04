@@ -29,13 +29,13 @@
           %tr.to-calculate
             %td.vam
               %span.freight= s[0]
-              %input{:type => "hidden", :name => "[inv_freights][#{i}][name]", :value => s[0]}
+              %input{:type => "hidden", :name => "[freights][#{i}][name]", :value => s[0]}
             %td.spnr
               %span= "%.2f" % s[1][1]
-              %input{:type => "hidden", :name => "[inv_freights][#{i}][qu]", :value => s[1][1]}
+              %input{:type => "hidden", :name => "[freights][#{i}][qu]", :value => s[1][1]}
             %td.ce
-              %input.puw{:id => s[1][0], :name => "[inv_freights][#{i}][pu]", :value => "0.0000"}
-              %input{:type => "hidden", :name => "[inv_freights][#{i}][id_stats]", :value => s[1][0]}
+              %input.puw{:id => s[1][0], :name => "[freights][#{i}][pu]", :value => "0.0000"}
+              %input{:type => "hidden", :name => "[freights][#{i}][id_stats]", :value => s[1][0]}
             %td.spnr
               %span 0.00
         %tr.result
