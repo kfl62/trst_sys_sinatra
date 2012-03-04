@@ -19,6 +19,7 @@ class TrstAccFreightIn
   belongs_to :doc_grn, :class_name => "TrstAccGrn",           :inverse_of => :freights
   belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :ins
 
+  before_create   :handle_nil_id
   before_update   :update_self
   before_update   :handle_stock_add
   before_destroy  :handle_stock_remove
@@ -92,6 +93,10 @@ class TrstAccFreightIn
     TrstFirm.unit_by_unit_id(self.doc.unit_id)
   end
   protected
+  # @todo
+  def handle_nil_id
+    self.id = BSON::ObjectId.new
+  end
   # @todo
   def update_self
     self.id_date   = doc_exp.nil? ? doc_grn.id_date : doc_exp.id_date

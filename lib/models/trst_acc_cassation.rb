@@ -25,7 +25,7 @@ class TrstAccCassation
   class << self
     # @todo
     def pos(slg)
-      where(:unit_id => TrstFirm.unit_id_by_unit_slug(slg))
+      where(:unit_id => TrstFirm.pos(slg).id)
     end
     # @todo
     def daily(y = nil, m = nil, d = nil)

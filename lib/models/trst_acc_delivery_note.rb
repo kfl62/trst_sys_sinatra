@@ -32,7 +32,7 @@ class TrstAccDeliveryNote
   class << self
     # @todo
     def pos(slg)
-      where(:unit_id => TrstFirm.pos(slg))
+      where(:unit_id => TrstFirm.pos(slg).id)
     end
     # @todo
     def daily(y = nil, m = nil, d = nil)

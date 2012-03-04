@@ -40,7 +40,7 @@ class TrstAccFreight
     end
     # @todo
     def pos(s)
-      where(:unit_id => TrstFirm.pos(s))
+      where(:unit_id => TrstFirm.pos(s).id)
     end
     # @todo
     def by_unit_id(u)

@@ -44,7 +44,7 @@ class TrstAccExpenditure
     end
     # @todo
     def pos(slg)
-      where(:unit_id => TrstFirm.pos(slg))
+      where(:unit_id => TrstFirm.pos(slg).id)
     end
     # @todo
     def by_unit_id(u)

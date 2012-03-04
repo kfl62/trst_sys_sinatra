@@ -20,7 +20,7 @@ class TrstAccStock
   class << self
     # @todo
     def pos(slg)
-      where(:unit_id => TrstFirm.pos(slg))
+      where(:unit_id => TrstFirm.pos(slg).id)
     end
     # @todo
     def monthly(y = nil, m = nil)
