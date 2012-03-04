@@ -117,14 +117,14 @@ class TrstAccFreightOut
         f   = fs.where(:pu => spu).first
         csf = csfs.where(:pu => f.pu).first if csfs
         if out > f.qu
-          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :doc_id => doc_id) unless f.qu == 0
+          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :val => (f.pu * f.qu).round(2), :doc_id => doc_id) unless f.qu == 0
           out -= f.qu unless out == 0
           f.qu   = 0
           csf.qu = 0 if csf
           f.save
           csf.save if csf
         else
-          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :doc_id => doc_id) unless out == 0
+          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :val => (f.pu * out).round(2), :doc_id => doc_id) unless out == 0
           f.qu   -= out
           csf.qu -= out if csf
           out = 0
