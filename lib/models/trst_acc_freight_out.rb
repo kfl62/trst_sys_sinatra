@@ -85,7 +85,8 @@ class TrstAccFreightOut
   protected
   # @todo
   def update_self
-    self.id_date   = doc.id_date
+    self.id = BSON::ObjectId.new
+    self.id_date = doc.id_date
     self.val = (pu * qu).round(2)
     self.id_intern = true if doc.id_intern
   end
