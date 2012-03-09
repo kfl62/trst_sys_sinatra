@@ -1,7 +1,7 @@
 :ruby
   unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
-  clients = current_user.permission_lvl <= 5 ? TrstPartner.clients : TrstPartner.clients.where(:name.in => ["Biti","Diren", "Remat"])
-  transporters = current_user.permission_lvl <= 5 ? TrstPartner.transporters : TrstPartner.transporters.where(:name.in => ["Biti","Diren", "Remat"])
+  clients = current_user.permission_lvl <= 5 ? TrstPartner.clients : TrstPartner.clients.where(:name.in => ["Biti","Diren", "Gogeco", "Remat"])
+  transporters = current_user.permission_lvl <= 5 ? TrstPartner.transporters : TrstPartner.transporters.where(:name.in => ["Biti","Diren", "Gogeco", "Remat"])
 %p.close{:onclick => "trst.task.destroy()"}
 %p.task_title= t('trst_acc_delivery_note.title')
 %span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.delivery_note", :action => "filter"}}
