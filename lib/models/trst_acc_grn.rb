@@ -105,7 +105,7 @@ class TrstAccGrn
     if TrstAccGrn.by_unit_id(unit_id).last.freights.empty?
       TrstAccGrn.by_unit_id(unit_id).last.destroy
     end unless TrstAccGrn.by_unit_id(unit_id).last.nil?
-    self.name = TrstAccGrn.by_unit_id(unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_NIR_001"
+    self.name = TrstAccGrn.by_unit_id(unit_id).asc(:name).last.name.next rescue "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_NIR_0001"
     self.id_date = Date.today
     self.id_intern = true if supplier.firm
   end
