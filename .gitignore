@@ -7,5 +7,4 @@ log/*
 !tmp/restart.txt
 Gemfile.lock
 public/api
-src/trst_pdf/*
 config/secret*
