@@ -7,7 +7,7 @@
 +font-face("EmbossedBlackWideNormal", font-files("/stylesheets/fonts/Embossed_Black_Wide-webfont.woff", woff,"/stylesheets/fonts//Embossed_Black_Wide-webfont.ttf", truetype,"/stylesheets/fonts/Embossed_Black_Wide-webfont.svg", svg),"/stylesheets/fonts/Embossed_Black_Wide-webfont.eot")
 
 body
-  background-color: #820000
+  background-color: #3e3e3e
 .wrap
   +container
 #content
@@ -37,21 +37,24 @@ body
   &.loading
     background:
       color: rgba(230, 255, 230, 1)
-      image: image_url(unquote("/images/icons/loading.gif"))
+      image: image_url(unquote("icons/loading.gif"))
       position: 0.5em 0.5em
       repeat: no-repeat
     text-indent: 2.5em
   &.info
     background:
       color: rgba(230, 255, 230, 1)
-      image: image_url(unquote("/images/icons/info.png"))
+      image: image_url(unquote("icons/info.png"))
       position: 0.5em 0.5em
       repeat: no-repeat
   &.error, &.warning
     background:
       color: rgba(255, 204, 204, 1)
-      image: image_url(unquote("/images/icons/warning.png"))
+      image: image_url(unquote("icons/warning.png"))
       position: 0.5em 0.5em
       repeat: no-repeat
 
 @import "partials/header"
+@import "partials/menu"
+@import "partials/sidebar"
+@import "partials/footer"
