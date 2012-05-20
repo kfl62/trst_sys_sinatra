@@ -31,6 +31,7 @@ module Trst
     #
     # @api public
     def translate(*args)
+      args[0] = "#{Trst.firm.i18n_path}.#{args[0]}"
       I18n.translate(*args)
     end
     alias :t :translate
