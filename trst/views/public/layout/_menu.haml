@@ -1,0 +1,4 @@
+%ul
+  - %w{index services prices contact}.each do |slug|
+    %li
+      %a{href: "#{slug}.html", title: t("menu.#{slug}")}= t("menu.#{slug}")

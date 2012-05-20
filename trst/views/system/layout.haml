@@ -1,0 +1,23 @@
+!! 5
+%html
+  = partial('layout/html-head')
+
+  %body{id: "system", data: {:user_id => @current_user.id}}
+    #main.wrap
+      %article#xhr_msg
+      %header#header.system
+        = partial('layout/header')
+
+      %nav#menu.system
+        = partial('layout/menu')
+
+      %section#content
+        %article#xhr_content
+          = yield
+      %section#sidebar.system
+        = partial('layout/sidebar')
+
+      %section#main_footer.wrap
+
+    %footer#footer.wrap
+      = partial('layout/footer')
