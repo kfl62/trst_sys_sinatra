@@ -7,7 +7,7 @@ module Trst
   module Assets
     # #Sass/Compass Handler
     class Stylesheets < Sinatra::Base
-      set :views, File.join(Trst.assets, 'stylesheets')
+      register  CompassInitializer
 
       # @todo Document this method
       get '/stylesheets/:name.css' do
