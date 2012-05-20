@@ -2,7 +2,7 @@
 !.gitignore
 !.yardopts
 bin/*
-config/secret*
+config/*.yml
 tmp/*
 src/trst_pdf/*
 !tmp/restart.txt
