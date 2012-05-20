@@ -1,0 +1,13 @@
+ro:
+  trst: &trst_public
+    sidebar:
+      address_title: Ferenc-Loránt Kiss
+      address: |
+        str. Florilor nr.120<br>
+        407281 Luna de Sus, Cluj, România
+      workhours: Zilnic 09:00 - 20:00
+      workhours_title: Sunt accesibil
+      phone_title: Telefon
+      email_title: Adresă email
+  varena-auto:
+    << : *trst_public

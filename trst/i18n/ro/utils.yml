@@ -1,0 +1,24 @@
+ro:
+  trst: &trst_utils
+    lang:
+      ro: Română
+      en: Engleză
+      hu: Maghiară
+      change: Limba aleasă este >Română<
+    login:
+      title: Autentificare
+      link_in: Login
+      link_out: Logout
+      name: Nume
+      password: Parolă
+      ok: Autentificare reuşită
+      error: Hmmm... Nume/Parolă greşită
+      logout: La revedere!
+      required: |
+        Frumoasă încercare, dar este nevoie >Autentificare<
+      authenticated_as: |
+        Autentificat ca şi:
+    msg:
+      loading: Se încarcă pagina...
+  varena-auto:
+    << : *trst_utils
