@@ -14,11 +14,36 @@ module Trst
     end
 
     get '/' do
-      haml "Hello"
+      book = Book.where(name: 'trst_pub').first
+      @chapters = book.chapters
+      @page = book.chapters.where(slug: 'home').first
+      haml :page
     end
 
-    get '/:page' do |page|
-      haml :"#{page}", :layout => !request.xhr?
+    get '/*' do |page|
+      book = Book.where(:name  => "trst_pub").first
+      if request.xhr?
+        method, id = params[:splat][0].split('_')
+        @page = Book.send method, id
+        haml :page, :layout  => false
+      else
+        #code below just for testing :) real route above
+        @chapters = book.chapters
+        if params[:splat][0] == ""
+          @page = book.chapters.where(:slug  => "home").first
+        elsif File.basename(params[:splat][0]) == "index.html"
+          if File.dirname(params[:splat][0]) == "."
+            @page = book.chapters.where(:slug  => "home").first
+          else
+            @page = book.chapters.where(:slug  => File.dirname(params[:splat][0])).first
+          end
+        else
+          chapter = @chapters.where(:slug  => File.dirname(params[:splat][0])).first
+          slug = File.basename(params[:splat][0]).gsub(/(TrustSys-#{chapter.slug.camelize}-)|(.html)/,"")
+          @page = chapter.pages.where(:slug => slug).first
+        end
+        haml :page
+      end
     end
     ##
     # You can manage errors like:
