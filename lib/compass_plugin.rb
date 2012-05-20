@@ -7,11 +7,11 @@ module CompassInitializer
     require 'sass/plugin/rack'
 
     Compass.configuration do |config|
-      config.project_path = Trst.root
-      config.sass_dir = "trst/assets/stylesheets"
-      config.css_dir = "public/stylesheets"
-      config.images_dir = "public/images/firm/#{Trst.firm.image_path}"
-      config.relative_assets = true
+      config.project_path     = Trst.root
+      config.sass_dir         = Trst.firm.sass_dir
+      config.css_dir          = Trst.firm.css_dir
+      config.images_dir       = Trst.firm.images_dir
+      config.http_images_path = Trst.firm.images_dir.gsub('public','')
       config.output_style = :normal # compressed
       config.sass_options = {cache_location: "./tmp/sass-cache"}
     end
