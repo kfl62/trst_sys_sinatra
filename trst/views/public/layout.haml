@@ -1,23 +1,23 @@
 !!! 5
 %html
-  = partial('layout/html-head')
+  = partial("#{Trst.firm.layout}/html-head")
 
   %body{id: "public"}
     #main.wrap
       %article#xhr_msg
       %header#header.public
-        = partial('layout/header')
+        = partial("#{Trst.firm.layout}/header")
 
       %nav#menu.public
-        = partial('layout/menu')
+        = partial("#{Trst.firm.layout}/menu")
 
       %section#content
         %article#xhr_content
           = yield
       %section#sidebar.public
-        = partial('layout/sidebar')
+        = partial("#{Trst.firm.layout}/sidebar")
 
       %section#main_footer.wrap
 
     %footer#footer.wrap
-      = partial('layout/footer')
+      = partial("#{Trst.firm.layout}/footer")
