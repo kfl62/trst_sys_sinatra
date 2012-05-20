@@ -9,11 +9,9 @@ module CompassInitializer
     Compass.configuration do |config|
       config.project_path = Trst.root
       config.sass_dir = "trst/assets/stylesheets"
-      config.project_type = :stand_alone
-      config.http_path = "/"
       config.css_dir = "public/stylesheets"
-      config.images_dir = "public/images"
-      config.javascripts_dir = "public/javascripts"
+      config.images_dir = "public/images/firm/#{Trst.firm.image_path}"
+      config.relative_assets = true
       config.output_style = :normal # compressed
       config.sass_options = {cache_location: "./tmp/sass-cache"}
     end
