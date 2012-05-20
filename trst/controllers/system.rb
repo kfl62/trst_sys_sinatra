@@ -14,7 +14,7 @@ module Trst
     end
 
     get '/' do
-      haml :'index.html'
+      haml "Hello"
     end
 
     get '/:page' do |page|
