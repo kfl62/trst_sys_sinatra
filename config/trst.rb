@@ -32,6 +32,11 @@ module Trst
     def assets
       opt.assets || File.join(TRST_ROOT,'trst','assets')
     end
+    # @todo
+    def firm
+      file = YAML.load_file File.join(TRST_ROOT,'config','firm.yml')
+      OpenStruct.new file['firm']
+    end
   end
   # @todo document this method
   def self.server
