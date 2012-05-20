@@ -63,4 +63,9 @@ module Trst
   autoload :Public,               'public'
   autoload :Utils,                'utils'
   autoload :Assets,               'assets'
+  autoload :Book,                 'book'
+  autoload :Chapter,              'book'
+  autoload :Page,                 'book'
+  autoload :User,                 'user'
+  autoload :Task,                 'task'
 end
