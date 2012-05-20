@@ -4,7 +4,14 @@
 !.yardopts
 tmp/*
 log/*
+!log/.gitkeep
 !tmp/restart.txt
 Gemfile.lock
 public/api
+public/images/*
+!public/images/default
+public/stylesheets/*
+!public/stylesheets/fonts
+trst/assets/stylesheets/*
+!trst/assets/stylesheets/default
 config/*.yml
