@@ -4,19 +4,7 @@
   %meta{name: "description", content: "Sistem informatic"}
   %meta{name: "keywords", content: "Sistem informatic"}
   %meta{name: "viewport", content: "initial-scale=1.0, user-scalable=no"}
-  %link{href: "/stylesheets/application.css",media: "all",rel: "stylesheet",type: "text/css"}
+  %link{href: "#{Trst.firm.images_path}/favicon.ico",rel: "icon",type: "image/x-icon"}
+  %link{href: "#{Trst.firm.css_path}/application.css",media: "all",rel: "stylesheet",type: "text/css"}
   %link{href: "http://yandex.st/jquery-ui/1.8.18/themes/smoothness/jquery.ui.all.min.css",media: "all",rel: "stylesheet",type: "text/css"}
-  - if settings.cdn
-    %script{src: "http://yandex.st/jquery/1.7.2/jquery.min.js",type: "text/javascript"}
-    %script{src: "http://yandex.st/jquery-ui/1.8.18/jquery-ui.min.js",type: "text/javascript"}
-  - else
-    %script{src: "/javascripts/lib/jquery.min.js",type: "text/javascript"}
-    %script{src: "/javascripts/lib/jquery-ui.min.js",type: "text/javascript"}
-  %script{src: "/javascripts/lib/jquery.ba-tinypubsub.min.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst_pubsub.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst_file_upload.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst_file_delete.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst_file_preview.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst_file_download.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst_desk.js",type: "text/javascript"}
-  %script{src: "/javascripts/trst.js",type: "text/javascript"}
+  %script{src: "/javascripts/libs/require.js", data: {main: '/javascripts/main'},type: "text/javascript"}
