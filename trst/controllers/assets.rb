@@ -20,9 +20,9 @@ module Trst
       set :views, File.join(Trst.assets,'javascripts')
 
       # @todo Document this method
-      get '/javascripts/:name.js' do
+      get '/javascripts/:module/:name.js' do |m,n|
         content_type 'text/javascript', :charset => 'utf-8'
-        coffee params[:name].to_sym
+        coffee "#{m}/#{n}".to_sym
       end
     end
   end
