@@ -1,0 +1,33 @@
+ro:
+  trst: &trst_system
+    sidebar:
+      start:
+        title: Sarcinile Dvs.
+        text: Alegeţi contextul din meniu...
+      empty: Nu aveţi sarcini definite/accesibile!
+      daily_tasks:
+        title: De rezolvat zilnic... (sarcini)
+      jobs-sheet:
+        title: Fişa postului
+      system-procedures:
+        title: Proceduri de sitem
+      modules_db:
+        title: Administrare bază de date
+      modules_monthly:
+        title: Închidere lună
+      pages:
+        title: Pagini aplicaţie
+      tasks:
+        title: Sarcini
+      users:
+        title: Utilizatori
+      web:
+        title: Pagini web
+      category:
+        report: Rapoarte/Formulare
+        query: Interogări/Statistică/Verificare
+        repair: S-a strecurat o greşeală...
+        test: Deocamdată ptr. testare
+        uncategorized: Alte sarcini
+  varena-auto:
+    << : *trst_system
