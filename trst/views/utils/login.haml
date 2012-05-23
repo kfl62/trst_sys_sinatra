@@ -1,0 +1,20 @@
+%form{:action => "/utils/login", :method => "post"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td{:colspan => "2"}
+    %tbody
+      %tr
+        %td
+          %span.label{:for => "name"}= t('login.name')
+        %td
+          %input.ui-state-default{:type => "text",:name => "name"}
+      %tr
+        %td
+          %span.label{:for => "password"}= t('login.password')
+        %td
+          %input.ui-state-default{:type => "password",:name => "password"}
+    %tfoot
+      %tr
+        %td.ce{:colspan => "2"}
+          %button{:type => "submit", :data => {:icon => "ui-icon-unlocked"}}= t('button.login')

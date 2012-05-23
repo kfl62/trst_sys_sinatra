@@ -7,15 +7,4 @@
   %link{href: "#{Trst.firm.images_path}/favicon.ico",rel: "icon",type: "image/x-icon"}
   %link{href: "#{Trst.firm.css_path}/application.css",media: "all",rel: "stylesheet",type: "text/css"}
   %link{href: "http://yandex.st/jquery-ui/1.8.18/themes/smoothness/jquery.ui.all.min.css",media: "all",rel: "stylesheet",type: "text/css"}
-  %script{src: "http://maps.google.com/maps/api/js?sensor=false",type: "text/javascript"}
-  - if settings.cdn
-    %script{src: "http://yandex.st/jquery/1.7.2/jquery.min.js",type: "text/javascript"}
-    %script{src: "http://yandex.st/jquery-ui/1.8.18/jquery-ui.min.js",type: "text/javascript"}
-  - else
-    %script{src: "/javascripts/lib/jquery.min.js",type: "text/javascript"}
-    %script{src: "/javascripts/lib/jquery-ui.min.js",type: "text/javascript"}
-  / %script{src: "/javascripts/lib/jquery.ba-tinypubsub.min.js", type: "text/javascript"}
-  / %script{src: "/javascripts/trst_pubsub.js", type: "text/javascript"}
-  / %script{src: "/javascripts/trst_map.js", type: "text/javascript"}
-  / %script{src: "/javascripts/trst_login.js", type: "text/javascript"}
-  / %script{src: "/javascripts/public.js", type: "text/javascript"}
+  %script{src: "/javascripts/libs/require.js", data: {main: '/javascripts/main'},type: "text/javascript"}
