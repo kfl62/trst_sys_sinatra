@@ -4,7 +4,7 @@
 
   %body{id: "system", data: {:user_id => @current_user.id}}
     #main.wrap
-      %article#xhr_msg
+      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
       %header#header.system
         = partial('layout/header')
 

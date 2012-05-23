@@ -4,7 +4,7 @@
 
   %body{id: "public"}
     #main.wrap
-      %article#xhr_msg
+      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
       %header#header.public
         = partial("#{Trst.firm.layout}/header")
 
