@@ -1,0 +1,43 @@
+%ul
+  %li.em.st=  t("sidebar.#{@page.slug}.title")
+  - if @tasks.empty?
+    %li= t('sidebar.empty')
+  - else
+    - @tasks.group_by{|t| t.action}.each_pair do |action,tasks|
+      - case action
+      - when /filter/
+        - tasks.each do |tsk|
+          %li
+            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
+            %span.help
+      - when /report/
+        %li.em.st= t("sidebar.category.#{action}")
+        - tasks.each do |tsk|
+          %li
+            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %span.help
+      - when /query/
+        %li.em.st= t("sidebar.category.#{action}")
+        - tasks.each do |tsk|
+          %li
+            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %span.help
+      - when /repair/
+        %li.em.st= t("sidebar.category.#{action}")
+        - tasks.each do |tsk|
+          %li
+            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %span.help
+      - when /test/
+        %li.em.st= t("sidebar.category.#{action}")
+        - tasks.each do |tsk|
+          %li
+            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %span.help
+      - else
+        %hr
+        %li.em.st= t("sidebar.category.uncategorized")
+        - tasks.each do |tsk|
+          %li
+            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/edit/#{@page.id}", data: {action: tsk.action}}= tsk.name
+            %span.help
