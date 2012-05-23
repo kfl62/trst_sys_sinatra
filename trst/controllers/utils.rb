@@ -47,7 +47,7 @@ module Trst
     get '/lang/:lang' do |l|
       I18n.locale = l.to_sym
       path = session[:user].nil? ?  "#{lp}/" :  "#{lp}/sys"
-      flash[:msg] = {:msg => {:txt => I18n.t('lang.change'), :class => "info"}}
+      flash[:msg] = {:msg => {:txt => t('lang.change'), :class => "info"}}
       redirect path
     end
     # @todo Document this method
