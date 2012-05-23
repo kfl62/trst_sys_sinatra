@@ -40,6 +40,7 @@ body
       image: image_url(unquote("icons/loading.gif"))
       position: 0.5em 0.5em
       repeat: no-repeat
+    display: block
     text-indent: 2.5em
   &.info
     background:
@@ -47,12 +48,14 @@ body
       image: image_url(unquote("icons/info.png"))
       position: 0.5em 0.5em
       repeat: no-repeat
+    display: block
   &.error, &.warning
     background:
       color: rgba(255, 204, 204, 1)
       image: image_url(unquote("icons/warning.png"))
       position: 0.5em 0.5em
       repeat: no-repeat
+    display: block
 
 @import "partials/header"
 @import "partials/menu"
