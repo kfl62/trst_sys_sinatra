@@ -1,0 +1,13 @@
+%span#hidden_data.hidden{data: {dialog: "delete", title: t("delete.title", data: mat(@object,'model_name')), model: mat(@object,'model_name'), oid: @object.id, related_id: params[:related_id] || 'null'}}
+%form{action: "/sys/#{@path}", method: "delete"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr
+        %th{colspan: "2"}
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        %td.buttonset.ce{colspan: "2"}
+          %button{type: "button", data: {action: "delete",icon: "circle-minus"}}= t('button.delete')
+          %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+
