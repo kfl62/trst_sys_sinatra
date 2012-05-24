@@ -9,8 +9,20 @@ require.config({
 
 require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
   $(function(){
-    module = function(name) {
-      return window[name] = window[name] || {};
+    Trst = {
+      desk: {
+        buttons: {
+          action: {}
+        },
+        select: {},
+        relations: {},
+        tabs: {}
+      }
+    };
+    $msg = function(txt){
+      if (Trst.debug){
+        console.log(txt)
+      }
     };
     if ($('body').attr('id') == 'public'){
       require(['public/main'], function(){
