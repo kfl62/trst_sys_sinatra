@@ -1,5 +1,4 @@
 define ()->
-  module 'Trst'
   sysMsg = $.subscribe 'xhrMsg', (event,what,kind,data) ->
     $xhr_msg = $('#xhr_msg')
     $.ajax
@@ -16,14 +15,15 @@ define ()->
         .fadeOut(1000,'linear',() -> $(this).removeAttr('class');return)
       return
     return
-  Trst.publish = (args...) ->
-    $.publish 'xhrMsg', args
-    return
-  Trst.msgShow = (msg = '...') ->
-      $('#xhr_msg').stop(true,true).fadeOut(0,'linear',() -> $(this).removeAttr('class');return)
-      .html(msg).addClass('loading').fadeIn()
+  $.extend Trst,
+    publish: (args...) ->
+      $.publish 'xhrMsg', args
       return
-  Trst.msgHide = () ->
-      $('#xhr_msg').stop(true,true).fadeOut(1000,'linear',() -> $(this).removeAttr('class');return)
-      return
+    msgShow: (msg = '...') ->
+        $('#xhr_msg').stop(true,true).fadeOut(0,'linear',() -> $(this).removeAttr('class');return)
+        .html(msg).addClass('loading').fadeIn()
+        return
+    msgHide: () ->
+        $('#xhr_msg').stop(true,true).fadeOut(1000,'linear',() -> $(this).removeAttr('class');return)
+        return
   return Trst
