@@ -1,0 +1,15 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/task':
+        model_name: Sarcină
+        id: Id system
+        name: Nume
+        title: Titlu
+        help: Help
+        haml_path: Cale
+        goal: Cale BD
+        rels: Relaţii
+        user_ids: Utilizator asociat
+        created_at: Creat
+        updated_at: Modificat
