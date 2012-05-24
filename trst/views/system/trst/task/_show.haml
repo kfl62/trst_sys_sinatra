@@ -1,0 +1,11 @@
+%tbody
+  - tr_show_for @object, 'id'
+  - tr_show_for @object, 'name'
+  - tr_show_for @object, 'title'
+  - tr_show_for @object, 'help'
+  - tr_show_for @object, 'haml_path'
+  - tr_show_for @object, 'goal'
+  - tr_show_for @object, 'rels'
+  - tr_show_for @object, 'user_ids',    {map: 'view_users'}
+  - tr_show_for @object, 'created_at'
+  - tr_show_for @object, 'updated_at'
