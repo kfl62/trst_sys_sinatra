@@ -17,7 +17,7 @@ module Trst
       book = Book.where(name: 'trst_pub').first
       @chapters = book.chapters
       @page = book.chapters.where(slug: 'home').first
-      haml :page
+      haml :page, layout: Trst.firm.layout.to_sym
     end
 
     get '/*' do |page|
@@ -25,7 +25,7 @@ module Trst
       if request.xhr?
         method, id = params[:splat][0].split('_')
         @page = Book.send method, id
-        haml :page, :layout  => false
+        haml :page, layout: false
       else
         #code below just for testing :) real route above
         @chapters = book.chapters
@@ -42,7 +42,7 @@ module Trst
           slug = File.basename(params[:splat][0]).gsub(/(TrustSys-#{chapter.slug.camelize}-)|(.html)/,"")
           @page = chapter.pages.where(:slug => slug).first
         end
-        haml :page
+        haml :page, layout: Trst.firm.layout.to_sym
       end
     end
     ##

@@ -60,7 +60,7 @@ module Trst
     end
   end
   autoload :System,               'system'
-  autoload :Public,               'public'
+  autoload :Public,               Trst.firm.public
   autoload :Utils,                'utils'
   autoload :Assets,               'assets'
   autoload :Book,                 'book'
