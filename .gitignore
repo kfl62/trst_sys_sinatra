@@ -10,12 +10,9 @@ Gemfile.lock
 public/api
 public/images/*
 !public/images/default
-!public/images/demo
 public/stylesheets/*
 !public/stylesheets/fonts
 !public/stylesheets/default
-!public/stylesheets/demo
 trst/assets/stylesheets/*
 !trst/assets/stylesheets/default
-!trst/assets/stylesheets/demo
 config/*.yml
