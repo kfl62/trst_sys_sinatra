@@ -1,0 +1,602 @@
+/* line 4, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+html {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+/* line 18, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+.bp-reset-element, body, h1, h2, h3, h4, h5, h6, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, blockquote, q, th, td, caption, table, div, span, object, iframe, p, pre, a, abbr, acronym, address, code, del, dfn, em, img, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline; }
+
+/* line 20, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/* line 21, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+blockquote, q {
+  quotes: "" ""; }
+/* line 67, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: ""; }
+
+/* line 22, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+th, td, caption {
+  float: none !important;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 23, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle; }
+
+/* line 24, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 6, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+html * {
+  font-size: 100.01%; }
+
+/* line 8, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+textarea, pre, tt, code {
+  font-family: "Courier New", Courier, monospace; }
+
+/* line 10, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+body {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 75%;
+  margin: 0px; }
+
+/* line 14, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin: 0 0 0.25em 0; }
+
+/* line 17, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h1 {
+  font-size: 200%; }
+
+/* line 19, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h2 {
+  font-size: 166.67%; }
+
+/* line 21, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h3 {
+  font-size: 150%; }
+
+/* line 23, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h4 {
+  font-size: 133.33%; }
+
+/* line 25, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h5 {
+  font-size: 116.67%; }
+
+/* line 27, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+h6 {
+  font-size: 116.67%;
+  font-style: italic; }
+
+/* line 30, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+p {
+  line-height: 1.5em;
+  margin: 0 0 1em 0; }
+
+/* line 33, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+ul, ol, dl {
+  line-height: 1.5em;
+  margin: 0 0 1em 0.25em; }
+
+/* line 36, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+li {
+  margin-left: 0.25em;
+  line-height: 1.5em; }
+
+/* line 39, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+dt {
+  font-weight: bold; }
+
+/* line 41, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+dd {
+  margin: 0 0 1em 2em; }
+
+/* line 43, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+cite, blockquote {
+  font-style: italic; }
+
+/* line 45, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+blockquote {
+  margin: 0 0 1em 1.5em; }
+
+/* line 47, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+strong, b {
+  font-weight: bold; }
+
+/* line 49, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+em, i {
+  font-style: italic; }
+
+/* line 51, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+pre, code {
+  font-family: monospace;
+  font-size: 1.1em; }
+
+/* line 54, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+acronym, abbr {
+  letter-spacing: 0.07em;
+  border-bottom: 0.1em dashed #cc0000; }
+
+/* line 58, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=em], [class~=it] {
+  font-style: italic; }
+
+/* line 60, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=bo], [class~=st] {
+  font-weight: bold; }
+
+/* line 62, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=small] {
+  font-size: 0.9em; }
+
+/* line 64, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=ju] {
+  text-align: justify; }
+
+/* line 66, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=ce] {
+  text-align: center; }
+
+/* line 68, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=ri] {
+  text-align: right; }
+
+/* line 70, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=vam] {
+  vertical-align: middle !important; }
+
+/* line 72, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=vat] {
+  vertical-align: top !important; }
+
+/* line 74, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=in] {
+  text-indent: 2em; }
+
+/* line 76, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+[class~=flri] {
+  float: right; }
+
+/* line 78, ../../../trst/assets/stylesheets/default/partials/_base.sass */
+.hidden {
+  display: none; }
+
+@font-face {
+  font-family: "EmbossedBlackWideNormal";
+  src: url(/stylesheets/fonts/Embossed_Black_Wide-webfont.eot);
+  src: url(/stylesheets/fonts/Embossed_Black_Wide-webfont.eot?#iefix) format('eot'), url(/stylesheets/fonts/Embossed_Black_Wide-webfont.woff) format('woff'), url(/stylesheets/fonts//Embossed_Black_Wide-webfont.ttf) format('truetype'), url(/stylesheets/fonts/Embossed_Black_Wide-webfont.svg) format('svg'); }
+
+/* line 9, ../../../trst/assets/stylesheets/default/application.sass */
+body {
+  background-color: #3e3e3e; }
+
+/* line 11, ../../../trst/assets/stylesheets/default/application.sass */
+.wrap {
+  width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  *zoom: 1; }
+
+/* line 13, ../../../trst/assets/stylesheets/default/application.sass */
+#content {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 530px;
+  background-color: #f5f5f5;
+  background-image: url('/images/default/main_bckgrnd.png?1337496748');
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  height: 500px;
+  position: relative;
+  overflow: auto;
+  color: #333333; }
+/* line 147, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #content {
+  overflow-x: hidden; }
+/* line 25, ../../../trst/assets/stylesheets/default/application.sass */
+#content #xhr_content {
+  margin: 0.5em; }
+
+/* line 27, ../../../trst/assets/stylesheets/default/application.sass */
+#xhr_msg {
+  border-radius: 10px;
+  box-shadow: 0.5em 0.5em #3e3e3e;
+  color: black;
+  display: none;
+  position: absolute;
+  padding: 1em;
+  text-indent: 1.5em;
+  top: 30px;
+  z-index: 1002; }
+/* line 37, ../../../trst/assets/stylesheets/default/application.sass */
+#xhr_msg.loading {
+  background-color: #e6ffe6;
+  background-image: url('/images/default/icons/loading.gif?1337496748');
+  background-position: 0.5em 0.5em;
+  background-repeat: no-repeat;
+  display: block;
+  text-indent: 2.5em; }
+/* line 45, ../../../trst/assets/stylesheets/default/application.sass */
+#xhr_msg.info {
+  background-color: #e6ffe6;
+  background-image: url('/images/default/icons/info.png?1332849224');
+  background-position: 0.5em 0.5em;
+  background-repeat: no-repeat;
+  display: block; }
+/* line 52, ../../../trst/assets/stylesheets/default/application.sass */
+#xhr_msg.error, #xhr_msg.warning {
+  background-color: #ffcccc;
+  background-image: url('/images/default/icons/warning.png?1332849224');
+  background-position: 0.5em 0.5em;
+  background-repeat: no-repeat;
+  display: block; }
+
+/* line 1, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header {
+  background-color: #3e3e3e;
+  background-image: url('/images/default/logo.png?1337504415');
+  background-position: 25px -5px;
+  background-repeat: no-repeat;
+  height: 95px; }
+/* line 8, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header span > a {
+  color: #f5f5f5;
+  text-decoration: none; }
+/* line 12, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header.public p.header_title {
+  color: #f5f5f5;
+  font-family: "EmbossedBlackWideNormal";
+  font-size: 4em;
+  padding-top: 10px; }
+/* line 18, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header.public p.header_auth {
+  color: #f5f5f5;
+  position: relative;
+  top: -130px;
+  left: 680px; }
+/* line 23, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header.public #I18n {
+  position: relative;
+  top: -134px;
+  left: 730px; }
+/* line 28, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header.system p.header_title {
+  color: #f5f5f5;
+  font-family: "EmbossedBlackWideNormal";
+  font-size: 3em;
+  padding-top: 10px; }
+/* line 34, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header.system p.header_auth {
+  color: #f5f5f5;
+  position: relative;
+  top: -100px;
+  left: 665px; }
+/* line 39, ../../../trst/assets/stylesheets/default/partials/_header.sass */
+#header.system #I18n {
+  position: relative;
+  top: -104px;
+  left: 730px; }
+
+/* line 1, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu {
+  background-color: silver;
+  background-image: url('/images/default/menu_bckgrnd.png?1337508594');
+  background-position: center right;
+  background-repeat: repeat-x;
+  border-top: 1px white solid;
+  border-bottom: 1px #333333 solid;
+  margin-bottom: 5px; }
+/* line 10, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul {
+  border-left: 1px #aaaaaa solid;
+  border-right: 1px white solid;
+  display: inline-block;
+  margin: 0px 10px;
+  padding: 0; }
+/* line 16, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+/* line 23, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li {
+  border-left: 1px white solid;
+  border-right: 1px #aaaaaa solid;
+  float: left;
+  position: relative;
+  font-size: 1em;
+  line-height: 1em;
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+/* line 33, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li a {
+  background: transparent;
+  color: black;
+  display: block;
+  font-size: 1em;
+  font-style: italic;
+  margin: 0;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  text-decoration: none;
+  width: auto; }
+/* line 44, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li a:focus, #menu ul li a:hover, #menu ul li a:active {
+  background: #eeeeee;
+  color: #333333;
+  text-decoration: none; }
+/* line 48, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li:hover > ul {
+  display: block; }
+/* line 50, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li ul {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  position: absolute;
+  top: 16px;
+  left: 0;
+  background: #d6d6d6;
+  border: solid 1px #3e3e3e;
+  border-top: none;
+  z-index: 98; }
+/* line 62, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li ul li {
+  float: none;
+  margin: 0;
+  padding: 2px;
+  border: none; }
+/* line 67, ../../../trst/assets/stylesheets/default/partials/_menu.sass */
+#menu ul li ul:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-bottom: 5px; }
+
+/* line 15, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar {
+  color: #111111;
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 260px;
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #f5f5f5), color-stop(100%, #3e3e3e));
+  background-image: -webkit-linear-gradient(left, #f5f5f5, #3e3e3e);
+  background-image: -moz-linear-gradient(left, #f5f5f5, #3e3e3e);
+  background-image: -o-linear-gradient(left, #f5f5f5, #3e3e3e);
+  background-image: -ms-linear-gradient(left, #f5f5f5, #3e3e3e);
+  background-image: linear-gradient(left, #f5f5f5, #3e3e3e);
+  height: 500px; }
+/* line 147, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #sidebar {
+  overflow-x: hidden; }
+/* line 22, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #address_title {
+  background-image: url('/images/default/icons/home.png?1199028726');
+  background-position: 5px 50%;
+  background-repeat: no-repeat;
+  font-style: italic;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
+  text-indent: 2.5em; }
+/* line 24, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #workhours_title {
+  background-image: url('/images/default/icons/clock.png?1199028694');
+  background-position: 5px 50%;
+  background-repeat: no-repeat;
+  font-style: italic;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
+  text-indent: 2.5em; }
+/* line 26, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #phone_title {
+  background-image: url('/images/default/icons/telephone.png?1246990946');
+  background-position: 5px 50%;
+  background-repeat: no-repeat;
+  font-style: italic;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
+  text-indent: 2.5em; }
+/* line 28, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #email_title {
+  background-image: url('/images/default/icons/mail.png?1199028740');
+  background-position: 5px 50%;
+  background-repeat: no-repeat;
+  font-style: italic;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
+  text-indent: 2.5em; }
+/* line 30, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #address, #sidebar.public #workhours, #sidebar.public #phone, #sidebar.public #email {
+  line-height: 1em; }
+/* line 32, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #address span, #sidebar.public #workhours span, #sidebar.public #phone span, #sidebar.public #email span {
+  padding: 0px 20px;
+  display: block; }
+/* line 35, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.public #google_map {
+  margin-left: 5px;
+  height: 250px;
+  width: 250px; }
+/* line 40, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.system article {
+  padding: 1em; }
+/* line 42, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.system ul {
+  margin: 0px;
+  list-style-type: none;
+  padding: 0px; }
+/* line 47, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.system ul li a {
+  background: transparent;
+  color: black;
+  display: block;
+  font-size: 1em;
+  font-style: italic;
+  margin: 0;
+  padding: 0px 0.5em;
+  text-decoration: none;
+  width: auto; }
+/* line 57, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.system ul li a:focus, #sidebar.system ul li a:hover, #sidebar.system ul li a:active {
+  background: #eeeeee;
+  color: #333333;
+  text-decoration: none; }
+/* line 61, ../../../trst/assets/stylesheets/default/partials/_sidebar.sass */
+#sidebar.system .help {
+  background-image: url('/images/default/icons/help.png?1332849224');
+  cursor: pointer;
+  float: right;
+  width: 16px;
+  height: 16px;
+  margin-top: -17px;
+  padding: 0px; }
+
+/* line 10, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+html, body {
+  height: 100%; }
+
+/* line 12, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+#main {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -25px; }
+/* line 18, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+#main #main_footer {
+  height: 25px; }
+
+/* line 20, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+#footer {
+  clear: both;
+  position: relative;
+  height: 25px; }
+
+/* line 5, ../../../trst/assets/stylesheets/default/partials/_footer.sass */
+#footer {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #f5f5f5), color-stop(100%, #3e3e3e));
+  background-image: -webkit-linear-gradient(bottom, #f5f5f5, #3e3e3e);
+  background-image: -moz-linear-gradient(bottom, #f5f5f5, #3e3e3e);
+  background-image: -o-linear-gradient(bottom, #f5f5f5, #3e3e3e);
+  background-image: -ms-linear-gradient(bottom, #f5f5f5, #3e3e3e);
+  background-image: linear-gradient(bottom, #f5f5f5, #3e3e3e);
+  width: 200px;
+  cursor: pointer; }
+/* line 11, ../../../trst/assets/stylesheets/default/partials/_footer.sass */
+#footer p {
+  margin: 5px 0px 0px; }
+
+/* line 1, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+.ui-dialog-shadow {
+  box-shadow: 0.5em 0.5em #3e3e3e; }
+
+/* line 3, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+.ui-widget-overlay {
+  background-color: red !important;
+  background-image: none !important; }
+
+/* line 6, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+ul.trst-ui-sortable {
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #f5f5f5;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 2em;
+  float: left; }
+/* line 14, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+ul.trst-ui-sortable li {
+  margin: 0 3px;
+  padding: 0 1em;
+  cursor: e-resize; }
+/* line 18, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+ul.trst-ui-sortable span.relation-title {
+  border-bottom: 1px solid #f5f5f5;
+  padding: 0.25em 0.5em 0.5em;
+  display: block;
+  min-width: 180px; }
+
+/* line 26, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog .icon-only .ui-button-text, #loginDialog .icon-only .ui-button-text {
+  padding: 0 !important; }
+/* line 28, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog .ui-button-text, #loginDialog .ui-button-text {
+  padding: 0.2em 1em 0.2em 2.1em !important; }
+/* line 30, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog select, #loginDialog select {
+  font-family: Arial, sans-serif; }
+/* line 32, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table, #loginDialog table {
+  font-size: 0.9em;
+  width: 100%; }
+/* line 35, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table td, #loginDialog table td {
+  vertical-align: baseline; }
+/* line 40, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table thead tr td:last-child, #loginDialog table thead tr td:last-child {
+  padding-bottom: 0.5em; }
+/* line 45, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr:last-child td, #loginDialog table tbody tr:last-child td {
+  padding-bottom: 0.5em; }
+/* line 48, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr td.buttonset, #loginDialog table tbody tr td.buttonset {
+  padding-left: 8px; }
+/* line 50, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr td span.label, #loginDialog table tbody tr td span.label {
+  padding-right: 5px; }
+/* line 52, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr td span.value, #loginDialog table tbody tr td span.value {
+  display: block;
+  padding: 3px 0 3px 10px;
+  max-width: 700px; }
+/* line 56, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr td span.value-input, #loginDialog table tbody tr td span.value-input {
+  display: block;
+  padding: 1px 5px;
+  max-width: 700px; }
+/* line 60, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr td span.error, #loginDialog table tbody tr td span.error {
+  padding-left: 5px;
+  color: red; }
+/* line 63, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tbody tr td input[type="text"], #deskDialog table tbody tr td input[type="password"], #loginDialog table tbody tr td input[type="text"], #loginDialog table tbody tr td input[type="password"] {
+  width: 100%; }
+/* line 68, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#deskDialog table tfoot tr td:first-child, #loginDialog table tfoot tr td:first-child {
+  border-top: solid 1px black;
+  padding: 0.5em; }
+
+/* line 72, ../../../trst/assets/stylesheets/default/partials/_dialog.sass */
+#relationsContainer {
+  border-radius: 5px;
+  box-shadow: 0.25em 0.25em #3e3e3e;
+  font-size: 12px;
+  position: fixed; }
