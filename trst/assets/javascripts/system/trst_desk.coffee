@@ -5,6 +5,10 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
       @hdo = if @hda.length then @hda.data() else {}
       @hdf = $('#deskDialog form')
       if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
+    close: () ->
+      $('#deskDialog').dialog('close')
+      $.cookie('task_id',null)
+      return
     createDialog: (data) ->
       $desk = $('<div id="deskDialog"></div>')
       $position = $('#content').position()
@@ -47,7 +51,4 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
           else
             console.log 'Initialize error...'
       $msg('Trst.desk.init() ...')
-    close: () ->
-      $('#deskDialog').dialog('close')
-      return
   return Trst
