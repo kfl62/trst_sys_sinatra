@@ -271,5 +271,36 @@ module Trst
         td_error_for   model,attribute,options
       end
     end
+    # @todo
+    def page_content(id,help = false)
+      if help
+        task = Trst::Task.find(id)
+        path = File.join(task.goal.split('.')[0].underscore,'help')
+        file = File.join(Trst.views,'system',"#{path}.md")
+        md   = File.exists?(file) ? path.to_sym : task.help
+      else
+        page = Trst::Book.page(id) rescue Trst::Book.chapter(id)
+        path = File.join('pages',I18n.locale.to_s,page.slug)
+        file = File.join(Trst.views,'system',"#{path}.md")
+        md   = File.exists?(file) ? path.to_sym : page.content
+      end
+      md
+    end
+    # @todo
+    def haml_path(action,related = false)
+      task = Trst::Task.find(request.cookies['task_id'])
+      path = File.join(task.goal.split('.')[0].underscore,action)
+      file = File.join(Trst.views,'system',"#{path}.haml")
+      haml_path = File.exists?(file) ? path : remove_second(path)
+      haml_path += '_related' if related
+      haml_path = task.haml_path if task.haml_path != 'default'
+      haml_path.to_sym
+    end
+    # @todo
+    def remove_second(s)
+      a = s.split('/')
+      a.delete_at(1)
+      a.join('/')
+    end
   end # Helper
 end # Trst
