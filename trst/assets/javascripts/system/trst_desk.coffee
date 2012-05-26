@@ -5,11 +5,11 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
       @hdo = if @hda.length then @hda.data() else {}
       @hdf = $('#deskDialog form')
       if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
-    close: () ->
+    closeDesk: () ->
       $('#deskDialog').dialog('close')
       $.cookie('task_id',null)
       return
-    createDialog: (data) ->
+    createDesk: (data) ->
       $desk = $('<div id="deskDialog"></div>')
       $position = $('#content').position()
       $desk.html(data)
@@ -40,7 +40,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
       $request.done (data) ->
         if $type isnt 'GET' then Trst.publish('flash')
         if $type isnt 'DELETE'
-          Trst.desk.createDialog(data)
+          Trst.desk.createDesk(data)
           if Trst.desk.readData()
             $desk = $('#deskDialog')
             $desk.dialog title: Trst.desk.hdo.title

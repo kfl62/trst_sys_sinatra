@@ -12,7 +12,7 @@ define () ->
         if $hd.oid is null
           Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
         else
-          Trst.desk.close()
+          Trst.desk.closeDesk()
           $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
           $url += "/#{$hd.oid}#{$hd.related_id}"
           Trst.desk.init($url)
@@ -23,7 +23,7 @@ define () ->
         if $hd.oid is null
           Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
         else
-          Trst.desk.close()
+          Trst.desk.closeDesk()
           $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
           $url += "/edit/#{$hd.oid}#{$hd.related_id}"
           Trst.desk.init($url)
@@ -33,7 +33,7 @@ define () ->
         $url  = Trst.desk.hdf.attr('action')
         $type = Trst.desk.hdf.attr('method')
         $data = Trst.desk.hdf.serializeArray()
-        Trst.desk.close()
+        Trst.desk.closeDesk()
         $hd.oid = if $hd.oid is null then 'create' else $hd.oid
         $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
         $url += "/#{$hd.oid}#{$hd.related_id}"
@@ -47,7 +47,7 @@ define () ->
           return false
         $msg('Button.delete Pressed...')
       cancel: () ->
-        Trst.desk.close()
+        Trst.desk.closeDesk()
         $msg('Button.cancel Pressed...')
       relations: () ->
         if $('#relationsContainer').length
