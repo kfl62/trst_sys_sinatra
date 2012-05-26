@@ -27,8 +27,9 @@ module Trst
     get '/' do
       book = Book.where(name: 'trst_sys').first
       @chapters = book.chapters
-      @page = book.chapters.where(slug: 'my_page').first
-      haml :page
+      start_pg  = book.chapters.where(slug: 'my_page').first
+      @content  = page_content(start_pg.id.to_s)
+      markdown @content, layout: true, :layout_engine => :haml
     end
     # @todo Document this route
     get '/tasks/:page_id' do |page|
@@ -37,42 +38,46 @@ module Trst
       haml :tasks, layout: false
     end
     # @todo Document this route
+    get '/help/:task_id' do |id|
+      @content = page_content(id,true)
+      markdown @content
+    end
+    # @todo Document this route
     get '/:module/:class/filter' do |m,c|
       handle_params(m,c,nil,'filter',params)
-      haml_path = @related_object.nil? ? 'trst/filter' : 'trst/filter_related'
-      haml :"#{haml_path}", layout: false
+      haml haml_path('filter',!@related_object.nil?), layout: false
     end
     # @todo Document this route
     get '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_get',params)
-      haml :'trst/create', layout: false
+      haml haml_path('create'), layout: false
     end
      # @todo Document this route
     post '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_post',params)
       if @object.save
         flash[:msg] = {msg: {txt: t('create.msg.end', data: mat(@object,'model_name')), class: 'info'}}
-        haml :'trst/show', layout: false
+        haml haml_path('show'), layout: false
       else
         flash[:msg] = {msg: {txt: t('create.msg.error', data: mat(@object,'model_name')), class: 'error'}}
         @create_error = true
-        haml :'trst/create', layout: false
+        haml haml_path('create'), layout: false
       end
     end
     # @todo Document this route
     get '/:module/:class/edit/:id' do |m,c,id|
       handle_params(m,c,id,'edit_get',params)
-      haml :'trst/edit', layout: false
+      haml haml_path('edit'), layout: false
     end
     # @todo Document this route
     get '/:module/:class/delete/:id' do |m,c,id|
       handle_params(m,c,id,'delete_get',params)
-      haml :'trst/delete', layout: false
+      haml haml_path('delete'), layout: false
     end
     # @todo Document this route
     get '/:module/:class/:id' do |m,c,id|
       handle_params(m,c,id,'show',params)
-      haml :'trst/show', layout: false
+      haml haml_path('show'), layout: false
     end
     # @todo Document this route
     get '/:module/:class/:id/tab/:what/:verb' do |m,c,id,w,v|
@@ -84,10 +89,10 @@ module Trst
       handle_params(m,c,id,'edit_put',params)
       if @object.update_attributes(params[:"#{@path}"])
         flash[:msg] = {msg: {txt: t('edit.msg.end', data: mat(@object,'model_name')), class: 'info'}}
-        haml :'trst/show', layout: false
+        haml haml_path('show'), layout: false
       else
         flash[:msg] = {msg: {txt: t('edit.msg.error', data: mat(@object,'model_name')), class: 'error'}}
-        haml :'trst/edit', layout: false
+        haml haml_path('edit'), layout: false
       end
     end
     # @todo Document this route
@@ -134,8 +139,8 @@ module Trst
     # @todo Document this route
     get '/*' do
       method, id = params[:splat][0].split('_')
-      @page = Book.send method, id
-      haml :page, layout: false
+      @content   = page_content(id)
+      markdown @content
     end
   end # System
 end # Trst
