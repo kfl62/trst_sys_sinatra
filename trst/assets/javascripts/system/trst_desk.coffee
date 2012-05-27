@@ -7,7 +7,6 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
       if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
     closeDesk: () ->
       $('#deskDialog').dialog('close')
-      $.cookie('task_id',null)
       return
     createDesk: (data) ->
       $desk = $('<div id="deskDialog"></div>')
