@@ -15,7 +15,7 @@ module Trst
 
     before do
       if session[:user]
-        @current_user = User.find(session[:user])
+        @current_user ||= User.find(session[:user])
         I18n.reload! if Trst.env == 'development'
       else
         flash[:msg] = {msg: {txt: t('login.required'), class: 'error'}}
