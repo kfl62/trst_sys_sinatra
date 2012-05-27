@@ -1,0 +1,10 @@
+%tbody
+  - tr_show_for @object, 'id'
+  - tr_show_for @object, 'login_name'
+  - tr_show_for @object, 'name'
+  - tr_show_for @object, 'email'
+  - tr_show_for @object, 'access_lvl'
+  - tr_show_for @object, 'access_grp'
+  - tr_show_for @object, 'task_ids',    {map: 'view_tasks'}
+  - tr_show_for @object, 'created_at'
+  - tr_show_for @object, 'updated_at'
