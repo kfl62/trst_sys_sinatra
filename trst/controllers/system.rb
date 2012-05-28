@@ -25,9 +25,9 @@ module Trst
 
     # @todo Document this route
     get '/' do
-      book = Book.where(name: 'trst_sys').first
+      book = Book.find_by(slug: 'trst_system')
       @chapters = book.chapters
-      start_pg  = book.chapters.where(slug: 'my_page').first
+      start_pg  = book.chapters.find_by(slug: 'my_page')
       @content  = page_content(start_pg.id.to_s)
       markdown @content, layout: true, :layout_engine => :haml
     end

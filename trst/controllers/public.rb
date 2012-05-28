@@ -14,14 +14,14 @@ module Trst
     end
 
     get '/' do
-      book = Book.where(name: 'trst_pub').first
+      book = Book.find_by(slug: 'trst_public')
       @chapters = book.chapters
-      @page = book.chapters.where(slug: 'home').first
+      @page = book.chapters.find_by(slug: 'home')
       haml :page, layout: Trst.firm.layout.to_sym
     end
 
     get '/*' do |page|
-      book = Book.where(:name  => "trst_pub").first
+      book = Book.find_by(slug: 'trst_public')
       if request.xhr?
         method, id = params[:splat][0].split('_')
         @page = Book.send method, id
@@ -30,17 +30,17 @@ module Trst
         #code below just for testing :) real route above
         @chapters = book.chapters
         if params[:splat][0] == ""
-          @page = book.chapters.where(:slug  => "home").first
+          @page = book.chapters.find_by(slug: 'home')
         elsif File.basename(params[:splat][0]) == "index.html"
           if File.dirname(params[:splat][0]) == "."
-            @page = book.chapters.where(:slug  => "home").first
+            @page = book.chapters.find_by(slug: 'home')
           else
-            @page = book.chapters.where(:slug  => File.dirname(params[:splat][0])).first
+            @page = book.chapters.find_by(slug: File.dirname(params[:splat][0]).underscore)
           end
         else
-          chapter = @chapters.where(:slug  => File.dirname(params[:splat][0])).first
-          slug = File.basename(params[:splat][0]).gsub(/(TrustSys-#{chapter.slug.camelize}-)|(.html)/,"")
-          @page = chapter.pages.where(:slug => slug).first
+          chapter = @chapters.find_by(slug: File.dirname(params[:splat][0]).underscore)
+          slug = File.basename(params[:splat][0]).gsub(/(trustsys-#{chapter.slug.dasherize}-)|(.html)/,"")
+          @page = chapter.pages.find_by(slug: slug.underscore)
         end
         haml :page, layout: Trst.firm.layout.to_sym
       end
