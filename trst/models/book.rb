@@ -12,10 +12,11 @@ module Trst
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    field :name,    localize: true
-    field :content, localize: true
+    field :slug,    type: String
+    field :name,    type: String, localize: true
+    field :content, type: String, localize: true
 
-    validates_presence_of :name
+    validates_presence_of :slug
 
     embeds_many :chapters, class_name:  'Trst::Chapter'
 
@@ -65,18 +66,20 @@ module Trst
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    field :order,   type: Integer
     field :slug,    type: String
-    field :name,    localize: true
-    field :title,   localize: true
-    field :content, localize: true
+    field :order,   type: Integer
+    field :name,    type: String,   localize: true
+    field :title,   type: String,   localize: true
+    field :content, type: String,   localize: true
+
+    validates_presence_of :slug
 
     embedded_in :book,  class_name: 'Trst::Book', inverse_of: :chapters
     embeds_many :pages, class_name: 'Trst::Page'
 
     # @todo Document this method
     def path
-      slug == 'home' ? '/index.html' : "/#{slug}/index.html"
+      slug == 'home' ? '/index.html' : "/#{slug.dasherize}/index.html"
     end
     # @todo
     def embedded_in
@@ -102,13 +105,15 @@ module Trst
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    field :order,           type: Integer
     field :slug,            type: String
+    field :order,           type: Integer
     field :access_lvl,      type: Integer,       default: 3
-    field :access_grp,      type: Array,         default: ['public','admin']
+    field :access_grp,      type: Array,         default: ['public']
     field :name,            localize: true
     field :title,           localize: true
     field :content,         localize: true
+
+    validates_presence_of :slug
 
     embedded_in             :chapter, class_name: 'Trst::Chapter', inverse_of: :pages
     has_and_belongs_to_many :tasks,   class_name: 'Trst::Task',    inverse_of: nil
@@ -122,8 +127,8 @@ module Trst
 
     # @todo Document this method
     def path
-      retval = chapter.slug == 'home' ? '/' : "/#{chapter.slug}/"
-      retval += "TrustSys-#{chapter.slug.camelize}-#{slug}.html"
+      retval = chapter.slug == 'home' ? '/' : "/#{chapter.slug.dasherize}/"
+      retval += "trustsys-#{chapter.slug.dasherize}-#{slug.dasherize}.html"
     end
     # @todo
     def embedded_in
