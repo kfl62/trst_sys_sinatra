@@ -1,5 +1,5 @@
 %ul
-  %li.em.st=  t("sidebar.#{@page.slug}.title")
+  %li.em.st=  t("sidebar.#{@page.chapter.slug}.#{@page.slug}.title")
   - if @tasks.empty?
     %li= t('sidebar.empty')
   - else
