@@ -1,0 +1,14 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/user':
+        model_name: Utilizator
+        id: Id system
+        login_name: Utilizator
+        name: Nume
+        email: Email
+        access_lvl: Acces - Nivel
+        access_grp: Acces - Grupă
+        task_ids:   Sarcini asociate
+        created_at: Creat
+        updated_at: Modificat

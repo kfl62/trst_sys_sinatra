@@ -1,0 +1,19 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/page':
+        model_name: Pagină
+        id: Id system
+        name: Nume
+        title: Titlu
+        content: Conţinut
+        slug: Cale
+        order: Nr. ordine
+        access_lvl: Acces - Nivel
+        access_grp:
+          '0': Acces - Grupă (1)
+          '1': Acces - Grupă (2)
+          '2': Acces - Grupă (3)
+        task_ids: Sarcini asociate
+        created_at: Creat
+        updated_at: Modificat
