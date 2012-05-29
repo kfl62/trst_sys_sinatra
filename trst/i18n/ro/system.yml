@@ -5,24 +5,27 @@ ro:
         title: Sarcinile Dvs.
         text: Alegeţi contextul din meniu...
       empty: Nu aveţi sarcini definite/accesibile!
-      daily_tasks:
-        title: De rezolvat zilnic... (sarcini)
-      jobs-sheet:
-        title: Fişa postului
-      system-procedures:
-        title: Proceduri de sitem
-      modules_db:
-        title: Administrare bază de date
-      modules_monthly:
-        title: Închidere lună
-      pages:
-        title: Pagini aplicaţie
-      tasks:
-        title: Sarcini
-      users:
-        title: Utilizatori
-      web:
-        title: Pagini web
+      my_page:
+        daily_tasks:
+          title: De rezolvat zilnic... (sarcini)
+        jobs_sheet:
+          title: Fişa postului
+        system_procedures:
+          title: Proceduri de sitem
+      modules:
+        db:
+          title: Administrare bază de date
+        monthly:
+          title: Închidere lună
+      sys_admin:
+        pages:
+          title: Pagini aplicaţie
+        tasks:
+          title: Sarcini
+        users:
+          title: Utilizatori
+        web:
+          title: Pagini web
       category:
         report: Rapoarte/Formulare
         query: Interogări/Statistică/Verificare
