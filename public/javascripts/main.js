@@ -10,6 +10,7 @@ require.config({
 require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
   $(function(){
     Trst = {
+      debug: true,
       desk: {
         buttons: {
           action: {}
