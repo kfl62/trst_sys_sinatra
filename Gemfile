@@ -17,6 +17,7 @@ gem 'rdiscount'
 group :development do
   gem 'thin'
   gem 'wirble'
+  gem 'guard-livereload'
 end
 # Test requirements
 group :test do
