@@ -1,14 +1,19 @@
 %p.header_title.ce= Trst.firm.header_text
 %p.header_auth
   %span
-    %a#login_status.st.em{href: "/utils/logout"}= t('login.link_out')
-    &nbsp;|&nbsp;
-    %a.st.em{href: "http://trst.ro"} TrustSys
+    %a#login_status.st.em{href: "/utils/logout"}
+      #{t('login.link_out')}
+      %i.icon-signout
+    %a.st.em{href: "http://trst.ro"}
+      TrustSys
+      %i.icon-external-link
     %br
   %span.small= "IP: #{request.ip}<br>"
   %br
   %span #{t('login.authenticated_as')}<br>
-  %span#login_name.st.em #{@current_user.login_name}
+  %span#login_name.st.em
+    %i.icon-user
+    #{@current_user.login_name}
 %span#I18n
   %a{href: '/utils/lang/ro',title: t('lang.ro')}
     %img{src: "#{Trst.firm.images_path}/icons/ro.png",alt: t('lang.ro')}
