@@ -6,6 +6,14 @@ define () ->
           primary: "ui-icon-#{button.data('icon')}"
       return
     action:
+      create: () ->
+        $hd = Trst.desk.hdo
+        $url= Trst.desk.hdf.attr('action')
+        $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
+        Trst.desk.closeDesk()
+        $url += "/create#{$hd.related_id}"
+        Trst.desk.init($url)
+        $msg('Button.create Pressed...')
       show: () ->
         $hd = Trst.desk.hdo
         $url= Trst.desk.hdf.attr('action')
