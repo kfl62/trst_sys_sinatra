@@ -7,6 +7,7 @@ module Trst
   module Assets
     # #Sass/Compass Handler
     class Stylesheets < Sinatra::Base
+      set :static, true
       register  CompassInitializer
 
       # @todo Document this method
@@ -17,13 +18,10 @@ module Trst
     end
     # #Coffeescript Handler
     class Javascripts < Sinatra::Base
-      set :views, File.join(Trst.assets,'javascripts')
-
-      # @todo Document this method
-      get '/javascripts/:module/:name.js' do |m,n|
-        content_type 'text/javascript', :charset => 'utf-8'
-        coffee "#{m}/#{n}".to_sym
-      end
+      set :static, true
+      use Rack::Coffee,
+        root: Trst.assets,
+        cache_compile: true
     end
   end
 end
