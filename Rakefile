@@ -42,9 +42,12 @@ namespace :db do
       end
       admin = Trst::User.find_by(login_name: 'kfl62')
       Trst::Task.each{|t| t.users << admin; t.save}
-      sys_admin = Trst::Book.find_by(slug: 'trst_system').chapters.find_by(slug: 'sys_admin')
       edit_page = Trst::Task.find_by(goal: 'Trst::Page.page')
+      sys_admin = Trst::Book.find_by(slug: 'trst_system').chapters.find_by(slug: 'sys_admin')
       sys_admin.pages.each{|p| p.tasks << edit_page; p.save}
+      my_page  = Trst::Book.find_by(slug: 'trst_system').chapters.find_by(slug: 'my_page')
+      daily_tp  = my_page.pages.find_by(slug: 'daily_tasks')
+      daily_tp.tasks << edit_page; daily_tp.save
     end
   end
 end
