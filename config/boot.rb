@@ -12,12 +12,12 @@ Dir.glob(File.join(TRST_ROOT, 'lib','**','*.rb')).each{|r| require r}
 # Load configurations
 Dir.glob(File.join(TRST_ROOT, 'config','**','*.rb')).each{|r| require r}
 # Initialize path for Trst
-Dir['trst/*'].each do |dir|
+Dir['system/*'].each do |dir|
   dir = File.join(File.expand_path('..',File.dirname(__FILE__)),dir)
   $LOAD_PATH.unshift(dir) unless $LOAD_PATH.include?(dir)
 end
 # Add path for translations and default language
-I18n.load_path += Dir.glob(File.join(TRST_ROOT, 'trst','i18n','*/*.yml'))
+I18n.load_path += Dir.glob(File.join(TRST_ROOT, 'system','i18n','*/*.yml'))
 I18n.default_locale = :ro
 # Sintra default settings
 Sinatra::Base.set(:root, TRST_ROOT)

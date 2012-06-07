@@ -26,11 +26,11 @@ module Trst
     end
     # @todo
     def views
-      opt.views || File.join(TRST_ROOT,'trst','views')
+      opt.views || File.join(TRST_ROOT,'system','views')
     end
     # @todo
     def assets
-      opt.assets || File.join(TRST_ROOT,'trst','assets')
+      opt.assets || File.join(TRST_ROOT,'system','assets')
     end
     # @todo
     def firm
@@ -60,12 +60,12 @@ module Trst
     end
   end
   autoload :System,               'system'
-  autoload :Public,               Trst.firm.public
+  autoload :Public,               Trst.firm.public['controller']
   autoload :Utils,                'utils'
   autoload :Assets,               'assets'
-  autoload :Book,                 'book'
-  autoload :Chapter,              'book'
-  autoload :Page,                 'book'
-  autoload :User,                 'user'
-  autoload :Task,                 'task'
+  autoload :Book,                 'trst/book'
+  autoload :Chapter,              'trst/book'
+  autoload :Page,                 'trst/book'
+  autoload :User,                 'trst/user'
+  autoload :Task,                 'trst/task'
 end
