@@ -35,7 +35,8 @@ module Rack
 
     def brew(file)
       if cache_compile_dir
-        cache_file = cache_compile_dir + "#{file.mtime.to_i}_#{file.basename('coffee')}js"
+        file_name = check_path(file)
+        cache_file = cache_compile_dir + file_name
         if cache_file.file?
           cache_file.read
         else
@@ -47,6 +48,11 @@ module Rack
       else
         compile(file.read)
       end
+    end
+
+    def check_path(file)
+      path_ends_with = String(file.dirname).split('/').last
+      path_ends_with =~ /javascripts/ ? "#{file.mtime.to_i}_#{file.basename('coffee')}js" : "#{path_ends_with}/#{file.mtime.to_i}_#{file.basename('coffee')}js"
     end
 
     def compile(coffee)
