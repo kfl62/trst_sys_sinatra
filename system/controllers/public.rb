@@ -6,7 +6,7 @@ module Trst
   class Public  < Sinatra::Base
     register Sinatra::Flash
     register Trst::Helpers
-    set :views, File.join(Trst.views, 'public')
+    set :views, File.join(Trst.views, 'public', Trst.firm.public['views'])
 
     if Trst.env == 'development'
       use Assets::Stylesheets
@@ -17,7 +17,7 @@ module Trst
       book = Book.find_by(slug: 'trst_public')
       @chapters = book.chapters
       @page = book.chapters.find_by(slug: 'home')
-      haml :page, layout: Trst.firm.layout.to_sym
+      haml :page, layout: Trst.firm.public['layout'].to_sym
     end
 
     get '/*' do |page|
