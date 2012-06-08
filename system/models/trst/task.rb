@@ -22,7 +22,7 @@ module Trst
 
     # @todo
     def action
-        goal.split('_').last == 'test' ? 'test' : goal.split('.').last
+      goal.split('_').last == 'test' ? 'test' : goal.split('.').last
     end
     # @todo
     def view_users
