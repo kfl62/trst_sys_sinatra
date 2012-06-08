@@ -52,7 +52,7 @@ module Trst
       handle_params(m,c,nil,'create_get',params)
       haml haml_path('create'), layout: false
     end
-     # @todo Document this route
+    # @todo Document this route
     post '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_post',params)
       if @object.save

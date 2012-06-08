@@ -69,5 +69,5 @@ module Trst
       @object = parent.where(:_id.nin => (child.send :"#{r.split('_').last}_ids", id))
       haml :relations, :layout => false
     end
- end # Utils
+  end # Utils
 end # Trst
