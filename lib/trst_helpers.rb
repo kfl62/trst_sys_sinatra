@@ -15,7 +15,7 @@ module Trst
       if collection = options.delete(:collection) then
         collection.inject([]) do |buffer, member|
           buffer << haml(:"#{template}", options.merge(layout: false,
-          locals: {template_array[-1].to_sym => member}))
+                                                       locals: {template_array[-1].to_sym => member}))
         end.join("\n")
       else
         haml(:"#{template}", options)
@@ -92,34 +92,34 @@ module Trst
         @related_object= related_model.all
       end
       case action
-        when 'filter'
-          @object = model.all
-          if related && related_id
-            @object = related_model.find(related_id).send related.inverse
-          end
-        when 'create_get'
-          @object = model.new
-          if related && related_id
-            @related_object= related_model.find(related_id)
-            object         = @related_object.send related.inverse
-            @object        = object.new
-          end
-        when 'create_post'
-          @object = model.new(params[:"#{@path}"])
-          if related && related_id
-            @related_object= related_model.find(related_id)
-            object         = @related_object.send related.inverse
-            @object        = object.new(params[:"#{@path}"])
-          end
-        when 'edit_get', 'edit_put', 'show', 'delete_get', 'delete'
-          @object = model.find(id)
-          if related && related_id
-            @related_object= related_model.find(related_id)
-            object         = @related_object.send related.inverse
-            @object        = object.find(id)
-          end
-        else
-           @object = nil
+      when 'filter'
+        @object = model.all
+        if related && related_id
+          @object = related_model.find(related_id).send related.inverse
+        end
+      when 'create_get'
+        @object = model.new
+        if related && related_id
+          @related_object= related_model.find(related_id)
+          object         = @related_object.send related.inverse
+          @object        = object.new
+        end
+      when 'create_post'
+        @object = model.new(params[:"#{@path}"])
+        if related && related_id
+          @related_object= related_model.find(related_id)
+          object         = @related_object.send related.inverse
+          @object        = object.new(params[:"#{@path}"])
+        end
+      when 'edit_get', 'edit_put', 'show', 'delete_get', 'delete'
+        @object = model.find(id)
+        if related && related_id
+          @related_object= related_model.find(related_id)
+          object         = @related_object.send related.inverse
+          @object        = object.find(id)
+        end
+      else
+        @object = nil
       end
       # special case handling page
       if c =~ /chapter|page/
@@ -135,14 +135,14 @@ module Trst
       method = map.nil? ? attribute : map
       value  = model.send method
       case value
-        when Array, Hash
-          value = map.nil? ? order.nil? ? value.join(',') : value[order] : value.map(&:last).join(', ')
-        when Time
-          value = l(value, format: :trst)
-        when String, Integer, Float, BSON::ObjectId
-          value = type == 'enum' ? mat(model,"#{attribute}_#{value}") : value
-        else
-          value = value.send order rescue value = ''
+      when Array, Hash
+        value = map.nil? ? order.nil? ? value.join(',') : value[order] : value.map(&:last).join(', ')
+      when Time
+        value = l(value, format: :trst)
+      when String, Integer, Float, BSON::ObjectId
+        value = type == 'enum' ? mat(model,"#{attribute}_#{value}") : value
+      else
+        value = value.send order rescue value = ''
       end
       value
     end
@@ -174,7 +174,7 @@ module Trst
       end
     end
     # @todo
-   def value_for(model,attribute,options = {})
+    def value_for(model,attribute,options = {})
       order,style = options.values_at(:order,:style)
       value = guess_value model,attribute,options
       value = '-' if value.blank?
