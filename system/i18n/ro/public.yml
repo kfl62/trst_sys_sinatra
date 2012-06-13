@@ -9,5 +9,13 @@ ro:
       workhours_title: Sunt accesibil
       phone_title: Telefon
       email_title: Adresă email
-  varena-auto:
+  demo:
+    << : *trst_public
+  asrv:
+    << : *trst_public
+  clns:
+    << : *trst_public
+  htls:
+    << : *trst_public
+  wstm:
     << : *trst_public

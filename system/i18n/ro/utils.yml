@@ -20,5 +20,13 @@ ro:
         Autentificat ca şi:
     msg:
       loading: Se încarcă pagina...
-  varena-auto:
+  demo:
+    << : *trst_utils
+  asrv:
+    << : *trst_utils
+  clns:
+    << : *trst_utils
+  htls:
+    << : *trst_utils
+  wstm:
     << : *trst_utils

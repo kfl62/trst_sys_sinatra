@@ -32,5 +32,13 @@ ro:
         repair: S-a strecurat o greşeală...
         test: Deocamdată ptr. testare
         uncategorized: Alte sarcini
-  varena-auto:
+  demo:
+    << : *trst_system
+  asrv:
+    << : *trst_system
+  clns:
+    << : *trst_system
+  htls:
+    << : *trst_system
+  wstm:
     << : *trst_system
