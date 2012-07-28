@@ -17,10 +17,12 @@ class TrstAccFreightOut
   field :val,           :type => Float,     :default => 0.00
   field :val_invoice,   :type => Float,     :default => 0.00
 
-  belongs_to :doc,     :class_name => "TrstAccDeliveryNote",  :inverse_of => :freights
+  belongs_to :doc_dn,  :class_name => "TrstAccDeliveryNote",  :inverse_of => :freights
+  belongs_to :doc_cs,  :class_name => "TrstAccCassation",     :inverse_of => :freights
   belongs_to :freight, :class_name => "TrstAccFreight",       :inverse_of => :outs
 
-  before_create   :update_self
+  before_create   :handle_nil_id
+  before_update   :update_self
   before_update   :handle_stock_remove
   before_destroy  :handle_stock_add
 
@@ -79,14 +81,21 @@ class TrstAccFreightOut
     end
   end # Class methods
   # @todo
+  def doc
+    doc_dn_id.nil? ? doc_cs : doc_dn
+  end
+  # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.doc.unit_id)
   end
   protected
   # @todo
-  def update_self
+  def handle_nil_id
     self.id = BSON::ObjectId.new
-    self.id_date = doc.id_date
+  end
+  # @todo
+  def update_self
+    self.id_date = doc_dn_id.nil? ? doc_cs.id_date : doc_dn.id_date
     self.val = (pu * qu).round(2)
     self.id_intern = true if doc.id_intern
   end
@@ -118,14 +127,14 @@ class TrstAccFreightOut
         f   = fs.where(:pu => spu).first
         csf = csfs.where(:pu => f.pu).first if csfs
         if out > f.qu
-          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :val => (f.pu * f.qu).round(2), :doc_id => doc_id) unless f.qu == 0
+          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => f.qu, :val => (f.pu * f.qu).round(2), :doc_cs_id => (doc_cs_id if doc_cs_id), :doc_dn_id => (doc_dn_id if doc_dn_id), :id_date => id_date, :id_intern => id_intern) unless f.qu == 0
           out -= f.qu unless out == 0
           f.qu   = 0
           csf.qu = 0 if csf
           f.save
           csf.save if csf
         else
-          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :val => (f.pu * out).round(2), :doc_id => doc_id) unless out == 0
+          self.class.create(:id_stats => f.id_stats,:freight_id => f.freight.id, :pu => f.pu, :qu => out, :val => (f.pu * out).round(2), :doc_cs_id => (doc_cs_id if doc_cs_id), :doc_dn_id => (doc_dn_id if doc_dn_id), :id_date => id_date, :id_intern => id_intern) unless out == 0
           f.qu   -= out
           csf.qu -= out if csf
           out = 0

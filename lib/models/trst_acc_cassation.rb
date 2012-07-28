@@ -19,7 +19,7 @@ class TrstAccCassation
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :cassations
   belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :cassations
 
-  before_create :increment_name_date
+  before_create :init_name_date_expl
   before_destroy :destroy_freights
 
   class << self
@@ -51,5 +51,16 @@ class TrstAccCassation
   # @todo
   def unit
     TrstFirm.unit_by_unit_id(self.unit_id) rescue nil
+  end
+  protected
+  # @todo
+  def init_name_date_expl
+    self.name = "PV_din-#{Date.today.to_s}"
+    self.id_date = Date.today
+    self.text = I18n.t('trst_acc_cassation.text_value')
+  end
+  # @todo
+  def destroy_freights
+    self.freights.destroy_all
   end
 end

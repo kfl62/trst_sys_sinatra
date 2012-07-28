@@ -18,7 +18,7 @@ class TrstAccDeliveryNote
 
   alias :file_name :name
 
-  has_many   :freights,   :class_name => "TrstAccFreightOut", :inverse_of => :doc
+  has_many   :freights,   :class_name => "TrstAccFreightOut", :inverse_of => :doc_dn
   belongs_to :client,     :class_name => "TrstPartner",       :inverse_of => :delivery_notes
   belongs_to :transporter,:class_name => "TrstPartner",       :inverse_of => :delivery_pprss
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :delivery_notes
