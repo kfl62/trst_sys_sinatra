@@ -1,6 +1,4 @@
 #encoding: utf-8
-require "thin"
-require "wirble"
 
 task :default => "doc"
 
@@ -58,5 +56,6 @@ end
 
 desc "Start web server"
 task :thin do
+  require "bundler/setup"
   exec "thin start"
 end
