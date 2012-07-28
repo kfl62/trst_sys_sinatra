@@ -68,4 +68,5 @@ module Trst
   autoload :Page,                 'trst/book'
   autoload :User,                 'trst/user'
   autoload :Task,                 'trst/task'
+  autoload :Person,               'trst/person'
 end
