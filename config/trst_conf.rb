@@ -8,7 +8,6 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'haml'
-require 'compass'
 require 'rdiscount'
 # YAML settings
 YAML::ENGINE.yamler = 'syck'
