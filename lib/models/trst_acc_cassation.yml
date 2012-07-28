@@ -2,6 +2,17 @@
 ro:
   trst_acc_cassation:
     title: "Proces verbal casare"
+    name: Denumire
+    id_date: Data
+    text_value: PV Casare din -
+    value: Valoare
+    filter:
+      info: |
+        Selectaţi PV Casare/Degradare sau Creaţi unul nou!
+    put:
+      label:
+        tbody: ["Material", "UM", "Stoc", "Cant.", "Rămâne", "&nbsp;&nbsp;"]
+        tbody_sum: Cantitate casată
     not_ready: |
       Din păcate încâ nu este gata!<br/><br/>
       Faptul că a apărut în meniul "Sarcini zilnice",<br/>
