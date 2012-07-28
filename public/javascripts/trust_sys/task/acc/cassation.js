@@ -1,6 +1,17 @@
 dojo.mixin(trst.task.acc,{
   cassation: {
     init: function(){
+      // Connect select, 'Post' on filter
+      if (trst.task.acc.hd.action == 'filter'){
+        dojo.query('select.dp').onchange(function(e){
+          if (selectedValue(e.target) != 'null'){
+            trst.task.init(trst.task.acc.hd.task_id,'get',selectedValue(e.target))
+          }
+        })
+        dojo.query('.button.post.mc-evt').onclick(function(){
+           trst.task.init(trst.task.acc.hd.task_id,'post','new')
+        })
+      }
       //Initialize select freight inputs
       if (dojo.query('input.freight').length > 0){
         dojo.query('input.freight').forEach(function(fr,i){
