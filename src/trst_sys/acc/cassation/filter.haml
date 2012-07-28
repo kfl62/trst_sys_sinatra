@@ -1,1 +1,29 @@
+:ruby
+  unit_id = current_user.unit_id.nil? ? session[:unit_id] : current_user.unit_id
 %p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= t('trst_acc_cassation.title')
+%span#hidden_data.hidden{:data => {:task_id => @task.id, :js => "acc.cassation", :action => "filter"}}
+- if unit_id
+  - if current_user.unit_id.nil?
+    = partial('trst_sys/shared/select_unit')
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+          %p{:style => "font-size:0.9em"}= t('trst_acc_cassation.filter.info')
+    %tbody
+      %tr
+        %td
+          %select.pv
+            %option{:value => 'null'}= TrstAccCassation.by_unit_id(unit_id).empty? ? t('select.no_data') : t('select.select')
+            - unless TrstAccCassation.by_unit_id(unit_id).empty?
+              - TrstAccCassation.by_unit_id(unit_id).asc(:id_date).each do |o|
+                %option{:value => o.id}
+                  = option_name(o)
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          %span{:class => "button post mc-evt"}= t("button.post") + " Proces verbal Casare"
+          %span{:class => "button cancel mc-evt"}= t("button.cancel")
+- else
+  = partial('trst_sys/shared/select_unit')

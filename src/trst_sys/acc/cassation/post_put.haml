@@ -1,1 +1,66 @@
 %p.close{:onclick => "trst.task.destroy()"}
+%p.task_title= current_title(@task,action)
+- if action == 'put'
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.cassation", :action => "put", :object_id => "#{@object.id rescue nil}"}}
+  %form{:id  => "xhr_#{action}"}
+    %table{:cellspacing => "0"}
+      %thead
+        %tr
+          %th{colspan: '6'}
+            Document:
+            %input{:name => "[trst_acc_cassation][name]", :value => @object.name}
+            din data de:
+            %input.date{:name => "[trst_acc_cassation][id_date]", :value => @object.id_date.to_s}
+        %tr
+          %th{colspan: '6'}
+            Explicaţii
+            %input{:name => "[trst_acc_cassation][text]", :value => @object.text, style: 'width:340px'}
+      %tbody.inner
+        %tr
+          - t('trst_acc_cassation.put.label.tbody').each do |label|
+            %td.ce= label
+        -for i in 1..5 do
+          %tr{:id => "tr_0#{i.to_s}"}
+            %td.filtering-select-freight
+              %input.freight{:id => "freightSelect_0#{i.to_s}"}
+            %td
+              %span.ce.st kg
+            %td
+              %span.val 0.00
+            %td
+              %input.ri.st{:id => "qu_0#{i.to_s}",:name => "[freights][#{i}][qu]",:value => "0.00", :style => "width:8em"}
+              %input{:type => "hidden", :name => "[freights][#{i}][doc_cs_id]",:value => @object.id}
+              %input{:type => "hidden", :name => "[freights][#{i}][id_stats]",:value => ''}
+              %input{:type => "hidden", :name => "[freights][#{i}][pu]",:value => 0.00}
+            %td
+              %span.res 0.00
+            %td
+              %span.db-freight-del
+        %tr
+          %td.ce.em.st{:colspan => "3"}= t('trst_acc_cassation.put.label.tbody_sum')
+          %td
+            %span.ce.st{:style => "display:block"} 0.00
+          %td{:colspan => "2"}
+            %span &nbsp;&nbsp;
+      %tfoot
+        %tr
+          %td{:class => "buttons_bottom", :colspan => "6"}
+            %span{:class => "button save mc-evt"}= t("button.save")
+            %span{:class => "button delete mc-evt"}= t("button.delete")
+
+- else
+  %span#hidden_data.hidden{:data => {:task_id => "#{@task.id}", :js => "acc.cassation", :action => "post", :object_id => "#{@object.id rescue nil}"}}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %th= t("gen_warning.#{action}")
+    %tbody
+      %tr
+        %td
+          %p.ju{:style => "width:350px"}= t("gen_msg.#{action}", :data => "#{@object.name}")
+    %tfoot
+      %tr
+        %td{:class => "buttons_bottom"}
+          - current_buttons(action).each do |button|
+            %span{:class => "button #{button}", :onclick => current_xhr(button,@task.id,action,"new",params)}<
+              =t("button.#{button}")
