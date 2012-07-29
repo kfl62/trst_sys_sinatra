@@ -3,7 +3,7 @@ dojo.mixin(trst.task.acc,{
     init: function(){
       // Connect select, 'Post' on filter
       if (trst.task.acc.hd.action == 'filter'){
-        dojo.query('select.dp').onchange(function(e){
+        dojo.query('select.pv').onchange(function(e){
           if (selectedValue(e.target) != 'null'){
             trst.task.init(trst.task.acc.hd.task_id,'get',selectedValue(e.target))
           }
