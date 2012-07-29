@@ -5,15 +5,46 @@
   %table{:cellspacing => "0"}
     %thead
       %tr
-        %th= t('gen_head.field')
-        %th= t('gen_head.value')
-    %tbody
-      -# @object.table_data.each do |data|
-        -# tr_body('get',data)
+        %tr
+          %td{colspan: '5'}
+            Cu documentul nr.&nbsp;
+            %span.st= @object.name
+            &nbsp;din data de:&nbsp;
+            %span.st= @object.id_date.to_s
+        %tr
+          %td{colspan: '5'}
+            Explicaţii:&nbsp;
+            %span.st{style: 'width:340px'}= @object.text
+            %br
+            s-au Casat/Degradat următoarele materiale:
+        %tr
+          %td{colspan: '5'}
+            %span &nbsp;
+    %tbody.inner
+      %tr
+        - t('trst_acc_cassation.get.label.tbody').each do |label|
+          %td.ce= label
+      - @object.freights.each do |f|
+        %tr
+          %td
+            %span= f.freight.name
+          %td
+            %span.ce kg
+          %td
+            %span.qu= "%.2f" % f.pu
+          %td
+            %span.qu= "%.2f" % f.qu
+          %td
+            %span.val= "%.2f" % f.val
+      %tr
+        %td.ce.em.st{:colspan => "3"}= t('trst_acc_cassation.get.label.tbody_sum')
+        %td
+          %span.qu= "%.2f" % @object.freights.sum(:qu)
+        %td
+          %span.val= "%.2f" % @object.freights.sum(:val)
     %tfoot
       %tr
-        %td{:class => "buttons_bottom", :colspan => "2"}
-          %span{:class => "button put mc-evt"}= t("button.put")
+        %td{:class => "buttons_bottom", :colspan => "5"}
           %span{:class => "button delete mc-evt"}= t("button.delete")
           %span{:class => "button cancel mc-evt"}= t("button.cancel")
       %tr

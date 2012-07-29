@@ -13,6 +13,10 @@ ro:
       label:
         tbody: ["Material", "UM", "Stoc", "Cant.", "Rămâne", "&nbsp;&nbsp;"]
         tbody_sum: Cantitate casată
+    get:
+      label:
+        tbody: ["Material", "UM", "PU", "Cant.", "Valoare"]
+        tbody_sum: Total
     not_ready: |
       Din păcate încâ nu este gata!<br/><br/>
       Faptul că a apărut în meniul "Sarcini zilnice",<br/>
