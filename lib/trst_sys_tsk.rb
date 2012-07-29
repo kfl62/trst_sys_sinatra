@@ -163,6 +163,7 @@ class TrstSysTsk < Sinatra::Base
         o.delete if v["qu"] == '-999'
       end
       @object.update_delivery_notes(true) if @object.class.instance_methods.include?(:update_delivery_notes)
+      @object.save if @object.class == TrstAccCassation
       @object.reload
     end
     if params[:delegates]

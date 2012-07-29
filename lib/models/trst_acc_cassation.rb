@@ -19,8 +19,9 @@ class TrstAccCassation
   belongs_to :unit,       :class_name => "TrstFirmUnit",      :inverse_of => :cassations
   belongs_to :signed_by,  :class_name => "TrstUser",          :inverse_of => :cassations
 
-  before_create :init_name_date_expl
-  before_destroy :destroy_freights
+  before_create   :init_name_date_expl
+  before_destroy  :destroy_freights
+  before_save     :update_value
 
   class << self
     # @todo
@@ -62,5 +63,9 @@ class TrstAccCassation
   # @todo
   def destroy_freights
     self.freights.destroy_all
+  end
+  # @todo
+  def update_value
+    self.val = freights.sum(:val).round(2) rescue 0.0
   end
 end
