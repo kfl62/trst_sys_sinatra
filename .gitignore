@@ -8,6 +8,7 @@ log/*
 !tmp/restart.txt
 Gemfile.lock
 config/*.yml
+!config/mongoid.yml
 public/api
 public/images/*
 !public/images/trst
