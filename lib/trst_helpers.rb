@@ -139,7 +139,7 @@ module Trst
         value = map.nil? ? order.nil? ? value.join(',') : value[order] : value.map(&:last).join(', ')
       when Time
         value = l(value, format: :trst)
-      when String, Integer, Float, BSON::ObjectId
+      when String, Integer, Float, Moped::BSON::ObjectId
         value = type == 'enum' ? mat(model,"#{attribute}_#{value}") : value
       else
         value = value.send order rescue value = ''
