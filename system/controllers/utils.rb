@@ -20,6 +20,7 @@ module Trst
     post '/login' do
       if user = User.authenticate(params[:name], params[:password])
         session[:user] = user.id
+        user.set(:last_login, Time.now)
         flash[:msg] = {:msg => {:txt => t('login.ok'), :class => "loading"}}
         redirect "#{lp}/sys"
       else
