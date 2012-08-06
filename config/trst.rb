@@ -33,6 +33,10 @@ module Trst
       opt.assets || File.join(TRST_ROOT,'system','assets')
     end
     # @todo
+    def models
+      opt.models || File.join(TRST_ROOT,'system','models')
+    end
+    # @todo
     def firm
       file = YAML.load_file File.join(TRST_ROOT,'config','firm.yml')
       OpenStruct.new file['firm']
@@ -63,10 +67,9 @@ module Trst
   autoload :Public,               Trst.firm.public['controller']
   autoload :Utils,                'utils'
   autoload :Assets,               'assets'
-  autoload :Book,                 'trst/book'
-  autoload :Chapter,              'trst/book'
-  autoload :Page,                 'trst/book'
-  autoload :User,                 'trst/user'
-  autoload :Task,                 'trst/task'
-  autoload :Person,               'trst/person'
+  firm.models_path.each do |mp|
+    Dir.glob(File.join(models,mp,'*.rb')).each do |m|
+      require m
+    end
+  end
 end
