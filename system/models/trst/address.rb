@@ -16,6 +16,7 @@ module Trst
     field :state,   type: String,   default: 'Cluj'
     field :country, type: String,   default: 'Romania'
     field :zip,     type: String,   default: '-'
-    field :other,   type: String,   default: 'Client'
+
+    belongs_to :person_address, polymorphic: true
   end # Address
 end #Trst
