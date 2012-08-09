@@ -291,16 +291,25 @@ module Trst
       task = Trst::Task.find(request.cookies['task_id'])
       path = File.join(task.goal.split('.')[0].underscore,action)
       file = File.join(Trst.views,'system',"#{path}.haml")
-      haml_path = File.exists?(file) ? path : remove_second(path)
+      haml_path = check_haml_path(file,path)
       haml_path += '_related' if related
       haml_path = task.haml_path if task.haml_path != 'default'
       haml_path.to_sym
     end
     # @todo
-    def remove_second(s)
+    def check_haml_path(f,p)
+      path = File.exists?(f) ? p : check_module(p)
+      file = File.join(Trst.views,'system',"#{path}.haml")
+      unless File.exists?(file)
+        path = check_module(path,true)
+      end
+      path
+    end
+    # @todo
+    def check_module(s,main = false)
       a = s.split('/')
-      a.delete_at(1)
+      main ? a[0] = 'trst' : a.delete_at(1)
       a.join('/')
     end
-  end # Helper
+ end # Helper
 end # Trst
