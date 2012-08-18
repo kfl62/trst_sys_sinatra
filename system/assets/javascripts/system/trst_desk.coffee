@@ -1,4 +1,9 @@
-define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
+define [
+          'jquery-ui',
+          'system/trst_desk_buttons',
+          'system/trst_desk_select',
+          'system/trst_desk_tabs'
+        ], () ->
   $.extend Trst.desk,
     readData: () ->
       @hda = $('#hidden_data')
@@ -45,6 +50,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select'], () ->
             $desk.dialog title: Trst.desk.hdo.title
             Trst.desk.buttons.init()
             Trst.desk.select.init() if Trst.desk.hdf.find('select').length
+            Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length
             $desk.dialog('open')
             return
           else
