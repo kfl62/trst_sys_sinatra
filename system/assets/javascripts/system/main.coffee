@@ -1,4 +1,8 @@
-define ['/javascripts/libs/jquery.cookie.min.js','libs/trst_msg','system/trst_desk'], () ->
+define [
+          '/javascripts/libs/jquery.cookie.min.js',
+          '/javascripts/libs/select2.min.js',
+          'libs/trst_msg','system/trst_desk'
+        ], () ->
   $.extend Trst,
     init: () ->
       Trst.msgHide()
