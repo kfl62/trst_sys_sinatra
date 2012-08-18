@@ -1,0 +1,18 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/person': &trst_person
+        model_name: Date personale
+        id: Id system
+        id_pn: Cod Numeric Personal
+        name_last: Nume
+        name_frst: Prenume
+        id_doc_type: Document (BI/CI/PS)
+        id_doc_sr: Seria
+        id_doc_nr: Număr
+        id_doc_by: Eliberat de
+        id_doc_on: în data de
+        phone: Număr telefon
+        email: Adresă email
+        created_at: Creat
+        updated_at: Modificat

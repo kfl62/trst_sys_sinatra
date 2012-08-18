@@ -1,0 +1,18 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/address': &trst_address
+        model_name: Adresă
+        id: Id system
+        city: Localitate
+        street: Strada
+        nr: Număr
+        bl: Bloc
+        sc: Scara
+        et: Etaj
+        ap: Apartament
+        state: Judeţ
+        country: Ţara
+        zip: Cod poştal
+        created_at: Creat
+        updated_at: Modificat
