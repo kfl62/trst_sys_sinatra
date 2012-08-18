@@ -17,7 +17,7 @@ Dir['system/*'].each do |dir|
   $LOAD_PATH.unshift(dir) unless $LOAD_PATH.include?(dir)
 end
 # Add path for translations and default language
-I18n.load_path += Dir.glob(File.join(TRST_ROOT, 'system','i18n','*/*.yml'))
+I18n.load_path += Dir.glob(File.join(TRST_ROOT, 'system','i18n','**','*','*.yml'))
 I18n.default_locale = :ro
 # Sintra default settings
 Sinatra::Base.set(:root, TRST_ROOT)
