@@ -150,8 +150,8 @@ module Trst
     def guess_name(model,attribute,options)
       order,nested = options.values_at(:order,:nested)
       name  = "[#{model.class.name.underscore}]"
-      name  = "[#{model._parent.class.name.underscore}]" if (nested && model.embedded?)
-      name  = "[#{model[model.relations.values[0].name.to_s + "_type"].underscore}]" if (nested && model.polymorphic)
+      name  = "[#{model._parent.class.name.underscore}]" if (nested && !model._parent.nil?)
+      name  = "[#{model[model.relations.values[0].name.to_s + "_type"].underscore}]" if (nested && model._parent.nil?)
       name += (model.metadata.macro.to_s.split('_').last == "one" ? "[#{nested}_attributes]" : "[#{nested}_attributes][]") if nested
       name += "[#{attribute}]"
       name += ((order.is_a? Integer) ? "[]" : "[#{order}]") if order
