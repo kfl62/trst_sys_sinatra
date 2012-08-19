@@ -5,7 +5,6 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :name,    type: String,   default: 'Home'
     field :city,    type: String,   default: 'Cluj-Napoca'
     field :street,  type: String,   default: '-'
     field :nr,      type: String,   default: '-'
@@ -17,6 +16,5 @@ module Trst
     field :country, type: String,   default: 'Romania'
     field :zip,     type: String,   default: '-'
 
-    belongs_to :person_address, polymorphic: true
   end # Address
 end #Trst
