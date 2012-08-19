@@ -1,0 +1,23 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/firm': &trst_firm
+        id: Id system
+        name_0: Denumire uzuală
+        name_1: Denumire completă
+        name_2: Denumire oficială
+        identities_caen: Dom.activitate CAEN
+        identities_chambcom: Cam.Comerţ Jxx
+        identities_fiscal: Cod fiscal CUI
+        identities_account: Cod contabilitate
+        identities_itm: Nr. Cam.Munca ITM
+        identities_internet: IP internet
+        identities_cod: Cod intern
+        contact_phone: Telefon
+        contact_fax: Fax
+        contact_email: Adresă email
+        contact_website: Pagină web
+        about_scope: Scop
+        about_descript: Descriere
+        created_at: Creat
+        updated_at: Modificat
