@@ -16,7 +16,7 @@ module Trst
 
     # @todo
     def name(last_first = true)
-      last_first ? "#{name_last} #{name_frst}" : "#{name_first} #{name_last}"
+      last_first ? "#{name_last} #{name_frst}" : "#{name_frst} #{name_last}"
     end
   end # Person
 end # Trst
