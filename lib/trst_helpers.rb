@@ -76,7 +76,7 @@ module Trst
     alias :lp :localized_path
     # @todo
     def guess_task(path,action)
-      Trst::Task.find_by(goal: "#{path.classify}.#{action}") || Trst::Task.find_by(goal: "#{path.classify}.filter") || Trst::Task.find_by(goal: "#{path.classify}.page")
+      Trst::Task.find(request.cookies['task_id'])
     end
     # @todo
     def handle_params(m,c,id,action,params)
@@ -85,7 +85,7 @@ module Trst
       @verb     = action.split('_').first
       task      = guess_task(@path,action)
       model     = @path.classify.constantize
-      related   = model.relations[task.rels]
+      related   = model.relations[task.rels] || model.relations[request.cookies['rels']]
       if related
         @related_path  = related.class_name.underscore
         related_model  = related.class_name.constantize
