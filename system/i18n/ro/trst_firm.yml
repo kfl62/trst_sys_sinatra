@@ -2,6 +2,7 @@ ro:
   mongoid:
     attributes:
       'trst/firm': &trst_firm
+        model_name: Firmă
         id: Id system
         name_0: Denumire uzuală
         name_1: Denumire completă

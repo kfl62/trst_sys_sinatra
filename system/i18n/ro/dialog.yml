@@ -21,7 +21,7 @@ ro:
         sau alegând "Creare" veţi crea unul/una.
       embedded: |
         Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
-        prima dată trebuie să selectaţi Producătorul!<br>
+        prima dată trebuie să selectaţi un/o %{parent}!<br>
       select:
         option: |
           Alegeţi &raquo;%{data}&laquo;
