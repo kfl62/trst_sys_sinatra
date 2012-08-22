@@ -75,6 +75,10 @@ module Trst
     end
     alias :lp :localized_path
     # @todo
+    def current_user
+      Trst::User.find(session[:user])
+    end
+    # @todo
     def guess_task(path,action)
       Trst::Task.find(request.cookies['task_id'])
     end
