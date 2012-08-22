@@ -26,7 +26,6 @@ define [
         position: [$position.left + 10,$position.top - 20]
         close: () ->
           $(this).remove()
-          return
       return
     init: (url,type,data) ->
       $url  = url
@@ -55,5 +54,12 @@ define [
             return
           else
             console.log 'Initialize error...'
+        else
+          if $.cookie 'reload_path'
+            $url = $.cookie 'reload_path'
+            $.cookie 'reload_path', null
+            $.cookie 'rels', null
+            Trst.desk.init($url)
+            return
       $msg('Trst.desk.init() ...')
   return Trst
