@@ -1,0 +1,12 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/freight':
+        model_name: Material
+        id: Id system
+        name: Denumire
+        um: Unitate de măsură
+        pu: Preţ unitar
+        id_stats: Id statistică
+        created_at: Creat
+        updated_at: Modificat
