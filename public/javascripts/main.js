@@ -31,6 +31,10 @@ require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
       })
     } else {
       require(['system/main'], function(){
+        if ($('body').data('js_path')){
+          var js_path = $('body').data('js_path')
+          require([js_path + '/module'])
+        }
         Trst.init()
       })
     }
