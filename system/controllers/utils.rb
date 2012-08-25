@@ -70,5 +70,12 @@ module Trst
       @object = parent.where(:_id.nin => (child.send :"#{r.split('_').last}_ids", id))
       haml :relations, :layout => false
     end
+    # @todo
+    get '/units/:model/:class/:unit_id' do |m,c,uid|
+      uid == 'null' ? session[:unit_id] = nil : session[:unit_id] = uid
+      handle_params(m,c,nil,'filter',params)
+      path = "#{lp}/sys/#{haml_path('filter').to_s}"
+      redirect path
+    end
   end # Utils
 end # Trst
