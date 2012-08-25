@@ -47,6 +47,9 @@ ro:
           Nu sa putut salva &raquo;%{data}&laquo;<br>
           Vezi detalii în formular!
     create:
+      header: |
+        Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
+        Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
       title: |
         Administrare &raquo;%{data}&laquo; - Creare -
       msg:
@@ -60,6 +63,9 @@ ro:
     delete:
       title: |
         Administrare &raquo;%{data}&laquo; - Ştergere -
+      header: |
+        Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
+        Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
       msg:
         start: |
           Atenţie se va şterge &raquo;%{data}&laquo;
