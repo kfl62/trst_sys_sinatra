@@ -10,22 +10,26 @@ define [
       @hdo = if @hda.length then @hda.data() else {}
       @hdf = $('#deskDialog form')
       if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
-    closeDesk: () ->
-      $('#deskDialog').dialog('close')
+    closeDesk: (cls = true) ->
+      $('#deskDialog').dialog('close') if cls
       return
     createDesk: (data) ->
       $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
       $position = $('#content').position()
-      $desk.html(data)
-      .dialog
-        dialogClass: 'ui-dialog-shadow'
-        autoOpen: false
-        modal: true
-        height: 'auto'
-        width: 'auto'
-        position: [$position.left + 10,$position.top - 20]
-        close: () ->
-          $(this).remove()
+      if $desk.dialog('isOpen') is true
+        $desk.html(data)
+        $msg 'Dialog isOpen...'
+      else
+        $desk.html(data)
+        .dialog
+          dialogClass: 'ui-dialog-shadow'
+          autoOpen: false
+          modal: true
+          height: 'auto'
+          width: 'auto'
+          position: [$position.left + 10,$position.top - 20]
+          close: () ->
+            $(this).remove()
       return
     init: (url,type,data) ->
       $url  = url
