@@ -14,7 +14,7 @@ define [
       $('#deskDialog').dialog('close')
       return
     createDesk: (data) ->
-      $desk = $('<div id="deskDialog"></div>')
+      $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
       $position = $('#content').position()
       $desk.html(data)
       .dialog
@@ -47,7 +47,8 @@ define [
           if Trst.desk.readData()
             $desk = $('#deskDialog')
             $desk.dialog title: Trst.desk.hdo.title
-            Trst.desk.buttons.init()
+            Trst.module.desk.init() if Trst.module?
+            Trst.desk.buttons.init() if $('button').length
             Trst.desk.select.init() if Trst.desk.hdf.find('select').length
             Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length
             $desk.dialog('open')
