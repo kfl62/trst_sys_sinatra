@@ -33,7 +33,11 @@ require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
       require(['system/main'], function(){
         if ($('body').data('js_path')){
           var js_path = $('body').data('js_path')
-          require([js_path + '/module'])
+          var module  = js_path.substr(0,1).toUpperCase() + js_path.substr(1)
+          Trst.module = module
+          require([js_path + '/module'], function(){
+            Trst.module = window[Trst.module]
+          })
         }
         Trst.init()
       })
