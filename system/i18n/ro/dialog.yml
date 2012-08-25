@@ -1,5 +1,9 @@
 ro:
   trst: &trst_dialog
+    'true': Da
+    'yes': Da
+    'false': Nu
+    'no': Nu
     button:
       login: Autentificare
       cancel: Renunţare
@@ -11,8 +15,10 @@ ro:
       upload: Încărcare
       preview: Vizionare
       download: Descărcare
-      yes: Da
-      no: Nu
+      'true': Da
+      'yes': Da
+      'no': Nu
+      'no': Nu
     filter:
       title: |
         Administrare &raquo;%{data}&laquo; - Selectare -
