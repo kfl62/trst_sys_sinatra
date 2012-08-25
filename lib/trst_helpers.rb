@@ -141,6 +141,8 @@ module Trst
         value = l(value, format: :trst)
       when String, Integer, Float, Moped::BSON::ObjectId
         value = type == 'enum' ? mat(model,"#{attribute}_#{value}") : value
+      when TrueClass, FalseClass
+        value = t(value)
       else
         value = value.send order rescue value = ''
       end
