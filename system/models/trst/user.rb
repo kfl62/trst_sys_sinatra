@@ -48,8 +48,13 @@ module Trst
     end
     # `true` if `#user` has admin rights
     # @return [Boolean]
+    def root?
+      self.access_lvl == -1
+    end
+    # `true` if `#user` has admin rights
+    # @return [Boolean]
     def admin?
-      self.access_lvl == -1 || self.access_grp.include?('admin')
+      self.access_lvl < 4 || self.access_grp.include?('admin')
     end
     # @todo
     def view_tasks
