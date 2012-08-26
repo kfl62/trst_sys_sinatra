@@ -54,12 +54,7 @@ module Trst
     # @todo Document this method
     get '/search/:model' do |m|
       model = m.constantize
-      unit = User.find(session[:user]).unit_id || session[:unit_id]
-      if params[:dn]
-        model.auto_search(unit,true).to_json
-      else
-        model.auto_search(unit).to_json
-      end
+      model.auto_search(params).to_json
     end
     # @todo
     get '/relations/:model/:class/:id/:rel_to' do |m,c,id,r|
