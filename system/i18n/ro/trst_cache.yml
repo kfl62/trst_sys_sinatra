@@ -1,0 +1,13 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/cache':
+        model_name: Dispoziţie plată
+        id: Id system
+        name: Denumire
+        id_date: Data
+        money_in: Suma primită
+        money_out: Suma dată
+        money_stock: Sold
+        created_at: Creat
+        updated_at: Modificat
