@@ -20,6 +20,15 @@ module Trst
         where(:id_date.gte => mb.to_time, :id_date.lt => me.to_time)
       end
       # @todo
+      def weekly(y = nil, w = nil)
+        y,w = y.split('-').map{|s| s.to_i} if y.is_a? String
+        y ||= Date.today.year
+        w ||= Date.today.cweek
+        wb = Date.commercial(y, w, 1)
+        we = Date.commercial(y, w, 7)
+        where(:id_date.gte => wb.to_time, :id_date.lte => we.to_time)
+      end
+      # @todo
       def daily(y = nil, m = nil, d = nil)
         y,m,d = y.split('-').map{|s| s.to_i} if y.is_a? String
         y ||= Date.today.year
