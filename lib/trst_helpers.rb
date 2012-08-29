@@ -152,9 +152,11 @@ module Trst
     def guess_name(model,attribute,options)
       order,nested = options.values_at(:order,:nested)
       name  = "[#{model.class.name.underscore}]"
-      name  = "[#{model._parent.class.name.underscore}]" if (nested && !model._parent.nil?)
-      name  = "[#{model[model.relations.values[0].name.to_s + "_type"].underscore}]" if (nested && model._parent.nil?)
-      name += (model.metadata.macro.to_s.split('_').last == "one" ? "[#{nested}_attributes]" : "[#{nested}_attributes][]") if nested
+      if nested
+        relation = model.relations[nested]
+        name  = "[#{relation.class_name.underscore}]"
+        name += (model.metadata.macro.to_s.split('_').last == "one" ? "[#{relation.inverse_of.to_s}_attributes]" : "[#{relation.inverse_of.to_s}_attributes][]")
+      end
       name += "[#{attribute}]"
       name += ((order.is_a? Integer) ? "[]" : "[#{order}]") if order
       name
@@ -193,11 +195,11 @@ module Trst
     end
     # @todo
     def input_for(model,attribute,options = {})
-      id,name,value,type,order,nested,disabled,placeholder = options.values_at(:id,:name,:value,:type,:order,:nested,:disabled,:placeholder)
+      id,style,name,value,type,order,nested,disabled,placeholder = options.values_at(:id,:style,:name,:value,:type,:order,:nested,:disabled,:placeholder)
       type  ||= 'text'
       value ||= guess_value model,attribute,options
       name  ||= guess_name  model,attribute,options
-      style   = 'ui-state-default' unless type == 'hidden'
+      style ||= 'ui-state-default' unless type == 'hidden'
       haml_tag :input,id: id,class: style,name: (name if name != 'strip'),value: (value if value != 'strip'),type: type,disabled: disabled,placeholder: placeholder
     end
     # @todo
