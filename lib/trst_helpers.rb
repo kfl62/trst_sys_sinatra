@@ -137,7 +137,7 @@ module Trst
       case value
       when Array, Hash
         value = map.nil? ? order.nil? ? value.join(',') : value[order] : value.map(&:last).join(', ')
-      when Time
+      when Time, Date
         value = l(value, format: :trst)
       when String, Integer, Float, Moped::BSON::ObjectId
         value = type == 'enum' ? mat(model,"#{attribute}_#{value}") : value
@@ -198,7 +198,7 @@ module Trst
       value ||= guess_value model,attribute,options
       name  ||= guess_name  model,attribute,options
       style   = 'ui-state-default' unless type == 'hidden'
-      haml_tag :input,id: id,class: style,name: name,value: value,type: type,disabled: disabled,placeholder: placeholder
+      haml_tag :input,id: id,class: style,name: (name if name != 'strip'),value: (value if value != 'strip'),type: type,disabled: disabled,placeholder: placeholder
     end
     # @todo
     def td_input_for(model,attribute,options = {})
