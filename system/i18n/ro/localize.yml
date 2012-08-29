@@ -25,15 +25,16 @@ ro:
     day_names:
     - Duminică
     - Luni
-    - Marți
+    - Marţi
     - Miercuri
     - Joi
     - Vineri
-    - Sâmbată
+    - Sâmbătă
     formats:
       default: ! '%d-%m-%Y'
       long: ! '%d %B %Y'
       short: ! '%d %b'
+      trst: ! '%A, %d %B, %Y'
     month_names:
     -
     - Ianuarie
@@ -58,5 +59,5 @@ ro:
       default: ! '%a %d %b %Y, %H:%M:%S %z'
       long: ! '%d %B %Y %H:%M'
       short: ! '%d %b %H:%M'
-      trst: ! '%A %d %B %Y, %H:%M:%S'
+      trst: ! '%A, %d %B, %Y %H:%M:%S'
     pm: ''
