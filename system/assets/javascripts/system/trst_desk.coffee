@@ -51,10 +51,10 @@ define [
           if Trst.desk.readData()
             $desk = $('#deskDialog')
             $desk.dialog title: Trst.desk.hdo.title
-            Trst.module.desk.init() if Trst.module?
             Trst.desk.buttons.init() if $('button').length
             Trst.desk.select.init() if Trst.desk.hdf.find('select').length
             Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length
+            Trst.module.desk.init() if Trst.module?
             $desk.dialog('open')
             return
           else
