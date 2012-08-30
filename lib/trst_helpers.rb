@@ -150,12 +150,12 @@ module Trst
     end
     # @todo
     def guess_name(model,attribute,options)
-      order,nested = options.values_at(:order,:nested)
+      order,nested,index = options.values_at(:order,:nested, :index)
       name  = "[#{model.class.name.underscore}]"
       if nested
         relation = model.relations[nested]
         name  = "[#{relation.class_name.underscore}]"
-        name += (model.metadata.macro.to_s.split('_').last == "one" ? "[#{relation.inverse_of.to_s}_attributes]" : "[#{relation.inverse_of.to_s}_attributes][]")
+        name += ((model.metadata.macro.to_s.split('_').last rescue 'many') == 'one' ? "[#{relation.inverse_of.to_s}_attributes]" : "[#{relation.inverse_of.to_s}_attributes][#{index}]")
       end
       name += "[#{attribute}]"
       name += ((order.is_a? Integer) ? "[]" : "[#{order}]") if order
