@@ -59,10 +59,10 @@ define () ->
         $msg('Button.edit Pressed...')
       save: (button) ->
         $hd   = Trst.desk.hdo
-        $bd = button.data()
+        $bd   = button.data()
         $type = Trst.desk.hdf.attr('method')
         $data = Trst.desk.hdf.serializeArray()
-        $url= if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
+        $url  = if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
         Trst.desk.closeDesk($bd.remove)
         $hd.oid = if $hd.oid is null then 'create' else $hd.oid
         $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
