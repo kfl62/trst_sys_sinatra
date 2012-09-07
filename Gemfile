@@ -12,6 +12,7 @@ gem 'compass'
 gem 'haml'
 gem 'mongoid', github: "mongoid"
 gem 'rdiscount'
+gem 'prawn'
 
 # Development requirements
 group :development do
