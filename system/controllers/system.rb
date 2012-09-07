@@ -48,6 +48,24 @@ module Trst
       haml haml_path('filter',!@related_object.nil?), layout: false
     end
     # @todo Document this route
+    get '/:module/:class/print' do |m,c|
+      id    = params[:id].nil? ? nil : params[:id]
+      action= params[:id].nil? ? 'filter' : 'print'
+      handle_params(m,c,id,action,params)
+      file = haml_path('pdf')
+      if params['haml']
+        haml file, layout: false
+      else
+        headers({'Content-Type' => 'application/pdf',
+                 'Content-Description' => 'File Transfer',
+                 'Content-Transfer-Encoding' => 'binary',
+                 'Content-Disposition' => "attachment;filename=\"#{@object.file_name}.pdf\"",
+                 'Expires' => '0',
+                 'Pragma' => 'public'})
+        pdf file, layout: false
+      end
+    end
+    # @todo Document this route
     get '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_get',params)
       haml haml_path('create'), layout: false
