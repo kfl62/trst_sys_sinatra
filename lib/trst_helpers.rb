@@ -6,6 +6,10 @@ module Trst
         app.helpers self
       end
     end
+    # @todo document this method
+    def pdf(*args)
+      render(:rb, *args)
+    end
     # @todo
     def partial(template, *args)
       template_array = template.to_s.split('/')
@@ -111,7 +115,7 @@ module Trst
           object         = @related_object.send related.inverse
           @object        = object.new(params[:"#{@path}"])
         end
-      when 'edit_get', 'edit_put', 'show', 'delete_get', 'delete'
+      when 'edit_get', 'edit_put', 'show', 'delete_get', 'delete', 'print'
         @object = model.find(id)
         if related && related_id
           @related_object= related_model.find(related_id)
@@ -183,8 +187,11 @@ module Trst
       order,style = options.values_at(:order,:style)
       value = guess_value model,attribute,options
       value = '-' if value.blank?
+      value = "%.2f" % value if value.is_a?(Float)
       style ||= 'value'
-      style +=  attribute =~ /^id$|_at/ ? ' ui-state-highlight' : ' ui-state-default'
+      unless ['name','um','pu','qu','val'].include? style
+        style +=  attribute =~ /^id$|_at/ ? ' ui-state-highlight' : ' ui-state-default'
+      end
       haml_tag  :span, value, class: style
     end
     # @todo
@@ -295,16 +302,17 @@ module Trst
     def haml_path(action,related = false)
       task = Trst::Task.find(request.cookies['task_id'])
       path = File.join(task.goal.split('.')[0].underscore,action)
-      file = File.join(Trst.views,'system',"#{path}.haml")
-      haml_path = check_haml_path(file,path)
+      ext  = action == 'pdf' ? 'rb' : 'haml'
+      file = File.join(Trst.views,'system',"#{path}.#{ext}")
+      haml_path = check_haml_path(file,path,ext)
       haml_path += '_related' if related
       haml_path = task.haml_path if task.haml_path != 'default'
       haml_path.to_sym
     end
     # @todo
-    def check_haml_path(f,p)
+    def check_haml_path(f,p,e)
       path = File.exists?(f) ? p : check_module(p)
-      file = File.join(Trst.views,'system',"#{path}.haml")
+      file = File.join(Trst.views,'system',"#{path}.#{e}")
       unless File.exists?(file)
         path = check_module(path,true)
       end
