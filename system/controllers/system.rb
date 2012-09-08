@@ -45,14 +45,14 @@ module Trst
     # @todo Document this route
     get '/:module/:class/filter' do |m,c|
       handle_params(m,c,nil,'filter',params)
-      haml haml_path('filter',!@related_object.nil?), layout: false
+      haml haml_path('filter',"#{m}/#{c}",!@related_object.nil?), layout: false
     end
     # @todo Document this route
     get '/:module/:class/print' do |m,c|
       id    = params[:id].nil? ? nil : params[:id]
       action= params[:id].nil? ? 'filter' : 'print'
       handle_params(m,c,id,action,params)
-      file = haml_path('pdf')
+      file = haml_path('pdf',"#{m}/#{c}")
       if params['haml']
         haml file, layout: false
       else
@@ -68,34 +68,34 @@ module Trst
     # @todo Document this route
     get '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_get',params)
-      haml haml_path('create'), layout: false
+      haml haml_path('create',"#{m}/#{c}"), layout: false
     end
     # @todo Document this route
     post '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_post',params)
       if @object.save
         flash[:msg] = {msg: {txt: t('create.msg.end', data: mat(@object,'model_name')), class: 'info'}}
-        haml haml_path('show'), layout: false
+        haml haml_path('show',"#{m}/#{c}"), layout: false
       else
         flash[:msg] = {msg: {txt: t('create.msg.error', data: mat(@object,'model_name')), class: 'error'}}
         @create_error = true
-        haml haml_path('create'), layout: false
+        haml haml_path('create',"#{m}/#{c}"), layout: false
       end
     end
     # @todo Document this route
     get '/:module/:class/edit/:id' do |m,c,id|
       handle_params(m,c,id,'edit_get',params)
-      haml haml_path('edit'), layout: false
+      haml haml_path('edit',"#{m}/#{c}"), layout: false
     end
     # @todo Document this route
     get '/:module/:class/delete/:id' do |m,c,id|
       handle_params(m,c,id,'delete_get',params)
-      haml haml_path('delete'), layout: false
+      haml haml_path('delete',"#{m}/#{c}"), layout: false
     end
     # @todo Document this route
     get '/:module/:class/:id' do |m,c,id|
       handle_params(m,c,id,'show',params)
-      haml haml_path('show'), layout: false
+      haml haml_path('show',"#{m}/#{c}"), layout: false
     end
     # @todo Document this route
     get '/:module/:class/:id/tab/:what/:verb' do |m,c,id,w,v|
@@ -107,10 +107,10 @@ module Trst
       handle_params(m,c,id,'edit_put',params)
       if @object.update_attributes(params[:"#{@path}"])
         flash[:msg] = {msg: {txt: t('edit.msg.end', data: mat(@object,'model_name')), class: 'info'}}
-        haml haml_path('show'), layout: false
+        haml haml_path('show',"#{m}/#{c}"), layout: false
       else
         flash[:msg] = {msg: {txt: t('edit.msg.error', data: mat(@object,'model_name')), class: 'error'}}
-        haml haml_path('edit'), layout: false
+        haml haml_path('edit',"#{m}/#{c}"), layout: false
       end
     end
     # @todo Document this route
