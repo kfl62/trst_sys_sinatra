@@ -9,17 +9,7 @@ require.config({
 
 require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
   $(function(){
-    Trst = {
-      debug: true,
-      desk: {
-        buttons: {
-          action: {}
-        },
-        select: {},
-        relations: {},
-        tabs: {}
-      }
-    };
+    Trst = {debug: true};
     $msg = function(txt){
       if (Trst.debug){
         console.log(txt)

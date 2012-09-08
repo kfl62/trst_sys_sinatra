@@ -1,6 +1,6 @@
-define ['async!http://maps.google.com/maps/api/js?sensor=false'],() ->
-  $.extend Trst,
-    gmap: (node) ->
+define ['async!http://maps.google.com/maps/api/js?sensor=false'],()->
+  $.extend true,Trst,
+    gmap: (node)->
       latlng = new google.maps.LatLng(46.74479,23.43220);
       myOptions =
         zoom: 15,
@@ -13,4 +13,4 @@ define ['async!http://maps.google.com/maps/api/js?sensor=false'],() ->
         map: map,
         title: "kfl62"
       return
-  return
+  Trst

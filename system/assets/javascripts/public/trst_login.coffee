@@ -1,8 +1,8 @@
 define ['jquery-ui'], ()->
-  $.extend Trst,
-    login: (node) ->
-      button = () ->
-       $('#loginDialog').find('button').each () ->
+  $.extend true,Trst,
+    login: (node)->
+      button = ()->
+       $('#loginDialog').find('button').each ()->
           $button = $(this)
           $button.button
             icons:
@@ -21,9 +21,9 @@ define ['jquery-ui'], ()->
           width: 'auto'
           position: [$position.left, $position.top - 100]
           title: node.attr('title')
-          close: (ev,ui) ->
+          close: (ev,ui)->
             $(this).remove()
             return
       $login.dialog('open')
       return
-  return
+  Trst
