@@ -299,9 +299,9 @@ module Trst
       md
     end
     # @todo
-    def haml_path(action,related = false)
+    def haml_path(action,_path = nil,related = nil)
       task = Trst::Task.find(request.cookies['task_id'])
-      path = File.join(task.goal.split('.')[0].underscore,action)
+      path = _path.nil? ? File.join(task.goal.split('.')[0].underscore,action) : File.join(_path,action)
       ext  = action == 'pdf' ? 'rb' : 'haml'
       file = File.join(Trst.views,'system',"#{path}.#{ext}")
       haml_path = check_haml_path(file,path,ext)
