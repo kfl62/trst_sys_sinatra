@@ -8,53 +8,53 @@ define () ->
         text: false if $bd.text is 'hidden'
       return
     handle_reload_path: (button) ->
+      $hd = Trst.desk.hdo
       $bd = button.data()
       if $bd.reload?
         $.cookie 'reload_path', $bd.reload
         $.cookie 'rels',        $bd.rels
         $.cookie 'tab',         $bd.tab
-      return
+      if $bd.url?
+        [$url,$params] = $bd.url.split('?')
+      else
+        $url = Trst.desk.hdf.attr('action')
+      $hd.related_id = if $bd.related_id? then $bd.related_id else $hd.related_id
+      if $hd.related_id?
+        $params = if $params? then "?#{$params}&related_id=#{$hd.related_id}" else "?related_id=#{$hd.related_id}"
+      else
+        $params = if $params? then "?#{$params}" else ''
+      [$url,$params]
     action:
       create: (button) ->
         $hd = Trst.desk.hdo
         $bd = button.data()
-        $url= if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
-        $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
-        $hd.related_id = if $bd.related_id? then $bd.related_id else $hd.related_id
-        $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
+        [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
         Trst.desk.closeDesk($bd.remove)
-        Trst.desk.buttons.handle_reload_path(button)
-        $url += "/create#{$hd.related_id}"
+        $url = if $url.split('/').pop() is 'create' then "#{$url}#{$params}" else "#{$url}/create#{$params}"
         Trst.desk.init($url)
         $msg('Button.create Pressed...')
       show: (button) ->
         $hd = Trst.desk.hdo
         $bd = button.data()
-        $url= if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
+        [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
         $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
         if $hd.oid is null
           Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
         else
           Trst.desk.closeDesk($bd.remove)
-          $hd.related_id = if $bd.related_id? then $bd.related_id else $hd.related_id
-          $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
-          $url += "/#{$hd.oid}#{$hd.related_id}"
-          Trst.desk.buttons.handle_reload_path(button)
+          $url += "/#{$hd.oid}#{$params}"
           Trst.desk.init($url)
         $msg('Button.show Pressed...')
       edit: (button) ->
         $hd = Trst.desk.hdo
         $bd = button.data()
-        $url= if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
+        [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
         $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
         if $hd.oid is null
           Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
         else
-          Trst.desk.buttons.handle_reload_path(button)
           Trst.desk.closeDesk($bd.remove)
-          $hd.related_id = if $bd.related_id? then $bd.related_id else $hd.related_id
-          $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
-          $url += "/edit/#{$hd.oid}#{$hd.related_id}"
+          $url = if $url.split('/').pop() is 'edit' then "#{$url}#{$params}" else "#{$url}/edit/#{$hd.oid}#{$params}"
           Trst.desk.init($url)
         $msg('Button.edit Pressed...')
       save: (button) ->
@@ -62,31 +62,27 @@ define () ->
         $bd   = button.data()
         $type = Trst.desk.hdf.attr('method')
         $data = Trst.desk.hdf.serializeArray()
-        $url  = if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
+        [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
         Trst.desk.closeDesk($bd.remove)
         $hd.oid = if $hd.oid is null then 'create' else $hd.oid
-        $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
-        $url += "/#{$hd.oid}#{$hd.related_id}"
+        $url += "/#{$hd.oid}#{$params}"
         Trst.desk.init($url,$type,$data)
         $msg('Button.save Pressed...')
       delete: (button) ->
         $hd = Trst.desk.hdo
         $bd = button.data()
-        $url= if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
+        [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
         $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
         $type = Trst.desk.hdf.attr('method')
         if $hd.oid is null
           Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
         else
-          Trst.desk.buttons.handle_reload_path(button)
           Trst.desk.closeDesk($bd.remove)
-          $hd.related_id = if $bd.related_id? then $bd.related_id else $hd.related_id
-          $hd.related_id = if $hd.related_id is null then '' else "?related_id=#{$hd.related_id}"
           if $hd.dialog is 'delete'
-            $url += "/#{$hd.oid}#{$hd.related_id}"
+            $url += "/#{$hd.oid}#{$params}"
             Trst.desk.init($url,$type)
           else
-            $url += "/delete/#{$hd.oid}#{$hd.related_id}"
+            $url = if $url.split('/').pop() is 'delete' then "#{$url}#{$params}" else "#{$url}/delete/#{$hd.oid}#{$params}"
             Trst.desk.init($url)
         $msg('Button.delete Pressed...')
       cancel: (button) ->
