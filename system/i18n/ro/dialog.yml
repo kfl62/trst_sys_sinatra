@@ -4,6 +4,7 @@ ro:
     'yes': Da
     'false': Nu
     'no': Nu
+    month: ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"]
     button:
       login: Autentificare
       cancel: Renunţare
