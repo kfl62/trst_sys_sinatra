@@ -66,10 +66,10 @@ module Trst
       haml :relations, :layout => false
     end
     # @todo
-    get '/units/:model/:class/:unit_id' do |m,c,uid|
+    get '/units/:model/:class/:dialog/:unit_id' do |m,c,d,uid|
       uid == 'null' ? session[:unit_id] = nil : session[:unit_id] = uid
-      handle_params(m,c,nil,'filter',params)
-      path = "#{lp}/sys/#{haml_path('filter').to_s}"
+      handle_params(m,c,nil,d,params)
+      path = "#{lp}/sys/#{m}/#{c}/#{d}"
       redirect path
     end
   end # Utils
