@@ -14,25 +14,25 @@
         %li.em.st= t("sidebar.category.#{action}")
         - tasks.each do |tsk|
           %li
-            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
             %span.help
       - when /query/
         %li.em.st= t("sidebar.category.#{action}")
         - tasks.each do |tsk|
           %li
-            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
             %span.help
       - when /repair/
         %li.em.st= t("sidebar.category.#{action}")
         - tasks.each do |tsk|
           %li
-            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
             %span.help
       - when /test/
         %li.em.st= t("sidebar.category.#{action}")
         - tasks.each do |tsk|
           %li
-            %a{id: tsk.id, href: "#", data: {action: tsk.action}}= tsk.name
+            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
             %span.help
       - else
         %hr
