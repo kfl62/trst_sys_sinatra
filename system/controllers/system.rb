@@ -48,6 +48,11 @@ module Trst
       haml haml_path('filter',"#{m}/#{c}",!@related_object.nil?), layout: false
     end
     # @todo Document this route
+    get '/:module/:class/query' do |m,c|
+      handle_params(m,c,nil,'query',params)
+      haml haml_path('query',"#{m}/#{c}"), layout: false
+    end
+    # @todo Document this route
     get '/:module/:class/print' do |m,c|
       id    = params[:id].nil? ? nil : params[:id]
       action= params[:id].nil? ? 'filter' : 'print'
