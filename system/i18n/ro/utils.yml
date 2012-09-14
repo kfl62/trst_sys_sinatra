@@ -20,6 +20,13 @@ ro:
         Autentificat ca şi:
     msg:
       loading: Se încarcă pagina...
+    error:
+      download: |
+        <span class='warning'>Din păcate nu s-a putut genera <b>%{data}</b>.<br>
+        În cazul în care sunteţi convins că nu aveţi greşeli la formular<br>
+        închideţi această fereastră şi apăsaţi încă o dată pe "Generare PDF".<br>
+        Dacă nu funcţionează, <b>Ştergeţi</b> documentul după ce închideţi<br>
+        fereastra de avertizare!</span>
   demo:
     << : *trst_utils
   asrv:
