@@ -106,14 +106,11 @@ define () ->
               Trst.desk.relations.init()
             $msg('Button.relations Pressed...')
           print: (button)->
-            $hd = Trst.desk.hdo
-            $bd = button.data()
-            $url= if $bd.url? then $bd.url else Trst.desk.hdf.attr('action')
-            $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
-            Trst.desk.closeDesk($bd.remove)
-            $url += "/print?id=#{$hd.oid}"
-            window.location= $url
-            $msg 'Button.print Presses...'
+            ###
+            Handled by fileDownload plugin
+            http://johnculviner.com/category/jQuery-File-Download.aspx
+            ###
+            $msg('Button.print Pressed...')
         init: (buttons) ->
           $desk = $('#deskDialog')
           $buttons = if buttons? then buttons else $desk.find('button')

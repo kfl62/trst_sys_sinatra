@@ -1,4 +1,4 @@
-define ['/javascripts/libs/jquery.cookie.min.js','libs/trst_msg','system/trst_desk'], ()->
+define ['/javascripts/libs/jquery.cookie.min.js','/javascripts/libs/jquery.fileDownload.js','libs/trst_msg','system/trst_desk'], ()->
   Number::round = (n = 0)->
     Math.round(this*Math.pow(10,n))/Math.pow(10,n)
   $.extend $.fn,

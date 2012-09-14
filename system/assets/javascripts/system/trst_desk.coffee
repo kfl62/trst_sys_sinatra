@@ -27,6 +27,27 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               $(this).remove()
               return
         return
+      downloadError: (data)->
+        $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
+        $position = $('#content').position()
+        $download.dialog
+          dialogClass: 'ui-dialog-shadow'
+          autoOpen: false
+          modal: true
+          height: 'auto'
+          width: 'auto'
+          position: [$position.left + 10,$position.top - 30]
+          close: ()->
+            $(this).remove()
+            return
+          title: 'Hmmm ceva nu-a mers bine...!'
+        $.post(
+          '/utils/msg'
+          data
+          (response)-> $download.html(response.msg.txt)
+          'json'
+        )
+        $download.dialog('open')
       init: (url,type,data)->
         $url  = url
         $type = if type? then type.toUpperCase() else "GET"
