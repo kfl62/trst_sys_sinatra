@@ -21,13 +21,6 @@ module Trst
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort! if pu
         ks
       end
-      # @todo
-      def stats_pos(*args)
-        opts = args.last.is_a?(Hash) ? {}.merge!(args.pop) : {}
-        asc(:id_stats).each_with_object([]) do |f,a|
-          a << [f.id,f.name,*f.stats_sum(*args,opts)]
-        end
-      end
     end # Class methods
   end # Freight
 end # Trst
