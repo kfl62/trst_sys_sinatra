@@ -55,16 +55,18 @@ module Trst
     # @todo Document this route
     get '/:module/:class/print' do |m,c|
       id    = params[:id].nil? ? nil : params[:id]
-      action= params[:id].nil? ? 'filter' : 'print'
+      action= params[:id].nil? ? 'report' : 'print'
       handle_params(m,c,id,action,params)
-      file = haml_path('pdf',"#{m}/#{c}")
-      if params['haml']
+      file = params[:rb] ? "#{m}/#{c}/#{params[:rb]}" : haml_path('pdf',"#{m}/#{c}")
+      if params['report']
         haml file, layout: false
       else
+        file_name = params[:fn] ? params[:fn] : @object.file_name
         headers({'Content-Type' => 'application/pdf',
                  'Content-Description' => 'File Transfer',
                  'Content-Transfer-Encoding' => 'binary',
-                 'Content-Disposition' => "attachment;filename=\"#{@object.file_name}.pdf\"",
+                 'Content-Disposition' => "attachment;filename=\"#{file_name}.pdf\"",
+                 'Set-Cookie' => 'fileDownload=true; path=/',
                  'Expires' => '0',
                  'Pragma' => 'public'})
         pdf file, layout: false
