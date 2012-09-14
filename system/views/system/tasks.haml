@@ -3,41 +3,13 @@
   - if @tasks.empty?
     %li= t('sidebar.empty')
   - else
-    - @tasks.group_by{|t| t.action}.each_pair do |action,tasks|
-      - case action
-      - when /filter/
-        - tasks.each do |tsk|
+    - (%w{filter print query repair test page} & @tasks.map(&:action).uniq).each do |action|
+      %li.em.st= t("sidebar.category.#{action}", default: :'wstm.sidebar.category.uncategorized') unless action == 'filter'
+      - @tasks.each do |tsk|
+        - href  = "/sys/#{tsk.goal.underscore.gsub('.','/')}"
+        - href += "#{tsk.params}" unless tsk.params.blank?
+        - href  = href.sub(/page$/,"edit/#{@page.id}") if action == 'page'
+        - if tsk.action =~ /#{action}/
           %li
-            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
-            %span.help
-      - when /report/
-        %li.em.st= t("sidebar.category.#{action}")
-        - tasks.each do |tsk|
-          %li
-            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
-            %span.help
-      - when /query/
-        %li.em.st= t("sidebar.category.#{action}")
-        - tasks.each do |tsk|
-          %li
-            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
-            %span.help
-      - when /repair/
-        %li.em.st= t("sidebar.category.#{action}")
-        - tasks.each do |tsk|
-          %li
-            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
-            %span.help
-      - when /test/
-        %li.em.st= t("sidebar.category.#{action}")
-        - tasks.each do |tsk|
-          %li
-            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/#{action}", data: {action: tsk.action}}= tsk.name
-            %span.help
-      - else
-        %hr
-        %li.em.st= t("sidebar.category.uncategorized")
-        - tasks.each do |tsk|
-          %li
-            %a{id: tsk.id, href: "/sys/#{tsk.goal.split('.').first.underscore}/edit/#{@page.id}", data: {action: tsk.action}}= tsk.name
+            %a{id: tsk.id, href: href, data: {action: tsk.action}}= tsk.name
             %span.help
