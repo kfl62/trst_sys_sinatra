@@ -110,6 +110,9 @@ ro:
           Fişierul <b>nu se poate descărca</b> de pe server!<br>
           Motiv: Nu există fişierul.
           Sunaţi la Varena Auto să remedieze problema...
+    report:
+      title: |
+        Configurare &raquo;%{data}&laquo;
   demo:
     << : *trst_dialog
   asrv:
