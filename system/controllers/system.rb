@@ -56,8 +56,8 @@ module Trst
     get '/:module/:class/print' do |m,c|
       id    = params[:id].nil? ? nil : params[:id]
       action= params[:id].nil? ? 'report' : 'print'
-      handle_params(m,c,id,action,params)
-      file = params[:rb] ? "#{m}/#{c}/#{params[:rb]}" : haml_path('pdf',"#{m}/#{c}")
+      handle_params(m,c,id,action,params) unless params[:rb]
+      file = params[:rb] ? "#{m}/#{c}/#{params[:rb]}".to_sym : haml_path('pdf',"#{m}/#{c}")
       if params['report']
         haml file, layout: false
       else
