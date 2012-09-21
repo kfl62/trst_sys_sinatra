@@ -8,7 +8,7 @@ define ['jquery-ui'], ()->
             icons:
               primary: $button.data('icon')
           return
-        return
+        $('input').first().focus()
       $login = $('<div id="loginDialog"></div>')
       $position = $('#sidebar').position()
       $login
