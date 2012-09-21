@@ -44,7 +44,7 @@ module Trst
     end
     # @todo Document this route
     post '/session/:key/:value' do |k,v|
-      session[k.to_sym] = v
+      session[k.to_sym] = (v == 'null') ? nil : v
     end
     # @todo Document this route
     get '/:module/:class/filter' do |m,c|
