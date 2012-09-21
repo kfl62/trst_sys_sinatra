@@ -8,7 +8,7 @@
             %span.info= t("intro.embedded", child: mat(@object,'model_name'), parent: mat(@related_object,'model_name'))
         - else
           %td
-            %span.info= t("intro.filter", data: mat(@object,'model_name'))
+            %span.info= t("intro.filter.main", data: mat(@object,'model_name'))
       %tr
         %td
           %select#related_id
