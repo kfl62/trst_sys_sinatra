@@ -67,7 +67,8 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             if Trst.desk.readData()
               $desk  = $('#deskDialog')
               $title = Trst.i18n.title[Trst.desk.hdo.dialog][Trst.desk.hdo.js_ext] || Trst.i18n.title[Trst.desk.hdo.dialog]['main']
-              $desk.dialog title: $title.replace('%{data}',Trst.desk.hdo.model_name)
+              $tdata = Trst.desk.hdo.title_data || Trst.desk.hdo.model_name
+              $desk.dialog title: $title.replace('%{data}',$tdata)
               $desk.dialog('open')
               Trst.desk.buttons.init() if $('button').length
               Trst.desk.select.init() if Trst.desk.hdf.find('select').length
