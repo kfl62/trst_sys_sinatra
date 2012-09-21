@@ -10,7 +10,7 @@ require.config({
 require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
   $(function(){
     Trst = {debug: true};
-    $msg = function(txt){
+    $log = function(txt){
       if (Trst.debug){
         console.log(txt)
       }
@@ -21,15 +21,18 @@ require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
       })
     } else {
       require(['system/main'], function(){
-        if ($('body').data('js_path')){
-          var js_path = $('body').data('js_path')
-          var module  = js_path.substr(0,1).toUpperCase() + js_path.substr(1)
-          Trst.module = module
-          require([js_path + '/module'], function(){
-            Trst.module = window[Trst.module]
+        if ($('body').data('js_module_path')){
+          var js_module_path = $('body').data('js_module_path')
+          var module  = js_module_path.substr(0,1).toUpperCase() + js_module_path.substr(1)
+          window[module] = {}
+          require([js_module_path + '/main'], function(module){
+            Trst.module = module
+            Trst.init()
+            module.init()
           })
+        } else {
+          Trst.init()
         }
-        Trst.init()
       })
     }
   })
