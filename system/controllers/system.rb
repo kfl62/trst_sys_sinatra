@@ -18,7 +18,7 @@ module Trst
         @current_user ||= User.find(session[:user])
         I18n.reload! if Trst.env == 'development'
       else
-        flash[:msg] = {msg: {txt: t('login.required'), class: 'error'}}
+        flash[:msg] = {msg: {txt: t('msg.login.required'), class: 'error'}}
         redirect  "#{lp}/"
       end
     end
@@ -41,6 +41,10 @@ module Trst
     get '/help/:task_id' do |id|
       @content = page_content(id,true)
       markdown @content
+    end
+    # @todo Document this route
+    post '/session/:key/:value' do |k,v|
+      session[k.to_sym] = v
     end
     # @todo Document this route
     get '/:module/:class/filter' do |m,c|
@@ -81,10 +85,10 @@ module Trst
     post '/:module/:class/create' do |m,c|
       handle_params(m,c,nil,'create_post',params)
       if @object.save
-        flash[:msg] = {msg: {txt: t('create.msg.end', data: mat(@object,'model_name')), class: 'info'}}
+        flash[:msg] = {msg: {txt: t('msg.create.end', data: mat(@object,'model_name')), class: 'info'}}
         haml haml_path('show',"#{m}/#{c}"), layout: false
       else
-        flash[:msg] = {msg: {txt: t('create.msg.error', data: mat(@object,'model_name')), class: 'error'}}
+        flash[:msg] = {msg: {txt: t('msg.create.error', data: mat(@object,'model_name')), class: 'error'}}
         @create_error = true
         haml haml_path('create',"#{m}/#{c}"), layout: false
       end
@@ -113,10 +117,10 @@ module Trst
     put '/:module/:class/:id' do |m,c,id|
       handle_params(m,c,id,'edit_put',params)
       if @object.update_attributes(params[:"#{@path}"])
-        flash[:msg] = {msg: {txt: t('edit.msg.end', data: mat(@object,'model_name')), class: 'info'}}
+        flash[:msg] = {msg: {txt: t('msg.edit.end', data: mat(@object,'model_name')), class: 'info'}}
         haml haml_path('show',"#{m}/#{c}"), layout: false
       else
-        flash[:msg] = {msg: {txt: t('edit.msg.error', data: mat(@object,'model_name')), class: 'error'}}
+        flash[:msg] = {msg: {txt: t('msg.edit.error', data: mat(@object,'model_name')), class: 'error'}}
         haml haml_path('edit',"#{m}/#{c}"), layout: false
       end
     end
@@ -124,7 +128,7 @@ module Trst
     delete '/:module/:class/:id' do |m,c,id|
       handle_params(m,c,id,'delete',params)
       @object.destroy
-      flash[:msg] = {msg: {txt: t('delete.msg.end', data: mat(@object,'model_name')), class: 'info'}}
+      flash[:msg] = {msg: {txt: t('msg.delete.end', data: mat(@object,'model_name')), class: 'info'}}
       status 200
     end
     # @todo Document this route
@@ -132,10 +136,10 @@ module Trst
       handle_params(m,c,id,'show',params)
       upload_object = @object.send r_to
       if upload_object.new(params[:upload]).save
-        flash[:msg] = {msg: {txt: t('file_upload.msg.end'), class: 'info'}}
+        flash[:msg] = {msg: {txt: t('msg.file_upload.end'), class: 'info'}}
         "Success"
       else
-        flash[:msg] = {msg: {txt: t('file_upload.msg.error'), class: 'error'}}
+        flash[:msg] = {msg: {txt: t('msg.file_upload.error'), class: 'error'}}
         "Error"
       end
     end
@@ -144,10 +148,10 @@ module Trst
       handle_params(m,c,id,'show',params)
       delete_object = @object.send(r_to).find(r_id)
       if delete_object.destroy
-        flash[:msg] = {msg: {txt: t('file_delete.msg.end'), class: 'info'}}
+        flash[:msg] = {msg: {txt: t('msg.file_delete.end'), class: 'info'}}
         "Success"
       else
-        flash[:msg] = {msg: {txt: t('file_delete.msg.error'), class: 'error'}}
+        flash[:msg] = {msg: {txt: t('msg.file_delete.error'), class: 'error'}}
         "Error"
       end
     end

@@ -21,17 +21,17 @@ module Trst
       if user = User.authenticate(params[:name], params[:password])
         session[:user] = user.id
         user.set(:last_login, Time.now)
-        flash[:msg] = {:msg => {:txt => t('login.ok'), :class => "loading"}}
+        flash[:msg] = {:msg => {:txt => t('msg.login.start'), :class => "loading"}}
         redirect "#{lp}/sys"
       else
-        flash[:msg] = {:msg => {:txt => t('login.error'), :class => "error"}}
+        flash[:msg] = {:msg => {:txt => t('msg.login.error'), :class => "error"}}
         redirect "#{lp}/"
       end
     end
     # Logout
     get '/logout' do
       session[:user] = nil
-      flash[:msg] = {:msg => {:txt =>t('login.logout'), :class => "loading"}}
+      flash[:msg] = {:msg => {:txt =>t('msg.login.end'), :class => "loading"}}
       redirect "#{lp}/"
     end
     # @todo Document this method
@@ -48,7 +48,7 @@ module Trst
     get '/lang/:lang' do |l|
       I18n.locale = l.to_sym
       path = session[:user].nil? ?  "#{lp}/" :  "#{lp}/sys"
-      flash[:msg] = {:msg => {:txt => t('lang.change'), :class => "info"}}
+      flash[:msg] = {:msg => {:txt => t('msg.lang.start'), :class => "info"}}
       redirect path
     end
     # @todo Document this method
