@@ -1,10 +1,10 @@
-/* line 4, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 4, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 html {
   margin: 0;
   padding: 0;
   border: 0; }
 
-/* line 18, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 18, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 .bp-reset-element, body, h1, h2, h3, h4, h5, h6, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, blockquote, q, th, td, caption, table, div, span, object, iframe, p, pre, a, abbr, acronym, address, code, del, dfn, em, img, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr {
   margin: 0;
   padding: 0;
@@ -15,31 +15,31 @@ html {
   font-family: inherit;
   vertical-align: baseline; }
 
-/* line 20, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 20, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block; }
 
-/* line 21, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 21, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 blockquote, q {
   quotes: "" ""; }
-/* line 67, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 67, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 blockquote:before, blockquote:after, q:before, q:after {
   content: ""; }
 
-/* line 22, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 22, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 th, td, caption {
   float: none !important;
   text-align: left;
   font-weight: normal;
   vertical-align: middle; }
 
-/* line 23, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 23, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 table {
   border-collapse: separate;
   border-spacing: 0;
   vertical-align: middle; }
 
-/* line 24, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+/* line 24, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
 a img {
   border: none; }
 
@@ -202,8 +202,8 @@ body {
   float: left;
   margin-right: 10px;
   width: 530px;
-  background-color: #f5f5f5;
-  background-image: url('/images/trst/main_bckgrnd.png?1339059555');
+  background-color: whitesmoke;
+  background-image: url('/images/trst/main_bckgrnd.png?1344234820');
   background-position: center center;
   background-repeat: no-repeat;
   border-radius: 10px;
@@ -211,7 +211,7 @@ body {
   position: relative;
   overflow: auto;
   color: #333333; }
-/* line 147, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+/* line 147, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #content {
   overflow-x: hidden; }
 /* line 25, ../../../system/assets/stylesheets/trst/application.sass */
@@ -232,7 +232,7 @@ body {
 /* line 37, ../../../system/assets/stylesheets/trst/application.sass */
 #xhr_msg.loading {
   background-color: #e6ffe6;
-  background-image: url('/images/trst/icons/loading.gif?1339059555');
+  background-image: url('/images/trst/icons/loading.gif?1344234820');
   background-position: 0.5em 0.5em;
   background-repeat: no-repeat;
   display: block;
@@ -240,14 +240,14 @@ body {
 /* line 45, ../../../system/assets/stylesheets/trst/application.sass */
 #xhr_msg.info {
   background-color: #e6ffe6;
-  background-image: url('/images/trst/icons/info.png?1339059555');
+  background-image: url('/images/trst/icons/info.png?1344234820');
   background-position: 0.5em 0.5em;
   background-repeat: no-repeat;
   display: block; }
 /* line 52, ../../../system/assets/stylesheets/trst/application.sass */
 #xhr_msg.error, #xhr_msg.warning {
   background-color: #ffcccc;
-  background-image: url('/images/trst/icons/warning.png?1339059555');
+  background-image: url('/images/trst/icons/warning.png?1344234820');
   background-position: 0.5em 0.5em;
   background-repeat: no-repeat;
   display: block; }
@@ -255,23 +255,23 @@ body {
 /* line 1, ../../../system/assets/stylesheets/trst/partials/_header.sass */
 #header {
   background-color: #3e3e3e;
-  background-image: url('/images/trst/logo.png?1339059555');
+  background-image: url('/images/trst/logo.png?1344234820');
   background-position: 25px -5px;
   background-repeat: no-repeat;
   height: 95px; }
 /* line 8, ../../../system/assets/stylesheets/trst/partials/_header.sass */
 #header span > a {
-  color: #f5f5f5;
+  color: whitesmoke;
   text-decoration: none; }
 /* line 12, ../../../system/assets/stylesheets/trst/partials/_header.sass */
 #header.public p.header_title {
-  color: #f5f5f5;
+  color: whitesmoke;
   font-family: "EmbossedBlackWideNormal";
   font-size: 4em;
   padding-top: 10px; }
 /* line 18, ../../../system/assets/stylesheets/trst/partials/_header.sass */
 #header.public p.header_auth {
-  color: #f5f5f5;
+  color: whitesmoke;
   position: relative;
   top: -130px;
   left: 660px; }
@@ -282,13 +282,13 @@ body {
   left: 730px; }
 /* line 28, ../../../system/assets/stylesheets/trst/partials/_header.sass */
 #header.system p.header_title {
-  color: #f5f5f5;
+  color: whitesmoke;
   font-family: "EmbossedBlackWideNormal";
   font-size: 3em;
   padding-top: 10px; }
 /* line 34, ../../../system/assets/stylesheets/trst/partials/_header.sass */
 #header.system p.header_auth {
-  color: #f5f5f5;
+  color: whitesmoke;
   position: relative;
   top: -100px;
   left: 660px; }
@@ -301,7 +301,7 @@ body {
 /* line 1, ../../../system/assets/stylesheets/trst/partials/_menu.sass */
 #menu {
   background-color: silver;
-  background-image: url('/images/trst/menu_bckgrnd.png?1339059555');
+  background-image: url('/images/trst/menu_bckgrnd.png?1344234820');
   background-position: center right;
   background-repeat: repeat-x;
   border-top: 1px white solid;
@@ -389,15 +389,14 @@ body {
   background-image: -webkit-linear-gradient(left, #f5f5f5, #3e3e3e);
   background-image: -moz-linear-gradient(left, #f5f5f5, #3e3e3e);
   background-image: -o-linear-gradient(left, #f5f5f5, #3e3e3e);
-  background-image: -ms-linear-gradient(left, #f5f5f5, #3e3e3e);
   background-image: linear-gradient(left, #f5f5f5, #3e3e3e);
   height: 500px; }
-/* line 147, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+/* line 147, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #sidebar {
   overflow-x: hidden; }
 /* line 22, ../../../system/assets/stylesheets/trst/partials/_sidebar.sass */
 #sidebar.public #address_title {
-  background-image: url('/images/trst/icons/home.png?1339059555');
+  background-image: url('/images/trst/icons/home.png?1344234820');
   background-position: 5px 50%;
   background-repeat: no-repeat;
   font-style: italic;
@@ -406,7 +405,7 @@ body {
   text-indent: 2.5em; }
 /* line 24, ../../../system/assets/stylesheets/trst/partials/_sidebar.sass */
 #sidebar.public #workhours_title {
-  background-image: url('/images/trst/icons/clock.png?1339059555');
+  background-image: url('/images/trst/icons/clock.png?1344234820');
   background-position: 5px 50%;
   background-repeat: no-repeat;
   font-style: italic;
@@ -415,7 +414,7 @@ body {
   text-indent: 2.5em; }
 /* line 26, ../../../system/assets/stylesheets/trst/partials/_sidebar.sass */
 #sidebar.public #phone_title {
-  background-image: url('/images/trst/icons/telephone.png?1339059555');
+  background-image: url('/images/trst/icons/telephone.png?1344234820');
   background-position: 5px 50%;
   background-repeat: no-repeat;
   font-style: italic;
@@ -424,7 +423,7 @@ body {
   text-indent: 2.5em; }
 /* line 28, ../../../system/assets/stylesheets/trst/partials/_sidebar.sass */
 #sidebar.public #email_title {
-  background-image: url('/images/trst/icons/mail.png?1339059555');
+  background-image: url('/images/trst/icons/mail.png?1344234820');
   background-position: 5px 50%;
   background-repeat: no-repeat;
   font-style: italic;
@@ -469,7 +468,7 @@ body {
   text-decoration: none; }
 /* line 61, ../../../system/assets/stylesheets/trst/partials/_sidebar.sass */
 #sidebar.system .help {
-  background-image: url('/images/trst/icons/help.png?1339059555');
+  background-image: url('/images/trst/icons/help.png?1344234820');
   cursor: pointer;
   float: right;
   width: 16px;
@@ -477,22 +476,22 @@ body {
   margin-top: -17px;
   padding: 0px; }
 
-/* line 10, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 10, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 html, body {
   height: 100%; }
 
-/* line 12, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 12, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 #main {
   clear: both;
   min-height: 100%;
   height: auto !important;
   height: 100%;
   margin-bottom: -25px; }
-/* line 18, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 18, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 #main #main_footer {
   height: 25px; }
 
-/* line 20, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+/* line 20, ../../../.bundle/ruby/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
 #footer {
   clear: both;
   position: relative;
@@ -506,7 +505,6 @@ html, body {
   background-image: -webkit-linear-gradient(bottom, #f5f5f5, #3e3e3e);
   background-image: -moz-linear-gradient(bottom, #f5f5f5, #3e3e3e);
   background-image: -o-linear-gradient(bottom, #f5f5f5, #3e3e3e);
-  background-image: -ms-linear-gradient(bottom, #f5f5f5, #3e3e3e);
   background-image: linear-gradient(bottom, #f5f5f5, #3e3e3e);
   width: 200px;
   cursor: pointer; }
@@ -527,7 +525,7 @@ html, body {
 ul.trst-ui-sortable {
   border-radius: 5px;
   background-color: #f0f0f0;
-  border: 1px solid #f5f5f5;
+  border: 1px solid whitesmoke;
   list-style-type: none;
   margin: 0;
   padding: 0 0 2em;
@@ -539,62 +537,95 @@ ul.trst-ui-sortable li {
   cursor: e-resize; }
 /* line 18, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 ul.trst-ui-sortable span.relation-title {
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid whitesmoke;
   padding: 0.25em 0.5em 0.5em;
   display: block;
   min-width: 180px; }
 
-/* line 26, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 25, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+.s2_option div.select2-result-label {
+  padding: 0px 7px !important;
+  white-space: pre; }
+
+/* line 30, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog .icon-only .ui-button-text, #loginDialog .icon-only .ui-button-text {
   padding: 0 !important; }
-/* line 28, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 32, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog .ui-button-text, #loginDialog .ui-button-text {
   padding: 0.2em 1em 0.2em 2.1em !important; }
-/* line 30, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 34, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog select, #loginDialog select {
   font-family: Arial, sans-serif; }
-/* line 32, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 36, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table, #loginDialog table {
   font-size: 0.9em;
   width: 100%; }
-/* line 35, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 39, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table td, #loginDialog table td {
   vertical-align: baseline; }
-/* line 40, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 44, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table thead tr td:last-child, #loginDialog table thead tr td:last-child {
   padding-bottom: 0.5em; }
-/* line 45, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 49, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr:last-child td, #loginDialog table tbody tr:last-child td {
   padding-bottom: 0.5em; }
-/* line 48, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 52, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr td.buttonset, #loginDialog table tbody tr td.buttonset {
   padding-left: 8px; }
-/* line 50, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 54, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr td span.label, #loginDialog table tbody tr td span.label {
   padding-right: 5px; }
-/* line 52, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 56, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr td span.value, #loginDialog table tbody tr td span.value {
   display: block;
   padding: 3px 0 3px 10px;
   max-width: 700px; }
-/* line 56, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 60, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr td span.value-input, #loginDialog table tbody tr td span.value-input {
   display: block;
   padding: 1px 5px;
   max-width: 700px; }
-/* line 60, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 64, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr td span.error, #loginDialog table tbody tr td span.error {
   padding-left: 5px;
   color: red; }
-/* line 63, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 67, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tbody tr td input[type="text"], #deskDialog table tbody tr td input[type="password"], #loginDialog table tbody tr td input[type="text"], #loginDialog table tbody tr td input[type="password"] {
   width: 100%; }
-/* line 68, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 72, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #deskDialog table tfoot tr td:first-child, #loginDialog table tfoot tr td:first-child {
   border-top: solid 1px black;
   padding: 0.5em; }
+/* line 75, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+#deskDialog span.info, #loginDialog span.info {
+  background-color: #e6ffe6;
+  background-image: url('/images/trst/icons/info.png?1344234820');
+  background-position: 0.5em 0.5em;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: 0.5em 0.5em #3e3e3e;
+  padding: 0.5em 1em;
+  margin-bottom: 0.75em;
+  text-indent: 25px;
+  font-size: 0.9em;
+  display: block;
+  white-space: nowrap; }
+/* line 89, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+#deskDialog span.warning, #loginDialog span.warning {
+  background-color: #ffcccc;
+  background-image: url('/images/trst/icons/warning.png?1344234820');
+  background-position: 0.5em 0.5em;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: 0.5em 0.5em #3e3e3e;
+  padding: 0.5em 1em;
+  margin-bottom: 0.75em;
+  text-indent: 25px;
+  font-size: 0.9em;
+  display: block;
+  white-space: nowrap; }
 
-/* line 72, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
+/* line 103, ../../../system/assets/stylesheets/trst/partials/_dialog.sass */
 #relationsContainer {
   border-radius: 5px;
   box-shadow: 0.25em 0.25em #3e3e3e;
