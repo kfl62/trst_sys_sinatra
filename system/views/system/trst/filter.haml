@@ -1,14 +1,14 @@
-%span#hidden_data.hidden{data: {dialog: "filter", title: t("filter.title", data: mat(@object,'model_name')), model: mat(@object,'model_name'), oid: "null", related_id: params[:related_id] || 'null'}}
+%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",related_id: params[:related_id] || 'null'}}
 %form{action: "/sys/#{@path}", method: "get"}
   %table{cellspacing: "0"}
     %tbody
       %tr
         %td
-          %span.info= t("filter.intro", data: mat(@object,'model_name'))
+          %span.info= t("intro.filter", data: mat(@object,'model_name'))
       %tr
         %td
           %select#oid
-            %option{value: "null"}= t("filter.select.option", data: mat(@object,'model_name'))
+            %option{value: "null"}= t("select.option", data: mat(@object,'model_name'))
             - @object.default_sort.each do |o|
               %option{value: o.view_filter.first}= o.view_filter.last
     %tfoot

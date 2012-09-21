@@ -1,5 +1,5 @@
 %ul.trst-ui-sortable
-  %span.relation-title= t('relations.title')
+  %span.relation-title= t('title.relations')
   - @object.each do |o|
     %li.ui-state-highlight
       %span= @parent.include?('user') ? o.login_name : o.name

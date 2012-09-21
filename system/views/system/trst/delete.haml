@@ -1,10 +1,10 @@
-%span#hidden_data.hidden{data: {dialog: "delete", title: t("delete.title", data: mat(@object,'model_name')), model: mat(@object,'model_name'), oid: @object.id, related_id: params[:related_id] || 'null'}}
+%span#hidden_data.hidden{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id,related_id: params[:related_id] || 'null'}}
 %form{action: "/sys/#{@path}", method: "delete"}
   %table{cellspacing: "0"}
     %thead
       %tr
         %th{colspan: "2"}
-          %span.warning= t('delete.header', data: mat(@object,'model_name'))
+          %span.warning= t('intro.delete', data: mat(@object,'model_name'))
     = partial "/#{@path}/show"
     %tfoot
       %tr

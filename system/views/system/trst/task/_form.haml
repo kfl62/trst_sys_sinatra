@@ -10,7 +10,7 @@
     %td{colspan: "3"}
       %input{type: "hidden", name: "[#{@path}][user_ids][]", value: nil}
       %ul.trst-ui-sortable
-        %span.relation-title= t('relations.title_inv')
+        %span.relation-title= t('title.relations_inv')
         - @object.view_users.each do |t|
           %li.ui-state-default
             %span= t[1]
