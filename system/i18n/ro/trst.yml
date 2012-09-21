@@ -125,18 +125,22 @@ ro:
         error: |
           Nu aţi ales nici un/o &raquo;%{data}&laquo;!
     intro:
-      filter: |
-        Puteţi "Edita\Şterge" un/o &raquo;%{data}&laquo; după ce îl/o alegeţi din listă,<br>
-        sau alegând "Creare" veţi crea unul/una.
-      embedded: |
-        Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
-        prima dată trebuie să selectaţi un/o %{parent}!<br>
-      create: |
-        Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
-        Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
-      delete: |
-        Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
-        Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
+      filter:
+        main: |
+          Puteţi "Edita\Şterge" un/o &raquo;%{data}&laquo; după ce îl/o alegeţi din listă,<br>
+          sau alegând "Creare" veţi crea unul/una.
+      embedded:
+        main: |
+          Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
+          prima dată trebuie să selectaţi un/o %{parent}!<br>
+      create:
+        main: |
+          Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
+          Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
+      delete:
+        main: |
+          Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
+          Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
     select:
       option: |
         Alegeţi &raquo;%{data}&laquo;
