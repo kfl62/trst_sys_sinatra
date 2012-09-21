@@ -140,6 +140,8 @@ ro:
     select:
       option: |
         Alegeţi &raquo;%{data}&laquo;
+      placeholder: |
+        Alegeţi - %{data}
   demo:
     << : *trst
   asrv:
