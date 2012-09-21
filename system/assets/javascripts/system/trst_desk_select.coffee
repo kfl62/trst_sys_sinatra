@@ -11,7 +11,11 @@ define () ->
             if $id is 'oid'
               $select.change ()->
                 $hd[$id] = $select.val()
+            else if Trst.module
+              ###
+              Handled by Trst.module
+              ###
             else
-              $msg('Unknown id, select not handled...')
-          $msg('Trst.desk.select.init() OK...')
-  Trst
+              $log('Unknown id, select not handled...')
+          $log('Trst.desk.select.init() OK...')
+  Trst.desk.select

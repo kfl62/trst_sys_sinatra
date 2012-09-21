@@ -12,9 +12,9 @@ define () ->
           $('#deskDialog thead').after($tabsDefs)
           $tabsDefs.tabs
             panelTemplate: '<tbody></tbody>'
-            selected: if $.cookie('tab') then $.cookie('tab') else 0
+            selected: if Trst.lst.tab then Trst.lst.tab else 0
             show: (event,ui) ->
-              $.cookie 'tab', null
+              Trst.lst.removeItem 'tab'
               return
-          $msg('Trst.desk.tabs.init() OK...')
+          $log('Trst.desk.tabs.init() OK...')
   Trst

@@ -35,5 +35,5 @@ define () ->
             $container = Trst.desk.relations.createContainer()
             $container.append(data).appendTo('#deskDialog')
             Trst.desk.relations.makeSelectable()
-          $msg('Trst.desk.relations.init() OK...')
-  Trst
+          $log('Trst.desk.relations.init() OK...')
+  Trst.desk.relations

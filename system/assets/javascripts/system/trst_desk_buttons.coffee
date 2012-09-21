@@ -13,9 +13,10 @@ define () ->
           $hd = Trst.desk.hdo
           $bd = button.data()
           if $bd.reload?
-            $.cookie 'reload_path', $bd.reload
-            $.cookie 'rels',        $bd.rels
-            $.cookie 'tab',         $bd.tab
+            $.post("/sys/session/rels/#{$bd.rels}") if $bd.rels
+            Trst.lst.setItem 'reload_path', $bd.reload
+            Trst.lst.setItem 'rels',        $bd.rels
+            Trst.lst.setItem 'tab',         $bd.tab
           if $bd.url?
             [$url,$params] = $bd.url.split('?')
           else
@@ -34,31 +35,31 @@ define () ->
             Trst.desk.closeDesk($bd.remove)
             $url = if $url.split('/').pop() is 'create' then "#{$url}#{$params}" else "#{$url}/create#{$params}"
             Trst.desk.init($url)
-            $msg('Button.create Pressed...')
+            $log('Button.create Pressed...')
           show: (button) ->
             $hd = Trst.desk.hdo
             $bd = button.data()
             [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
             if $hd.oid is null
-              Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
+              Trst.publish("msg.select.error",'error',$hd.model)
             else
               Trst.desk.closeDesk($bd.remove)
               $url += "/#{$hd.oid}#{$params}"
               Trst.desk.init($url)
-            $msg('Button.show Pressed...')
+            $log('Button.show Pressed...')
           edit: (button) ->
             $hd = Trst.desk.hdo
             $bd = button.data()
             [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
             if $hd.oid is null
-              Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
+              Trst.publish("msg.select.error",'error',$hd.model)
             else
               Trst.desk.closeDesk($bd.remove)
               $url = if $url.split('/').pop() is 'edit' then "#{$url}#{$params}" else "#{$url}/edit/#{$hd.oid}#{$params}"
               Trst.desk.init($url)
-            $msg('Button.edit Pressed...')
+            $log('Button.edit Pressed...')
           save: (button) ->
             $hd   = Trst.desk.hdo
             $bd   = button.data()
@@ -69,7 +70,7 @@ define () ->
             $hd.oid = if $hd.oid is null then 'create' else $hd.oid
             $url += "/#{$hd.oid}#{$params}"
             Trst.desk.init($url,$type,$data)
-            $msg('Button.save Pressed...')
+            $log('Button.save Pressed...')
           delete: (button) ->
             $hd = Trst.desk.hdo
             $bd = button.data()
@@ -77,7 +78,7 @@ define () ->
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
             $type = Trst.desk.hdf.attr('method')
             if $hd.oid is null
-              Trst.publish("#{$hd.dialog}.select.error",'error',$hd.model)
+              Trst.publish("msg.select.error",'error',$hd.model)
             else
               Trst.desk.closeDesk($bd.remove)
               if $hd.dialog is 'delete'
@@ -86,31 +87,31 @@ define () ->
               else
                 $url = if $url.split('/').pop() is 'delete' then "#{$url}#{$params}" else "#{$url}/delete/#{$hd.oid}#{$params}"
                 Trst.desk.init($url)
-            $msg('Button.delete Pressed...')
+            $log('Button.delete Pressed...')
           cancel: (button) ->
             $bd = button.data()
             Trst.desk.closeDesk($bd.remove)
-            if $.cookie 'reload_path'
-              $url = $.cookie 'reload_path'
-              $.cookie 'reload_path', null
-              $.cookie 'rels', null
+            if Trst.lst.reload_path
+              $url = Trst.lst.reload_path
+              Trst.lst.removeItem 'reload_path'
+              Trst.lst.removeItem 'rels'
               Trst.desk.init($url)
-            $msg('Button.cancel Pressed...')
+            $log('Button.cancel Pressed...')
           relations: () ->
             if $('#relationsContainer').length
               $('#relationsContainer').remove()
               return
             else
-            require ['system/trst_desk_relations'], () ->
-              $msg('Trst.desk.relations() Loaded...')
-              Trst.desk.relations.init()
-            $msg('Button.relations Pressed...')
+            require ['system/trst_desk_relations'], (relations) ->
+              $log('Trst.desk.relations() Loaded...')
+              relations.init()
+            $log('Button.relations Pressed...')
           print: (button)->
             ###
             Handled by fileDownload plugin
             http://johnculviner.com/category/jQuery-File-Download.aspx
             ###
-            $msg('Button.print Pressed...')
+            $log('Button.print Pressed...')
         init: (buttons) ->
           $desk = $('#deskDialog')
           $buttons = if buttons? then buttons else $desk.find('button')
@@ -119,5 +120,5 @@ define () ->
             $(this).click () ->
               Trst.desk.buttons.action[$(this).data('action')]($(this))
           $desk.find('.buttonset').buttonset()
-          $msg('Trst.desk.buttons.init() OK...')
+          $log('Trst.desk.buttons.init() OK...')
   Trst

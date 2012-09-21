@@ -2,8 +2,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
   $.extend true, Trst,
     desk:
       readData: ()->
-        @hda = $('#hidden_data')
-        @hdo = if @hda.length then @hda.data() else {}
+        @hdo = if $('#hidden_data').length then $('#hidden_data').data() else {}
         @hdf = $('#deskDialog form')
         if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
       closeDesk: (cls = true)->
@@ -66,8 +65,9 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           if $type isnt 'DELETE'
             Trst.desk.createDesk(data)
             if Trst.desk.readData()
-              $desk = $('#deskDialog')
-              $desk.dialog title: Trst.desk.hdo.title
+              $desk  = $('#deskDialog')
+              $title = Trst.i18n.title[Trst.desk.hdo.dialog][Trst.desk.hdo.js_ext] || Trst.i18n.title[Trst.desk.hdo.dialog]['main']
+              $desk.dialog title: $title.replace('%{data}',Trst.desk.hdo.model_name)
               $desk.dialog('open')
               Trst.desk.buttons.init() if $('button').length
               Trst.desk.select.init() if Trst.desk.hdf.find('select').length
@@ -75,13 +75,13 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               Trst.module.desk.init() if Trst.module?
               return
             else
-              $msg 'Initialize error...'
+              $log 'Initialize error...'
           else
-            if $.cookie 'reload_path'
-              $url = $.cookie 'reload_path'
-              $.cookie 'reload_path', null
-              $.cookie 'rels', null
+            if Trst.lst.reload_path
+              $url = Trst.lst.reload_path
+              Trst.lst.removeItem 'reload_path'
+              Trst.lst.removeItem 'rels'
               Trst.desk.init($url)
               return
-        $msg('Trst.desk.init() ...')
-  Trst
+        $log('Trst.desk.init() ...')
+  Trst.desk
