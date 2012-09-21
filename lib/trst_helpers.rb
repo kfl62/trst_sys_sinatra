@@ -79,17 +79,13 @@ module Trst
     end
     alias :lp :localized_path
     # @todo
-    def guess_task(path,action)
-      Trst::Task.find(request.cookies['task_id'])
-    end
-    # @todo
     def handle_params(m,c,id,action,params)
       related_id= params[:related_id]
       @path     = "#{m}/#{c}"
       @verb     = action.split('_').first
-      task      = guess_task(@path,action)
+      @task     = Trst::Task.find(session[:task_id])
       model     = @path.classify.constantize
-      related   = model.relations[task.rels] || model.relations[request.cookies['rels']]
+      related   = model.relations[@task.rels] || model.relations[session[:rels]]
       if related
         @related_path  = related.class_name.underscore
         related_model  = related.class_name.constantize
@@ -300,13 +296,12 @@ module Trst
     end
     # @todo
     def haml_path(action,_path = nil,related = nil)
-      task = Trst::Task.find(request.cookies['task_id'])
-      path = _path.nil? ? File.join(task.goal.split('.')[0].underscore,action) : File.join(_path,action)
+      path = File.join(_path,action)
       ext  = action == 'pdf' ? 'rb' : 'haml'
       file = File.join(Trst.views,'system',"#{path}.#{ext}")
       haml_path = check_haml_path(file,path,ext)
       haml_path += '_related' if related
-      haml_path = task.haml_path if task.haml_path != 'default'
+      haml_path = @task.haml_path if @task.haml_path != 'default'
       haml_path.to_sym
     end
     # @todo
