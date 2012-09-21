@@ -80,12 +80,12 @@ module Trst
     alias :lp :localized_path
     # @todo
     def handle_params(m,c,id,action,params)
-      related_id= params[:related_id]
-      @path     = "#{m}/#{c}"
-      @verb     = action.split('_').first
-      @task     = Trst::Task.find(session[:task_id])
-      model     = @path.classify.constantize
-      related   = model.relations[@task.rels] || model.relations[session[:rels]]
+      r_id    = params[:r_id]
+      @path   = "#{m}/#{c}"
+      @verb   = action.split('_').first
+      @task   = Trst::Task.find(session[:task_id])
+      model   = @path.classify.constantize
+      related = model.relations[@task.rels] || model.relations[session[:r_mdl]]
       if related
         @related_path  = related.class_name.underscore
         related_model  = related.class_name.constantize
@@ -94,27 +94,27 @@ module Trst
       case action
       when 'filter', 'query', 'report'
         @object = model.all
-        if related && related_id
-          @object = related_model.find(related_id).send related.inverse
+        if related && r_id
+          @object = related_model.find(r_id).send related.inverse
         end
       when 'create_get'
         @object = model.new
-        if related && related_id
-          @related_object= related_model.find(related_id)
+        if related && r_id
+          @related_object= related_model.find(r_id)
           object         = @related_object.send related.inverse
           @object        = object.new
         end
       when 'create_post'
         @object = model.new(params[:"#{@path}"])
-        if related && related_id
-          @related_object= related_model.find(related_id)
+        if related && r_id
+          @related_object= related_model.find(r_id)
           object         = @related_object.send related.inverse
           @object        = object.new(params[:"#{@path}"])
         end
       when 'edit_get', 'edit_put', 'show', 'delete_get', 'delete', 'print'
         @object = model.find(id)
-        if related && related_id
-          @related_object= related_model.find(related_id)
+        if related && r_id
+          @related_object= related_model.find(r_id)
           object         = @related_object.send related.inverse
           @object        = object.find(id)
         end
