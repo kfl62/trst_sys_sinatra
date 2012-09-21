@@ -1,0 +1,152 @@
+ro:
+  trst: &trst
+    'true':  Da
+    'yes':   Da
+    'false': Nu
+    'no':    Nu
+    lang:
+      ro: Română
+      en: Engleză
+      hu: Maghiară
+    month: ["Luna", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"]
+    button:
+      login:    Autentificare
+      cancel:   Renunţare
+      edit:     Editare
+      show:     Detalii
+      create:   Creare
+      delete:   Ştergere
+      save:     Salvare
+      upload:   Încărcare
+      preview:  Vizionare
+      download: Descărcare
+      print:    Generare PDF
+      'true': Da
+      'yes': Da
+      'no': Nu
+      'no': Nu
+    title:
+      filter:
+        main: |
+          Administrare &raquo;%{data}&laquo; - Selectare -
+      show:
+        main: |
+          Administrare &raquo;%{data}&laquo; - Detalii -
+      edit:
+        main: |
+          Administrare &raquo;%{data}&laquo; - Editare -
+      create:
+        main: |
+          Administrare &raquo;%{data}&laquo; - Creare -
+      delete:
+        main: |
+          Administrare &raquo;%{data}&laquo; - Ştergere -
+      report:
+        main: |
+          Configurare &raquo;%{data}&laquo;
+        error: |
+          Hmmm ceva nu-a mers bine...!
+      relations: |
+        &larr; a (se) asocia<br/>
+        &rarr; a (se) disocia
+      relations_inv: |
+        a (se) asocia &nbsp;&larr;<br/>
+        a (se) disocia &rarr;
+    msg:
+      loading: Se încarcă pagina...
+      lang:
+        start: Limba aleasă este >Română<
+      login:
+        start: |
+          Autentificare reuşită!
+        end: |
+          La revedere!
+        error: |
+          Hmmm... Nume/Parolă greşită
+        required: |
+          Frumoasă încercare, dar este nevoie >Autentificare<
+      show:
+        start: |
+          Se vor afişa detaliile ptr. &raquo;%{data}&laquo;!
+        end: |
+          Un/o &raquo;%{data}&laquo; a fost salvat/ă...
+      edit:
+        start: |
+          Se va edita un/o &raquo;%{data}&laquo;
+        end: |
+          Un/o &raquo;%{data}&laquo; a fost salvat/ă...
+        error: |
+          Nu sa putut salva &raquo;%{data}&laquo;<br>
+          Vezi detalii în formular!
+      create:
+        start: |
+          Se va crea un/o &raquo;%{data}&laquo;
+        end: |
+          Un/o &raquo;%{data}&laquo; a fost salvat/ă...
+        error: |
+          Nu sa putut crea &raquo;%{data}&laquo;</br>
+          Vezi detalii în formular!
+      delete:
+        start: |
+          Atenţie se va şterge &raquo;%{data}&laquo;
+        end: |
+          &raquo;%{data}&laquo; a fost şters!
+        error: |
+          Nu sa putut şterge &raquo;%{data}&laquo;<br>
+          Vezi detalii în formular!
+      report:
+        start: |
+          Acum se generează documentul. Aveţi puţină tică răbdare...
+        error: |
+          <span class='warning'>Din păcate nu s-a putut genera <b>%{data}</b>.<br>
+          În cazul în care sunteţi convins că nu aveţi greşeli la formular<br>
+          închideţi această fereastră şi apăsaţi încă o dată pe "Generare PDF".<br>
+          Dacă nu funcţionează, <b>Ştergeţi</b> documentul după ce închideţi<br>
+          fereastra de avertizare!</span>
+      file_upload:
+        end: |
+          Fişierul a fost salvat pe server!
+        error: |
+          Fişierul <b>nu a fost</b> salvat pe server!
+      file_delete:
+        end: |
+          Fişierul a fost şters de pe server!
+        error: |
+          Fişierul <b>nu a fost</b> şters de pe server!
+      file_download:
+        check: Verific existenţa fişierului...
+        prepare: |
+          Fişierul %{name} (%{size}) va gata ptr. descărcare în aprox. %{time}
+        error: |
+          Fişierul <b>nu se poate descărca</b> de pe server!<br>
+          Motiv: Nu există fişierul.
+          Sunaţi la Varena Auto să remedieze problema...
+      select:
+        error: |
+          Nu aţi ales nici un/o &raquo;%{data}&laquo;!
+    intro:
+      filter: |
+        Puteţi "Edita\Şterge" un/o &raquo;%{data}&laquo; după ce îl/o alegeţi din listă,<br>
+        sau alegând "Creare" veţi crea unul/una.
+      embedded: |
+        Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
+        prima dată trebuie să selectaţi un/o %{parent}!<br>
+      create: |
+        Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
+        Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
+      delete: |
+        Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
+        Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
+    select:
+      option: |
+        Alegeţi &raquo;%{data}&laquo;
+  demo:
+    << : *trst
+  asrv:
+    << : *trst
+  clns:
+    << : *trst
+  htls:
+    << : *trst
+  wstm:
+    << : *trst
