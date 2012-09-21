@@ -38,9 +38,9 @@ define ['/javascripts/libs/jquery.fileDownload.js','libs/trst_msg','system/trst_
         false
       $tasks = $('#sidebar.system').on 'click', 'ul li a', () ->
         $url = $(@).attr('href')
-        sessionStorage.setItem 'task_id', $(@).attr('id')
-        $.post("/sys/session/task_id/#{$(@).attr('id')}").done ()->
-          Trst.desk.init($url)
+        Trst.lst.setItem 'task_id', $(@).attr('id')
+        $.ajax({type: 'POST',url: "/sys/session/task_id/#{$(@).attr('id')}",async: false})
+        Trst.desk.init($url)
         false
       $helpers = $('#sidebar.system').on 'click', 'ul li span', () ->
         $.get "/sys/help/#{$(@).prev('a').attr('id')}", (data) ->
