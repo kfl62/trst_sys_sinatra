@@ -16,7 +16,7 @@ define () ->
             $.ajax({type: 'POST',url: "/sys/session/r_mdl/#{$bd.r_mdl}",async: false})
             Trst.lst.setItem 'r_mdl', $bd.r_mdl
             Trst.lst.setItem 'r_id',  $bd.r_id
-            Trst.lst.setItem 'tab',   $bd.tab
+            Trst.lst.setItem 'tab',   $bd.tab  if $bd.tab
           if $bd.r_path?
             if $bd.r_path is 'remove'
               $.ajax({type: 'POST',url: "/sys/session/r_path/null",async: false})
