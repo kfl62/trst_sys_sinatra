@@ -78,10 +78,11 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             else
               $log 'Initialize error...'
           else
-            if Trst.lst.reload_path
-              $url = Trst.lst.reload_path
-              Trst.lst.removeItem 'reload_path'
-              Trst.lst.removeItem 'rels'
+            if Trst.lst.r_path
+              $url = Trst.lst.r_path
+              Trst.lst.removeItem 'r_path'
+              Trst.lst.removeItem 'r_mdl'
+              Trst.lst.removeItem 'r_id'
               Trst.desk.init($url)
               return
         $log('Trst.desk.init() ...')
