@@ -52,8 +52,33 @@ ro:
       relations_inv: |
         a (se) asocia &nbsp;&larr;<br/>
         a (se) disocia &rarr;
+    intro:
+      filter:
+        main: |
+          Puteţi "Edita\Şterge" un/o &raquo;%{data}&laquo; după ce îl/o alegeţi din listă,<br>
+          sau alegând "Creare" veţi crea unul/una.
+      embedded:
+        main: |
+          Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
+          prima dată trebuie să selectaţi un/o %{parent}!<br>
+      create:
+        main: |
+          Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
+          Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
+      delete:
+        main: |
+          Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
+          Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
+    select:
+      option: |
+        Alegeţi &raquo;%{data}&laquo;
+      placeholder: |
+        Alegeţi - %{data}
     msg:
       loading: Se încarcă pagina...
+      desk:
+        error: |
+          Ooops undeva este o greşeală ... %{data}
       lang:
         start: Limba aleasă este >Română<
       login:
@@ -124,28 +149,6 @@ ro:
       select:
         error: |
           Nu aţi ales nici un/o &raquo;%{data}&laquo;!
-    intro:
-      filter:
-        main: |
-          Puteţi "Edita\Şterge" un/o &raquo;%{data}&laquo; după ce îl/o alegeţi din listă,<br>
-          sau alegând "Creare" veţi crea unul/una.
-      embedded:
-        main: |
-          Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
-          prima dată trebuie să selectaţi un/o %{parent}!<br>
-      create:
-        main: |
-          Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
-          Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
-      delete:
-        main: |
-          Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
-          Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
-    select:
-      option: |
-        Alegeţi &raquo;%{data}&laquo;
-      placeholder: |
-        Alegeţi - %{data}
   demo:
     << : *trst
   asrv:
