@@ -29,7 +29,9 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
       downloadError: (data)->
         $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
         $position = $('#content').position()
-        $download.dialog
+        $data = Trst.i18n.msg.report.error. replace '%{data}', data
+        $download.html($data)
+        .dialog
           dialogClass: 'ui-dialog-shadow'
           autoOpen: false
           modal: true
@@ -39,13 +41,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           close: ()->
             $(this).remove()
             return
-          title: 'Hmmm ceva nu-a mers bine...!'
-        $.post(
-          '/utils/msg'
-          data
-          (response)-> $download.html(response.msg.txt)
-          'json'
-        )
+          title: Trst.i18n.title.report.error
         $download.dialog('open')
       init: (url,type,data)->
         $url  = url
@@ -58,7 +54,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           beforeSend: ()-> Trst.msgShow()
           complete:   ()-> Trst.msgHide()
         $request.fail (xhr)->
-          Trst.publish('error.desk', 'error', "#{xhr.status} #{xhr.statusText}")
+          Trst.publish('msg.desk.error', 'error', "#{xhr.status} #{xhr.statusText}")
           false
         $request.done (data)->
           if $type isnt 'GET' then Trst.publish('flash')
