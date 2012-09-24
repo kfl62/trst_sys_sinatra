@@ -34,18 +34,18 @@ define () ->
             $params = if $params? then "?#{$params}" else ''
           [$url,$params]
         action:
-          create: (button) ->
+          create: () ->
             $hd = Trst.desk.hdo
-            $bd = button.data()
-            [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
+            $bd = $(@).data()
+            [$url,$params] = Trst.desk.buttons.handle_reload_path($(@))
             Trst.desk.closeDesk($bd.remove)
             $url = if $url.split('/').pop() is 'create' then "#{$url}#{$params}" else "#{$url}/create#{$params}"
             Trst.desk.init($url)
             $log('Button.create Pressed...')
-          show: (button) ->
+          show: () ->
             $hd = Trst.desk.hdo
-            $bd = button.data()
-            [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
+            $bd = $(@).data()
+            [$url,$params] = Trst.desk.buttons.handle_reload_path($(@))
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
             if $hd.oid is null
               Trst.publish("msg.select.error",'error',$hd.model_name)
@@ -54,10 +54,10 @@ define () ->
               $url += "/#{$hd.oid}#{$params}"
               Trst.desk.init($url)
             $log('Button.show Pressed...')
-          edit: (button) ->
+          edit: () ->
             $hd = Trst.desk.hdo
-            $bd = button.data()
-            [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
+            $bd = $(@).data()
+            [$url,$params] = Trst.desk.buttons.handle_reload_path($(@))
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
             if $hd.oid is null
               Trst.publish("msg.select.error",'error',$hd.model_name)
@@ -66,21 +66,21 @@ define () ->
               $url = if $url.split('/').pop() is 'edit' then "#{$url}#{$params}" else "#{$url}/edit/#{$hd.oid}#{$params}"
               Trst.desk.init($url)
             $log('Button.edit Pressed...')
-          save: (button) ->
+          save: () ->
             $hd   = Trst.desk.hdo
-            $bd   = button.data()
+            $bd   = $(@).data()
             $type = Trst.desk.hdf.attr('method')
             $data = Trst.desk.hdf.serializeArray()
-            [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
+            [$url,$params] = Trst.desk.buttons.handle_reload_path($(@))
             Trst.desk.closeDesk($bd.remove)
             $hd.oid = if $hd.oid is null then 'create' else $hd.oid
             $url += "/#{$hd.oid}#{$params}"
             Trst.desk.init($url,$type,$data)
             $log('Button.save Pressed...')
-          delete: (button) ->
+          delete: () ->
             $hd = Trst.desk.hdo
-            $bd = button.data()
-            [$url,$params] = Trst.desk.buttons.handle_reload_path(button)
+            $bd = $(@).data()
+            [$url,$params] = Trst.desk.buttons.handle_reload_path($(@))
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
             $type = Trst.desk.hdf.attr('method')
             if $hd.oid is null
@@ -94,8 +94,8 @@ define () ->
                 $url = if $url.split('/').pop() is 'delete' then "#{$url}#{$params}" else "#{$url}/delete/#{$hd.oid}#{$params}"
                 Trst.desk.init($url)
             $log('Button.delete Pressed...')
-          cancel: (button) ->
-            $bd = button.data()
+          cancel: () ->
+            $bd = $(@).data()
             Trst.desk.closeDesk($bd.remove)
             if Trst.lst.r_mdl
               $.ajax({type: 'POST',url: "/sys/session/r_mdl/null",async: false})
@@ -116,7 +116,7 @@ define () ->
               $log('Trst.desk.relations() Loaded...')
               relations.init()
             $log('Button.relations Pressed...')
-          print: (button)->
+          print: ()->
             ###
             Handled by fileDownload plugin
             http://johnculviner.com/category/jQuery-File-Download.aspx
@@ -127,8 +127,8 @@ define () ->
           $buttons = if buttons? then buttons else $desk.find('button')
           $buttons.each () ->
             Trst.desk.buttons.layout($(this))
-            $(this).click () ->
-              Trst.desk.buttons.action[$(this).data('action')]($(this))
+            $(this).on 'click', Trst.desk.buttons.action[$(this).data('action')]
+            return
           $desk.find('.buttonset').buttonset()
           $log('Trst.desk.buttons.init() OK...')
   Trst
