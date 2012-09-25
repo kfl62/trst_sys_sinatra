@@ -82,12 +82,12 @@ define () ->
             $bd = $(@).data()
             [$url,$params] = Trst.desk.buttons.handle_reload_path($(@))
             $hd.oid = if $bd.oid? then $bd.oid else $hd.oid
-            $type = Trst.desk.hdf.attr('method')
+            $type = if $bd.type? then $bd.type else Trst.desk.hdf.attr('method')
             if $hd.oid is null
               Trst.publish("msg.select.error",'error',$hd.model_name)
             else
               Trst.desk.closeDesk($bd.remove)
-              if $hd.dialog is 'delete'
+              if $hd.dialog is 'delete' or $bd.type is 'delete'
                 $url += "/#{$hd.oid}#{$params}"
                 Trst.desk.init($url,$type)
               else
