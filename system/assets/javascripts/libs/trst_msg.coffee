@@ -34,6 +34,6 @@ define ()->
         .html(msg).addClass('loading').fadeIn()
         return
     msgHide: () ->
-        $('#xhr_msg').stop(true,true).fadeOut(1000,'linear',()-> $(this).removeAttr('class');return)
+        $('#xhr_msg').stop(true,true).fadeOut(500,'linear',()-> $(this).removeAttr('class');return)
         return
   Trst
