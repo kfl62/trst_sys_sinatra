@@ -198,12 +198,12 @@ module Trst
     end
     # @todo
     def input_for(model,attribute,options = {})
-      id,style,name,value,type,order,nested,disabled,placeholder = options.values_at(:id,:style,:name,:value,:type,:order,:nested,:disabled,:placeholder)
+      id,style,name,value,type,order,nested,disabled,placeholder,data = options.values_at(:id,:style,:name,:value,:type,:order,:nested,:disabled,:placeholder,:data)
       type  ||= 'text'
       value ||= guess_value model,attribute,options
       name  ||= guess_name  model,attribute,options
       style ||= 'ui-state-default' unless type == 'hidden'
-      haml_tag :input,id: id,class: style,name: (name if name != 'strip'),value: (value if value != 'strip'),type: type,disabled: disabled,placeholder: placeholder
+      haml_tag :input,id: id,class: style,name: (name if name != 'strip'),value: (value if value != 'strip'),type: type,disabled: disabled,placeholder: placeholder,data: data
     end
     # @todo
     def td_input_for(model,attribute,options = {})
@@ -213,7 +213,7 @@ module Trst
     end
     # @todo
     def select_for(model,attribute,options = {})
-      id,name,type,select_options = options.values_at(:id,:name,:type,:select_options)
+      id,name,type,style,select_options = options.values_at(:id,:name,:type,:style,:select_options)
       name  = guess_name model,attribute,options
       style ||= 'ui-state-default'
       haml_tag :select, id: id, class: style, name: name do
