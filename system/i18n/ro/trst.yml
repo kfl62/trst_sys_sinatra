@@ -41,6 +41,9 @@ ro:
       delete:
         main: |
           Administrare &raquo;%{data}&laquo; - Ştergere -
+      repair:
+        main: |
+          Administrare &raquo;%{data}&laquo; - Reparaţii -
       report:
         main: |
           Configurare &raquo;%{data}&laquo;
