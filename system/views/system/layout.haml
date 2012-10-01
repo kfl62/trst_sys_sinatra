@@ -2,7 +2,7 @@
 %html
   = partial('layout/html-head')
 
-  %body{id: "system", data: {js_module_path: Trst.firm.js_path, unit_id: @current_user.unit_id || 'true'}}
+  %body{id: "system", data: {js_module_path: Trst.firm.js_path, admin: @current_user.admin?.to_s}}
     #main.wrap
       %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
       %header#header.system
