@@ -92,7 +92,7 @@ module Trst
         @related_object= related_model.all
       end
       case action
-      when 'filter', 'query', 'report'
+      when 'filter', 'query', 'repair', 'report'
         @object = model.all
         if related && r_id
           @object = related_model.find(r_id).send related.inverse
