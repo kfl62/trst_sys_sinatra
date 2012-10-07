@@ -284,15 +284,15 @@ module Trst
       if help
         task = Trst::Task.find(id)
         path = File.join(task.goal.split('.')[0].underscore,'help')
-        file = File.join(Trst.views,'system',"#{path}.md")
-        md   = File.exists?(file) ? path.to_sym : task.help
+        file = File.join(Trst.views,'system',"#{path}.haml")
+        tmpl = File.exists?(file) ? path.to_sym : task.help
       else
         page = Trst::Book.page(id) rescue Trst::Book.chapter(id)
         path = File.join('pages',I18n.locale.to_s,page.slug)
         file = File.join(Trst.views,'system',"#{path}.md")
-        md   = File.exists?(file) ? path.to_sym : page.content
+        tmpl = File.exists?(file) ? path.to_sym : page.content
       end
-      md
+      tmpl
     end
     # @todo
     def haml_path(action,_path = nil,related = nil)

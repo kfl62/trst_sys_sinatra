@@ -40,7 +40,7 @@ module Trst
     # @todo Document this route
     get '/help/:task_id' do |id|
       @content = page_content(id,true)
-      markdown @content
+      haml @content, layout: false
     end
     # @todo Document this route
     post '/session/:key/:value' do |k,v|
