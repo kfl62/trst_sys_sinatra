@@ -12,6 +12,8 @@ config/*.yml
 public/api
 public/images/*
 !public/images/trst
+public/help/*
+!public/help/trst
 public/stylesheets/*
 !public/stylesheets/trst
 !public/stylesheets/fonts
