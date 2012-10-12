@@ -29,7 +29,7 @@ Datorită folosirii intensive a elementelor de javascript ([Dojo toolkit]) precu
 Creat de [Ferenc-Loránt Kiss][kfl62_trst]<br>
 
 ## License
-Copyright (c) 2008-2010 Ferenc-Loránt Kiss<br>
+Copyright (c) 2008-2012 Ferenc-Loránt Kiss<br>
 All Rights Reserved.<br>
 Released under a [slightly modified MIT License][license].
 
