@@ -59,20 +59,20 @@ ro:
     intro:
       filter:
         main: |
-          Puteţi "Edita\Şterge" un/o &raquo;%{data}&laquo; după ce îl/o alegeţi din listă,<br>
-          sau alegând "Creare" veţi crea unul/una.
+          Puteţi <b>Edita|Şterge</b> un(o) &raquo;%{data}&laquo; după ce îl(o) alegeţi din listă,
+          sau alegând <b>Creare</b> veţi crea unul(una).
       embedded:
         main: |
-          Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;<br>
-          prima dată trebuie să selectaţi un/o %{parent}!<br>
+          Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;
+          prima dată trebuie să selectaţi un(o) %{parent}!<br>
       create:
         main: |
-          Apăsând pe &raquo;Salvare&laquo; veţi crea un/o &raquo;%{data}&laquo;!<br>
-          Dacă apăsaţi pe &raquo;Renunţare&laquo; nu se va crea nimic!
+          Apăsând pe <b>Salvare</b> veţi crea un(o) &raquo;%{data}&laquo;!
+          Dacă apăsaţi pe <b>Renunţare</b> nu se va crea nimic!
       delete:
         main: |
-          Atenţie se va şterge un/o &raquo;%{data}&laquo; din baza de date!<br>
-          Dacă v-aţi hotărât apăsaţi pe &raquo;Ştergere&laquo;.
+          Atenţie se va şterge un(o) &raquo;%{data}&laquo; din baza de date!
+          Dacă v-aţi hotărât apăsaţi pe <b>Ştergere</b>.
     select:
       option: |
         Alegeţi &raquo;%{data}&laquo;
@@ -98,31 +98,28 @@ ro:
         start: |
           Se vor afişa detaliile ptr. &raquo;%{data}&laquo;!
         end: |
-          Un/o &raquo;%{data}&laquo; a fost salvat/ă...
+          Un(o) &raquo;%{data}&laquo; a fost salvat/ă...
       edit:
         start: |
-          Se va edita un/o &raquo;%{data}&laquo;
+          Se va edita un(o) &raquo;%{data}&laquo;
         end: |
-          Un/o &raquo;%{data}&laquo; a fost salvat/ă...
+          Un(o) &raquo;%{data}&laquo; a fost salvat/ă...
         error: |
-          Nu sa putut salva &raquo;%{data}&laquo;<br>
-          Vezi detalii în formular!
+          Nu sa putut salva &raquo;%{data}&laquo;! Vezi detalii în formular!
       create:
         start: |
-          Se va crea un/o &raquo;%{data}&laquo;
+          Se va crea un(o) &raquo;%{data}&laquo;
         end: |
-          Un/o &raquo;%{data}&laquo; a fost salvat/ă...
+          Un(o) &raquo;%{data}&laquo; a fost salvat/ă...
         error: |
-          Nu sa putut crea &raquo;%{data}&laquo;</br>
-          Vezi detalii în formular!
+          Nu sa putut crea &raquo;%{data}&laquo;! Vezi detalii în formular!
       delete:
         start: |
           Atenţie se va şterge &raquo;%{data}&laquo;
         end: |
           &raquo;%{data}&laquo; a fost şters!
         error: |
-          Nu sa putut şterge &raquo;%{data}&laquo;<br>
-          Vezi detalii în formular!
+          Nu sa putut şterge &raquo;%{data}&laquo;! Vezi detalii în formular!
       report:
         start: |
           Acum se generează documentul. Aveţi puţină tică răbdare...
@@ -152,7 +149,7 @@ ro:
           Sunaţi la Varena Auto să remedieze problema...
       select:
         error: |
-          Nu aţi ales nici un/o &raquo;%{data}&laquo;!
+          Nu aţi ales nici un(o) &raquo;%{data}&laquo;!
   demo:
     << : *trst
   asrv:
