@@ -185,7 +185,7 @@ module Trst
       value = '-' if value.blank?
       value = "%.2f" % value if value.is_a?(Float)
       style ||= 'value'
-      unless ['name','stats','um','pu','qu','val'].include? style
+      unless (['name','stats','um','pu','qu','val'] & style.split(' ')).length > 0
         style =  attribute =~ /^id$|_at/ ? "ui-state-highlight #{style}" : "ui-state-default #{style}"
       end
       haml_tag  :span, value, class: style
