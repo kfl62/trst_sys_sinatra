@@ -122,7 +122,7 @@ ro:
           Nu sa putut şterge &raquo;%{data}&laquo;! Vezi detalii în formular!
       report:
         start: |
-          Acum se generează documentul. Aveţi puţină tică răbdare...
+          Acum se generează documentul. Aveţi puţintică răbdare...
         error: |
           <span class='warning'>Din păcate nu s-a putut genera <b>%{data}</b>.<br>
           În cazul în care sunteţi convins că nu aveţi greşeli la formular<br>
