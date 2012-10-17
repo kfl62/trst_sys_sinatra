@@ -9,7 +9,7 @@ require.config({
 
 require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
   $(function(){
-    Trst = {debug: true};
+    Trst = {debug: false};
     $log = function(txt){
       if (Trst.debug){
         console.log(txt)
