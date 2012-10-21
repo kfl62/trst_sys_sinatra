@@ -3,4 +3,4 @@
   - @object.each do |o|
     %li.ui-state-highlight
       %span= @parent.include?('user') ? o.login_name : o.name
-      %input{:type => "hidden", :name => "[#{@child}][#{@parent.split('_').last}_ids][]", :value => o.id}
+      %input{type: "hidden",name: "[#{@child}][#{@parent.split('_').last}_ids][]",value: o.id}

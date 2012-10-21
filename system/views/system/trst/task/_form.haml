@@ -8,11 +8,11 @@
   - tr_input_for @object, 'params'
   %tr
     %td{colspan: "3"}
-      %input{type: "hidden", name: "[#{@path}][user_ids][]", value: nil}
+      %input{type: "hidden",name: "[#{@path}][user_ids][]",value: nil}
       %ul.trst-ui-sortable
         %span.relation-title= t('title.relations_inv')
         - @object.view_users.each do |t|
           %li.ui-state-default
             %span= t[1]
             %input{type: "hidden", name: "[#{@path}][user_ids][]", value: t[0]}
-      %button{type: "button", data: {action: "relations", icon: "transferthick-e-w", rel_to: "user"}}= mat(@object, :user_ids)
+      %button{type: "button",data: {action: "relations",icon: "transferthick-e-w",rel_to: "user"}}= mat(@object, :user_ids)
