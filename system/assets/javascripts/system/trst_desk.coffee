@@ -19,6 +19,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             dialogClass: 'ui-dialog-shadow'
             autoOpen: false
             modal: true
+            minHeight: 10
             height: 'auto'
             width: 'auto'
             position: [$position.left + 10,$position.top - 20]

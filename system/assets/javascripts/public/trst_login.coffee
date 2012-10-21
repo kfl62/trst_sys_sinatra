@@ -17,6 +17,7 @@ define ['jquery-ui'], ()->
           dialogClass: 'ui-dialog-shadow'
           autoOpen: false
           modal: true
+          minHeight: 10
           height: 'auto'
           width: 'auto'
           position: [$position.left, $position.top - 100]
