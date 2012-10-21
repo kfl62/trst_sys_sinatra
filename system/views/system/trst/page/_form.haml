@@ -9,7 +9,7 @@
   - @object.access_grp.each_with_index do |o,i|
     -tr_input_for @object, 'access_grp', {order: i}
   %tr
-    %td{:colspan => "3"}
+    %td{:colspan => "3",style: 'padding:0.1em'}
       %input{:type => "hidden",:name => "[#{@path}][task_ids][]",:value => nil}
       %ul.trst-ui-sortable
         %span.relation-title= t('title.relations_inv')
