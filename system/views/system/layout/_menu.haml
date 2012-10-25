@@ -1,7 +1,7 @@
 %ul
   - @chapters.each do |chapter|
     %li
-      - unless chapter.order == 5 && !@current_user.admin?
+      - unless chapter.order == 5 && !@current_user.root?
         %a{id: "chapter_#{chapter.id}", href: File.join(lp,'sys',chapter.path)}= chapter.name
       - if chapter.pages.length > 0 && (chapter.pages.where(:access_lvl.gte => @current_user.access_lvl).count) > 0
         %ul
