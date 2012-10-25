@@ -16,13 +16,17 @@ module Trst
     field :country, type: String,   default: 'Romania'
     field :zip,     type: String,   default: '-'
 
-    after_save: :beautify
+    validates_presence_of   :city, :street
+
+    before_save :beautify
 
     protected
     # @todo
     def beautify
-      city = self.city.titleize
-      street = self.street.titleize
+      self.city    = city.titleize if city
+      self.street  = street.titleize if street
+      self.state   = state.titleize if state
+      self.country = country.titleize if country
     end
 
   end # Address

@@ -17,7 +17,7 @@ module Trst
     validates_presence_of   :name_last, :name_frst
     validates_uniqueness_of :id_pn, :unless => Proc.new{|p| p.id_pn == '-'}
 
-    after_save: :beautify
+    before_save :beautify
 
     # @todo
     def name(last_first = true)
@@ -27,8 +27,10 @@ module Trst
     protected
     # @todo
     def beautify
-      name_frst = self.name_frst.titleize
-      name_last = self.name_last.titleize
+      self.name_frst = name_frst.titleize if name_frst
+      self.name_last = name_last.titleize if name_last
+      self.id_doc['type'] = id_doc['type'].upcase if id_doc['type']
+      self.id_doc['sr']   = id_doc['sr'].upcase if id_doc['sr']
     end
   end # Person
 end # Trst
