@@ -16,5 +16,14 @@ module Trst
     field :country, type: String,   default: 'Romania'
     field :zip,     type: String,   default: '-'
 
+    after_save: :beautify
+
+    protected
+    # @todo
+    def beautify
+      city = self.city.titleize
+      street = self.street.titleize
+    end
+
   end # Address
 end #Trst
