@@ -282,10 +282,10 @@ module Trst
     # @todo
     def page_content(id,help = false)
       if help
-        task = Trst::Task.find(id)
-        path = File.join(task.goal.split('.')[0].underscore,'help')
+        @task= Trst::Task.find(id)
+        path = File.join(@task.goal.split('.')[0].underscore,'help')
         file = File.join(Trst.views,'system',"#{path}.haml")
-        tmpl = File.exists?(file) ? path.to_sym : task.help
+        tmpl = File.exists?(file) ? path.to_sym : @task.help
       else
         page = Trst::Book.page(id) rescue Trst::Book.chapter(id)
         path = File.join('pages',I18n.locale.to_s,page.slug)
