@@ -14,6 +14,7 @@ define () ->
             panelTemplate: '<tbody></tbody>'
             selected: if Trst.lst.tab then Trst.lst.tab else 0
             show: (event,ui) ->
+              $('input.focus').focus()
               Trst.lst.removeItem 'tab'
               return
           $log('Trst.desk.tabs.init() OK...')
