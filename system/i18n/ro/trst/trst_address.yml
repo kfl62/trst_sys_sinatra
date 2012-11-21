@@ -4,6 +4,7 @@ ro:
       'trst/address': &trst_address
         model_name: Adresă
         id: Id system
+        name: Tip adresă
         city: Localitate
         street: Strada
         nr: Număr
