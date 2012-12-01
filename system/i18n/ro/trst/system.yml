@@ -11,12 +11,14 @@ ro:
         jobs_sheet:
           title: Fişa postului
         system_procedures:
-          title: Proceduri de sitem
+          title: Proceduri de sistem
       modules:
         db:
           title: Administrare bază de date
         monthly:
           title: Închidere lună
+        invoices:
+          title: Urmărire facturi
       sys_admin:
         pages:
           title: Pagini aplicaţie
