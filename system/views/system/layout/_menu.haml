@@ -3,9 +3,9 @@
     %li
       - unless chapter.order == 5 && !@current_user.root?
         %a{id: "chapter_#{chapter.id}", href: File.join(lp,'sys',chapter.path)}= chapter.name
-      - if chapter.pages.length > 0 && (chapter.pages.where(:access_lvl.gte => @current_user.access_lvl).count) > 0
+      - if chapter.pages.length > 0 && ((chapter.pages.where(:access_lvl.gte => @current_user.access_lvl).count > 0) || (chapter.pages.where(:slug.in => @current_user.access_grp).count > 0))
         %ul
           - chapter.pages.asc(:order).each do |page|
-            - if @current_user.access_lvl <= page.access_lvl
+            - if page.access_lvl >= @current_user.access_lvl || @current_user.access_grp.include?(page.slug)
               %li
                 %a{id: "page_#{page.id}", href: File.join(lp,'sys',page.path)}= page.name
