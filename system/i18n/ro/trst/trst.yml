@@ -61,6 +61,9 @@ ro:
         main: |
           Puteţi <b>Edita|Şterge</b> un(o) &raquo;%{data}&laquo; după ce îl(o) alegeţi din listă,
           sau alegând <b>Creare</b> veţi crea unul(una).
+        not_ready: |
+          Din păcate această activitate nu este finalizată, dar dacă a apărut în meniu
+          înseamnă că va fi gata în curând :)
       embedded:
         main: |
           Deoarece  &raquo;%{child}&laquo; este inclus în  &raquo;%{parent}&laquo;
