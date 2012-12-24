@@ -11,21 +11,18 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
       createDesk: (data)->
         $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
         $position = $('#content').position()
-        if $desk.dialog('isOpen') is true
-          $desk.html(data)
-        else
-          $desk.html(data)
-          .dialog
-            dialogClass: 'ui-dialog-shadow'
-            autoOpen: false
-            modal: true
-            minHeight: 10
-            height: 'auto'
-            width: 'auto'
-            position: [$position.left + 10,$position.top - 20]
-            close: ()->
-              $(this).remove()
-              return
+        $desk.html(data)
+        .dialog
+          dialogClass: 'ui-dialog-shadow'
+          autoOpen: false
+          modal: true
+          minHeight: 10
+          height: 'auto'
+          width: 'auto'
+          position: [$position.left + 10,$position.top - 20]
+          close: ()->
+            $(this).remove()
+            return
         return
       downloadError: (data)->
         $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
