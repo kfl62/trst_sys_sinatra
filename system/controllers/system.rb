@@ -47,47 +47,45 @@ module Trst
       session[k.to_sym] = (v == 'null') ? nil : v
     end
     # @todo Document this route
-    get '/:module/:class/filter' do |m,c|
-      handle_params(m,c,nil,'filter',params)
-      haml haml_path('filter',"#{m}/#{c}",!@related_object.nil?), layout: false
-    end
-    # @todo Document this route
-    get '/:module/:class/query' do |m,c|
-      handle_params(m,c,nil,'query',params)
-      haml haml_path('query',"#{m}/#{c}"), layout: false
-    end
-    # @todo Document this route
-    get '/:module/:class/repair' do |m,c|
-      handle_params(m,c,nil,'repair',params)
-      haml haml_path('repair',"#{m}/#{c}"), layout: false
-    end
-    # @todo Document this route
-    get '/:module/:class/print' do |m,c|
-      id    = params[:id].nil? ? nil : params[:id]
-      action= params[:id].nil? ? 'report' : 'print'
-      handle_params(m,c,id,action,params) unless params[:rb]
-      file = params[:rb] ? "#{m}/#{c}/#{params[:rb]}".to_sym : haml_path('pdf',"#{m}/#{c}")
-      if params['report']
-        haml file, layout: false
-      else
-        file_name = params[:fn] ? params[:fn] : @object.file_name
-        headers({'Content-Type' => 'application/pdf',
-                 'Content-Description' => 'File Transfer',
-                 'Content-Transfer-Encoding' => 'binary',
-                 'Content-Disposition' => "attachment;filename=\"#{file_name}.pdf\"",
-                 'Set-Cookie' => 'fileDownload=true; path=/',
-                 'Expires' => '0',
-                 'Pragma' => 'public'})
-        pdf file, layout: false
+    get /^\/([\/\p{L}]*)\/(\p{L}*)\/(filter|query|repair|print|create)/ do |m,c,a|
+      case a
+      when /filter|query|repair/
+        handle_params(m,c,nil,a,params)
+        haml haml_path(a,"#{m}/#{c}",!@related_object.nil?), layout: false
+      when /create/
+        handle_params(m,c,nil,'create_get',params)
+        haml haml_path(a,"#{m}/#{c}"), layout: false
+      when /print/
+        id    = params[:id].nil? ? nil : params[:id]
+        action= params[:id].nil? ? 'report' : 'print'
+        handle_params(m,c,id,action,params) unless params[:rb]
+        file = params[:rb] ? "#{m}/#{c}/#{params[:rb]}".to_sym : haml_path('pdf',"#{m}/#{c}")
+        if params['report']
+          haml file, layout: false
+        else
+          file_name = params[:fn] ? params[:fn] : @object.file_name
+          headers({'Content-Type' => 'application/pdf',
+                   'Content-Description' => 'File Transfer',
+                   'Content-Transfer-Encoding' => 'binary',
+                   'Content-Disposition' => "attachment;filename=\"#{file_name}.pdf\"",
+                   'Set-Cookie' => 'fileDownload=true; path=/',
+                   'Expires' => '0',
+                   'Pragma' => 'public'})
+          pdf file, layout: false
+        end
       end
     end
     # @todo Document this route
-    get '/:module/:class/create' do |m,c|
-      handle_params(m,c,nil,'create_get',params)
-      haml haml_path('create',"#{m}/#{c}"), layout: false
+    get /^\/([\/\p{L}]*)\/(\p{L}*)\/(edit|delete)\/(\w{24})/ do |m,c,a,id|
+      handle_params(m,c,id,"#{a}_get",params)
+      haml haml_path(a,"#{m}/#{c}"), layout: false
+    end
+    get /^\/([\/\p{L}]*)\/(\p{L}*)\/(\w{24})/ do |m,c,id|
+      handle_params(m,c,id,'show',params)
+      haml haml_path('show',"#{m}/#{c}"), layout: false
     end
     # @todo Document this route
-    post '/:module/:class/create' do |m,c|
+    post /^\/([\/\p{L}]*)\/(\p{L}*)\/(create)/ do |m,c,a|
       handle_params(m,c,nil,'create_post',params)
       if @object.save
         flash[:msg] = {msg: {txt: t('msg.create.end', data: mat(@object,'model_name')), class: 'info'}}
@@ -95,31 +93,11 @@ module Trst
       else
         flash[:msg] = {msg: {txt: t('msg.create.error', data: mat(@object,'model_name')), class: 'error'}}
         @create_error = true
-        haml haml_path('create',"#{m}/#{c}"), layout: false
+        haml haml_path('a',"#{m}/#{c}"), layout: false
       end
     end
     # @todo Document this route
-    get '/:module/:class/edit/:id' do |m,c,id|
-      handle_params(m,c,id,'edit_get',params)
-      haml haml_path('edit',"#{m}/#{c}"), layout: false
-    end
-    # @todo Document this route
-    get '/:module/:class/delete/:id' do |m,c,id|
-      handle_params(m,c,id,'delete_get',params)
-      haml haml_path('delete',"#{m}/#{c}"), layout: false
-    end
-    # @todo Document this route
-    get '/:module/:class/:id' do |m,c,id|
-      handle_params(m,c,id,'show',params)
-      haml haml_path('show',"#{m}/#{c}"), layout: false
-    end
-    # @todo Document this route
-    get '/:module/:class/:id/tab/:what/:verb' do |m,c,id,w,v|
-      handle_params(m,c,id,v,params)
-      haml :"#{m}/#{c}/_#{w}", layout: false
-    end
-    # @todo Document this route
-    put '/:module/:class/:id' do |m,c,id|
+    put /^\/([\/\p{L}]*)\/(\p{L}*)\/(\w{24})/ do |m,c,id|
       handle_params(m,c,id,'edit_put',params)
       if @object.update_attributes(params[:"#{@path}"])
         flash[:msg] = {msg: {txt: t('msg.edit.end', data: mat(@object,'model_name')), class: 'info'}}
@@ -130,11 +108,16 @@ module Trst
       end
     end
     # @todo Document this route
-    delete '/:module/:class/:id' do |m,c,id|
+    delete /^\/([\/\p{L}]*)\/(\p{L}*)\/(\w{24})/ do |m,c,id|
       handle_params(m,c,id,'delete',params)
       @object.destroy
       flash[:msg] = {msg: {txt: t('msg.delete.end', data: mat(@object,'model_name')), class: 'info'}}
       status 200
+    end
+    # @todo Document this route
+    get '/:module/:class/:id/tab/:what/:verb' do |m,c,id,w,v|
+      handle_params(m,c,id,v,params)
+      haml :"#{m}/#{c}/_#{w}", layout: false
     end
     # @todo Document this route
     post '/:module/:class/:id/file_upload/:related_to' do |m,c,id,r_to|
