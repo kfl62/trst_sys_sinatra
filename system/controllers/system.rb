@@ -47,7 +47,7 @@ module Trst
       session[k.to_sym] = (v == 'null') ? nil : v
     end
     # @todo Document this route
-    get /^\/([\/\p{L}]*)\/(\p{L}*)\/(filter|query|repair|print|create)/ do |m,c,a|
+    get /^\/([\/\p{L}\p{Pc}\p{Pd}]*)\/([\p{L}\p{Pc}\p{Pd}]*)\/(filter|query|repair|print|create)/ do |m,c,a|
       case a
       when /filter|query|repair/
         handle_params(m,c,nil,a,params)
@@ -76,16 +76,16 @@ module Trst
       end
     end
     # @todo Document this route
-    get /^\/([\/\p{L}]*)\/(\p{L}*)\/(edit|delete)\/(\w{24})/ do |m,c,a,id|
+    get /^\/([\/\p{L}\p{Pc}\p{Pd}]*)\/([\p{L}\p{Pc}\p{Pd}]*)\/(edit|delete)\/(\w{24})/ do |m,c,a,id|
       handle_params(m,c,id,"#{a}_get",params)
       haml haml_path(a,"#{m}/#{c}"), layout: false
     end
-    get /^\/([\/\p{L}]*)\/(\p{L}*)\/(\w{24})/ do |m,c,id|
+    get /^\/([\/\p{L}\p{Pc}\p{Pd}]*)\/([\p{L}\p{Pc}\p{Pd}]*)\/(\w{24})/ do |m,c,id|
       handle_params(m,c,id,'show',params)
       haml haml_path('show',"#{m}/#{c}"), layout: false
     end
     # @todo Document this route
-    post /^\/([\/\p{L}]*)\/(\p{L}*)\/(create)/ do |m,c,a|
+    post /^\/([\/\p{L}\p{Pc}\p{Pd}]*)\/([\p{L}\p{Pc}\p{Pd}]*)\/(create)/ do |m,c,a|
       handle_params(m,c,nil,'create_post',params)
       if @object.save
         flash[:msg] = {msg: {txt: t('msg.create.end', data: mat(@object,'model_name')), class: 'info'}}
@@ -97,7 +97,7 @@ module Trst
       end
     end
     # @todo Document this route
-    put /^\/([\/\p{L}]*)\/(\p{L}*)\/(\w{24})/ do |m,c,id|
+    put /^\/([\/\p{L}\p{Pc}\p{Pd}]*)\/([\p{L}\p{Pc}\p{Pd}]*)\/(\w{24})/ do |m,c,id|
       handle_params(m,c,id,'edit_put',params)
       if @object.update_attributes(params[:"#{@path}"])
         flash[:msg] = {msg: {txt: t('msg.edit.end', data: mat(@object,'model_name')), class: 'info'}}
@@ -108,7 +108,7 @@ module Trst
       end
     end
     # @todo Document this route
-    delete /^\/([\/\p{L}]*)\/(\p{L}*)\/(\w{24})/ do |m,c,id|
+    delete /^\/([\/\p{L}\p{Pc}\p{Pd}]*)\/([\p{L}\p{Pc}\p{Pd}]*)\/(\w{24})/ do |m,c,id|
       handle_params(m,c,id,'delete',params)
       @object.destroy
       flash[:msg] = {msg: {txt: t('msg.delete.end', data: mat(@object,'model_name')), class: 'info'}}
