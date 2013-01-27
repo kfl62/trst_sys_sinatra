@@ -89,34 +89,44 @@ module Trst
       if related
         @related_path  = related.class_name.underscore
         related_model  = related.class_name.constantize
+        related_one    = related_model.relations[related.inverse_of.to_s].macro.to_s.split('_')[1] == 'one'
         @related_object= related_model.all
       end
       case action
       when 'filter', 'query', 'repair', 'report'
         @object = model.all
         if related && r_id
-          @object = related_model.find(r_id).send related.inverse
+          @object = related_model.find(r_id).send related.inverse_of
         end
       when 'create_get'
         @object = model.new
         if related && r_id
-          @related_object= related_model.find(r_id)
-          object         = @related_object.send related.inverse
-          @object        = object.new
+          @related_object = related_model.find(r_id)
+          if related_one
+            @object = @related_object.send(:"build_#{related.inverse_of.to_s}")
+          else
+            object  = @related_object.send related.inverse_of
+            @object = object.new
+          end
         end
       when 'create_post'
         @object = model.new(params[:"#{@path}"])
         if related && r_id
           @related_object= related_model.find(r_id)
-          object         = @related_object.send related.inverse
-          @object        = object.new(params[:"#{@path}"])
+          if related_one
+            @object = @related_object.send(:"build_#{related.inverse_of.to_s}")
+            @object.update_attributes(params[:"#{@path}"])
+          else
+            object  = @related_object.send related.inverse_of
+            @object = object.new(params[:"#{@path}"])
+          end
         end
       when 'edit_get', 'edit_put', 'show', 'delete_get', 'delete', 'print'
         @object = model.find(id)
         if related && r_id
           @related_object= related_model.find(r_id)
-          object         = @related_object.send related.inverse
-          @object        = object.find(id)
+          object         = @related_object.send related.inverse_of
+          @object        = related_one ? object : object.find(id)
         end
       else
         @object = nil
@@ -138,7 +148,7 @@ module Trst
       when Array, Hash
         value = map.nil? ? order.nil? ? value.join(',') : value[order] : value.map(&:last).join(', ')
       when Time, Date
-        value = l(value, format: :trst)
+        value = type == 'string' ? value.to_s : l(value, format: :trst)
       when String, Integer, Float, Moped::BSON::ObjectId
         value = type == 'enum' ? mat(model,"#{attribute}_#{value}") : value
       when TrueClass, FalseClass
@@ -316,7 +326,7 @@ module Trst
     # @todo
     def check_module(s,main = false)
       a = s.split('/')
-      main ? a[0] = 'trst' : a.delete_at(1)
+      main ? a[0] = 'trst' : a = [a[0],a[-1]]
       a.join('/')
     end
  end # Helper
