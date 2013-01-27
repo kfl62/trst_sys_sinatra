@@ -4,13 +4,13 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
       readData: ()->
         @hdo = if $('#hidden_data').length then $('#hidden_data').data() else {}
         @hdf = $('#deskDialog form')
+        @height = $(window).height()
         if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
       closeDesk: (cls = true)->
         $('#deskDialog').dialog('close') if cls
         return
       createDesk: (data)->
         $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
-        $position = $('#content').position()
         $desk.html(data)
         .dialog
           dialogClass: 'ui-dialog-shadow'
@@ -19,14 +19,17 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           minHeight: 10
           height: 'auto'
           width: 'auto'
-          position: [$position.left + 10,$position.top - 20]
+          position:
+            my: 'left top'
+            at: 'left top'
+            of: '#menu'
+            collision: 'none'
           close: ()->
             $(this).remove()
             return
         return
       downloadError: (data)->
         $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
-        $position = $('#content').position()
         $data = Trst.i18n.msg.report.error. replace '%{data}', data
         $download.html($data)
         .dialog
@@ -35,12 +38,17 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           modal: true
           height: 'auto'
           width: 'auto'
-          position: [$position.left + 10,$position.top - 30]
+          position:
+            my: 'left top'
+            at: 'left top'
+            of: '#menu'
+            collision: 'none'
           close: ()->
             $(this).remove()
             return
           title: Trst.i18n.title.report.error
         $download.dialog('open')
+        $(".ui-widget-overlay").css('height',Trst.desk.height)
       init: (url,type,data)->
         $url  = url
         $type = if type? then type.toUpperCase() else "GET"
@@ -64,6 +72,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               $tdata = Trst.desk.hdo.title_data || Trst.desk.hdo.model_name
               $desk.dialog title: $title.replace('%{data}',$tdata)
               $desk.dialog('open')
+              $(".ui-widget-overlay").css('height',Trst.desk.height)
               Trst.desk.buttons.init() if $('button').length
               Trst.desk.select.init() if Trst.desk.hdf.find('select').length
               Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length
