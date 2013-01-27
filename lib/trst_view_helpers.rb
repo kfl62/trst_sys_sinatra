@@ -47,6 +47,6 @@ class String
     raise ArgumentError.new("invalid value for Boolean: \"#{self}\"")
   end
   def to_search_extended
-    self.gsub(/[aeioust]/, 'a'=>"\[a|ă|â|á|î\]", 'e'=>"\[e|é\]", 'i'=>"\[i|î|í|â\]", 'o'=>"\[o|ó|ö|ő\]", 'u'=>"\[u|ú|ü|ű\]", 's'=>"\[s|ş\]", 't'=>"\[t|ţ\]")
+    self.gsub(/[aeioust]/, 'a'=>"\[a|ă|â|á|î\]", 'e'=>"\[e|é\]", 'i'=>"\[i|î|í|â\]", 'o'=>"\[o|ó|ö|ő\]", 'u'=>"\[u|ú|ü|ű\]", 's'=>"\[s|\u015F|\u0219\]", 't'=>"\[t|\u0163|\u021B\]")
   end
 end
