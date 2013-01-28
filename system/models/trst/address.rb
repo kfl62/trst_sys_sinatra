@@ -23,10 +23,10 @@ module Trst
     protected
     # @todo
     def beautify
-      self.city    = city.titleize if city
-      self.street  = street.titleize if street
-      self.state   = state.titleize if state
-      self.country = country.titleize if country
+      self.city    = city.titleize if city && city != '-'
+      self.street  = street.titleize if street && street != '-'
+      self.state   = state.titleize if state && state != '-'
+      self.country = country.titleize if country && country != '-'
     end
 
   end # Address
