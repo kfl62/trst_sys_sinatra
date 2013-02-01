@@ -27,7 +27,7 @@ module Trst
         pe  = pb + p.day
         where(:id_date.gte => pb, :id_date.lt => pe)
       end
-       # @todo
+      # @todo
       def weekly(y = nil,w = nil)
         y ||= Date.today.year
         w ||= Date.today.cweek
@@ -35,7 +35,7 @@ module Trst
         we = Date.commercial(y, w, 7)
         where(:id_date.gte => wb.to_time, :id_date.lte => we.to_time)
       end
-     # @todo
+      # @todo
       def daily(y = nil,m = nil,d = nil)
         y ||= Date.today.year
         m ||= Date.today.month
