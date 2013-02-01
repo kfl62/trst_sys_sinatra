@@ -1,3 +1,4 @@
+# encoding: utf-8
 desc "Initialize bundle"
 task :init do
   `bundle install --path .bundle --binstubs .bundle/bin`
@@ -49,5 +50,20 @@ namespace :db do
       daily_tp  = my_page.pages.find_by(slug: 'daily_tasks')
       daily_tp.tasks << edit_page; daily_tp.save
     end
+  end
+  desc "Statistics for storekeepers"
+  task :storekeeper_stats, :unit, :u1, :u2, :y, :m do |t, args|
+    require './config/boot'
+    u1 = Wstm::User.find_by(login_name: /#{args[:u1]}/)
+    u2 = Wstm::User.find_by(login_name: /#{args[:u2]}/)
+    sum_out1 = Wstm::Expenditure.pos(args[:unit]).monthly(args[:y].to_i,args[:m].to_i).where(signed_by: u1).sum(:sum_out).round(2)
+    sum_out2 = Wstm::Expenditure.pos(args[:unit]).monthly(args[:y].to_i,args[:m].to_i).where(signed_by: u2).sum(:sum_out).round(2)
+    wd1 = 0; (1..Date.new(args[:y].to_i,args[:m].to_i,-1).day).each{|d| app = (Wstm::Expenditure.pos(args[:unit]).daily(args[:y].to_i,args[:m].to_i,d).where(signed_by: u1).count rescue 0);wd1 += 1 if app  >0}
+    wd2 = 0; (1..Date.new(args[:y].to_i,args[:m].to_i,-1).day).each{|d| app = (Wstm::Expenditure.pos(args[:unit]).daily(args[:y].to_i,args[:m].to_i,d).where(signed_by: u2).count rescue 0);wd2 += 1 if app  >0}
+    puts "\nSituația lunară #{args[:y]}-#{args[:m]}, Punct de colectare: #{Wstm::PartnerFirm.pos(args[:unit]).name}"
+    puts "\n"
+    puts "#{u1.name} - Achiziții #{sum_out1} - Zile lucrate #{wd1} - Media #{(sum_out1/wd1).round(2)}"
+    puts "#{u2.name} - Achiziții #{sum_out2} - Zile lucrate #{wd2} - Media #{(sum_out2/wd2).round(2)}"
+    puts "\n"
   end
 end
