@@ -1,6 +1,6 @@
 %ul.trst-ui-sortable
   %span.relation-title= t('title.relations')
-  - @object.each do |o|
+  - @object.asc(:name).each do |o|
     %li.ui-state-highlight
       %span= @parent.include?('user') ? o.login_name : o.name
       %input{type: "hidden",name: "[#{@child}][#{@parent.split('_').last}_ids][]",value: o.id}
