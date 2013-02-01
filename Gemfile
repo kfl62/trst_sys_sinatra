@@ -10,7 +10,7 @@ gem 'coffee-script'
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'compass'
 gem 'haml'
-gem 'mongoid', github: "mongoid"
+gem 'mongoid'
 gem 'rdiscount'
 gem 'prawn'
 
