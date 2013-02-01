@@ -52,18 +52,31 @@ namespace :db do
     end
   end
   desc "Statistics for storekeepers"
-  task :storekeeper_stats, :unit, :u1, :u2, :y, :m do |t, args|
+  task :storekeeper_stats, :user, :y, :m, :daily do |t, args|
     require './config/boot'
-    u1 = Wstm::User.find_by(login_name: /#{args[:u1]}/)
-    u2 = Wstm::User.find_by(login_name: /#{args[:u2]}/)
-    sum_out1 = Wstm::Expenditure.pos(args[:unit]).monthly(args[:y].to_i,args[:m].to_i).where(signed_by: u1).sum(:sum_out).round(2)
-    sum_out2 = Wstm::Expenditure.pos(args[:unit]).monthly(args[:y].to_i,args[:m].to_i).where(signed_by: u2).sum(:sum_out).round(2)
-    wd1 = 0; (1..Date.new(args[:y].to_i,args[:m].to_i,-1).day).each{|d| app = (Wstm::Expenditure.pos(args[:unit]).daily(args[:y].to_i,args[:m].to_i,d).where(signed_by: u1).count rescue 0);wd1 += 1 if app  >0}
-    wd2 = 0; (1..Date.new(args[:y].to_i,args[:m].to_i,-1).day).each{|d| app = (Wstm::Expenditure.pos(args[:unit]).daily(args[:y].to_i,args[:m].to_i,d).where(signed_by: u2).count rescue 0);wd2 += 1 if app  >0}
-    puts "\nSituația lunară #{args[:y]}-#{args[:m]}, Punct de colectare: #{Wstm::PartnerFirm.pos(args[:unit]).name}"
-    puts "\n"
-    puts "#{u1.name} - Achiziții #{sum_out1} - Zile lucrate #{wd1} - Media #{(sum_out1/wd1).round(2)}"
-    puts "#{u2.name} - Achiziții #{sum_out2} - Zile lucrate #{wd2} - Media #{(sum_out2/wd2).round(2)}"
-    puts "\n"
+    user = Wstm::User.find_by(login_name: /#{args[:user]}/)
+    daily= args[:daily] || "false"
+    data = user.work_stats(args[:y].to_i,args[:m].to_i, daily.to_bool) rescue nil
+    if user
+      if user.has_unit?
+        puts "\nSituația lunară #{I18n.localize(Date.new(args[:y].to_i,args[:m].to_i,1), format: "%B, %Y")}, Punct de colectare: #{user.unit.name[1]}"
+        puts "\n"
+        puts "#{user.name} - Zile lucrate #{data[0]} - Achiziții #{data[1]} - Media #{data[2]}"
+        puts "\n"
+        if daily.to_bool
+          puts "Achizițiile zilnice: \n#{"Data".center(10)} | #{"App".center(4)} | #{"Achitat".center(8)} | #{"Media".center(6)}"
+          data[3].each_pair do |k,v|
+            puts "#{k.center(10)} | #{v[0].to_s.rjust(4)} | #{("%0.2f" % v[1]).rjust(8)} | #{("%0.2f" % (v[1]/v[0])).rjust(6)}"
+          end
+          puts "\n"
+        end
+      else
+        puts "\nUtilizatorul nu este gestionar la nici un Punct de lucru!"
+        puts "\n"
+      end
+    else
+      puts "\nGestionar/Utilizator inexistent!"
+      puts "\n"
+    end
   end
 end
