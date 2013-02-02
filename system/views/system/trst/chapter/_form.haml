@@ -1,0 +1,10 @@
+%tbody
+  %tr
+    - td_label_for @related_object, 'name'
+    - td_value_for @related_object, 'name'
+    - td_error_for @related_object, 'name'
+  - tr_input_for @object, 'slug'
+  - tr_input_for @object, 'order'
+  - tr_input_for @object, 'name'
+  - tr_input_for @object, 'title'
+  - tr_input_for @object, 'content'
