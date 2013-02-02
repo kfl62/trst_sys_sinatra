@@ -146,7 +146,7 @@ module Trst
       value  = model.send method
       case value
       when Array, Hash
-        value = map.nil? ? order.nil? ? value.join(',') : value[order] : value.map(&:last).join(', ')
+        value = map.nil? ? (order.nil? ? value.join(',') : value[order]) : value.map(&:last).join(', ')
       when Time, Date
         value = type == 'string' ? value.to_s : l(value, format: :trst)
       when String, Integer, Float, Moped::BSON::ObjectId
