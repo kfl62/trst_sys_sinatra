@@ -19,6 +19,10 @@ ro:
           title: Închidere lună
         invoices:
           title: Urmărire facturi
+        hr:
+          title: Resurse umane
+        stats:
+          title: Statistică
       sys_admin:
         pages:
           title: Pagini aplicaţie
