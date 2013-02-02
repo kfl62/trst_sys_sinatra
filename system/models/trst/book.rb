@@ -11,6 +11,7 @@ module Trst
   class Book
     include Mongoid::Document
     include Mongoid::Timestamps
+    include ViewHelpers
 
     field :slug,    type: String
     field :name,    type: String, localize: true
@@ -29,7 +30,7 @@ module Trst
       end
       # @todo Document this method
       def chapter(id)
-        book = where('chapters._id'  => Moped::BSON::ObjectId.from_string("#{id}")).first
+        book = where(:'chapters._id'  => Moped::BSON::ObjectId.from_string("#{id}")).first
         chapter = book.chapters.find(id)
       end
       # @todo Document this method
@@ -65,6 +66,7 @@ module Trst
   class Chapter
     include Mongoid::Document
     include Mongoid::Timestamps
+    include ViewHelpers
 
     field :slug,    type: String
     field :order,   type: Integer
@@ -80,10 +82,6 @@ module Trst
     # @todo Document this method
     def path
       slug == 'home' ? '/index.html' : "/#{slug.dasherize}/index.html"
-    end
-    # @todo
-    def embedded_in
-      chapter
     end
   end # Chapter
 
@@ -104,6 +102,7 @@ module Trst
   class Page
     include Mongoid::Document
     include Mongoid::Timestamps
+    include ViewHelpers
 
     field :slug,            type: String
     field :order,           type: Integer
@@ -129,10 +128,6 @@ module Trst
     def path
       retval = chapter.slug == 'home' ? '/' : "/#{chapter.slug.dasherize}/"
       retval += "trustsys-#{chapter.slug.dasherize}-#{slug.dasherize}.html"
-    end
-    # @todo
-    def embedded_in
-      chapter
     end
     # @todo Document this method
     def view_tasks
