@@ -30,6 +30,9 @@ ro:
       filter:
         main: |
           Administrare &raquo;%{data}&laquo; - Selectare -
+      query:
+        main: |
+          Interogare/Statistică &raquo;%{data}&laquo;
       show:
         main: |
           Administrare &raquo;%{data}&laquo; - Detalii -
