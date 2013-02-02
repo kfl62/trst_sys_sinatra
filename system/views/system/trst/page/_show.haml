@@ -5,8 +5,7 @@
   - tr_show_for @object, 'content'
   - tr_show_for @object, 'slug'
   - tr_show_for @object, 'access_lvl'
-  - @object.access_grp.each_with_index do |o,i|
-    -tr_show_for @object, 'access_grp', {order: i}
-  - tr_show_for @object, 'task_ids',    {map: 'view_tasks'}
+  - tr_show_for @object, 'access_grp', {order: 0}
+  - tr_show_for @object, 'task_ids',   {map: 'view_tasks'}
   - tr_show_for @object, 'created_at'
   - tr_show_for @object, 'updated_at'

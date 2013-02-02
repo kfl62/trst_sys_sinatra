@@ -1,13 +1,11 @@
 %tbody
-  - tr_input_for @object, 'id'
   - tr_input_for @object, 'name'
   - tr_input_for @object, 'title'
   - tr_input_for @object, 'content'
   - tr_input_for @object, 'slug'
   - tr_input_for @object, 'order'
   - tr_input_for @object, 'access_lvl'
-  - @object.access_grp.each_with_index do |o,i|
-    -tr_input_for @object, 'access_grp', {order: i}
+  - tr_input_for @object, 'access_grp', {order: 0}
   %tr
     %td{:colspan => "3",style: 'padding:0.1em'}
       %input{:type => "hidden",:name => "[#{@path}][task_ids][]",:value => nil}
