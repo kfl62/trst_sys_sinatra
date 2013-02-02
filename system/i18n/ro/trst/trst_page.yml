@@ -1,6 +1,10 @@
 ro:
   mongoid:
     attributes:
+      'trst/book':
+        model_name: Carte
+      'trst/chapter':
+        model_name: Capitol
       'trst/page':
         model_name: Pagină
         id: Id system
