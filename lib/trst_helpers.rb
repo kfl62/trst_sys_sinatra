@@ -136,7 +136,7 @@ module Trst
         model   = "#{m}/book".classify.constantize
         method  = c
         @object = model.send method, id
-      end
+      end unless action =~ /filter|create/
       true
     end
     # @todo
