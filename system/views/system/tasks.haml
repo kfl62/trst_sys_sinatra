@@ -4,7 +4,7 @@
     %li= t('sidebar.empty')
   - else
     - (%w{filter print query repair test page} & @tasks.map(&:action).uniq).each do |action|
-      %li.em.st= t("sidebar.category.#{action}", default: :'wstm.sidebar.category.uncategorized') unless action == 'filter'
+      %li.em.st= t("sidebar.category.#{action}", default: :'wstm.sidebar.category.uncategorized') unless (action == 'filter' || (@page.slug == 'stats' && action == "query"))
       - @tasks.each do |tsk|
         - href  = "/sys/#{tsk.goal.underscore.gsub('.','/')}"
         - href += "#{tsk.params}" unless tsk.params.blank?
