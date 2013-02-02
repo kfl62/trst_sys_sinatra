@@ -3,8 +3,16 @@ ro:
     attributes:
       'trst/book':
         model_name: Carte
+        slug: Cale
+        name: Nume
+        content: Conținut
       'trst/chapter':
         model_name: Capitol
+        slug: Cale
+        order: Nr. ordine
+        name: Nume
+        title: Titlu
+        content: Conținut
       'trst/page':
         model_name: Pagină
         id: Id system
@@ -14,10 +22,7 @@ ro:
         slug: Cale
         order: Nr. ordine
         access_lvl: Acces - Nivel
-        access_grp:
-          '0': Acces - Grupă (1)
-          '1': Acces - Grupă (2)
-          '2': Acces - Grupă (3)
+        access_grp_0: Acces - Grupă
         task_ids: Sarcini asociate
         created_at: Creat
         updated_at: Modificat
