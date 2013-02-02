@@ -5,10 +5,10 @@
       %tr.pdb-05
         - unless params[:related_id]
           %td
-            %span.info= t("intro.embedded",child: mat(@object,'model_name'),parent: mat(@related_object,'model_name'))
+            %span.info.width-300.ju= t("intro.embedded.main",child: mat(@object,'model_name'),parent: mat(@related_object,'model_name'))
         - else
           %td
-            %span.info= t("intro.filter.main",data: mat(@object,'model_name'))
+            %span.info.width-300.ju= t("intro.filter.main",data: mat(@object,'model_name'))
       %tr.pdb-05
         %td
           %select#related_id
