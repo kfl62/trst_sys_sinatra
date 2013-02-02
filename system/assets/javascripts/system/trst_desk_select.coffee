@@ -11,10 +11,13 @@ define () ->
             if $id is 'oid'
               $select.change ()->
                 $hd[$id] = $select.val()
-            else if Trst.module
-              ###
-              Handled by Trst.module
-              ###
+            else if $id and $id.split('_').pop() is 'id'
+              $select.change () ->
+                Trst.lst.setItem 'r_mdl', 'fake_mdl'
+                Trst.lst.setItem 'r_id', $select.val()
+                $url = "#{$form.attr('action')}/#{$hd.dialog}?r_id=#{$select.val()}"
+                Trst.desk.init($url)
+                return
             else
               $log('Unknown id, select not handled...')
           $log('Trst.desk.select.init() OK...')
