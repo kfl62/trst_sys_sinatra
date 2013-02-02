@@ -11,11 +11,11 @@
             %span.info.width-300.ju= t("intro.filter.main",data: mat(@object,'model_name'))
       %tr.pdb-05
         %td
-          %select#related_id
+          %select#r_id
             %option{value: "null"}= t("select.option",data:  mat(@related_object,'model_name'))
             - @related_object.default_sort.each do |o|
               %option{value: o.view_filter.first,selected: o.view_filter.first.to_s == params[:related_id]}= o.view_filter.last
-          - if params[:related_id]
+          - if params[:r_id]
             %select#oid
               %option{value: "null"}= t("select.option",data: mat(@object,'model_name'))
               - @object.default_sort.each do |o|
@@ -23,7 +23,7 @@
       %tfoot
         %tr
           %td.buttonset.ce
-            - if params[:related_id]
+            - if params[:r_id]
               %button{:type => "button",data: {action: "create",icon: "circle-plus"}}= t('button.create')
               %button{:type => "button",data: {action: "show",  icon: "clipboard"}}= t('button.show')
               %button{:type => "button",data: {action: "edit",  icon: "document"}}= t('button.edit')
