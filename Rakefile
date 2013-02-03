@@ -17,15 +17,15 @@ namespace :db do
     Trst::Book.delete_all
     Trst::Task.delete_all
     Trst::User.delete_all
-    books = YAML.load_file File.join(Trst.root,'tmp','seed',"books.yml")
-    chapters = YAML.load_file File.join(Trst.root,'tmp','seed',"chapters.yml")
-    pages = YAML.load_file File.join(Trst.root,'tmp','seed',"pages.yml")
-    tasks = YAML.load_file File.join(Trst.root,'tmp','seed',"tasks.yml")
-    users = YAML.load_file File.join(Trst.root,'tmp','seed',"users.yml")
+    books = YAML.load_file File.join(Trst.root,'config','seed',"books.yml")
+    chapters = YAML.load_file File.join(Trst.root,'config','seed',"chapters.yml")
+    pages = YAML.load_file File.join(Trst.root,'config','seed',"pages.yml")
+    tasks = YAML.load_file File.join(Trst.root,'config','seed',"tasks.yml")
+    users = YAML.load_file File.join(Trst.root,'config','seed',"users.yml")
     users.each_pair do |login,attributes|
       Trst::User.find_or_create_by(login_name: login).update_attributes(attributes)
     end
-    admin = Trst::User.find_by(login_name: 'kfl62')
+    admin = Trst::User.find_by(login_name: 'admin')
     tasks.each_pair do |goal,attributes|
       task = Trst::Task.find_or_create_by(goal: goal)
       task.update_attributes(attributes)

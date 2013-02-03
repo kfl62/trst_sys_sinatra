@@ -1,0 +1,6 @@
+admin:
+  name: Admin Name
+  email: admin@example.com
+  access_lvl: -1
+  password: changeme
+  password_confirmation: changeme

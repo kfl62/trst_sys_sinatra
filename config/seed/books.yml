@@ -1,0 +1,18 @@
+trst_public:
+  name_translations:
+    ro: Paginile publice
+    en: Public pages
+    hu: Publikus oldalak
+  content_translations:
+    ro: Paginile publice
+    en: Public pages
+    hu: Publikus oldalak
+trst_system:
+  name_translations:
+    ro: Paginile de sistem
+    en: System pages
+    hu: Rendszer oldalak
+  content_translations:
+    ro: Paginile de sistem
+    en: System pages
+    hu: Rendszer oldalak

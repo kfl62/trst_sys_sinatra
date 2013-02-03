@@ -1,0 +1,45 @@
+'Trst::User.filter':
+  haml_path: default
+  rels: none
+  name_translations:
+    ro: Editare utilizatori
+    en: Edit users
+    hu: Felhasználók
+  title_translations:
+    ro: Administrare utilizatori
+    en: Edit users
+    hu: Felhasználók
+  help_translations:
+    ro: Administrare utilizatori
+    en: Edit users
+    hu: Felhasználók
+'Trst::Task.filter':
+  haml_path: default
+  rels: none
+  name_translations:
+    ro: Editare sarcini (taskuri)
+    en: Edit tasks
+    hu: Feladatok
+  title_translations:
+    ro: Administrare sarcini
+    en: Edit tasks
+    hu: Feladatok
+  help_translations:
+    ro: Administrare sarcini
+    en: Edit tasks
+    hu: Feladatok
+'Trst::Page.page':
+  haml_path: default
+  rels: none
+  name_translations:
+    ro: Editare pagină
+    en: Edit pages
+    hu: Oldalak
+  title_translations:
+    ro: Administrare pagini
+    en: Edit pages
+    hu: Oldalak
+  help_translations:
+    ro: Administrare pagini
+    en: Edit pages
+    hu: Oldalak

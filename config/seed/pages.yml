@@ -1,0 +1,443 @@
+trst_public:
+  knowledge_base:
+    intro:
+      order: 1
+      name_translations:
+        ro: Introducere
+        en: Introduction
+        hu: Bevezető
+      title_translations:
+        ro: Pagina Generalităţi -> Introducere
+        en: Page Knowledge base -> Introduction
+        hu: Oldal Tudásalap -> Bevezető
+      content_translations:
+        ro: Pagina Generalităţi -> Introducere
+        en: Page Knowledge base -> Introduction
+        hu: Oldal Tudásalap -> Bevezető
+    systems_theory:
+      order: 2
+      name_translations:
+        ro: Noţiuni TGS
+        en: ST notions
+        hu: RE fogalmak
+      title_translations:
+        ro: Pagina Generalităţi -> Noţiuni TGS
+        en: Page Knowledge base -> ST notions
+        hu: Oldal Tudásalap -> Rendszer elméleti fogalmak
+      content_translations:
+        ro: Pagina Generalităţi -> Noţiuni Teoria Generală a Sistemelor
+        en: Page Knowledge base -> System theory notions
+        hu: Oldal Tudásalap -> Rendszer elméleti fogalmak
+    systems_modelling:
+      order: 3
+      name_translations:
+        ro: Modelare sistemică
+        en: System modelling
+        hu: Rendszer modelezés
+      title_translations:
+        ro: Pagina Generalităţi -> Modelare sistemică
+        en: Page Knowledge base -> System modelling
+        hu: Oldal Tudásalap -> Rendszer modelezés
+      content_translations:
+        ro: Pagina Generalităţi -> Modelare sistemică
+        en: Page Knowledge base -> System modelling
+        hu: Oldal Tudásalap -> Rendszer modelezés
+    object_oriented_paradigm:
+      order: 4
+      name_translations:
+        ro: Paradigma OO
+        en: OO paradigm
+        hu: OO paradigma
+      title_translations:
+        ro: Pagina Generalităţi -> Paradigma OO
+        en: Page Knowledge base -> OO paradigm
+        hu: Oldal Tudásalap -> Object oriented paradigma
+      content_translations:
+        ro: Pagina Generalităţi -> Paradigma Object Oriented
+        en: Page Knowledge base -> OO paradigm
+        hu: Oldal Tudásalap -> Object oriented paradigma
+    why_uml:
+      order: 5
+      name_translations:
+        ro: De ce UML?
+        en: Why UML?
+        hu: Miért UML?
+      title_translations:
+        ro: Pagina Generalităţi -> De ce UML?
+        en: Page Knowledge base -> Why UML?
+        hu: Oldal Tudásalap -> Miért UML?
+      content_translations:
+        ro: Pagina Generalităţi -> De ce UML?
+        en: Page Knowledge base -> Why UML?
+        hu: Oldal Tudásalap -> Miért UML?
+    conclusions:
+      order: 6
+      name_translations:
+        ro: Concluzii
+        en: Conclusions
+        hu: Következtetések
+      title_translations:
+        ro: Pagina Generalităţi -> Concluzii
+        en: Page Knowledge base -> Conclusions
+        hu: Oldal Tudásalap -> Következtetések
+      content_translations:
+        ro: Pagina Generalităţi -> Concluzii
+        en: Page Knowledge base -> Conclusions
+        hu: Oldal Tudásalap -> Következtetések
+  methodology:
+    intro:
+      order: 1
+      name_translations:
+        ro: Introducere
+        en: Introduction
+        hu: Bevezető
+      title_translations:
+        ro: Pagina Metodologie -> Introducere
+        en: Page Methodology -> Introduction
+        hu: Oldal Metodologia -> Bevezető
+      content_translations:
+        ro: Pagina Metodologie -> Introducere
+        en: Page Methodology -> Introduction
+        hu: Oldal Metodologia -> Bevezető
+    process_list:
+      order: 2
+      name_translations:
+        ro: Lista proceselor
+        en: Process list
+        hu: Folyamat lista
+      title_translations:
+        ro: Pagina Metodologie -> Lista proceselor
+        en: Page Methodology -> Process list
+        hu: Oldal Metodologia -> Folyamat lista
+      content_translations:
+        ro: Pagina Metodologie -> Lista proceselor
+        en: Page Methodology -> Process list
+        hu: Oldal Metodologia -> Folyamat lista
+    iso_9001_2000:
+      order: 3
+      name_translations:
+        ro: ISO 9000-2000
+        en: ISO 9000-2000
+        hu: ISO 9001-2000
+      title_translations:
+        ro: Pagina Metodologie -> ISO 9000-2000
+        en: Page Methodology -> ISO 9000-2000
+        hu: Oldal Metodologia -> ISO 9001-2000
+      content_translations:
+        ro: Pagina Metodologie -> ISO 9000-2000
+        en: Page Methodology -> ISO 9000-2000
+        hu: Oldal Metodologia -> ISO 9001-2000
+    ias_constraint:
+      order: 4
+      name_translations:
+        ro: Constrângere IAS
+        en: IAS Constraint
+        hu: Könyvelési megszorítások
+      title_translations:
+        ro: Pagina Metodologie -> Constrângere IAS
+        en: Page Methodology -> IAS Constraint
+        hu: Oldal Metodologia -> Könyvelési megszorítások
+      content_translations:
+        ro: Pagina Metodologie -> Constrângere IAS
+        en: Page Methodology -> IAS Constraint
+        hu: Oldal Metodologia -> Könyvelési megszorítások
+    hr_constraint:
+      order: 5
+      name_translations:
+        ro: Constrângere HR
+        en: IAS Constraint
+        hu: HR megszorítások
+      title_translations:
+        ro: Pagina Metodologie -> Constrângere HR
+        en: Page Methodology -> IAS Constraint
+        hu: Oldal Metodologia -> HR megszorítások
+      content_translations:
+        ro: Pagina Metodologie -> Constrângere HR
+        en: Page Methodology -> IAS Constraint
+        hu: Oldal Metodologia -> HR (Emberi erőforrások) megszorítások
+  structure:
+    intro:
+      order: 1
+      name_translations:
+        ro: Introducere
+        en: Introduction
+        hu: Bevezető
+      title_translations:
+        ro: Pagina Structura -> Introducere
+        en: Page Structure -> Introduction
+        hu: Oldal Struktúra -> Bevezető
+      content_translations:
+        ro: Pagina Structura -> Introducere
+        en: Page Structure -> Introduction
+        hu: Oldal Struktúra -> Bevezető
+    general:
+      order: 2
+      name_translations:
+        ro: General
+        en: General
+        hu: Általános funkció
+      title_translations:
+        ro: Pagina Structura -> General
+        en: Page Structure -> General function
+        hu: Oldal Struktúra -> Általános funkció
+      content_translations:
+        ro: Pagina Structura -> General
+        en: Page Structure -> General function
+        hu: Oldal Struktúra -> Általános funkció
+    research_development:
+      order: 3
+      name_translations:
+        ro: Cercetare-Dezvoltare
+        en: Research/Development
+        hu: Kutatás-Fejlesztés
+      title_translations:
+        ro: Pagina Structura -> Cercetare-Dezvoltare
+        en: Page Structure -> Research/Development
+        hu: Oldal Struktúra -> Kutatás-Fejlesztés
+      content_translations:
+        ro: Pagina Structura -> Cercetare-Dezvoltare
+        en: Page Structure -> Research/Development
+        hu: Oldal Struktúra -> Kutatás-Fejlesztés
+    commercial:
+      order: 4
+      name_translations:
+        ro: Comercial
+        en: Commercial
+        hu: Kereskedelmi funkció
+      title_translations:
+        ro: Pagina Structura -> Comercial
+        en: Page Structure -> Commercial
+        hu: Oldal Struktúra -> Kereskedelmi funkció
+      content_translations:
+        ro: Pagina Structura -> Comercial
+        en: Page Structure -> Commercial
+        hu: Oldal Struktúra -> Kereskedelmi funkció
+    production_services:
+      order: 5
+      name_translations:
+        ro: Producţie/Servicii
+        en: Production/Services
+        hu: Termelés/Szolgáltatás
+      title_translations:
+        ro: Pagina Structura -> Producţie/Servicii
+        en: Page Structure -> Production/Services
+        hu: Oldal Struktúra -> Termelés/Szolgáltatás
+      content_translations:
+        ro: Pagina Structura -> Producţie/Servicii
+        en: Page Structure -> Production/Services
+        hu: Oldal Struktúra -> Termelés/Szolgáltatás
+    financial_accounting:
+      order: 6
+      name_translations:
+        ro: Financiar/Contabil
+        en: Financial/Accounting
+        hu: Pénzügyi-Számviteli
+      title_translations:
+        ro: Pagina Structura -> Financiar/Contabil
+        en: Page Structure -> Financial/Accounting
+        hu: Oldal Struktúra -> Pénzügyi-Számviteli
+      content_translations:
+        ro: Pagina Structura -> Financiar/Contabil
+        en: Page Structure -> Financial/Accounting
+        hu: Oldal Struktúra -> Pénzügyi-Számviteli
+    human_resources:
+      order: 7
+      name_translations:
+        ro: Resurse umane
+        en: Human resources
+        hu: Emberi erőforrások
+      title_translations:
+        ro: Pagina Structura -> Resurse umane
+        en: Page Structure -> Human resources
+        hu: Oldal Struktúra -> Emberi erőforrások
+      content_translations:
+        ro: Pagina Structura -> Resurse umane
+        en: Page Structure -> Human resources
+        hu: Oldal Struktúra -> Emberi erőforrások
+    system_admin:
+      order: 8
+      name_translations:
+        ro: Administrare TrustSys
+        en: Admin Trustsys
+        hu: Rendszergazda
+      title_translations:
+        ro: Pagina Structura -> Administrare TrustSys
+        en: Page Structure -> Admin Trustsys
+        hu: Oldal Struktúra -> Rendszergazdai feladatok
+      content_translations:
+        ro: Pagina Structura -> Administrare TrustSys
+        en: Page Structure -> Admin Trustsys
+        hu: Oldal Struktúra -> Rendszergazdai feladatok
+  help:
+    intro:
+      order: 1
+      name_translations:
+        ro: Introducere
+        en: Introduction
+        hu: Bevezető
+      title_translations:
+        ro: Pagina Help -> Introducere
+        en: Page Help -> Introduction
+        hu: Oldal Help -> Bevezető
+      content_translations:
+        ro: Pagina Help -> Introducere
+        en: Page Help -> Introduction
+        hu: Oldal Help -> Bevezető
+    system_help:
+      order: 2
+      name_translations:
+        ro: TrustSys
+        en: Trustsys
+        hu: Trustsys
+      title_translations:
+        ro: Pagina Help -> Trustsys
+        en: Page Help -> Trustsys
+        hu: Oldal Help -> Trustsys
+      content_translations:
+        ro: Pagina Help -> Trustsys
+        en: Page Help -> Trustsys
+        hu: Oldal Help -> Trustsys
+    chrome_help:
+      order: 3
+      name_translations:
+        ro: Google Chrome
+        en: Google Chrome
+        hu: Google Chrome
+      title_translations:
+        ro: Pagina Help -> Google Chrome
+        en: Page Help -> Google Chrome
+        hu: Oldal Help -> Google Chrome
+      content_translations:
+        ro: Pagina Help -> Google Chrome
+        en: Page Help -> Google Chrome
+        hu: Oldal Help -> Google Chrome
+trst_system:
+  my_page:
+    daily_tasks:
+      order: 1
+      name_translations:
+        ro: Sarcini zilnice
+        en: Daily tasks
+        hu: Napi feladatok
+      title_translations:
+        ro: Pagina Pagina mea ->
+        en: Page My page -> Daily tasks
+        hu: Oldal Saját oldal -> Napi feladatok
+      content_translations:
+        ro: Pagina Pagina mea ->
+        en: Page My page -> Daily tasks
+        hu: Oldal Saját oldal -> Napi feladatok
+    jobs_sheet:
+      order: 2
+      name_translations:
+        ro: Fişa postului
+        en: Jobs sheet
+        hu: Munkahely adatlap
+      title_translations:
+        ro: Pagina Pagina mea -> Fişa postului
+        en: Page My page -> Jobs sheet
+        hu: Oldal Saját oldal -> Munkahely adatlap
+      content_translations:
+        ro: Pagina Pagina mea -> Fişa postului
+        en: Page My page -> Jobs sheet
+        hu: Oldal Saját oldal -> Munkahely adatlap
+    system_procedures:
+      order: 3
+      name_translations:
+        ro: Procedurile de sistem
+        en: System procedures
+        hu: Rendszer procedurák
+      title_translations:
+        ro: Pagina Pagina mea -> Procedurile de sistem
+        en: Page My page -> System procedures
+        hu: Oldal Saját oldal -> Rendszer procedurák
+      content_translations:
+        ro: Pagina Pagina mea -> Procedurile de sistem
+        en: Page My page -> System procedures
+        hu: Oldal Saját oldal -> Rendszer procedurák
+  modules:
+    db:
+      order: 1
+      name_translations:
+        ro: Baza de date
+        en: Database
+        hu: Adatbázis
+      title_translations:
+        ro: Pagina Module accesibile ->  Baza de date
+        en: Page Modules -> Database
+        hu: Oldal Elérhető modulok -> Adatbázis
+      content_translations:
+        ro: Pagina Module accesibile ->  Baza de date
+        en: Page Modules -> Database
+        hu: Oldal Elérhető modulok -> Adatbázis
+    monthly:
+      order: 2
+      name_translations:
+        ro: Închidere lună
+        en: Monthly tasks
+        hu: Oldal Elérhető modulok -> Hónapzárás
+      title_translations:
+        ro: Pagina Module accesibile -> Închidere lună
+        en: Page Modules -> Monthly tasks
+        hu: Hónapzárás
+      content_translations:
+        ro: Pagina Module accesibile -> Închidere lună
+        en: Page Modules -> Monthly tasks
+        hu: Oldal Elérhető modulok -> Hónapzárás
+  sys_admin:
+    pages:
+      order: 1
+      name_translations:
+        ro: Pagini
+        en: Pages
+        hu: Oldalak
+      title_translations:
+        ro: Pagina TrustSys admin -> Pagini
+        en: Page TrustSys admin -> Pages
+        hu: Oldal Rendszergazda -> Oldalak
+      content_translations:
+        ro: Pagina TrustSys admin -> Pagini
+        en: Page TrustSys admin -> Pages
+        hu: Oldal Rendszergazda -> Oldalak
+    tasks:
+      order: 2
+      name_translations:
+        ro: Sarcini
+        en: Tasks
+        hu: Feladatok
+      title_translations:
+        ro: Pagina TrustSys admin -> Sarcini
+        en: Page TrustSys admin -> Tasks
+        hu: Oldal Rendszergazda -> Feladatok
+      content_translations:
+        ro: Pagina TrustSys admin -> Sarcini
+        en: Page TrustSys admin -> Tasks
+        hu: Oldal Rendszergazda -> Feladatok
+    users:
+      order: 3
+      name_translations:
+        ro: Utilizatori
+        en: Users
+        hu: Felhasználok
+      title_translations:
+        ro: Pagina TrustSys admin -> Utilizatori
+        en: Page TrustSys admin -> Users
+        hu: Oldal Rendszergazda -> Felhasználok
+      content_translations:
+        ro: Pagina TrustSys admin -> Utilizatori
+        en: Page TrustSys admin -> Users
+        hu: Oldal Rendszergazda -> Felhasználok
+    web:
+      order: 4
+      name_translations:
+        ro: Pagini web
+        en: Web pages
+        hu: Web oldalak
+      title_translations:
+        ro: Pagina TrustSys admin ->  Pagini web
+        en: Page TrustSys admin -> Web pages
+        hu: Oldal Rendszergazda -> Web oldalak
+      content_translations:
+        ro: Pagina TrustSys admin -> Pagini web
+        en: Page TrustSys admin -> Web pages
+        hu: Oldal Rendszergazda -> Web oldalak
