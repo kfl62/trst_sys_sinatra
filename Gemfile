@@ -1,18 +1,20 @@
 source :rubygems
 
 gem 'rake'
-gem 'sinatra', :require => "sinatra/base"
-gem 'sinatra-flash', :require => "sinatra/flash"
-gem 'rack-rewrite', :require => "rack/rewrite"
+gem 'sinatra', require: "sinatra/base"
+gem 'sinatra-flash', require: "sinatra/flash"
+gem 'rack-rewrite', require: "rack/rewrite"
 
 # Component requirements
 gem 'coffee-script'
-gem 'bcrypt-ruby', :require => "bcrypt"
+gem 'bcrypt-ruby', require: "bcrypt"
 gem 'compass'
 gem 'haml'
 gem 'mongoid'
 gem 'rdiscount'
 gem 'prawn'
+gem 'rmagick'
+gem 'gruff', github: 'topfunky/gruff'
 
 # Development requirements
 group :development do
