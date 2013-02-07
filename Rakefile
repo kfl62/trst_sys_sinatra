@@ -49,24 +49,23 @@ namespace :db do
     end
   end
   desc "Statistics for storekeepers"
-  task :storekeeper_stats, :user, :y, :m, :daily do |t, args|
+  task :storekeeper_stats, :user, :y, :m do |t, args|
     require './config/boot'
     user = Wstm::User.find_by(login_name: /#{args[:user]}/)
     daily= args[:daily] || "false"
-    data = user.work_stats(args[:y].to_i,args[:m].to_i, daily.to_bool) rescue nil
+    data = user.work_stats(args[:y].to_i,args[:m].to_i) rescue nil
     if user
       if user.has_unit?
         puts "\nSituația lunară #{I18n.localize(Date.new(args[:y].to_i,args[:m].to_i,1), format: "%B, %Y")}, Punct de colectare: #{user.unit.name[1]}"
         puts "\n"
-        puts "#{user.name} - Zile lucrate #{data[0]} - Achiziții #{data[1]} - Media #{data[2]}"
+        puts "#{user.name} - Zile lucrate #{data.wdy} - Achiziții #{data.out} - Media #{data.avg}"
         puts "\n"
-        if daily.to_bool
-          puts "Achizițiile zilnice: \n#{"Data".center(10)} | #{"App".center(4)} | #{"Achitat".center(8)} | #{"Media".center(6)}"
-          data[3].each_pair do |k,v|
-            puts "#{k.center(10)} | #{v[0].to_s.rjust(4)} | #{("%0.2f" % v[1]).rjust(8)} | #{("%0.2f" % (v[1]/v[0])).rjust(6)}"
-          end
-          puts "\n"
+        puts "Achizițiile zilnice: \n#{"Data".center(10)} | #{"App".center(4)} | #{"Achitat".center(8)} | #{"Media".center(6)}"
+        puts "\n"
+        data.day.each_pair do |k,v|
+          puts "#{k.center(10)} | #{v[0].to_s.rjust(4)} | #{("%0.2f" % v[1]).rjust(8)} | #{("%0.2f" % (v[1]/v[0])).rjust(6)}"
         end
+        puts "\n"
       else
         puts "\nUtilizatorul nu este gestionar la nici un Punct de lucru!"
         puts "\n"
