@@ -21,6 +21,7 @@ module Trst
       if user = User.authenticate(params[:name], params[:password])
         session[:user] = user.id
         user.set(:last_login, Time.now)
+        user.login if user.methods.include?(:login)
         flash[:msg] = {:msg => {:txt => t('msg.login.start'), :class => "loading"}}
         redirect "#{lp}/sys"
       else
@@ -30,6 +31,8 @@ module Trst
     end
     # Logout
     get '/logout' do
+      user = User.find(session[:user])
+      user.logout if user.methods.include?(:logout)
       session[:user] = nil
       flash[:msg] = {:msg => {:txt =>t('msg.login.end'), :class => "loading"}}
       redirect "#{lp}/"
