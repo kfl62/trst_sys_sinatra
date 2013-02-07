@@ -13,8 +13,9 @@ gem 'haml'
 gem 'mongoid'
 gem 'rdiscount'
 gem 'prawn'
-gem 'rmagick'
-gem 'gruff', github: 'topfunky/gruff'
+# Disable gruff for now (deploy problem wrong version of ImageMagick on my server)
+#gem 'rmagick'
+#gem 'gruff', github: 'topfunky/gruff'
 
 # Development requirements
 group :development do
