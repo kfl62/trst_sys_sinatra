@@ -51,7 +51,5 @@ define ['/javascripts/libs/jquery.fileDownload.js','libs/trst_msg','system/trst_
       $helpClose = $('#content').on 'click', '#xhr_content p.close', ()->
         $('#xhr_content').load "/sys/page_#{Trst.lst.page_id}"
         return
-      $(window).unload ()->
-        $.ajax({url: "/utils/logout",async: false})
       $log('Trst.init() OK...')
   Trst
