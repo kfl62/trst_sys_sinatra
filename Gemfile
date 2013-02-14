@@ -16,6 +16,7 @@ gem 'prawn'
 # Disable gruff for now (deploy problem wrong version of ImageMagick on my server)
 #gem 'rmagick'
 #gem 'gruff', github: 'topfunky/gruff'
+gem 'googlecharts'
 
 # Development requirements
 group :development do
