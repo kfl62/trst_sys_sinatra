@@ -7,6 +7,9 @@ require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 require 'ostruct'
 Bundler.require(:default, TRST_ENV)
+# Haml :hyphenate_data_attrs defaults to true since v.4.0.0
+# @todo rewrite code, mostly js, and 118n related
+Haml::Options.defaults[:hyphenate_data_attrs] = false
 # Load libraries
 Dir.glob(File.join(TRST_ROOT, 'lib','**','*.rb')).each{|r| require r}
 # Load configurations
