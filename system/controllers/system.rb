@@ -64,7 +64,7 @@ module Trst
           haml file, layout: false
         else
           file_name = params[:fn] ? params[:fn] : @object.file_name
-          headers({'Content-Type' => 'application/pdf',
+          headers({#'Content-Type' => 'application/pdf',
                    'Content-Description' => 'File Transfer',
                    'Content-Transfer-Encoding' => 'binary',
                    'Content-Disposition' => "attachment;filename=\"#{file_name}.pdf\"",
