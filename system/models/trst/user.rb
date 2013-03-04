@@ -25,6 +25,7 @@ module Trst
     validates_length_of     :password,  :within => 4..40, :if => :password_required
 
     before_save :encrypt_password, :if => :password_required
+    before_save :handle_access_group
 
     class << self
       # Authentication based on name and password
@@ -57,6 +58,7 @@ module Trst
       self.access_lvl < 4 || self.access_grp.include?('admin')
     end
     # @todo
+    # Document this method
     def view_tasks
       task_ids.each_with_object([]){|id,a| t = tasks.find(id); a << [t.id, t.name]}
     end
@@ -74,6 +76,11 @@ module Trst
     # @return [Boolean] `false` just for safety :)
     def method_missing(m, *args)
       return false
+    end
+    # @todo
+    # Document this method
+    def handle_access_group
+      self.access_grp = access_grp.split(',') if access_grp.is_a?(String)
     end
   end
 end
