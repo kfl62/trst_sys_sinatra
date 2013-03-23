@@ -7,7 +7,10 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
         @height = $(window).height()
         if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
       closeDesk: (cls = true)->
-        $('#deskDialog').dialog('close') if cls
+        if cls
+          $('#deskDialog').dialog('close')
+          $('[class^="select2"]').remove()
+          $('[class^="ui-datepicker"]').remove()
         return
       createDesk: (data)->
         $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
@@ -70,7 +73,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               $desk  = $('#deskDialog')
               $title = Trst.i18n.title[Trst.desk.hdo.dialog][Trst.desk.hdo.js_ext] || Trst.i18n.title[Trst.desk.hdo.dialog]['main']
               $tdata = Trst.desk.hdo.title_data || Trst.desk.hdo.model_name
-              $desk.dialog title: $title.replace('%{data}',$tdata)
+              $desk.dialog title: $("<span>#{$title.replace('%{data}',$tdata)}</span>").text()
               $desk.dialog('open')
               $(".ui-widget-overlay").css('height',Trst.desk.height)
               Trst.desk.buttons.init() if $('button').length
