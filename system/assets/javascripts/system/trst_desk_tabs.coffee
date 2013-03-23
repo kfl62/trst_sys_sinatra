@@ -12,8 +12,8 @@ define () ->
           $('#deskDialog thead').after($tabsDefs)
           $tabsDefs.tabs
             panelTemplate: '<tbody></tbody>'
-            selected: if Trst.lst.tab then Trst.lst.tab else 0
-            show: (event,ui) ->
+            active: if Trst.lst.tab then Trst.lst.tab else 0
+            create: (event,ui) ->
               $('input.focus').focus()
               Trst.lst.removeItem 'tab'
               return
