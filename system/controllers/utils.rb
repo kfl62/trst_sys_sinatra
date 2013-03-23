@@ -21,7 +21,7 @@ module Trst
       if user = User.authenticate(params[:name], params[:password])
         session[:user] = user.id
         user.set(:last_login, Time.now)
-        user.login if user.methods.include?(:login)
+        user.login(request.ip) if user.methods.include?(:login)
         flash[:msg] = {:msg => {:txt => t('msg.login.start'), :class => "loading"}}
         redirect "#{lp}/sys"
       else
