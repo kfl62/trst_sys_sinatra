@@ -299,8 +299,12 @@ module Trst
       else
         page = Trst::Book.page(id) rescue Trst::Book.chapter(id)
         path = File.join('pages',I18n.locale.to_s,page.slug)
-        file = File.join(Trst.views,'system',"#{path}.md")
-        tmpl = File.exists?(file) ? path.to_sym : page.content
+        file = false
+        ['public', 'system'].each do |controller|
+          f = File.join(Trst.views,controller,"#{path}.md")
+          file = File.exists?(f) ? f : false unless file
+        end
+        tmpl = file != false ? File.read(file) : page.content
       end
       tmpl
     end
