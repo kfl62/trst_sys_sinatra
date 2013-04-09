@@ -19,7 +19,7 @@ a tranzacţiilor cît şi la toate nivelele de conducere
 
 ######Notă:
 >Această parte (publică, accesibilă ca şi utilizator neautentificat) a site-lui
-se referă la produsul informatic **TrstSys** şi este o prezentare a acestuia,
+se referă la produsul informatic **TrustSys** şi este o prezentare a acestuia,
 respectiv a scopului urmărit de creatori.
 
 >Consider că prezentarea suportului teoretic **Generalităţi** a **Metodologiei** ce stă
