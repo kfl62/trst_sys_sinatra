@@ -34,6 +34,7 @@ system/models/*
 !system/models/trst
 system/views/public/*
 !system/views/public/trst
+!system/views/public/pages
 system/views/system/asrv
 system/views/system/demo
 system/views/system/clns
