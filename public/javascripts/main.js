@@ -1,6 +1,6 @@
 require.config({
   paths: {
-    'jquery': 'http://code.jquery.com/jquery-1.9.1.min',
+    'jquery': 'http://code.jquery.com/jquery-2.0.0.min',
     'jquery-ui': 'http://code.jquery.com/ui/1.10.2/jquery-ui.min',
     'async': 'plugins/async'
   },
