@@ -5,7 +5,6 @@
 #   ...
 # @todo document this model
 module Trst
-  VERSION = "0.1.0"
   @@opt = OpenStruct.new
   class << self
     # @todo
