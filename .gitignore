@@ -17,6 +17,11 @@ public/help/*
 public/stylesheets/*
 !public/stylesheets/trst
 !public/stylesheets/fonts
+public/javascripts/asrv
+public/javascripts/clns
+public/javascripts/demo
+public/javascripts/htls
+public/javascripts/wstm
 system/assets/stylesheets/*
 !system/assets/stylesheets/trst
 system/assets/javascripts/asrv
