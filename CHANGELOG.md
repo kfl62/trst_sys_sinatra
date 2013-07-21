@@ -1,3 +1,9 @@
+## v0.2.1
+
+release date: **2013-07-21**
+
+* hotfix v0.2.1: mondodb configuration issue in production env.
+
 ## v0.2.0
 
 release date: **2013-07-20**

@@ -67,6 +67,11 @@ test:
       database: <%= Trst.firm.db_test %>
       hosts:
         - localhost:27017
+      options:
+        consistency: :strong
+  options:
+    preload_models: true
+    raise_not_found_error: false
 
 production:
   sessions:
@@ -74,3 +79,8 @@ production:
       database: <%= Trst.firm.db_devel %>
       hosts:
         - localhost:27017
+      options:
+        consistency: :strong
+  options:
+    preload_models: true
+    raise_not_found_error: false
