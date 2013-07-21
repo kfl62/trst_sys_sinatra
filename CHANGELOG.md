@@ -1,8 +1,14 @@
+## v0.2.2
+
+release date: **2013-07-21**
+
+* hotfix v0.2.2: typo in CHANGELOG :)
+
 ## v0.2.1
 
 release date: **2013-07-21**
 
-* hotfix v0.2.1: mondodb configuration issue in production env.
+* hotfix v0.2.1: mongoid configuration issue in production env.
 
 ## v0.2.0
 
