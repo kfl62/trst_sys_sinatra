@@ -27,11 +27,11 @@ module Trst
 
     get '/*' do |page|
       method, id = params[:splat][0].split('_')
-      @content   = page_content(id)
-      begin
+      if (Moped::BSON::ObjectId.from_string(id) rescue false)
+        @content   = page_content(id)
         markdown @content
-      rescue
-        markdown @content,views: File.join(Trst.views, 'public')
+      else
+        redirect "#{lp}/"
       end
     end
     ##
