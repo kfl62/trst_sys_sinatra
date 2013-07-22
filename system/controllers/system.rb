@@ -156,8 +156,12 @@ module Trst
     # @todo Document this route
     get '/*' do
       method, id = params[:splat][0].split('_')
-      @content   = page_content(id)
-      markdown @content
+      if (Moped::BSON::ObjectId.from_string(id) rescue false)
+        @content   = page_content(id)
+        markdown @content
+      else
+        redirect "#{lp}/"
+      end
     end
   end # System
 end # Trst
