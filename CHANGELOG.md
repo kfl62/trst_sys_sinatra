@@ -1,3 +1,11 @@
+## v0.2.3
+
+release date: **2013-07-22**
+
+* hotfix v0.2.3: avoid `Moped::Errors::InvalidObjectId` errors in log files.
+
+* Note: avoid robots.txt, favicon.ico 404 errors [nginx config file][1]
+
 ## v0.2.2
 
 release date: **2013-07-21**
@@ -36,3 +44,5 @@ release date: **2013-07-18**
 * Added **CHANGELOG**
 
 * Move version from `config/trst.rb` to `lib/version.rb`
+
+[1]: https://gist.github.com/kfl62/6049099
