@@ -1,3 +1,11 @@
+## v0.2.4
+
+release date: **2013-07-24**
+
+* patched `/public/javascripts/main.js` [select2 issue 1246][2]
+
+* upgrade select2 library to v3.4.1
+
 ## v0.2.3
 
 release date: **2013-07-22**
@@ -46,3 +54,4 @@ release date: **2013-07-18**
 * Move version from `config/trst.rb` to `lib/version.rb`
 
 [1]: https://gist.github.com/kfl62/6049099
+[2]: https://github.com/ivaynberg/select2/issues/1246 "Select2 search broken inside jQuery UI 1.10.x modal Dialog"

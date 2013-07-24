@@ -1,5 +1,4 @@
 (function() {
-
   define(['/javascripts/libs/jquery.fileDownload.js', 'libs/trst_msg', 'system/trst_desk'], function() {
     Storage.prototype.setObject = function(key, value) {
       return this.setItem(key, JSON.stringify(value));
@@ -83,6 +82,9 @@
         $helpClose = $('#content').on('click', '#xhr_content p.close', function() {
           $('#xhr_content').load("/sys/page_" + Trst.lst.page_id);
         });
+        $.ui.dialog.prototype._allowInteraction = function(e) {
+          return !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-drop').length;
+        };
         return $log('Trst.init() OK...');
       }
     });
