@@ -190,10 +190,11 @@ module Trst
     end
     # @todo
     def value_for(model,attribute,options = {})
-      order,style = options.values_at(:order,:style)
+      order,style,precision = options.values_at(:order,:style,:precision)
+      precision ||= 2
       value = guess_value model,attribute,options
       value = '-' if value.blank?
-      value = "%.2f" % value if value.is_a?(Float)
+      value = "%.#{precision}f" % value if value.is_a?(Float)
       style ||= 'value'
       unless (['name','stats','um','pu','qu','val'] & style.split(' ')).length > 0
         style =  attribute =~ /^id$|_at/ ? "ui-state-highlight #{style}" : "ui-state-default #{style}"
