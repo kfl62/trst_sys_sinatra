@@ -1,3 +1,9 @@
+## v0.2.5
+release date: **2013-11-12**
+
+* `trst_helpers.rb` show values with precision
+* controller `system.rb` handle `..\partial\..` routes
+
 ## v0.2.4
 
 release date: **2013-07-24**
