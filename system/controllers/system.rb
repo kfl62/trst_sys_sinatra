@@ -43,6 +43,10 @@ module Trst
       haml @content, layout: false
     end
     # @todo Document this route
+    get '/partial/:m/:f/:v' do |m,f,v|
+      haml :"#{m}/#{f}/#{v}", layout: false
+    end
+    # @todo Document this route
     post '/session/:key/:value' do |k,v|
       session[k.to_sym] = (v == 'null') ? nil : v
     end
