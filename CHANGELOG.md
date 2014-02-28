@@ -1,3 +1,8 @@
+## v0.2.6
+release date: **2014-02-28**
+
+* bundle update related changes
+
 ## v0.2.5
 release date: **2013-11-12**
 
