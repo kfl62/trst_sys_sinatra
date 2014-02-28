@@ -23,6 +23,7 @@ end
 require "i18n/backend/fallbacks"
 I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
 I18n.load_path += Dir.glob(File.join(TRST_ROOT, 'system','i18n','**','*','*.yml'))
+I18n.enforce_available_locales = false
 I18n.default_locale = :ro
 I18n.fallbacks[:ro]=[:ro,:en]
 # Sintra default settings
