@@ -13,6 +13,7 @@ gem 'haml'
 gem 'mongoid'
 gem 'rdiscount'
 gem 'prawn'
+gem 'prawn-templates'
 # Disable gruff for now (deploy problem wrong version of ImageMagick on my server)
 #gem 'rmagick'
 #gem 'gruff', github: 'topfunky/gruff'
