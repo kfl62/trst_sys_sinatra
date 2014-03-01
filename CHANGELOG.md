@@ -1,3 +1,8 @@
+## v0.2.7
+release date: **2014-03-01**
+
+* pdf reports, no file name bug fixed
+
 ## v0.2.6
 release date: **2014-02-28**
 
