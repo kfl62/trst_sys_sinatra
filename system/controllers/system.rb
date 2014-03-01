@@ -67,7 +67,7 @@ module Trst
         if params['report']
           haml file, layout: false
         else
-          file_name = params[:fn] ? params[:fn] : @object.file_name
+          file_name = params[:fn] ? params[:fn] : (@object.file_name rescue 'print')
           headers({#'Content-Type' => 'application/pdf',
                    'Content-Description' => 'File Transfer',
                    'Content-Transfer-Encoding' => 'binary',
