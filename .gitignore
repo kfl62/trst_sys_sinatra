@@ -21,6 +21,7 @@ public/javascripts/asrv
 public/javascripts/clns
 public/javascripts/demo
 public/javascripts/htls
+public/javascripts/trds
 public/javascripts/wstm
 system/assets/stylesheets/*
 !system/assets/stylesheets/trst
@@ -28,12 +29,14 @@ system/assets/javascripts/asrv
 system/assets/javascripts/clns
 system/assets/javascripts/demo
 system/assets/javascripts/htls
+system/assets/javascripts/trds
 system/assets/javascripts/wstm
 system/controllers/public_*
 system/i18n/ro/asrv
 system/i18n/ro/clns
 system/i18n/ro/demo
 system/i18n/ro/htls
+system/i18n/ro/trds
 system/i18n/ro/wstm
 system/models/*
 !system/models/trst
@@ -44,5 +47,6 @@ system/views/system/asrv
 system/views/system/demo
 system/views/system/clns
 system/views/system/htls
+system/views/system/trds
 system/views/system/wstm
 src/*

@@ -1,3 +1,8 @@
+## v0.2.8
+release date: **2014-03-31**
+
+* Add new module `trds`, Gemfile `bcrypt` gem related
+
 ## v0.2.7
 release date: **2014-03-01**
 
