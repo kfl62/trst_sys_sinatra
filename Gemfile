@@ -7,7 +7,7 @@ gem 'rack-rewrite', require: "rack/rewrite"
 
 # Component requirements
 gem 'coffee-script'
-gem 'bcrypt-ruby', require: "bcrypt"
+gem 'bcrypt'
 gem 'compass'
 gem 'haml'
 gem 'mongoid'
