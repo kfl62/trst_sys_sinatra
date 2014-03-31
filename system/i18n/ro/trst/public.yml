@@ -19,3 +19,5 @@ ro:
     << : *trst_public
   wstm:
     << : *trst_public
+  trds:
+    << : *trst_public

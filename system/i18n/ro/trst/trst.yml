@@ -167,3 +167,5 @@ ro:
     << : *trst
   wstm:
     << : *trst
+  trds:
+    << : *trst

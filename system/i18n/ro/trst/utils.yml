@@ -18,3 +18,5 @@ ro:
     << : *trst_utils
   wstm:
     << : *trst_utils
+  trds:
+    << : *trst_utils

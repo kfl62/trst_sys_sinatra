@@ -49,3 +49,5 @@ ro:
     << : *trst_system
   wstm:
     << : *trst_system
+  trds:
+    << : *trst_system
