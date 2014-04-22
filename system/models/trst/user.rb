@@ -9,10 +9,11 @@ module Trst
 
     field :login_name,      type: String
     field :name,            type: String
+    field :id_pn,           type: String,        default: '123456789012'
     field :email,           type: String
     field :hashed_password, type: String
     field :last_login,      type: Time
-    field :access_lvl,      type: Integer,       default: 3
+    field :access_lvl,      type: Integer,       default: 10
     field :access_grp,      type: Array,         default: ['public']
 
     has_and_belongs_to_many :tasks,     class_name: 'Trst::Task', inverse_of: :users

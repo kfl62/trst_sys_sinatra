@@ -1,3 +1,8 @@
+## v0.2.9
+release date: **2014-04-22**
+
+* model `Trst::User` new field `id_pn` and related views... 
+
 ## v0.2.8
 release date: **2014-03-31**
 

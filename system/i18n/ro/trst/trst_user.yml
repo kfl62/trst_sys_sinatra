@@ -6,6 +6,7 @@ ro:
         id: Id system
         login_name: Utilizator
         name: Nume
+        id_pn: CNP
         email: Email
         access_lvl: Acces - Nivel
         access_grp: Acces - Grupă
