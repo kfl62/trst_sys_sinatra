@@ -1,3 +1,8 @@
+## v0.2.10
+release date: **2014-04-24**
+
+* models `Trst::Book|Page|Task` relations nil bugfix 
+
 ## v0.2.9
 release date: **2014-04-22**
 

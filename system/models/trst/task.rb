@@ -27,7 +27,7 @@ module Trst
     end
     # @todo
     def view_users
-      user_ids.each_with_object([]){|id,a| u = users.find(id); a << [u.id, u.login_name]}
+      user_ids.each_with_object([]){|id,a| u = users.find(id); a << [u.id, u.login_name] if u}
     end
   end # Task
 end # Trst
