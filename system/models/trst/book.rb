@@ -131,7 +131,7 @@ module Trst
     end
     # @todo Document this method
     def view_tasks
-      task_ids.each_with_object([]){|id,a| t = tasks.find(id); a << [t.id, t.name]}
+      task_ids.each_with_object([]){|id,a| t = tasks.find(id); a << [t.id, t.name] if t}
     end
   end # Page
 
