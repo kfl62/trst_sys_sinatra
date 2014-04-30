@@ -1,12 +1,18 @@
+## v0.2.11
+release date: **2014-04-30**
+
+* rename `lib.version.rb` :(
+* `.gitignore` ignore modules CHANGELOG, version
+
 ## v0.2.10
 release date: **2014-04-24**
 
-* models `Trst::Book|Page|Task` relations nil bugfix 
+* models `Trst::Book|Page|Task` relations nil bugfix
 
 ## v0.2.9
 release date: **2014-04-22**
 
-* model `Trst::User` new field `id_pn` and related views... 
+* model `Trst::User` new field `id_pn` and related views...
 
 ## v0.2.8
 release date: **2014-03-31**
