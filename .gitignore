@@ -7,8 +7,10 @@ log/*
 !log/.gitkeep
 !tmp/restart.txt
 Gemfile.lock
+CHANGELOG_*
 config/*.yml
 !config/mongoid.yml
+lib/version_*
 public/api
 public/images/*
 !public/images/trst
