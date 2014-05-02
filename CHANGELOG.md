@@ -1,3 +1,8 @@
+## v0.2.12
+release date: **2014-05-02**
+
+* session expire in 12 hours, and related...
+
 ## v0.2.11
 release date: **2014-04-30**
 
