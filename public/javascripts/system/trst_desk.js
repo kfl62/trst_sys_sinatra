@@ -1,5 +1,4 @@
 (function() {
-
   define(['jquery-ui', 'system/trst_desk_buttons', 'system/trst_desk_select', 'system/trst_desk_tabs'], function() {
     $.extend(true, Trst, {
       desk: {
@@ -117,6 +116,9 @@
                   Trst.module.desk.init();
                 }
               } else {
+                alert(Trst.i18n.msg.session.relogin);
+                Trst.lst.clear();
+                window.location = '/';
                 return $log('Initialize error...');
               }
             } else {
