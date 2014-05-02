@@ -44,7 +44,9 @@ module Trst
   # @todo document this method
   def self.server
     Rack::Builder.new do
-      use Rack::Session::Cookie, secret: '14743354a2e77700a28a2d0aa8bebee57c42452713d115232b9abafc5dae9a12'
+      use Rack::Session::Cookie,
+        expire_after: 12*60*60,
+        secret: '14743354a2e77700a28a2d0aa8bebee57c42452713d115232b9abafc5dae9a12'
       use Rack::Rewrite do
         rewrite %r{^/\w{2}/utils}, '/utils'
         rewrite %r{^/\w{2}/sys},  '/sys'
