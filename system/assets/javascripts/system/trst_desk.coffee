@@ -82,6 +82,9 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               Trst.module.desk.init() if Trst.module?
               return
             else
+              alert Trst.i18n.msg.session.relogin
+              Trst.lst.clear()
+              window.location = '/'
               $log 'Initialize error...'
           else
             if Trst.lst.r_path
