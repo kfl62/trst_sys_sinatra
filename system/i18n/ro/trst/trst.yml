@@ -157,6 +157,8 @@ ro:
       select:
         error: |
           Nu aţi ales nici un(o) &raquo;%{data}&laquo;!
+      session:
+        relogin: "Eroare inițializare! ...\n\n\tÎncercați un nou: Login"
   demo:
     << : *trst
   asrv:
