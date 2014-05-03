@@ -1,3 +1,9 @@
+## v0.2.13
+release date: **2014-05-03**
+
+* check clients system date before login
+* keep error messages visible for 5s (2s)
+
 ## v0.2.12
 release date: **2014-05-02**
 
