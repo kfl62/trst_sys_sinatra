@@ -4,12 +4,17 @@
   define(function() {
     var sysMsg;
     sysMsg = $.subscribe('xhrMsg', function(event, what, kind, data) {
-      var $msg, $xhr_msg;
+      var $msg, $xhr_msg, d;
       $xhr_msg = $('#xhr_msg');
       $msg = eval("Trst.i18n." + what);
       if (typeof $msg === 'string') {
         $msg = $msg.replace('%{data}', data);
-        $xhr_msg.html($msg).stop(true, true).addClass(kind).fadeIn(0).delay(2000).fadeOut(1000, 'linear', function() {
+        if (kind === 'error') {
+          d = 5000;
+        } else {
+          d = 2000;
+        }
+        $xhr_msg.html($msg).stop(true, true).addClass(kind).fadeIn(0).delay(d).fadeOut(1000, 'linear', function() {
           $(this).removeAttr('class');
         });
       } else {
@@ -23,7 +28,12 @@
           },
           dataType: 'json'
         }).done(function(data) {
-          $xhr_msg.html(data.msg.txt).stop(true, true).addClass(data.msg["class"]).fadeIn(0).delay(2000).fadeOut(1000, 'linear', function() {
+          if (data.msg["class"] === 'error') {
+            d = 5000;
+          } else {
+            d = 2000;
+          }
+          $xhr_msg.html(data.msg.txt).stop(true, true).addClass(data.msg["class"]).fadeIn(0).delay(d).fadeOut(1000, 'linear', function() {
             $(this).removeAttr('class');
           });
         });
@@ -44,7 +54,13 @@
         }).html(msg).addClass('loading').fadeIn();
       },
       msgHide: function() {
-        $('#xhr_msg').stop(true, true).fadeOut(500, 'linear', function() {
+        var d;
+        if ($('#xhr_msg').hasClass('error')) {
+          d = 5000;
+        } else {
+          d = 0;
+        }
+        $('#xhr_msg').stop(true, true).delay(d).fadeOut(500, 'linear', function() {
           $(this).removeAttr('class');
         });
       }
