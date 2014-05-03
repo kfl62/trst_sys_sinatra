@@ -1,5 +1,4 @@
 (function() {
-
   define(['jquery-ui'], function() {
     $.extend(true, Trst, {
       login: function(node) {
@@ -14,6 +13,7 @@
               }
             });
           });
+          $('.cdate').val(new Date().toISOString().slice(0, 10));
           return $('input').first().focus();
         };
         $login = $('<div id="loginDialog"></div>');
