@@ -99,6 +99,8 @@ ro:
           La revedere!
         error: |
           Hmmm... Nume/Parolă greşită
+        error_date: |
+          Data din calculatorul Dvs. este greșit! Setați data și reveniți :)
         required: |
           Frumoasă încercare, dar este nevoie >Autentificare<
       show:
