@@ -13,7 +13,7 @@
               }
             });
           });
-          $('.cdate').val(new Date().toISOString().slice(0, 10));
+          $('.cdate').val($.datepicker.formatDate('yy-mm-dd', new Date()));
           return $('input').first().focus();
         };
         $login = $('<div id="loginDialog"></div>');
