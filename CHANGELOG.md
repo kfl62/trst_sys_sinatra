@@ -1,3 +1,8 @@
+## v0.2.14
+release date: **2014-05-26**
+
+* fix [issue #3][#3]
+
 ## v0.2.13
 release date: **2014-05-03**
 
@@ -103,3 +108,43 @@ release date: **2013-07-18**
 
 [1]: https://gist.github.com/kfl62/6049099
 [2]: https://github.com/ivaynberg/select2/issues/1246 "Select2 search broken inside jQuery UI 1.10.x modal Dialog"
+[#1]: https://github.com/kfl62/trst_sys_sinatra/issues/1
+[#2]: https://github.com/kfl62/trst_sys_sinatra/issues/2
+[#3]: https://github.com/kfl62/trst_sys_sinatra/issues/3
+[#4]: https://github.com/kfl62/trst_sys_sinatra/issues/4
+[#5]: https://github.com/kfl62/trst_sys_sinatra/issues/5
+[#6]: https://github.com/kfl62/trst_sys_sinatra/issues/6
+[#7]: https://github.com/kfl62/trst_sys_sinatra/issues/7
+[#8]: https://github.com/kfl62/trst_sys_sinatra/issues/8
+[#9]: https://github.com/kfl62/trst_sys_sinatra/issues/9
+[#10]: https://github.com/kfl62/trst_sys_sinatra/issues/10
+[#11]: https://github.com/kfl62/trst_sys_sinatra/issues/11
+[#12]: https://github.com/kfl62/trst_sys_sinatra/issues/12
+[#13]: https://github.com/kfl62/trst_sys_sinatra/issues/13
+[#14]: https://github.com/kfl62/trst_sys_sinatra/issues/14
+[#15]: https://github.com/kfl62/trst_sys_sinatra/issues/15
+[#16]: https://github.com/kfl62/trst_sys_sinatra/issues/16
+[#17]: https://github.com/kfl62/trst_sys_sinatra/issues/17
+[#18]: https://github.com/kfl62/trst_sys_sinatra/issues/18
+[#19]: https://github.com/kfl62/trst_sys_sinatra/issues/19
+[#20]: https://github.com/kfl62/trst_sys_sinatra/issues/20
+[#21]: https://github.com/kfl62/trst_sys_sinatra/issues/21
+[#22]: https://github.com/kfl62/trst_sys_sinatra/issues/22
+[#23]: https://github.com/kfl62/trst_sys_sinatra/issues/23
+[#24]: https://github.com/kfl62/trst_sys_sinatra/issues/24
+[#25]: https://github.com/kfl62/trst_sys_sinatra/issues/25
+[#26]: https://github.com/kfl62/trst_sys_sinatra/issues/26
+[#27]: https://github.com/kfl62/trst_sys_sinatra/issues/27
+[#28]: https://github.com/kfl62/trst_sys_sinatra/issues/28
+[#29]: https://github.com/kfl62/trst_sys_sinatra/issues/29
+[#30]: https://github.com/kfl62/trst_sys_sinatra/issues/30
+[#31]: https://github.com/kfl62/trst_sys_sinatra/issues/31
+[#32]: https://github.com/kfl62/trst_sys_sinatra/issues/32
+[#33]: https://github.com/kfl62/trst_sys_sinatra/issues/33
+[#34]: https://github.com/kfl62/trst_sys_sinatra/issues/34
+[#35]: https://github.com/kfl62/trst_sys_sinatra/issues/35
+[#36]: https://github.com/kfl62/trst_sys_sinatra/issues/36
+[#37]: https://github.com/kfl62/trst_sys_sinatra/issues/37
+[#38]: https://github.com/kfl62/trst_sys_sinatra/issues/38
+[#39]: https://github.com/kfl62/trst_sys_sinatra/issues/39
+[#40]: https://github.com/kfl62/trst_sys_sinatra/issues/40
