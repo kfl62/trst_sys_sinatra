@@ -254,9 +254,10 @@ module Trst
       order,type = options.values_at(:order,:enum)
       value = "&nbsp;"
       messages = model.send(:errors).messages[attribute.to_sym]
+      messages = model.send(:errors).messages["#{attribute}.#{order}".to_sym] if order
       if messages
         value = model.send(:errors).messages[attribute.to_sym]
-        value = model.send(:errors).messages[attribute.to_sym][order] if order
+        value = model.send(:errors).messages["#{attribute}.#{order}".to_sym] if order
         value = value.join(",\n")
       end
       haml_tag :span, value, class: 'error'
