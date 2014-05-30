@@ -61,3 +61,8 @@ ro:
       short: ! '%d %b %H:%M'
       trst: ! '%A, %d %B, %Y %H:%M:%S'
     pm: ''
+  mongoid:
+    errors:
+      messages:
+        blank: Obligatoriu! Nu poate lipsi!
+        taken: Duplicate! A fost deja utilizat!

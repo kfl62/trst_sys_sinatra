@@ -15,6 +15,7 @@ module Trst
     field :other,       type: String, default: 'Client'
 
     validates_presence_of   :name_last, :name_frst
+    validates_uniqueness_of :id_pn, :unless => Proc.new{|p| p.id_pn == '-'}
 
     before_save :beautify
 
