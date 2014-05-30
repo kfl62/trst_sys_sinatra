@@ -1,3 +1,11 @@
+## v0.2.15
+release date: **2014-05-30**
+
+* models `Trst::Person` fix [issue #6][#6]
+* models `Trst::Firm` fix [issue #4][#4]
+* controllers `system.rb` fix [issue #5][#5]
+* Gemfile mongoid use `:git => 'https://github.com/kfl62/mongoid.git', :branch => '3.1.0-stable'` until [mongoid issue][3] is solved
+
 ## v0.2.14
 release date: **2014-05-26**
 
@@ -108,6 +116,7 @@ release date: **2013-07-18**
 
 [1]: https://gist.github.com/kfl62/6049099
 [2]: https://github.com/ivaynberg/select2/issues/1246 "Select2 search broken inside jQuery UI 1.10.x modal Dialog"
+[3]: https://github.com/mongoid/mongoid/issues/3672 "issue 3672"
 [#1]: https://github.com/kfl62/trst_sys_sinatra/issues/1
 [#2]: https://github.com/kfl62/trst_sys_sinatra/issues/2
 [#3]: https://github.com/kfl62/trst_sys_sinatra/issues/3

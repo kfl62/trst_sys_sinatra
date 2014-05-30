@@ -97,7 +97,7 @@ module Trst
       else
         flash[:msg] = {msg: {txt: t('msg.create.error', data: mat(@object,'model_name')), class: 'error'}}
         @create_error = true
-        haml haml_path('a',"#{m}/#{c}"), layout: false
+        haml haml_path(a,"#{m}/#{c}"), layout: false
       end
     end
     # @todo Document this route
