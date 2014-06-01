@@ -1,3 +1,8 @@
+## v0.2.16
+release date: **2014-06-01**
+
+* models `Trst::User` overwrite `#view_filter`, fix [issue #7][#7]
+
 ## v0.2.15
 release date: **2014-05-30**
 
