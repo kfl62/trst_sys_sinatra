@@ -63,6 +63,10 @@ module Trst
     def view_tasks
       task_ids.each_with_object([]){|id,a| t = tasks.find(id); a << [t.id, t.name]}
     end
+    # @todo
+    def view_filter
+      [id, "#{name} - #{login_name}"]
+    end
     protected
     # Generate encrypted password
     # @return [String] random string for `#user.salt`
