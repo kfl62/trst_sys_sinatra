@@ -17,6 +17,10 @@ module Trst
       if session[:user]
         @current_user ||= User.find(session[:user])
         I18n.reload! if Trst.env == 'development'
+        if Time.now > Time.now.end_of_month - 4.hours
+          flash[:msg] = {msg: {txt: t('msg.login.monthly_revision'), class: 'error'}}
+          redirect  "#{lp}/"
+        end unless @current_user.root?
       else
         flash[:msg] = {msg: {txt: t('msg.login.required'), class: 'error'}}
         redirect  "#{lp}/"

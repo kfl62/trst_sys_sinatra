@@ -103,6 +103,9 @@ ro:
           Data din calculatorul Dvs. este greșit! Setați data și reveniți :)
         required: |
           Frumoasă încercare, dar este nevoie >Autentificare<
+        monthly_revision: |
+          În ultima zii a lunii, după ora 20:00, au acces doar Administratorii de sistem.<br>
+          Reveniți mâine!
       show:
         start: |
           Se vor afişa detaliile ptr. &raquo;%{data}&laquo;!
