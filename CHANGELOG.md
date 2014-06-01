@@ -1,3 +1,9 @@
+## v0.2.17
+release date: **2014-06-01**
+
+* i18n `trst.yml` monthly revision message
+* controller `system.rb`, last day in month only root, fix [issue #8][#8]
+
 ## v0.2.16
 release date: **2014-06-01**
 
