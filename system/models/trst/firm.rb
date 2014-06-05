@@ -22,7 +22,7 @@ module Trst
     # @todo
     def identities_fiscal_uniq
       return if !identities.key?('fiscal')
-      if self.class.where(:'identities.fiscal' => /#{Regexp.escape(identities['fiscal'])}/i) && new_record?
+      if self.class.find_by(:'identities.fiscal' => /#{Regexp.escape(identities['fiscal'])}/i) && new_record?
         self.errors.add(:'identities.fiscal', :taken)
       end
     end
