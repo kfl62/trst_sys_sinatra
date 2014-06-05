@@ -2,10 +2,10 @@
 module Trst
   class PartnerFirm < Trst::Firm
 
-    field :client,              type: Boolean,       default: true
-    field :supplr,              type: Boolean,       default: true
-    field :transp,              type: Boolean,       default: true
-    field :firm,                type: Boolean,       default: false
+    field :client,            type: Boolean,                            default: true
+    field :supplr,            type: Boolean,                            default: true
+    field :transp,            type: Boolean,                            default: true
+    field :firm,              type: Boolean,                            default: false
 
     embeds_many :addresses,   class_name: "Trst::PartnerFirm::Address", cascade_callbacks: true
     embeds_many :people,      class_name: "Trst::PartnerFirm::Person",  cascade_callbacks: true
@@ -43,7 +43,7 @@ module Trst
 
   class PartnerFirm::Address < Trst::Address
 
-    field :name,    type: String,   default: 'Main Address'
+    field :name,              type: String,                             default: 'Main Address'
 
     embedded_in :firm,        class_name: 'Trst::PartnerFirm',          inverse_of: :addresses
 
@@ -64,6 +64,13 @@ module Trst
   class PartnerFirm::Unit < Trst::Unit
 
     embedded_in :firm,        class_name: 'Trst::PartnerFirm',          inverse_of: :units
+    has_many    :ins,         class_name: 'Trst::FreightIn',            inverse_of: :unit
+    has_many    :outs,        class_name: 'Trst::FreightOut',           inverse_of: :unit
+    has_many    :fsts,        class_name: 'Trst::FreightStock',         inverse_of: :unit
 
+    # @todo
+    def view_filter
+      [id, name[1]]
+    end
   end # PartnerFirm::Unit
 end #Trst
