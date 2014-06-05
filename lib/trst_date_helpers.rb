@@ -43,6 +43,5 @@ module Trst
         where(:id_date => Time.utc(y,m,d))
       end
     end #Class methods
-
-  end
-end
+  end # DateHelpers
+end # Trst

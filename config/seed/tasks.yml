@@ -1,3 +1,48 @@
+'Mdl::PartnerPerson.filter':
+  haml_path: default
+  rels: none
+  name_translations:
+    ro: Editare partener (PF)
+    en: Edit partner (PP)
+    hu: Partner (MSZ)
+  title_translations:
+    ro: Administrare partener (PF)
+    en: Edit partner (PP)
+    hu: Partner (MSZ)
+  help_translations:
+    ro: Administrare partener (PF)
+    en: Edit partner (PP)
+    hu: Partner (MSZ)
+'Mdl::PartnerFirm.filter':
+  haml_path: default
+  rels: none
+  name_translations:
+    ro: Editare partener (Firmă)
+    en: Edit partner (Firm)
+    hu: Partner (Cég)
+  title_translations:
+    ro: Administrare partener (Firmă)
+    en: Edit partner (Firm)
+    hu: Partner (Cég)
+  help_translations:
+    ro: Administrare partener (Firmă)
+    en: Edit partner (Firm)
+    hu: Partner (Cég)
+'Mdl::Freight.filter':
+  haml_path: default
+  rels: none
+  name_translations:
+    ro: Editare materiale
+    en: Edit freight
+    hu: Edit freight
+  title_translations:
+    ro: Administrare materiale
+    en: Edit freight
+    hu: Edit freight
+  help_translations:
+    ro: Administrare materiale
+    en: Edit freight
+    hu: Edit freight
 'Trst::User.filter':
   haml_path: default
   rels: none

@@ -1,3 +1,23 @@
+### v0.3.0
+
+release date: **2014-xx-xx**
+
+* **feature v0.2.990**, v0.3.0 preparation
+   - feature date: **2014-06-05**
+   - bump version v0.2.990
+   - update CHANGELOG
+   - prepare for v0.3.0
+   - models `Trst::PartnerFirm|Person` cleanup, skeleton
+   - models `TrstFreight|In|Out|Stock` cleanup, skeleton
+   - models `Trst::Firm` fix [issue #9][#9]
+   - lib helpers, cleanup, new helpers
+   - config `seed/tasks.yml` add tasks
+   - models `Trst::PartnerPerson` skeleton, overwrite in modules
+   - models `Trst::PartnerFirm` skeleton, overwrite in modules
+   - models `Trst::Unit` skeleton, use as embedded
+   - models `Trst::Bank` skeleton, use as embedded
+
+
 ## v0.2.17
 release date: **2014-06-01**
 

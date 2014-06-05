@@ -10,7 +10,7 @@ module Trst
       def default_sort
         asc(:name)
       end
-    end
+    end #Class methods
     # @todo
     def view_filter
       [id, name]
@@ -37,8 +37,8 @@ module Trst
       end
       "%.#{precision}f#{suffix}" % value
     end
-  end
-end
+  end # ViewHelpers
+end # Trst
 
 class String
   def to_bool
