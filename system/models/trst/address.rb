@@ -5,20 +5,23 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :city,    type: String,   default: 'Cluj-Napoca'
-    field :street,  type: String,   default: '-'
-    field :nr,      type: String,   default: '-'
-    field :bl,      type: String,   default: '-'
-    field :sc,      type: String,   default: '-'
-    field :et,      type: String,   default: '-'
-    field :ap,      type: String,   default: '-'
-    field :state,   type: String,   default: 'Cluj'
-    field :country, type: String,   default: 'Romania'
-    field :zip,     type: String,   default: '-'
+    field :city,              type: String,                             default: 'Cluj-Napoca'
+    field :street,            type: String,                             default: '-'
+    field :nr,                type: String,                             default: '-'
+    field :bl,                type: String,                             default: '-'
+    field :sc,                type: String,                             default: '-'
+    field :et,                type: String,                             default: '-'
+    field :ap,                type: String,                             default: '-'
+    field :state,             type: String,                             default: 'Cluj'
+    field :country,           type: String,                             default: 'Romania'
+    field :zip,               type: String,                             default: '-'
 
     validates_presence_of   :city, :street
 
     before_save :beautify
+
+    class << self
+    end # Class methods
 
     protected
     # @todo
