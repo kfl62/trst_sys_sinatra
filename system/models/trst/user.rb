@@ -7,16 +7,24 @@ module Trst
 
     attr_accessor :password, :password_confirmation
 
-    field :login_name,      type: String
-    field :name,            type: String
-    field :id_pn,           type: String,        default: '123456789012'
-    field :email,           type: String
-    field :hashed_password, type: String
-    field :last_login,      type: Time
-    field :access_lvl,      type: Integer,       default: 10
-    field :access_grp,      type: Array,         default: ['public']
+    field :login_name,        type: String
+    field :name,              type: String
+    field :id_pn,             type: String,                             default: '123456789012'
+    field :email,             type: String
+    field :hashed_password,   type: String
+    field :last_login,        type: Time
+    field :access_lvl,        type: Integer,                            default: 10
+    field :access_grp,        type: Array,                              default: ['public']
 
-    has_and_belongs_to_many :tasks,     class_name: 'Trst::Task', inverse_of: :users
+    has_many   :apps,         class_name: 'Trst::Expenditure',          inverse_of: :signed_by
+    has_many   :dlns,         class_name: 'Trst::DeliveryNote',         inverse_of: :signed_by
+    has_many   :grns,         class_name: 'Trst::Grn',                  inverse_of: :signed_by
+    has_many   :csss,         class_name: 'Trst::Cassation',            inverse_of: :signed_by
+    has_many   :cnss,         class_name: 'Trst::Consumption',          inverse_of: :signed_by
+    has_many   :srts,         class_name: 'Trst::Sorting',              inverse_of: :signed_by
+    has_many   :invs,         class_name: 'Trst::Invoice',              inverse_of: :signed_by
+    belongs_to :unit,         class_name: 'Trst::PartnerFirm::Unit',    inverse_of: :users
+    has_and_belongs_to_many   :tasks,  class_name: 'Trst::Task',        inverse_of: :users
 
     # Validations
     validates_uniqueness_of :login_name

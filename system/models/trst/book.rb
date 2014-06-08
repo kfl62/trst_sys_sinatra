@@ -13,9 +13,9 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :slug,    type: String
-    field :name,    type: String, localize: true
-    field :content, type: String, localize: true
+    field :slug,              type: String
+    field :name,              type: String,                             localize: true
+    field :content,           type: String,                             localize: true
 
     validates_presence_of :slug
 
@@ -68,16 +68,19 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :slug,    type: String
-    field :order,   type: Integer
-    field :name,    type: String,   localize: true
-    field :title,   type: String,   localize: true
-    field :content, type: String,   localize: true
+    field :slug,              type: String
+    field :order,             type: Integer
+    field :name,              type: String,                             localize: true
+    field :title,             type: String,                             localize: true
+    field :content,           type: String,                             localize: true
 
     validates_presence_of :slug
 
-    embedded_in :book,  class_name: 'Trst::Book', inverse_of: :chapters
-    embeds_many :pages, class_name: 'Trst::Page'
+    embedded_in :book,        class_name: 'Trst::Book',                 inverse_of: :chapters
+    embeds_many :pages,       class_name: 'Trst::Page'
+
+    class << self
+    end # Class methods
 
     # @todo Document this method
     def path
@@ -104,18 +107,18 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :slug,            type: String
-    field :order,           type: Integer
-    field :access_lvl,      type: Integer,       default: 3
-    field :access_grp,      type: Array,         default: ['public']
-    field :name,            localize: true
-    field :title,           localize: true
-    field :content,         localize: true
+    field :slug,              type: String
+    field :order,             type: Integer
+    field :access_lvl,        type: Integer,                            default: 3
+    field :access_grp,        type: Array,                              default: ['public']
+    field :name,              localize: true
+    field :title,             localize: true
+    field :content,           localize: true
 
     validates_presence_of :slug
 
-    embedded_in             :chapter, class_name: 'Trst::Chapter', inverse_of: :pages
-    has_and_belongs_to_many :tasks,   class_name: 'Trst::Task',    inverse_of: nil
+    embedded_in               :chapter, class_name: 'Trst::Chapter',    inverse_of: :pages
+    has_and_belongs_to_many   :tasks,   class_name: 'Trst::Task',       inverse_of: nil
 
     class << self
       # @todo

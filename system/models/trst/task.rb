@@ -4,13 +4,14 @@ module Trst
     include Mongoid::Document
     include Mongoid::Timestamps
     include ViewHelpers
-    field  :name,       type: String,     localize: true
-    field  :title,      type: String,     localize: true
-    field  :help,       type: String,     localize: true
-    field  :haml_path,  type: String,     default: 'default'
-    field  :goal,       type: String,     default: 'Model.method'
-    field  :rels,       type: String,     default: 'none'
-    field  :params,     type: String,     default: ''
+
+    field  :name,             type: String,                             localize: true
+    field  :title,            type: String,                             localize: true
+    field  :help,             type: String,                             localize: true
+    field  :haml_path,        type: String,                             default: 'default'
+    field  :goal,             type: String,                             default: 'Model.method'
+    field  :rels,             type: String,                             default: 'none'
+    field  :params,           type: String,                             default: ''
 
     has_and_belongs_to_many :users,   class_name: 'Trst::User', inverse_of: :tasks
 
