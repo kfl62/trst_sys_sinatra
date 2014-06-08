@@ -2,6 +2,14 @@
 
 release date: **2014-xx-xx**
 
+
+* **feature v0.2.991**,, v0.3.0 preparation
+   - feature date: **2014-06-xx**
+   - bump version v0.2.991
+   - update CHANGELOG
+   - models all, create skeleton, update relations, beutify
+
+
 * **feature v0.2.990**, v0.3.0 preparation
    - feature date: **2014-06-05**
    - bump version v0.2.990
