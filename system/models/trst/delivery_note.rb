@@ -12,20 +12,20 @@ module Trst
     field :id_intern,         type: Boolean,                            default: false
     field :doc_name,          type: String
     field :doc_plat,          type: String
-    field :expl,              type: String,                             default: ''
     field :charged,           type: Boolean,                            default: false
+    field :expl,              type: String,                             default: ''
+
+    has_many   :freights,     class_name: "Trst::FreightOut",           inverse_of: :doc_dln, dependent: :destroy
+    belongs_to :doc_grn,      class_name: "Trst::Grn",                  inverse_of: :docs
+    belongs_to :doc_inv,      class_name: "Trst::Invoice",              inverse_of: :docs
+    belongs_to :client,       class_name: "Trst::PartnerFirm",          inverse_of: :docs_client
+    belongs_to :client_d,     class_name: "Trst::PartnerFirm::Person",  inverse_of: :docs_client
+    belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :docs
+    belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :docs
 
     alias :file_name :name; alias :unit :unit_belongs_to
 
-    has_many   :freights,     class_name: "Trst::FreightOut",           inverse_of: :doc_dln, dependent: :destroy
-    belongs_to :doc_grn,      class_name: "Trst::Grn",                  inverse_of: :dlns
-    belongs_to :doc_inv,      class_name: "Trst::Invoice",              inverse_of: :dlns
-    belongs_to :client,       class_name: "Trst::PartnerFirm",          inverse_of: :dlns_client
-    belongs_to :client_d,     class_name: "Trst::PartnerFirm::Person",  inverse_of: :dlns_client
-    belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :dlns
-    belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :dlns
-
-    index({ unit_id: 1, id_date: 1 })
+    scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     accepts_nested_attributes_for :freights,
       reject_if: ->(attrs){ attrs[:qu].to_f == 0 }
@@ -59,9 +59,9 @@ module Trst
     end
     # @todo
     def increment_name(unit_id)
-      dlns = Trst::DeliveryNote.by_unit_id(unit_id).yearly(Date.today.year)
-      if dlns.count > 0
-        name = dlns.asc(:name).last.name.next
+      docs = Trst::DeliveryNote.by_unit_id(unit_id).yearly(Date.today.year)
+      if docs.count > 0
+        name = docs.asc(:name).last.name.next
       else
         unit = Trst::PartnerFirm.unit_by_unit_id(unit_id)
         prfx = Date.today.year.to_s[-2..-1]
@@ -71,7 +71,8 @@ module Trst
     end
     # @todo
     def freights_list
-      freights.asc(:id_stats).each_with_object([]) do |f,r|
+      freights.asc(:id_stats).each_with_object([id_date.to_s,name]) do |f,r|
+        r << expl if expl.length > 0
         r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
       end
     end

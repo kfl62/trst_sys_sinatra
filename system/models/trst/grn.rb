@@ -21,8 +21,6 @@ module Trst
     field :expl,              type: String,                             default: ''
     field :charged,           type: Boolean,                            default: false
 
-    alias :file_name :name; alias :unit :unit_belongs_to
-
     has_many   :freights,     class_name: "Trst::FreightIn",          inverse_of: :doc_grn, dependent: :destroy
     has_many   :dlns,         class_name: "Trst::DeliveryNote",       inverse_of: :doc_grn
     belongs_to :supplr,       class_name: "Trst::PartnerFirm",        inverse_of: :grns_supplr
@@ -31,7 +29,7 @@ module Trst
     belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",  inverse_of: :grns
     belongs_to :signed_by,    class_name: "Trst::User",               inverse_of: :grns
 
-    index({ unit_id: 1, id_date: 1 })
+    alias :file_name :name; alias :unit :unit_belongs_to
 
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
@@ -68,9 +66,9 @@ module Trst
     end
     # @todo
     def increment_name(unit_id)
-      grns = Trst::Grn.by_unit_id(unit_id).yearly(Date.today.year)
-      if grns.count > 0
-        name = grns.asc(:name).last.name.next
+      docs = self.class.by_unit_id(unit_id).yearly(Date.today.year)
+      if docs.count > 0
+        name = docs.asc(:name).last.name.next
       else
         unit = Trst::PartnerFirm.unit_by_unit_id(unit_id)
         prfx = Date.today.year.to_s[-2..-1]
@@ -80,10 +78,10 @@ module Trst
     end
     # @todo
     def freights_list
-      freights.asc(:id_stats).each_with_object([]) do |f,r|
+      freights.asc(:id_stats).each_with_object([id_date.to_s,name]) do |f,r|
+        r << expl if expl.length > 0
         r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
       end
     end
-
   end # Grn
 end # Trst

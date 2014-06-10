@@ -20,12 +20,16 @@ module Trst
     belongs_to  :doc_grn,     class_name: 'Trst::Grn',                  inverse_of: :freights, index: true
     belongs_to  :doc_sor,     class_name: 'Trst::Sorting',              inverse_of: :resl_freights  #, index: true
 
-    alias :unit :unit_belongs_to
+    alias :unit :unit_belongs_to; alias :name :freight_name; alias :um :freight_um
 
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     class << self
     end # Class methods
 
+    # @todo
+    def key
+      "#{id_stats}_#{"%.4f" % pu}"
+    end
   end # FreightIn
 end # Trst

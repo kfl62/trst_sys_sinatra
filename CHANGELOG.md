@@ -3,8 +3,16 @@
 release date: **2014-xx-xx**
 
 
-* **feature v0.2.991**,, v0.3.0 preparation
-   - feature date: **2014-06-xx**
+* **feature v0.2.992**, v0.3.0 preparation
+   - feature date: **2014-06-10**
+   - bump version v0.2.992
+   - update CHANGELOG
+   - models `Clns` module related changes
+   - lib `trst_main_helper` fix [issue #10][#10]
+
+
+* **feature v0.2.991**, v0.3.0 preparation
+   - feature date: **2014-06-08**
    - bump version v0.2.991
    - update CHANGELOG
    - models all, create skeleton, update relations, beutify

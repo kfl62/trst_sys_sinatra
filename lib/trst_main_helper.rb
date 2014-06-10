@@ -51,15 +51,15 @@ module Trst
     end #Class methods
 
     # @todo
-    def name
+    def freight_name
       freight.name
     end
     # @todo
-    def um
+    def freight_um
       freight.um rescue '-'
     end
     # @todo
-    def tva
+    def freight_tva
       freight.tva
     end
     # @todo
