@@ -12,12 +12,12 @@ module Trst
     field :id_intern,         type: Boolean,                            default: true
     field :expl,              type: String,                             default: ''
 
-    alias :file_name :name; alias :unit :unit_belongs_to
-
     has_many   :from_freights, class_name: "Clns::FreightOut",          inverse_of: :doc_sor, dependent: :destroy
     has_many   :resl_freights, class_name: "Clns::FreightIn",           inverse_of: :doc_sor, dependent: :destroy
     belongs_to :unit,          class_name: "Clns::PartnerFirm::Unit",   inverse_of: :srts
     belongs_to :signed_by,     class_name: "Clns::User",                inverse_of: :srts
+
+    alias :file_name :name; alias :unit :unit_belongs_to
 
     index({ unit_id: 1, id_date: 1 })
 

@@ -4,6 +4,8 @@ module Trst
     include Mongoid::Document
     include Mongoid::Timestamps
     include ViewHelpers
+    include Trst::DateHelpers
+    include Trst::MainHelpers
 
     field :name,        type: String,         default: "Freight"
     field :id_stats,    type: String

@@ -19,8 +19,6 @@ module Trst
     field :payed,             type: Boolean,                            default: false
     field :expl,              type: String,                             default: ''
 
-    alias :file_name :name
-
     embeds_many :freights,     class_name: "Trst::InvoiceFreight",      inverse_of: :doc_inv, cascade_callbacks: true
     has_many    :dlns,         class_name: "Trst::DeliveryNote",        inverse_of: :doc_inv
     has_many    :grns,         class_name: "Trst::Grn",                 inverse_of: :doc_inv
@@ -28,6 +26,8 @@ module Trst
     belongs_to  :client,       class_name: "Trst::PartnerFirm",         inverse_of: :invs_client
     belongs_to  :client_d,     class_name: "Trst::PartnerFirm::Person", inverse_of: :invs_client
     belongs_to  :signed_by,    class_name: "Trst::User",                inverse_of: :invs
+
+    alias :file_name :name
 
     accepts_nested_attributes_for :dlns, :grns
     accepts_nested_attributes_for :freights,
@@ -58,28 +58,30 @@ module Trst
       Trst::PartnerFirm.person_by_person_id(client_d_id) rescue nil
     end
     # @todo
-    def increment_name
-      firm = Trst::PartnerFirm.find_by(:firm => true)
-      invs = Trst::Invoice.yearly(Date.today.year).nonin
-      if invs.count > 0
-        name = invs.asc(:name).last.name.next
+    def increment_name(unit_id)
+      docs = self.class.by_unit_id(unit_id).yearly(Date.today.year)
+      if docs.count > 0
+        name = docs.asc(:name).last.name.next
       else
+        unit = Trst::PartnerFirm.unit_by_unit_id(unit_id)
         prfx = Date.today.year.to_s[-2..-1]
-        name = "#{firm.name[0][0..2].upcase}_INV-#{prfx}00001"
+        name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_INV-#{prfx}00001"
       end
       name
     end
     # @todo
     def freights_list
-      freights.asc(:id_stats).each_with_object([]) do |f,r|
-        r << "#{f.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.2f" % f.pu} )"
+      freights.asc(:id_stats).each_with_object([id_date.to_s,name]) do |f,r|
+        r << expl if expl.length > 0
+        r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
       end
     end
-
   end # Invoice
 
   class InvoiceFreight < Trst::Freight
     field :qu,                type: Float,                              default: 0.00
+    # temproray solutioin, @todo  convert to Hash
+    field       :pu,          type: Float,                              default: 0.0
 
     embedded_in :doc_inv,     class_name: "Trst::Invoice",              inverse_of: :freights
 
