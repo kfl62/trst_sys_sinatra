@@ -21,7 +21,7 @@ module Trst
     field :expl,              type: String,                             default: ''
     field :charged,           type: Boolean,                            default: false
 
-    has_many   :freights,     class_name: "Trst::FreightIn",          inverse_of: :doc_grn, dependent: :destroy
+    has_many   :freights,     class_name: "Trst::FreightIn",          inverse_of: :doc_grn
     has_many   :dlns,         class_name: "Trst::DeliveryNote",       inverse_of: :doc_grn
     belongs_to :supplr,       class_name: "Trst::PartnerFirm",        inverse_of: :grns_supplr
     belongs_to :supplr_d,     class_name: "Trst::PartnerFirm::Person",inverse_of: :grns_supplr
@@ -60,10 +60,6 @@ module Trst
       end
     end # Class methods
 
-    # @todo
-    def supplr_d
-      Trst::PartnerFirm.person_by_person_id(supplr_d_id) rescue nil
-    end
     # @todo
     def increment_name(unit_id)
       docs = self.class.by_unit_id(unit_id).yearly(Date.today.year)

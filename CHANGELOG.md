@@ -3,6 +3,17 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.993**, v0.3.0 preparation
+   - feature date: **2014-08-13**
+   - bump version v0.2.993
+   - update CHANGELOG
+   - models `Trst::FreightStock` new scope `:stock_now`
+   - models `Trst::Stock` skeleton
+   - models `Trst::Payment` rename field `text` -> `expl`
+   - models `Trst::DeliveryNote|Expenditure|Invoice|Sorting` cleanup, adapt `#increment_name`, `freights_list`
+   - models `Trst::Cassation|Consumption|Grn` remove `dependent: :destroy`
+
+
 * **feature v0.2.992**, v0.3.0 preparation
    - feature date: **2014-06-10**
    - bump version v0.2.992

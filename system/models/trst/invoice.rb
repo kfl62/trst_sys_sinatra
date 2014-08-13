@@ -54,18 +54,14 @@ module Trst
     end # Class methods
 
     # @todo
-    def client_d
-      Trst::PartnerFirm.person_by_person_id(client_d_id) rescue nil
-    end
-    # @todo
-    def increment_name(unit_id)
-      docs = self.class.by_unit_id(unit_id).yearly(Date.today.year)
+    def increment_name
+      docs = self.class.yearly(Date.today.year).nonin
       if docs.count > 0
         name = docs.asc(:name).last.name.next
       else
-        unit = Trst::PartnerFirm.unit_by_unit_id(unit_id)
+        firm = Clns::PartnerFirm.find_by(:firm => true)
         prfx = Date.today.year.to_s[-2..-1]
-        name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_INV-#{prfx}00001"
+        name = "#{firm.name[0][0..2].upcase}_INV-#{prfx}00001"
       end
       name
     end
@@ -73,7 +69,7 @@ module Trst
     def freights_list
       freights.asc(:id_stats).each_with_object([id_date.to_s,name]) do |f,r|
         r << expl if expl.length > 0
-        r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
+        r << "#{f.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
       end
     end
   end # Invoice

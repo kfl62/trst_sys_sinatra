@@ -12,14 +12,12 @@ module Trst
     field :id_intern,         type: Boolean,                            default: true
     field :expl,              type: String,                             default: ''
 
-    has_many   :from_freights, class_name: "Clns::FreightOut",          inverse_of: :doc_sor, dependent: :destroy
-    has_many   :resl_freights, class_name: "Clns::FreightIn",           inverse_of: :doc_sor, dependent: :destroy
-    belongs_to :unit,          class_name: "Clns::PartnerFirm::Unit",   inverse_of: :srts
-    belongs_to :signed_by,     class_name: "Clns::User",                inverse_of: :srts
+    has_many   :from_freights,class_name: "Trst::FreightOut",           inverse_of: :doc_sor
+    has_many   :resl_freights,class_name: "Trst::FreightIn",            inverse_of: :doc_sor
+    belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :srts
+    belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :srts
 
     alias :file_name :name; alias :unit :unit_belongs_to
-
-    index({ unit_id: 1, id_date: 1 })
 
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
@@ -33,16 +31,26 @@ module Trst
 
     # @todo
     def increment_name(unit_id)
-      sorts = Clns::Sorting.by_unit_id(unit_id).yearly(Date.today.year)
-      if sorts.count > 0
-        name = sorts.asc(:name).last.name.next
+      docs = self.class.by_unit_id(unit_id).yearly(Date.today.year)
+      if docs.count > 0
+        name = docs.asc(:name).last.name.next
       else
-        unit = Clns::PartnerFirm.unit_by_unit_id(unit_id)
+        unit = Trst::PartnerFirm.unit_by_unit_id(unit_id)
         prfx = Date.today.year.to_s[-2..-1]
         name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_PVST-#{prfx}00001"
       end
       name
     end
-
+    # @todo
+    def freights_list
+      ary = from_freights.asc(:id_stats).each_with_object([id_date.to_s,name]) do |f,r|
+        r << expl if expl.length > 0
+        r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
+      end
+      ary << "-"*10
+      resl_freights.asc(:id_stats).each_with_object(ary) do |f,r|
+         r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
+     end
+    end
   end # Sorting
 end # Trst

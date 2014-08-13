@@ -13,7 +13,7 @@ module Trst
     field :val,               type: Float,                              default: 0.00
     field :expl,              type: String,                             default: ''
 
-    has_many   :freights,     class_name: "Trst::FreightOut",           inverse_of: :doc_cas, dependent: :destroy
+    has_many   :freights,     class_name: "Trst::FreightOut",           inverse_of: :doc_cas
     belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :csss
     belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :csss
 
