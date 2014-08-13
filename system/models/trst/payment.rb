@@ -9,8 +9,8 @@ module Trst
 
     field :id_date,           type: Date,                               default: -> {Date.today}
     field :id_intern,         type: Boolean,                            default: false
-    field :text,              type: String,                             default: "Doc.nr."
     field :val,               type: Float,                              default: 0.00
+    field :expl,              type: String,                             default: "Doc.nr."
 
     belongs_to :doc_inv,      class_name: "Trst::Invoice",              inverse_of: :pyms
 
