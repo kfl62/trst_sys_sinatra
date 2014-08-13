@@ -15,13 +15,13 @@ module Trst
     field :charged,           type: Boolean,                            default: false
     field :expl,              type: String,                             default: ''
 
-    has_many   :freights,     class_name: "Trst::FreightOut",           inverse_of: :doc_dln, dependent: :destroy
-    belongs_to :doc_grn,      class_name: "Trst::Grn",                  inverse_of: :docs
-    belongs_to :doc_inv,      class_name: "Trst::Invoice",              inverse_of: :docs
-    belongs_to :client,       class_name: "Trst::PartnerFirm",          inverse_of: :docs_client
-    belongs_to :client_d,     class_name: "Trst::PartnerFirm::Person",  inverse_of: :docs_client
-    belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :docs
-    belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :docs
+    has_many   :freights,     class_name: "Trst::FreightOut",           inverse_of: :doc_dln
+    belongs_to :doc_grn,      class_name: "Trst::Grn",                  inverse_of: :dlns
+    belongs_to :doc_inv,      class_name: "Trst::Invoice",              inverse_of: :dlns
+    belongs_to :client,       class_name: "Trst::PartnerFirm",          inverse_of: :dlns_client
+    belongs_to :client_d,     class_name: "Trst::PartnerFirm::Person",  inverse_of: :dlns_client
+    belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :dlns
+    belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :dlns
 
     alias :file_name :name; alias :unit :unit_belongs_to
 
@@ -53,10 +53,6 @@ module Trst
       end
     end # Class methods
 
-    # @todo
-    def client_d
-      Trst::PartnerFirm.person_by_person_id(client_d_id) rescue nil
-    end
     # @todo
     def increment_name(unit_id)
       docs = Trst::DeliveryNote.by_unit_id(unit_id).yearly(Date.today.year)

@@ -18,7 +18,7 @@ module Trst
 
     alias :file_name :name; alias :unit :unit_belongs_to
 
-    has_many   :freights,     class_name: "Trst::FreightIn",            inverse_of: :doc_exp, dependent: :destroy
+    has_many   :freights,     class_name: "Trst::FreightIn",            inverse_of: :doc_exp
     belongs_to :unit,         class_name: "Trst::PartnerFirm::Unit",    inverse_of: :apps, index: true
     belongs_to :client,       class_name: "Trst::PartnerPerson",        inverse_of: :apps, index: true
     belongs_to :signed_by,    class_name: "Trst::User",                 inverse_of: :apps
@@ -53,9 +53,9 @@ module Trst
 
     # @todo
     def increment_name(unit_id)
-      apps = Trst::Expenditure.by_unit_id(unit_id).yearly(Date.today.year)
-      if apps.count > 0
-        name = apps.asc(:name).last.name.next
+      docs = self.class.by_unit_id(unit_id).yearly(Date.today.year)
+      if docs.count > 0
+        name = docs.asc(:name).last.name.next
       else
         unit = Trst::PartnerFirm.unit_by_unit_id(unit_id)
         prfx = Date.today.year.to_s[-2..-1]
