@@ -1,0 +1,55 @@
+#header {
+  background: {
+    color: #3e3e3e;
+    image: image_url(unquote("logo.png"));
+    position: 25px -5px;
+    repeat: no-repeat;
+  };
+  height: 95px;
+  span > a {
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  &.public {
+    p.header_title {
+      color: whitesmoke;
+      font: {
+        family: "EmbossedBlackWideNormal";
+        size: 4em;
+      };
+      padding-top: 10px;
+    }
+    p.header_auth {
+      color: whitesmoke;
+      position: relative;
+      top: -130px;
+      left: 660px;
+    }
+    #I18n {
+      position: relative;
+      top: -134px;
+      left: 730px;
+    }
+  }
+  &.system {
+    p.header_title {
+      color: whitesmoke;
+      font: {
+        family: "EmbossedBlackWideNormal";
+        size: 3em;
+      };
+      padding-top: 10px;
+    }
+    p.header_auth {
+      color: whitesmoke;
+      position: relative;
+      top: -100px;
+      left: 660px;
+    }
+    #I18n {
+      position: relative;
+      top: -104px;
+      left: 730px;
+    }
+  }
+}
