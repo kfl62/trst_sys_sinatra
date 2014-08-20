@@ -1,5 +1,28 @@
 (function() {
   define(['jquery-ui', 'system/trst_desk_buttons', 'system/trst_desk_select', 'system/trst_desk_tabs'], function() {
+    (function($, window, document) {
+      return $.widget("app.dialog", $.ui.dialog, {
+        options: {
+          iconButtons: []
+        },
+        _create: function() {
+          var $titlebar;
+          this._super();
+          $titlebar = this.uiDialog.find(".ui-dialog-titlebar");
+          $.each(this.options.iconButtons, function(i, v) {
+            var $button, right;
+            $button = $("<button/>").text(this.text);
+            right = $titlebar.find("[role='button']:last").css("right");
+            $button.button({
+              icons: {
+                primary: this.icon
+              },
+              text: false
+            }).addClass("ui-dialog-titlebar-close").css("right", (parseInt(right) + 22) + "px").click(this.click).appendTo($titlebar);
+          });
+        }
+      });
+    })(jQuery, window, document);
     $.extend(true, Trst, {
       desk: {
         readData: function() {
@@ -40,7 +63,16 @@
             },
             close: function() {
               $(this).remove();
-            }
+            },
+            iconButtons: [
+              {
+                text: "Help",
+                icon: "ui-icon-info",
+                click: function(e) {
+                  $("span.info").toggle();
+                }
+              }
+            ]
           });
         },
         downloadError: function(data) {

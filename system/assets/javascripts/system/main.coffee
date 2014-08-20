@@ -51,7 +51,8 @@ define ['/javascripts/libs/jquery.fileDownload.js','libs/trst_msg','system/trst_
       $helpClose = $('#content').on 'click', '#xhr_content p.close', ()->
         $('#xhr_content').load "/sys/page_#{Trst.lst.page_id}"
         return
-      $.ui.dialog.prototype._allowInteraction = (e)->
-        !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-drop').length
+      $(document).tooltip
+        content: ()->
+          $(@).attr('title').replace(/\n/g, "<br/>")
       $log('Trst.init() OK...')
   Trst

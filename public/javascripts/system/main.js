@@ -82,9 +82,11 @@
         $helpClose = $('#content').on('click', '#xhr_content p.close', function() {
           $('#xhr_content').load("/sys/page_" + Trst.lst.page_id);
         });
-        $.ui.dialog.prototype._allowInteraction = function(e) {
-          return !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-drop').length;
-        };
+        $(document).tooltip({
+          content: function() {
+            return $(this).attr('title').replace(/\n/g, "<br/>");
+          }
+        });
         return $log('Trst.init() OK...');
       }
     });

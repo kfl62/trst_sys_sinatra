@@ -2,7 +2,7 @@
   define(['jquery-ui'], function() {
     $.extend(true, Trst, {
       login: function(node) {
-        var $login, $position, button;
+        var $login, button;
         button = function() {
           $('#loginDialog').find('button').each(function() {
             var $button;
@@ -17,7 +17,6 @@
           return $('input').first().focus();
         };
         $login = $('<div id="loginDialog"></div>');
-        $position = $('#sidebar').position();
         $login.load(node.attr('href'), button).dialog({
           dialogClass: 'ui-dialog-shadow',
           autoOpen: false,
@@ -25,8 +24,12 @@
           minHeight: 10,
           height: 'auto',
           width: 'auto',
-          position: [$position.left, $position.top - 100],
-          title: node.attr('title'),
+          position: {
+            my: 'left top',
+            at: 'left-50 top+20',
+            of: '#login_status'
+          },
+          title: node.data('title'),
           close: function(ev, ui) {
             $(this).remove();
           }

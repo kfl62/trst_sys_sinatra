@@ -1,4 +1,21 @@
 define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system/trst_desk_tabs'], ()->
+  do ($ = jQuery, window, document) ->
+    $.widget "app.dialog", $.ui.dialog,
+      options:
+        iconButtons: []
+      _create: ->
+        @_super()
+        $titlebar = @uiDialog.find(".ui-dialog-titlebar")
+        $.each @options.iconButtons, (i, v) ->
+          $button = $("<button/>").text(@text)
+          right = $titlebar.find("[role='button']:last").css("right")
+          $button.button(
+            icons:
+              primary: @icon
+            text: false
+          ).addClass("ui-dialog-titlebar-close").css("right", (parseInt(right) + 22) + "px").click(@click).appendTo $titlebar
+          return
+        return
   $.extend true, Trst,
     desk:
       readData: ()->
@@ -28,8 +45,17 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             of: '#menu'
             collision: 'none'
           close: ()->
-            $(this).remove()
+            $(@).remove()
             return
+          iconButtons: [
+            {
+              text: "Help"
+              icon: "ui-icon-info"
+              click: (e) ->
+                $("span.info").toggle()
+                return
+            }
+          ]
         return
       downloadError: (data)->
         $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
@@ -47,7 +73,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             of: '#menu'
             collision: 'none'
           close: ()->
-            $(this).remove()
+            $(@).remove()
             return
           title: Trst.i18n.title.report.error
         $download.dialog('open')
