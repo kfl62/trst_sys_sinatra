@@ -1,5 +1,4 @@
 (function() {
-
   define(['libs/trst_msg', 'public/trst_login', 'public/trst_map'], function() {
     $.extend(Trst, {
       init: function() {
@@ -14,6 +13,11 @@
           return false;
         });
         Trst.gmap($('#google_map')[0]);
+        $(document).tooltip({
+          content: function() {
+            return $(this).attr('title').replace(/\n/g, "<br/>");
+          }
+        });
       }
     });
     return Trst;

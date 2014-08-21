@@ -3,6 +3,25 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.994**, v0.3.0 preparation, [issue #11][#11], [issue #12][#12], [issue #13][#13], [issue #14][#14], [issue #15][#15]
+   - feature date: **2014-08-21**
+   - bump version v0.2.994
+   - update CHANGELOG
+   - update `.gitignore`
+   - lib `compass_plugin` output settings
+   - aseets css, `_trst_dialog` custom style for jQuery tooltip
+   - assets js, add tooltip [issue #11][#11], login windows position, upgrade [issue #14][#14]
+   - assets js, `main.js` upgrade JQuery 2.1.1, JQuery UI 1.11.1,[issue #14][#14]
+   - views `system`,[issue #14][#14]
+   - views `public`,[issue #14][#14], [issue #15][#15]
+   - assets `webcomponents` empty folder (fill with bower),  [issue #13][#13]
+   - controllers `assets.rb` switch to scss
+   - assets `select2.css|js`,  update 3.5.2, [issue #14][#14]
+   - fonts `font-awesome` update 4.1.0, [issue #14][#14]
+   - assets `font-awesome.css`,  update 4.1.0, [issue #14][#14]
+   - assets `application.css`,  use unique style in modules, fix [issue #12][#12]
+
+
 * **feature v0.2.993**, v0.3.0 preparation
    - feature date: **2014-08-13**
    - bump version v0.2.993

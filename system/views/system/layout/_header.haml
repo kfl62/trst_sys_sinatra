@@ -3,16 +3,16 @@
   %span
     %a#login_status.st.em{href: "/utils/logout"}
       #{t('login.link_out')}
-      %i.icon-signout
+      %i.fa.fa-sign-out
     %a.st.em{href: "http://trst.ro"}
       TrustSys
-      %i.icon-external-link
+      %i.fa.fa-external-link
     %br
   %span.small= "IP: #{request.ip}<br>"
   %br
   %span #{t('login.authenticated_as')}<br>
   %span#login_name.st.em
-    %i.icon-user
+    %i.fa.fa-user
     #{@current_user.login_name}
 %span#I18n
   %a{href: '/utils/lang/ro',title: t('lang.ro')}

@@ -11,7 +11,6 @@ define ['jquery-ui'], ()->
         $('.cdate').val($.datepicker.formatDate('yy-mm-dd', new Date()))
         $('input').first().focus()
       $login = $('<div id="loginDialog"></div>')
-      $position = $('#sidebar').position()
       $login
         .load(node.attr('href'), button)
         .dialog
@@ -21,8 +20,11 @@ define ['jquery-ui'], ()->
           minHeight: 10
           height: 'auto'
           width: 'auto'
-          position: [$position.left, $position.top - 100]
-          title: node.attr('title')
+          position:
+            my: 'left top'
+            at: 'left-50 top+20'
+            of: '#login_status'
+          title: node.data('title')
           close: (ev,ui)->
             $(this).remove()
             return
