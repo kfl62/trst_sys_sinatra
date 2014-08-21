@@ -12,8 +12,8 @@ module CompassInitializer
       config.css_dir          = Trst.firm.css_dir
       config.images_dir       = Trst.firm.images_dir
       config.http_images_path = Trst.firm.images_dir.gsub('public','')
-      config.output_style = :normal # compressed
-      config.sass_options = {cache_location: "./tmp/sass-cache"}
+      config.output_style = :compact
+      config.sass_options = {cache_location: "./tmp/sass-cache", line_comments: false}
     end
 
     Compass.configure_sass_plugin!
