@@ -1,23 +1,18 @@
 !!! 5
 %html
   = partial('layout/html-head')
-
   %body{id: "public"}
-    #main.wrap
-      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
-      %header#header.public
+    %section.header
+      %header
         = partial('layout/header')
-
-      %nav#menu.public
+      %nav.menu
         = partial('layout/menu')
-
-      %section#content
+    %section.content
+      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
+      %aside.main
         %article#xhr_content
           = yield
-      %section#sidebar.public
+      %aside.sidebar
         = partial('layout/sidebar')
-
-      %section#main_footer.wrap
-
-    %footer#footer.wrap
+    %footer.ce
       = partial('layout/footer')
