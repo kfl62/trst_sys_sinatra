@@ -4,11 +4,11 @@
       init: function() {
         var $menuItems;
         Trst.msgHide();
-        $('#login_status[href$="login"]').click(function() {
+        $('a.header-login').click(function() {
           Trst.login($(this));
           return false;
         });
-        $menuItems = $('#menu.public ul li a').click(function() {
+        $menuItems = $('nav.menu ul li a').click(function() {
           $('#xhr_content').load("/" + ($(this).attr('id')));
           return false;
         });
