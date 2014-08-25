@@ -33,8 +33,9 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
         $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
         $desk.html(data)
         .dialog
-          dialogClass: 'ui-dialog-shadow'
+          dialogClass: 'ui-dialog-trst'
           autoOpen: false
+          resizable: false
           modal: true
           minHeight: 10
           height: 'auto'
@@ -42,7 +43,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           position:
             my: 'left top'
             at: 'left top'
-            of: '#menu'
+            of: 'nav'
             collision: 'none'
           close: ()->
             $(@).remove()
@@ -52,7 +53,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               text: "Help"
               icon: "ui-icon-info"
               click: (e) ->
-                $("span.info").toggle()
+                alert 'Not ready! :)'
                 return
             }
           ]
@@ -62,7 +63,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
         $data = Trst.i18n.msg.report.error. replace '%{data}', data
         $download.html($data)
         .dialog
-          dialogClass: 'ui-dialog-shadow'
+          dialogClass: 'ui-dialog-trst'
           autoOpen: false
           modal: true
           height: 'auto'
@@ -77,7 +78,6 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             return
           title: Trst.i18n.title.report.error
         $download.dialog('open')
-        $(".ui-widget-overlay").css('height',Trst.desk.height)
       init: (url,type,data)->
         $url  = url
         $type = if type? then type.toUpperCase() else "GET"
@@ -101,7 +101,6 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               $tdata = Trst.desk.hdo.title_data || Trst.desk.hdo.model_name
               $desk.dialog title: $("<span>#{$title.replace('%{data}',$tdata)}</span>").text()
               $desk.dialog('open')
-              $(".ui-widget-overlay").css('height',Trst.desk.height)
               Trst.desk.buttons.init() if $('button').length
               Trst.desk.select.init() if Trst.desk.hdf.find('select').length
               Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length

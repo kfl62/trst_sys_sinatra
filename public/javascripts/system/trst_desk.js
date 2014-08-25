@@ -49,8 +49,9 @@
           var $desk;
           $desk = $('#deskDialog').length ? $('#deskDialog') : $('<div id="deskDialog"></div>');
           $desk.html(data).dialog({
-            dialogClass: 'ui-dialog-shadow',
+            dialogClass: 'ui-dialog-trst',
             autoOpen: false,
+            resizable: false,
             modal: true,
             minHeight: 10,
             height: 'auto',
@@ -58,7 +59,7 @@
             position: {
               my: 'left top',
               at: 'left top',
-              of: '#menu',
+              of: 'nav',
               collision: 'none'
             },
             close: function() {
@@ -69,7 +70,7 @@
                 text: "Help",
                 icon: "ui-icon-info",
                 click: function(e) {
-                  $("span.info").toggle();
+                  alert('Not ready! :)');
                 }
               }
             ]
@@ -80,7 +81,7 @@
           $download = $('#downloadDialog').length ? $('#downloadDialog') : $('<div id="downloadDialog" class="small"></div>');
           $data = Trst.i18n.msg.report.error.replace('%{data}', data);
           $download.html($data).dialog({
-            dialogClass: 'ui-dialog-shadow',
+            dialogClass: 'ui-dialog-trst',
             autoOpen: false,
             modal: true,
             height: 'auto',
@@ -96,8 +97,7 @@
             },
             title: Trst.i18n.title.report.error
           });
-          $download.dialog('open');
-          return $(".ui-widget-overlay").css('height', Trst.desk.height);
+          return $download.dialog('open');
         },
         init: function(url, type, data) {
           var $data, $request, $type, $url;
@@ -134,7 +134,6 @@
                   title: $("<span>" + ($title.replace('%{data}', $tdata)) + "</span>").text()
                 });
                 $desk.dialog('open');
-                $(".ui-widget-overlay").css('height', Trst.desk.height);
                 if ($('button').length) {
                   Trst.desk.buttons.init();
                 }

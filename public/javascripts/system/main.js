@@ -54,7 +54,7 @@
             delete Trst.i18n.login;
           }, 'json');
         }
-        $menuItems = $('#menu.system ul li a').click(function() {
+        $menuItems = $('nav.menu ul li a').click(function() {
           $('#xhr_content').load("/sys/" + ($(this).attr('id')));
           return false;
         }).filter('[id^="page"]').click(function() {
@@ -62,7 +62,7 @@
           $('#xhr_tasks').load("/sys/tasks/" + ($(this).attr('id').split('_')[1]));
           return false;
         });
-        $tasks = $('#sidebar.system').on('click', 'ul li a', function() {
+        $tasks = $('aside.sidebar').on('click', 'ul li a', function() {
           var $url;
           $url = $(this).attr('href');
           Trst.lst.setItem('task_id', $(this).attr('id'));
@@ -74,7 +74,7 @@
           Trst.desk.init($url);
           return false;
         });
-        $helpers = $('#sidebar.system').on('click', 'ul li span', function() {
+        $helpers = $('aside.sidebar').on('click', 'ul li span', function() {
           $.get("/sys/help/" + ($(this).prev('a').attr('id')), function(data) {
             $('#xhr_content').html(data);
           });
