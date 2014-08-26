@@ -14,6 +14,7 @@ gem 'mongoid', :git => 'https://github.com/kfl62/mongoid.git', :branch => '3.1.0
 gem 'rdiscount'
 gem 'prawn'
 gem 'prawn-templates'
+gem 'prawn-table'
 # Disable gruff for now (deploy problem wrong version of ImageMagick on my server)
 #gem 'rmagick'
 #gem 'gruff', github: 'topfunky/gruff'
