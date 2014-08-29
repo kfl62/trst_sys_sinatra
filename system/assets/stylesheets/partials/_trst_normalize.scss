@@ -1,0 +1,412 @@
+/* normalize-scss 3.0.0-alpha.2+normalize.3.0.0 | MIT/GPLv2 License | bit.ly/normalize-scss */
+// This variable is a copy of the one used in Compass' support module.
+
+  // Optional map of minimum browser versions to support. For example, to
+  // remove support for IE 7 and earlier, set $browser-minimum-versions['ie']
+  // to '8'.
+  $supported-browsers: (
+    'chrome'
+  ) !default;
+  $browser-minimum-versions: (
+    'chrome':  '36'
+  ) !default;
+
+// Set this to true to force CSS output to exactly match normalize.css.
+$strict-normalize: true !default;
+// The font sizes for h1-h6.
+$h1-font-size: 2    * $base-font-size !default;
+$h2-font-size: 1.5  * $base-font-size !default;
+$h3-font-size: 1.17 * $base-font-size !default;
+$h4-font-size: 1    * $base-font-size !default;
+$h5-font-size: 0.83 * $base-font-size !default;
+$h6-font-size: 0.67 * $base-font-size !default;
+
+// The amount lists and blockquotes are indented.
+$indent-amount: 40px !default;
+
+// After the default variables are set, import the required Compass partials.
+@import "compass/support";
+@import "compass/css3/box-sizing";
+@import "compass/typography/vertical_rhythm";
+
+
+// To work around a bug in compass-core 1.0.0.rc.0, we override Compass'
+// support-legacy-browser() function with a version of our own.
+// @TODO Remove this monkey patch after it's fixed in Compass.
+// @see https://github.com/chriseppstein/compass/pull/1524
+// @see also https://github.com/chriseppstein/compass/pull/1520
+@function support-legacy-browser($browser, $min-version, $max-version: null, $threshold: $critical-usage-threshold) {
+  @if not index($supported-browsers, $browser) {
+    @return false;
+  }
+  // Check agaist usage stats and declared minimums
+  $min-required-version: map-get($browser-minimum-versions, $browser);
+  $supported-browser: ($min-required-version and
+                       compare-browser-versions($browser, $max-version or $min-version, $min-required-version) >= 0);
+  // If a minimum required version is specified and the default threshold is
+  // used, we only check the declared browser minimums.
+  @if ($threshold == $critical-usage-threshold) and $min-required-version {
+    @return $supported-browser;
+  }
+  $usage: if($max-version,
+             omitted-usage($browser, $min-version, $max-version),
+             omitted-usage($browser, $min-version));
+  @return $usage > $threshold or $supported-browser;
+}
+
+@if not $strict-normalize or support-legacy-browser(ie, "7") {
+
+  @include establish-baseline();
+}
+
+html {
+  font-family: $base-font-family;
+}
+
+body {
+  margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+audio,
+canvas,
+progress,
+video {
+  @if support-legacy-browser(ie, "9") {
+    display: inline-block; /* 1 */
+    @if support-legacy-browser(ie, "7") {
+      *display: inline;
+      *zoom: 1;
+    }
+  }
+  vertical-align: baseline; /* 2 */
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+@if support-legacy-browser(ie, "10") {
+  [hidden] {
+    display: none;
+  }
+}
+
+template {
+  display: none;
+}
+
+@if support-legacy-browser(ie, "10") {
+  a {
+    background: transparent;
+  }
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+@if not $strict-normalize or support-legacy-browser(ie, "7") {
+  blockquote {
+    margin: rhythm(1) $indent-amount;
+  }
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  @if support-legacy-browser(ie, "6") {
+    _font-family: 'courier new', monospace;
+  }
+  font-size: 1em;
+}
+
+dfn {
+  font-style: italic;
+}
+
+h1 {
+  @if not $strict-normalize or support-legacy-browser(ie, "7") {
+    @include adjust-font-size-to( $h1-font-size );
+  }
+  @else {
+    font-size: if($rhythm-unit == "px", $h1-font-size, ($h1-font-size / $base-font-size)#{$rhythm-unit});
+  }
+  @include leader(1, $h1-font-size);
+  @include trailer(1, $h1-font-size);
+}
+
+@if not $strict-normalize or support-legacy-browser(ie, "7") {
+  h2 {
+    @include adjust-font-size-to( $h2-font-size );
+    @include leader(1, $h2-font-size);
+    @include trailer(1, $h2-font-size);
+  }
+
+  h3 {
+    @include adjust-font-size-to( $h3-font-size );
+    @include leader(1, $h3-font-size);
+    @include trailer(1, $h3-font-size);
+  }
+
+  h4 {
+    @include adjust-font-size-to( $h4-font-size );
+    @include leader(1, $h4-font-size);
+    @include trailer(1, $h4-font-size);
+  }
+
+  h5 {
+    @include adjust-font-size-to( $h5-font-size );
+    @include leader(1, $h5-font-size);
+    @include trailer(1, $h5-font-size);
+  }
+
+  h6 {
+    @include adjust-font-size-to( $h6-font-size );
+    @include leader(1, $h6-font-size);
+    @include trailer(1, $h6-font-size);
+  }
+}
+
+@if support-legacy-browser(ie, "9") {
+  mark {
+    background: #ff0;
+    color: #000;
+  }
+}
+
+@if not $strict-normalize or support-legacy-browser(ie, "7") {
+  p,
+  pre {
+    margin: rhythm(1) 0;
+  }
+}
+
+pre {
+  overflow: auto;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+@if not $strict-normalize or support-legacy-browser(ie, "7") {
+  dl,
+  menu,
+  ol,
+  ul {
+    margin: rhythm(1) 0;
+  }
+
+  @if not $strict-normalize {
+    ol,
+    ul {
+      ol,
+      ul {
+        margin: 0;
+      }
+    }
+  }
+
+  dd {
+    margin: 0 0 0 $indent-amount;
+  }
+
+  menu,
+  ol,
+  ul {
+    padding: 0 0 0 $indent-amount;
+  }
+}
+
+@if support-legacy-browser(ie, "7") {
+  nav ul,
+  nav ol {
+    list-style: none;
+    list-style-image: none;
+  }
+}
+@if support-legacy-browser(ie, "10") {
+  img {
+    border: 0;
+    @if support-legacy-browser(ie, "7") {
+      -ms-interpolation-mode: bicubic;
+    }
+  }
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+@if support-legacy-browser(ie, "9") or support-legacy-browser(safari, "5") {
+  figure {
+    margin: rhythm(1) $indent-amount;
+  }
+}
+
+hr {
+  @include box-sizing(content-box);
+  height: 0;
+}
+
+@if support-legacy-browser(ie, "7") {
+  form {
+    margin: 0;
+  }
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+  @if support-legacy-browser(ie, "7") {
+    *font-family: $base-font-family; /* 4 */
+    *vertical-align: middle; /* 5 */
+  }
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer; /* 3 */
+  @if support-legacy-browser(ie, "7") {
+    *overflow: visible; /* 4 */
+  }
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  line-height: normal;
+}
+
+@if support-legacy-browser(ie, "10") {
+  input[type="checkbox"],
+  input[type="radio"] {
+    @include box-sizing(border-box); /* 1 */
+    padding: 0; /* 2 */
+    @if support-legacy-browser(ie, "7") {
+      *height: 13px; /* 3 */
+      *width: 13px; /* 3 */
+    }
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  @include box-sizing(content-box); /* 2 */
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+fieldset {
+  margin: 0 2px;
+  border-color: #c0c0c0;
+  @include apply-side-rhythm-border(top,    $width: 1px, $lines: 0.35 );
+  @include apply-side-rhythm-border(bottom, $width: 1px, $lines: 0.65 );
+  @include apply-side-rhythm-border(left,   $width: 1px, $lines: 0.625);
+  @include apply-side-rhythm-border(right,  $width: 1px, $lines: 0.625);
+}
+
+legend {
+  @if support-legacy-browser(ie, "9") {
+    border: 0; /* 1 */
+  }
+  padding: 0; /* 2 */
+  @if support-legacy-browser(ie, "7") {
+    *margin-left: -7px; /* 3 */
+  }
+}
+
+textarea {
+  overflow: auto;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
