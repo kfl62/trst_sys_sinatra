@@ -1,90 +1,12 @@
-@import "blueprint/reset";
 @import "partials/trst_base";
-@import "blueprint/grid";
+@import "partials/trst_normalize";
+
 @import "compass";
 
-@include font-face("EmbossedBlackWideNormal", font-files("/stylesheets/fonts/Embossed_Black_Wide-webfont.woff", woff, "/stylesheets/fonts/Embossed_Black_Wide-webfont.ttf", truetype, "/stylesheets/fonts/Embossed_Black_Wide-webfont.svg", svg, "/stylesheets/fonts/Embossed_Black_Wide-webfont.eot"));
-
-body {
-  background-color: #3e3e3e;
-  overflow: hidden;
-}
-
-.wrap {
-  @include container;
-}
-
-#content {
-  @include column(6);
-  background: {
-    color: whitesmoke;
-    image: image_url(unquote("main_bckgrnd.png"));
-    position: center center;
-    repeat: no-repeat;
-  };
-  border-radius: 10px;
-  height: 500px;
-  position: relative;
-  overflow: hidden;
-  color: #333333;
-  #xhr_content {
-    margin: 0.5em;
-    p {
-      background-color: rgba(245, 245, 245, 0.5);
-    }
-    p.close {
-      color: red;
-      cursor: pointer;
-      font-size: 2em;
-      position: absolute;
-      right: 37px;
-      top: 10px;
-    }
-  }
-}
-
-#xhr_msg {
-  border-radius: 10px;
-  box-shadow: 0.5em 0.5em #3e3e3e;
-  color: black;
-  display: none;
-  position: absolute;
-  padding: 1em;
-  text-indent: 1.5em;
-  top: 30px;
-  z-index: 1005;
-  &.loading {
-    background: {
-      color: rgba(230, 255, 230, 1);
-      image: image_url(unquote("icons/loading.gif"));
-      position: 0.5em 0.5em;
-      repeat: no-repeat;
-    };
-    display: block;
-    text-indent: 2.5em;
-  }
-  &.info {
-    background: {
-      color: rgba(230, 255, 230, 1);
-      image: image_url(unquote("icons/info.png"));
-      position: 0.5em 0.5em;
-      repeat: no-repeat;
-    };
-    display: block;
-  }
-  &.error, &.warning {
-    background: {
-      color: rgba(255, 204, 204, 1);
-      image: image_url(unquote("icons/warning.png"));
-      position: 0.5em 0.5em;
-      repeat: no-repeat;
-    };
-    display: block;
-  }
-}
-
-@import "partials/trst_header";
-@import "partials/trst_menu";
-@import "partials/trst_sidebar";
-@import "partials/trst_footer";
-@import "partials/trst_dialog";
+@import "partials/trst_base_mixins";
+@import "partials/trst_base_classes";
+@import "partials/trst_core";
+@import "partials/trst_section_header";
+@import "partials/trst_section_content";
+@import "partials/trst_section_footer";
+@import "partials/trst_widgets";

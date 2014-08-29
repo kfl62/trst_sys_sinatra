@@ -1,0 +1,47 @@
+html{
+  font-size: 62.5%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(63,63,63,1);
+  font-size: 1.2rem;
+  margin: auto;
+  max-width: $trst-max-width;
+  min-height: 100vh;
+}
+p {
+  margin: 0 0 1rem 0;
+  line-height: 1.8rem;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+blockquote {
+  margin: 0 1.5rem 2rem;
+  font-style: italic;
+}
+ul , li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+ul + button {
+  margin-left: .2rem;
+}
+li[class*=select2-result]{
+  span:not[class~=select2-match] {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:nth-child(2) {
+      padding-left: .5rem;
+      width: 7rem;
+    }
+    &:nth-child(4) {
+      padding-left: .5rem;
+      width: 20rem;
+    }
+  }
+}

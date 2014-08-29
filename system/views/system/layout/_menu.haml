@@ -9,3 +9,10 @@
             - if page.access_lvl >= @current_user.access_lvl || @current_user.access_grp.include?(page.slug)
               %li
                 %a{id: "page_#{page.id}", href: File.join(lp,'sys',page.path)}= page.name
+%span
+  %a{href: '/utils/lang/ro',title: t('lang.ro')}
+    %img{src: "#{Trst.firm.images_path}/icons/ro.png",alt: t('lang.ro')}
+  %a{href: '/utils/lang/en',title: t('lang.en')}
+    %img{src: "#{Trst.firm.images_path}/icons/en.png",alt: t('lang.en')}
+  %a{href: '/utils/lang/hu',title: t('lang.hu')}
+    %img{src: "#{Trst.firm.images_path}/icons/hu.png",alt: t('lang.hu')}

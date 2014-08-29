@@ -1,0 +1,88 @@
+.ui-widget-overlay {
+  background: none !important;
+}
+.ui-dialog-trst {
+  box-shadow: .5rem .5rem rgba(62,62,62,1);
+}
+.ui-tooltip {
+  font: 1.1rem Verdana, sans-serif !important;
+  max-width: 100% !important;
+  padding: .5rem !important;
+}
+#loginDialog {
+  span {
+    padding: 1rem .5rem;
+  }
+  button {
+    margin-top: 0.5em
+  }
+}
+#deskDialog{
+  font-size: 1.2rem;
+  .info {
+    display: none
+  }
+  tr.pdb-05 td {
+    padding-bottom: .5rem;
+  }
+  td {
+    @include trst-relations-sortable;
+    & div.select2-container {
+      margin: .3rem 0;
+    }
+    & > span {
+      display: inline-block;
+      max-width: 55rem;
+      padding: 0 .5rem;
+      &.link.link {
+        &:hover {
+          background-color: rgba(255, 255, 190, 0.8);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  thead, tbody tr:last-child td:last-child {
+    padding-bottom: .5rem;
+  }
+  tfoot tr td:last-child {
+    border-top: solid .1rem rgba(62, 62, 62, 1);
+    padding: .5rem .5rem 0;
+  }
+  tbody.inner {
+    border: solid .1rem  rgba(62, 62, 62, 1);
+    tr {
+      &:first-child {
+        text-align: center;
+      }
+      &:nth-child(2) {
+        td {
+          border-top: solid 1px rgba(62, 62, 62, 1);
+        }
+      }
+      &:nth-child(odd) {
+        background-color: rgba(210, 210, 210, 1);
+      }
+      &:last-child {
+        color: rgba(255, 0, 0, 1);
+        font-weight: bold;
+        text-align: center;
+        td {
+          border-top: solid 1px rgba(62, 62, 62, 1);
+        }
+      }
+    }
+    td {
+      border-right: solid 1px rgba(62, 62, 62, 1);
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}
+#relationsContainer {
+  @include trst-relations-sortable;
+  border-radius: .5rem;
+  box-shadow: .5rem .5rem rgba(62,62,62,1);
+  position: fixed;
+}

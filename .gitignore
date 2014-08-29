@@ -2,6 +2,7 @@
 !.gitignore
 !.gitkeep
 !.yardopts
+!.bowerrc
 tmp/*
 log/*
 !log/.gitkeep

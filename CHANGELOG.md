@@ -3,6 +3,21 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.995**, v0.3.0 preparation
+   - feature date: **2014-08-29**
+   - bump version v0.2.995
+   - update CHANGELOG
+   - Gemfile `prawn-table` fix [issue #21][#21]
+   - complet rewrite stylesheets, [issue #17][#17]
+   - assets css, cleanup
+   - update js in `system`, [issue #17][#17], [issue #19][#19], [issue #20][#20]
+   - update `system` layouts affected by [issue #17][#17]
+   - update `public` layouts, pages affected by [issue #17][#17]
+   - update js and views in `public`, [issue #19][#19], [issue #20][#20]
+   - web components install directory [issue #16][#16]
+   - update `.gitignore` .bowerrc
+
+
 * **feature v0.2.994**, v0.3.0 preparation, [issue #11][#11], [issue #12][#12], [issue #13][#13], [issue #14][#14], [issue #15][#15]
    - feature date: **2014-08-21**
    - bump version v0.2.994
