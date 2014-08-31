@@ -14,5 +14,5 @@
           %li.ui-state-default
             %span= t[1]
             %input{type: "hidden",name: "[#{@path}][task_ids][]",value: t[0]}
-      %button{type: "button",data: {action: "relations",icon: "transferthick-e-w",rel_to: "task"}}= mat(@object, :task_ids)
+      - button 'relations', {relations: {rel_to: 'task', text: mat(@object, :task_ids)}}
 
