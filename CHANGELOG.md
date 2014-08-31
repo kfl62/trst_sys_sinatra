@@ -3,6 +3,20 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.996**, v0.3.0 preparation
+   - feature date: **2014-08-31**
+   - bump version v0.2.996
+   - update CHANGELOG
+   - views `system` default CRUD, use new `button|td_buttonset` help
+   - assets: css, updated
+   - assets js, use FontAwasome by default, for buttons [issue #20][#20]
+   - lib `trst_helper` button, buttonset, fix [issue #23][#23]
+   - models `Trst::Page` slug nil issue (todo ???)
+   - controller `system` require Prawn dependencies, fix [issue #22][#22]
+   - views `login.haml` adapt to new css
+   - Gemfile cleanup, `gem 'sass', '3.4.1'` [issue #24][#24]
+
+
 * **feature v0.2.995**, v0.3.0 preparation
    - feature date: **2014-08-29**
    - bump version v0.2.995
