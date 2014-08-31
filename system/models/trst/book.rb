@@ -130,7 +130,7 @@ module Trst
     # @todo Document this method
     def path
       retval = chapter.slug == 'home' ? '/' : "/#{chapter.slug.dasherize}/"
-      retval += "trustsys-#{chapter.slug.dasherize}-#{slug.dasherize}.html"
+      retval += "trustsys-#{chapter.slug.dasherize}-#{slug.dasherize rescue 'error'}.html"
     end
     # @todo Document this method
     def view_tasks
