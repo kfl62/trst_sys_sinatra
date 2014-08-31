@@ -4,10 +4,8 @@ define () ->
       buttons:
         layout: (button) ->
           $bd = button.data()
-          button.button
-            icons:
-              primary: "ui-icon-#{$bd.icon}"
-            text: false if $bd.text is 'hidden'
+          button.prepend("<i class='#{$bd.icon}'></i>")
+          button.button()
           return
         handle_reload_path: (button) ->
           $hd = Trst.desk.hdo

@@ -79,6 +79,9 @@ module Trst
                    'Set-Cookie' => 'fileDownload=true; path=/',
                    'Expires' => '0',
                    'Pragma' => 'public'})
+          require 'prawn/measurement_extensions'
+          require "prawn/templates"
+          require 'prawn/table'
           pdf file, layout: false
         end
       end
