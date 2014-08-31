@@ -1,5 +1,4 @@
 (function() {
-
   define(function() {
     $.extend(true, Trst, {
       desk: {
@@ -7,12 +6,8 @@
           layout: function(button) {
             var $bd;
             $bd = button.data();
-            button.button({
-              icons: {
-                primary: "ui-icon-" + $bd.icon
-              },
-              text: $bd.text === 'hidden' ? false : void 0
-            });
+            button.prepend("<i class='" + $bd.icon + "'></i>");
+            button.button();
           },
           handle_reload_path: function(button) {
             var $bd, $hd, $params, $url, _ref;
@@ -173,10 +168,11 @@
               return $log('Button.relations Pressed...');
             },
             print: function() {
+
               /*
-                          Handled by fileDownload plugin
-                          http://johnculviner.com/category/jQuery-File-Download.aspx
-              */
+              Handled by fileDownload plugin
+              http://johnculviner.com/category/jQuery-File-Download.aspx
+               */
               return $log('Button.print Pressed...');
             }
           },

@@ -20,7 +20,7 @@ define () ->
           $container = $('<div id="relationsContainer"></div>')
           $container.css
             top:    $button.offset().top
-            left:   $button.offset().left + $button.width() + 5
+            left:   $button.offset().left + $button.width() + 15
             zIndex: 1005
           $container
         init: () ->
