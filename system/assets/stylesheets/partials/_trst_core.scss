@@ -4,7 +4,8 @@ html{
 body {
   display: flex;
   flex-direction: column;
-  background-color: rgba(63,63,63,1);
+  background-color: $trst-color-bg-dark;
+  color: $trst-color-txt-dark;
   font-size: 1.2rem;
   margin: auto;
   max-width: $trst-max-width;
