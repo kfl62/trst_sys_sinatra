@@ -4,7 +4,7 @@ release date: **2014-xx-xx**
 
 
 * **feature v0.2.997**, v0.3.0 preparation
-   - feature date: **2014-09-xx**
+   - feature date: **2014-09-05**
    - bump version v0.2.997
    - update CHANGELOG
    - assets css, part of [issue #28][#28]
