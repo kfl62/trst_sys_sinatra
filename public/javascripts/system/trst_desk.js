@@ -67,10 +67,9 @@
             },
             iconButtons: [
               {
-                text: "Help",
                 icon: "ui-icon-info",
                 click: function(e) {
-                  alert('Not ready! :)');
+                  $('#xhr_info').toggle();
                 }
               }
             ]
@@ -109,10 +108,10 @@
             type: $type,
             data: $data,
             beforeSend: function() {
-              return Trst.msgShow();
+              return $('#xhr_msg').html("<span>...</span>").addClass('loading').prepend("<i class='fa fa-refresh fa-spin fa-lg'></i>").show();
             },
             complete: function() {
-              return Trst.msgHide();
+              return $('#xhr_msg').hide().removeAttr('class').html('');
             }
           });
           $request.fail(function(xhr) {

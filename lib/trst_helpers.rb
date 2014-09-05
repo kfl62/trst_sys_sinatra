@@ -193,6 +193,16 @@ module Trst
         i.push 'fa-print'
       when /cancel/
         i.push 'fa-ban'
+      when /info/
+        i.push 'fa-info-circle', 'fa-lg', 'blue'
+      when /warning/
+        i.push 'fa-fa-exclamation-triangle', 'fa-lg'
+      when /error/
+        i.push 'fa-bomb', 'fa-lg'
+      when /loading/
+        i.push 'fa-refresh', 'fa-spin', 'fa-lg'
+      else
+        i.push 'fa-bomb', 'fa-lg'
       end
       i.join(' ')
     end

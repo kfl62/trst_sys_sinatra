@@ -1,14 +1,13 @@
-%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null"}}
+%span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null"}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  - unless params[:related_id]
+    = t("intro.embedded.main",child: mat(@object,'model_name'),parent: mat(@related_object,'model_name'))
+  -else
+    = t("intro.filter.main",data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "get"}
   %table{cellspacing: "0"}
     %tbody
-      %tr.pdb-05
-        - unless params[:related_id]
-          %td
-            %span.info.width-300.ju= t("intro.embedded.main",child: mat(@object,'model_name'),parent: mat(@related_object,'model_name'))
-        - else
-          %td
-            %span.info.width-300.ju= t("intro.filter.main",data: mat(@object,'model_name'))
       %tr.pdb-05
         %td
           %select#r_id

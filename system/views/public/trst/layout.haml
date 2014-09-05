@@ -8,7 +8,7 @@
       %nav.menu
         = partial('layout/menu')
     %section.content
-      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
+      = partial('layout/xhr_msg')
       %aside.main
         %article#xhr_content
           = yield

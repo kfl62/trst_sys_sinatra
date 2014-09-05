@@ -15,19 +15,17 @@
 }
 @mixin nav-menu {
   background: {
-    color: rgba(192,192,192,1);
     image: image_url(unquote("menu_bckgrnd.png"));
     position: center right;
     repeat: repeat-x;
   };
-  border-top: .1rem rgba(255,255,255,1) solid;
-  border-bottom: .1rem rgba(51,51,51,1) solid;
+  border-top: solid .1rem $trst-color-bg-light;
+  border-bottom: solid .1rem $trst-color-bg-light;
   line-height: .7rem;
   margin-bottom: .5rem;
 }
 @mixin ul-menu-main {
-  border-left: .1rem rgba(170,170,170,1) solid;
-  border-right: .1rem rgba(255,255,255,1) solid;
+  border-right: solid .1rem $trst-color-bg-light;
   display: inline-block;
   margin: 0 1rem;
   padding: 0;
@@ -48,14 +46,13 @@
   position: absolute;
   top: 1.6rem;
   left: 0;
-  background: rgba(214,214,214,1);
-  border: .1rem rgba(62,62,62,1) solid;
+  background: $trst-color-bg-detail;
+  border: solid .1rem $trst-color-brd-dark;
   border-top: none;
   z-index: 98;
 }
 @mixin li-menu-main {
-  border-left: .1rem rgba(255,255,255,1) solid;
-  border-right: .1rem rgba(170,170,170,1) solid;
+  border-left: solid .1rem $trst-color-bg-light;
   float: left;
   position: relative;
   font-size: 1.2rem;

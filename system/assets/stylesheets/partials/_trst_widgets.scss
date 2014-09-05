@@ -2,7 +2,7 @@
   background: none !important;
 }
 .ui-dialog-trst {
-  box-shadow: .5rem .5rem rgba(62,62,62,1);
+  box-shadow: .5rem .5rem $trst-color-bg-dark;
 }
 .ui-tooltip {
   font: 1.1rem Verdana, sans-serif !important;
@@ -18,7 +18,6 @@
   }
 }
 #deskDialog{
-  font-size: 1.2rem;
   [class*=ui-button-text]{
     padding: .1em .5rem;
     i {
@@ -26,9 +25,6 @@
       padding-right: .5rem;
       vertical-align: -5%;
     }
-  }
-  .info {
-    display: none
   }
   tr.pdb-05 td {
     padding-bottom: .5rem;
@@ -44,53 +40,82 @@
       padding: .1rem .5rem;
       &.link {
         &:hover {
-          background-color: rgba(255, 255, 190, 0.8);
+          background: $trst-color-bg-hlight;
+          color: $trst-color-txt-darker;
           cursor: pointer;
         }
       }
     }
+    & > input[type="text"], input[type="password"] {
+      width: 100%;
+    }
+    &[class*=ta-] {
+      padding: 0;
+    }
   }
-  thead, tbody tr:last-child td:last-child {
+  thead, tbody tr:last-child td:last-child:only-child {
     padding-bottom: .5rem;
   }
   tfoot tr td:last-child {
-    border-top: solid .1rem rgba(62, 62, 62, 1);
+    border-top: solid .1rem $trst-color-bg-dark;
     padding: .5rem .5rem 0;
   }
   tbody.inner {
-    border: solid .1rem  rgba(62, 62, 62, 1);
+    border: solid .1rem  $trst-color-bg-dark;
+    font-size: 1.2rem;
     tr {
       &:first-child {
         text-align: center;
       }
       &:nth-child(2) {
         td {
-          border-top: solid 1px rgba(62, 62, 62, 1);
+          border-top: solid 1px $trst-color-bg-dark;
         }
       }
       &:nth-child(odd) {
-        background-color: rgba(210, 210, 210, 1);
+        background-color: $trst-color-bg-detail;
       }
       &:last-child {
-        color: rgba(255, 0, 0, 1);
+        color: rgba(255, 0, 0, .9);
         font-weight: bold;
         text-align: center;
         td {
-          border-top: solid 1px rgba(62, 62, 62, 1);
+          border-top: solid 1px $trst-color-bg-dark;
         }
       }
     }
     td {
-      border-right: solid 1px rgba(62, 62, 62, 1);
+      border-right: solid 1px $trst-color-bg-dark;
       &:last-child {
         border: none;
       }
     }
   }
 }
+#xhr_info {
+  border: solid 1px $trst-color-bg-dark;
+  border-radius: .5rem;
+  color: $trst-color-txt-darker;
+  display: none;
+  max-width: 50rem;
+  padding: 1rem;
+  position: absolute;
+  top: .3rem;
+  left: 0;
+  z-index: 102;
+  &.info {
+    background-color: $trst-color-bg-info;
+  }
+  &.error, &.warning {
+    background: $trst-color-bg-warning;
+  }
+  &.detail{
+    background: $trst-color-bg-detail;
+  }
+}
 #relationsContainer {
   @include trst-relations-sortable;
   border-radius: .5rem;
-  box-shadow: .5rem .5rem rgba(62,62,62,1);
+  box-shadow: .5rem .5rem $trst-color-bg-dark;
   position: fixed;
 }

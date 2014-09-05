@@ -1,0 +1,7 @@
+:ruby
+  cls = flash[:msg][:msg][:cls] rescue 'loading'
+  txt = flash[:msg][:msg][:txt] rescue '...'
+
+%article#xhr_msg{class: cls}
+  %i{class: guess_icon(cls)}
+  %span= txt

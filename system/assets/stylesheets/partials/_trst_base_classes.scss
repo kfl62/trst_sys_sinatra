@@ -29,6 +29,9 @@
 [class~=red] {
   color: rgba(255,0,0,1);
 }
+[class~=blue] {
+  color: rgba(0,0,255,1);
+}
 [class~=pointer], [class~=link] {
   cursor: pointer;
 }

@@ -1,10 +1,9 @@
-%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null"}}
-%form{action: "/sys/#{@path}",method: "post"}
+%span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null"}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  = t('intro.create.main',data: mat(@object,'model_name'))
+form{action: "/sys/#{@path}",method: "post"}
   %table{:cellspacing => "0"}
-    %thead
-      %tr.pdb-05
-        %th{colspan: "3"}
-          %span.warning.width-350.ju= t('intro.create.main', data: mat(@object,'model_name'))
     = partial "#{@path}/form"
     %tfoot
       %tr

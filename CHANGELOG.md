@@ -3,6 +3,20 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.997**, v0.3.0 preparation
+   - feature date: **2014-09-05**
+   - bump version v0.2.997
+   - update CHANGELOG
+   - assets css, part of [issue #28][#28]
+   - views CRUD cleanup and fix [issue #29][#29]
+   - views new partial `_xhr_msg`, [issue #27][#27]
+   - views layout, [issue #27][#27]
+   - lib helper, [issue #27][#27]
+   - controllers [issue #27][#27]
+   - assets js, issues [#26][#26], [#27][#27]
+   - assets css, issues [#26][#26], [#27][#27]
+
+
 * **feature v0.2.996**, v0.3.0 preparation
    - feature date: **2014-08-31**
    - bump version v0.2.996
@@ -22,7 +36,7 @@ release date: **2014-xx-xx**
    - bump version v0.2.995
    - update CHANGELOG
    - Gemfile `prawn-table` fix [issue #21][#21]
-   - complet rewrite stylesheets, [issue #17][#17]
+   - complete rewrite stylesheets, [issue #17][#17]
    - assets css, cleanup
    - update js in `system`, [issue #17][#17], [issue #19][#19], [issue #20][#20]
    - update `system` layouts affected by [issue #17][#17]

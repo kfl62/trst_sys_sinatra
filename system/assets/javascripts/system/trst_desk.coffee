@@ -50,10 +50,9 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             return
           iconButtons: [
             {
-              text: "Help"
               icon: "ui-icon-info"
               click: (e) ->
-                alert 'Not ready! :)'
+                $('#xhr_info').toggle()
                 return
             }
           ]
@@ -86,8 +85,8 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           url : $url
           type: $type
           data: $data
-          beforeSend: ()-> Trst.msgShow()
-          complete:   ()-> Trst.msgHide()
+          beforeSend: ()-> $('#xhr_msg').html("<span>...</span>").addClass('loading').prepend("<i class='fa fa-refresh fa-spin fa-lg'></i>").show() #Trst.msgShow()
+          complete:   ()-> $('#xhr_msg').hide().removeAttr('class').html('') #Trst.msgHide()
         $request.fail (xhr)->
           Trst.publish('msg.desk.error', 'error', "#{xhr.status} #{xhr.statusText}")
           false
