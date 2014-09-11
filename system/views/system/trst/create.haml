@@ -2,7 +2,7 @@
 %article#xhr_info.info
   %i.fa.fa-info-circle.fa-lg.blue
   = t('intro.create.main',data: mat(@object,'model_name'))
-form{action: "/sys/#{@path}",method: "post"}
+%form{action: "/sys/#{@path}",method: "post"}
   %table{:cellspacing => "0"}
     = partial "#{@path}/form"
     %tfoot
