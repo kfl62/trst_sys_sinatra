@@ -1,3 +1,6 @@
+[class~=hidden] {
+  display: none;
+}
 [class~=em] {
   font-style: italic;
 }
@@ -34,4 +37,14 @@
 }
 [class~=pointer], [class~=link] {
   cursor: pointer;
+}
+@each $width in 2,4,6,8,10,15,20,25,30,35,40,45,50,55 {
+  [class~=w-#{$width}rem] {
+    width: 1rem * $width;
+  }
+}
+@each $width in 80,90,100 {
+  [class~=w-#{$width}pr] {
+    width: 1% * $width;
+  }
 }
