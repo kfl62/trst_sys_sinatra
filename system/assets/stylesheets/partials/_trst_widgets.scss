@@ -33,7 +33,7 @@
   table.inner {
     margin: auto;
   }
-  tr.pdb-05 td {
+  div, tr.pdb-05 td {
     padding-bottom: .5rem;
   }
   td {
@@ -91,7 +91,10 @@
       }
     }
     &:not([class*='w-']) > input[type="text"], input[type="password"] {
-      &:only-child {width: 100%;}
+      &:only-child {
+        width: 100%;
+        padding-left: .3rem;
+      }
     }
     &[class*=ta-] {
       padding: 0;
