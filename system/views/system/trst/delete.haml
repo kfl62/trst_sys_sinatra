@@ -4,6 +4,7 @@
   = t('intro.delete.main',data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "delete"}
   %table
+    %thead
     = partial "/#{@path}/show"
     %tfoot
       %tr
