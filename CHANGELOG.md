@@ -3,6 +3,20 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.998**, v0.3.0 preparation
+   - feature date: **2014-09-14**
+   - bump version v0.2.998
+   - update CHANGELOG
+   - assets css, fix #26, fix #28
+   - views CRUD ugly fix #30, needs fix in js v1.0.0
+   - models `Trst::DeliveryNote#freight_list` fix #34
+   - update CHANGELOG
+   - assets css, see issues #25, #26, #27, #28, #31
+   - views `system/tasks` missing help, fix #31
+   - views CRUD, cleanup fix #33
+   - views CRUD, `create` typo, fix #32
+
+
 * **feature v0.2.997**, v0.3.0 preparation
    - feature date: **2014-09-05**
    - bump version v0.2.997
