@@ -1,6 +1,7 @@
 %span#hidden_data{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id}}
 %form{action: "/sys/#{@path}",method: "put"}
-  %table{cellspacing: "0"}
+  %table
+    %thead
     = partial "#{@path}/form"
     %tfoot
       %tr

@@ -44,13 +44,18 @@ section.content {
         padding: 0;
         li {
           a {
-            display: block;
+            display: inline-block;
             padding: .2rem .5rem;
             &:focus, &:hover, &:active {
               background: $trst-color-bg-light;
               color: $trst-color-txt-darker;
               text-decoration: none;
             }
+          }
+          span.help {
+            color: rgba(255,255,255,.5);
+            float: right;
+            cursor: pointer;
           }
         }
       }

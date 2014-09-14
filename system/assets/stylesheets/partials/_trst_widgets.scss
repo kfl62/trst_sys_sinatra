@@ -1,13 +1,16 @@
-.ui-widget-overlay {
+[class*=ui-widget-overlay] {
   background: none !important;
 }
-.ui-dialog-trst {
+[class*=ui-dialog-trst] {
   box-shadow: .5rem .5rem $trst-color-bg-dark;
 }
-.ui-tooltip {
+[class*=ui-tooltip] {
   font: 1.1rem Verdana, sans-serif !important;
   max-width: 100% !important;
   padding: .5rem !important;
+}
+[class*=ui-widget] {
+  font-size: 1.2rem;
 }
 #loginDialog {
   span {
@@ -18,15 +21,19 @@
   }
 }
 #deskDialog{
-  [class*=ui-button-text]{
+  [class*=ui-button-text] {
+    line-height: 1;
     padding: .1em .5rem;
-    i {
+    i:not(.fa-only) {
       font-size: 1.4rem;
       padding-right: .5rem;
       vertical-align: -5%;
     }
   }
-  tr.pdb-05 td {
+  table.inner {
+    margin: auto;
+  }
+  div, tr.pdb-05 td {
     padding-bottom: .5rem;
   }
   td {
@@ -35,9 +42,9 @@
       margin: .3rem 0;
     }
     & > span {
-      display: block;
       max-width: 55rem;
       padding: .1rem .5rem;
+      &:only-child {display: block;}
       &.link {
         &:hover {
           background: $trst-color-bg-hlight;
@@ -46,8 +53,48 @@
         }
       }
     }
-    & > input[type="text"], input[type="password"] {
-      width: 100%;
+    & > input[type="radio"] {
+      vertical-align: middle;
+      margin: .2rem 2rem 0;
+      &:before {
+        display: inline-block;
+        position: relative;
+        bottom: .2rem;
+      }
+      &.true_ro {
+        &:before {
+          text-indent: -2rem;
+          content: 'Da';
+        }
+      }
+      &.false_ro {
+        &:before {
+          text-indent: -2rem;
+          content: 'Nu';
+        }
+      }
+    }
+    & > detail {
+      border: solid 1px $trst-color-bg-dark;
+      border-radius: .5rem;
+      color: $trst-color-txt-darker;
+      display: inline-block;
+      padding: 1rem;
+      &.info {
+        background-color: $trst-color-bg-info;
+      }
+      &.warning {
+        background-color: $trst-color-bg-warning;
+      }
+      &.detail{
+        background: $trst-color-bg-detail;
+      }
+    }
+    &:not([class*='w-']) > input[type="text"], input[type="password"] {
+      &:only-child {
+        width: 100%;
+        padding-left: .3rem;
+      }
     }
     &[class*=ta-] {
       padding: 0;
@@ -62,7 +109,6 @@
   }
   tbody.inner {
     border: solid .1rem  $trst-color-bg-dark;
-    font-size: 1.2rem;
     tr {
       &:first-child {
         text-align: center;
@@ -95,13 +141,12 @@
 #xhr_info {
   border: solid 1px $trst-color-bg-dark;
   border-radius: .5rem;
+  box-shadow: .5rem .5rem $trst-color-bg-dark;
   color: $trst-color-txt-darker;
   display: none;
   max-width: 50rem;
   padding: 1rem;
-  position: absolute;
-  top: .3rem;
-  left: 0;
+  position: fixed;
   z-index: 102;
   &.info {
     background-color: $trst-color-bg-info;
