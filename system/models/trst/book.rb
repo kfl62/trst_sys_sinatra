@@ -111,9 +111,9 @@ module Trst
     field :order,             type: Integer
     field :access_lvl,        type: Integer,                            default: 3
     field :access_grp,        type: Array,                              default: ['public']
-    field :name,              localize: true
-    field :title,             localize: true
-    field :content,           localize: true
+    field :name,              type: String,                             localize: true
+    field :title,             type: String,                             localize: true
+    field :content,           type: String,                             localize: true
 
     validates_presence_of :slug
 

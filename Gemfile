@@ -9,7 +9,7 @@ gem 'rack-rewrite', require: "rack/rewrite"
 gem 'coffee-script'
 gem 'bcrypt'
 gem 'haml'
-gem 'sass', '3.4.1'
+gem 'sass'
 gem 'compass'
 gem 'mongoid', :git => 'https://github.com/kfl62/mongoid.git', :branch => '3.1.0-stable'
 gem 'rdiscount'

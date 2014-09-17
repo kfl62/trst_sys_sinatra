@@ -1,6 +1,15 @@
 ### v0.3.0
 
-release date: **2014-xx-xx**
+release date: **2014-09-17**
+
+
+* **feature v0.2.998**, v0.3.0 preparation
+   - feature date: **2014-09-xx**
+   - bump version v0.2.999
+   - update CHANGELOG
+   - Gemfile, upgrade `sass`
+   - assets css update
+   - models `Trst::Book` missing `type: String`
 
 
 * **feature v0.2.998**, v0.3.0 preparation
