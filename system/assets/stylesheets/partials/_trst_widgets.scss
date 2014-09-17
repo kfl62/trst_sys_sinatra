@@ -83,7 +83,7 @@
       &.info {
         background-color: $trst-color-bg-info;
       }
-      &.warning {
+      &.error, &.warning {
         background-color: $trst-color-bg-warning;
       }
       &.detail{
