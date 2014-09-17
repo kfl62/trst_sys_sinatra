@@ -24,13 +24,13 @@ module Trst
     class << self
       # @todo Document this method
       def page(id)
-        book = where(:'chapters.pages._id'  => Moped::BSON::ObjectId.from_string("#{id}")).first
-        chapter = book.chapters.where(:'pages._id' => Moped::BSON::ObjectId.from_string("#{id}")).first
+        book = where(:'chapters.pages._id'  => BSON::ObjectId.from_string("#{id}")).first
+        chapter = book.chapters.where(:'pages._id' => BSON::ObjectId.from_string("#{id}")).first
         page = chapter.pages.find(id)
       end
       # @todo Document this method
       def chapter(id)
-        book = where(:'chapters._id'  => Moped::BSON::ObjectId.from_string("#{id}")).first
+        book = where(:'chapters._id'  => BSON::ObjectId.from_string("#{id}")).first
         chapter = book.chapters.find(id)
       end
       # @todo Document this method

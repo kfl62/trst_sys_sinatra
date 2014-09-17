@@ -17,12 +17,12 @@ module Trst
     class << self
       # @todo
       def unit_by_unit_id(i)
-        i = Moped::BSON::ObjectId(i) if i.is_a?(String)
+        i = BSON::ObjectId(i) if i.is_a?(String)
         find_by(:'units._id' => i).units.find(i)
       end
       # @todo
       def person_by_person_id(i)
-        i = Moped::BSON::ObjectId(i) if i.is_a?(String)
+        i = BSON::ObjectId(i) if i.is_a?(String)
         find_by(:'people._id' => i).people.find(i)
       end
       # @todo
