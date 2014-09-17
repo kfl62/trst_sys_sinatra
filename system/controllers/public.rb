@@ -27,7 +27,7 @@ module Trst
 
     get '/*' do |page|
       method, id = params[:splat][0].split('_')
-      if (Moped::BSON::ObjectId.from_string(id) rescue false)
+      if (BSON::ObjectId.from_string(id) rescue false)
         @content   = page_content(id)
         markdown @content
       else

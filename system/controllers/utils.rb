@@ -21,7 +21,7 @@ module Trst
       if Date.today == Date.new(*params[:cdate].split('-').map(&:to_i))
         if user = User.authenticate(params[:name], params[:password])
           session[:user] = user.id
-          user.set(:last_login, Time.now)
+          user.set(last_login: Time.now)
           user.login(request.ip) if user.methods.include?(:login)
           flash[:msg] = {msg: {txt: t('msg.login.start'), cls: "info"}}
           redirect "#{lp}/sys"
