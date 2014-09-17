@@ -27,6 +27,7 @@ namespace :db do
     end
     admin = Trst::User.find_by(login_name: 'admin')
     tasks.each_pair do |goal,attributes|
+      goal = goal.gsub "Mdl::", "#{Trst.firm.models_path[1].titleize}::"
       task = Trst::Task.find_or_create_by(goal: goal)
       task.update_attributes(attributes)
       task.users << admin

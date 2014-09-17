@@ -1,5 +1,28 @@
 (function() {
   define(['jquery-ui', 'system/trst_desk_buttons', 'system/trst_desk_select', 'system/trst_desk_tabs'], function() {
+    (function($, window, document) {
+      return $.widget("app.dialog", $.ui.dialog, {
+        options: {
+          iconButtons: []
+        },
+        _create: function() {
+          var $titlebar;
+          this._super();
+          $titlebar = this.uiDialog.find(".ui-dialog-titlebar");
+          $.each(this.options.iconButtons, function(i, v) {
+            var $button, right;
+            $button = $("<button/>").text(this.text);
+            right = $titlebar.find("[role='button']:last").css("right");
+            $button.button({
+              icons: {
+                primary: this.icon
+              },
+              text: false
+            }).addClass("ui-dialog-titlebar-close").css("right", (parseInt(right) + 22) + "px").click(this.click).appendTo($titlebar);
+          });
+        }
+      });
+    })(jQuery, window, document);
     $.extend(true, Trst, {
       desk: {
         readData: function() {
@@ -26,8 +49,9 @@
           var $desk;
           $desk = $('#deskDialog').length ? $('#deskDialog') : $('<div id="deskDialog"></div>');
           $desk.html(data).dialog({
-            dialogClass: 'ui-dialog-shadow',
+            dialogClass: 'ui-dialog-trst',
             autoOpen: false,
+            resizable: false,
             modal: true,
             minHeight: 10,
             height: 'auto',
@@ -35,12 +59,20 @@
             position: {
               my: 'left top',
               at: 'left top',
-              of: '#menu',
+              of: 'nav',
               collision: 'none'
             },
             close: function() {
               $(this).remove();
-            }
+            },
+            iconButtons: [
+              {
+                icon: "ui-icon-info",
+                click: function(e) {
+                  $('#xhr_info').toggle();
+                }
+              }
+            ]
           });
         },
         downloadError: function(data) {
@@ -48,7 +80,7 @@
           $download = $('#downloadDialog').length ? $('#downloadDialog') : $('<div id="downloadDialog" class="small"></div>');
           $data = Trst.i18n.msg.report.error.replace('%{data}', data);
           $download.html($data).dialog({
-            dialogClass: 'ui-dialog-shadow',
+            dialogClass: 'ui-dialog-trst',
             autoOpen: false,
             modal: true,
             height: 'auto',
@@ -64,8 +96,7 @@
             },
             title: Trst.i18n.title.report.error
           });
-          $download.dialog('open');
-          return $(".ui-widget-overlay").css('height', Trst.desk.height);
+          return $download.dialog('open');
         },
         init: function(url, type, data) {
           var $data, $request, $type, $url;
@@ -77,10 +108,10 @@
             type: $type,
             data: $data,
             beforeSend: function() {
-              return Trst.msgShow();
+              return $('#xhr_msg').html("<span>...</span>").addClass('loading').prepend("<i class='fa fa-refresh fa-spin fa-lg'></i>").show();
             },
             complete: function() {
-              return Trst.msgHide();
+              return $('#xhr_msg').hide().removeAttr('class').html('');
             }
           });
           $request.fail(function(xhr) {
@@ -102,7 +133,6 @@
                   title: $("<span>" + ($title.replace('%{data}', $tdata)) + "</span>").text()
                 });
                 $desk.dialog('open');
-                $(".ui-widget-overlay").css('height', Trst.desk.height);
                 if ($('button').length) {
                   Trst.desk.buttons.init();
                 }

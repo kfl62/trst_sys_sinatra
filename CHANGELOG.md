@@ -1,3 +1,137 @@
+## v0.3.0
+
+* release date: **2014-09-16**
+   - bump version v0.3.0
+   - update CHANGELOG
+
+
+* **feature v0.2.998**, v0.3.0 preparation
+   - feature date: **2014-09-xx**
+   - bump version v0.2.999
+   - update CHANGELOG
+   - Gemfile, upgrade `sass`
+   - assets css update
+   - models `Trst::Book` missing `type: String`
+
+
+* **feature v0.2.998**, v0.3.0 preparation
+   - feature date: **2014-09-14**
+   - bump version v0.2.998
+   - update CHANGELOG
+   - assets css, fix #26, fix #28
+   - views CRUD ugly fix #30, needs fix in js v1.0.0
+   - models `Trst::DeliveryNote#freight_list` fix #34
+   - update CHANGELOG
+   - assets css, see issues #25, #26, #27, #28, #31
+   - views `system/tasks` missing help, fix #31
+   - views CRUD, cleanup fix #33
+   - views CRUD, `create` typo, fix #32
+
+
+* **feature v0.2.997**, v0.3.0 preparation
+   - feature date: **2014-09-05**
+   - bump version v0.2.997
+   - update CHANGELOG
+   - assets css, part of [issue #28][#28]
+   - views CRUD cleanup and fix [issue #29][#29]
+   - views new partial `_xhr_msg`, [issue #27][#27]
+   - views layout, [issue #27][#27]
+   - lib helper, [issue #27][#27]
+   - controllers [issue #27][#27]
+   - assets js, issues [#26][#26], [#27][#27]
+   - assets css, issues [#26][#26], [#27][#27]
+
+
+* **feature v0.2.996**, v0.3.0 preparation
+   - feature date: **2014-08-31**
+   - bump version v0.2.996
+   - update CHANGELOG
+   - views `system` default CRUD, use new `button|td_buttonset` help
+   - assets: css, updated
+   - assets js, use FontAwasome by default, for buttons [issue #20][#20]
+   - lib `trst_helper` button, buttonset, fix [issue #23][#23]
+   - models `Trst::Page` slug nil issue (todo ???)
+   - controller `system` require Prawn dependencies, fix [issue #22][#22]
+   - views `login.haml` adapt to new css
+   - Gemfile cleanup, `gem 'sass', '3.4.1'` [issue #24][#24]
+
+
+* **feature v0.2.995**, v0.3.0 preparation
+   - feature date: **2014-08-29**
+   - bump version v0.2.995
+   - update CHANGELOG
+   - Gemfile `prawn-table` fix [issue #21][#21]
+   - complete rewrite stylesheets, [issue #17][#17]
+   - assets css, cleanup
+   - update js in `system`, [issue #17][#17], [issue #19][#19], [issue #20][#20]
+   - update `system` layouts affected by [issue #17][#17]
+   - update `public` layouts, pages affected by [issue #17][#17]
+   - update js and views in `public`, [issue #19][#19], [issue #20][#20]
+   - web components install directory [issue #16][#16]
+   - update `.gitignore` .bowerrc
+
+
+* **feature v0.2.994**, v0.3.0 preparation, [issue #11][#11], [issue #12][#12], [issue #13][#13], [issue #14][#14], [issue #15][#15]
+   - feature date: **2014-08-21**
+   - bump version v0.2.994
+   - update CHANGELOG
+   - update `.gitignore`
+   - lib `compass_plugin` output settings
+   - aseets css, `_trst_dialog` custom style for jQuery tooltip
+   - assets js, add tooltip [issue #11][#11], login windows position, upgrade [issue #14][#14]
+   - assets js, `main.js` upgrade JQuery 2.1.1, JQuery UI 1.11.1,[issue #14][#14]
+   - views `system`,[issue #14][#14]
+   - views `public`,[issue #14][#14], [issue #15][#15]
+   - assets `webcomponents` empty folder (fill with bower),  [issue #13][#13]
+   - controllers `assets.rb` switch to scss
+   - assets `select2.css|js`,  update 3.5.2, [issue #14][#14]
+   - fonts `font-awesome` update 4.1.0, [issue #14][#14]
+   - assets `font-awesome.css`,  update 4.1.0, [issue #14][#14]
+   - assets `application.css`,  use unique style in modules, fix [issue #12][#12]
+
+
+* **feature v0.2.993**, v0.3.0 preparation
+   - feature date: **2014-08-13**
+   - bump version v0.2.993
+   - update CHANGELOG
+   - models `Trst::FreightStock` new scope `:stock_now`
+   - models `Trst::Stock` skeleton
+   - models `Trst::Payment` rename field `text` -> `expl`
+   - models `Trst::DeliveryNote|Expenditure|Invoice|Sorting` cleanup, adapt `#increment_name`, `freights_list`
+   - models `Trst::Cassation|Consumption|Grn` remove `dependent: :destroy`
+
+
+* **feature v0.2.992**, v0.3.0 preparation
+   - feature date: **2014-06-10**
+   - bump version v0.2.992
+   - update CHANGELOG
+   - models `Clns` module related changes
+   - lib `trst_main_helper` fix [issue #10][#10]
+
+
+* **feature v0.2.991**, v0.3.0 preparation
+   - feature date: **2014-06-08**
+   - bump version v0.2.991
+   - update CHANGELOG
+   - models all, create skeleton, update relations, beutify
+
+
+* **feature v0.2.990**, v0.3.0 preparation
+   - feature date: **2014-06-05**
+   - bump version v0.2.990
+   - update CHANGELOG
+   - prepare for v0.3.0
+   - models `Trst::PartnerFirm|Person` cleanup, skeleton
+   - models `TrstFreight|In|Out|Stock` cleanup, skeleton
+   - models `Trst::Firm` fix [issue #9][#9]
+   - lib helpers, cleanup, new helpers
+   - config `seed/tasks.yml` add tasks
+   - models `Trst::PartnerPerson` skeleton, overwrite in modules
+   - models `Trst::PartnerFirm` skeleton, overwrite in modules
+   - models `Trst::Unit` skeleton, use as embedded
+   - models `Trst::Bank` skeleton, use as embedded
+
+
 ## v0.2.17
 release date: **2014-06-01**
 

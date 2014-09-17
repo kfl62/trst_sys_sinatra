@@ -8,16 +8,14 @@ gem 'rack-rewrite', require: "rack/rewrite"
 # Component requirements
 gem 'coffee-script'
 gem 'bcrypt'
-gem 'compass'
 gem 'haml'
+gem 'sass'
+gem 'compass'
 gem 'mongoid', :git => 'https://github.com/kfl62/mongoid.git', :branch => '3.1.0-stable'
 gem 'rdiscount'
 gem 'prawn'
 gem 'prawn-templates'
-# Disable gruff for now (deploy problem wrong version of ImageMagick on my server)
-#gem 'rmagick'
-#gem 'gruff', github: 'topfunky/gruff'
-gem 'googlecharts'
+gem 'prawn-table'
 
 # Development requirements
 group :development do

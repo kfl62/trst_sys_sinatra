@@ -1,8 +1,5 @@
 %form{action: "/utils/login",method: "post"}
-  %table{cellspacing: "0"}
-    %thead
-      %tr
-        %td{colspan: "2"}
+  %table
     %tbody
       %tr
         %td
@@ -16,6 +13,8 @@
           %input.ui-state-default{type: "password",name: "password"}
     %tfoot
       %tr
-        %td.ce{:colspan => "2"}
+        %td.ta-ce{:colspan => "2"}
           %input.cdate{type: 'hidden',name: 'cdate'}
-          %button{type: "submit",data: {icon: "ui-icon-unlocked"}}= t('button.login')
+          %button{type: "submit"}
+            %i.fa.fa-unlock.fa-lg
+            = t('button.login')

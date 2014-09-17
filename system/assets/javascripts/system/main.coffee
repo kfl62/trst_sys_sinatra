@@ -30,20 +30,20 @@ define ['/javascripts/libs/jquery.fileDownload.js','libs/trst_msg','system/trst_
             delete Trst.i18n.login
             return
           'json')
-      $menuItems = $('#menu.system ul li a').click ()->
+      $menuItems = $('nav.menu ul li a').click ()->
         $('#xhr_content').load "/sys/#{$(@).attr('id')}"
         false
       .filter('[id^="page"]').click ()->
         $('#xhr_content').load "/sys/#{$(@).attr('id')}"
         $('#xhr_tasks').load "/sys/tasks/#{$(@).attr('id').split('_')[1]}"
         false
-      $tasks = $('#sidebar.system').on 'click', 'ul li a', ()->
+      $tasks = $('aside.sidebar').on 'click', 'ul li a', ()->
         $url = $(@).attr('href')
         Trst.lst.setItem 'task_id', $(@).attr('id')
         $.ajax({type: 'POST',url: "/sys/session/task_id/#{$(@).attr('id')}",async: false})
         Trst.desk.init($url)
         false
-      $helpers = $('#sidebar.system').on 'click', 'ul li span', ()->
+      $helpers = $('aside.sidebar').on 'click', 'ul li span', ()->
         $.get "/sys/help/#{$(@).prev('a').attr('id')}", (data)->
           $('#xhr_content').html(data)
           return
@@ -51,7 +51,8 @@ define ['/javascripts/libs/jquery.fileDownload.js','libs/trst_msg','system/trst_
       $helpClose = $('#content').on 'click', '#xhr_content p.close', ()->
         $('#xhr_content').load "/sys/page_#{Trst.lst.page_id}"
         return
-      $.ui.dialog.prototype._allowInteraction = (e)->
-        !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-drop').length
+      $(document).tooltip
+        content: ()->
+          $(@).attr('title').replace(/\n/g, "<br/>")
       $log('Trst.init() OK...')
   Trst

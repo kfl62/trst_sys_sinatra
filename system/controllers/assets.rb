@@ -13,7 +13,7 @@ module Trst
       # @todo Document this method
       get '/stylesheets/:name.css' do
         content_type 'text/css', :charset => 'utf-8'
-        sass params[:name].to_sym, Compass.sass_engine_options
+        scss params[:name].to_sym, Compass.sass_engine_options
       end
     end
     # #Coffeescript Handler

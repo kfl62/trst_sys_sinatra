@@ -2,31 +2,25 @@
   define(['jquery-ui'], function() {
     $.extend(true, Trst, {
       login: function(node) {
-        var $login, $position, button;
-        button = function() {
-          $('#loginDialog').find('button').each(function() {
-            var $button;
-            $button = $(this);
-            $button.button({
-              icons: {
-                primary: $button.data('icon')
-              }
-            });
-          });
+        var $login, init;
+        init = function() {
           $('.cdate').val($.datepicker.formatDate('yy-mm-dd', new Date()));
           return $('input').first().focus();
         };
         $login = $('<div id="loginDialog"></div>');
-        $position = $('#sidebar').position();
-        $login.load(node.attr('href'), button).dialog({
-          dialogClass: 'ui-dialog-shadow',
+        $login.load(node.attr('href'), init).dialog({
           autoOpen: false,
           modal: true,
           minHeight: 10,
           height: 'auto',
-          width: 'auto',
-          position: [$position.left, $position.top - 100],
-          title: node.attr('title'),
+          width: 240,
+          resizable: false,
+          position: {
+            my: 'right top',
+            at: 'right top+20',
+            of: 'body'
+          },
+          title: node.data('title'),
           close: function(ev, ui) {
             $(this).remove();
           }

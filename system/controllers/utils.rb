@@ -23,14 +23,14 @@ module Trst
           session[:user] = user.id
           user.set(:last_login, Time.now)
           user.login(request.ip) if user.methods.include?(:login)
-          flash[:msg] = {msg: {txt: t('msg.login.start'), class: "loading"}}
+          flash[:msg] = {msg: {txt: t('msg.login.start'), cls: "info"}}
           redirect "#{lp}/sys"
         else
-          flash[:msg] = {msg: {txt: t('msg.login.error'), class: "error"}}
+          flash[:msg] = {msg: {txt: t('msg.login.error'), cls: "error"}}
           redirect "#{lp}/"
         end
       else
-        flash[:msg] = {msg: {txt: t('msg.login.error_date'), class: "error"}}
+        flash[:msg] = {msg: {txt: t('msg.login.error_date'), cls: "error"}}
         redirect "#{lp}/"
       end
     end
@@ -39,16 +39,16 @@ module Trst
       user = User.find(session[:user])
       user.logout if user.methods.include?(:logout)
       session[:user] = nil
-      flash[:msg] = {msg: {txt:t('msg.login.end'), class: "loading"}}
+      flash[:msg] = {msg: {txt:t('msg.login.end'), cls: "info"}}
       redirect "#{lp}/"
     end
     # @todo Document this method
     post '/msg' do
       w, k, d = params[:what], params[:kind], params[:data]
       if w == 'flash'
-        retval = flash[:msg] || {msg: {txt: t('msg.loading'), class: "loading"}}
+        retval = flash[:msg] || {msg: {txt: t('msg.loading'), cls: "loading"}}
       else
-        retval = {msg: {txt: t(w, data: d), class: k}}
+        retval = {msg: {txt: t(w, data: d), cls: k}}
       end
       retval.to_json
     end
@@ -56,7 +56,7 @@ module Trst
     get '/lang/:lang' do |l|
       I18n.locale = l.to_sym
       path = session[:user].nil? ?  "#{lp}/" :  "#{lp}/sys"
-      flash[:msg] = {msg: {txt: t('msg.lang.start'), class: "info"}}
+      flash[:msg] = {msg: {txt: t('msg.lang.start'), cls: "info"}}
       redirect path
     end
     # @todo Document this method

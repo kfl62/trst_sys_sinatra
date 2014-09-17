@@ -1,23 +1,18 @@
 !!! 5
 %html
   = partial('layout/html-head')
-
   %body{id: "system",data: {js_module_path: Trst.firm.js_path,admin: @current_user.admin?.to_s}}
-    #main.wrap
-      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
-      %header#header.system
+    %section.header
+      %header
         = partial('layout/header')
-
-      %nav#menu.system
+      %nav.menu
         = partial('layout/menu')
-
-      %section#content
+    %section.content
+      = partial('layout/xhr_msg')
+      %aside.main
         %article#xhr_content
           = yield
-      %section#sidebar.system
+      %aside.sidebar
         = partial('layout/sidebar')
-
-      %section#main_footer.wrap
-
-    %footer#footer.wrap
+    %footer.ce
       = partial('layout/footer')

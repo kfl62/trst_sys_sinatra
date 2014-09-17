@@ -1,4 +1,21 @@
 define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system/trst_desk_tabs'], ()->
+  do ($ = jQuery, window, document) ->
+    $.widget "app.dialog", $.ui.dialog,
+      options:
+        iconButtons: []
+      _create: ->
+        @_super()
+        $titlebar = @uiDialog.find(".ui-dialog-titlebar")
+        $.each @options.iconButtons, (i, v) ->
+          $button = $("<button/>").text(@text)
+          right = $titlebar.find("[role='button']:last").css("right")
+          $button.button(
+            icons:
+              primary: @icon
+            text: false
+          ).addClass("ui-dialog-titlebar-close").css("right", (parseInt(right) + 22) + "px").click(@click).appendTo $titlebar
+          return
+        return
   $.extend true, Trst,
     desk:
       readData: ()->
@@ -16,8 +33,9 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
         $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
         $desk.html(data)
         .dialog
-          dialogClass: 'ui-dialog-shadow'
+          dialogClass: 'ui-dialog-trst'
           autoOpen: false
+          resizable: false
           modal: true
           minHeight: 10
           height: 'auto'
@@ -25,18 +43,26 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           position:
             my: 'left top'
             at: 'left top'
-            of: '#menu'
+            of: 'nav'
             collision: 'none'
           close: ()->
-            $(this).remove()
+            $(@).remove()
             return
+          iconButtons: [
+            {
+              icon: "ui-icon-info"
+              click: (e) ->
+                $('#xhr_info').toggle()
+                return
+            }
+          ]
         return
       downloadError: (data)->
         $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
         $data = Trst.i18n.msg.report.error. replace '%{data}', data
         $download.html($data)
         .dialog
-          dialogClass: 'ui-dialog-shadow'
+          dialogClass: 'ui-dialog-trst'
           autoOpen: false
           modal: true
           height: 'auto'
@@ -47,11 +73,10 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             of: '#menu'
             collision: 'none'
           close: ()->
-            $(this).remove()
+            $(@).remove()
             return
           title: Trst.i18n.title.report.error
         $download.dialog('open')
-        $(".ui-widget-overlay").css('height',Trst.desk.height)
       init: (url,type,data)->
         $url  = url
         $type = if type? then type.toUpperCase() else "GET"
@@ -60,8 +85,8 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           url : $url
           type: $type
           data: $data
-          beforeSend: ()-> Trst.msgShow()
-          complete:   ()-> Trst.msgHide()
+          beforeSend: ()-> $('#xhr_msg').html("<span>...</span>").addClass('loading').prepend("<i class='fa fa-refresh fa-spin fa-lg'></i>").show() #Trst.msgShow()
+          complete:   ()-> $('#xhr_msg').hide().removeAttr('class').html('') #Trst.msgHide()
         $request.fail (xhr)->
           Trst.publish('msg.desk.error', 'error', "#{xhr.status} #{xhr.statusText}")
           false
@@ -75,7 +100,6 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               $tdata = Trst.desk.hdo.title_data || Trst.desk.hdo.model_name
               $desk.dialog title: $("<span>#{$title.replace('%{data}',$tdata)}</span>").text()
               $desk.dialog('open')
-              $(".ui-widget-overlay").css('height',Trst.desk.height)
               Trst.desk.buttons.init() if $('button').length
               Trst.desk.select.init() if Trst.desk.hdf.find('select').length
               Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length

@@ -172,6 +172,41 @@ module Trst
       name
     end
     # @todo
+    def guess_icon(action)
+      i = ['fa']
+      case action
+      when /query|filter/
+        i.push 'fa-search'
+      when /relations/
+        i.push 'fa-arrows-h'
+      when /create|add/
+        i.push 'fa-plus-square-o'
+      when /show|view/
+        i.push 'fa-file-text-o'
+      when /edit/
+        i.push 'fa-edit'
+      when /delete|remove/
+        i.push 'fa-minus-square-o', 'red'
+      when /save/
+        i.push 'fa-floppy-o'
+      when /print|pdf/
+        i.push 'fa-print'
+      when /cancel/
+        i.push 'fa-ban'
+      when /info/
+        i.push 'fa-info-circle', 'fa-lg', 'blue'
+      when /warning/
+        i.push 'fa-fa-exclamation-triangle', 'fa-lg'
+      when /error/
+        i.push 'fa-bomb', 'fa-lg'
+      when /loading/
+        i.push 'fa-refresh', 'fa-spin', 'fa-lg'
+      else
+        i.push 'fa-bomb', 'fa-lg'
+      end
+      i.join(' ')
+    end
+    # @todo
     def label_for(model,attribute,options = {})
       order,type,label = options.values_at(:order,:type,:label)
       #path = model.class.name.underscore
@@ -289,6 +324,24 @@ module Trst
         td_label_for   model,attribute,options
         td_select_for  model,attribute,options
         td_error_for   model,attribute,options
+      end
+    end
+    # @todo
+    def button(action,options = {})
+      data  = {action: action, icon: guess_icon(action)}
+      extra = options.delete(action.to_sym)
+      text  = extra.delete(:text) if extra
+      text ||= t("button.#{action}")
+      data.merge! extra if extra
+      haml_tag :button, type: 'button', data: data do
+        haml_concat text
+      end
+    end
+    # @todo
+    def td_buttonset(buttons = [], options = {}, colspan = false)
+      style = ['buttonset'].push(options.delete(:style)).compact.join(' ')
+      haml_tag :td, class: style, colspan: colspan do
+        buttons.each{|b| button(b, options)}
       end
     end
     # @todo

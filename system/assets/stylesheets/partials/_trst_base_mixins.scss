@@ -1,0 +1,89 @@
+@font-face{
+  font-family: 'EmbossedBlackWideNormal';
+  src: url('#{$trst-font-path}/Embossed_Black_Wide-webfont.eot');
+  src: url('#{$trst-font-path}/Embossed_Black_Wide-webfont.woff') format('woff'),
+    url('#{$trst-font-path}/Embossed_Black_Wide-webfont.ttf') format('truetype'),
+    url('#{$trst-font-path}/Embossed_Black_Wide-webfont.svg') format('svg');
+}
+@mixin background-image-file($file,$color: transparent){
+  background: {
+    image: image_url(unquote($file));
+    color: $color;
+    position: .5rem center;
+    repeat: no-repeat;
+  };
+}
+@mixin nav-menu {
+  background: {
+    image: image_url(unquote("menu_bckgrnd.png"));
+    position: center right;
+    repeat: repeat-x;
+  };
+  border-top: solid .1rem $trst-color-bg-light;
+  border-bottom: solid .1rem $trst-color-bg-light;
+  line-height: .7rem;
+  margin-bottom: .5rem;
+}
+@mixin ul-menu-main {
+  border-right: solid .1rem $trst-color-bg-light;
+  display: inline-block;
+  margin: 0 1rem;
+  padding: 0;
+  &:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }
+}
+@mixin ul-menu-submenu {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 15rem;
+  position: absolute;
+  top: 1.6rem;
+  left: 0;
+  background: $trst-color-bg-detail;
+  border: solid .1rem $trst-color-brd-dark;
+  border-top: none;
+  z-index: 98;
+}
+@mixin li-menu-main {
+  border-left: solid .1rem $trst-color-bg-light;
+  float: left;
+  position: relative;
+  font-size: 1.2rem;
+  line-height: 1.1rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+@mixin trst-relations-sortable {
+  ul:not([class~=select2-choices]) {
+    border-radius: .5rem;
+    background-color: rgba(230,230,230,1);
+    border: .1rem solid rgba(211,211,211,1);
+    margin: 0;
+    padding: 0 0 3rem;
+    float: left;
+    max-height: 25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    span {
+      display: inline-block;
+      margin: .5rem;
+      min-width: 15rem;
+    }
+    li {
+      cursor: e-resize;
+      padding: 0 1.5rem;
+      margin: 0 .3rem;
+      span {
+        margin: .2rem;
+      }
+    }
+  }
+}

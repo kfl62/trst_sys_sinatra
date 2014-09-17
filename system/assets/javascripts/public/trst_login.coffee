@@ -1,28 +1,24 @@
 define ['jquery-ui'], ()->
   $.extend true,Trst,
     login: (node)->
-      button = ()->
-       $('#loginDialog').find('button').each ()->
-          $button = $(this)
-          $button.button
-            icons:
-              primary: $button.data('icon')
-          return
+      init = ()->
         $('.cdate').val($.datepicker.formatDate('yy-mm-dd', new Date()))
         $('input').first().focus()
       $login = $('<div id="loginDialog"></div>')
-      $position = $('#sidebar').position()
       $login
-        .load(node.attr('href'), button)
+        .load(node.attr('href'), init)
         .dialog
-          dialogClass: 'ui-dialog-shadow'
           autoOpen: false
           modal: true
           minHeight: 10
           height: 'auto'
-          width: 'auto'
-          position: [$position.left, $position.top - 100]
-          title: node.attr('title')
+          width: 240
+          resizable: false
+          position:
+            my: 'right top'
+            at: 'right top+20'
+            of: 'body'
+          title: node.data('title')
           close: (ev,ui)->
             $(this).remove()
             return

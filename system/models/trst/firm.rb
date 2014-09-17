@@ -5,10 +5,10 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :name,                type: Array,         default: ['ShortName','FullName','OfficialName']
-    field :identities,          type: Hash,          default: {"caen" => "xxx", "chambcom" => "J", "fiscal" => "RO", "account" => "xxx", "itm" => "xxx", "internet" => "xxx.xxx.xxx.xxx", "cod" => "XXX"}
-    field :contact,             type: Hash,          default: {"phone" => "xxxx", "fax" => "xxx", "email" => "xx@xxx.xxx", "website" => "xxxx"}
-    field :about,               type: Hash,          default: {"scope" => "Scope ...?...", "descript" => "Descript ...?..."}
+    field :name,              type: Array,                              default: ['ShortName','FullName','OfficialName']
+    field :identities,        type: Hash,                               default: {"caen" => "xxx", "chambcom" => "J", "fiscal" => "RO", "account" => "xxx", "itm" => "xxx", "internet" => "xxx.xxx.xxx.xxx", "cod" => "XXX"}
+    field :contact,           type: Hash,                               default: {"phone" => "xxxx", "fax" => "xxx", "email" => "xx@xxx.xxx", "website" => "xxxx"}
+    field :about,             type: Hash,                               default: {"scope" => "Scope ...?...", "descript" => "Descript ...?..."}
 
     validate :'identities_fiscal_uniq'
 
@@ -22,7 +22,7 @@ module Trst
     # @todo
     def identities_fiscal_uniq
       return if !identities.key?('fiscal')
-      if self.class.where(:'identities.fiscal' => /#{Regexp.escape(identities['fiscal'])}/i) && new_record?
+      if self.class.find_by(:'identities.fiscal' => /#{Regexp.escape(identities['fiscal'])}/i) && new_record?
         self.errors.add(:'identities.fiscal', :taken)
       end
     end
