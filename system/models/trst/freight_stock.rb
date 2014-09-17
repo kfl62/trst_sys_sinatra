@@ -21,7 +21,7 @@ module Trst
     alias :unit :unit_belongs_to; alias :name :freight_name; alias :um :freight_um
 
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
-    scope :stock_now, where(id_date: Date.new(2000,1,31))
+    scope :stock_now,  ->()        {where(id_date: Date.new(2000,1,31))}
 
     class << self
     end # Class methods

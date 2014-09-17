@@ -1,12 +1,27 @@
+## v1.0.0
+
+* release date: **2014-12-01**
+
+
+* **feature v0.3.0.1**, fix [#36][#36]
+   - feature date: **2014-09-17**
+   - bump version v0.3.0.1
+   - update CHANGELOG
+   - Rakefile cleanup and fix [#37][#37]
+   - helpers, controllers, models ...  backwards incompatible  ... [#36][#36]
+   - config `mongoid.yml` [#36][#36]
+   - Gemfile upgrade mongoid [#36][#36]
+
+
 ## v0.3.0
 
-* release date: **2014-09-16**
+* release date: **2014-09-17**
    - bump version v0.3.0
    - update CHANGELOG
 
 
 * **feature v0.2.998**, v0.3.0 preparation
-   - feature date: **2014-09-xx**
+   - feature date: **2014-09-17**
    - bump version v0.2.999
    - update CHANGELOG
    - Gemfile, upgrade `sass`
@@ -18,14 +33,13 @@
    - feature date: **2014-09-14**
    - bump version v0.2.998
    - update CHANGELOG
-   - assets css, fix #26, fix #28
-   - views CRUD ugly fix #30, needs fix in js v1.0.0
-   - models `Trst::DeliveryNote#freight_list` fix #34
-   - update CHANGELOG
-   - assets css, see issues #25, #26, #27, #28, #31
-   - views `system/tasks` missing help, fix #31
-   - views CRUD, cleanup fix #33
-   - views CRUD, `create` typo, fix #32
+   - assets css, fix [#26][#26], fix [#28][#28]
+   - views CRUD ugly fix [#30][#30], needs fix in js v1.0.0
+   - models `Trst::DeliveryNote#freight_list` fix [#34][#34]
+   - assets css, see issues [#25][#25], [#26][#26], [#27][#27], [#28][#28], [#31][#31]
+   - views `system/tasks` missing help, fix [#31][#31]
+   - views CRUD, cleanup fix [#33][#33]
+   - views CRUD, `create` typo, fix [#32][#32]
 
 
 * **feature v0.2.997**, v0.3.0 preparation
@@ -302,3 +316,13 @@ release date: **2013-07-18**
 [#38]: https://github.com/kfl62/trst_sys_sinatra/issues/38
 [#39]: https://github.com/kfl62/trst_sys_sinatra/issues/39
 [#40]: https://github.com/kfl62/trst_sys_sinatra/issues/40
+[#41]: https://github.com/kfl62/trst_sys_sinatra/issues/41
+[#42]: https://github.com/kfl62/trst_sys_sinatra/issues/42
+[#43]: https://github.com/kfl62/trst_sys_sinatra/issues/43
+[#44]: https://github.com/kfl62/trst_sys_sinatra/issues/44
+[#45]: https://github.com/kfl62/trst_sys_sinatra/issues/45
+[#46]: https://github.com/kfl62/trst_sys_sinatra/issues/46
+[#47]: https://github.com/kfl62/trst_sys_sinatra/issues/47
+[#48]: https://github.com/kfl62/trst_sys_sinatra/issues/48
+[#49]: https://github.com/kfl62/trst_sys_sinatra/issues/49
+[#50]: https://github.com/kfl62/trst_sys_sinatra/issues/50

@@ -36,8 +36,8 @@ module Trst
       diff = self.ib - self.fb if self.destroyed?
       diff ||= 0.0
       self.class.where(:id_date.gt => self.id_date).asc(:id_date).each do |cbp|
-        cbp.set(:ib, (cbp.ib + diff).round(2))
-        cbp.set(:fb, (cbp.fb + diff).round(2))
+        cbp.set(ib: (cbp.ib + diff).round(2))
+        cbp.set(fb: (cbp.fb + diff).round(2))
       end
     end
 
