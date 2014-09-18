@@ -81,7 +81,7 @@ module Trst
                    'Pragma' => 'public'})
           require 'prawn/measurement_extensions'
           require "prawn/templates"
-          require 'prawn/table'
+          #require 'prawn/table' # hotfix v0.3.1
           pdf file, layout: false
         end
       end

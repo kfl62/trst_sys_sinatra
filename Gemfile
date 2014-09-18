@@ -13,9 +13,9 @@ gem 'sass'
 gem 'compass'
 gem 'mongoid', :git => 'https://github.com/kfl62/mongoid.git'
 gem 'rdiscount'
-gem 'prawn'
+gem 'prawn', '1.0.0'  # hotfix v0.3.1
 gem 'prawn-templates'
-gem 'prawn-table'
+#gem 'prawn-table'    # hotfix v0.3.1
 
 # Development requirements
 group :development do
