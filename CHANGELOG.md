@@ -1,3 +1,13 @@
+## v0.3.1 - hotfix-
+
+* release date: **2014-09-18**, fix
+   - bump version v0.3.1
+   - update CHANGELOG
+   - assets css, small fix
+   - controllers `system` Prawn v1.0.0 [#36][#36]
+   - Gemfile Prawn v1.0.0 [#36][#36]
+
+
 ## v0.3.0
 
 * release date: **2014-09-16**

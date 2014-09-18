@@ -33,7 +33,7 @@
   table.inner {
     margin: auto;
   }
-  div, tr.pdb-05 td {
+  div:not(.select2-container), tr.pdb-05 td {
     padding-bottom: .5rem;
   }
   td {
