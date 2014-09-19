@@ -12,6 +12,24 @@ module Trst
 
     validate :'identities_fiscal_uniq'
 
+    class << self
+      # @todo
+      def auto_search(params)
+        if params[:w]
+          default_sort.where(params[:w].to_sym => true)
+          .and(name: /\A#{params[:q]}/i)
+          .each_with_object([]){|pf,a| a << {id: pf.id.to_s,text: "#{pf.name[0][0..20]}"}}
+        elsif params[:id]
+          find(params[:id]).people.asc(:name_last).each_with_object([]){|d,a| a << {id: d.id.to_s,text: "#{d.name[0..20]}"}}.push({id: 'new',text: 'Adăugare delegat'})
+        else
+          default_sort.only(:id,:name,:identities)
+          .or(name: /\A#{params[:q]}/i)
+          .or(:'identities.fiscal' => /\A#{params[:q]}/i)
+          .each_with_object([]){|pf,a| a << {id: pf.id.to_s,text: "#{pf.identities['fiscal'].ljust(18)} #{pf.name[1]}"}}
+        end
+      end
+    end # Class methods
+
     # @todo
     def view_filter
       [id, name[1]]
