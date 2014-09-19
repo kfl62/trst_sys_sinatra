@@ -43,7 +43,7 @@ module Trst
         .or(doc_name: /#{params[:q]}/i)
         .or(:client_id.in => Trst::PartnerFirm.only(:id).where(name: /#{params[:q]}/i).map(&:id))
         .each_with_object([]) do |d,a|
-          a << {id: d.id,
+          a << {id: d.id.to_s,
                 text: {
                         name:  d.name,
                         title: d.freights_list.join("\n"),
