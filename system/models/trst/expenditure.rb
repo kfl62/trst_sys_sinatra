@@ -65,7 +65,9 @@ module Trst
     end
     # @todo
     def freights_list
-      freights.asc(:id_stats).each_with_object([]) do |f,r|
+      start = [id_date.to_s,name]
+      start.push(expl) if expl.length > 0
+      freights.asc(:id_stats).each_with_object(start) do |f,r|
         r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
       end
     end
