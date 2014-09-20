@@ -3,6 +3,26 @@
 * release date: **2014-12-01**
 
 
+* **feature v0.3.1.1**
+   - feature date: **2014-09-20**
+   - bump version v0.3.1.1
+   - update CHANGELOG
+   - models `Document#freights_list` fix [#40][#40]
+   - models `BSON::ObjectId` issue
+   - models `Trst::Person|Firm` add Class-method `auto_search` fix [#38][#38]
+   - models `.to_json` returns now `$oid:ID`
+
+
+## v0.3.1 - hotfix-
+
+* release date: **2014-09-18**, fix [#39][#39]
+   - bump version v0.3.1
+   - update CHANGELOG
+   - assets css, small fix
+   - controllers `system` Prawn v1.0.0 [#39][#39]
+   - Gemfile Prawn v1.0.0 [#39][#39]
+
+
 * **feature v0.3.0.1**, fix [#36][#36]
    - feature date: **2014-09-17**
    - bump version v0.3.0.1
