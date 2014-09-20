@@ -40,7 +40,7 @@ module Trst
         unit_id = params[:uid]
         day     = params[:day].split('-').map(&:to_i)
         where(unit_id: unit_id,id_date: Date.new(*day),name: /#{params[:q]}/i).asc(:name).each_with_object([]) do |e,a|
-          a << {id: e.id,
+          a << {id: e.id.to_s,
                 text: {
                         name:  e.name,
                         title: e.freights_list.join("\n"),
@@ -65,7 +65,9 @@ module Trst
     end
     # @todo
     def freights_list
-      freights.asc(:id_stats).each_with_object([]) do |f,r|
+      start = [id_date.to_s,name]
+      start.push(expl) if expl.length > 0
+      freights.asc(:id_stats).each_with_object(start) do |f,r|
         r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
       end
     end
