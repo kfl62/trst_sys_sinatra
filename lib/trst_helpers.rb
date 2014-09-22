@@ -10,21 +10,6 @@ module Trst
     def pdf(*args)
       render(:rb, *args)
     end
-    # @todo
-    def partial(template, *args)
-      template_array = template.to_s.split('/')
-      template = template_array[0..-2].join('/') + "/_#{template_array[-1]}"
-      options = args.last.is_a?(Hash) ? args.pop : {}
-      options.merge!(layout: false)
-      if collection = options.delete(:collection) then
-        collection.inject([]) do |buffer, member|
-          buffer << haml(:"#{template}", options.merge(layout: false,
-                                                       locals: {template_array[-1].to_sym => member}))
-        end.join("\n")
-      else
-        haml(:"#{template}", options)
-      end
-    end
     # Delegates to I18n.translate with no additional functionality.
     #
     # @param [Symbol] *args
@@ -71,6 +56,10 @@ module Trst
       model.human_attribute_name(attribute)
     end
     alias :mat :model_attribute_translate
+    # @todo
+    def model_name
+      mat(@object, 'model_name')
+    end
     # Set language prefix for browser's path
     # @return [String]
     def localized_path
@@ -80,7 +69,7 @@ module Trst
     alias :lp :localized_path
     # @todo
     def handle_params(m,c,id,action,params)
-      r_id    = params[:r_id]
+      r_id    = params[:r_id] unless params[:r_id] == 'null'
       @path   = "#{m}/#{c}"
       @verb   = action.split('_').first
       @task   = Trst::Task.find(session[:task_id])
@@ -196,7 +185,7 @@ module Trst
       when /info/
         i.push 'fa-info-circle', 'fa-lg', 'blue'
       when /warning/
-        i.push 'fa-fa-exclamation-triangle', 'fa-lg'
+        i.push 'fa-exclamation-triangle', 'fa-lg'
       when /error/
         i.push 'fa-bomb', 'fa-lg'
       when /loading/
@@ -209,13 +198,12 @@ module Trst
     # @todo
     def label_for(model,attribute,options = {})
       order,type,label = options.values_at(:order,:type,:label)
-      #path = model.class.name.underscore
       field = attribute
       field = "#{attribute}_#{order}" if order
       field = "#{attribute}_id" if model.respond_to?("#{attribute}_id")
       field = "#{attribute}_label" if type == 'enum'
       field = label if label
-      haml_tag  :span, mat(model,field), class: 'label'
+      haml_tag  :span, mat(model,field)
     end
     # @todo
     def td_label_for(model,attribute,options = {})
@@ -230,10 +218,7 @@ module Trst
       value = guess_value model,attribute,options
       value = '-' if value.blank?
       value = "%.#{precision}f" % value if value.is_a?(Float)
-      style ||= 'value'
-      unless (['name','stats','um','pu','qu','val'] & style.split(' ')).length > 0
-        style =  attribute =~ /^id$|_at/ ? "ui-state-highlight #{style}" : "ui-state-default #{style}"
-      end
+      style =  attribute =~ /^id$|_at/ ? "ui-state-highlight #{style}" : "ui-state-default #{style}"
       haml_tag  :span, value, class: style
     end
     # @todo
@@ -342,6 +327,19 @@ module Trst
       style = ['buttonset'].push(options.delete(:style)).compact.join(' ')
       haml_tag :td, class: style, colspan: colspan do
         buttons.each{|b| button(b, options)}
+      end
+    end
+    # @todo
+    def xhr_hidden_data(data = {})
+      data[:model_name] = data[:model_name] || model_name
+      data[:oid]        = data[:oid] || (@object.id rescue 'null')
+      haml_tag :article, id: 'hidden_data', data: data
+    end
+    # @todo
+    def xhr_info(type = 'info',text = 'Not defined')
+      haml_tag :article, id: 'xhr_info', class: type do
+        haml_tag :i, class: guess_icon(type)
+        haml_concat text
       end
     end
     # @todo
