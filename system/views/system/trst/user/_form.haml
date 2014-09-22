@@ -1,18 +1,19 @@
-%tbody
-  - tr_input_for    @object,  'login_name',   {name: "[#{@path}][login_name]"}
-  - tr_input_for    @object,  'name',         {name: "[#{@path}][name]"}
-  - tr_input_for    @object,  'id_pn',        {name: "[#{@path}][id_pn]"}
-  - tr_input_for    @object,  'email',        {name: "[#{@path}][email]"}
-  - tr_input_for    @object,  'access_lvl',   {name: "[#{@path}][access_lvl]"}
-  - tr_input_for    @object,  'access_grp',   {name: "[#{@path}][access_grp]"}
-  %tr
-    %td{colspan: "3",style: 'padding:0.1em'}
-      %input{type: "hidden",name: "[#{@path}][task_ids][]",value: nil}
-      %ul.trst-ui-sortable
-        %span.relation-title= t('title.relations_inv')
-        -  @object.view_tasks.each do |t|
-          %li.ui-state-default
-            %span= t[1]
-            %input{type: "hidden",name: "[#{@path}][task_ids][]",value: t[0]}
-      - button 'relations', {relations: {rel_to: 'task', text: mat(@object, :task_ids)}}
+%table
+  %tbody
+    - tr_input_for    @object,  'login_name',   {name: "[#{@path}][login_name]"}
+    - tr_input_for    @object,  'name',         {name: "[#{@path}][name]"}
+    - tr_input_for    @object,  'id_pn',        {name: "[#{@path}][id_pn]"}
+    - tr_input_for    @object,  'email',        {name: "[#{@path}][email]"}
+    - tr_input_for    @object,  'access_lvl',   {name: "[#{@path}][access_lvl]"}
+    - tr_input_for    @object,  'access_grp',   {name: "[#{@path}][access_grp][]"}
+    %tr
+      %td{colspan: "3"}
+        %input{type: "hidden",name: "[#{@path}][task_ids][]",value: nil}
+        %ul.trst-ui-sortable
+          %span.relation-title= t('title.relations_inv')
+          -  @object.view_tasks.each do |t|
+            %li.ui-state-default
+              %span= t[1]
+              %input{type: "hidden",name: "[#{@path}][task_ids][]",value: t[0]}
+        - button 'relations', {relations: {rel_to: 'task', text: mat(@object, :task_ids)}}
 
