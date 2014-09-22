@@ -12,7 +12,7 @@ module Trst
 
     field :name,              type: String,                               default: 'Domiciliu'
 
-    embedded_in :partner_person,class_name: 'Wstm::PartnerPerson',        inverse_of: :address
+    embedded_in :partner_person,class_name: 'Trst::PartnerPerson',        inverse_of: :address
 
   end # PartnerPerson::Address
 end # Trst
