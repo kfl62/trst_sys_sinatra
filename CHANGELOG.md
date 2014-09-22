@@ -3,6 +3,18 @@
 * release date: **2014-12-01**
 
 
+* **feature v0.3.1.2**
+   - feature date: **2014-09-22**
+   - bump version v0.3.1.2
+   - update CHANGELOG
+   - views: CRUD, partials fix [#43][#43]
+   - views: layouts `public,system` partial <-> haml, see [#43][#43]
+   - models `Trst::User` fix [#42][#4]2
+   - models `Trst::ParnerPerson` typo
+   - controllers `system` add class variables
+   - lib `trst_helper` [#41][#41]
+
+
 * **feature v0.3.1.1**
    - feature date: **2014-09-20**
    - bump version v0.3.1.1
