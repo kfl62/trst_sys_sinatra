@@ -34,7 +34,7 @@ module Trst
     validates_length_of     :password,  :within => 4..40, :if => :password_required
 
     before_save :encrypt_password, :if => :password_required
-    before_save :handle_access_group
+    before_save :handle_field_type_array
 
     class << self
       # Authentication based on name and password
@@ -92,8 +92,8 @@ module Trst
     end
     # @todo
     # Document this method
-    def handle_access_group
-      self.access_grp = access_grp.split(',') if access_grp.is_a?(String)
+    def handle_field_type_array
+      set(access_grp: self.access_grp.each_with_object([]){|t,n| t.split(',').each{|t| n.push t.strip}})
     end
   end
 end
