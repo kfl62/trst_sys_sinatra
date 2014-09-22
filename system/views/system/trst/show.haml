@@ -1,8 +1,11 @@
-%span#hidden_data{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id}}
+- xhr_hidden_data({dialog: "show"})
 %form{action: "/sys/#{@path}",method: "get"}
   %table
     %thead
-    = partial "#{@path}/show"
+    %tbody
+      %tr
+        %td
+          = haml :"#{@path}/_show"
     %tfoot
       %tr
-        - td_buttonset(['create','edit','delete','cancel'],{style: 'ta-ce'},'2')
+        - td_buttonset(['create','edit','delete','cancel'],{style: 'ta-ce'})

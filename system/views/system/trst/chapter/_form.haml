@@ -1,7 +1,8 @@
-%tbody
-  - tr_input_for @related_object, 'name', {disabled: true}
-  - tr_input_for @object, 'slug'
-  - tr_input_for @object, 'order'
-  - tr_input_for @object, 'name'
-  - tr_input_for @object, 'title'
-  - tr_input_for @object, 'content'
+%table
+  %tbody
+    - tr_input_for @related_object, 'name', {disabled: true}
+    - tr_input_for @object, 'slug'
+    - tr_input_for @object, 'order'
+    - tr_input_for @object, 'name'
+    - tr_input_for @object, 'title'
+    - tr_input_for @object, 'content'

@@ -1,18 +1,18 @@
 !!! 5
 %html
-  = partial('layout/html-head')
+  = haml :'layout/_html-head'
   %body{id: "public"}
     %section.header
       %header
-        = partial('layout/header')
+        = haml :'layout/_header'
       %nav.menu
-        = partial('layout/menu')
+        = haml :'layout/_menu'
     %section.content
-      = partial('layout/xhr_msg')
+      = haml :'layout/_xhr_msg'
       %aside.main
         %article#xhr_content
           = yield
       %aside.sidebar
-        = partial('layout/sidebar')
-    %footer.ce
-      = partial('layout/footer')
+        = haml :'layout/_sidebar'
+    %footer
+      = haml :'layout/_footer'

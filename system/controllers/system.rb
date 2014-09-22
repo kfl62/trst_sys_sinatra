@@ -15,7 +15,10 @@ module Trst
 
     before do
       if session[:user]
+        @firm         ||= PartnerFirm.find_by(firm: true)
         @current_user ||= User.find(session[:user])
+        @uid          ||= @current_user.unit_id || session[:unit_id]
+        @today        ||= Date.today
         I18n.reload! if Trst.env == 'development'
         if Time.now > Time.now.end_of_month - 4.hours
           flash[:msg] = {msg: {txt: t('msg.login.monthly_revision'), cls: 'error'}}

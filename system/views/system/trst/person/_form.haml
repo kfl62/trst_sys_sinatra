@@ -1,9 +1,10 @@
-%tbody
-  - tr_input_for @object, 'id_pn'
-  - tr_input_for @object, 'name_last'
-  - tr_input_for @object, 'name_frst'
-  - tr_input_for @object, 'id_doc',  {order: 'type'}
-  - tr_input_for @object, 'id_doc',  {order: 'sr'}
-  - tr_input_for @object, 'id_doc',  {order: 'nr'}
-  - tr_input_for @object, 'id_doc',  {order: 'by'}
-  - tr_input_for @object, 'id_doc',  {order: 'on'}
+%table
+  %tbody
+    - tr_input_for @object, 'id_pn'
+    - tr_input_for @object, 'name_last'
+    - tr_input_for @object, 'name_frst'
+    - tr_input_for @object, 'id_doc',  {order: 'type'}
+    - tr_input_for @object, 'id_doc',  {order: 'sr'}
+    - tr_input_for @object, 'id_doc',  {order: 'nr'}
+    - tr_input_for @object, 'id_doc',  {order: 'by'}
+    - tr_input_for @object, 'id_doc',  {order: 'on'}
