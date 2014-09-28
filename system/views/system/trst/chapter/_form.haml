@@ -1,8 +1,8 @@
 %table
   %tbody
-    - tr_input_for @related_object, 'name', {disabled: true}
-    - tr_input_for @object, 'slug'
-    - tr_input_for @object, 'order'
-    - tr_input_for @object, 'name'
-    - tr_input_for @object, 'title'
-    - tr_input_for @object, 'content'
+    - tr_input_for @related_object, 'name', {tag: {disabled: true}}
+    - tr_input_for @object, 'slug',         {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'order',        {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'name',         {tag: {data: {mark: 'ui-focus focus step'}}}
+    - tr_input_for @object, 'title',        {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'content',      {tag: {data: {mark: 'ui-focus step'}}}

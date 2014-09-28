@@ -1,11 +1,11 @@
 %table
   %tbody
-    - tr_input_for    @object,  'login_name',   {name: "[#{@path}][login_name]"}
-    - tr_input_for    @object,  'name',         {name: "[#{@path}][name]"}
-    - tr_input_for    @object,  'id_pn',        {name: "[#{@path}][id_pn]"}
-    - tr_input_for    @object,  'email',        {name: "[#{@path}][email]"}
-    - tr_input_for    @object,  'access_lvl',   {name: "[#{@path}][access_lvl]"}
-    - tr_input_for    @object,  'access_grp',   {name: "[#{@path}][access_grp][]"}
+    - tr_input_for    @object,  'login_name',   {tag: {data: {mark: 'ui-focus step'},name: "[#{@path}][login_name]"}}
+    - tr_input_for    @object,  'name',         {tag: {data: {mark: 'ui-focus step'},name: "[#{@path}][name]"}}
+    - tr_input_for    @object,  'id_pn',        {tag: {data: {mark: 'ui-focus step'},name: "[#{@path}][id_pn]"}}
+    - tr_input_for    @object,  'email',        {tag: {data: {mark: 'ui-focus step'},name: "[#{@path}][email]"}}
+    - tr_input_for    @object,  'access_lvl',   {tag: {data: {mark: 'ui-focus step'},name: "[#{@path}][access_lvl]"}}
+    - tr_input_for    @object,  'access_grp',   {tag: {data: {mark: 'ui-focus step'},name: "[#{@path}][access_grp][]"}}
     %tr
       %td{colspan: "3"}
         %input{type: "hidden",name: "[#{@path}][task_ids][]",value: nil}
