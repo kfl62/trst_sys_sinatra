@@ -19,6 +19,5 @@
               - @object.default_sort.each do |o|
                 %option{value: o.view_filter.first}= o.view_filter.last
       %tfoot
-        %tr
-          - buttons = r_id == 'null' ? ['cancel'] : ['create','show','edit','delete','cancel']
-          - td_buttonset(buttons,{style: 'ta-ce'})
+        - buttons = r_id == 'null' ? ['cancel'] : ['create','show','edit','delete','cancel']
+        - tr_buttonset(buttons,{td: {class: 'ta-ce'}})

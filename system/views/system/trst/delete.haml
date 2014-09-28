@@ -8,6 +8,5 @@
         %td
           = haml :"/#{@path}/_show"
     %tfoot
-      %tr
-        - td_buttonset(['delete','cancel'],{style: 'ta-ce'})
+      - tr_buttonset(['delete','cancel'],{td: {class: 'ta-ce'}})
 
