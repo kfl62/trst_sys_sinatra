@@ -2,7 +2,7 @@ define () ->
   $.extend true,Trst,
     desk:
       relations:
-        makeSelectable: () ->
+        makeSelectable: ()->
           $('#deskDialog ul.trst-ui-sortable, #relationsContainer ul.trst-ui-sortable')
             .sortable
               connectWith: '.trst-ui-sortable'
@@ -15,7 +15,7 @@ define () ->
                 return
             .disableSelection()
           return
-        createContainer: () ->
+        createContainer: ()->
           $button    = $('#deskDialog form button[data-action="relations"]')
           $container = $('<div id="relationsContainer"></div>')
           $container.css
@@ -23,7 +23,7 @@ define () ->
             left:   $button.offset().left + $button.width() + 15
             zIndex: 1005
           $container
-        init: () ->
+        init: ()->
           $hd      = Trst.desk.hdo
           $form    = Trst.desk.hdf
           $button  = $('#deskDialog form button[data-action="relations"]')

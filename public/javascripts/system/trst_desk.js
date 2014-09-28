@@ -1,5 +1,5 @@
 (function() {
-  define(['jquery-ui', 'system/trst_desk_buttons', 'system/trst_desk_select', 'system/trst_desk_tabs'], function() {
+  define(['system/trst_desk_buttons', 'system/trst_desk_selects', 'system/trst_desk_inputs', 'system/trst_desk_tables'], function() {
     (function($, window, document) {
       return $.widget("app.dialog", $.ui.dialog, {
         options: {
@@ -23,6 +23,17 @@
         }
       });
     })(jQuery, window, document);
+    $.extend(true, $.fn.select2.defaults, {
+      formatInputTooShort: function(input, min) {
+        return Trst.desk.inputs.__f.inputTooShortMsg(input, min);
+      },
+      formatSearching: function() {
+        return Trst.i18n.msg.searching;
+      },
+      formatNoMatches: function(term) {
+        return Trst.i18n.msg.no_matches;
+      }
+    });
     $.extend(true, Trst, {
       desk: {
         readData: function() {
@@ -35,14 +46,21 @@
             return false;
           }
         },
-        closeDesk: function(cls) {
-          if (cls == null) {
-            cls = true;
+        handleRequires: function() {
+          if ($('button').length) {
+            this.buttons.init();
           }
-          if (cls) {
-            $('#deskDialog').dialog('close');
-            $('[class^="select2"]').remove();
-            $('[class^="ui-datepicker"]').remove();
+          if ($('select').length) {
+            this.selects.init();
+          }
+          if ($('input').length) {
+            this.inputs.init();
+          }
+          if ($('table').length) {
+            this.tables.init();
+          }
+          if (Trst.module != null) {
+            Trst.module.desk.init();
           }
         },
         createDesk: function(data) {
@@ -75,7 +93,17 @@
             ]
           });
         },
-        downloadError: function(data) {
+        closeDesk: function(cls) {
+          if (cls == null) {
+            cls = true;
+          }
+          if (cls) {
+            $('#deskDialog').dialog('close');
+            $('[class^="select2"]').remove();
+            $('[class^="ui-datepicker"]').remove();
+          }
+        },
+        createDownload: function(data) {
           var $data, $download;
           $download = $('#downloadDialog').length ? $('#downloadDialog') : $('<div id="downloadDialog" class="small"></div>');
           $data = Trst.i18n.msg.report.error.replace('%{data}', data);
@@ -133,18 +161,7 @@
                   title: $("<span>" + ($title.replace('%{data}', $tdata)) + "</span>").text()
                 });
                 $desk.dialog('open');
-                if ($('button').length) {
-                  Trst.desk.buttons.init();
-                }
-                if (Trst.desk.hdf.find('select').length) {
-                  Trst.desk.select.init();
-                }
-                if ($('tbody[id^="tabs-"]').length) {
-                  Trst.desk.tabs.init();
-                }
-                if (Trst.module != null) {
-                  Trst.module.desk.init();
-                }
+                Trst.desk.handleRequires();
               } else {
                 alert(Trst.i18n.msg.session.relogin);
                 Trst.lst.clear();

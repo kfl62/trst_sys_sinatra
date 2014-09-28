@@ -7,7 +7,7 @@ require.config({
   priority: ['jquery']
 })
 
-require(['jquery','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
+require(['jquery','jquery-ui','/javascripts/libs/jquery.ba-tinypubsub.min.js'], function($){
   $(function(){
     Trst = {debug: false};
     $log = function(txt){

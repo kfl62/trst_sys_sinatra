@@ -108,25 +108,32 @@ define () ->
           relations: () ->
             if $('#relationsContainer').length
               $('#relationsContainer').remove()
-              return
             else
             require ['system/trst_desk_relations'], (relations) ->
               $log('Trst.desk.relations() Loaded...')
               relations.init()
+              return
             $log('Button.relations Pressed...')
           print: ()->
-            ###
-            Handled by fileDownload plugin
-            http://johnculviner.com/category/jQuery-File-Download.aspx
-            ###
+            $hd   = Trst.desk.hdo
+            $form = Trst.desk.hdf
+            Trst.msgShow Trst.i18n.msg.report.start
+            $.fileDownload "#{$form.attr('action')}/print?id=#{$hd.oid}",
+              successCallback: ()->
+                Trst.msgHide()
+                return
+              failCallback: ()->
+                Trst.msgHide()
+                Trst.desk.createDownload $hd.model_name
+                return
             $log('Button.print Pressed...')
         init: (buttons) ->
           $desk = $('#deskDialog')
           $buttons = if buttons? then buttons else $desk.find('button')
           $buttons.each () ->
-            Trst.desk.buttons.layout($(this))
-            $(this).on 'click', Trst.desk.buttons.action[$(this).data('action')]
+            Trst.desk.buttons.layout($(@))
+            $(@).on 'click', Trst.desk.buttons.action[$(@).data('action')]
             return
           $desk.find('.buttonset').buttonset()
           $log('Trst.desk.buttons.init() OK...')
-  Trst
+  Trst.desk.buttons
