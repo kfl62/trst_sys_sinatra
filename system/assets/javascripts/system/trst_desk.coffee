@@ -1,4 +1,4 @@
-define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system/trst_desk_tabs'], ()->
+define ['system/trst_desk_buttons','system/trst_desk_selects','system/trst_desk_inputs','system/trst_desk_tables'], ()->
   do ($ = jQuery, window, document) ->
     $.widget "app.dialog", $.ui.dialog,
       options:
@@ -16,6 +16,15 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           ).addClass("ui-dialog-titlebar-close").css("right", (parseInt(right) + 22) + "px").click(@click).appendTo $titlebar
           return
         return
+
+  $.extend true, $.fn.select2.defaults,
+    formatInputTooShort: (input, min)->
+      Trst.desk.inputs.__f.inputTooShortMsg(input, min)
+    formatSearching: ()->
+      Trst.i18n.msg.searching
+    formatNoMatches: (term)->
+     Trst.i18n.msg.no_matches
+
   $.extend true, Trst,
     desk:
       readData: ()->
@@ -23,11 +32,12 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
         @hdf = $('#deskDialog form')
         @height = $(window).height()
         if (!$.isEmptyObject(@hdo) and @hdf?) then true else false
-      closeDesk: (cls = true)->
-        if cls
-          $('#deskDialog').dialog('close')
-          $('[class^="select2"]').remove()
-          $('[class^="ui-datepicker"]').remove()
+      handleRequires: ()->
+        @buttons.init() if $('button').length
+        @selects.init() if $('select').length
+        @inputs.init()  if $('input').length
+        @tables.init()  if $('table').length
+        Trst.module.desk.init()  if Trst.module?
         return
       createDesk: (data)->
         $desk = if $('#deskDialog').length then $('#deskDialog') else $('<div id="deskDialog"></div>')
@@ -57,7 +67,13 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
             }
           ]
         return
-      downloadError: (data)->
+      closeDesk: (cls = true)->
+        if cls
+          $('#deskDialog').dialog('close')
+          $('[class^="select2"]').remove()
+          $('[class^="ui-datepicker"]').remove()
+        return
+      createDownload: (data)->
         $download = if $('#downloadDialog').length then $('#downloadDialog') else $('<div id="downloadDialog" class="small"></div>')
         $data = Trst.i18n.msg.report.error. replace '%{data}', data
         $download.html($data)
@@ -85,8 +101,8 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
           url : $url
           type: $type
           data: $data
-          beforeSend: ()-> $('#xhr_msg').html("<span>...</span>").addClass('loading').prepend("<i class='fa fa-refresh fa-spin fa-lg'></i>").show() #Trst.msgShow()
-          complete:   ()-> $('#xhr_msg').hide().removeAttr('class').html('') #Trst.msgHide()
+          beforeSend: ()-> $('#xhr_msg').html("<span>...</span>").addClass('loading').prepend("<i class='fa fa-refresh fa-spin fa-lg'></i>").show()
+          complete:   ()-> $('#xhr_msg').hide().removeAttr('class').html('')
         $request.fail (xhr)->
           Trst.publish('msg.desk.error', 'error', "#{xhr.status} #{xhr.statusText}")
           false
@@ -100,10 +116,7 @@ define ['jquery-ui','system/trst_desk_buttons','system/trst_desk_select','system
               $tdata = Trst.desk.hdo.title_data || Trst.desk.hdo.model_name
               $desk.dialog title: $("<span>#{$title.replace('%{data}',$tdata)}</span>").text()
               $desk.dialog('open')
-              Trst.desk.buttons.init() if $('button').length
-              Trst.desk.select.init() if Trst.desk.hdf.find('select').length
-              Trst.desk.tabs.init() if $('tbody[id^="tabs-"]').length
-              Trst.module.desk.init() if Trst.module?
+              Trst.desk.handleRequires()
               return
             else
               alert Trst.i18n.msg.session.relogin

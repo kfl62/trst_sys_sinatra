@@ -3,6 +3,17 @@
 * release date: **2014-12-01**
 
 
+* **feature v0.3.1.3**
+   - feature date: **2014-09-28**
+   - bump version v0.3.1.3
+   - update CHANGELOG
+   - views partials, apply [#41][#41], fix [#35][#35]
+   - views CRUD, fix [#43][#43]
+   - i18n add missing `trst_chache_book.yml`
+   - assets js, cleanup, review, rewrite all, see [#35][#35], [#43][#43], fix [#44][#44]
+   - libs `trst_helper` rewrite, see [#35][#35], [#43][#43], fix [#41][#41]
+
+
 * **feature v0.3.1.2**
    - feature date: **2014-09-22**
    - bump version v0.3.1.2

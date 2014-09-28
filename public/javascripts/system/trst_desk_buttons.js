@@ -157,22 +157,29 @@
             relations: function() {
               if ($('#relationsContainer').length) {
                 $('#relationsContainer').remove();
-                return;
               } else {
 
               }
               require(['system/trst_desk_relations'], function(relations) {
                 $log('Trst.desk.relations() Loaded...');
-                return relations.init();
+                relations.init();
               });
               return $log('Button.relations Pressed...');
             },
             print: function() {
-
-              /*
-              Handled by fileDownload plugin
-              http://johnculviner.com/category/jQuery-File-Download.aspx
-               */
+              var $form, $hd;
+              $hd = Trst.desk.hdo;
+              $form = Trst.desk.hdf;
+              Trst.msgShow(Trst.i18n.msg.report.start);
+              $.fileDownload("" + ($form.attr('action')) + "/print?id=" + $hd.oid, {
+                successCallback: function() {
+                  Trst.msgHide();
+                },
+                failCallback: function() {
+                  Trst.msgHide();
+                  Trst.desk.createDownload($hd.model_name);
+                }
+              });
               return $log('Button.print Pressed...');
             }
           },
@@ -190,7 +197,7 @@
         }
       }
     });
-    return Trst;
+    return Trst.desk.buttons;
   });
 
 }).call(this);

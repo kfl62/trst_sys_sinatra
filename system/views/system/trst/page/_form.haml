@@ -1,12 +1,12 @@
 %table
   %tbody
-    - tr_input_for @object, 'name'
-    - tr_input_for @object, 'title'
-    - tr_input_for @object, 'content'
-    - tr_input_for @object, 'slug'
-    - tr_input_for @object, 'order'
-    - tr_input_for @object, 'access_lvl'
-    - tr_input_for @object, 'access_grp', {order: 0}
+    - tr_input_for @object, 'name',       {tag: {data: {mark: 'ui-focus focus step'}}}
+    - tr_input_for @object, 'title',      {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'content',    {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'slug',       {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'order',      {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'access_lvl', {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'access_grp', {guess: {order: 0},tag: {data: {mark: 'ui-focus step'}}}
     %tr
       %td{:colspan => "3"}
         %input{:type => "hidden",:name => "[#{@path}][task_ids][]",:value => nil}

@@ -130,9 +130,9 @@ module Trst
     end
     # @todo
     def guess_value(model,attribute,options)
-      order,type,map = options.values_at(:order,:type,:map)
-      method = map.nil? ? attribute : map
-      value  = model.send method
+      order,type,map = options[:guess].try(:values_at,:order,:type,:map)
+      method= map.nil? ? attribute : map
+      value = options[:tag].try(:delete,:value) || model.send(method)
       case value
       when Array, Hash
         value = map.nil? ? (order.nil? ? value.join(',') : value[order]) : value.map(&:last).join(', ')
@@ -149,7 +149,7 @@ module Trst
     end
     # @todo
     def guess_name(model,attribute,options)
-      order,nested,index = options.values_at(:order,:nested, :index)
+      order,nested,index = options[:guess].try(:values_at,:order,:nested, :index)
       name  = "[#{model.class.name.underscore}]"
       if nested
         relation = model.relations[nested]
@@ -197,7 +197,7 @@ module Trst
     end
     # @todo
     def label_for(model,attribute,options = {})
-      order,type,label = options.values_at(:order,:type,:label)
+      order,type,label = options[:guess].try(:values_at,:order,:type,:label)
       field = attribute
       field = "#{attribute}_#{order}" if order
       field = "#{attribute}_id" if model.respond_to?("#{attribute}_id")
@@ -207,38 +207,40 @@ module Trst
     end
     # @todo
     def td_label_for(model,attribute,options = {})
-      haml_tag :td do
+      haml_tag :td,options.delete(:td) do
         label_for model,attribute,options
       end
     end
     # @todo
     def value_for(model,attribute,options = {})
-      order,style,precision = options.values_at(:order,:style,:precision)
-      precision ||= 2
+      tag_attributes = options[:tag] || {}
+      tag_attributes[:class] = attribute =~ /^id$|_at/ ? "ui-state-highlight #{tag_attributes[:class]}" : "ui-state-default #{tag_attributes[:class]}"
+      tag_attributes[:class] = tag_attributes[:class].gsub('ui-state-default strip', '').strip
+      precision = tag_attributes.delete(:precision) || 2
       value = guess_value model,attribute,options
       value = '-' if value.blank?
       value = "%.#{precision}f" % value if value.is_a?(Float)
-      style =  attribute =~ /^id$|_at/ ? "ui-state-highlight #{style}" : "ui-state-default #{style}"
-      haml_tag  :span, value, class: style
+      haml_tag  :span, value,tag_attributes.delete_if{|k,v| v.blank?}
     end
     # @todo
     def td_value_for(model,attribute,options = {})
-      haml_tag :td do
+      haml_tag :td,options.delete(:td) do
         value_for model,attribute,options
       end
     end
     # @todo
     def input_for(model,attribute,options = {})
-      id,style,name,value,type,order,nested,disabled,placeholder,data = options.values_at(:id,:style,:name,:value,:type,:order,:nested,:disabled,:placeholder,:data)
-      type  ||= 'text'
-      value ||= guess_value model,attribute,options
-      name  ||= guess_name  model,attribute,options
-      style ||= 'ui-state-default' unless type == 'hidden'
-      haml_tag :input,id: id,class: style,name: (name if name != 'strip'),value: (value if value != 'strip'),type: type,disabled: disabled,placeholder: placeholder,data: data
+      tag_attributes = options[:tag] || {}
+      tag_attributes[:type] ||= 'text'
+      tag_attributes[:value]||= guess_value model,attribute,options
+      tag_attributes[:name] ||= guess_name  model,attribute,options
+      tag_attributes[:class]  = tag_attributes[:type] == 'hidden' ? "#{tag_attributes[:class]}" : "ui-state-default #{tag_attributes[:class]}"
+      tag_attributes[:class]  = tag_attributes[:class].gsub('ui-state-default strip', '').strip
+      haml_tag :input,tag_attributes.delete_if{|k,v| v.blank? || v == 'strip'}
     end
     # @todo
     def td_input_for(model,attribute,options = {})
-      haml_tag :td do
+      haml_tag :td,options.delete(:td) do
         input_for model,attribute,options
       end
     end
@@ -265,7 +267,7 @@ module Trst
     end
     # @todo
     def td_select_for(model,attribute,options = {})
-      haml_tag :td do
+      haml_tag :td,options.delete(:td) do
         select_for model,attribute,options
       end
     end
@@ -284,20 +286,20 @@ module Trst
     end
     # @todo
     def td_error_for(model,attribute,options = {})
-      haml_tag :td do
+      haml_tag :td,options.delete(:td) do
         error_for model,attribute,options
       end
     end
     # @todo
     def tr_show_for(model,attribute,options = {})
-      haml_tag :tr do
+      haml_tag :tr,options.delete(:tr) do
         td_label_for model,attribute,options
         td_value_for model,attribute,options
       end
     end
     # @todo
     def tr_input_for(model,attribute,options = {})
-      haml_tag :tr do
+      haml_tag :tr,options.delete(:tr) do
         td_label_for   model,attribute,options
         td_input_for   model,attribute,options
         td_error_for   model,attribute,options
@@ -305,10 +307,20 @@ module Trst
     end
     # @todo
     def tr_select_for(model,attribute,options = {})
-      haml_tag :tr do
+      haml_tag :tr,options.delete(:tr) do
         td_label_for   model,attribute,options
         td_select_for  model,attribute,options
         td_error_for   model,attribute,options
+      end
+    end
+    # @todo
+    def tr_header_for(labels,options = {})
+      haml_tag :tr,options.delete(:tr) do
+        labels.each do |label|
+          haml_tag :td,options.delete(:td) do
+            haml_tag :span,label,options.delete(:tag)
+          end
+        end
       end
     end
     # @todo
@@ -323,10 +335,17 @@ module Trst
       end
     end
     # @todo
-    def td_buttonset(buttons = [], options = {}, colspan = false)
-      style = ['buttonset'].push(options.delete(:style)).compact.join(' ')
-      haml_tag :td, class: style, colspan: colspan do
+    def td_buttonset(buttons = [], options = {})
+      td_attributes = options.delete(:td) || {}
+      td_attributes[:class] ? td_attributes[:class] += ' buttonset' : td_attributes[:class] = 'buttonset'
+      haml_tag :td, td_attributes do
         buttons.each{|b| button(b, options)}
+      end
+    end
+    # @todo
+    def tr_buttonset(buttons = [], options = {})
+      haml_tag :tr,options.delete(:tr) do
+        td_buttonset buttons, options
       end
     end
     # @todo

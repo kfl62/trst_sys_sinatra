@@ -1,12 +1,12 @@
 %table
   %body
-    - tr_input_for @object, 'name'
-    - tr_input_for @object, 'title'
-    - tr_input_for @object, 'help'
-    - tr_input_for @object, 'haml_path'
-    - tr_input_for @object, 'goal'
-    - tr_input_for @object, 'rels'
-    - tr_input_for @object, 'params'
+    - tr_input_for @object, 'name',       {tag: {data: {mark: 'ui-focus focus step'}}}
+    - tr_input_for @object, 'title',      {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'help',       {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'haml_path',  {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'goal',       {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'rels',       {tag: {data: {mark: 'ui-focus step'}}}
+    - tr_input_for @object, 'params',     {tag: {data: {mark: 'ui-focus step'}}}
     %tr
       %td{colspan: "3"}
         %input{type: "hidden",name: "[#{@path}][user_ids][]",value: nil}

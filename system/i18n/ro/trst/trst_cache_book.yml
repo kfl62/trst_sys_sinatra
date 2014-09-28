@@ -1,0 +1,13 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/cache_book':
+        model_name: Registru de casă
+        id: Id system
+        name: Nr.
+        id_date: din data de
+        ib: Sold inițial
+        fb: Sold final
+        lines: Nr. linii
+        created_at: Creat
+        updated_at: Modificat
