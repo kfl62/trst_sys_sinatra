@@ -3,6 +3,15 @@
 * release date: **2014-12-01**
 
 
+* **feature v0.3.1.4**
+   - feature date: **2014-10-12**
+   - bump version v0.3.1.4
+   - update CHANGELOG
+   - assets css `_trst_widget` add `pdt-05`
+   - model `Trst::Cassation` change `id_intern` default to true
+   - libs `trst_helper` add `td_detail_for` and related
+
+
 * **feature v0.3.1.3**
    - feature date: **2014-09-28**
    - bump version v0.3.1.3

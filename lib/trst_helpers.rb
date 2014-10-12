@@ -182,12 +182,13 @@ module Trst
         i.push 'fa-print'
       when /cancel/
         i.push 'fa-ban'
-      when /info/
+      when /info|detail/
         i.push 'fa-info-circle', 'fa-lg', 'blue'
       when /warning/
         i.push 'fa-exclamation-triangle', 'fa-lg'
-      when /error/
+      when /error|error-red/
         i.push 'fa-bomb', 'fa-lg'
+        i.push 'red' if action == 'error-red'
       when /loading/
         i.push 'fa-refresh', 'fa-spin', 'fa-lg'
       else
@@ -219,6 +220,7 @@ module Trst
       precision = tag_attributes.delete(:precision) || 2
       value = guess_value model,attribute,options
       value = '-' if value.blank?
+      value = '' if value == 'strip'
       value = "%.#{precision}f" % value if value.is_a?(Float)
       haml_tag  :span, value,tag_attributes.delete_if{|k,v| v.blank?}
     end
@@ -359,6 +361,15 @@ module Trst
       haml_tag :article, id: 'xhr_info', class: type do
         haml_tag :i, class: guess_icon(type)
         haml_concat text
+      end
+    end
+    # @todo
+    def td_detail_for(type = 'detail',text = 'Not defined', icon = nil)
+      haml_tag :td do
+        haml_tag :detail,class: type do
+          haml_tag :i, class: icon.nil? ? guess_icon(type.split(' ').first) : guess_icon(icon)
+          haml_concat text
+        end
       end
     end
     # @todo

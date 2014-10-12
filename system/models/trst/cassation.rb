@@ -9,7 +9,7 @@ module Trst
 
     field :name,              type: String
     field :id_date,           type: Date,                               default: -> {Date.today}
-    field :id_intern,         type: Boolean,                            default: false
+    field :id_intern,         type: Boolean,                            default: true
     field :val,               type: Float,                              default: 0.00
     field :expl,              type: String,                             default: ''
 

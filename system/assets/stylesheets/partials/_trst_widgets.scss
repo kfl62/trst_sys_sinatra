@@ -36,6 +36,9 @@
   div:not(.select2-container), tr.pdb-05 td {
     padding-bottom: .5rem;
   }
+  div:not(.select2-container), tr.pdt-05 td {
+    padding-top: .5rem;
+  }
   td {
     @include trst-relations-sortable;
     & div.select2-container {
