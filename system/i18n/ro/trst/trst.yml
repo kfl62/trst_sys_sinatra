@@ -4,6 +4,7 @@ ro:
     'yes':   Da
     'false': Nu
     'no':    Nu
+    legend: Legendă
     lang:
       ro: Română
       en: Engleză
