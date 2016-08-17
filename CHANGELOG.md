@@ -1,6 +1,15 @@
 ## v1.0.0
 
-* release date: **2014-12-01**
+* release date: **2016-12-31**
+
+
+* **feature v0.3.1.5**
+   - feature date: **2016-08-17**
+   - bump version v0.3.1.5
+   - update CHANGELOG
+   - playing with the new ver. of mongoid
+   - assets: css, new rules
+   - playing with the new ver. of mongoid
 
 
 * **feature v0.3.1.4**
