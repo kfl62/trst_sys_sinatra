@@ -10,7 +10,7 @@
             button.button();
           },
           handle_reload_path: function(button) {
-            var $bd, $hd, $params, $url, _ref;
+            var $bd, $hd, $params, $url, ref;
             $hd = Trst.desk.hdo;
             $bd = button.data();
             if ($bd.r_mdl != null) {
@@ -43,7 +43,7 @@
               }
             }
             if ($bd.url != null) {
-              _ref = $bd.url.split('?'), $url = _ref[0], $params = _ref[1];
+              ref = $bd.url.split('?'), $url = ref[0], $params = ref[1];
             } else {
               $url = Trst.desk.hdf.attr('action');
             }
@@ -56,20 +56,20 @@
           },
           action: {
             create: function() {
-              var $bd, $hd, $params, $url, _ref;
+              var $bd, $hd, $params, $url, ref;
               $hd = Trst.desk.hdo;
               $bd = $(this).data();
-              _ref = Trst.desk.buttons.handle_reload_path($(this)), $url = _ref[0], $params = _ref[1];
+              ref = Trst.desk.buttons.handle_reload_path($(this)), $url = ref[0], $params = ref[1];
               Trst.desk.closeDesk($bd.remove);
-              $url = $url.split('/').pop() === 'create' ? "" + $url + $params : "" + $url + "/create" + $params;
+              $url = $url.split('/').pop() === 'create' ? "" + $url + $params : $url + "/create" + $params;
               Trst.desk.init($url);
               return $log('Button.create Pressed...');
             },
             show: function() {
-              var $bd, $hd, $params, $url, _ref;
+              var $bd, $hd, $params, $url, ref;
               $hd = Trst.desk.hdo;
               $bd = $(this).data();
-              _ref = Trst.desk.buttons.handle_reload_path($(this)), $url = _ref[0], $params = _ref[1];
+              ref = Trst.desk.buttons.handle_reload_path($(this)), $url = ref[0], $params = ref[1];
               $hd.oid = $bd.oid != null ? $bd.oid : $hd.oid;
               if ($hd.oid === null) {
                 Trst.publish("msg.select.error", 'error', $hd.model_name);
@@ -81,27 +81,27 @@
               return $log('Button.show Pressed...');
             },
             edit: function() {
-              var $bd, $hd, $params, $url, _ref;
+              var $bd, $hd, $params, $url, ref;
               $hd = Trst.desk.hdo;
               $bd = $(this).data();
-              _ref = Trst.desk.buttons.handle_reload_path($(this)), $url = _ref[0], $params = _ref[1];
+              ref = Trst.desk.buttons.handle_reload_path($(this)), $url = ref[0], $params = ref[1];
               $hd.oid = $bd.oid != null ? $bd.oid : $hd.oid;
               if ($hd.oid === null) {
                 Trst.publish("msg.select.error", 'error', $hd.model_name);
               } else {
                 Trst.desk.closeDesk($bd.remove);
-                $url = $url.split('/').pop() === 'edit' ? "" + $url + $params : "" + $url + "/edit/" + $hd.oid + $params;
+                $url = $url.split('/').pop() === 'edit' ? "" + $url + $params : $url + "/edit/" + $hd.oid + $params;
                 Trst.desk.init($url);
               }
               return $log('Button.edit Pressed...');
             },
             save: function() {
-              var $bd, $data, $hd, $params, $type, $url, _ref;
+              var $bd, $data, $hd, $params, $type, $url, ref;
               $hd = Trst.desk.hdo;
               $bd = $(this).data();
               $type = Trst.desk.hdf.attr('method');
               $data = Trst.desk.hdf.serializeArray();
-              _ref = Trst.desk.buttons.handle_reload_path($(this)), $url = _ref[0], $params = _ref[1];
+              ref = Trst.desk.buttons.handle_reload_path($(this)), $url = ref[0], $params = ref[1];
               Trst.desk.closeDesk($bd.remove);
               $hd.oid = $hd.oid === null ? 'create' : $hd.oid;
               $url += "/" + $hd.oid + $params;
@@ -109,10 +109,10 @@
               return $log('Button.save Pressed...');
             },
             "delete": function() {
-              var $bd, $hd, $params, $type, $url, _ref;
+              var $bd, $hd, $params, $type, $url, ref;
               $hd = Trst.desk.hdo;
               $bd = $(this).data();
-              _ref = Trst.desk.buttons.handle_reload_path($(this)), $url = _ref[0], $params = _ref[1];
+              ref = Trst.desk.buttons.handle_reload_path($(this)), $url = ref[0], $params = ref[1];
               $hd.oid = $bd.oid != null ? $bd.oid : $hd.oid;
               $type = $bd.type != null ? $bd.type : Trst.desk.hdf.attr('method');
               if ($hd.oid === null) {
@@ -123,7 +123,7 @@
                   $url += "/" + $hd.oid + $params;
                   Trst.desk.init($url, $type);
                 } else {
-                  $url = $url.split('/').pop() === 'delete' ? "" + $url + $params : "" + $url + "/delete/" + $hd.oid + $params;
+                  $url = $url.split('/').pop() === 'delete' ? "" + $url + $params : $url + "/delete/" + $hd.oid + $params;
                   Trst.desk.init($url);
                 }
               }
@@ -170,16 +170,19 @@
               var $form, $hd;
               $hd = Trst.desk.hdo;
               $form = Trst.desk.hdf;
-              Trst.msgShow(Trst.i18n.msg.report.start);
-              $.fileDownload("" + ($form.attr('action')) + "/print?id=" + $hd.oid, {
-                successCallback: function() {
-                  Trst.msgHide();
-                },
-                failCallback: function() {
-                  Trst.msgHide();
-                  Trst.desk.createDownload($hd.model_name);
-                }
-              });
+              if ($('form').attr('action').indexOf('/sys/wstm/report/') !== -1) {
+                $.fileDownload($('form').attr('action'), {
+                  successCallback: function() {
+                    return Trst.msgHide();
+                  }
+                });
+              } else {
+                $.fileDownload($('form').attr('action') + ("/print?id=" + $hd.oid), {
+                  successCallback: function() {
+                    return Trst.msgHide();
+                  }
+                });
+              }
               return $log('Button.print Pressed...');
             }
           },

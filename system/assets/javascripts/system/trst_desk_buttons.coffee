@@ -117,15 +117,14 @@ define () ->
           print: ()->
             $hd   = Trst.desk.hdo
             $form = Trst.desk.hdf
-            Trst.msgShow Trst.i18n.msg.report.start
-            $.fileDownload "#{$form.attr('action')}/print?id=#{$hd.oid}",
-              successCallback: ()->
-                Trst.msgHide()
-                return
-              failCallback: ()->
-                Trst.msgHide()
-                Trst.desk.createDownload $hd.model_name
-                return
+            if $('form').attr('action').indexOf('/sys/wstm/report/') isnt -1
+              $.fileDownload $('form').attr('action'),
+                successCallback: ()->
+                  Trst.msgHide()
+            else
+              $.fileDownload $('form').attr('action') + "/print?id=#{$hd.oid}",
+                successCallback: ()->
+                  Trst.msgHide()
             $log('Button.print Pressed...')
         init: (buttons) ->
           $desk = $('#deskDialog')

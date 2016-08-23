@@ -2,12 +2,18 @@
 
 * release date: **2016-12-31**
 
+* **feature v0.3.1.6**
+   - feature date: **2016-08-23**
+   - bump version v0.3.1.6
+   - update CHANGELOG
+   - Gemfile, update mongoid, prawn
+   - assets: js, bugfix `trst_desk_buttons`
+
 
 * **feature v0.3.1.5**
    - feature date: **2016-08-17**
    - bump version v0.3.1.5
    - update CHANGELOG
-   - playing with the new ver. of mongoid
    - assets: css, new rules
    - playing with the new ver. of mongoid
 
