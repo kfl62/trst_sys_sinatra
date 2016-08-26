@@ -143,7 +143,7 @@
             }
           });
           $request.fail(function(xhr) {
-            Trst.publish('msg.desk.error', 'error', "" + xhr.status + " " + xhr.statusText);
+            Trst.publish('msg.desk.error', 'error', xhr.status + " " + xhr.statusText);
             return false;
           });
           $request.done(function(data) {

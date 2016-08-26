@@ -167,16 +167,30 @@
               return $log('Button.relations Pressed...');
             },
             print: function() {
-              var $form, $hd;
+              var $f, $form, $hd;
               $hd = Trst.desk.hdo;
               $form = Trst.desk.hdf;
               if ($('form').attr('action').indexOf('/sys/wstm/report/') !== -1) {
+                Trst.msgShow(Trst.i18n.msg.report.start);
+                $f = $('[name=fn]').val();
+                if ($('#date_send').val()) {
+                  $f += $('#date_send').val();
+                }
+                if ($('[name=period]').val() > 1) {
+                  $f += "#" + ($('[name=period]').val());
+                }
+                $('[name=fn]').val($f);
                 $.fileDownload($('form').attr('action'), {
+                  data: $('form').serialize(),
                   successCallback: function() {
+                    if ($('#date_send').val()) {
+                      $('[name=fn]').val($f.substring(0, $f.indexOf('-')) + '-');
+                    }
                     return Trst.msgHide();
                   }
                 });
               } else {
+                Trst.msgShow(Trst.i18n.msg.report.start);
                 $.fileDownload($('form').attr('action') + ("/print?id=" + $hd.oid), {
                   successCallback: function() {
                     return Trst.msgHide();

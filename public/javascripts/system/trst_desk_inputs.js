@@ -3,6 +3,14 @@
     $.extend(true, Trst, {
       desk: {
         inputs: {
+          handleDownload: function() {
+            $('#unit_ids').select2({
+              placeholder: 'Selectaţi min. o unitate...',
+              minimumInputLength: 0,
+              multiple: true,
+              data: $('#unit_ids').data('data')
+            });
+          },
           handleUI: function() {
             $('input[data-mark~=focus]').focus().select().removeClass('ui-state-default');
             $('select[data-mark~=focus]').focus();
@@ -16,13 +24,13 @@
             });
             $('input[data-mark~=step]').each(function() {
               $(this).on('keydown', function(e) {
-                var $ord, $stp, _ref, _ref1;
+                var $ord, $stp, ref, ref1;
                 $stp = $('input[data-mark~=step]');
                 $ord = $stp.index(this);
-                if ((_ref = e.which) === 13 || _ref === 34 || _ref === 40) {
+                if ((ref = e.which) === 13 || ref === 34 || ref === 40) {
                   $stp.eq($ord + 1).focus().select();
                 }
-                if ((_ref1 = e.which) === 33 || _ref1 === 38) {
+                if ((ref1 = e.which) === 33 || ref1 === 38) {
                   $stp.eq($ord - 1).focus().select();
                 }
               });
@@ -47,7 +55,7 @@
             }
           },
           hanedleDatePicker: function(node) {
-            var $dp, max, min, now, _ref;
+            var $dp, max, min, now, ref;
             $dp = $(node);
             now = new Date();
             min = Trst.lst.admin === 'true' ? new Date(now.getFullYear(), now.getMonth() - 1, 1) : new Date(now.getFullYear(), now.getMonth(), 1);
@@ -59,22 +67,22 @@
               minDate: min,
               regional: ['ro']
             });
-            $dp.addClass('ta-ce').attr('size', ((_ref = $dp.val()) != null ? _ref.length : void 0) + 2);
+            $dp.addClass('ta-ce').attr('size', ((ref = $dp.val()) != null ? ref.length : void 0) + 2);
             $dp.on('change', function() {
-              var _ref1;
-              $dp.attr('size', ((_ref1 = $dp.val()) != null ? _ref1.length : void 0) + 2);
+              var ref1;
+              $dp.attr('size', ((ref1 = $dp.val()) != null ? ref1.length : void 0) + 2);
             });
           },
           __f: {
             validateIdPN: function(id) {
-              var $chk, $mod, $sum, i, _fn, _i;
+              var $chk, $mod, $sum, fn, i, j;
               $chk = "279146358279";
               $sum = 0;
-              _fn = function(i) {
+              fn = function(i) {
                 return $sum += id.charAt(i) * $chk.charAt(i);
               };
-              for (i = _i = 0; _i <= 12; i = ++_i) {
-                _fn(i);
+              for (i = j = 0; j <= 12; i = ++j) {
+                fn(i);
               }
               $mod = $sum % 11;
               if (($mod < 10 && $mod.toString() === id.charAt(12)) || ($mod === 10 && id.charAt(12) === "1")) {
@@ -101,6 +109,7 @@
             this.handleUI();
             this.handleIdPN();
             this.hanedleDatePicker($('#date_show'));
+            this.handleDownload($('#unit_ids'));
             return $log('Trst.desk.inputs.init() OK...');
           }
         }
