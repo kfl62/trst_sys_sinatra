@@ -20,7 +20,7 @@
               var $url;
               Trst.lst.setItem('r_mdl', 'fake_mdl');
               Trst.lst.setItem('r_id', select.val());
-              $url = "" + ($form.attr('action')) + "/" + $hd.dialog + "?r_id=" + (select.val());
+              $url = ($form.attr('action')) + "/" + $hd.dialog + "?r_id=" + (select.val());
               Trst.desk.init($url);
             });
           },
