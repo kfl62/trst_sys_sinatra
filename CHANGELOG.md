@@ -2,6 +2,17 @@
 
 * release date: **2016-12-31**
 
+
+* **feature v0.3.1.7**
+   - feature date: **2016-08-26**
+   - bump version v0.3.1.7
+   - update CHANGELOG
+   - assets: js, add `handleDownload`"
+   - assets: js, bugfix `trst_desk_buttons`"
+   - update `.js`"
+   - upgrade fileDonload.js (v1.4.5)"
+
+
 * **feature v0.3.1.6**
    - feature date: **2016-08-23**
    - bump version v0.3.1.6
