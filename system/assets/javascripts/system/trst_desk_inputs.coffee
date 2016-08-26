@@ -2,6 +2,13 @@ define () ->
   $.extend true,Trst,
     desk:
       inputs:
+        handleDownload: ()->
+          $('#unit_ids').select2
+            placeholder: 'Selectaţi min. o unitate...'
+            minimumInputLength: 0
+            multiple: true
+            data: $('#unit_ids').data('data')
+          return
         handleUI: ()->
           $('input[data-mark~=focus]').focus().select().removeClass 'ui-state-default'
           $('select[data-mark~=focus]').focus()
@@ -66,5 +73,6 @@ define () ->
           @handleUI()
           @handleIdPN()
           @hanedleDatePicker $('#date_show')
+          @handleDownload $('#unit_ids')
           $log('Trst.desk.inputs.init() OK...')
   Trst.desk.inputs
