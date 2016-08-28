@@ -5,18 +5,18 @@ module Trst
     include Mongoid::Timestamps
     include ViewHelpers
 
-    field :city,              type: String,                             default: 'Cluj-Napoca'
-    field :street,            type: String,                             default: '-'
-    field :nr,                type: String,                             default: '-'
-    field :bl,                type: String,                             default: '-'
-    field :sc,                type: String,                             default: '-'
-    field :et,                type: String,                             default: '-'
-    field :ap,                type: String,                             default: '-'
-    field :state,             type: String,                             default: 'Cluj'
-    field :country,           type: String,                             default: 'Romania'
-    field :zip,               type: String,                             default: '-'
+    field :city               ,type: String       ,default: 'Cluj-Napoca'
+    field :street             ,type: String
+    field :nr                 ,type: String
+    field :bl                 ,type: String
+    field :sc                 ,type: String
+    field :et                 ,type: String
+    field :ap                 ,type: String
+    field :state              ,type: String
+    field :country            ,type: String
+    field :zip                ,type: String
 
-    validates_presence_of   :city, :street
+    validates_presence_of   :city, :street, :nr
 
     before_save :beautify
 
@@ -26,10 +26,16 @@ module Trst
     protected
     # @todo
     def beautify
-      self.city    = city.titleize if city && city != '-'
-      self.street  = street.titleize if street && street != '-'
-      self.state   = state.titleize if state && state != '-'
-      self.country = country.titleize if country && country != '-'
+      city    = city.titleize if city && city != '-'
+      street  = street.titleize if street
+      nr      = '1'
+      bl      = bl.capitalize if bl
+      sc      = sc.capitalize if sc
+      et      = et.capitalize if et
+      ap      = ap.capitalize if ap
+      state   = state.titleize if state
+      country = country.titleize if country
+      zip     = zip.capitalize if zip
     end
 
   end # Address
