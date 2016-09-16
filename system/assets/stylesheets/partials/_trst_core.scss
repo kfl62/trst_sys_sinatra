@@ -31,6 +31,9 @@ ul , li {
 ul + button {
   margin-left: .2rem;
 }
+input[type=checkbox], input[type=radio] {
+  vertical-align: middle;
+}
 li[class*=select2-result]{
   span:not[class~=select2-match] {
     display: inline-block;
