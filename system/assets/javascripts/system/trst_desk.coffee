@@ -8,7 +8,7 @@ define ['system/trst_desk_buttons','system/trst_desk_selects','system/trst_desk_
         $titlebar = @uiDialog.find(".ui-dialog-titlebar")
         $.each @options.iconButtons, (i, v) ->
           $button = $("<button/>").text(@text)
-          right = $titlebar.find("[role='button']:last").css("right")
+          right = $titlebar.find("[class~='ui-button-icon-only']:last").css("right")
           $button.button(
             icons:
               primary: @icon
@@ -61,6 +61,7 @@ define ['system/trst_desk_buttons','system/trst_desk_selects','system/trst_desk_
           iconButtons: [
             {
               icon: "ui-icon-info"
+              text: "Info"
               click: (e) ->
                 $('#xhr_info').toggle()
                 return
