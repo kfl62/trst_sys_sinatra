@@ -1,7 +1,7 @@
 require.config({
   paths: {
-    'jquery': 'http://code.jquery.com/jquery-2.1.1.min',
-    'jquery-ui': 'http://code.jquery.com/ui/1.11.1/jquery-ui.min',
+    'jquery': 'http://code.jquery.com/jquery-3.1.0',
+    'jquery-ui': 'http://code.jquery.com/ui/1.12.1/jquery-ui',
     'async': 'plugins/async'
   },
   priority: ['jquery']

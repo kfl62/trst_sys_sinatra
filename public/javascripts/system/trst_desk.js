@@ -12,7 +12,7 @@
           $.each(this.options.iconButtons, function(i, v) {
             var $button, right;
             $button = $("<button/>").text(this.text);
-            right = $titlebar.find("[role='button']:last").css("right");
+            right = $titlebar.find("[class~='ui-button-icon-only']:last").css("right");
             $button.button({
               icons: {
                 primary: this.icon
@@ -86,6 +86,7 @@
             iconButtons: [
               {
                 icon: "ui-icon-info",
+                text: "Info",
                 click: function(e) {
                   $('#xhr_info').toggle();
                 }

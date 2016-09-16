@@ -3,6 +3,19 @@
 * release date: **2016-12-31**
 
 
+* **feature v0.3.1.8**
+   - feature date: **2016-09-16**
+   - bump version v0.3.1.8
+   - update CHANGELOG
+   - assets: css, `_trst_core`, add new rule
+   - asstes: js, upgrade jQuery, jquery-ui
+   - views: `public,system _html_head`, upgrade jQuery, jquery-ui
+   - lib: `trst_helper` metadata -> __metadata :)
+   - remove unused .bowerrc
+   - models: `Trst::Address` remove unneeded defaults
+   - models: `Trst::Person` remove unneeded defaults
+
+
 * **feature v0.3.1.7**
    - feature date: **2016-08-26**
    - bump version v0.3.1.7

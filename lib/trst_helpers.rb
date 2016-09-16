@@ -154,7 +154,7 @@ module Trst
       if nested
         relation = model.relations[nested]
         name  = "[#{relation.class_name.underscore}]"
-        name += ((model.metadata.macro.to_s.split('_').last rescue 'many') == 'one' ? "[#{relation.inverse_of.to_s}_attributes]" : "[#{relation.inverse_of.to_s}_attributes][#{index}]")
+        name += ((model.__metadata.macro.to_s.split('_').last rescue 'many') == 'one' ? "[#{relation.inverse_of.to_s}_attributes]" : "[#{relation.inverse_of.to_s}_attributes][#{index}]")
       end
       name += "[#{attribute}]"
       name += ((order.is_a? Integer) ? "[]" : "[#{order}]") if order
