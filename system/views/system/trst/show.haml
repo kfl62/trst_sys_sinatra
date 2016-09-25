@@ -6,5 +6,5 @@
       %tr
         %td
           = haml :"#{@path}/_show"
-    %tfoot
-      - tr_buttonset(['create','edit','delete','cancel'],{td: {class: 'ta-ce'}})
+    %tfoot{class: 'ta-ce'}
+      - tr_buttonset ['create','edit','delete','cancel']
