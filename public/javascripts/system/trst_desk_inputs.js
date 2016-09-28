@@ -36,9 +36,9 @@
               });
             });
             $('input[data-mark~=resize]').each(function() {
-              $(this).attr('size', $(this).val().length + 2);
+              $(this).attr('size', $(this).val().length + 3);
               $(this).on('change', function() {
-                $(this).attr('size', $(this).val().length + 2);
+                $(this).attr('size', $(this).val().length + 3);
               });
             });
           },

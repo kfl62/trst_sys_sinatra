@@ -24,9 +24,9 @@ define () ->
               return
             return
           $('input[data-mark~=resize]').each ()->
-            $(@).attr 'size', $(@).val().length + 2
+            $(@).attr 'size', $(@).val().length + 3
             $(@).on 'change', ()->
-              $(@).attr 'size', $(@).val().length + 2
+              $(@).attr 'size', $(@).val().length + 3
               return
             return
           return
