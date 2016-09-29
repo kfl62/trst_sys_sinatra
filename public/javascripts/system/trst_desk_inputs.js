@@ -46,6 +46,9 @@
             var $input;
             $input = $('input[name*="id_pn"]');
             if ($input.length) {
+              $('input[name*="id_pn"]').on('keyup', function() {
+                Trst.desk.inputs.handleIdPN();
+              });
               if (this.__f.validateIdPN($input.val())) {
                 $input.attr('class', 'ui-state-default');
                 $input.parents('tr').next().find('input').focus();
@@ -59,7 +62,7 @@
             $dp = $(node);
             now = new Date();
             min = Trst.lst.admin === 'true' ? new Date(now.getFullYear(), now.getMonth() - 1, 1) : new Date(now.getFullYear(), now.getMonth(), 1);
-            max = Trst.lst.admin === 'true' ? '+1' : '+0';
+            max = '+0';
             $dp.datepicker({
               altField: '#date_send',
               altFormat: 'yy-mm-dd',
