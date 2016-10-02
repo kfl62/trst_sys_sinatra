@@ -6,9 +6,8 @@ end
 desc "Irb with DB environment loaded"
 task :console do
   require './config/boot'
-  require "irb"
   ARGV.clear
-  IRB.start
+  Pry.start
 end
 namespace :db do
   desc "Seed data for Trst"
