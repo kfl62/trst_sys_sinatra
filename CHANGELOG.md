@@ -2,6 +2,19 @@
 
 * release date: **2016-12-31**
 
+* **feature v0.3.1.9**
+   - feature date: **2016-10-09 16**
+   - bump version v0.3.1.9
+   - update CHANGELOG
+   - assets: scss `_trst_base_class` added `fs-0.(X)rem` class
+   - lib: `trst_helper`, `td_detail_for` + colspan
+   - assets: js, `trst_desk_tables` window max height
+   - Rakefile, switch to pry
+   - Gemfile, switch to pry, ap bug mongoid 6.0.0 (BSON)
+   - assets: js, add `handleIdPN` bugfix (add keyup event)
+   - assets: js, `trst_desk_inputs` data-mark resize => size
+   - views: base CRUD add class `%tfoot`
+   - lib: `trst_helper` new method `details_for`
 
 * **feature v0.3.1.8**
    - feature date: **2016-09-16**
