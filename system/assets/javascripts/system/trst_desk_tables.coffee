@@ -2,7 +2,7 @@ define () ->
   $.extend true,Trst,
     desk:
       tables:
-        handleScroll: (tbl,h=450)->
+        handleScroll: (tbl,h=430)->
           $table = $(tbl)
           if h isnt 0
             tblHdr   = $("<table style='width:auto'><tbody class='inner'><tr></tr><tr></tr></tbody></table>")

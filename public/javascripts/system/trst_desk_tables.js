@@ -6,7 +6,7 @@
           handleScroll: function(tbl, h) {
             var $table, tblClmnW, tblCntnr, tblHdr, tblscrll;
             if (h == null) {
-              h = 450;
+              h = 430;
             }
             $table = $(tbl);
             if (h !== 0) {

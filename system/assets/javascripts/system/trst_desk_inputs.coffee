@@ -24,15 +24,18 @@ define () ->
               return
             return
           $('input[data-mark~=resize]').each ()->
-            $(@).attr 'size', $(@).val().length + 2
+            $(@).attr 'size', $(@).val().length + 3
             $(@).on 'change', ()->
-              $(@).attr 'size', $(@).val().length + 2
+              $(@).attr 'size', $(@).val().length + 3
               return
             return
           return
         handleIdPN: ()->
           $input = $('input[name*="id_pn"]')
           if $input.length
+            $('input[name*="id_pn"]').on 'keyup', ()->
+              Trst.desk.inputs.handleIdPN()
+              return
             if @__f.validateIdPN($input.val())
               $input.attr('class','ui-state-default')
               $input.parents('tr').next().find('input').focus()
@@ -43,7 +46,7 @@ define () ->
           $dp = $(node)
           now = new Date()
           min = if Trst.lst.admin is 'true' then new Date(now.getFullYear(),now.getMonth() - 1,1) else new Date(now.getFullYear(),now.getMonth(),1)
-          max = if Trst.lst.admin is 'true' then '+1' else '+0'
+          max = '+0' #if Trst.lst.admin is 'true' then '+1' else '+0'
           $dp.datepicker
             altField: '#date_send'
             altFormat: 'yy-mm-dd'

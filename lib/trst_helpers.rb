@@ -364,8 +364,15 @@ module Trst
       end
     end
     # @todo
-    def td_detail_for(type = 'detail',text = 'Not defined', icon = nil)
-      haml_tag :td do
+    def detail_for(type = 'detail',text = 'Not defined', icon = nil)
+      haml_tag :detail,class: type do
+        haml_tag :i, class: icon.nil? ? guess_icon(type.split(' ').first) : guess_icon(icon)
+        haml_concat text
+      end
+    end
+    # @todo
+    def td_detail_for(type = 'detail',text = 'Not defined', icon = nil, colspan = nil)
+      haml_tag :td,colspan: colspan do
         haml_tag :detail,class: type do
           haml_tag :i, class: icon.nil? ? guess_icon(type.split(' ').first) : guess_icon(icon)
           haml_concat text

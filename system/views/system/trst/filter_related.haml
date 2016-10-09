@@ -1,23 +1,22 @@
 :ruby
   r_id = params[:r_id] || 'null'
-
 - xhr_hidden_data({dialog: 'filter', oid: 'null'})
 - xhr_info('info',params[:related_id].nil? ? t('intro.filter.main',data: model_name) : t("intro.embedded.main",child: model_name,parent: mat(@related_object,'model_name')))
 %form{action: "/sys/#{@path}",method: "get"}
   %table
     %thead
     %tbody
-      %tr.pdb-05
+      %tr{class: 'pdb-05'}
         %td
-          %select#r_id
+          %select{id: 'r_id'}
             %option{value: "null"}= t("select.option",data:  mat(@related_object,'model_name'))
             - @related_object.default_sort.each do |o|
               %option{value: o.view_filter.first,selected: o.view_filter.first.to_s == r_id}= o.view_filter.last
           - unless r_id == 'null'
-            %select#oid
+            %select{id: 'oid'}
               %option{value: "null"}= t("select.option",data: model_name)
               - @object.default_sort.each do |o|
                 %option{value: o.view_filter.first}= o.view_filter.last
-      %tfoot
+      %tfoot{class: 'ta-ce'}
         - buttons = r_id == 'null' ? ['cancel'] : ['create','show','edit','delete','cancel']
-        - tr_buttonset(buttons,{td: {class: 'ta-ce'}})
+        - tr_buttonset buttons

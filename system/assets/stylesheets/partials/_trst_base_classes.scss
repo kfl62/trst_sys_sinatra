@@ -44,6 +44,11 @@
 [class~=dsp-ib] {
   display: inline-block;
 }
+@each $size in 8,9 {
+  [class~=fs-0\.#{$size}rem] {
+    font-size: 0.1rem * $size;
+  }
+}
 @each $width in 2,4,6,8,10,15,20,25,30,35,40,45,50,55 {
   [class~=w-#{$width}rem] {
     width: 1rem * $width;

@@ -11,16 +11,17 @@ gem 'bcrypt'
 gem 'haml'
 gem 'sass'
 gem 'compass'
-gem 'mongoid' #, :git => 'https://github.com/kfl62/mongoid.git', :branch => '4.0.0-stable'
+gem 'mongoid', '< 6'
 gem 'rdiscount'
-gem 'prawn' #, '1.0.0'  # hotfix v0.3.1
+gem 'prawn'       # hotfix v0.3.1
 gem 'prawn-templates'
-gem 'prawn-table'    	# hotfix v0.3.1
+gem 'prawn-table' # hotfix v0.3.1
 
 # Development requirements
 group :development do
   gem 'thin'
-  gem 'wirble'
+  gem 'pry'
+  gem 'awesome_print'
 end
 # Test requirements
 group :test do

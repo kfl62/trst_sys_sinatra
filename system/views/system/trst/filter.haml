@@ -4,11 +4,11 @@
   %table
     %thead
     %tbody
-      %tr.pdb-05
+      %tr{class: 'pdb-05'}
         %td
-          %select#oid
+          %select{id: 'oid'}
             %option{value: "null"}= t("select.option",data: model_name)
             - @object.default_sort.each do |o|
               %option{value: o.view_filter.first}= o.view_filter.last
-    %tfoot
-      - tr_buttonset(['create','show','edit','delete','cancel'],{td: {class: 'ta-ce'}})
+    %tfoot{class: 'ta-ce'}
+      - tr_buttonset ['create','show','edit','delete','cancel']
