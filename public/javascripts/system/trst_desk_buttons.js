@@ -167,9 +167,10 @@
               return $log('Button.relations Pressed...');
             },
             print: function() {
-              var $f, $form, $hd;
+              var $bd, $f, $form, $hd;
               $hd = Trst.desk.hdo;
               $form = Trst.desk.hdf;
+              $bd = $(this).data();
               if ($('form').attr('action').indexOf('/sys/wstm/report/') !== -1) {
                 Trst.msgShow(Trst.i18n.msg.report.start);
                 $f = $('[name=fn]').val();
@@ -186,6 +187,13 @@
                     if ($('#date_send').val()) {
                       $('[name=fn]').val($f.substring(0, $f.indexOf('-')) + '-');
                     }
+                    return Trst.msgHide();
+                  }
+                });
+              } else if ($bd.url) {
+                Trst.msgShow(Trst.i18n.msg.report.start);
+                $.fileDownload($('form').attr('action') + ("/print?" + $bd.url), {
+                  successCallback: function() {
                     return Trst.msgHide();
                   }
                 });
