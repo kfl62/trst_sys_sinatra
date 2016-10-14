@@ -1,6 +1,0 @@
-development:
-  clients:
-    default:
-      database: <%= Trst.firm.db_devel %>
-      hosts:
-        - localhost: 27017
