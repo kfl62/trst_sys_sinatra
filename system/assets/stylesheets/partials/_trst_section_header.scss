@@ -12,7 +12,7 @@ section.header {
     }
     p.header-logo {
       flex: 0 0 10.5rem;
-      @include background-image-file('logo.png');
+      @include background-image-file('/images/trst/logo.png');
       background-position: center;
       height: 9.5rem;
     }

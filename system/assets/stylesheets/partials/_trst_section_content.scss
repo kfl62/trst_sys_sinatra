@@ -4,7 +4,7 @@ section.content {
   flex: 1;
   aside.main{
     flex: 1;
-    @include background-image-file("main_bckgrnd.png");
+    @include background-image-file("/images/trst/main_bckgrnd.png");
     background-color: $trst-color-bg-light;
     background-position: center;
     border-radius: 1rem;
