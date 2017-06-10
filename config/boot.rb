@@ -13,7 +13,7 @@ Haml::Options.defaults[:hyphenate_data_attrs] = false
 # Load libraries
 Dir.glob(File.join(TRST_ROOT, 'lib','**','*.rb')).each{|r| require r}
 # Load configurations
-Dir.glob(File.join(TRST_ROOT, 'config','**','*.rb')).each{|r| require r}
+Dir.glob(File.join(TRST_ROOT, 'config','**','*.rb')).reverse_each{|r| require r}
 # Initialize path for Trst
 Dir['system/*'].each do |dir|
   dir = File.join(File.expand_path('..',File.dirname(__FILE__)),dir)

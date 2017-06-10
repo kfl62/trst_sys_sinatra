@@ -1,13 +1,13 @@
 @font-face{
   font-family: 'EmbossedBlackWideNormal';
-  src: url('#{$trst-font-path}/Embossed_Black_Wide-webfont.eot');
-  src: url('#{$trst-font-path}/Embossed_Black_Wide-webfont.woff') format('woff'),
+  src: url('#{$trst-font-path}/Embossed_Black_Wide-webfont.eot'),
+    url('#{$trst-font-path}/Embossed_Black_Wide-webfont.woff') format('woff'),
     url('#{$trst-font-path}/Embossed_Black_Wide-webfont.ttf') format('truetype'),
     url('#{$trst-font-path}/Embossed_Black_Wide-webfont.svg') format('svg');
 }
 @mixin background-image-file($file,$color: transparent){
   background: {
-    image: image_url(unquote($file));
+    image: url(unquote($file));
     color: $color;
     position: .5rem center;
     repeat: no-repeat;
@@ -15,7 +15,7 @@
 }
 @mixin nav-menu {
   background: {
-    image: image_url(unquote("menu_bckgrnd.png"));
+    image: url(unquote("/images/trst/menu_bckgrnd.png"));
     position: center right;
     repeat: repeat-x;
   };

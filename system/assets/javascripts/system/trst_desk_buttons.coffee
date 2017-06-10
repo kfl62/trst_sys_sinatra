@@ -117,16 +117,22 @@ define () ->
           print: ()->
             $hd   = Trst.desk.hdo
             $form = Trst.desk.hdf
+            $bd   = $(@).data()
             if $('form').attr('action').indexOf('/sys/wstm/report/') isnt -1
               Trst.msgShow Trst.i18n.msg.report.start
-              $f  = $('[name=fn]').val() 
+              $f  = $('[name=fn]').val()
               $f += $('#date_send').val() if $('#date_send').val()
-              $f += "##{$('[name=period]').val()}" if $('[name=period]').val() > 1 
+              $f += "##{$('[name=period]').val()}" if $('[name=period]').val() > 1
               $('[name=fn]').val($f)
               $.fileDownload $('form').attr('action'),
                 data: $('form').serialize()
                 successCallback: ()->
                   $('[name=fn]').val($f.substring(0, $f.indexOf('-')) + '-') if $('#date_send').val()
+                  Trst.msgHide()
+            else if $bd.url
+              Trst.msgShow Trst.i18n.msg.report.start
+              $.fileDownload $('form').attr('action') + "/print?#{$bd.url}",
+                successCallback: ()->
                   Trst.msgHide()
             else
               Trst.msgShow Trst.i18n.msg.report.start

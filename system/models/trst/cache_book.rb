@@ -1,4 +1,6 @@
 # encoding: utf-8
+require_relative 'cache_book_line'
+
 module Trst
   class CacheBook
     include Mongoid::Document

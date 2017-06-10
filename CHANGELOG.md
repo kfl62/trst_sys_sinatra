@@ -1,6 +1,18 @@
 ## v1.0.0
 
-* release date: **2016-12-31**
+* release date: **2017-12-31**
+
+* **feature v0.3.1.10**
+   - feature date: **2017-06-10 16**
+   - bump version v0.3.1.10
+   - update CHANGELOG
+   - controllers: `assets.rb` drop `compass`, use `sass,scss`
+   - Gemfile, update gems, drop `compass`
+   - assets: scss, `application.scss` and partials"
+   - lib: remove `compass`, relay only on `sass`"
+   - cleaning, delete unneeded files
+   - assets: js, `trst_desk_buttons` add new print method
+   - !strange! after updating my computer, required changes
 
 * **feature v0.3.1.9**
    - feature date: **2016-10-09 16**
