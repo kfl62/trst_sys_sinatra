@@ -5,15 +5,12 @@ module Trst
   # ##Scope
   # @todo document this module
   module Assets
-    # #Sass/Compass Handler
     class Stylesheets < Sinatra::Base
       set :static, true
-      register  CompassInitializer
-
-      # @todo Document this method
+      set :scss, { :cache_location => './tmp/sass-cache' }
       get '/stylesheets/:name.css' do
         content_type 'text/css', :charset => 'utf-8'
-        scss params[:name].to_sym, Compass.sass_engine_options
+        scss params[:name].to_sym, :views => "#{TRST_ROOT}/system/assets/stylesheets"
       end
     end
     # #Coffeescript Handler
