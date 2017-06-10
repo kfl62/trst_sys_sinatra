@@ -1,4 +1,10 @@
 # encoding: utf-8
+require_relative 'firm'
+require_relative 'address'
+require_relative 'person'
+require_relative 'bank'
+require_relative 'unit'
+
 module Trst
   class PartnerFirm < Trst::Firm
 
