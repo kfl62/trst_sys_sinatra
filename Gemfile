@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'sinatra'         ,'< 2',require: "sinatra/base"
+gem 'sinatra'         ,require: "sinatra/base"
 gem 'sinatra-flash'   ,require: "sinatra/flash"
 gem 'rack-rewrite'    ,require: "rack/rewrite"
 
@@ -12,9 +12,9 @@ gem 'haml'            ,'< 5'
 gem 'sass'
 gem 'mongoid'         ,'< 6'
 gem 'rdiscount'
-gem 'prawn'           # hotfix v0.3.1
+gem 'prawn'
 gem 'prawn-templates'
-gem 'prawn-table'     # hotfix v0.3.1
+gem 'prawn-table'
 
 # Development requirements
 group :development do
