@@ -2,8 +2,17 @@
 
 * release date: **2017-12-31**
 
+* **feature v0.3.1.11**
+   - feature date: **2017-12-29**
+   - bump version v0.3.1.11
+   - update CHANGELOG
+   - update `Gemfile`
+   - views: `_footer.haml` strange behavior
+   - controller: update, adapt `Mustemann` requirements
+   - delete unneeded js files
+
 * **feature v0.3.1.10**
-   - feature date: **2017-06-10 16**
+   - feature date: **2017-06-10**
    - bump version v0.3.1.10
    - update CHANGELOG
    - controllers: `assets.rb` drop `compass`, use `sass,scss`
@@ -15,7 +24,7 @@
    - !strange! after updating my computer, required changes
 
 * **feature v0.3.1.9**
-   - feature date: **2016-10-09 16**
+   - feature date: **2016-10-09**
    - bump version v0.3.1.9
    - update CHANGELOG
    - assets: scss `_trst_base_class` added `fs-0.(X)rem` class
