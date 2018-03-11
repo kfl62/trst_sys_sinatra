@@ -3,7 +3,16 @@ development:
     default:
       database: <%= Trst.firm.db_devel %>
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
+  options:
+    preload_models: true
+    raise_not_found_error: false
+production:
+  clients:
+    default:
+      database: <%= Trst.firm.db_devel %>
+      hosts:
+        - 127.0.0.1:27017
   options:
     preload_models: true
     raise_not_found_error: false

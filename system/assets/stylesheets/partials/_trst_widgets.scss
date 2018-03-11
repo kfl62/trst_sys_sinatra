@@ -112,6 +112,7 @@
   }
   tbody.inner {
     border: solid .1rem  $trst-color-bg-dark;
+    line-height: 1.2rem;
     tr {
       &:first-child {
         text-align: center;

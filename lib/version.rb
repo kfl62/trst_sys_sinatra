@@ -1,4 +1,4 @@
 # encoding: utf-8
 module Trst
-  VERSION = "0.3.1.11"
+  VERSION = "1.0.0"
 end
