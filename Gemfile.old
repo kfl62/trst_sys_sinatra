@@ -1,0 +1,31 @@
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'sinatra', '1.4.8', require: "sinatra/base"
+gem 'sinatra-flash', require: "sinatra/flash"
+gem 'rack-rewrite', require: "rack/rewrite"
+
+# Component requirements
+gem 'coffee-script', '2.4.1'
+gem 'bcrypt', '3.1.11'
+gem 'haml', '4.0.7'
+gem 'sass'
+gem 'compass','0.12.6'
+gem 'mongoid', :git => 'https://github.com/kfl62/mongoid.git', :branch => '3.1.0-stable'
+gem 'rdiscount', '2.2.0.1'
+gem 'prawn', '1.0.0'  # hotfix v0.3.1
+gem 'prawn-templates'
+#gem 'prawn-table'    # hotfix v0.3.1
+
+# Development requirements
+group :development do
+  gem 'thin'
+  gem 'pry'
+  gem 'awesome_print'
+end
+
+# Test requirements
+group :test do
+  gem 'rspec'
+  gem 'rack-test', :require => "rack/test"
+end
