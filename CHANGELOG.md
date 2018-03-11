@@ -1,6 +1,13 @@
 ## v1.0.0
 
-* release date: **2017-12-31**
+* release date: **2018-03-11**
+* bump version v1.0.0
+* update CHANGELOG
+* update LICENSE
+* update README
+* add Gemfile.old (to remind what was...)
+* config: update `mongoid.yml`
+* assets: stylesheets `_trst_widgets` change line-height
 
 * **feature v0.3.1.11**
    - feature date: **2017-12-29**
