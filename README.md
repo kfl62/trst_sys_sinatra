@@ -36,7 +36,7 @@ Released under a [slightly modified MIT License][license].
 [kfl62_gh]: http://github.com/kfl62
 [kfl62_trst]: http://kfl62.trst.ro
 [Seneca]: http://ro.wikipedia.org/wiki/Seneca "Lucius Annaeus Seneca (cca.4 î.e.n. - 65 e.n.)"
-[JQuey toolkit]: https://jquery.com/ "JQuery - JavaScript Tools"
+[JQuery toolkit]: https://jquery.com/ "JQuery - JavaScript Tools"
 [HTML5]: http://dev.w3.org/html5/spec/Overview.html "HyperText Markup Language"
 [Chrome]: http://www.google.com/chrome "Google Chrome"
 [Firefox]: http://www.mozilla.com/en-US/firefox/firefox.html "Mozilla Firefox"
