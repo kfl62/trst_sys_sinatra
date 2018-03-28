@@ -18,7 +18,7 @@ gem 'prawn-table'
 
 # Development requirements
 group :development do
-  gem 'thin'
+  gem 'puma'
   gem 'pry'
   gem 'awesome_print'
 end
