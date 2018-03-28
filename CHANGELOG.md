@@ -1,3 +1,10 @@
+## v1.0.2
+
+* release date: **2018-03-28**
+   - bump version v1.0.2
+   - update CHANGELOG
+   - Gemfile replace `thin` with `puma`
+
 ## v1.0.1
 
 * release date: **2018-03-18**
