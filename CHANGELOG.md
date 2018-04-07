@@ -1,3 +1,10 @@
+## v1.0.3
+
+* release date: **2018-04-07**
+   - bump version v1.0.3
+   - update CHANGELOG
+   - Gemfile update
+
 ## v1.0.2
 
 * release date: **2018-03-28**
