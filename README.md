@@ -29,7 +29,7 @@ Datorită folosirii intensive a elementelor de javascript ([JQuery toolkit]) pre
 Creat de [Ferenc-Loránt Kiss][kfl62_trst]<br>
 
 ## License
-Copyright (c) 2008-2018 Ferenc-Loránt Kiss<br>
+Copyright (c) 2008-2022 Ferenc-Loránt Kiss<br>
 All Rights Reserved.<br>
 Released under a [slightly modified MIT License][license].
 
